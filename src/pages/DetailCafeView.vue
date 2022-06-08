@@ -5,48 +5,18 @@
   </CafeTag>
 
   <!-- 카페 주소 -->
-  <div>
-    <p>{{ CafeAddrData[0].address }}</p>
-  </div>
   <CafeAddr :CafeAddrData="CafeAddrData" />
 
   <!-- 카페 영업시간 -->
-  <div>
-    <span>
-      {{ CafeTimeData[0].weekday }} | {{ CafeTimeData[0].weekend }} |
-      {{ CafeTimeData[0].dayoff }}
-    </span>
-  </div>
   <CafeOperationTime :CafeTimeData="CafeTimeData" />
 
   <!-- 카페 연락처(전화번호, 홈페이지, 인스타그램) -->
-  <div>
-    <span>{{ CafeContactData[0].tel }}</span>
-    <br />
-    <a href="">{{ CafeContactData[0].web }}</a>
-    <br />
-    <a href="">{{ CafeContactData[0].insta }}</a>
-  </div>
   <CafeContact :CafeContactData="CafeContactData" />
 
   <!-- 브루잉 메뉴 -->
-  <div>
-    <h6>브루잉 메뉴</h6>
-    <p v-for="(a, i) in BrewingMenuData" :key="i">
-      <strong>{{ a.title }}</strong>
-      --- HOT {{ a.hot }} ICE {{ a.ice }}
-    </p>
-  </div>
   <BrewingMenu :BrewingMenuData="BrewingMenuData" />
 
   <!-- 베리에이션 메뉴 -->
-  <div>
-    <h6>베리에이션 메뉴</h6>
-    <p v-for="(a, i) in VariationMenuData" :key="i">
-      <strong>{{ a.title }}</strong>
-      --- HOT {{ a.hot }} ICE {{ a.ice }}
-    </p>
-  </div>
   <VariationMenu :VariationMenuData="VariationMenuData" />
 
   <!-- 페이지네이션 -->
@@ -58,6 +28,7 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import CafeTag from '../components/CafeTag/CafeTag.vue'
 import CafeAddr from '../components/CafeInfo/CafeAddr.vue'
 import CafeContact from '../components/CafeInfo/CafeContact.vue'
@@ -73,9 +44,9 @@ import CafeTimeData from '../data/CafeTimeData'
 import BrewingMenuData from '../data/BrewingMenuData'
 import VariationMenuData from '../data/VariationMenuData'
 
-export default {
+export default defineComponent({
   name: 'DetailCafeView',
-  component: {
+  components: {
     CafeTag,
     CafeAddr,
     CafeContact,
@@ -94,7 +65,7 @@ export default {
       VariationMenuData
     }
   }
-}
+})
 </script>
 
 <style>
