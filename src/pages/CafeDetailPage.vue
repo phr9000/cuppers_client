@@ -45,7 +45,7 @@ import BrewingMenuData from '../data/BrewingMenuData'
 import VariationMenuData from '../data/VariationMenuData'
 
 export default defineComponent({
-  name: 'DetailCafeView',
+  name: 'CafeDetailPage',
   components: {
     CafeTag,
     CafeAddr,

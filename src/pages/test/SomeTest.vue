@@ -10,7 +10,7 @@ import { defineComponent } from 'vue'
 import TestCard from 'src/components/TestCard.vue'
 
 export default defineComponent({
-  name: 'IndexPage',
+  name: 'SomeTest',
   components: { TestCard },
   data() {
     return {

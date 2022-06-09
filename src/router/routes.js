@@ -7,6 +7,28 @@ const routes = [
       {
         path: 'cafedetail',
         component: () => import('src/pages/CafeDetailPage.vue')
+      },
+      {
+        path: 'sns',
+        component: () => import('src/pages/CoffeeSNSPage.vue')
+      },
+      {
+        path: 'profile',
+        component: () => import('src/pages/UserProfilePage.vue')
+      },
+      {
+        path: 'reqnewcafe',
+        component: () => import('src/pages/ReqNewCafePage.vue')
+      }
+    ]
+  },
+  {
+    path: '/map',
+    component: () => import('layouts/MapLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/test/KakaoMapTest.vue')
       }
     ]
   },
@@ -18,6 +40,10 @@ const routes = [
       {
         path: 'icon',
         component: () => import('pages/test/IconTest.vue')
+      },
+      {
+        path: 'card',
+        component: () => import('pages/test/CardTest.vue')
       },
       {
         path: 'kakaomap',

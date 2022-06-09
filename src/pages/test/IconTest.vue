@@ -30,7 +30,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   // components: { TestCard },
-  name: 'IndexPage',
+  name: 'IconTest',
   data() {
     return {
       val: false,
