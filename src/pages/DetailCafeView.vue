@@ -23,7 +23,7 @@
   <div class="q-pa-lg flex flex-center">
     <q-pagination v-model="current" :max="5" direction-links />
   </div>
-
+  <!-- 인피니트스크롤 -->
   <InfiniteScroll />
 </template>
 
