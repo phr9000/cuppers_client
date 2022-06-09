@@ -68,8 +68,4 @@ export default defineComponent({
 })
 </script>
 
-<style>
-* {
-  padding-left: 10px;
-}
-</style>
+<style></style>
