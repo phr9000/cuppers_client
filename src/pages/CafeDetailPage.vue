@@ -1,8 +1,6 @@
 <template>
   <!-- 카페 태그 -->
-  <CafeTag :CafeTagData="CafeTagData" v-for="(a, i) in CafeTagData" :key="i">
-    <q-badge color="brown">{{ a.title }}</q-badge>
-  </CafeTag>
+  <CafeTag :CafeTagData="CafeTagData" />
 
   <!-- 카페 주소 -->
   <CafeAddr :CafeAddrData="CafeAddrData" />
