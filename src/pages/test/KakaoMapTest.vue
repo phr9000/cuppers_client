@@ -141,6 +141,7 @@ import CafeData from 'src/data/CafeData.json'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
+  name: 'KakaoMapTest',
   data() {
     return {
       cafesRaw: [], // 현재 불러온 전체 카페 리스트
