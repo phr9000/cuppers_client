@@ -1,17 +1,35 @@
 <template>
   <!-- 카페 태그 -->
-  <div class="q-pa-md q-gutter-md" v-for="(a, i) in CafeTagData" :key="i">
-    <q-badge color="brown">{{ a.title }}</q-badge>
+  <div class="q-pa-md badges">
+    <div v-for="tag in CafeTag" :key="tag" class="badge">
+      <q-badge color="brown">{{ tag.title }}</q-badge>
+    </div>
   </div>
 </template>
 
 <script>
+import CafeTagData from '../../data/CafeTagData'
+
 export default {
   name: 'CafeTag',
   props: {
     CafeTagData: Array
+  },
+  data() {
+    return {
+      CafeTag: CafeTagData
+    }
   }
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.badges {
+  display: flex;
+  padding: 0;
+  margin: 5px 0;
+  .badge {
+    padding-right: 5px;
+  }
+}
+</style>

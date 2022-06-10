@@ -1,7 +1,7 @@
 <template>
   <q-btn flat dense>
     <q-avatar @click="clickReqNewCafe" square size="lg">
-      <img src="/public/icons/new_cafe.png" />
+      <img src="/icons/new_cafe.png" />
     </q-avatar>
   </q-btn>
 </template>

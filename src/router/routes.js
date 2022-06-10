@@ -42,6 +42,10 @@ const routes = [
       {
         path: 'kakaomap',
         component: () => import('pages/test/KakaoMapTest.vue')
+      },
+      {
+        path: 'modal',
+        component: () => import('pages/test/ModalTest.vue')
       }
     ]
   },
