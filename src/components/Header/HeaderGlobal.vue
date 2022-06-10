@@ -2,17 +2,18 @@
   <q-header elevated>
     <q-toolbar class="bg-white text-grey-10">
       <q-btn
+        v-if="hasBtnMenu"
         class="text-grey-6"
         flat
         round
         icon="menu"
         aria-label="Menu"
-        @click="toggleLeftDrawer"
+        @click="clickMenu"
       />
 
-      <btn-logo />
-
-      <q-toolbar-title class="font_caveat"> Cuppers' </q-toolbar-title>
+      <q-toolbar-title class="font_caveat"
+        ><btn-logo to="/" />
+      </q-toolbar-title>
       <q-btn to="/map" class="q-mr-sm" flat color="primary" label="카페찾기" />
       <q-btn to="sns" class="q-mr-md" flat color="primary" label="커피SNS" />
       <div>
@@ -29,12 +30,15 @@ import BtnMyAvatar from '../Button/BtnMyAvatar.vue'
 import BtnReqNewCafe from '../Button/BtnReqNewCafe.vue'
 export default defineComponent({
   components: { BtnLogo, BtnReqNewCafe, BtnMyAvatar },
+  props: {
+    hasBtnMenu: { type: Boolean, default: false }
+  },
   data() {
     return {}
   },
   methods: {
-    toggleLeftDrawer() {
-      this.$emit('toggle')
+    clickMenu() {
+      this.$emit('clickMenu')
     }
   }
 })
