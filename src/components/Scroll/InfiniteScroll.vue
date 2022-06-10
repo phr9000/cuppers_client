@@ -1,4 +1,5 @@
 <template>
+  <!-- 인피니트 스크롤 -->
   <div class="q-pa-md">
     <q-infinite-scroll @load="onLoad" :offset="250">
       <div v-for="(item, index) in items" :key="index" class="caption">
@@ -11,6 +12,7 @@
       </template>
     </q-infinite-scroll>
   </div>
+  <!-- 카드 인피니트 스크롤 -->
 </template>
 
 <script>

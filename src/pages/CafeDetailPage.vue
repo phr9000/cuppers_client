@@ -21,9 +21,8 @@
     </div>
 
     <CafeReview />
-
-    <InfiniteScroll />
   </div>
+  <InfiniteScroll />
 </template>
 
 <script>
