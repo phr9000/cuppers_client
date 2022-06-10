@@ -5,44 +5,34 @@
         <h3 class="q-mb-lg">따뜻한<br />커피 한 잔이<br />좋다☕</h3>
       </div>
     </div>
-    <CNoteCarousel />
+    <c-note-carousel />
 
     <!-- 카페 키워드 -->
-
-    <div class="keyword-container column constrain">
-      <div class="keyword">
+    <section class="text-center column constrain">
+      <div>
         <h4>CAFE KEYWORD</h4>
         <p>
           <span class="txt_keyword"> 키워드로 분류된 다양한 카페 모음 </span>
         </p>
       </div>
-      <div class="column">
+      <div class="column keyword-container">
         <div class="row">
-          <div class="col-2"></div>
-          <div class="col-1"><keyword-for-main /></div>
-          <div class="col-1"><keyword-for-main /></div>
-          <div class="col-1"><keyword-for-main /></div>
-          <div class="col-1"><keyword-for-main /></div>
-          <div class="col-1"><keyword-for-main /></div>
-          <div class="col-1"><keyword-for-main /></div>
-          <div class="col-1"><keyword-for-main /></div>
-          <div class="col-1"><keyword-for-main /></div>
-          <div class="col-2"></div>
+          <keyword-for-main
+            v-for="keyword in keywords"
+            :key="keyword.id"
+            :id="keyword.id"
+            :keyword="keyword.keyword"
+          />
         </div>
       </div>
 
-      <!-- <RecommendList /> -->
-      <div class="">
-        <div class="q-pa-md q-gutter-sm" style="padding-top: 850px">
-          <q-btn
-            color="black"
-            label="지도 표시하기"
-            icon="map"
-            @click="MapRedirect()"
-          ></q-btn>
-        </div>
+      <!-- 추천 카페 -->
+      <!-- <recommend-list /> -->
+
+      <div class="q-my-xl">
+        <q-btn to="map" color="black" label="지도 표시하기" icon="map"></q-btn>
       </div>
-    </div>
+    </section>
   </q-page>
 </template>
 
@@ -51,7 +41,6 @@ import CafeKeywordsData from '../data/CafeKeywordsData'
 
 // import RecommendList from '../components/Card/RecommendList.vue'
 import CNoteCarousel from '../components/Carousel/CNoteCarousel.vue'
-// import CafeKeywords from '../components/Keyword/CafeKeywords.vue'
 import KeywordForMain from '../components/Keyword/KeywordForMain.vue'
 
 export default {
@@ -59,29 +48,27 @@ export default {
   components: {
     CNoteCarousel,
     KeywordForMain
-    // CafeKeywords
     // RecommendList
   },
   data() {
     return {
-      CafeKeywordsData
+      keywords: CafeKeywordsData
     }
   },
-  methods: {
-    MapRedirect() {
-      this.$router.push('/map')
-    }
-  }
+  methods: {}
 }
 </script>
 <style lang="scss" scoped>
 .keyword-container {
-  text-align: center;
-}
-.q-pa-md q-gutter-sm {
-  display: block;
-  margin: auto;
-  text-align: center;
-  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+  width: 962px;
+  margin: 0 auto;
+  @media (max-width: 962px) {
+    width: 722px;
+  }
+  @media (max-width: 722px) {
+    width: 482px;
+  }
 }
 </style>
