@@ -1,6 +1,6 @@
 <template>
   <!-- 카페 태그 -->
-  <div class="q-pa-md q-gutter-md">
+  <div class="q-pa-md q-gutter-md" v-for="(a, i) in CafeTagData" :key="i">
     <q-badge color="brown">{{ a.title }}</q-badge>
   </div>
 </template>
