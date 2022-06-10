@@ -1,41 +1,40 @@
 <template>
-  <!-- 카페 태그 -->
-  <CafeTag :CafeTagData="CafeTagData" v-for="(a, i) in CafeTagData" :key="i">
-    <q-badge color="brown">{{ a.title }}</q-badge>
-  </CafeTag>
+  <div class="q-container">
+    <!-- Image Grid -->
+    <ImageGrid />
 
-  <!-- 카페 주소 -->
-  <CafeAddr :CafeAddrData="CafeAddrData" />
+    <!-- CafeInformation -->
+    <CafeInformation />
 
-  <!-- 카페 영업시간 -->
-  <CafeOperationTime :CafeTimeData="CafeTimeData" />
+    <!-- 카페 연락처(전화번호, 홈페이지, 인스타그램) -->
+    <CafeContact :CafeContactData="CafeContactData" />
 
-  <!-- 카페 연락처(전화번호, 홈페이지, 인스타그램) -->
-  <CafeContact :CafeContactData="CafeContactData" />
+    <!-- 브루잉 메뉴 -->
+    <BrewingMenu :BrewingMenuData="BrewingMenuData" />
 
-  <!-- 브루잉 메뉴 -->
-  <BrewingMenu :BrewingMenuData="BrewingMenuData" />
+    <!-- 베리에이션 메뉴 -->
+    <VariationMenu :VariationMenuData="VariationMenuData" />
 
-  <!-- 베리에이션 메뉴 -->
-  <VariationMenu :VariationMenuData="VariationMenuData" />
+    <!-- 페이지네이션 -->
+    <div class="q-pa-lg flex flex-center">
+      <q-pagination v-model="current" :max="5" direction-links />
+    </div>
 
-  <!-- 페이지네이션 -->
-  <div class="q-pa-lg flex flex-center">
-    <q-pagination v-model="current" :max="5" direction-links />
+    <CafeReview />
+
+    <InfiniteScroll />
   </div>
-
-  <InfiniteScroll />
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import CafeTag from '../components/CafeTag/CafeTag.vue'
-import CafeAddr from '../components/CafeInfo/CafeAddr.vue'
+import CafeInformation from '../components/CafeDetail/CafeInformation.vue'
 import CafeContact from '../components/CafeInfo/CafeContact.vue'
-import CafeOperationTime from '../components/CafeInfo/CafeOperationTime.vue'
 import BrewingMenu from '../components/CafeMenu/BrewingMenu.vue'
 import VariationMenu from '../components/CafeMenu/VariationMenu.vue'
 import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
+import ImageGrid from '../components/CafeDetail/ImageGrid.vue'
+import CafeReview from '../components/CafeDetail/CafeReview.vue'
 
 import CafeTagData from '../data/CafeTagData'
 import CafeAddrData from '../data/CafeAddrData'
@@ -47,13 +46,13 @@ import VariationMenuData from '../data/VariationMenuData'
 export default defineComponent({
   name: 'CafeDetailPage',
   components: {
-    CafeTag,
-    CafeAddr,
+    CafeInformation,
     CafeContact,
-    CafeOperationTime,
     BrewingMenu,
     VariationMenu,
-    InfiniteScroll
+    InfiniteScroll,
+    ImageGrid,
+    CafeReview
   },
   data() {
     return {
@@ -68,4 +67,9 @@ export default defineComponent({
 })
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.q-container {
+  width: 80%;
+  margin: 0 auto;
+}
+</style>
