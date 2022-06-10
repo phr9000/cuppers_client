@@ -24,13 +24,7 @@ const routes = [
   },
   {
     path: '/map',
-    component: () => import('layouts/MapLayout.vue'),
-    children: [
-      {
-        path: '',
-        component: () => import('pages/test/KakaoMapTest.vue')
-      }
-    ]
+    component: () => import('layouts/MapLayout.vue')
   },
   {
     path: '/test',
