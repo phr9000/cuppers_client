@@ -38,19 +38,19 @@
   </div>
 </template>
 <script>
-import Userinformation from '../../data/Userinformation'
+import UserData from '../../data/UserData'
 import ReviewData from '../../data/ReviewData'
 
 export default {
   name: 'ImageGrid',
   props: {
     ReviewData: Array,
-    Userinformation: Array
+    UserData: Array
   },
   data() {
     return {
       Review: ReviewData,
-      UserInfo: Userinformation
+      UserInfo: UserData
     }
   },
   computed: {

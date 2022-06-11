@@ -13,7 +13,6 @@
     <CafeMenu />
 
     <!-- User Reveiw -->
-    <CafeReview />
 
     <!-- 페이지네이션 -->
     <div class="q-pa-lg flex flex-center">
@@ -28,7 +27,6 @@ import { defineComponent } from 'vue'
 import CafeInformation from '../components/CafeDetail/CafeInformation.vue'
 import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
 import ImageGrid from '../components/CafeDetail/ImageGrid.vue'
-import CafeReview from '../components/CafeDetail/CafeReview.vue'
 import CafeMenu from '../components/CafeDetail/CafeMenu.vue'
 
 import CafeKeywordsData from '../data/CafeKeywordsData'
@@ -42,7 +40,6 @@ export default defineComponent({
     CafeInformation,
     InfiniteScroll,
     ImageGrid,
-    CafeReview,
     CafeMenu
   },
   data() {
