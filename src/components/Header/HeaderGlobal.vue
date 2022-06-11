@@ -1,11 +1,20 @@
 <template>
   <q-header elevated>
     <q-toolbar class="bg-white text-grey-10">
+      <q-btn
+        v-if="hasBtnMenu"
+        class="text-grey-6"
+        flat
+        round
+        icon="menu"
+        aria-label="Menu"
+        @click="clickMenu"
+      />
       <q-toolbar-title class="font_caveat"
         ><btn-logo to="/" />
         <q-btn
           to="/test"
-          class="text-grey-5"
+          class="text-grey-3"
           flat
           round
           icon="cruelty_free"
