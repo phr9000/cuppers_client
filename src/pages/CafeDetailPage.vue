@@ -4,7 +4,10 @@
     <ImageGrid />
 
     <!-- CafeInformation -->
-    <CafeInformation />
+    <CafeInformation
+      :CafeData="CafeData"
+      :CafeKeywordsData="CafeKeywordsData"
+    />
 
     <!-- Coffee Menu-->
     <CafeMenu />
@@ -28,12 +31,10 @@ import ImageGrid from '../components/CafeDetail/ImageGrid.vue'
 import CafeReview from '../components/CafeDetail/CafeReview.vue'
 import CafeMenu from '../components/CafeDetail/CafeMenu.vue'
 
-import CafeTagData from '../data/CafeTagData'
-import CafeAddrData from '../data/CafeAddrData'
-import CafeContactData from '../data/CafeContactData'
-import CafeTimeData from '../data/CafeTimeData'
+import CafeKeywordsData from '../data/CafeKeywordsData'
 import BrewingMenuData from '../data/BrewingMenuData'
 import VariationMenuData from '../data/VariationMenuData'
+import CafeData from 'src/data/CafeData.json'
 
 export default defineComponent({
   name: 'CafeDetailPage',
@@ -46,12 +47,10 @@ export default defineComponent({
   },
   data() {
     return {
-      CafeTagData,
-      CafeAddrData,
-      CafeContactData,
-      CafeTimeData,
       BrewingMenuData,
-      VariationMenuData
+      VariationMenuData,
+      CafeKeywordsData,
+      CafeData
     }
   }
 })

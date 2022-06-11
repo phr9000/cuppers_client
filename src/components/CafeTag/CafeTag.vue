@@ -1,24 +1,17 @@
 <template>
   <!-- 카페 태그 -->
   <div class="q-pa-md badges">
-    <div v-for="tag in CafeTag" :key="tag" class="badge">
-      <q-badge color="brown">{{ tag.title }}</q-badge>
+    <div class="badge">
+      <q-badge color="brown">{{ CafeKeywordsData[0].keyword }}</q-badge>
     </div>
   </div>
 </template>
 
 <script>
-import CafeTagData from '../../data/CafeTagData'
-
 export default {
   name: 'CafeTag',
   props: {
-    CafeTagData: Array
-  },
-  data() {
-    return {
-      CafeTag: CafeTagData
-    }
+    CafeKeywordsData: Array
   }
 }
 </script>

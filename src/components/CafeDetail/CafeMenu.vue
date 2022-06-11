@@ -29,10 +29,6 @@ import VariationMenuData from '../../data/VariationMenuData'
 
 export default {
   name: 'CafeMenu',
-  props: {
-    BrewingMenu: Array,
-    VariationMenu: Array
-  },
   data() {
     return {
       Brewing: BrewingMenuData,

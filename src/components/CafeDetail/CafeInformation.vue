@@ -5,10 +5,26 @@
         <div class="q-pl-md info">
           <h5 class="title">기본정보</h5>
           <div class="body">
-            <CafeTag />
-            <CafeAddr />
-            <CafeOperationTime />
-            <CafeContact />
+            <CafeTag :CafeKeywordsData="CafeKeywordsData" />
+            <!-- 카페 주소 -->
+            <div>
+              <p>{{ CafeData[0].cafe_address }}</p>
+            </div>
+            <!-- 카페 영업시간 -->
+            <div>
+              <span>
+                {{ CafeData[0].cafe_weekday }} |
+                {{ CafeData[0].cafe_weekend }} |
+                {{ CafeData[0].cafe_dayoff }}
+              </span>
+            </div>
+            <!-- 카페 연락처(전화번호, 홈페이지, 인스타그램) -->
+            <div>
+              <p>{{ CafeData[0].cafe_phone }}</p>
+              <a href="">{{ CafeData[0].cafe_web }}</a>
+              <br />
+              <a href="">{{ CafeData[0].cafe_insta }}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -22,36 +38,15 @@
 <script>
 // Components
 import CafeTag from '../CafeTag/CafeTag.vue'
-import CafeAddr from '../CafeInfo/CafeAddr.vue'
-import CafeOperationTime from '../CafeInfo/CafeOperationTime.vue'
-import CafeContact from '../CafeInfo/CafeContact.vue'
-
-// Data
-import CafeTagData from '../../data/CafeTagData'
-import CafeAddrData from '../../data/CafeAddrData'
-import CafeContactData from '../../data/CafeContactData'
-import CafeTimeData from '../../data/CafeTimeData'
-import BrewingMenuData from '../../data/BrewingMenuData'
-import VariationMenuData from '../../data/VariationMenuData'
 
 export default {
   name: 'CafeInformation',
-  components: {
-    CafeTag,
-    CafeAddr,
-    CafeOperationTime,
-    CafeContact
+  props: {
+    CafeData: Array,
+    CafeKeywordsData: Array
   },
-
-  data() {
-    return {
-      CafeTagData,
-      CafeAddrData,
-      CafeContactData,
-      CafeTimeData,
-      BrewingMenuData,
-      VariationMenuData
-    }
+  components: {
+    CafeTag
   }
 }
 </script>
