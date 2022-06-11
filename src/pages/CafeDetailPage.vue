@@ -1,39 +1,32 @@
 <template>
-  <div class="q-container">
+  <q-page class="container" container>
     <!-- Image Grid -->
     <ImageGrid />
 
     <!-- CafeInformation -->
     <CafeInformation />
 
-    <!-- 카페 연락처(전화번호, 홈페이지, 인스타그램) -->
-    <CafeContact :CafeContactData="CafeContactData" />
+    <!-- Coffee Menu-->
+    <CafeMenu />
 
-    <!-- 브루잉 메뉴 -->
-    <BrewingMenu :BrewingMenuData="BrewingMenuData" />
-
-    <!-- 베리에이션 메뉴 -->
-    <VariationMenu :VariationMenuData="VariationMenuData" />
+    <!-- User Reveiw -->
+    <CafeReview />
 
     <!-- 페이지네이션 -->
     <div class="q-pa-lg flex flex-center">
       <q-pagination v-model="current" :max="5" direction-links />
     </div>
-
-    <CafeReview />
-  </div>
+  </q-page>
   <InfiniteScroll />
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import CafeInformation from '../components/CafeDetail/CafeInformation.vue'
-import CafeContact from '../components/CafeInfo/CafeContact.vue'
-import BrewingMenu from '../components/CafeMenu/BrewingMenu.vue'
-import VariationMenu from '../components/CafeMenu/VariationMenu.vue'
 import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
 import ImageGrid from '../components/CafeDetail/ImageGrid.vue'
 import CafeReview from '../components/CafeDetail/CafeReview.vue'
+import CafeMenu from '../components/CafeDetail/CafeMenu.vue'
 
 import CafeTagData from '../data/CafeTagData'
 import CafeAddrData from '../data/CafeAddrData'
@@ -46,12 +39,10 @@ export default defineComponent({
   name: 'CafeDetailPage',
   components: {
     CafeInformation,
-    CafeContact,
-    BrewingMenu,
-    VariationMenu,
     InfiniteScroll,
     ImageGrid,
-    CafeReview
+    CafeReview,
+    CafeMenu
   },
   data() {
     return {
@@ -66,9 +57,4 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
-.q-container {
-  width: 80%;
-  margin: 0 auto;
-}
-</style>
+<style lang="scss" scoped></style>

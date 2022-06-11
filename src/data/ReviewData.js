@@ -31,6 +31,7 @@ export default [
   },
   {
     Cafe_title: '유의미로스터즈',
+
     Cafe_address: '영천동',
     Review_title: 'Good4',
     Review_description: 'Very Good4',

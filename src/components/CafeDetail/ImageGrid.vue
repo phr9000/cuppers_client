@@ -2,11 +2,11 @@
   <div class="q-mt-xl">
     <a href="#">
       <span style="font-size: 25px" class="title">{{
-        Review[0].Cafe_title
+        firstReview.Cafe_title
       }}</span
       >|
     </a>
-    <span class="title">{{ Review[0].Cafe_address }}</span>
+    <span class="title">{{ firstReview.Cafe_address }}</span>
   </div>
   <div view="lhh LpR lff" container class="shadow-2 q-mt-xl">
     <div class="row">
