@@ -1,6 +1,11 @@
 // app global css in SCSS form
 @import url(./_header.scss);
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .radius_border {
   border: 1px solid #919191;
   border-radius: 5px;
