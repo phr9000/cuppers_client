@@ -58,14 +58,7 @@
           alt="축소"
       /></span>
     </div>
-    <q-btn
-      @click="toggleDrawer"
-      v-if="!drawerOpen"
-      class="custom_toggle_drawer"
-      round
-      color="secondary"
-      icon="menu"
-    />
+
     <q-btn
       @click="setCurrentLocation"
       class="custom_current_location"
@@ -76,44 +69,53 @@
       icon="my_location"
     />
   </div>
-  <div class="q-ma-xs q-pa-xs custom_test radius_border">
-    현재위치: {{ currentLocation }}
-  </div>
-  <div class="q-ma-xs q-pa-xs custom_test radius_border">
-    <q-btn
-      class="q-mr-xs"
-      color="secondary"
-      @click="searchTest('송파')"
-      label="송파 검색"
-    />
-    <q-btn
-      class="q-mr-xs"
-      color="secondary"
-      @click="searchTest('강동')"
-      label="강동 검색"
-    />
-    <q-btn color="secondary" @click="clearAllMarkers" label="모든 마커 삭제" />
-  </div>
 
-  <!-- 검색 결과 표시 -->
-  <div class="q-ma-xs q-pa-xs custom_test radius_border">
-    <div v-for="cafe in cafes" :key="cafe.cafe_id">
-      {{ cafe.cafe_name_pr }}
+  <!-- 테스트 영역 -->
+  <section>
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      현재위치: {{ currentLocation }}
     </div>
-  </div>
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      <btn-basic
+        @click="searchTest('송파')"
+        color="secondary"
+        label="송파 검색"
+      />
+      <btn-basic
+        @click="searchTest('강동')"
+        color="secondary"
+        label="강동 검색"
+      />
+      <btn-basic
+        @click="clearAllMarkers"
+        color="warning"
+        label="모든 마커 삭제"
+      />
+      <btn-basic
+        @click="showMiniDetailCard"
+        color="primary"
+        label="인포 윈도우 표시/닫기"
+      />
+    </div>
+
+    <!-- 검색 결과 표시 -->
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      <div v-for="cafe in cafes" :key="cafe.cafe_id">
+        {{ cafe.cafe_name_pr }}
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import CafeData from 'src/data/CafeData.json'
-// import MapSearch from 'src/components/MapSearch.vue'
-//import MapMyList from 'src/components/MapMyList.vue'
+import BtnBasic from 'src/components/Button/BtnBasic.vue'
 
 export default defineComponent({
   name: 'MapPage',
   components: {
-    // MapSearch,
-    //MapMyList
+    BtnBasic
   },
   data() {
     return {
@@ -167,6 +169,7 @@ export default defineComponent({
     }
   },
   methods: {
+    showMiniDetailCard() {},
     clearAllMarkers() {
       // 모든 마커를 삭제
       console.log('모든 마커를 삭제')
