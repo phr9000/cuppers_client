@@ -1,32 +1,31 @@
 <template>
-  <q-page class="flex flex-center">
-    {{ title }}
-    <test-card class="green q-ma-lg" />
+  <q-page class="q-pa-sm">
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      <p>기타등등 테스트</p>
+    </div>
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import TestCard from 'src/components/TestCard.vue'
-
 export default defineComponent({
-  name: 'SomeTest',
-  components: { TestCard },
+  components: {},
   data() {
-    return {
-      title: '커퍼즈 Cuppers'
-    }
+    return {}
   },
-  mounted() {
-    let apiUrl = 'http://localhost:3000/posts'
-    this.$axios
-      .get(apiUrl)
-      .then((result) => {
-        console.log(result)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+  mounted() {},
+  methods: {
+    axiosTest() {
+      let apiUrl = 'http://localhost:3000/posts'
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          console.log(result)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 })
 </script>

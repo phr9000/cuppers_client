@@ -5,7 +5,7 @@ const routes = [
     children: [
       { path: '', component: () => import('src/pages/MainPage.vue') },
       {
-        path: 'cafedetail',
+        path: 'cafedetail/:id',
         component: () => import('src/pages/CafeDetailPage.vue')
       },
       {
@@ -30,7 +30,11 @@ const routes = [
     path: '/test',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/test/SomeTest.vue') },
+      { path: '', component: () => import('pages/test/ButtonTest.vue') },
+      {
+        path: 'btn',
+        component: () => import('pages/test/ButtonTest.vue')
+      },
       {
         path: 'icon',
         component: () => import('pages/test/IconTest.vue')
@@ -40,12 +44,12 @@ const routes = [
         component: () => import('pages/test/CardTest.vue')
       },
       {
-        path: 'kakaomap',
-        component: () => import('pages/test/KakaoMapTest.vue')
-      },
-      {
         path: 'modal',
         component: () => import('pages/test/ModalTest.vue')
+      },
+      {
+        path: 'some',
+        component: () => import('pages/test/SomeTest.vue')
       }
     ]
   },

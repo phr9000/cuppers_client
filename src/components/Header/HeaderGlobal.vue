@@ -1,19 +1,18 @@
 <template>
   <q-header elevated>
     <q-toolbar class="bg-white text-grey-10">
-      <q-btn
-        v-if="hasBtnMenu"
-        class="text-grey-6"
-        flat
-        round
-        icon="menu"
-        aria-label="Menu"
-        @click="clickMenu"
-      />
-
       <q-toolbar-title class="font_caveat"
         ><btn-logo to="/" />
+        <q-btn
+          to="/test"
+          class="text-grey-5"
+          flat
+          round
+          icon="cruelty_free"
+          aria-label="Menu"
+        />
       </q-toolbar-title>
+
       <q-btn to="/map" class="q-mr-sm" flat color="primary" label="카페찾기" />
       <q-btn to="sns" class="q-mr-md" flat color="primary" label="커피SNS" />
       <div>
