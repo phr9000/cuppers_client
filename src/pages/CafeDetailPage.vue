@@ -1,5 +1,5 @@
 <template>
-  <q-page class="container" container>
+  <q-page class="constrain" container>
     <!-- Image Grid -->
     <ImageGrid />
 
