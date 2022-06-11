@@ -15,7 +15,7 @@ export default {
     id: { type: Number, required: true },
     keyword: {
       type: String,
-      default: '키워드<br />wefwe'
+      default: '키워드 기본값'
     }
   },
   computed: {
@@ -32,10 +32,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .keyword {
-  border: 1px solid #eee;
+  border-left: 1px solid #eee;
+  border-bottom: 1px solid #eee;
   font-size: 14px;
   line-height: 18px;
   width: 120px;
   height: 120px;
+  word-break: keep-all;
 }
 </style>

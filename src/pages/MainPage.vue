@@ -61,7 +61,8 @@ export default {
 <style lang="scss" scoped>
 .keyword-container {
   border-collapse: collapse;
-  border: 1px solid #eee;
+  border-right: 1px solid #eee;
+  border-top: 1px solid #eee;
   width: 962px;
   margin: 0 auto;
   @media (max-width: 962px) {
