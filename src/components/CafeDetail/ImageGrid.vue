@@ -2,30 +2,33 @@
   <div class="q-mt-xl">
     <a href="#">
       <span style="font-size: 25px" class="title">{{
-        firstReview.Cafe_title
+        cafeData[0].cafe_name_pr
       }}</span
       >|
     </a>
-    <span class="title">{{ firstReview.Cafe_address }}</span>
+    <span class="title">{{ cafeData[0].cafe_region }}</span>
   </div>
   <div view="lhh LpR lff" container class="shadow-2 q-mt-xl">
     <div class="row">
       <div class="col col-md-6 image">
         <q-img
-          :src="firstReview.ImageUrl"
+          :src="reviewData[0].review_thumbnail"
           style="height: 400px; max-width: 600px"
         >
           <div class="absolute-bottom text-subtitle text-center">
-            {{ firstReview.Review_title }}
+            {{ reviewData[0].cafe_name }}
           </div>
         </q-img>
       </div>
       <div class="col">
         <div class="row">
-          <div v-for="a in lestReview" :key="a" class="col-6 images">
-            <q-img :src="a.ImageUrl" style="height: 197px; max-width: 300px">
+          <div v-for="i in activeArray" :key="i" class="col-6 images">
+            <q-img
+              :src="i.review_thumbnail"
+              style="height: 197px; max-width: 300px"
+            >
               <div class="absolute-bottom text-subtitle text-center">
-                {{ a.Review_title }}
+                {{ i.cafe_name }}
               </div>
             </q-img>
           </div>
@@ -38,42 +41,19 @@
   </div>
 </template>
 <script>
-import UserData from '../../data/UserData'
-import ReviewData from '../../data/ReviewData'
+import reviewData from 'src/data/reviewData'
 
 export default {
   name: 'ImageGrid',
   props: {
-    ReviewData: Array,
-    UserData: Array
-  },
-  data() {
-    return {
-      Review: ReviewData,
-      UserInfo: UserData
-    }
+    cafeData: Array,
+    reviewData: Array,
+    userData: Array
   },
   computed: {
-    firstReview() {
-      return this.Review[0]
-    },
-    lestReview() {
-      let lestData = [...this.Review]
-      lestData = lestData.splice(1).slice(0, 4)
-      return lestData
-    },
-    userInfo() {
-      return this.UserInfo[1]
+    activeArray() {
+      return reviewData.splice(1, 4)
     }
-    // cafeLike() {
-    //   let like = 0
-    //   for (i = 0; i < this.UserInfo.length; i++) {
-    //     if (this.UserInfo.user_cafe_likeit) {
-    //       like += 1
-    //     }
-    //   }
-    //   return 1
-    // }
   }
 }
 </script>
