@@ -13,7 +13,8 @@
     "cafe_weekend": "토,일요일 12:00 ~ 22:00",
     "cafe_dayoff": "명절 당일 휴무",
     "cafe_web": "https://www.cafeabcd.com",
-    "cafe_insta": "https://www.instagram.com/userid/"
+    "cafe_insta": "https://www.instagram.com/userid/",
+    "cafe_menu_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGOQ_VynXr2kDkkFhIOvherUBTWBujQs9PhA&usqp=CAU"
   },
   {
     "cafe_id": 2,

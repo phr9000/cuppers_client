@@ -1,14 +1,20 @@
 <template>
   <div class="q-mt-xl">
     <a href="#">
-      <span style="font-size: 25px" class="title">{{
+      <span style="font-size: 25px; font-weight: 700" class="title">{{
         cafeData[0].cafe_name_pr
       }}</span
       >|
     </a>
-    <span class="title">{{ cafeData[0].cafe_region }}</span>
+    <span class="title"> {{ cafeData[0].cafe_region }}</span>
   </div>
-  <div view="lhh LpR lff" container class="shadow-2 q-mt-xl">
+  <div class="q-mt-xs">
+    <span style="font-weight: 700; color: #007f9f" class="q-pl-md">
+      <q-icon size="sm" name="notes" class="q-pr-sm q-pb-xs" />리뷰 수
+      {{ reviewData.length }}
+    </span>
+  </div>
+  <div view="lhh LpR lff" container class="shadow-2 q-mt-xs">
     <div class="row">
       <div class="col col-md-6 image">
         <q-img
@@ -34,15 +40,10 @@
           </div>
         </div>
       </div>
-      <div class="q-pa-md absolute-bottom">
-        <q-btn :key="`btn_size_sq_xs`" label="이미지 더보기" />
-      </div>
     </div>
   </div>
 </template>
 <script>
-import reviewData from 'src/data/reviewData'
-
 export default {
   name: 'ImageGrid',
   props: {
@@ -52,7 +53,8 @@ export default {
   },
   computed: {
     activeArray() {
-      return reviewData.splice(1, 4)
+      let recentReview = [...this.reviewData].splice(1, 4)
+      return recentReview
     }
   }
 }
@@ -64,6 +66,7 @@ a:link {
 }
 .title {
   margin: 10px;
+  color: #000;
 }
 .image {
   padding: 3px;
