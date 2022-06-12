@@ -42,11 +42,8 @@
       </q-list>
     </q-drawer>
 
-    <!-- 왼쪽 nav -->
-    <div class="map_nav"></div>
-
     <!-- 지도 확대, 축소 컨트롤 div -->
-    <div class="custom_zoomcontrol radius_border">
+    <div class="zoom_control radius_border">
       <span @click="zoomIn"
         ><img
           src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png"
@@ -59,15 +56,20 @@
       /></span>
     </div>
 
-    <q-btn
+    <!-- current location - 현재 위치 버튼 -->
+    <btn-icon
       @click="setCurrentLocation"
-      class="custom_current_location"
-      v-if="locationSupported"
-      :loading="locationLoading"
-      round
-      color="secondary"
+      class="btn_current_location"
       icon="my_location"
     />
+
+    <!-- 마커 클릭시 표시되는 인포 윈도우 -->
+    <section v-if="targetCafe" class="info_window_wrap">
+      <card-cafe-map
+        :title="targetCafe.cafe_name_pr"
+        :caption="targetCafe.cafe_description"
+      />
+    </section>
   </div>
 
   <!-- 테스트 영역 -->
@@ -92,7 +94,7 @@
         label="모든 마커 삭제"
       />
       <btn-basic
-        @click="showMiniDetailCard"
+        @click="handleMarkerClick(1)"
         color="primary"
         label="인포 윈도우 표시/닫기"
       />
@@ -100,9 +102,17 @@
 
     <!-- 검색 결과 표시 -->
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      검색 결과 표시
+      <q-separator />
       <div v-for="cafe in cafes" :key="cafe.cafe_id">
         {{ cafe.cafe_name_pr }}
       </div>
+    </div>
+    <!-- 클릭한 카페 -->
+    <div v-if="targetCafe" class="q-ma-xs q-pa-xs custom_test radius_border">
+      targetCafe
+      <q-separator />
+      {{ targetCafe.cafe_name_pr }}
     </div>
   </section>
 </template>
@@ -111,11 +121,15 @@
 import { defineComponent } from 'vue'
 import CafeData from 'src/data/CafeData.json'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
+import BtnIcon from 'src/components/Button/BtnIcon.vue'
+import CardCafeMap from 'src/components/Card/CardCafeMap.vue'
 
 export default defineComponent({
   name: 'MapPage',
   components: {
-    BtnBasic
+    BtnBasic,
+    BtnIcon,
+    CardCafeMap
   },
   data() {
     return {
@@ -141,7 +155,8 @@ export default defineComponent({
       search: '',
       drawerOpen: true,
       tab: 'search', // 'search', 'mylist',
-      searching: false
+      searching: false,
+      targetCafe: null
     }
   },
   computed: {
@@ -169,7 +184,18 @@ export default defineComponent({
     }
   },
   methods: {
-    showMiniDetailCard() {},
+    handleMarkerClick(cafeId) {
+      if (this.targetCafe) {
+        this.targetCafe = null
+      } else {
+        const find = this.cafes.filter((cafe) => {
+          return cafe['cafe_id'] === cafeId
+        })[0]
+        console.log(find)
+        this.targetCafe = { ...find }
+        console.log(this.targetCafe)
+      }
+    },
     clearAllMarkers() {
       // 모든 마커를 삭제
       console.log('모든 마커를 삭제')
@@ -353,61 +379,53 @@ export default defineComponent({
   overflow: hidden;
   // width: calc(100%-300px);
   height: 500px;
-}
-#map {
-  width: calc(100%-300px);
-  height: 500px;
-}
 
-.map_nav {
-  position: relative;
-  left: 0;
-  top: 0;
-  width: 300px;
-  height: 100%;
-  background: white;
-  z-index: 1;
-}
-.map_nav_toolbar {
-  color: $red-1;
-  border-radius: 0;
-}
-.custom_toggle_drawer {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  z-index: 21;
-}
-.custom_current_location {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  z-index: 1;
-}
-.custom_zoomcontrol {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 36px;
-  height: 80px;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #f5f5f5;
-}
-.custom_zoomcontrol span {
-  display: block;
-  width: 36px;
-  height: 40px;
-  text-align: center;
-  cursor: pointer;
-}
-.custom_zoomcontrol span img {
-  width: 15px;
-  height: 15px;
-  margin-top: 11px;
-  border: none;
-}
-.custom_zoomcontrol span:first-child {
-  border-bottom: 1px solid #bfbfbf;
+  #map {
+    width: calc(100%-300px);
+    height: 500px;
+  }
+
+  .zoom_control {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 80px;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #f5f5f5;
+
+    span {
+      display: block;
+      width: 36px;
+      height: 40px;
+      text-align: center;
+      cursor: pointer;
+    }
+    span img {
+      width: 15px;
+      height: 15px;
+      margin-top: 11px;
+      border: none;
+    }
+    span:first-child {
+      border-bottom: 1px solid #bfbfbf;
+    }
+  }
+
+  .btn_current_location {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 1;
+  }
+
+  .info_window_wrap {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 240px;
+    z-index: 1;
+  }
 }
 </style>
