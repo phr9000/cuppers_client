@@ -8,6 +8,7 @@
       <btn-basic to="/test/card" color="secondary" label="카드 테스트" />
       <btn-basic to="/test/icon" color="dark" label="아이콘 테스트" />
       <btn-basic to="/test/modal" color="warning" label="모달 테스트" />
+      <btn-basic to="/test/like" color="warning" label="좋아요 테스트" />
       <btn-basic to="/test/some" color="info" label="기타등등 테스트" />
       <btn-basic
         @click="testMethod"

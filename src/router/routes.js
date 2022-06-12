@@ -48,6 +48,10 @@ const routes = [
         component: () => import('pages/test/ModalTest.vue')
       },
       {
+        path: 'like',
+        component: () => import('pages/test/LikeTest.vue')
+      },
+      {
         path: 'some',
         component: () => import('pages/test/SomeTest.vue')
       }

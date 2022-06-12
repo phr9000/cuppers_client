@@ -10,14 +10,17 @@
     <!-- CafeInformation -->
 
     <cafe-information
+      :reviewData="reviewData"
+      :userData="userData"
       :cafeData="cafeData"
       :cafeKeywordsData="cafeKeywordsData"
     />
 
     <!-- Coffee Menu-->
-    <cafe-menu />
+    <cafe-menu :cafeMenuData="cafeMenuData" :cafeData="cafeData" class="half" />
 
     <!-- User Reveiw -->
+    <review-card :reviewData="reviewData" :userData="userData" />
 
     <!-- 페이지네이션 -->
     <div class="q-pa-lg flex flex-center">
@@ -33,11 +36,11 @@ import CafeInformation from '../components/CafeDetail/CafeInformation.vue'
 import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
 import ImageGrid from '../components/CafeDetail/ImageGrid.vue'
 import CafeMenu from '../components/CafeDetail/CafeMenu.vue'
+import ReviewCard from '../components/Card/ReviewCard.vue'
 
 import cafeKeywordsData from '../data/cafeKeywordsData'
-import brewingMenuData from '../data/brewingMenuData'
-import variationMenuData from '../data/variationMenuData'
-import cafeData from 'src/data/cafeData.json'
+import cafeMenuData from '../data/cafeMenuData'
+import cafeData from '../data/cafeData.json'
 import reviewData from '../data/reviewData'
 import userData from '../data/userData'
 
@@ -47,12 +50,12 @@ export default defineComponent({
     CafeInformation,
     InfiniteScroll,
     ImageGrid,
-    CafeMenu
+    CafeMenu,
+    ReviewCard
   },
   data() {
     return {
-      brewingMenuData,
-      variationMenuData,
+      cafeMenuData,
       cafeKeywordsData,
       cafeData,
       reviewData,
@@ -62,4 +65,9 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.half {
+  padding-bottom: 50px;
+  border-bottom: 1px solid #848484;
+}
+</style>
