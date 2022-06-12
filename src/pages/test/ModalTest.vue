@@ -1,14 +1,14 @@
 <template>
-  <ImageSlideModal />
+  <modal-image-slide />
 </template>
 
 <script>
-import ImageSlideModal from 'src/components/Modal/ImageSlideModal.vue'
+import ModalImageSlide from 'src/components/Modal/ModalImageSlide.vue'
 
 export default {
   name: 'ModalTest',
   components: {
-    ImageSlideModal
+    ModalImageSlide
   }
 }
 </script>
