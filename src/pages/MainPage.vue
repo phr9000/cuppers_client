@@ -7,15 +7,15 @@
     </div>
     <c-note-carousel />
 
-    <!-- 카페 키워드 -->
-    <section class="text-center column constrain">
+    <div class="bottom_container text-center column constrain_more">
+      <!-- 메인 키워드 -->
       <div>
         <h4>CAFE KEYWORD</h4>
         <p>
           <span class="txt_keyword"> 키워드로 분류된 다양한 카페 모음 </span>
         </p>
       </div>
-      <div class="column keyword-container">
+      <section class="column keywords_container">
         <div class="row">
           <btn-main
             v-for="keyword in keywords"
@@ -24,22 +24,38 @@
             :keyword="keyword.keyword"
           />
         </div>
-      </div>
-
+      </section>
       <!-- 추천 카페 -->
-      <!-- <card-cafe-main /> -->
+      <section class="recommends_container row q-mt-xl">
+        <div class="card_wrap q-mr-md">
+          <card-cafe-main
+            title="커피리브레 연남점연남점연남점"
+            distance="3.4km"
+            imgUrl="http://designcoffee.com/web/images/TAG/Round7/coffee%20libre_interview%20(3).jpg"
+          />
+        </div>
+        <div class="card_wrap q-mr-md">
+          <card-cafe-main
+            title="커피 앰비언스"
+            distance="300m"
+            caption="‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페. 한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다."
+            imgUrl="https://blog.kakaocdn.net/dn/TRtov/btqviGyD7Xs/4YJRM8qw366Wr5TpVofhRk/img.png"
+          />
+        </div>
+        <div class="card_wrap q-mr-md"><card-cafe-main /></div>
+      </section>
 
       <div class="q-my-xl">
         <q-btn to="map" color="black" label="지도 표시하기" icon="map"></q-btn>
       </div>
-    </section>
+    </div>
   </q-page>
 </template>
 
 <script>
 import cafeKeywordsData from '../data/cafeKeywordsData'
 
-// import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
+import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CNoteCarousel from 'src/components/Carousel/CNoteCarousel.vue'
 import BtnMain from 'src/components/Button/BtnMain.vue'
 
@@ -47,8 +63,8 @@ export default {
   name: 'MainPage',
   components: {
     CNoteCarousel,
-    BtnMain
-    // CardCafeMain
+    BtnMain,
+    CardCafeMain
   },
   data() {
     return {
@@ -59,17 +75,37 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.keyword-container {
-  border-collapse: collapse;
-  border-right: 1px solid #eee;
-  border-top: 1px solid #eee;
+.bottom_container {
   width: 962px;
-  margin: 0 auto;
   @media (max-width: 962px) {
     width: 722px;
   }
   @media (max-width: 722px) {
     width: 482px;
+  }
+  .keywords_container {
+    border-collapse: collapse;
+    border-right: 1px solid #eee;
+    border-top: 1px solid #eee;
+    margin: 0 auto;
+  }
+  .recommends_container {
+    .card_wrap {
+      width: 310px;
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      @media (max-width: 962px) {
+        width: 230px;
+        margin-bottom: 1rem;
+      }
+      @media (max-width: 722px) {
+        width: 233px;
+        &:nth-child(2n) {
+          margin-right: 0;
+        }
+      }
+    }
   }
 }
 </style>
