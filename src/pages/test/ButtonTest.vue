@@ -20,6 +20,9 @@
       <btn-icon />
       <btn-icon color="warning" />
       <btn-icon color="grey-5" />
+      <btn-icon :flat="true" />
+      <btn-icon :flat="true" color="warning" />
+      <btn-icon :flat="true" color="grey-5" />
       <btn-icon color="grey-7" icon="menu" />
     </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
