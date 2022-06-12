@@ -5,7 +5,7 @@
         <h3 class="q-mb-lg main_tile">따뜻한<br />커피 한 잔이<br />좋다☕</h3>
       </div>
     </section>
-    <c-note-carousel />
+    <carousel-main-slide />
     <section class="bottom_container text-center column constrain_more">
       <!-- 커핑 노트 KEYWORD -->
       <div class="title-area">
@@ -67,13 +67,13 @@
 import cafeKeywordsData from '../data/cafeKeywordsData'
 
 import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
-import CNoteCarousel from 'src/components/Carousel/CNoteCarousel.vue'
+import CarouselMainSlide from 'src/components/Carousel/CarouselMainSlide.vue'
 import BtnMain from 'src/components/Button/BtnMain.vue'
 
 export default {
   name: 'MainPage',
   components: {
-    CNoteCarousel,
+    CarouselMainSlide,
     BtnMain,
     CardCafeMain
   },
