@@ -1,19 +1,16 @@
 <template>
   <q-page>
-    <div class="column">
+    <section class="column">
       <div class="q-pl-xl col">
         <h3 class="q-mb-lg">따뜻한<br />커피 한 잔이<br />좋다☕</h3>
       </div>
-    </div>
+    </section>
     <c-note-carousel />
-
-    <div class="bottom_container text-center column constrain_more">
-      <!-- 메인 키워드 -->
+    <section class="bottom_container text-center column constrain_more">
+      <!-- 커핑 노트 KEYWORD -->
       <div>
-        <h4>커핑 노트 KEYWORD</h4>
-        <p>
-          <span class="txt_keyword"> 키워드로 분류된 다양한 커핑 노트 </span>
-        </p>
+        <h4 class="q-mb-md text-primary">커핑 노트 KEYWORD</h4>
+        <p class="txt_keyword q-mb-xl">키워드로 분류된 다양한 커핑 노트</p>
       </div>
       <section class="column keywords_container">
         <div class="row">
@@ -25,33 +22,42 @@
           />
         </div>
       </section>
-      <!-- 추천 카페 -->
-      <div>
-        <h4 class="q-mb-none">당신을 위한 추천카페</h4>
-      </div>
-      <section class="recommends_container row q-mt-xl">
-        <div class="card_wrap q-mr-md">
-          <card-cafe-main
-            title="커피리브레 연남점연남점연남점"
-            distance="3.4km"
-            imgUrl="http://designcoffee.com/web/images/TAG/Round7/coffee%20libre_interview%20(3).jpg"
-          />
+    </section>
+    <section class="bg-grey-1">
+      <div class="bottom_container text-center column constrain_more">
+        <!-- 추천 카페 -->
+        <div>
+          <h4 class="q-mb-none text-primary">당신을 위한 추천카페</h4>
         </div>
-        <div class="card_wrap q-mr-md">
-          <card-cafe-main
-            title="커피 앰비언스"
-            distance="300m"
-            caption="‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페. 한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다."
-            imgUrl="https://blog.kakaocdn.net/dn/TRtov/btqviGyD7Xs/4YJRM8qw366Wr5TpVofhRk/img.png"
-          />
+        <div class="recommends_container row q-mt-xl">
+          <div class="card_wrap q-mr-md">
+            <card-cafe-main
+              title="커피리브레 연남점연남점연남점"
+              distance="3.4km"
+              imgUrl="http://designcoffee.com/web/images/TAG/Round7/coffee%20libre_interview%20(3).jpg"
+            />
+          </div>
+          <div class="card_wrap q-mr-md">
+            <card-cafe-main
+              title="커피 앰비언스"
+              distance="300m"
+              caption="‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페. 한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다."
+              imgUrl="https://blog.kakaocdn.net/dn/TRtov/btqviGyD7Xs/4YJRM8qw366Wr5TpVofhRk/img.png"
+            />
+          </div>
+          <div class="card_wrap q-mr-md"><card-cafe-main /></div>
         </div>
-        <div class="card_wrap q-mr-md"><card-cafe-main /></div>
-      </section>
 
-      <div class="q-my-xl">
-        <q-btn to="map" color="black" label="지도 표시하기" icon="map"></q-btn>
+        <div class="q-my-xl">
+          <q-btn
+            to="map"
+            color="primary"
+            label="지도 표시하기"
+            icon="map"
+          ></q-btn>
+        </div>
       </div>
-    </div>
+    </section>
   </q-page>
 </template>
 
@@ -79,12 +85,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 .bottom_container {
-  width: 962px;
-  @media (max-width: 962px) {
-    width: 722px;
+  padding: 100px 16px;
+  width: 945px;
+  @media (max-width: 977px) {
+    width: 717px;
   }
-  @media (max-width: 722px) {
-    width: 482px;
+  @media (max-width: 749px) {
+    width: 489px;
   }
   .keywords_container {
     border-collapse: collapse;
@@ -94,16 +101,16 @@ export default {
   }
   .recommends_container {
     .card_wrap {
-      width: 310px;
+      width: 293px;
       &:nth-child(3n) {
         margin-right: 0;
       }
-      @media (max-width: 962px) {
-        width: 230px;
+      @media (max-width: 977px) {
+        width: 217px;
         margin-bottom: 1rem;
       }
-      @media (max-width: 722px) {
-        width: 233px;
+      @media (max-width: 749px) {
+        width: 220px;
         &:nth-child(2n) {
           margin-right: 0;
         }

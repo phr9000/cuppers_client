@@ -37,8 +37,8 @@ export default {
   border-bottom: 1px solid #eee;
   font-size: 14px;
   line-height: 18px;
-  width: 120px;
-  height: 120px;
+  width: 114px;
+  height: 114px;
   word-break: keep-all;
 }
 </style>

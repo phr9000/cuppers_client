@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-px-md">
     <q-carousel
       animated
       v-model="slide"
