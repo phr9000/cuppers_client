@@ -2,13 +2,15 @@
 @import url(./_header.scss);
 * {
   box-sizing: border-box;
+  font-family: 'Montserrat', 'Noto Sans KR', -apple-system, system-ui,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, sans-serif;
 }
 .constrain {
   max-width: 1200px;
   margin: 0 auto;
 }
 .constrain_more {
-  max-width: 962px;
+  max-width: 978px;
   margin: 0 auto;
 }
 .radius_border {

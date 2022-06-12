@@ -16,13 +16,13 @@
           <q-icon name="place" /> {{ distance }}
         </div>
       </div>
-      <div class="text-left text-h6">
+      <div class="text-left text-h6 cafe-title">
         {{ title }}
       </div>
     </q-card-section>
 
     <q-card-section class="q-pt-none">
-      <div class="caption text-caption text-grey overflow-hidden">
+      <div class="caption text-caption text-grey cafe-description">
         {{ caption }}
       </div>
     </q-card-section>
@@ -69,6 +69,12 @@ export default defineComponent({
 .card_cafe_main {
   width: 100%;
   max-width: 500px;
+  transition: all 0.5s;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover {
+    transform: scale(1.1);
+  }
 
   .title_wrap {
     padding-right: 70px;
@@ -98,8 +104,19 @@ export default defineComponent({
   }
   .caption {
     height: 60px;
+    &.cafe-description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
   }
   .text-h6 {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     @media (max-width: 962px) {
       font-size: 1rem;
     }
