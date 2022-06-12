@@ -27,7 +27,7 @@
       </div>
 
       <!-- 추천 카페 -->
-      <!-- <recommend-list /> -->
+      <!-- <card-cafe-main /> -->
 
       <div class="q-my-xl">
         <q-btn to="map" color="black" label="지도 표시하기" icon="map"></q-btn>
@@ -39,16 +39,16 @@
 <script>
 import CafeKeywordsData from '../data/CafeKeywordsData'
 
-// import RecommendList from '../components/Card/RecommendList.vue'
-import CNoteCarousel from '../components/Carousel/CNoteCarousel.vue'
-import BtnMain from '../components/Button/BtnMain.vue'
+// import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
+import CNoteCarousel from 'src/components/Carousel/CNoteCarousel.vue'
+import BtnMain from 'src/components/Button/BtnMain.vue'
 
 export default {
   name: 'MainPage',
   components: {
     CNoteCarousel,
     BtnMain
-    // RecommendList
+    // CardCafeMain
   },
   data() {
     return {

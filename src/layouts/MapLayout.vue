@@ -11,7 +11,7 @@
 <script>
 import { defineComponent } from 'vue'
 
-import HeaderGlobal from 'src/components/Header/HeaderGlobal.vue'
+import HeaderGlobal from 'src/components/Global/HeaderGlobal.vue'
 import MapPage from 'src/pages/MapPage.vue'
 export default defineComponent({
   name: 'MapLayout',

@@ -10,7 +10,7 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import HeaderGlobal from 'src/components/Header/HeaderGlobal.vue'
+import HeaderGlobal from 'src/components/Global/HeaderGlobal.vue'
 
 export default defineComponent({
   name: 'MainLayout',
