@@ -10,9 +10,9 @@
     <div class="bottom_container text-center column constrain_more">
       <!-- 메인 키워드 -->
       <div>
-        <h4>CAFE KEYWORD</h4>
+        <h4>커핑 노트 KEYWORD</h4>
         <p>
-          <span class="txt_keyword"> 키워드로 분류된 다양한 카페 모음 </span>
+          <span class="txt_keyword"> 키워드로 분류된 다양한 커핑 노트 </span>
         </p>
       </div>
       <section class="column keywords_container">
@@ -26,6 +26,9 @@
         </div>
       </section>
       <!-- 추천 카페 -->
+      <div>
+        <h4 class="q-mb-none">당신을 위한 추천카페</h4>
+      </div>
       <section class="recommends_container row q-mt-xl">
         <div class="card_wrap q-mr-md">
           <card-cafe-main
