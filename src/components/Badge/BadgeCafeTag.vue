@@ -2,16 +2,16 @@
   <!-- 카페 태그 -->
   <div class="q-pa-md badges">
     <div class="badge">
-      <q-badge color="brown">{{ CafeKeywordsData[0].keyword }}</q-badge>
+      <q-badge color="brown">{{ cafeKeywordsData[0].keyword }}</q-badge>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CafeTag',
+  name: 'BadgeCafeTag',
   props: {
-    CafeKeywordsData: Array
+    cafeKeywordsData: Array
   }
 }
 </script>

@@ -1,16 +1,21 @@
 <template>
   <q-page class="constrain" container>
     <!-- Image Grid -->
-    <ImageGrid />
+    <image-grid
+      :cafeData="cafeData"
+      :reviewData="reviewData"
+      :userData="userData"
+    />
 
     <!-- CafeInformation -->
-    <CafeInformation
-      :CafeData="CafeData"
-      :CafeKeywordsData="CafeKeywordsData"
+
+    <cafe-information
+      :cafeData="cafeData"
+      :cafeKeywordsData="cafeKeywordsData"
     />
 
     <!-- Coffee Menu-->
-    <CafeMenu />
+    <cafe-menu />
 
     <!-- User Reveiw -->
 
@@ -19,7 +24,7 @@
       <q-pagination v-model="current" :max="5" direction-links />
     </div>
   </q-page>
-  <InfiniteScroll />
+  <infinite-scroll />
 </template>
 
 <script>
@@ -29,10 +34,12 @@ import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
 import ImageGrid from '../components/CafeDetail/ImageGrid.vue'
 import CafeMenu from '../components/CafeDetail/CafeMenu.vue'
 
-import CafeKeywordsData from '../data/CafeKeywordsData'
-import BrewingMenuData from '../data/BrewingMenuData'
-import VariationMenuData from '../data/VariationMenuData'
-import CafeData from 'src/data/CafeData.json'
+import cafeKeywordsData from '../data/cafeKeywordsData'
+import brewingMenuData from '../data/brewingMenuData'
+import variationMenuData from '../data/variationMenuData'
+import cafeData from 'src/data/cafeData.json'
+import reviewData from '../data/reviewData'
+import userData from '../data/userData'
 
 export default defineComponent({
   name: 'CafeDetailPage',
@@ -44,10 +51,12 @@ export default defineComponent({
   },
   data() {
     return {
-      BrewingMenuData,
-      VariationMenuData,
-      CafeKeywordsData,
-      CafeData
+      brewingMenuData,
+      variationMenuData,
+      cafeKeywordsData,
+      cafeData,
+      reviewData,
+      userData
     }
   }
 })

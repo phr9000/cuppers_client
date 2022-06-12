@@ -1,7 +1,7 @@
 export default [
   {
     user_id: 1,
-    user_name: 111,
+    user_name: '',
     user_email: '111111@gmail.com',
     user_cafe_likeit: true,
     user_lv: 4,

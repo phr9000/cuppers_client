@@ -5,25 +5,25 @@
         <div class="q-pl-md info">
           <h5 class="title">기본정보</h5>
           <div class="body">
-            <CafeTag :CafeKeywordsData="CafeKeywordsData" />
+            <badge-cafe-tag :cafeKeywordsData="cafeKeywordsData" />
             <!-- 카페 주소 -->
             <div>
-              <p>{{ CafeData[0].cafe_address }}</p>
+              <p>{{ cafeData[0].cafe_address }}</p>
             </div>
             <!-- 카페 영업시간 -->
             <div>
               <span>
-                {{ CafeData[0].cafe_weekday }} |
-                {{ CafeData[0].cafe_weekend }} |
-                {{ CafeData[0].cafe_dayoff }}
+                {{ cafeData[0].cafe_weekday }} |
+                {{ cafeData[0].cafe_weekend }} |
+                {{ cafeData[0].cafe_dayoff }}
               </span>
             </div>
             <!-- 카페 연락처(전화번호, 홈페이지, 인스타그램) -->
             <div>
-              <p>{{ CafeData[0].cafe_phone }}</p>
-              <a href="">{{ CafeData[0].cafe_web }}</a>
+              <p>{{ cafeData[0].cafe_phone }}</p>
+              <a href="">{{ cafeData[0].cafe_web }}</a>
               <br />
-              <a href="">{{ CafeData[0].cafe_insta }}</a>
+              <a href="">{{ cafeData[0].cafe_insta }}</a>
             </div>
           </div>
         </div>
@@ -37,16 +37,16 @@
 
 <script>
 // Components
-import CafeTag from '../CafeTag/CafeTag.vue'
+import BadgeCafeTag from '../Badge/BadgeCafeTag.vue'
 
 export default {
   name: 'CafeInformation',
   props: {
-    CafeData: Array,
-    CafeKeywordsData: Array
+    cafeData: Array,
+    cafeKeywordsData: Array
   },
   components: {
-    CafeTag
+    BadgeCafeTag
   }
 }
 </script>

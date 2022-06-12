@@ -4,13 +4,14 @@
     class="keyword flex flex-center no-border-radius"
     flat
     color="primary"
-    v-html="word"
-  />
+  >
+    <div class="text-body2 text-weight-medium" v-html="word"></div>
+  </q-btn>
 </template>
 
 <script>
 export default {
-  name: 'KeywordForMain',
+  name: 'BtnMain',
   props: {
     id: { type: Number, required: true },
     keyword: {

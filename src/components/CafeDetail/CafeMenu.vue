@@ -24,15 +24,15 @@
   </div>
 </template>
 <script>
-import BrewingMenuData from '../../data/BrewingMenuData'
-import VariationMenuData from '../../data/VariationMenuData'
+import brewingMenuData from '../../data/brewingMenuData'
+import variationMenuData from '../../data/variationMenuData'
 
 export default {
   name: 'CafeMenu',
   data() {
     return {
-      Brewing: BrewingMenuData,
-      Variation: VariationMenuData
+      Brewing: brewingMenuData,
+      Variation: variationMenuData
     }
   }
 }
