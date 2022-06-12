@@ -17,7 +17,7 @@
       </div>
       <div class="column keyword-container">
         <div class="row">
-          <keyword-for-main
+          <btn-main
             v-for="keyword in keywords"
             :key="keyword.id"
             :id="keyword.id"
@@ -41,13 +41,13 @@ import CafeKeywordsData from '../data/CafeKeywordsData'
 
 // import RecommendList from '../components/Card/RecommendList.vue'
 import CNoteCarousel from '../components/Carousel/CNoteCarousel.vue'
-import KeywordForMain from '../components/Keyword/KeywordForMain.vue'
+import BtnMain from '../components/Button/BtnMain.vue'
 
 export default {
   name: 'MainPage',
   components: {
     CNoteCarousel,
-    KeywordForMain
+    BtnMain
     // RecommendList
   },
   data() {

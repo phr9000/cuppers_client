@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'CafeTag',
+  name: 'BadgeCafeTag',
   props: {
     CafeKeywordsData: Array
   }

@@ -5,7 +5,7 @@
         <div class="q-pl-md info">
           <h5 class="title">기본정보</h5>
           <div class="body">
-            <CafeTag :CafeKeywordsData="CafeKeywordsData" />
+            <badge-cafe-tag :CafeKeywordsData="CafeKeywordsData" />
             <!-- 카페 주소 -->
             <div>
               <p>{{ CafeData[0].cafe_address }}</p>
@@ -37,7 +37,7 @@
 
 <script>
 // Components
-import CafeTag from '../CafeTag/CafeTag.vue'
+import BadgeCafeTag from '../Badge/BadgeCafeTag.vue'
 
 export default {
   name: 'CafeInformation',
@@ -46,7 +46,7 @@ export default {
     CafeKeywordsData: Array
   },
   components: {
-    CafeTag
+    BadgeCafeTag
   }
 }
 </script>
