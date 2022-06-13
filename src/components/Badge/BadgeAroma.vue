@@ -1,8 +1,6 @@
 <template>
   <!-- 아로마노트 태그 -->
-  <q-badge outline class="badge_aroma_note text-brown-1" color="brown-7">{{
-    value
-  }}</q-badge>
+  <q-badge outline rounded class="badge_aroma_note">{{ value }}</q-badge>
 </template>
 
 <script>
@@ -19,8 +17,11 @@ export default {
 
 <style lang="scss">
 .badge_aroma_note {
-  font-weight: 300;
-  padding: 3px 3px;
+  color: $brown-3;
+  border: 1px solid $brown-3;
+  font-weight: 400;
+  padding: 3px 6px;
   margin-right: 4px;
+  margin-bottom: 3px;
 }
 </style>

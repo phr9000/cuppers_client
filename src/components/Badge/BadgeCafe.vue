@@ -1,8 +1,6 @@
 <template>
   <!-- 아로마노트 태그 -->
-  <q-badge outline class="badge_cafe_keyword" color="secondary">{{
-    value
-  }}</q-badge>
+  <q-badge outline rounded class="badge_cafe_keyword">{{ value }}</q-badge>
 </template>
 
 <script>
@@ -19,8 +17,11 @@ export default {
 
 <style lang="scss">
 .badge_cafe_keyword {
-  font-weight: 300;
-  padding: 3px 3px;
+  color: $teal-3;
+  border: 1px solid $teal-2;
+  font-weight: 400;
+  padding: 3px 6px;
   margin-right: 4px;
+  margin-bottom: 3px;
 }
 </style>

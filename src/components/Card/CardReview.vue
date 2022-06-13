@@ -1,12 +1,12 @@
 <template>
   <div class="card_review_container">
-    <div class="row items-center">
+    <div class="user_info row items-center">
       <btn-avatar />
-      <div class="q-ml-sm">{{ review.user_name }}</div>
+      <div class="q-ml-sm user_name">{{ review.user_name }}</div>
     </div>
-    <q-card class="card_review" flat bordered>
-      <q-card-section class="row items-center">
-        <div class="text-h5 cafe_name q-mr-md">
+    <q-card class="card_review bg-grey-1" flat bordered>
+      <q-card-section class="cafe_info row items-center">
+        <div @click="cafeNameClick" class="text-h5 cafe_name q-mb-xs">
           {{ review.cafe_name }}
         </div>
         <div class="cafe_keywords_wrap">
@@ -17,12 +17,11 @@
           />
         </div>
       </q-card-section>
-      <q-card-section horizontal>
-        <q-card-section class="q-py-none bg-grey-1">
+      <q-card-section horizontal class="coffee_info_wrap row q-pt-none q-pr-md">
+        <div class="coffee_info q-py-none q-px-md">
           <div class="q-mb-xs">
             {{ review.review_drink }}
           </div>
-
           <div class="aromanote_wrap">
             <badge-aroma
               v-for="aroma in aromaNotes"
@@ -30,32 +29,44 @@
               :value="aroma.keyword_name"
             />
           </div>
-
           <div class="caption text-caption text-grey q-my-sm">
             {{ review.review_description }}
           </div>
-        </q-card-section>
-        <q-card-section class="col-5 flex flex-center bg-grey-1">
-          <q-img :ratio="3 / 4" :src="review.review_thumbnail" />
-        </q-card-section>
+        </div>
+        <q-img
+          class="col-5 q-pr-sm image"
+          :initial-ratio="16 / 9"
+          :src="review.review_thumbnail"
+        />
       </q-card-section>
-      <q-card-section class="review_bottom row items-center">
-        <q-icon size="sm" color="red-5" name="favorite" />
-        <span class="q-ml-xs text-red-4 text-h6">512</span>
-        <div>2022.22.22</div>
+      <q-card-section
+        class="review_bottom row justify-between items-center q-mb-m"
+      >
+        <btn-like
+          :userId="1"
+          :whatId="review.review_id"
+          likeWhat="review"
+          :likedIt="review.user_review_liked"
+          :likeItCount="review.review_liked_cnt"
+        />
+
+        <div class="text-grey">{{ createDate }}</div>
       </q-card-section>
     </q-card>
   </div>
 </template>
 
 <script>
+import { format } from 'date-fns'
 import { defineComponent } from 'vue'
 import BtnAvatar from 'src/components/Button/BtnAvatar.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import BadgeAroma from 'src/components/Badge/BadgeAroma.vue'
+import BtnLike from 'src/components/Button/BtnLike.vue'
+
 export default defineComponent({
   name: 'CardReview',
-  components: { BtnAvatar, BadgeCafe, BadgeAroma },
+  components: { BtnAvatar, BadgeCafe, BadgeAroma, BtnLike },
   props: {
     review: {
       type: Object,
@@ -90,6 +101,18 @@ export default defineComponent({
               keyword_type: 'cafe'
             },
             {
+              keyword_name: '추출도구 선택 가능',
+              keyword_type: 'cafe'
+            },
+            {
+              keyword_name: '분위기가 좋은',
+              keyword_type: 'cafe'
+            },
+            {
+              keyword_name: '분위기가 좋은',
+              keyword_type: 'cafe'
+            },
+            {
               keyword_name: '감귤',
               keyword_type: 'coffee'
             },
@@ -104,9 +127,14 @@ export default defineComponent({
             {
               keyword_name: '캐러멜',
               keyword_type: 'coffee'
+            },
+            {
+              keyword_name: '캐러멜',
+              keyword_type: 'coffee'
             }
           ],
-          user_cafe_likeit: true,
+          user_review_liked: true,
+          review_liked_cnt: 142,
           review_thumbnail:
             'https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal'
         }
@@ -114,6 +142,10 @@ export default defineComponent({
     }
   },
   computed: {
+    createDate() {
+      // return format(this.review.created_at, 'yyyy/dd/MM')
+      return format(new Date(), 'MMM dd. yyyy')
+    },
     cafeKeywords() {
       return this.review.review_keyword.filter((key) => {
         return key.keyword_type === 'cafe'
@@ -124,29 +156,38 @@ export default defineComponent({
         return key.keyword_type === 'coffee'
       })
     }
+  },
+  methods: {
+    cafeNameClick() {
+      this.$router.push({ path: '/cafedetail/1' })
+    }
   }
 })
 </script>
+
 <style lang="scss" scoped>
-.card_review {
-  border: 1px solid $primary;
-  // height: 250px;
-  .user_info {
-    width: 30px;
-    display: flex;
-    align-items: center;
-    margin: 10px;
-  }
+.user_info {
   .user_name {
-    font-size: 20px;
-    margin: 10px;
+    color: $grey-9;
   }
-  .caption {
-    height: 80px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+}
+.card_review {
+  border: 1px solid $grey-4;
+  .cafe_info {
+    .cafe_name {
+      transition: all 0.5s;
+      color: $grey-9;
+      cursor: pointer;
+      &:hover {
+        color: $grey-6;
+      }
+    }
+    .cafe_keywords_wrap {
+      flex-wrap: nowrap;
+    }
+  }
+  .review_image {
+    border-radius: 4px;
   }
   .review_bottom {
     padding: 0 16px 8px 16px;
