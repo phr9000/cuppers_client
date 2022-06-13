@@ -2,29 +2,25 @@
   <div class="q-mt-xl q-pl-xl" style="font-size: 20px; font-weight: 600">
     방문자 리뷰 {{ reviewData.length }}건
   </div>
-  <q-page class="row q-mt-xs q-gutter-md justify-center">
-    <q-card
-      v-for="review in reviewData"
-      :key="review"
-      class="my-card"
-      flat
-      bordered
-    >
+  <q-page class="col-6 q-mt-xs q-gutter-md justify-center">
+    <q-card class="my-card" flat bordered>
       <q-card-section horizontal>
         <q-card-section class="q-pt-sm">
           <div>
             <q-avatar>
               <img :src="userData[2]['user_thumbnail_url']" alt="" />
             </q-avatar>
-            <div class="text-overline">{{ review.user_name }}</div>
+            <div class="text-overline">{{ reviewData[0].user_name }}</div>
           </div>
-          <div class="text q-mt-sm q-mb-xs">{{ review.review_drink }}</div>
+          <div class="text q-mt-sm q-mb-xs">
+            {{ reviewData[0].review_drink }}
+          </div>
           <div class="text-caption text-grey">
-            {{ review.review_description }}
+            {{ reviewData[0].review_description }}
           </div>
         </q-card-section>
         <q-card-section class="col-5 flex flex-center">
-          <q-img class="borders" :src="review.review_thumbnail" />
+          <q-img class="borders" :src="reviewData[0].review_thumbnail" />
         </q-card-section>
       </q-card-section>
     </q-card>

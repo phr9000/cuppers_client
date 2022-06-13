@@ -20,7 +20,13 @@
     <cafe-menu :cafeMenuData="cafeMenuData" :cafeData="cafeData" class="half" />
 
     <!-- User Reveiw -->
-    <card-review :reviewData="reviewData" :userData="userData" />
+    <card-review
+      v-for="review in reviewData"
+      :key="review"
+      :reviewData="reviewData"
+      :userData="userData"
+      class="row"
+    />
 
     <!-- 페이지네이션 -->
     <div class="q-pa-lg flex flex-center">
