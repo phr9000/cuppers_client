@@ -30,20 +30,25 @@
 export default {
   name: 'CafeMenu',
   props: {
-    menu_name: {
-      type: String,
-      default: '에스프레소'
+    cafeMenuData: {
+      type: Object,
+      default: () => {
+        return {
+          menu_name: '에스프레소',
+          menu_price_hot: 3.5,
+          menu_price_ice: 3.5
+        }
+      }
     },
-    menu_price_hot: {
-      type: Number,
-      default: 3.5
-    },
-    menu_price_ice: {
-      type: Number,
-      default: 3.5
-    },
-    cafeData: Array,
-    cafeMenuData: Array
+    cafeData: {
+      type: Object,
+      default: () => {
+        return {
+          cafe_menu_image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGOQ_VynXr2kDkkFhIOvherUBTWBujQs9PhA&usqp=CAU'
+        }
+      }
+    }
   },
   computed: {
     OnlyBrewing() {
