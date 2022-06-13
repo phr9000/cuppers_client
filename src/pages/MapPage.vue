@@ -1,120 +1,126 @@
 <template>
-  <div class="map_wrap">
-    <!-- 지도가 표시되는 div -->
-    <div id="map"></div>
+  <div>
+    <div class="map_wrap">
+      <!-- 지도가 표시되는 div -->
+      <div id="map"></div>
 
-    <!-- 왼쪽 drawer -->
-    <q-drawer v-model="drawerOpen" show-if-above bordered>
-      <!-- tab -->
-      <q-tabs v-model="tab" inline-label class="shadow-2">
-        <q-tab name="search" icon="search" label="검색" />
-        <q-tab name="mylist" icon="list" label="내목록" />
-      </q-tabs>
+      <!-- 왼쪽 drawer -->
+      <q-drawer v-model="drawerOpen" show-if-above bordered>
+        <!-- tab -->
+        <q-tabs v-model="tab" inline-label class="shadow-2">
+          <q-tab name="search" icon="search" label="검색" />
+          <q-tab name="mylist" icon="list" label="내목록" />
+        </q-tabs>
 
-      <!-- tab1: map-search -->
-      <q-list v-show="tab === 'search'">
-        <q-input
-          @keyup.enter="doSearch"
-          v-model="search"
-          dense
-          placeholder="키워드 / 지역으로 검색"
-          class="q-mx-auto q-my-sm text-grey-5"
-          style="width: 90%"
-          hint="키워드 / 지역으로 검색하세요"
-        >
-          <template v-slot:prepend>
-            <q-btn @click="doSearch" round dense flat icon="search" />
-          </template>
-        </q-input>
-        <!-- <q-space />
+        <!-- tab1: map-search -->
+        <q-list v-show="tab === 'search'">
+          <q-input
+            @keyup.enter="doSearch"
+            v-model="search"
+            dense
+            placeholder="키워드 / 지역으로 검색"
+            class="q-mx-auto q-my-sm text-grey-5"
+            style="width: 90%"
+            hint="키워드 / 지역으로 검색하세요"
+          >
+            <template v-slot:prepend>
+              <q-btn @click="doSearch" round dense flat icon="search" />
+            </template>
+          </q-input>
+          <!-- <q-space />
           <q-btn round dense flat icon="menu" class="q-mr-xs" /> -->
-        <!-- 검색 결과 표시 -->
-        <div class="q-ma-xs q-pa-xs custom_test radius_border">
-          <div v-for="cafe in cafes" :key="cafe.cafe_id">
-            {{ cafe.cafe_name_pr }}
+          <!-- 검색 결과 표시 -->
+          <div class="q-ma-xs q-pa-xs custom_test radius_border">
+            <div v-for="cafe in cafes" :key="cafe.cafe_id">
+              {{ cafe.cafe_name_pr }}
+            </div>
           </div>
-        </div>
-      </q-list>
+        </q-list>
 
-      <!-- tab2: map-my-list -->
-      <q-list v-show="tab === 'mylist'">
-        <q-item-label header> 마이리스트 </q-item-label>
-      </q-list>
-    </q-drawer>
+        <!-- tab2: map-my-list -->
+        <q-list v-show="tab === 'mylist'">
+          <q-item-label header> 마이리스트 </q-item-label>
+        </q-list>
+      </q-drawer>
 
-    <!-- 지도 확대, 축소 컨트롤 div -->
-    <div class="zoom_control radius_border">
-      <span @click="zoomIn"
-        ><img
-          src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png"
-          alt="확대"
-      /></span>
-      <span @click="zoomOut"
-        ><img
-          src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
-          alt="축소"
-      /></span>
+      <!-- 지도 확대, 축소 컨트롤 div -->
+      <div class="zoom_control radius_border">
+        <span @click="zoomIn"
+          ><img
+            src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png"
+            alt="확대"
+        /></span>
+        <span @click="zoomOut"
+          ><img
+            src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
+            alt="축소"
+        /></span>
+      </div>
+
+      <!-- current location - 현재 위치 버튼 -->
+      <btn-icon
+        @click="setCurrentLocation"
+        class="btn_current_location"
+        icon="my_location"
+      />
+
+      <!-- 마커 클릭시 표시되는 인포 윈도우 -->
+      <section v-if="targetCafe" class="info_window_wrap">
+        <card-cafe-map
+          @close="hideCard"
+          :title="targetCafe.cafe_name_pr"
+          :caption="targetCafe.cafe_description"
+        />
+      </section>
     </div>
 
-    <!-- current location - 현재 위치 버튼 -->
-    <btn-icon
-      @click="setCurrentLocation"
-      class="btn_current_location"
-      icon="my_location"
-    />
+    <!-- 테스트 영역 -->
+    <section>
+      <div class="q-ma-xs q-pa-xs custom_test radius_border">
+        현재위치: {{ currentLocation }}
+      </div>
+      <div class="q-ma-xs q-pa-xs custom_test radius_border">
+        <btn-basic
+          @click="searchTest('송파')"
+          color="secondary"
+          label="송파 검색"
+        />
+        <btn-basic
+          @click="searchTest('강동')"
+          color="secondary"
+          label="강동 검색"
+        />
+        <btn-basic
+          @click="clearAllMarkers"
+          color="warning"
+          label="모든 마커 삭제"
+        />
+        <btn-basic
+          @click="clickMarker(1)"
+          color="primary"
+          label="마커 클릭/다시 클릭"
+        />
+      </div>
 
-    <!-- 마커 클릭시 표시되는 인포 윈도우 -->
-    <section v-if="targetCafe" class="info_window_wrap">
-      <card-cafe-map
-        :title="targetCafe.cafe_name_pr"
-        :caption="targetCafe.cafe_description"
-      />
+      <!-- 검색 결과 표시 -->
+      <div class="q-ma-xs q-pa-xs custom_test radius_border">
+        검색 결과 표시
+        <q-separator />
+        <div v-for="cafe in cafes" :key="cafe.cafe_id">
+          {{ cafe.cafe_name_pr }}
+        </div>
+      </div>
+      <!-- 클릭한 카페 -->
+      <div
+        v-if="targetCafe && showCard"
+        class="q-ma-xs q-pa-xs custom_test radius_border"
+      >
+        targetCafe
+        <q-separator />
+        {{ targetCafe.cafe_name_pr }}
+      </div>
     </section>
   </div>
-
-  <!-- 테스트 영역 -->
-  <section>
-    <div class="q-ma-xs q-pa-xs custom_test radius_border">
-      현재위치: {{ currentLocation }}
-    </div>
-    <div class="q-ma-xs q-pa-xs custom_test radius_border">
-      <btn-basic
-        @click="searchTest('송파')"
-        color="secondary"
-        label="송파 검색"
-      />
-      <btn-basic
-        @click="searchTest('강동')"
-        color="secondary"
-        label="강동 검색"
-      />
-      <btn-basic
-        @click="clearAllMarkers"
-        color="warning"
-        label="모든 마커 삭제"
-      />
-      <btn-basic
-        @click="handleMarkerClick(1)"
-        color="primary"
-        label="인포 윈도우 표시/닫기"
-      />
-    </div>
-
-    <!-- 검색 결과 표시 -->
-    <div class="q-ma-xs q-pa-xs custom_test radius_border">
-      검색 결과 표시
-      <q-separator />
-      <div v-for="cafe in cafes" :key="cafe.cafe_id">
-        {{ cafe.cafe_name_pr }}
-      </div>
-    </div>
-    <!-- 클릭한 카페 -->
-    <div v-if="targetCafe" class="q-ma-xs q-pa-xs custom_test radius_border">
-      targetCafe
-      <q-separator />
-      {{ targetCafe.cafe_name_pr }}
-    </div>
-  </section>
 </template>
 
 <script>
@@ -156,7 +162,8 @@ export default defineComponent({
       drawerOpen: true,
       tab: 'search', // 'search', 'mylist',
       searching: false,
-      targetCafe: null
+      targetCafe: null,
+      showCard: false
     }
   },
   computed: {
@@ -184,7 +191,18 @@ export default defineComponent({
     }
   },
   methods: {
-    handleMarkerClick(cafeId) {
+    hideCard() {
+      console.log('hide')
+      this.showCard = flase
+    },
+    clearTarget() {
+      console.log('clearTarget')
+      if (this.targetCafe) {
+        this.targetCafe = null
+        this.showCard = flase
+      }
+    },
+    clickMarker(cafeId) {
       if (this.targetCafe) {
         this.targetCafe = null
       } else {
