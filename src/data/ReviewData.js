@@ -45,8 +45,8 @@ export default [
         keyword_type: 'coffee'
       }
     ],
-    user_cafe_likeit: true,
-    likeit_cnt: true,
+    user_review_liked: true,
+    review_liked_cnt: 142,
     review_thumbnail:
       'https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal'
   }

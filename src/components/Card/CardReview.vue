@@ -5,7 +5,7 @@
       <div class="q-ml-sm user_name">{{ review.user_name }}</div>
     </div>
     <q-card class="card_review bg-grey-1" flat bordered>
-      <q-card-section class="cafe_info row items-center">
+      <q-card-section class="cafe_info row items-center justify-between">
         <div @click="cafeNameClick" class="text-h5 cafe_name q-mb-xs">
           {{ review.cafe_name }}
         </div>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <q-img
-          class="col-5 q-pr-sm image"
+          class="col-5 q-pr-sm review_image"
           :initial-ratio="16 / 9"
           :src="review.review_thumbnail"
         />

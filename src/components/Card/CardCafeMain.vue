@@ -51,16 +51,14 @@ export default defineComponent({
         '커피즈커피는 커피를 매개로 만나는 사람들의 미각적 행복과 기술적 진보를 위해 노력합니다. 커피리브레는 커피를 매개로 만나는 사람들의 미각적 행복과 기술적 진보를 위해 노력합니다.'
     }
   },
-  data() {
-    return {
-      handleClickCard() {
-        // 해당 카페의 상세 페이지로 이동
-        console.log('card clicked. cafe_id: ', this.cafeId)
-      },
-      handleClickLocation() {
-        // 해당 카페를 지도에서 보기 (나중에 구현)
-        console.log('location icon clicked. cafe_id: ', this.cafeId)
-      }
+  methods: {
+    handleClickCard() {
+      // 해당 카페의 상세 페이지로 이동
+      console.log('card clicked. cafe_id: ', this.cafeId)
+    },
+    handleClickLocation() {
+      // 해당 카페를 지도에서 보기 (나중에 구현)
+      console.log('location icon clicked. cafe_id: ', this.cafeId)
     }
   }
 })
@@ -68,7 +66,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .card_cafe_main {
-  width: 100%;
   max-width: 500px;
   cursor: pointer;
   overflow: hidden;
