@@ -30,6 +30,18 @@
 export default {
   name: 'CafeMenu',
   props: {
+    menu_name: {
+      type: String,
+      default: '에스프레소'
+    },
+    menu_price_hot: {
+      type: Number,
+      default: 3.5
+    },
+    menu_price_ice: {
+      type: Number,
+      default: 3.5
+    },
     cafeData: Array,
     cafeMenuData: Array
   },

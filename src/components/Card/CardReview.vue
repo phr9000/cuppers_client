@@ -14,7 +14,7 @@
         <q-card-section class="q-pt-sm">
           <div>
             <q-avatar>
-              <img :src="User['user_thumbnail_url']" alt="" />
+              <img :src="userData[1]['user_thumbnail_url']" alt="" />
             </q-avatar>
             <div class="text-overline">{{ review.user_name }}</div>
           </div>
@@ -32,18 +32,11 @@
 </template>
 
 <script>
-import userData from 'src/data/userData'
-
 export default {
   name: 'ReviewCard',
   props: {
     userData: Array,
     reviewData: Array
-  },
-  computed: {
-    User() {
-      return userData[1]
-    }
   }
 }
 </script>

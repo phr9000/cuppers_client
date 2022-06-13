@@ -1,7 +1,7 @@
 <template>
   <q-page class="constrain" container>
     <!-- Image Grid -->
-    <image-grid
+    <cafe-image-grid
       :cafeData="cafeData"
       :reviewData="reviewData"
       :userData="userData"
@@ -20,7 +20,7 @@
     <cafe-menu :cafeMenuData="cafeMenuData" :cafeData="cafeData" class="half" />
 
     <!-- User Reveiw -->
-    <review-card :reviewData="reviewData" :userData="userData" />
+    <card-review :reviewData="reviewData" :userData="userData" />
 
     <!-- 페이지네이션 -->
     <div class="q-pa-lg flex flex-center">
@@ -32,11 +32,11 @@
 
 <script>
 import { defineComponent } from 'vue'
-import CafeInformation from '../components/CafeDetail/CafeInformation.vue'
+import CafeInformation from '../components/Etc/CafeInformation.vue'
 import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
-import ImageGrid from '../components/CafeDetail/ImageGrid.vue'
-import CafeMenu from '../components/CafeDetail/CafeMenu.vue'
-import ReviewCard from '../components/Card/ReviewCard.vue'
+import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
+import CafeMenu from '../components/Etc/CafeMenu.vue'
+import CardReview from '../components/Card/CardReview.vue'
 
 import cafeKeywordsData from '../data/cafeKeywordsData'
 import cafeMenuData from '../data/cafeMenuData'
@@ -49,9 +49,9 @@ export default defineComponent({
   components: {
     CafeInformation,
     InfiniteScroll,
-    ImageGrid,
+    CafeImageGrid,
     CafeMenu,
-    ReviewCard
+    CardReview
   },
   data() {
     return {
