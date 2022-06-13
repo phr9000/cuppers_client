@@ -1,7 +1,20 @@
 <template>
   <q-page class="q-pa-sm">
+    <!-- card-review 리뷰카드 -->
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
-      <p>card-cafe-main</p>
+      <p>card-review 리뷰카드</p>
+      <div class="row">
+        <div class="q-mr-sm" style="width: 500px"><card-review /></div>
+        <div class="q-mr-sm" style="width: 400px">
+          <card-review />
+        </div>
+        <div style="width: 300px"><card-review /></div>
+      </div>
+    </div>
+
+    <!-- card-cafe-main 카페카드-메인 -->
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      <p>card-cafe-main 카페카드-메인</p>
       <div class="row">
         <div class="q-mr-sm" style="width: 500px"><card-cafe-main /></div>
         <div class="q-mr-sm" style="width: 400px">
@@ -25,11 +38,12 @@
 
 <script>
 import { defineComponent } from 'vue'
-import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CardSample from 'src/components/Card/CardSample.vue'
+import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
+import CardReview from 'src/components/Card/CardReview.vue'
 
 export default defineComponent({
-  components: { CardCafeMain, CardSample },
+  components: { CardSample, CardCafeMain, CardReview },
   data() {
     return {}
   }

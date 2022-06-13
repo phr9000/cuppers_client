@@ -20,13 +20,15 @@
     <cafe-menu :cafeMenuData="cafeMenuData" :cafeData="cafeData" class="half" />
 
     <!-- User Reveiw -->
-    <card-review
-      v-for="review in reviewData"
-      :key="review"
-      :reviewData="reviewData"
-      :userData="userData"
-      class="row"
-    />
+    <div class="row q-mt-xl">
+      <div class="card_wrap q-mr-md">
+        <card-review
+          v-for="review in reviews"
+          :key="review.review_id"
+          :review="review"
+        />
+      </div>
+    </div>
 
     <!-- 페이지네이션 -->
     <div class="q-pa-lg flex flex-center">
@@ -44,11 +46,11 @@ import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
 import CafeMenu from '../components/Etc/CafeMenu.vue'
 import CardReview from '../components/Card/CardReview.vue'
 
-import cafeKeywordsData from '../data/cafeKeywordsData'
-import cafeMenuData from '../data/cafeMenuData'
+import cafeKeywordsData from '../data/CafeKeywordsData'
+import cafeMenuData from '../data/CafeMenuData'
 import cafeData from '../data/cafeData.json'
-import reviewData from '../data/reviewData'
-import userData from '../data/userData'
+import reviewData from '../data/ReviewData'
+import userData from '../data/UserData'
 
 export default defineComponent({
   name: 'CafeDetailPage',
@@ -65,8 +67,13 @@ export default defineComponent({
       cafeKeywordsData,
       cafeData,
       reviewData,
-      userData
+      userData,
+      reviews: []
     }
+  },
+  mounted() {
+    this.reviews = reviewData
+    console.log(this.reviews)
   }
 })
 </script>

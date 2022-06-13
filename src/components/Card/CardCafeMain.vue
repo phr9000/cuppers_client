@@ -33,6 +33,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
+  name: 'CardCafeMain',
   props: {
     cafeId: {
       type: Number,
@@ -69,12 +70,8 @@ export default defineComponent({
 .card_cafe_main {
   width: 100%;
   max-width: 500px;
-  transition: all 0.5s;
   cursor: pointer;
   overflow: hidden;
-  &:hover {
-    transform: scale(1.1);
-  }
 
   .title_wrap {
     padding-right: 70px;
