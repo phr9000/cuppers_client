@@ -1,15 +1,14 @@
 <template>
   <div @click="handleCLick" class="likeit_wrap row items-center">
-    <q-icon v-if="isLiked" size="xs" class="icon_fav red" name="favorite" />
-    <q-icon v-else size="xs" class="icon_fav" name="favorite_border" />
-    <span class="likeit_cnt q-ml-xs text-h6" :class="{ red: isLiked }">{{
-      likeitCnt
-    }}</span>
+    <q-icon v-if="isLiked" size="xs" class="icon_fav red" name="fmd_good" />
+    <q-icon v-else size="xs" class="icon_fav" name="fmd_good" />
+    <span class="likeit_cnt text-h6" :class="{ red: isLiked }">가본곳</span>
   </div>
 </template>
 <script>
+// 아직 데이터 등등 정리 전 상태입니다 !!
 export default {
-  name: 'BtnLike',
+  name: 'BtnBeenThere',
   components: {},
   props: {
     user_id: { type: Number, required: true }, // 로그인한 사용자의 아이디
@@ -54,30 +53,31 @@ export default {
 <style lang="scss" scoped>
 .likeit_wrap {
   cursor: pointer;
+  .icon_fav {
+    color: $grey-5;
+    &.red {
+      color: $teal-4;
+    }
+  }
+  .likeit_cnt {
+    padding-left: 2px;
+    line-height: 18px;
+    color: $grey-5;
+    font-size: 16px;
+    &.red {
+      color: $teal-4;
+    }
+  }
+
   &:hover {
     .icon_fav {
       transition: all 0.3s;
-      color: $red-3;
+      color: $teal-3;
     }
     .likeit_cnt {
       line-height: 18px;
       transition: all 0.3s;
-      color: $red-3;
-    }
-  }
-
-  .icon_fav {
-    color: $grey-5;
-    &.red {
-      color: $red-4;
-    }
-  }
-  .likeit_cnt {
-    line-height: 18px;
-    color: $grey-5;
-    font-size: 18px;
-    &.red {
-      color: $red-4;
+      color: $teal-3;
     }
   }
 }

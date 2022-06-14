@@ -7,13 +7,33 @@
       <btn-basic to="/cafedetail/1" label="앰비언스 상세" />
       <btn-basic to="/test/card" color="secondary" label="카드 테스트" />
       <btn-basic to="/test/icon" color="dark" label="아이콘 테스트" />
-      <btn-basic to="/test/modal" color="warning" label="모달 테스트" />
-      <btn-basic to="/test/some" color="info" label="기타등등 테스트" />
+      <btn-basic
+        to="/test/modal"
+        color="warning"
+        label="모달 테스트"
+        icon="flight"
+      />
+      <btn-basic
+        to="/test/some"
+        color="info"
+        label="기타등등 테스트"
+        size="lg"
+      />
       <btn-basic
         @click="testMethod"
         color="primary"
-        label="인포 윈도우 표시/닫기"
+        label="메일보내기"
+        icon="mail"
       />
+      <btn-basic label="사이즈 sm" size="sm" />
+      <btn-basic label="리뷰 쓰기" size="md" />
+      <btn-basic label="링크 공유" size="md" />
+    </div>
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      <p>btn-basic-icon</p>
+      <btn-basic-right color="primary" label="리뷰 쓰기" icon="mail" />
+      <btn-basic-right color="secondary" label="리뷰 쓰기" icon="edit" />
+      <btn-basic-right color="secondary" label="공유" icon="share" />
     </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>btn-icon</p>
@@ -37,6 +57,7 @@
 <script>
 import { defineComponent } from 'vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
+import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import BtnIcon from 'src/components/Button/BtnIcon.vue'
 import BtnLogo from 'src/components/Button/BtnLogo.vue'
 import BtnMyAvatar from 'src/components/Button/BtnMyAvatar.vue'
@@ -45,6 +66,7 @@ import BtnReqNewCafe from 'src/components/Button/BtnReqNewCafe.vue'
 export default defineComponent({
   components: {
     BtnBasic,
+    BtnBasicRight,
     BtnIcon,
     BtnLogo,
     BtnReqNewCafe,
