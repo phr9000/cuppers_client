@@ -1,146 +1,245 @@
 <template>
-  <swiper
-    :effect="'cards'"
-    :grabCursor="true"
-    :modules="modules"
-    class="mySwiper"
-  >
-    <swiper-slide>
-      <img
-        src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/308b352c-5a60-487c-a754-e90a6619cdc8.jpeg"
-        alt=""
-      />
-    </swiper-slide>
-    <swiper-slide>
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStrqoncg9wM0iEXGc1hRhlsfyd_ACDh8yffbxgnMEmLHORWTpTGAVP9Z9znWCgXi75I0o&usqp=CAU"
-        alt=""
-      /> </swiper-slide
-    ><swiper-slide>
-      <img src="https://img.siksinhot.com/place/1545066193044445.jpg" alt="" />
-    </swiper-slide>
-    <swiper-slide
-      ><img
-        src="https://mp-seoul-image-production-s3.mangoplate.com/463989_1642374596865404.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80"
-        alt="" /></swiper-slide
-    ><swiper-slide>Slide 5</swiper-slide> <swiper-slide>Slide 6</swiper-slide
-    ><swiper-slide>Slide 7</swiper-slide> <swiper-slide>Slide 8</swiper-slide
-    ><swiper-slide>Slide 9</swiper-slide>
-  </swiper>
+  <div class="slide-container">
+    <swiper :slides-per-view="3" :space-between="0">
+      <swiper-slide style="width: 320px">
+        <ul class="slide-container slide-container1">
+          <li class="slide">
+            <div class="img-area">
+              <img
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/5fa226153eb945489e14772a7c48d31d"
+                class="img_pic"
+                alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
+              />
+            </div>
+            <div class="txt-area">test</div>
+          </li>
+          <li class="slide">
+            <div class="img-area">
+              <img
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/2359e14af9dd4270bfd02276dbabcc21"
+                class="img_pic"
+                alt="캠핑 밴에 사는<br>골드코스트의 히피들<br>"
+              />
+            </div>
+            <div class="txt-area">test</div>
+          </li>
+        </ul>
+      </swiper-slide>
+      <swiper-slide style="width: 960px">
+        <ul class="slide-container slide-container">
+          <li class="slide">
+            <div class="img-area">
+              <img
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/7cc0844444db44c7970663cb74b7364f"
+                class="img_pic"
+                alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
+              />
+            </div>
+            <div class="txt-area">test</div>
+          </li>
+          <li class="slide">
+            <div class="img-area">
+              <img
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/d9602a28c42248f1b406695658e36c52"
+                class="img_pic"
+                alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
+              />
+            </div>
+            <div class="txt-area">test</div>
+          </li>
+          <li class="slide">
+            <div class="img-area">
+              <img
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/ab3848ca65d3409ba7cbd2d2431ff419"
+                class="img_pic"
+                alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
+              />
+            </div>
+            <div class="txt-area">test</div>
+          </li>
+        </ul>
+      </swiper-slide>
+      <swiper-slide>
+        <ul class="slide-container slide-container1">
+          <li class="slide">
+            <div class="img-area">
+              <img
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/5fa226153eb945489e14772a7c48d31d"
+                class="img_pic"
+                alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
+              />
+            </div>
+            <div class="txt-area">test</div>
+          </li>
+          <li class="slide">
+            <div class="img-area">
+              <img
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/2359e14af9dd4270bfd02276dbabcc21"
+                class="img_pic"
+                alt="캠핑 밴에 사는<br>골드코스트의 히피들<br>"
+              />
+            </div>
+            <div class="txt-area">test</div>
+          </li>
+        </ul>
+      </swiper-slide>
+      <swiper-slide>
+        <ul class="slide-container slide-container">
+          <li class="slide">
+            <div class="img-area">
+              <img
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/7cc0844444db44c7970663cb74b7364f"
+                class="img_pic"
+                alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
+              />
+            </div>
+            <div class="txt-area">test</div>
+          </li>
+          <li class="slide">
+            <div class="img-area">
+              <img
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/d9602a28c42248f1b406695658e36c52"
+                class="img_pic"
+                alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
+              />
+            </div>
+            <div class="txt-area">test</div>
+          </li>
+          <li class="slide">
+            <div class="img-area">
+              <img
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/ab3848ca65d3409ba7cbd2d2431ff419"
+                class="img_pic"
+                alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
+              />
+            </div>
+            <div class="txt-area">test</div>
+          </li>
+        </ul>
+      </swiper-slide>
+    </swiper>
+  </div>
 </template>
+
 <script>
-// Import Swiper Vue.js components
+// import { ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-
-// Import Swiper styles
 import 'swiper/css'
-
-import 'swiper/css/effect-cards'
-
-// import required modules
-import { EffectCards } from 'swiper'
-
+import cafeData from '../../data/cafeData.json'
 export default {
   components: {
     Swiper,
     SwiperSlide
   },
-  setup() {
+  // 2.
+  swiperOptions: {
+    // 네비게이션
+    navigation: true,
+
+    // 페이지네이션
+    pagination: true,
+
+    slidesPerView: 6,
+    slidesPerGroup: 6,
+    spaceBetween: 10,
+    // 반응형 breakpoints
+    breakpoints: {
+      375: {
+        slidesPerView: 1
+      },
+      425: {
+        slidesPerView: 2,
+        slidesPerGroup: 2
+      },
+      768: {
+        slidesPerView: 3,
+        slidesPerGroup: 3
+      },
+      1024: {
+        slidesPerView: 4,
+        slidesPerGroup: 4
+      },
+      1400: {
+        slidesPerView: 5,
+        slidesPerGroup: 5
+      }
+    }
+  },
+  data() {
     return {
-      modules: [EffectCards]
+      cafeData
     }
   }
 }
 </script>
-<style>
-/* html,
-body {
-  position: relative;
-  height: 100%;
-}
 
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
+<style lang="scss" scope>
+ul {
   padding: 0;
-} */
-
-/* body {
-  background: #fff;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
   margin: 0;
-  padding: 0;
-} */
-
-html,
-body {
-  position: relative;
-  height: 100%;
 }
-
-#app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+li {
+  list-style: none;
 }
-
-.swiper {
-  width: 240px;
-  height: 320px;
-}
-
 .swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 18px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #fff;
+  overflow: hidden;
 }
-
-.swiper-slide:nth-child(1n) {
-  background-color: rgb(206, 17, 17);
-}
-
-.swiper-slide:nth-child(2n) {
-  background-color: rgb(255, 244, 212);
-}
-
-.swiper-slide:nth-child(3n) {
-  background-color: rgb(10, 184, 111);
-}
-
-.swiper-slide:nth-child(4n) {
-  background-color: rgb(211, 122, 7);
-}
-
-.swiper-slide:nth-child(5n) {
-  background-color: rgb(118, 163, 12);
-}
-
-.swiper-slide:nth-child(6n) {
-  background-color: rgb(180, 10, 47);
-}
-
-.swiper-slide:nth-child(7n) {
-  background-color: rgb(35, 99, 19);
-}
-
-.swiper-slide:nth-child(8n) {
-  background-color: rgb(0, 68, 255);
-}
-
-.swiper-slide:nth-child(9n) {
-  background-color: rgb(218, 12, 218);
-}
-
-.swiper-slide:nth-child(10n) {
-  background-color: rgb(54, 94, 77);
+.swiper {
+  overflow: hidden;
+  height: 520px;
+  .slide-container {
+    display: flex;
+    .slide {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      .img-area {
+        &:hover {
+          transition: all 0.5s;
+          transform: scale(1.1);
+          background-color: transparent;
+          opacity: 1;
+        }
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+          width: 100%;
+          height: 100%;
+          opacity: 0.5;
+          background-color: rgb(0, 0, 0);
+        }
+      }
+      .txt-area {
+        position: absolute;
+        z-index: 2;
+        color: red;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    &.slide-container1 {
+      width: 320px;
+      flex-direction: column;
+      .swiper-slide {
+        width: 320px !important;
+      }
+      .slide {
+        height: 280px;
+      }
+    }
+    &.slide-container2 {
+      flex-direction: row;
+      width: 100%;
+      .slide {
+        width: 33%;
+        height: 280px;
+      }
+    }
+  }
 }
 </style>
