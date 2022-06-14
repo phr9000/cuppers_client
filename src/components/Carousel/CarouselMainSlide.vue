@@ -6,21 +6,17 @@
           <li class="slide">
             <div class="img-area">
               <img
-                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/5fa226153eb945489e14772a7c48d31d"
+                :src="cnote.cnote_thumbnail"
                 class="img_pic"
-                alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
+                alt="한 잔의 커피는 나의 아낭케"
               />
             </div>
             <div class="txt-area">
-              <div class="title">
-                미니멀리즘으로 가는<br />
-                한달살기
-              </div>
+              <div class="title">{{ cnote.cnote_title }}</div>
               <div class="desc">
-                미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는
-                것이라고...
+                <p>{{ cnote.cnote_content }}</p>
               </div>
-              <div class="writer">by 위트립</div>
+              <div class="writer">by {{ cnote.user_name }}</div>
             </div>
           </li>
           <li class="slide">
@@ -181,13 +177,12 @@
 // import { ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
-import cafeData from '../../data/cafeData.json'
+
 export default {
   components: {
     Swiper,
     SwiperSlide
   },
-  // 2.
   swiperOptions: {
     // 네비게이션
     navigation: true,
@@ -223,9 +218,27 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      cafeData
+  props: {
+    cnote: {
+      type: Object,
+      default: () => {
+        return {
+          cnote_id: 2,
+          user_id: 2,
+          user_name: '커퍼',
+          cnote_title: '한 잔의 커피는 나의 아낭케',
+          cnote_content:
+            '오늘도 정량을 비운 커피잔엔 내일 마실 한 잔의 커피를 그리워하는 마음이 말라버린 거품으로 남았다.',
+          cnote_thumbnail:
+            'https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg',
+          create_at: '2022-06-14 14:30:55'
+        }
+      }
+    },
+    computed: {
+      createDate() {
+        return format(new Date(), 'MMM dd. yyyy')
+      }
     }
   }
 }

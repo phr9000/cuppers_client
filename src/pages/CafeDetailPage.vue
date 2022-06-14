@@ -13,7 +13,7 @@
       :reviewData="reviewData"
       :userData="userData"
       :cafeData="cafeData"
-      :cafeKeywordsData="cafeKeywordsData"
+      :mainKeywordsData="mainKeywordsData"
     />
 
     <!-- Coffee Menu-->
@@ -46,8 +46,8 @@ import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
 import CafeMenu from '../components/Etc/CafeMenu.vue'
 import CardReview from '../components/Card/CardReview.vue'
 
-import cafeKeywordsData from '../data/CafeKeywordsData'
-import cafeMenuData from '../data/CafeMenuData'
+import mainKeywordsData from '../data/mainKeywordsData'
+import cafeMenuData from '../data/cafeMenuData'
 import cafeData from '../data/cafeData.json'
 import reviewData from '../data/ReviewData'
 import userData from '../data/UserData'
@@ -64,7 +64,7 @@ export default defineComponent({
   data() {
     return {
       cafeMenuData,
-      cafeKeywordsData,
+      mainKeywordsData,
       cafeData,
       reviewData,
       userData,
