@@ -192,18 +192,6 @@ export default {
     Swiper,
     SwiperSlide
   },
-  setup() {
-    const onSwiper = (swiper) => {
-      console.log(swiper)
-    }
-    const onSlideChange = () => {
-      console.log('slide change')
-    }
-    return {
-      onSwiper,
-      onSlideChange
-    }
-  },
   swiperOptions: {
     // 네비게이션
     navigation: true,

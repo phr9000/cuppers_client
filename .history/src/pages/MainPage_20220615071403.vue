@@ -28,10 +28,10 @@
     <section class="bg-grey-1">
       <div class="bottom_container text-center column constrain_more">
         <!-- 추천 카페 -->
-        <div class="title-area">
-          <h4 class="q-mb-md text-primary keyword-title">Today's CAFE</h4>
+        <div>
+          <h4 class="q-mb-md text-primary keyword-title">커핑 노트 KEYWORD</h4>
           <p class="txt_keyword q-mb-xl keyword-des">
-            좋아할 만한 카페를 준비했어요
+            키워드로 분류된 다양한 커핑 노트
           </p>
         </div>
         <div class="recommends_container row q-mt-xl">
