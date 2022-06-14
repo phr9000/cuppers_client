@@ -60,6 +60,7 @@ export default {
       color: $red-3;
     }
     .likeit_cnt {
+      line-height: 18px;
       transition: all 0.3s;
       color: $red-3;
     }
@@ -72,6 +73,7 @@ export default {
     }
   }
   .likeit_cnt {
+    line-height: 18px;
     color: $grey-5;
     font-size: 18px;
     &.red {

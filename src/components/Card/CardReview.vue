@@ -190,7 +190,7 @@ export default defineComponent({
     border-radius: 4px;
   }
   .review_bottom {
-    padding: 0 16px 8px 16px;
+    padding: 4px 16px 8px 16px;
   }
 }
 </style>

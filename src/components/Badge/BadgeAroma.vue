@@ -19,7 +19,7 @@ export default {
 .badge_aroma_note {
   color: $brown-3;
   border: 1px solid $brown-3;
-  font-weight: 400;
+  font-weight: 500;
   padding: 3px 6px;
   margin-right: 4px;
   margin-bottom: 3px;

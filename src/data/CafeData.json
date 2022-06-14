@@ -24,6 +24,9 @@
     "created_at": "2022-06-10T10:58:54.000Z",
     "cafe_res_time": "2022-06-10T10:58:54.000Z",
     "cafe_shutdown_time": null,
+    "likeIt": {
+      "count": 114
+    },
     "image": [
       {
         "type": "m",
