@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import cafeKeywordsData from '../data/cafeKeywordsData'
+import CafeKeywordsData from '../data/CafeKeywordsData'
 
 import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CarouselMainSlide from 'src/components/Carousel/CarouselMainSlide.vue'
@@ -79,7 +79,7 @@ export default {
   },
   data() {
     return {
-      keywords: cafeKeywordsData
+      keywords: CafeKeywordsData
     }
   },
   methods: {}
@@ -104,6 +104,10 @@ export default {
   .recommends_container {
     .card_wrap {
       width: 293px;
+      transition: all 0.5s;
+      &:hover {
+        transform: scale(1.1);
+      }
       &:nth-child(3n) {
         margin-right: 0;
       }

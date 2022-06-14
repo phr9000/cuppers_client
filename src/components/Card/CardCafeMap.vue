@@ -1,7 +1,13 @@
 <template>
   <!-- Card, 카페 추천리스트 -->
-  <q-card class="card_cafe_main overflow-hidden" @click="handleClickCard">
-    <btn-icon @click="close" color="primary" class="btn_close" icon="close" />
+  <q-card class="card_cafe_main overflow-hidden">
+    <btn-icon
+      @click="close"
+      :flat="true"
+      color="grey-9"
+      class="btn_close"
+      icon="close"
+    />
     <q-img class="border-rad" :ratio="16 / 9" :src="imgUrl" />
 
     <q-card-section class="title_wrap">
@@ -29,6 +35,7 @@ import { defineComponent } from 'vue'
 import BtnIcon from 'src/components/Button/BtnIcon.vue'
 
 export default defineComponent({
+  name: 'CardCafeMap',
   components: {
     BtnIcon
   },
@@ -50,15 +57,16 @@ export default defineComponent({
     }
   },
   data() {
-    return {
-      handleClickCard() {
-        // 해당 카페의 상세 페이지로 이동
-        console.log('card clicked. cafe_id: ', this.cafeId)
-      },
-      close() {
-        console.log('close clicked.')
-        this.$emit('close')
-      }
+    return {}
+  },
+  methods: {
+    handleClickCard() {
+      // 해당 카페의 상세 페이지로 이동
+      console.log('card clicked. cafe_id: ', this.cafeId)
+    },
+    clickClose() {
+      console.log('close clicked.')
+      this.$emit('close')
     }
   }
 })
@@ -81,10 +89,11 @@ export default defineComponent({
 
   .btn_close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0px;
+    right: 0px;
     z-index: 1;
     border-radius: 50%;
+    transform: scale(1.2);
   }
 
   .location {

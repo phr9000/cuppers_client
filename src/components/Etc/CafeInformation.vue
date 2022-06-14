@@ -72,20 +72,57 @@
 
 <script>
 // Components
+import { defineComponent } from 'vue'
 import BadgeCafeTag from '../Badge/BadgeCafeTag.vue'
 
-export default {
+export default defineComponent({
   name: 'CafeInformation',
   props: {
-    cafeData: Array,
-    cafeKeywordsData: Array,
-    reviewData: Array,
-    userData: Array
+    cafeData: {
+      type: Object,
+      default: () => {
+        return {
+          cafe_id: -1,
+          cafe_address: '서울 송파구 송이로17길 51',
+          cafe_weekday: '08:00 ~ 22:00',
+          cafe_weekend: '토, 일요일 12:00 ~ 22:00',
+          cafe_dayoff: '명절 당일 휴무',
+          cafe_phone: '02-449-9967',
+          cafe_web: 'https://www.cafeabcd.com',
+          cafe_insta: 'https://www.instagram.com/userid/',
+          cafe_menu_image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGOQ_VynXr2kDkkFhIOvherUBTWBujQs9PhA&usqp=CAU'
+        }
+      }
+    },
+    userData: {
+      type: Object,
+      default: () => {
+        return {
+          user_thumbnail_url:
+            'https://i.pinimg.com/564x/8d/ef/74/8def742e13e30690bed31ad7634839c3.jpg'
+        }
+      }
+    },
+    reviewData: {
+      type: Object,
+      default: () => {
+        return {
+          user_name: 'Weme',
+          review_drink: '에스프레소',
+          review_description:
+            '동네커피숍처럼 아기자기했던 까페 ^^ 이곳저곳 모두 비슷한매장컨셉에 질렸던터라, 이곳은 저에겐 좀 색다르게느껴졌어요 ㅎㅎㅎ까페치고는 매우 간략한메뉴판이 있는 곳입니다 ㅎㅎ',
+          review_thumbnail:
+            'https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.kakaocdn.net%2Fmystore%2F8B933339DC3E4BF2B9033A30ADBCA5F4'
+        }
+      }
+    },
+    cafeKeywordsData: Array
   },
   components: {
     BadgeCafeTag
   }
-}
+})
 </script>
 <style lang="scss" scoped>
 a:link {

@@ -1,7 +1,7 @@
 <template>
   <q-page class="constrain" container>
     <!-- Image Grid -->
-    <image-grid
+    <cafe-image-grid
       :cafeData="cafeData"
       :reviewData="reviewData"
       :userData="userData"
@@ -20,7 +20,15 @@
     <cafe-menu :cafeMenuData="cafeMenuData" :cafeData="cafeData" class="half" />
 
     <!-- User Reveiw -->
-    <review-card :reviewData="reviewData" :userData="userData" />
+    <div class="row q-mt-xl">
+      <div class="card_wrap q-mr-md">
+        <card-review
+          v-for="review in reviews"
+          :key="review.review_id"
+          :review="review"
+        />
+      </div>
+    </div>
 
     <!-- 페이지네이션 -->
     <div class="q-pa-lg flex flex-center">
@@ -32,26 +40,26 @@
 
 <script>
 import { defineComponent } from 'vue'
-import CafeInformation from '../components/CafeDetail/CafeInformation.vue'
+import CafeInformation from '../components/Etc/CafeInformation.vue'
 import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
-import ImageGrid from '../components/CafeDetail/ImageGrid.vue'
-import CafeMenu from '../components/CafeDetail/CafeMenu.vue'
-import ReviewCard from '../components/Card/ReviewCard.vue'
+import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
+import CafeMenu from '../components/Etc/CafeMenu.vue'
+import CardReview from '../components/Card/CardReview.vue'
 
-import cafeKeywordsData from '../data/cafeKeywordsData'
-import cafeMenuData from '../data/cafeMenuData'
+import cafeKeywordsData from '../data/CafeKeywordsData'
+import cafeMenuData from '../data/CafeMenuData'
 import cafeData from '../data/cafeData.json'
-import reviewData from '../data/reviewData'
-import userData from '../data/userData'
+import reviewData from '../data/ReviewData'
+import userData from '../data/UserData'
 
 export default defineComponent({
   name: 'CafeDetailPage',
   components: {
     CafeInformation,
     InfiniteScroll,
-    ImageGrid,
+    CafeImageGrid,
     CafeMenu,
-    ReviewCard
+    CardReview
   },
   data() {
     return {
@@ -59,8 +67,13 @@ export default defineComponent({
       cafeKeywordsData,
       cafeData,
       reviewData,
-      userData
+      userData,
+      reviews: []
     }
+  },
+  mounted() {
+    this.reviews = reviewData
+    console.log(this.reviews)
   }
 })
 </script>

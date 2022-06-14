@@ -47,9 +47,25 @@
 export default {
   name: 'ImageGrid',
   props: {
-    cafeData: Array,
-    reviewData: Array,
-    userData: Array
+    cafeData: {
+      type: Object,
+      default: () => {
+        return {
+          cafe_name_pr: '커피앰비언스',
+          cafe_region: '송파'
+        }
+      }
+    },
+    reviewData: {
+      type: Object,
+      default: () => {
+        return {
+          cafe_name: '커피앰비언스',
+          review_thumbnail:
+            'https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.kakaocdn.net%2Fmystore%2F8B933339DC3E4BF2B9033A30ADBCA5F4'
+        }
+      }
+    }
   },
   computed: {
     activeArray() {
