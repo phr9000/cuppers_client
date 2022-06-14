@@ -1,42 +1,50 @@
 <template>
   <div @click="handleCLick" class="likeit_wrap row items-center">
-    <q-icon v-if="likedIt" size="xs" class="icon_fav red" name="favorite" />
+    <q-icon v-if="isLiked" size="xs" class="icon_fav red" name="favorite" />
     <q-icon v-else size="xs" class="icon_fav" name="favorite_border" />
-    <span class="likeit_cnt q-ml-xs text-h6" :class="{ red: likedIt }">{{
-      likeItCount
+    <span class="likeit_cnt q-ml-xs text-h6" :class="{ red: isLiked }">{{
+      likeitCnt
     }}</span>
   </div>
 </template>
 <script>
-import { el } from 'date-fns/locale'
 export default {
   name: 'BtnLike',
   components: {},
   props: {
-    userId: { type: Number, required: true }, // 로그인한 사용자의 아이디
-    likeWhat: { type: String, required: true }, // 'review' or 'cnote' or 'cafe'
-    whatId: { type: Number, required: true }, // 'review_id' or 'cnote_id' or 'cafe_id'
-    likedIt: {
+    user_id: { type: Number, required: true }, // 로그인한 사용자의 아이디
+    like_what: { type: String, required: true }, // 'review' or 'cnote' or 'cafe'
+    id_what: { type: Number, required: true }, // 'review_id' or 'cnote_id' or 'cafe_id'
+    is_liked: {
       type: Boolean,
       required: true
     }, // 좋아요 했는지 여부
-    likeItCount: {
+    likeit_cnt: {
       type: Number,
       required: true
     } // 이 '~'의 좋아요 총 합
   },
   data() {
-    return {}
+    return {
+      isLiked: false,
+      likeitCnt: 0
+    }
+  },
+  mounted() {
+    this.isLiked = this.is_liked
+    this.likeitCnt = this.likeit_cnt
   },
   methods: {
     handleCLick() {
-      if (this.likedIt) {
+      if (this.isLiked) {
+        this.isLiked = false
         console.log(
-          `user:id(${this.userId}) just dislike this ${this.likeWhat}:id(${this.whatId})  `
+          `user:id(${this.user_id}) just dislike this ${this.like_what}:id(${this.id_what})  `
         )
       } else {
+        this.isLiked = true
         console.log(
-          `user:id(${this.userId}) just like this ${this.likeWhat}:id(${this.whatId})  `
+          `user:id(${this.user_id}) just like this ${this.like_what}:id(${this.id_what})  `
         )
       }
     }
@@ -49,11 +57,11 @@ export default {
   &:hover {
     .icon_fav {
       transition: all 0.3s;
-      color: $red-4;
+      color: $red-3;
     }
     .likeit_cnt {
       transition: all 0.3s;
-      color: $red-4;
+      color: $red-3;
     }
   }
 

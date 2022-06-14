@@ -43,11 +43,11 @@
         class="review_bottom row justify-between items-center q-mb-m"
       >
         <btn-like
-          :userId="1"
-          :whatId="review.review_id"
-          likeWhat="review"
-          :likedIt="review.user_review_liked"
-          :likeItCount="review.review_liked_cnt"
+          :user_id="1"
+          :id_what="review.review_id"
+          like_what="review"
+          :is_liked="review.user_review_liked"
+          :likeit_cnt="review.review_liked_cnt"
         />
 
         <div class="text-grey">{{ createDate }}</div>
