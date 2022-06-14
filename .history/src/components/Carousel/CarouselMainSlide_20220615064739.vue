@@ -244,11 +244,8 @@ export default {
         }
       }
     },
-    created() {
-      return this.swiper.update()
-    },
     mounted() {
-      return this.swiper.update()
+      swiper.update()
     },
     computed: {
       createDate() {
@@ -263,9 +260,6 @@ export default {
 </script>
 
 <style lang="scss" scope>
-.swiper-slide {
-  width: auto !important;
-}
 ul {
   padding: 0 !important;
   margin: 0;

@@ -184,8 +184,8 @@
 import { ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
-// import 'swiper/components/navigation/navigation.min.css'
-// import 'swiper/components/pagination/pagination.min.css'
+import 'swiper/components/navigation/navigation.min.css'
+import 'swiper/components/pagination/pagination.min.css'
 
 export default {
   components: {
@@ -244,12 +244,6 @@ export default {
         }
       }
     },
-    created() {
-      return this.swiper.update()
-    },
-    mounted() {
-      return this.swiper.update()
-    },
     computed: {
       createDate() {
         return format(new Date(), 'MMM dd. yyyy')
@@ -263,9 +257,6 @@ export default {
 </script>
 
 <style lang="scss" scope>
-.swiper-slide {
-  width: auto !important;
-}
 ul {
   padding: 0 !important;
   margin: 0;

@@ -264,7 +264,7 @@ export default {
 
 <style lang="scss" scope>
 .swiper-slide {
-  width: auto !important;
+  width: 500px !important;
 }
 ul {
   padding: 0 !important;

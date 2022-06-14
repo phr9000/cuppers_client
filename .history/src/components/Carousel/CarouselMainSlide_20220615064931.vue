@@ -1,5 +1,5 @@
 <template>
-  <div class="slide-container" style="margin-right: 20px">
+  <div :class="slide - container" style="margin-right: 20px">
     <swiper ref="mySwiper">
       <swiper-slide style="width: 320px">
         <ul class="slide-container slide-container1">
@@ -245,10 +245,10 @@ export default {
       }
     },
     created() {
-      return this.swiper.update()
+      this.swiper.update()
     },
     mounted() {
-      return this.swiper.update()
+      this.swiper.update()
     },
     computed: {
       createDate() {
@@ -263,9 +263,6 @@ export default {
 </script>
 
 <style lang="scss" scope>
-.swiper-slide {
-  width: auto !important;
-}
 ul {
   padding: 0 !important;
   margin: 0;

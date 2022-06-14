@@ -1,6 +1,6 @@
 <template>
-  <div class="slide-container" style="margin-right: 20px">
-    <swiper ref="mySwiper">
+  <div :class="slide - container" style="margin-right: 20px">
+    <swiper ref="mySwiper" @swiper="setSwiperRef">
       <swiper-slide style="width: 320px">
         <ul class="slide-container slide-container1">
           <li class="slide">
@@ -184,6 +184,10 @@
 import { ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
+import SwiperCore, { Pagination, Navigation } from 'swiper'
+import 'swiper/components/pagination/pagination.scss'
+import 'swiper/components/navigation/navigation.min.css'
+
 // import 'swiper/components/navigation/navigation.min.css'
 // import 'swiper/components/pagination/pagination.min.css'
 
@@ -204,6 +208,11 @@ export default {
     slideToClickedSlide: true,
     observer: true,
     observeParents: true,
+    navigation: {
+      // 버튼 사용자 지정
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
     // 반응형 breakpoints
     breakpoints: {
       375: {
@@ -245,10 +254,10 @@ export default {
       }
     },
     created() {
-      return this.swiper.update()
+      this.swiper.update()
     },
     mounted() {
-      return this.swiper.update()
+      this.swiper.update()
     },
     computed: {
       createDate() {
@@ -263,9 +272,6 @@ export default {
 </script>
 
 <style lang="scss" scope>
-.swiper-slide {
-  width: auto !important;
-}
 ul {
   padding: 0 !important;
   margin: 0;
