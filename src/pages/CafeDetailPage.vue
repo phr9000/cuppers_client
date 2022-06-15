@@ -14,7 +14,7 @@
         <div class="row justify-between">
           <div class="row items-center">
             <!-- 좋아요 버튼 -->
-            <div class="q-mr-xs">
+            <div class="btn_likeit q-mr-xs">
               <btn-like
                 :user_id="1"
                 :id_what="cafe.cafe_id"
@@ -71,10 +71,10 @@
     <!-- 기본정보 & 최근리뷰 컨테이너 -->
     <section class="cafe_information column">
       <section class="cafe_detail_wrap row">
-        <!-- 기본정보 -->
-        <div class="cafe_basic_info col-7 q-pa-md bg-grey-1">
+        <div class="cafe_basic_info_wrap col-7 q-pa-md bg-grey-1">
+          <!-- 기본정보 -->
           <div class="subtitle q-pl-sm q-mb-md">기본 정보</div>
-          <div class="col">
+          <div class="cafe_basic_info col q-pl-md">
             <!-- info_top -->
             <div class="info_top">
               <!-- 키워드 -->
@@ -155,6 +155,28 @@
               </div>
             </div>
           </div>
+
+          <!-- 커피메뉴 -->
+          <div class="subtitle q-pl-sm q-mb-md">커피 메뉴</div>
+          <div class="coffe_menu col q-pl-md">
+            <!-- info_top -->
+            <div class="info_top">
+              <!-- 브루잉 메뉴 -->
+              <div class="info q-mb-xs">
+                <q-icon size="xs" name="info" class="icon q-pr-xs" />
+                <div class="text_subtitle1">브루잉 메뉴</div>
+              </div>
+              <div class="q-pl-lg q-pb-sm">
+                <menu-item
+                  v-for="menu in cafe.menu"
+                  :name="menu.menu_name"
+                  :aromaNotes="menu.menu_aromanote"
+                  :key="menu.menu_name"
+                  :type="menu.menu_type"
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 최근리뷰 -->
@@ -225,6 +247,7 @@ import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnBeenThere from 'src/components/Button/BtnBeenThere.vue'
 import CardReview from '../components/Card/CardReview.vue'
+import MenuItem from 'src/components/Etc/MenuItem.vue'
 
 export default defineComponent({
   name: 'CafeDetailPage',
@@ -239,7 +262,8 @@ export default defineComponent({
     // BtnBasicRight,
     BtnLike,
     BtnBeenThere,
-    CardReview
+    CardReview,
+    MenuItem
   },
   data() {
     return {
@@ -282,9 +306,13 @@ export default defineComponent({
       font-weight: 500;
       color: $grey-10;
     }
+    .btn_likeit {
+      position: relative;
+      left: -8px;
+    }
     .btn_been_there {
       position: relative;
-      left: -10px;
+      left: -18px;
     }
   }
 
@@ -295,69 +323,68 @@ export default defineComponent({
       color: $primary;
     }
     position: relative;
+
     .cafe_detail_wrap {
-      .cafe_basic_info {
-        .text_subtitle1 {
-          // font-size: 1rem;
-        }
+      .text_subtitle1 {
+        // font-size: 1rem;
+      }
+      .info {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+      .info_top {
         .info {
+        }
+      }
+      .info_mid {
+        .cafe_keywords_wrap {
+          border: 1px solid $border-color;
+          padding: 6px 10px;
+          border-radius: $border-radius;
+        }
+        .info_right {
           display: flex;
-          flex-wrap: nowrap;
-          align-items: center;
-        }
-        .info_top {
-          .info {
-          }
-        }
-        .info_mid {
-          .cafe_keywords_wrap {
-            border: 1px solid $border-color;
-            padding: 6px 10px;
-            border-radius: $border-radius;
-          }
-          .info_right {
-            display: flex;
-            flex-direction: column;
-            justify-content: end;
-            .info {
-              display: flex;
-              flex-wrap: nowrap;
-              justify-content: end;
-            }
-          }
-        }
-        .info_bottom {
+          flex-direction: column;
+          justify-content: end;
           .info {
             display: flex;
             flex-wrap: nowrap;
             justify-content: end;
           }
-          .cafe_sns {
-            cursor: pointer;
-            text-align: right;
-            font-size: 0.85rem;
-            width: 370px;
-            color: $brown-4;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            &:hover {
-              color: $primary;
-            }
+        }
+      }
+      .info_bottom {
+        .info {
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: end;
+        }
+        .cafe_sns {
+          cursor: pointer;
+          text-align: right;
+          font-size: 0.85rem;
+          width: 370px;
+          color: $brown-4;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          &:hover {
+            color: $primary;
           }
         }
       }
-      .recent_review {
-        // position: absolute;
-        width: 500px;
-        // top: 0;
-        // right: 0;
-        // @media (max-width: 977px) {
-        //   position: relative;
-        // }
-      }
+    }
+    .recent_review {
+      // position: absolute;
+      width: 500px;
+      // top: 0;
+      // right: 0;
+      // @media (max-width: 977px) {
+      //   position: relative;
+      // }
     }
   }
 }

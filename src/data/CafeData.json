@@ -92,6 +92,44 @@
         "operation_day": "일",
         "operation_time": "정기휴무"
       }
+    ],
+    "menu": [
+      {
+        "menu_name": "에티오피아",
+        "menu_price_hot": 5000,
+        "menu_price_ice": null,
+        "menu_type": "br",
+        "menu_aromanote": [
+          {
+            "keyword_name": "감귤",
+            "keyword_type": "coffee"
+          },
+          {
+            "keyword_name": "모과",
+            "keyword_type": "coffee"
+          },
+          {
+            "keyword_name": "볶은 땅콩",
+            "keyword_type": "coffee"
+          },
+          {
+            "keyword_name": "캐러멜",
+            "keyword_type": "coffee"
+          }
+        ]
+      },
+      {
+        "menu_name": "아메리카노",
+        "menu_price_hot": 3800,
+        "menu_price_ice": 3800,
+        "menu_type": "va"
+      },
+      {
+        "menu_name": "카페라떼",
+        "menu_price_hot": 4400,
+        "menu_price_ice": 4800,
+        "menu_type": "sig"
+      }
     ]
   },
   {

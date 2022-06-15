@@ -19,16 +19,7 @@
       </q-card-section>
       <q-card-section horizontal class="coffee_info_wrap row q-pt-none q-pr-md">
         <div class="coffee_info q-py-none q-px-md">
-          <div class="q-mb-xs">
-            {{ review.review_drink }}
-          </div>
-          <div class="aromanote_wrap">
-            <badge-aroma
-              v-for="aroma in aromaNotes"
-              :key="aroma.keyword_name"
-              :value="aroma.keyword_name"
-            />
-          </div>
+          <menu-item :name="review.review_drink" :aromaNotes="aromaNotes" />
           <div class="caption text-caption text-grey q-my-sm">
             {{ review.review_description }}
           </div>
@@ -61,12 +52,12 @@ import { format } from 'date-fns'
 import { defineComponent } from 'vue'
 import BtnAvatar from 'src/components/Button/BtnAvatar.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
-import BadgeAroma from 'src/components/Badge/BadgeAroma.vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
+import MenuItem from 'src/components/Etc/MenuItem.vue'
 
 export default defineComponent({
   name: 'CardReview',
-  components: { BtnAvatar, BadgeCafe, BadgeAroma, BtnLike },
+  components: { BtnAvatar, BadgeCafe, BtnLike, MenuItem },
   props: {
     review: {
       type: Object,
