@@ -19,6 +19,10 @@ const routes = [
       {
         path: 'reqnewcafe',
         component: () => import('src/pages/ReqNewCafePage.vue')
+      },
+      {
+        path: 'newcafe',
+        component: () => import('src/pages/AddNewCafePage.vue')
       }
     ]
   },

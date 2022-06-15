@@ -241,7 +241,6 @@ import reviewData from '../data/ReviewData'
 // import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
 // import CafeMenu from '../components/Etc/CafeMenu.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
-import BadgeAroma from 'src/components/Badge/BadgeAroma.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
@@ -257,7 +256,6 @@ export default defineComponent({
     // CafeImageGrid,
     // CafeMenu,
     BadgeCafe,
-    //BadgeAroma,
     BtnBasic,
     // BtnBasicRight,
     BtnLike,
