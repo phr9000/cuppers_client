@@ -25,6 +25,7 @@
               </div>
               <div class="writer">by {{ cnote.user_name }}</div>
             </div>
+            <div class="dim"></div>
           </li>
           <li class="slide">
             <div class="img-area">
@@ -45,6 +46,7 @@
               </div>
               <div class="writer">by 위트립</div>
             </div>
+            <div class="dim"></div>
           </li>
         </ul>
       </swiper-slide>
@@ -53,62 +55,64 @@
           <li class="slide">
             <div class="img-area">
               <img
-                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/7cc0844444db44c7970663cb74b7364f"
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/e56017e9572e43a68279370cd769983d"
                 class="img_pic"
                 alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
               />
             </div>
             <div class="txt-area">
               <div class="title">
-                미니멀리즘으로 가는<br />
-                한달살기
+                핸드드립을 맛있게<br />
+                내리는 팁 - 2
               </div>
               <div class="desc">
-                미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는
-                것이라고...
+                지난 글에서는 핸드드립을 본격적으로 내려 마시기 전에 고민해야 할
+                몇가지 ...
               </div>
-              <div class="writer">by 위트립</div>
+              <div class="writer">by 봉선</div>
             </div>
+            <div class="dim"></div>
           </li>
           <li class="slide">
             <div class="img-area">
               <img
-                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/d9602a28c42248f1b406695658e36c52"
+                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/3c29644f2fef4c19bae2e64fee105612"
                 class="img_pic"
                 alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
               />
             </div>
             <div class="txt-area">
               <div class="title">
-                미니멀리즘으로 가는<br />
-                한달살기
+                샤로수길에서 찾은<br />
+                힙한 카페
               </div>
               <div class="desc">
-                미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는
-                것이라고...
+                생각해보면 돌아봤을 때 더 기억에 더 남는 장소가 있다. abc 카페가
+                나에겐 그런 카페인 것 같다..
               </div>
-              <div class="writer">by 위트립</div>
+              <div class="writer">by 재훈</div>
             </div>
+            <div class="dim"></div>
           </li>
           <li class="slide">
             <div class="img-area">
               <img
-                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/ab3848ca65d3409ba7cbd2d2431ff419"
+                src="//img1.daumcdn.net/thumb/C520x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/32b33b09b41a4282912e67ca80c2a2cf"
                 class="img_pic"
                 alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
               />
             </div>
             <div class="txt-area">
               <div class="title">
-                미니멀리즘으로 가는<br />
-                한달살기
+                두시간 걸려 서울 갈 필요 없다 안산으로 모여
               </div>
               <div class="desc">
                 미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는
                 것이라고...
               </div>
-              <div class="writer">by 위트립</div>
+              <div class="writer">by 주하</div>
             </div>
+            <div class="dim"></div>
           </li>
         </ul>
       </swiper-slide>
@@ -124,11 +128,12 @@
             </div>
             <div class="txt-area">
               <div class="title">
-                미니멀리즘으로 가는<br />
-                한달살기
+                상해 도심에서<br />
+                스페셜티 카페를 찾다
               </div>
-              <div class="writer">by 위트립</div>
+              <div class="writer">by 성우</div>
             </div>
+            <div class="dim"></div>
           </li>
           <li class="slide">
             <div class="img-area">
@@ -138,7 +143,13 @@
                 alt="캠핑 밴에 사는<br>골드코스트의 히피들<br>"
               />
             </div>
-            <div class="txt-area">test</div>
+            <div class="txt-area">
+              <div class="title">
+                한달만 좀 예쁜 제주도 카페에서 푹 쉬고 싶다.
+              </div>
+              <div class="writer">by 해람</div>
+            </div>
+            <div class="dim"></div>
           </li>
         </ul>
       </swiper-slide>
@@ -147,12 +158,13 @@
           <li class="slide">
             <div class="img-area">
               <img
-                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/7cc0844444db44c7970663cb74b7364f"
+                src="//img1.daumcdn.net/thumb/C520x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/32b33b09b41a4282912e67ca80c2a2cf"
                 class="img_pic"
                 alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
               />
             </div>
             <div class="txt-area">test</div>
+            <div class="dim"></div>
           </li>
           <li class="slide">
             <div class="img-area">
@@ -163,6 +175,7 @@
               />
             </div>
             <div class="txt-area">test</div>
+            <div class="dim"></div>
           </li>
           <li class="slide">
             <div class="img-area">
@@ -173,6 +186,7 @@
               />
             </div>
             <div class="txt-area">test</div>
+            <div class="dim"></div>
           </li>
         </ul>
       </swiper-slide>
@@ -249,9 +263,32 @@ export default {
   }
   .swiper-slide:nth-child(2) {
     width: 960px !important;
+    li {
+      width: 33.4% !important;
+    }
   }
   .swiper-slide:nth-child(3) {
     width: 320px !important;
+  }
+  .swiper-slide:nth-child(4) {
+    width: 960px !important;
+    li {
+      width: 33.4% !important;
+    }
+  }
+}
+
+.slide {
+  position: relative;
+  .dim {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease-in-out;
+    background-color: #000;
+    opacity: 0.4;
   }
 }
 
@@ -278,41 +315,19 @@ li {
       position: relative;
       cursor: pointer;
       overflow: hidden;
-      .img-area {
-        &:after {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-          // z-index: 2;
-          width: 100%;
-          height: 100%;
-          opacity: 0.4;
-          background-color: #333;
+      &:hover {
+        .dim {
+          opacity: 0.6;
         }
-        &:hover {
+        .img-area {
           transition: all 0.4s;
           transform: scale(1.1);
-          background-color: transparent;
-          opacity: 1;
-          &:after {
-            content: '';
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            // z-index: 2;
-            width: 100%;
-            height: 100%;
-            opacity: 0.5;
-            background-color: #333;
-          }
         }
       }
+
       .txt-area {
         position: absolute;
-
+        z-index: 2;
         color: #fff;
         text-align: center;
         top: 50%;
@@ -323,6 +338,7 @@ li {
           padding-bottom: 20px;
           font-size: 28px;
           font-weight: 500;
+          word-break: break-all;
         }
         .desc {
           width: 250px;
@@ -351,6 +367,14 @@ li {
       }
     }
   }
+}
+.swiper-pagination-bullet {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 .swiper-button-prev {
   width: 100px;
