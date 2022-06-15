@@ -1,7 +1,7 @@
 <template>
   <q-page v-if="cafe" class="cafe_detail_page constrain">
     <!-- 카페이름 및 기본버튼들 -->
-    <section class="cafe_title_wrap column q-pa-md">
+    <section class="cafe_title_wrap column q-px-lg q-pt-lg">
       <div class="col">
         <div class="row items-center">
           <div class="title text-h5 cafe_name q-mb-xs">
@@ -62,14 +62,17 @@
     </section>
 
     <!-- Image Grid -->
-    <q-img class="rounded" src="/public/GRIDIMAGES_TEMP.JPG" />
+    <div class="q-mx-xs q-px-sm q-pt-xs">
+      <!-- Image Grid -->
+      <q-img class="rounded" src="/public/GRIDIMAGES_TEMP.JPG" />
+    </div>
 
     <!-- 기본정보 & 최근리뷰 컨테이너 -->
     <section class="cafe_information column">
       <section class="cafe_detail_wrap row">
         <!-- 기본정보 -->
         <div class="cafe_basic_info col-7 q-pa-md bg-grey-1">
-          <div class="subtitle q-mb-md">기본 정보</div>
+          <div class="subtitle q-pl-sm q-mb-md">기본 정보</div>
           <div class="col">
             <!-- info_top -->
             <div class="info_top">
