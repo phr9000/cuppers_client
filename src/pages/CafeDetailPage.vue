@@ -13,25 +13,26 @@
       <div class="col q-mb-xs">
         <div class="row justify-between">
           <div class="row items-center">
+            <!-- 좋아요 버튼 -->
             <div class="q-mr-xs">
               <btn-like
                 :user_id="1"
                 :id_what="cafe.cafe_id"
                 like_what="cafe"
-                :is_liked="false"
+                :is_liked="cafe.likeIt.user_cafe_liked"
                 :likeit_cnt="cafe.likeIt.count"
               />
             </div>
-            <div class="q-mr-xs">
+            <!-- 가본곳 버튼 -->
+            <div class="btn_been_there q-mr-xs">
               <btn-been-there
                 :user_id="1"
-                :id_what="cafe.cafe_id"
-                like_what="cafe"
-                :is_liked="false"
-                :likeit_cnt="cafe.likeIt.count"
+                :cafe_id="cafe.cafe_id"
+                :been_there="cafe.beenThere.user_cafe_beenthere"
               />
             </div>
 
+            <!-- 리뷰수 -->
             <div>(리뷰수)</div>
           </div>
           <div class="row items-end">
@@ -280,6 +281,10 @@ export default defineComponent({
       font-size: 1.6rem;
       font-weight: 500;
       color: $grey-10;
+    }
+    .btn_been_there {
+      position: relative;
+      left: -10px;
     }
   }
 

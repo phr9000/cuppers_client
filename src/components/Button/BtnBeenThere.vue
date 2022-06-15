@@ -1,47 +1,52 @@
 <template>
-  <div @click="handleCLick" class="likeit_wrap row items-center">
-    <q-icon v-if="isLiked" size="xs" class="icon_fav red" name="beenhere" />
+  <q-btn
+    @click="handleCLick"
+    padding="2px 8px"
+    flat
+    dense
+    rounded
+    color="secondary"
+    class="likeit_wrap row items-center"
+  >
+    <q-icon
+      v-if="beenThere"
+      size="xs"
+      class="icon_fav colored"
+      name="beenhere"
+    />
     <q-icon v-else size="xs" class="icon_fav" name="beenhere" />
-    <span class="likeit_cnt text-h6" :class="{ red: isLiked }">가본곳</span>
-  </div>
+    <span class="likeit_cnt" :class="{ colored: beenThere }">가본곳</span>
+  </q-btn>
 </template>
 <script>
-// 아직 데이터 등등 정리 전 상태입니다 !!
 export default {
   name: 'BtnBeenThere',
   components: {},
   props: {
     user_id: { type: Number, required: true }, // 로그인한 사용자의 아이디
-    like_what: { type: String, required: true }, // 'review' or 'cnote' or 'cafe'
-    id_what: { type: Number, required: true }, // 'review_id' or 'cnote_id' or 'cafe_id'
-    is_liked: {
+    cafe_id: { type: Number, required: true },
+    been_there: {
       type: Boolean,
       required: true
-    }, // 좋아요 했는지 여부
-    likeit_cnt: {
-      type: Number,
-      required: true
-    } // 이 '~'의 좋아요 총 합
+    } // 가본곳 눌렀는지 여부
   },
   data() {
     return {
-      isLiked: false,
-      likeitCnt: 0
+      beenThere: false
     }
   },
   mounted() {
-    this.isLiked = this.is_liked
-    this.likeitCnt = this.likeit_cnt
+    this.beenThere = this.been_there
   },
   methods: {
     handleCLick() {
-      if (this.isLiked) {
-        this.isLiked = false
+      if (this.beenThere) {
+        this.beenThere = false
         console.log(
           `user:id(${this.user_id}) just dislike this ${this.like_what}:id(${this.id_what})  `
         )
       } else {
-        this.isLiked = true
+        this.beenThere = true
         console.log(
           `user:id(${this.user_id}) just like this ${this.like_what}:id(${this.id_what})  `
         )
@@ -53,9 +58,10 @@ export default {
 <style lang="scss" scoped>
 .likeit_wrap {
   cursor: pointer;
+
   .icon_fav {
     color: $grey-5;
-    &.red {
+    &.colored {
       color: $teal-4;
     }
   }
@@ -63,8 +69,9 @@ export default {
     padding-left: 2px;
     line-height: 18px;
     color: $grey-5;
-    font-size: 16px;
-    &.red {
+    font-size: 15px;
+    font-weight: 400;
+    &.colored {
       color: $teal-4;
     }
   }

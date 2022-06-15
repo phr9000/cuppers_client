@@ -1,11 +1,19 @@
 <template>
-  <div @click="handleCLick" class="likeit_wrap row items-center">
-    <q-icon v-if="isLiked" size="xs" class="icon_fav red" name="favorite" />
+  <q-btn
+    @click="handleCLick"
+    padding="2px 8px"
+    flat
+    dense
+    rounded
+    color="red-4"
+    class="likeit_wrap row items-center"
+  >
+    <q-icon v-if="isLiked" size="xs" class="icon_fav colored" name="favorite" />
     <q-icon v-else size="xs" class="icon_fav" name="favorite_border" />
-    <span class="likeit_cnt q-ml-xs text-h6" :class="{ red: isLiked }">{{
+    <span class="likeit_cnt q-ml-xs text-h6" :class="{ colored: isLiked }">{{
       likeitCnt
     }}</span>
-  </div>
+  </q-btn>
 </template>
 <script>
 export default {
@@ -27,7 +35,8 @@ export default {
   data() {
     return {
       isLiked: false,
-      likeitCnt: 0
+      likeitCnt: 0,
+      icon: 'favorite_border'
     }
   },
   mounted() {
@@ -38,11 +47,13 @@ export default {
     handleCLick() {
       if (this.isLiked) {
         this.isLiked = false
+        this.likeitCnt--
         console.log(
           `user:id(${this.user_id}) just dislike this ${this.like_what}:id(${this.id_what})  `
         )
       } else {
         this.isLiked = true
+        this.likeitCnt++
         console.log(
           `user:id(${this.user_id}) just like this ${this.like_what}:id(${this.id_what})  `
         )
@@ -52,8 +63,27 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.block {
+  font-size: 4rem !important;
+}
 .likeit_wrap {
   cursor: pointer;
+
+  .icon_fav {
+    color: $grey-5;
+    &.colored {
+      color: $red-4;
+    }
+  }
+  .likeit_cnt {
+    line-height: 18px;
+    color: $grey-5;
+    font-size: 18px;
+    &.colored {
+      color: $red-4;
+    }
+  }
+
   &:hover {
     .icon_fav {
       transition: all 0.3s;
@@ -63,21 +93,6 @@ export default {
       line-height: 18px;
       transition: all 0.3s;
       color: $red-3;
-    }
-  }
-
-  .icon_fav {
-    color: $grey-5;
-    &.red {
-      color: $red-4;
-    }
-  }
-  .likeit_cnt {
-    line-height: 18px;
-    color: $grey-5;
-    font-size: 18px;
-    &.red {
-      color: $red-4;
     }
   }
 }
