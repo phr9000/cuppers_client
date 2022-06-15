@@ -54,12 +54,15 @@
         </div>
 
         <div class="q-my-xl">
-          <q-btn
+          <btn-basic
+            :dense="false"
+            size="md"
             to="map"
-            color="primary"
+            color="secondary"
             label="지도 표시하기"
             icon="map"
-          ></q-btn>
+            padding="5px 15px"
+          />
         </div>
       </div>
     </section>
@@ -72,14 +75,16 @@ import mainKeywordsData from '../data/mainKeywordsData'
 import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CarouselMainSlide from 'src/components/Carousel/CarouselMainSlide.vue'
 import BtnMain from 'src/components/Button/BtnMain.vue'
+import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import mainCnoteData from 'src/data/mainCnoteData'
 
 export default {
   name: 'MainPage',
   components: {
     CarouselMainSlide,
+    CardCafeMain,
     BtnMain,
-    CardCafeMain
+    BtnBasic
   },
   data() {
     return {

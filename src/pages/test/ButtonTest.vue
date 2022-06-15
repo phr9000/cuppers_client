@@ -28,6 +28,17 @@
       <btn-basic label="사이즈 sm" size="sm" />
       <btn-basic label="리뷰 쓰기" size="md" />
       <btn-basic label="링크 공유" size="md" />
+      <btn-basic label="dense false" size="md" :dense="false" />
+      <btn-basic label="커스텀패딩" size="md" padding="2px 10px 2px 15px" />
+      <btn-basic
+        :dense="false"
+        size="md"
+        to="map"
+        color="primary"
+        label="지도 표시하기"
+        icon="map"
+        padding="4px 15px 4px 15px"
+      />
     </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>btn-basic-icon</p>

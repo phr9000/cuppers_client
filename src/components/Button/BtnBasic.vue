@@ -1,6 +1,6 @@
 <template>
   <q-btn
-    dense
+    :dense="dense"
     outline
     rounded
     :size="size"
@@ -16,6 +16,7 @@ export default defineComponent({
   name: 'BtnBasic',
   props: {
     size: { type: String, default: 'md' },
+    dense: { type: Boolean, default: true },
     color: { type: String, default: 'secondary' },
     label: { type: String, default: 'BTN BASIC' }
   },

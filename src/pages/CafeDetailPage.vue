@@ -78,7 +78,7 @@
             <div class="info_top">
               <!-- 키워드 -->
               <div class="info q-mb-xs">
-                <q-icon size="xs" name="img:/icons/tag_f.png" class="q-mx-sm" />
+                <q-icon size="xs" name="tag" class="icon q-mb-xs" />
 
                 <div class="cafe_keywords_wrap">
                   <badge-cafe
@@ -95,13 +95,8 @@
               <div class="info_left col-12 col-md-7">
                 <!-- 주소 -->
                 <div class="info q-mb-xs">
-                  <!-- <q-icon size="sm" name="room" class="q-pr-xs" /> -->
-                  <q-icon
-                    size="xs"
-                    name="img:/icons/location_f.png"
-                    class="q-mx-sm"
-                  />
-                  <!-- <q-img src="/public/icons/location_bk.png" style="width: 20px" /> -->
+                  <q-icon size="xs" name="place" class="icon" />
+
                   <div class="text_subtitle1">{{ cafe.cafe_address }}</div>
                 </div>
 
@@ -109,11 +104,11 @@
                 <div class="info q-mb-xs">
                   <q-icon
                     size="xs"
-                    name="img:/icons/clock_f.png"
-                    class="q-mx-sm"
+                    name="calendar_today"
+                    class="icon q-pt-xs"
                   />
 
-                  <div class="cafe_keywords_wrap text_subtitle1">
+                  <div class="cafe_keywords_wrap text_subtitle1 q-pt-xs">
                     <div
                       v-for="time in cafe.operationTime"
                       :key="time.operation_day"
@@ -124,15 +119,11 @@
                 </div>
 
                 <!-- 시설정보 -->
-                <div class="row items-bottom q-mb-xs">
-                  <q-icon
-                    class="q-mx-sm"
-                    size="xs"
-                    name="img:/icons/phone_f.png"
-                  />
+                <div class="info q-mb-xs">
+                  <q-icon size="xs" name="info" class="icon q-pr-xs" />
                   <div class="text_subtitle1">시설 정보</div>
                 </div>
-                <div class="q-pl-lg q-py-sm">
+                <div class="q-pl-lg q-pb-sm">
                   <q-img width="210px" src="/public/facility.png" />
                 </div>
               </div>
@@ -141,20 +132,14 @@
                 <!-- 전화번호 -->
                 <div class="info q-mb-xs">
                   <div class="text_subtitle1">{{ cafe.cafe_phone }}</div>
-                  <q-icon
-                    class="q-mx-sm"
-                    size="xs"
-                    name="img:/icons/phone_f.png"
-                  />
+
+                  <q-icon size="xs" name="phone_in_talk" class="icon q-pl-xs" />
                 </div>
                 <!-- 분점정보 -->
                 <div class="info q-mb-xs">
                   <div class="text_subtitle1">분점 송파점 | 강남점</div>
-                  <q-icon
-                    class="q-mx-sm"
-                    size="xs"
-                    name="img:/icons/phone_f.png"
-                  />
+
+                  <q-icon size="xs" name="storefront" class="icon q-pl-xs" />
                 </div>
               </div>
             </div>
@@ -164,11 +149,8 @@
                 <div class="text_subtitle1 cafe_sns">
                   {{ cafe.cafe_sns }}
                 </div>
-                <q-icon
-                  class="q-mx-sm"
-                  size="xs"
-                  name="img:/icons/phone_f.png"
-                />
+
+                <q-icon size="xs" name="language" class="icon q-pl-xs" />
               </div>
             </div>
           </div>
@@ -283,11 +265,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.icon {
+  color: $icon;
+  padding-right: 6px;
+}
 .rounded {
   border-radius: 6px;
 }
 .cafe_detail_page {
-  color: $grey-9;
+  color: $grey-8;
 
   .cafe_title_wrap {
     .title {
@@ -307,19 +293,23 @@ export default defineComponent({
     .cafe_detail_wrap {
       .cafe_basic_info {
         .text_subtitle1 {
-          font-size: 1rem;
+          // font-size: 1rem;
         }
         .info {
           display: flex;
           flex-wrap: nowrap;
-          align-items: baseline;
+          align-items: center;
         }
         .info_top {
           .info {
-            align-items: center;
           }
         }
         .info_mid {
+          .cafe_keywords_wrap {
+            border: 1px solid $border-color;
+            padding: 6px 10px;
+            border-radius: $border-radius;
+          }
           .info_right {
             display: flex;
             flex-direction: column;
@@ -328,7 +318,6 @@ export default defineComponent({
               display: flex;
               flex-wrap: nowrap;
               justify-content: end;
-              align-items: baseline;
             }
           }
         }
@@ -337,12 +326,11 @@ export default defineComponent({
             display: flex;
             flex-wrap: nowrap;
             justify-content: end;
-            align-items: baseline;
           }
           .cafe_sns {
             cursor: pointer;
             text-align: right;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             width: 370px;
             color: $brown-4;
             overflow: hidden;

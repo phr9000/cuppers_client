@@ -1,7 +1,7 @@
 <template>
   <div @click="handleCLick" class="likeit_wrap row items-center">
-    <q-icon v-if="isLiked" size="xs" class="icon_fav red" name="fmd_good" />
-    <q-icon v-else size="xs" class="icon_fav" name="fmd_good" />
+    <q-icon v-if="isLiked" size="xs" class="icon_fav red" name="beenhere" />
+    <q-icon v-else size="xs" class="icon_fav" name="beenhere" />
     <span class="likeit_cnt text-h6" :class="{ red: isLiked }">가본곳</span>
   </div>
 </template>
