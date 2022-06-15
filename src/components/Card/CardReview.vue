@@ -57,7 +57,7 @@
 </template>
 
 <script>
-// import { format } from 'date-fns'
+import { format } from 'date-fns'
 import { defineComponent } from 'vue'
 import BtnAvatar from 'src/components/Button/BtnAvatar.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
