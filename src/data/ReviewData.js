@@ -7,6 +7,7 @@ export default [
     user_thumbnail:
       'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
     review_drink: '브라질 아이피 옐로우버본 내추럴',
+    is_signature: true,
     review_description:
       '커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳',
     created_at: '2022-06-11 12:24:55',

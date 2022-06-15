@@ -19,7 +19,11 @@
       </q-card-section>
       <q-card-section horizontal class="coffee_info_wrap row q-pt-none q-pr-md">
         <div class="coffee_info q-py-none q-px-md">
-          <menu-item :name="review.review_drink" :aromaNotes="aromaNotes" />
+          <menu-item
+            :name="review.review_drink"
+            :aromaNotes="aromaNotes"
+            :is_signature="review.is_signature"
+          />
           <div class="caption text-caption text-grey q-my-sm">
             {{ review.review_description }}
           </div>
@@ -33,13 +37,15 @@
       <q-card-section
         class="review_bottom row justify-between items-center q-mb-m"
       >
-        <btn-like
-          :user_id="1"
-          :id_what="review.review_id"
-          like_what="review"
-          :is_liked="review.user_review_liked"
-          :likeit_cnt="review.review_liked_cnt"
-        />
+        <div class="btn_like">
+          <btn-like
+            :user_id="1"
+            :id_what="review.review_id"
+            like_what="review"
+            :is_liked="review.user_review_liked"
+            :likeit_cnt="review.review_liked_cnt"
+          />
+        </div>
 
         <div class="text-grey">{{ createDate }}</div>
       </q-card-section>
@@ -70,6 +76,7 @@ export default defineComponent({
           user_thumbnail:
             'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
           review_drink: '브라질 아이피 옐로우버본 내추럴',
+          is_signature: true,
           review_description:
             '커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳',
           created_at: '2022-06-11 12:24:55',
@@ -182,6 +189,10 @@ export default defineComponent({
   }
   .review_bottom {
     padding: 4px 16px 8px 16px;
+    .btn_like {
+      position: relative;
+      left: -8px;
+    }
   }
 }
 </style>

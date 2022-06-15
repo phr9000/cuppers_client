@@ -1,5 +1,5 @@
 <template>
-  <q-page v-if="cafe" class="cafe_detail_page constrain">
+  <q-page v-if="cafe" class="cafe_detail_page constrain bg-grey-1">
     <!-- 카페이름 및 기본버튼들 -->
     <section class="cafe_title_wrap column q-px-lg q-pt-lg">
       <div class="col">
@@ -71,7 +71,7 @@
     <!-- 기본정보 & 최근리뷰 컨테이너 -->
     <section class="cafe_information column">
       <section class="cafe_detail_wrap row">
-        <div class="cafe_basic_info_wrap col-7 q-pa-md bg-grey-1">
+        <div class="cafe_basic_info_wrap col-7 q-pa-md">
           <!-- 기본정보 -->
           <div class="subtitle q-pl-sm q-mb-md">기본 정보</div>
           <div class="cafe_basic_info col q-pl-md">
@@ -162,25 +162,49 @@
             <!-- info_top -->
             <div class="info_top">
               <!-- 브루잉 메뉴 -->
-              <div class="info q-mb-xs">
-                <q-icon size="xs" name="info" class="icon q-pr-xs" />
-                <div class="text_subtitle1">브루잉 메뉴</div>
+              <div v-if="menuBrewing">
+                <div class="info q-mb-xs">
+                  <q-icon size="xs" name="info" class="icon q-pr-xs" />
+                  <div class="text_subtitle1">브루잉 메뉴</div>
+                </div>
+                <div class="q-pl-lg q-pr-xs q-pb-sm">
+                  <menu-item
+                    v-for="menu in menuBrewing"
+                    :name="menu.menu_name"
+                    :aromaNotes="menu.menu_aromanote"
+                    :key="menu.menu_name"
+                    :type="menu.menu_type"
+                    :hot="menu.menu_price_hot"
+                    :ice="menu.menu_price_ice"
+                    :is_signature="menu.is_signature"
+                  />
+                </div>
               </div>
-              <div class="q-pl-lg q-pb-sm">
-                <menu-item
-                  v-for="menu in cafe.menu"
-                  :name="menu.menu_name"
-                  :aromaNotes="menu.menu_aromanote"
-                  :key="menu.menu_name"
-                  :type="menu.menu_type"
-                />
+
+              <div v-if="menuVariation">
+                <!-- 배리에이션 메뉴 -->
+                <div class="info q-mb-xs">
+                  <q-icon size="xs" name="info" class="icon q-pr-xs" />
+                  <div class="text_subtitle1">배리에이션 메뉴</div>
+                </div>
+                <div class="q-pl-lg q-pr-xs q-pb-sm">
+                  <menu-item
+                    v-for="menu in menuVariation"
+                    :name="menu.menu_name"
+                    :aromaNotes="menu.menu_aromanote"
+                    :key="menu.menu_name"
+                    :type="menu.menu_type"
+                    :hot="menu.menu_price_hot"
+                    :ice="menu.menu_price_ice"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- 최근리뷰 -->
-        <div class="col-5 q-py-md q-pr-md bg-grey-1 row justify-end">
+        <div class="col-5 q-py-md q-pr-md row justify-end">
           <div class="recent_review">
             <div class="subtitle q-mb-xs">최근 리뷰</div>
             <card-review />
@@ -225,6 +249,9 @@
     </div> -->
   </q-page>
   <!-- <infinite-scroll /> -->
+
+  <!-- 저작권 문구
+"icons created by www.flaticon.com from Freepik" -->
 </template>
 
 <script>
@@ -242,7 +269,7 @@ import reviewData from '../data/ReviewData'
 // import CafeMenu from '../components/Etc/CafeMenu.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
-import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
+// import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnBeenThere from 'src/components/Button/BtnBeenThere.vue'
 import CardReview from '../components/Card/CardReview.vue'
@@ -271,6 +298,8 @@ export default defineComponent({
       reviewData,
       // userData,
       cafe: null,
+      menuBrewing: null,
+      menuVariation: null,
       recent_review: {},
       reviews: []
     }
@@ -279,6 +308,12 @@ export default defineComponent({
     // console.log(cafeData[0])
     // this.cafe = { ...cafeData[0] }
     this.cafe = cafeData[0]
+    if (this.cafe.menu) {
+      this.menuBrewing = this.cafe.menu.filter((m) => m.menu_type === 'br')
+      this.menuVariation = this.cafe.menu.filter(
+        (menu) => menu.menu_type !== 'br'
+      )
+    }
 
     console.log(this.cafe)
     this.reviews = reviewData
@@ -323,17 +358,10 @@ export default defineComponent({
     position: relative;
 
     .cafe_detail_wrap {
-      .text_subtitle1 {
-        // font-size: 1rem;
-      }
       .info {
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
-      }
-      .info_top {
-        .info {
-        }
       }
       .info_mid {
         .cafe_keywords_wrap {
@@ -346,16 +374,12 @@ export default defineComponent({
           flex-direction: column;
           justify-content: end;
           .info {
-            display: flex;
-            flex-wrap: nowrap;
             justify-content: end;
           }
         }
       }
       .info_bottom {
         .info {
-          display: flex;
-          flex-wrap: nowrap;
           justify-content: end;
         }
         .cafe_sns {
@@ -377,13 +401,18 @@ export default defineComponent({
     }
     .recent_review {
       // position: absolute;
-      width: 500px;
+      width: 540px;
       // top: 0;
       // right: 0;
       // @media (max-width: 977px) {
       //   position: relative;
       // }
     }
+  }
+
+  .cafe_basic_info,
+  .coffe_menu {
+    max-width: 500px;
   }
 }
 </style>

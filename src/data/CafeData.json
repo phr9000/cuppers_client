@@ -95,10 +95,48 @@
     ],
     "menu": [
       {
-        "menu_name": "에티오피아",
-        "menu_price_hot": 5000,
+        "menu_name": "파나마 잰슨 게이샤 워시드",
+        "menu_price_hot": 6000,
         "menu_price_ice": null,
         "menu_type": "br",
+        "is_signature": true,
+        "menu_aromanote": [
+          {
+            "keyword_name": "플로럴",
+            "keyword_type": "coffee"
+          },
+          {
+            "keyword_name": "레몬그라스",
+            "keyword_type": "coffee"
+          },
+          {
+            "keyword_name": "오렌지",
+            "keyword_type": "coffee"
+          },
+          {
+            "keyword_name": "샤인머스캣",
+            "keyword_type": "coffee"
+          },
+          {
+            "keyword_name": "백도",
+            "keyword_type": "coffee"
+          },
+          {
+            "keyword_name": "케인슈가",
+            "keyword_type": "coffee"
+          },
+          {
+            "keyword_name": "쥬시하고 긴 여운",
+            "keyword_type": "coffee"
+          }
+        ]
+      },
+      {
+        "menu_name": "브라질 아이피 옐로우버본 내추럴",
+        "menu_price_hot": 5500,
+        "menu_price_ice": null,
+        "menu_type": "br",
+        "is_signature": false,
         "menu_aromanote": [
           {
             "keyword_name": "감귤",
@@ -122,13 +160,22 @@
         "menu_name": "아메리카노",
         "menu_price_hot": 3800,
         "menu_price_ice": 3800,
-        "menu_type": "va"
+        "menu_type": "va",
+        "is_signature": false
       },
       {
         "menu_name": "카페라떼",
         "menu_price_hot": 4400,
         "menu_price_ice": 4800,
-        "menu_type": "sig"
+        "menu_type": "va",
+        "is_signature": false
+      },
+      {
+        "menu_name": "딸기라떼",
+        "menu_price_hot": 4500,
+        "menu_price_ice": 4900,
+        "menu_type": "va",
+        "is_signature": false
       }
     ]
   },
