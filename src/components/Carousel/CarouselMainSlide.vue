@@ -1,7 +1,14 @@
 <template>
-  <div class="slide-container" style="margin-right: 20px">
-    <swiper ref="mySwiper" @swiper="onSwiper" @slideChange="onSlideChange">
-      <swiper-slide style="width: 320px">
+  <div class="slide-container">
+    <swiper
+      ref="mySwiper"
+      :options="swiperOption"
+      @slideChange="slideChangeTransitionStart"
+      navigation
+      :pagination="{ clickable: true }"
+      :scrollbar="{ draggable: false }"
+    >
+      <swiper-slide>
         <ul class="slide-container slide-container1">
           <li class="slide">
             <div class="img-area">
@@ -41,7 +48,7 @@
           </li>
         </ul>
       </swiper-slide>
-      <swiper-slide style="width: 960px">
+      <swiper-slide>
         <ul class="slide-container slide-container">
           <li class="slide">
             <div class="img-area">
@@ -169,13 +176,6 @@
           </li>
         </ul>
       </swiper-slide>
-
-      <!-- pagination -->
-      <div class="swiper-pagination"></div>
-
-      <!-- navigation -->
-      <div class="swiper-button-prev swiper-btn-prev"></div>
-      <div class="swiper-button-next swiper-btn-next"></div>
     </swiper>
   </div>
 </template>
@@ -184,60 +184,32 @@
 import { ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
+import SwiperCore, { Pagination, Navigation } from 'swiper'
+import 'swiper/scss'
+import 'swiper/scss/navigation'
+import 'swiper/scss/pagination'
+// import 'swiper/components/pagination/pagination.scss'
 // import 'swiper/components/navigation/navigation.min.css'
-// import 'swiper/components/pagination/pagination.min.css'
+SwiperCore.use([Pagination, Navigation])
 
 export default {
+  name: 'FilterSwiper',
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: '1',
+        spaceBetween: 6, // swiper-slide 사이의 간격 지정
+        slidesOffsetBefore: 0, // slidesOffsetBefore는 첫번째 슬라이드의 시작점에 대한 변경할 때 사용
+        slidesOffsetAfter: 0, // slidesOffsetAfter는 마지막 슬라이드 시작점 + 마지막 슬라이드 너비에 해당하는 위치의 변경이 필요할 때 사용
+        freeMode: true, // freeMode를 사용시 스크롤하는 느낌으로 구현 가능
+        centerInsufficientSlides: true, // 컨텐츠의 수량에 따라 중앙정렬 여부를 결정함,
+        touchRatio: 0 //드래그 금지
+      }
+    }
+  },
   components: {
     Swiper,
     SwiperSlide
-  },
-  setup() {
-    const onSwiper = (swiper) => {
-      console.log(swiper)
-    }
-    const onSlideChange = () => {
-      console.log('slide change')
-    }
-    return {
-      onSwiper,
-      onSlideChange
-    }
-  },
-  swiperOptions: {
-    // 네비게이션
-    navigation: true,
-
-    // 페이지네이션
-    pagination: true,
-    slidesPerView: 2,
-    slidesPerGroup: 6,
-    spaceBetween: 2,
-    slideToClickedSlide: true,
-    observer: true,
-    observeParents: true,
-    // 반응형 breakpoints
-    breakpoints: {
-      375: {
-        slidesPerView: 1
-      },
-      425: {
-        slidesPerView: 2
-        // slidesPerGroup: 2
-      },
-      768: {
-        slidesPerView: 3
-        // slidesPerGroup: 3
-      },
-      1024: {
-        slidesPerView: 4
-        // slidesPerGroup: 4
-      },
-      1400: {
-        slidesPerView: 5
-        // slidesPerGroup: 5
-      }
-    }
   },
   props: {
     cnote: {
@@ -256,12 +228,6 @@ export default {
         }
       }
     },
-    created() {
-      return this.swiper.update()
-    },
-    mounted() {
-      return this.swiper.update()
-    },
     computed: {
       createDate() {
         return format(new Date(), 'MMM dd. yyyy')
@@ -275,8 +241,22 @@ export default {
 </script>
 
 <style lang="scss" scope>
-.swiper-slide {
-  width: auto !important;
+// 1) swiper slide 너비 설정 (important 넣는 이유는 무시될 가능성 있어서)
+.swiper-wrapper {
+  .swiper-slide:nth-child(1) {
+    width: 320px !important;
+    margin-left: 1.6rem;
+  }
+  .swiper-slide:nth-child(2) {
+    width: 960px !important;
+  }
+  .swiper-slide:nth-child(3) {
+    width: 320px !important;
+  }
+}
+
+.swiper-button-disabled {
+  display: none;
 }
 ul {
   padding: 0 !important;
@@ -292,6 +272,7 @@ li {
   overflow: hidden;
   height: 520px;
   .slide-container {
+    margin: 0 !important;
     display: flex;
     .slide {
       position: relative;
@@ -358,7 +339,7 @@ li {
         width: 320px !important;
       }
       .slide {
-        height: 280px;
+        height: 260px;
       }
     }
     &.slide-container2 {
@@ -370,5 +351,27 @@ li {
       }
     }
   }
+}
+.swiper-button-prev {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #333;
+  opacity: 0.3;
+}
+.swiper-button-next {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #333;
+  opacity: 0.3;
 }
 </style>
