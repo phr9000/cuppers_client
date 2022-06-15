@@ -5,7 +5,7 @@
         <div class="q-pl-md info">
           <h6 class="title" style="font-weight: 600">기본정보</h6>
           <div class="body">
-            <badge-cafe-tag :cafeKeywordsData="cafeKeywordsData" />
+            <badge-cafe-tag :mainKeywordsData="mainKeywordsData" />
             <!-- 카페 주소 -->
             <div>
               <p>
@@ -117,7 +117,7 @@ export default defineComponent({
         }
       }
     },
-    cafeKeywordsData: Array
+    mainKeywordsData: Array
   },
   components: {
     BadgeCafeTag

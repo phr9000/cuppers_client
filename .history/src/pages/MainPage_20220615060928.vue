@@ -28,11 +28,8 @@
     <section class="bg-grey-1">
       <div class="bottom_container text-center column constrain_more">
         <!-- 추천 카페 -->
-        <div class="title-area">
-          <h4 class="q-mb-md text-primary keyword-title">Today's CAFE</h4>
-          <p class="txt_keyword q-mb-xl keyword-des">
-            좋아할 만한 카페를 준비했어요
-          </p>
+        <div>
+          <h4 class="q-mb-none text-primary">당신을 위한 추천카페</h4>
         </div>
         <div class="recommends_container row q-mt-xl">
           <div class="card_wrap q-mr-md">

@@ -2,7 +2,7 @@
   <!-- 카페 태그 -->
   <div class="q-pa-md badges">
     <div class="badge">
-      <q-badge color="brown">{{ cafeKeywordsData[0].keyword }}</q-badge>
+      <q-badge color="brown">{{ mainKeywordsData[0].keyword }}</q-badge>
     </div>
   </div>
 </template>
@@ -11,7 +11,7 @@
 export default {
   name: 'BadgeCafeTag',
   props: {
-    cafeKeywordsData: Array
+    mainKeywordsData: Array
   }
 }
 </script>

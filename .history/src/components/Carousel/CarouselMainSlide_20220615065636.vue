@@ -1,6 +1,6 @@
 <template>
   <div class="slide-container" style="margin-right: 20px">
-    <swiper ref="mySwiper" @swiper="onSwiper" @slideChange="onSlideChange">
+    <swiper ref="mySwiper">
       <swiper-slide style="width: 320px">
         <ul class="slide-container slide-container1">
           <li class="slide">
@@ -191,18 +191,6 @@ export default {
   components: {
     Swiper,
     SwiperSlide
-  },
-  setup() {
-    const onSwiper = (swiper) => {
-      console.log(swiper)
-    }
-    const onSlideChange = () => {
-      console.log('slide change')
-    }
-    return {
-      onSwiper,
-      onSlideChange
-    }
   },
   swiperOptions: {
     // 네비게이션

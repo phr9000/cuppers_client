@@ -31,7 +31,7 @@
         <div class="title-area">
           <h4 class="q-mb-md text-primary keyword-title">Today's CAFE</h4>
           <p class="txt_keyword q-mb-xl keyword-des">
-            좋아할 만한 카페를 준비했어요
+            오늘은 여기 카페 어때요?
           </p>
         </div>
         <div class="recommends_container row q-mt-xl">

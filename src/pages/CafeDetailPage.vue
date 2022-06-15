@@ -197,7 +197,8 @@
       :reviewData="reviewData"
       :userData="userData"
       :cafeData="cafeData"
-      :cafeKeywordsData="cafeKeywordsData"
+      :mainKeywordsData="mainKeywordsData"
+    />
     /> -->
 
     <!-- Coffee Menu-->
@@ -223,6 +224,7 @@
 
 <script>
 import { defineComponent } from 'vue'
+
 // import cafeKeywordsData from '../data/CafeKeywordsData'
 // import cafeMenuData from '../data/CafeMenuData'
 import cafeData from '../data/CafeData.json'
@@ -259,7 +261,7 @@ export default defineComponent({
   data() {
     return {
       // cafeMenuData,
-      // cafeKeywordsData,
+      // mainKeywordsData,
       cafeData,
       reviewData,
       // userData,
