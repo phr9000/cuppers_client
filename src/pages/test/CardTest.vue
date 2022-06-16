@@ -53,7 +53,7 @@ import { defineComponent } from 'vue'
 import CardSample from 'src/components/Card/CardSample.vue'
 import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CardReview from 'src/components/Card/CardReview.vue'
-import CardCnote from 'src/components/Card/CardCnote.vue'
+import CardCnote from 'src/components/Card/CardCupNote.vue'
 
 export default defineComponent({
   components: { CardSample, CardCafeMain, CardReview, CardCnote },

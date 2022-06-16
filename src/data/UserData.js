@@ -4,7 +4,7 @@ export default [
     user_name: '동글동글동글이',
     user_email: '111111@gmail.com',
     user_cafe_likeit: true,
-    user_lv: 4,
+    user_lv: 1,
     user_introduce: "Hello, I'm 111",
     user_thumbnail:
       'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83'
@@ -13,24 +13,24 @@ export default [
     user_id: 2,
     user_name: '길막',
     user_email: '222222@gmail.com',
-    user_lv: 5,
+    user_lv: 1,
     user_introduce: "Hello, I'm 222",
     user_thumbnail:
       'http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/008_1.jpg'
   },
   {
     user_id: 3,
-    user_name: 333,
+    user_name: '삼색',
     user_email: '333333@gmail.com',
     user_cafe_likeit: true,
-    user_lv: 2,
+    user_lv: 1,
     user_introduce: "Hello, I'm 333",
     user_thumbnail:
-      'https://i.pinimg.com/564x/e0/b0/be/e0b0bee36d10c69896e516f5e782e86f.jpg'
+      'https://yt3.ggpht.com/4wWds50BAyqbXstt2lDS7IcmCF3A0vdvqUnliJ3UukkRuBae0daZpAO_3uU-JwPO5SjXqflkRw=s176-c-k-c0x00ffffff-no-rj'
   },
   {
     user_id: 4,
-    user_name: 444,
+    user_name: '무',
     user_email: '444444@gmail.com',
     user_lv: 1,
     user_introduce: "Hello, I'm 444",
@@ -39,13 +39,13 @@ export default [
   },
   {
     user_id: 5,
-    user_name: 555,
+    user_name: 'Marilyn',
     user_email: '555555@gmail.com',
     user_cafe_likeit: true,
-    user_lv: 2,
+    user_lv: 1,
     user_introduce: "Hello, I'm 555",
     user_thumbnail:
-      'https://i.pinimg.com/564x/50/56/94/505694b139865c954d06145ba1ae82bb.jpg'
+      'http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg'
   },
   {
     user_id: 6,

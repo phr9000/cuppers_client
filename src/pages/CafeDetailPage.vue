@@ -281,23 +281,20 @@
 <script>
 import { defineComponent } from 'vue'
 
-// import cafeKeywordsData from '../data/CafeKeywordsData'
-// import cafeMenuData from '../data/CafeMenuData'
 import cafeData from '../data/CafeData.json'
 import reviewData from '../data/ReviewData'
-// import userData from '../data/UserData'
 
 // import CafeInformation from '../components/Etc/CafeInformation.vue'
 // import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
 import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
-// import CafeMenu from '../components/Etc/CafeMenu.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
-// import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
+
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnBeenThere from 'src/components/Button/BtnBeenThere.vue'
 import CardReview from '../components/Card/CardReview.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
+import CardCnote from 'src/components/Card/CardCupNote.vue'
 
 export default defineComponent({
   name: 'CafeDetailPage',
@@ -328,7 +325,7 @@ export default defineComponent({
       reviews: []
     }
   },
-  mounted() {
+  created() {
     // console.log(cafeData[0])
     // this.cafe = { ...cafeData[0] }
     this.cafe = cafeData[0]
