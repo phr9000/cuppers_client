@@ -7,7 +7,11 @@
           <div class="title text-h5 cafe_name q-mb-xs">
             {{ cafe.cafe_name_pr }}
           </div>
-          <div class="q-ml-sm">송파</div>
+          <div class="q-ml-sm row items-center">
+            <span class="text-grey q-mr-xs">송파</span>
+            <span class="text-grey-4">|</span>
+            <q-icon size="xs" name="img:/icons/roastery.png" class="q-mx-xs" />
+          </div>
         </div>
       </div>
       <div class="col q-mb-xs">
@@ -66,17 +70,12 @@
     <section class="q-mx-xs q-px-sm q-pt-xs">
       <!-- Image Grid -->
       <q-img class="rounded" src="/public/GRIDIMAGES_TEMP.JPG" />
-      <!-- 기존 코드 -->
-      <!-- <cafe-image-grid
-        :cafeData="cafeData"
-        :reviewData="reviewData"
-        :userData="userData"
-      /> -->
     </section>
 
-    <!-- 기본정보 & 최근리뷰 컨테이너 -->
+    <!-- 기본정보, 커피메뉴 & 최근리뷰 컨테이너 -->
     <section class="cafe_information_section column">
       <section class="cafe_detail_wrap row">
+        <!-- 기본정보, 커피메뉴 -->
         <div class="cafe_basic_info_wrap col-7 q-pa-md">
           <!-- 기본정보 -->
           <div class="subtitle q-pl-sm q-mb-md">기본 정보</div>
@@ -121,6 +120,9 @@
                       :key="time.operation_day"
                     >
                       {{ time.operation_day }} : {{ time.operation_time }}
+                    </div>
+                    <div class="text-red-5">
+                      영업시간을 클릭했을때만 크게 보여주도록 (like googlemap)
                     </div>
                   </div>
                 </div>
@@ -209,53 +211,51 @@
           </div>
         </div>
 
-        <!-- 최근리뷰 -->
-        <div class="col-5 q-py-md q-pr-md row justify-end">
+        <!-- 최근리뷰, 메뉴판 -->
+        <div class="col-5 q-py-md q-pr-md column justify-between align-end">
+          <!-- 최근 리뷰 -->
           <div class="recent_review">
             <div class="subtitle q-mb-xs">최근 리뷰</div>
             <card-review />
+          </div>
+
+          <!-- 대표 메뉴 이미지 -->
+          <div class="menu_image_wrap column items-end q-mt-md">
+            <div class="info q-mb-xs">
+              <q-icon size="xs" name="img:/icons/menu.png" class="q-mx-xs" />
+              <div class="text_subtitle1">메뉴판 이미지</div>
+            </div>
+            <q-img
+              class="menu_image"
+              width="80%"
+              height="130px"
+              :src="cafe.cafe_menu_url"
+            >
+              <div
+                class="rounded-borders absolute-full text-subtitle2 flex flex-center"
+              >
+                크게 보기
+              </div></q-img
+            >
           </div>
         </div>
       </section>
     </section>
 
-    <!-- CafeInformation -->
-
-    <!-- <cafe-information
-      :reviewData="reviewData"
-      :userData="userData"
-      :cafeData="cafeData"
-      :mainKeywordsData="mainKeywordsData"
-    />
-    /> -->
-
-    <!-- Coffee Menu-->
-    <!-- <cafe-menu :cafeMenuData="cafeMenuData" :cafeData="cafeData" class="half" /> -->
-
-    <!-- User Reveiw -->
-    <!-- <div class="row q-mt-xl">
-      <div class="card_wrap q-mr-md">
-        <card-review
-          v-for="review in reviews"
-          :key="review.review_id"
-          :review="review"
-        />
-      </div>
-    </div> -->
     <q-separator />
 
-    <!-- 최근 리뷰 -->
+    <!-- 리뷰 -->
     <section class="cafe_review_section q-pa-md">
-      <!-- 기본정보 -->
+      <!--  -->
       <div class="title_wrap row justify-between items-center">
-        <div class="subtitle q-pl-sm">xx건의 방문자 리뷰</div>
+        <div class="subtitle q-pl-sm">{{ reviewTotalCnt }}건의 방문자 리뷰</div>
         <div class="row items-center q-pr-sm">
           <btn-basic color="grey-6" label="추천순" size="sm" />
           <btn-basic color="grey-6" label="최신순" size="sm" />
         </div>
       </div>
 
-      <div class="reviews_container row">
+      <div class="reviews_container row justify-between">
         <div
           class="review_wrap"
           v-for="review in reviews"
@@ -265,14 +265,38 @@
         </div>
       </div>
 
+      <!-- 페이지네이션 -->
       <div class="q-pa-lg flex flex-center">
         <q-pagination v-model="current" :max="5" direction-links />
       </div>
     </section>
 
-    <!-- 페이지네이션 -->
+    <!-- 지도 미리보기 -->
+    <section class="q-mx-xs q-px-sm q-pt-xs">
+      <q-img class="rounded" src="/public/MAP_TEMP.JPG" />
+    </section>
+
+    <!-- 커핑 노트 -->
+    <section class="cafe_review_section q-pa-md">
+      <!--  -->
+      <div class="title_wrap row justify-between items-center">
+        <div class="subtitle q-pl-sm">{{ cnoteTotalCnt }}건의 커핑노트</div>
+        <div class="row items-center q-pr-sm">
+          <btn-basic color="grey-6" label="추천순" size="sm" />
+          <btn-basic color="grey-6" label="최신순" size="sm" />
+        </div>
+      </div>
+
+      <div class="reviews_container row justify-between">
+        <div v-for="cnote in cnotes" :key="cnote.cnote_id" class="review_wrap">
+          <card-cnote :cnote="cnote" />
+        </div>
+      </div>
+
+      <!-- 인피니티 스크롤 -->
+      <!-- <infinite-scroll /> -->
+    </section>
   </q-page>
-  <!-- <infinite-scroll /> -->
 
   <!-- 저작권 문구
 "icons created by www.flaticon.com from Freepik" -->
@@ -283,6 +307,7 @@ import { defineComponent } from 'vue'
 
 import cafeData from '../data/CafeData.json'
 import reviewData from '../data/ReviewData'
+import cnoteData from '../data/CnoteData'
 
 // import CafeInformation from '../components/Etc/CafeInformation.vue'
 // import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
@@ -309,6 +334,7 @@ export default defineComponent({
     BtnLike,
     BtnBeenThere,
     CardReview,
+    CardCnote,
     MenuItem
   },
   data() {
@@ -322,7 +348,11 @@ export default defineComponent({
       menuBrewing: null,
       menuVariation: null,
       recent_review: {},
-      reviews: []
+      reviews: [],
+      reviewTotalCnt: 0,
+      cnotes: [],
+      cnoteTotalCnt: 0,
+      current: 1 // for pagination
     }
   },
   created() {
@@ -336,9 +366,10 @@ export default defineComponent({
       )
     }
 
-    console.log(this.cafe)
+    // console.log(this.cafe)
     this.reviews = reviewData
-    console.log(this.reviews)
+    // console.log(this.reviews)
+    this.cnotes = cnoteData
   }
 })
 </script>
@@ -421,15 +452,13 @@ export default defineComponent({
           }
         }
       }
+
+      .menu_image {
+        // border: 1px solid rgb(141, 141, 141);
+        border-radius: 4px;
+      }
     }
     .recent_review {
-      // position: absolute;
-      width: 540px;
-      // top: 0;
-      // right: 0;
-      // @media (max-width: 977px) {
-      //   position: relative;
-      // }
     }
   }
 
@@ -448,6 +477,16 @@ export default defineComponent({
   .cafe_basic_info,
   .coffe_menu {
     max-width: 500px;
+  }
+  .absolute-full {
+    cursor: pointer;
+    background: rgba(69, 69, 69, 0.15);
+    transition: all 0.5s;
+    color: transparent;
+    &:hover {
+      background: rgba(0, 0, 0, 0.35);
+      color: $grey-4;
+    }
   }
 }
 </style>
