@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { format } from 'date-fns'
+import { format, toDate } from 'date-fns'
 import { defineComponent } from 'vue'
 import BtnAvatar from 'src/components/Button/BtnAvatar.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
@@ -142,8 +142,8 @@ export default defineComponent({
   },
   computed: {
     createDate() {
-      // return format(this.review.created_at, 'yyyy/dd/MM')
-      return format(new Date(), 'MMM dd. yyyy')
+      let time = toDate(Date.parse(this.review.created_at))
+      return format(time, 'MMM dd. yyyy')
     },
     cafeKeywords() {
       return this.review.review_keyword.filter((key) => {

@@ -2,6 +2,18 @@
   <q-page class="q-pa-sm">
     <!-- card-review 리뷰카드 -->
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      <p>card-cnote 커핑노트카드</p>
+      <div class="row">
+        <div class="q-mr-sm" style="width: 500px"><card-cnote /></div>
+        <div class="q-mr-sm" style="width: 400px">
+          <card-cnote />
+        </div>
+        <div style="width: 300px"><card-cnote /></div>
+      </div>
+    </div>
+
+    <!-- card-review 리뷰카드 -->
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>card-review 리뷰카드</p>
       <div class="row">
         <div class="q-mr-sm" style="width: 500px"><card-review /></div>
@@ -41,9 +53,10 @@ import { defineComponent } from 'vue'
 import CardSample from 'src/components/Card/CardSample.vue'
 import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CardReview from 'src/components/Card/CardReview.vue'
+import CardCnote from 'src/components/Card/CardCnote.vue'
 
 export default defineComponent({
-  components: { CardSample, CardCafeMain, CardReview },
+  components: { CardSample, CardCafeMain, CardReview, CardCnote },
   data() {
     return {}
   }
