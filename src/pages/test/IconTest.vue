@@ -1,7 +1,13 @@
 <template>
   <q-page class="q-pa-sm">
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
-      <p>아이콘 테스트</p>
+      <p>img-icon</p>
+      <q-icon size="xs" name="img:/icons/ice.png" />
+      <q-icon size="sm" name="img:/icons/hot.png" />
+      <q-icon size="md" name="img:/icons/br.png" />
+    </div>
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      <p>기본 아이콘 테스트</p>
       <!-- 구글 마테리얼 아이콘 : m_붙일 필요 없음 -->
       <q-icon size="md" name="close" />
       <q-icon size="md" name="storefront" />

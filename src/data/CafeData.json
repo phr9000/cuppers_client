@@ -171,8 +171,8 @@
         "is_signature": false
       },
       {
-        "menu_name": "딸기라떼",
-        "menu_price_hot": 4500,
+        "menu_name": "플랫화이트",
+        "menu_price_hot": null,
         "menu_price_ice": 4900,
         "menu_type": "va",
         "is_signature": false

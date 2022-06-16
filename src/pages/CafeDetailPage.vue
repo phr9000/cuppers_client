@@ -1,7 +1,7 @@
 <template>
-  <q-page v-if="cafe" class="cafe_detail_page constrain bg-grey-1">
+  <q-page v-if="cafe" class="cafe_detail_page constrain">
     <!-- 카페이름 및 기본버튼들 -->
-    <section class="cafe_title_wrap column q-px-lg q-pt-lg">
+    <section class="cafe_title_section column q-px-lg q-pt-lg">
       <div class="col">
         <div class="row items-center">
           <div class="title text-h5 cafe_name q-mb-xs">
@@ -63,13 +63,19 @@
     </section>
 
     <!-- Image Grid -->
-    <div class="q-mx-xs q-px-sm q-pt-xs">
+    <section class="q-mx-xs q-px-sm q-pt-xs">
       <!-- Image Grid -->
       <q-img class="rounded" src="/public/GRIDIMAGES_TEMP.JPG" />
-    </div>
+      <!-- 기존 코드 -->
+      <!-- <cafe-image-grid
+        :cafeData="cafeData"
+        :reviewData="reviewData"
+        :userData="userData"
+      /> -->
+    </section>
 
     <!-- 기본정보 & 최근리뷰 컨테이너 -->
-    <section class="cafe_information column">
+    <section class="cafe_information_section column">
       <section class="cafe_detail_wrap row">
         <div class="cafe_basic_info_wrap col-7 q-pa-md">
           <!-- 기본정보 -->
@@ -213,13 +219,6 @@
       </section>
     </section>
 
-    <!-- 기존 코드 -->
-    <!-- <cafe-image-grid
-      :cafeData="cafeData"
-      :reviewData="reviewData"
-      :userData="userData"
-    /> -->
-
     <!-- CafeInformation -->
 
     <!-- <cafe-information
@@ -243,10 +242,35 @@
         />
       </div>
     </div> -->
+    <q-separator />
+
+    <!-- 최근 리뷰 -->
+    <section class="cafe_review_section q-pa-md">
+      <!-- 기본정보 -->
+      <div class="title_wrap row justify-between items-center">
+        <div class="subtitle q-pl-sm">xx건의 방문자 리뷰</div>
+        <div class="row items-center q-pr-sm">
+          <btn-basic color="grey-6" label="추천순" size="sm" />
+          <btn-basic color="grey-6" label="최신순" size="sm" />
+        </div>
+      </div>
+
+      <div class="reviews_container row">
+        <div
+          class="review_wrap"
+          v-for="review in reviews"
+          :key="review.review_id"
+        >
+          <card-review :review="review" />
+        </div>
+      </div>
+
+      <div class="q-pa-lg flex flex-center">
+        <q-pagination v-model="current" :max="5" direction-links />
+      </div>
+    </section>
+
     <!-- 페이지네이션 -->
-    <!-- <div class="q-pa-lg flex flex-center">
-      <q-pagination v-model="current" :max="5" direction-links />
-    </div> -->
   </q-page>
   <!-- <infinite-scroll /> -->
 
@@ -265,7 +289,7 @@ import reviewData from '../data/ReviewData'
 
 // import CafeInformation from '../components/Etc/CafeInformation.vue'
 // import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
-// import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
+import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
 // import CafeMenu from '../components/Etc/CafeMenu.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
@@ -332,8 +356,14 @@ export default defineComponent({
 }
 .cafe_detail_page {
   color: $grey-8;
+  .subtitle {
+    font-size: 1.4rem;
+    // font-weight: 500;
+    color: $primary;
+  }
 
-  .cafe_title_wrap {
+  // 상단 타이틀 섹션
+  .cafe_title_section {
     .title {
       font-size: 1.6rem;
       font-weight: 500;
@@ -349,12 +379,8 @@ export default defineComponent({
     }
   }
 
-  .cafe_information {
-    .subtitle {
-      font-size: 1.4rem;
-      // font-weight: 500;
-      color: $primary;
-    }
+  // 기본정보, 최근리뷰 섹션
+  .cafe_information_section {
     position: relative;
 
     .cafe_detail_wrap {
@@ -407,6 +433,18 @@ export default defineComponent({
       // @media (max-width: 977px) {
       //   position: relative;
       // }
+    }
+  }
+
+  // 리뷰 섹션
+  .cafe_review_section {
+    .reviews_container {
+      .review_wrap {
+        // display: -webkit-box;
+        // display: inline-block;
+        padding: 8px 8px;
+        max-width: 50%;
+      }
     }
   }
 
