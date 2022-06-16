@@ -1,9 +1,7 @@
 <template>
   <q-btn @click="clickAvatar" round size="sm" class="q-my-sm">
     <q-avatar size="md">
-      <img
-        src="https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83"
-      />
+      <img :src="url" />
     </q-avatar>
   </q-btn>
 </template>
@@ -15,7 +13,7 @@ export default defineComponent({
       type: Number,
       default: 1
     },
-    userThumbnail: {
+    url: {
       type: String,
       default:
         'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83'

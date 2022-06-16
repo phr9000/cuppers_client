@@ -1,12 +1,12 @@
 <template>
   <div class="card_review_container">
     <div class="user_info row items-center">
-      <btn-avatar />
+      <btn-avatar :url="review.user_thumbnail" />
       <div class="q-ml-sm user_name">{{ review.user_name }}</div>
     </div>
-    <q-card class="card_review bg-grey-1" flat bordered>
+    <q-card class="card_review" flat bordered>
       <q-card-section class="cafe_info row items-center justify-between">
-        <div @click="cafeNameClick" class="text-h5 cafe_name q-mb-xs">
+        <div @click="cafeNameClick" class="text-h5 cafe_name q-mb-xs q-mr-xs">
           {{ review.cafe_name }}
         </div>
         <div class="cafe_keywords_wrap">
@@ -20,8 +20,9 @@
       <q-card-section horizontal class="coffee_info_wrap row q-pt-none q-pr-md">
         <div class="coffee_info q-py-none q-px-md">
           <menu-item
-            :name="review.review_drink"
+            :name="review.menu_name"
             :aromaNotes="aromaNotes"
+            :type="review.menu_type"
             :is_signature="review.is_signature"
           />
           <div class="caption text-caption text-grey q-my-sm">
@@ -75,7 +76,7 @@ export default defineComponent({
           user_name: '동글동글동글이',
           user_thumbnail:
             'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
-          review_drink: '브라질 아이피 옐로우버본 내추럴',
+          menu_name: '브라질 아이피 옐로우버본 내추럴',
           is_signature: true,
           review_description:
             '커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳',
@@ -170,6 +171,7 @@ export default defineComponent({
   }
 }
 .card_review {
+  background-color: $card-bg-color;
   border: 1px solid $grey-4;
   .cafe_info {
     .cafe_name {

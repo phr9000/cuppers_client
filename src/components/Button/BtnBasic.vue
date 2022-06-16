@@ -4,7 +4,7 @@
     outline
     rounded
     :size="size"
-    class="btn q-mr-xs"
+    class="btn_basic q-mr-xs"
     :class="[size === 'sm' ? btnSmClass : size === 'md' ? btnMdClass : '']"
     :color="color"
     :label="label"
@@ -28,13 +28,25 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss" scoped>
-.btn_sm {
-  padding: 2px 8px;
-  font-size: 11px !important;
-}
-.btn_md {
-  padding: 2px 10px;
-  font-size: 15px !important;
+<style lang="scss">
+.btn_basic {
+  &.btn_sm {
+    padding: 3px 9px 3px 9px;
+    font-size: 14px !important;
+    line-height: 14px;
+    min-height: 14px;
+    i {
+      font-size: 1rem !important;
+    }
+  }
+  &.btn_md {
+    padding: 3px 11px 3px 11px;
+    font-size: 16px !important;
+    line-height: 16px;
+    min-height: 16px;
+    i {
+      font-size: 1.2rem !important;
+    }
+  }
 }
 </style>

@@ -41,7 +41,7 @@
       />
     </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
-      <p>btn-basic-icon</p>
+      <p>btn-basic-right</p>
       <btn-basic-right color="primary" label="리뷰 쓰기" icon="mail" />
       <btn-basic-right color="secondary" label="리뷰 쓰기" icon="edit" />
       <btn-basic-right color="secondary" label="공유" icon="share" />
