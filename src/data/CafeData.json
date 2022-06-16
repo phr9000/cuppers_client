@@ -11,6 +11,7 @@
     "cafe_barista_info": null,
     "cafe_webpage": "https://smartstore.naver.com/coffeeambience",
     "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
+    "cafe_menu_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg",
     "cafe_menu_updated": null,
     "cafe_view": 0,
     "cafe_status": "inactive",
@@ -37,12 +38,16 @@
         "cafe_image_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg"
       },
       {
-        "type": "g",
-        "cafe_image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGOQ_VynXr2kDkkFhIOvherUBTWBujQs9PhA&usqp=CAU"
+        "type": "m",
+        "cafe_image_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMzBfMjkw%2FMDAxNTcyNDI0NTk4MTYx.HdNerEs_L2Z1TxqzYckhxhji3CA6Gw5a53dLpe6rsWEg.hBN-QpP9UTTwBQht6jkO2Y9ES3NrZdw2LCO2WjDYVg8g.JPEG.rohati%2F%25BF%25A503.jpg"
       },
       {
         "type": "g",
-        "cafe_image_url": "/일반 이미지2"
+        "cafe_image_url": "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/287536110_411860404177592_6995850544426415784_n.jpg?stp=dst-jpg_e35_s480x480&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=twL1ElIfF-wAX-sByZU&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT9uRRdj5GqvusAtbgg1HgSoFSnBNFZRrtQOteUS0tOqxA&oe=62B149C7&_nc_sid=8fd12b"
+      },
+      {
+        "type": "g",
+        "cafe_image_url": "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/288114218_853641705593396_7265799358911394713_n.jpg?stp=dst-jpg_e35_s480x480&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=PQKCuHWrveAAX9o7ADq&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT_vgcCpljQETKvq9MCvEKPs5WfVzVEgEDfG772kQ3Zq8Q&oe=62B283CF&_nc_sid=8fd12b"
       }
     ],
     "keywords": [

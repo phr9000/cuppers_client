@@ -24,6 +24,7 @@
             :aromaNotes="aromaNotes"
             :type="review.menu_type"
             :is_signature="review.is_signature"
+            :is_review="true"
           />
           <div class="caption text-caption text-grey q-my-sm">
             {{ review.review_description }}
@@ -36,7 +37,7 @@
         />
       </q-card-section>
       <q-card-section
-        class="review_bottom row justify-between items-center q-mb-m"
+        class="review_bottom row justify-between items-center q-mb-sm"
       >
         <div class="btn_like">
           <btn-like

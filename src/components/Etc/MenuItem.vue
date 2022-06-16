@@ -8,7 +8,9 @@
           name="img:/icons/br.png"
           class="q-mr-xs"
         /><q-icon v-else size="xs" name="img:/icons/va.png" class="q-mr-xs" />
-        <div class="name">{{ name }}</div>
+        <div class="name" :class="{ is_review: is_review }">
+          {{ name }}
+        </div>
         <div v-if="is_signature" class="badge_signature">SIGNATURE</div>
       </div>
       <div class="row items-center">
@@ -56,7 +58,8 @@ export default {
     type: { type: String, default: 'br' },
     hot: { type: Number, default: null },
     ice: { type: Number, default: null },
-    is_signature: { type: Boolean, default: false }
+    is_signature: { type: Boolean, default: false },
+    is_review: { type: Boolean, default: false }
   },
   data() {
     return {
@@ -77,7 +80,11 @@ export default {
 
 <style lang="scss" scoped>
 .name {
-  margin-right: 3px;
+  margin-right: 4px;
+  font-size: 0.9rem;
+  &.is_review {
+    font-size: 1rem;
+  }
 }
 .badge_signature {
   font-size: 0.4rem;
