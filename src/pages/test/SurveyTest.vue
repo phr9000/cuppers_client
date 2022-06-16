@@ -1,5 +1,4 @@
 <template>
-  <div>login page</div>
   <div class="wrapper" v-if="step == 1">
     <div class="title">
       <h4>선호하는 커피취향</h4>
