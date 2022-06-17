@@ -8,7 +8,7 @@ export default [
       'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
     menu_name: '파나마 잰슨 게이샤 워시드',
     menu_type: 'br',
-    is_signature: true,
+    is_signature: false,
     review_description:
       '커피에 진심인 카페. ☕️ \n다양한 드립 커피가 많아서 고르는 데 고민이 많이 되었어요.\n마지막까지 고민하던 종류 시음 하게 해주셔서 넘넘 감사했습니다!  사장님 센스👍🏾\n드립커피 보다 아메리카노를 선호 했었는데 드립커피에 대한 인식을 바꿔준 카페입니다!!!\n다음에 커피 마시러 또 방문 할게요😘',
     created_at: '2022-06-11 12:24:55',
@@ -31,11 +31,11 @@ export default [
         keyword_type: 'cafe'
       },
       {
-        keyword_name: '감귤',
+        keyword_name: '산미있는',
         keyword_type: 'coffee'
       },
       {
-        keyword_name: '모과',
+        keyword_name: '깔끔한 여운',
         keyword_type: 'coffee'
       },
       {
@@ -162,12 +162,12 @@ export default [
     review_id: 4,
     cafe_id: 1,
     user_id: 4,
-    user_name: 'Three Color',
+    user_name: '삼색',
     user_thumbnail:
       'https://yt3.ggpht.com/ytc/AKedOLQ3XdNs05VFer97aov10LiES3hlI9FgfBnRo5SONQ=s88-c-k-c0x00ffffff-no-rj',
     menu_name: '플랫화이트',
     menu_type: 'va',
-    is_signature: false,
+    is_signature: true,
     review_description:
       '커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳',
     created_at: '2022-06-11 12:24:55',
