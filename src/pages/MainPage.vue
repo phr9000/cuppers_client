@@ -6,7 +6,7 @@
       </div>
     </section>
     <carousel-main-slide :mainCnoteData="mainCnoteData" />
-    <section class="bottom_container text-center column constrain_more">
+    <section class="bottom_container text-center column constrain_md">
       <!-- 커핑 노트 KEYWORD -->
       <div class="title-area">
         <h4 class="q-mb-md text-primary keyword-title">커핑 노트 KEYWORD</h4>
@@ -26,7 +26,7 @@
       </section>
     </section>
     <section class="bg-grey-1">
-      <div class="bottom_container text-center column constrain_more">
+      <div class="bottom_container text-center column constrain_md">
         <!-- 추천 카페 -->
         <div class="title-area">
           <h4 class="q-mb-md text-primary keyword-title">Today's CAFE</h4>
