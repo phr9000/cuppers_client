@@ -41,18 +41,6 @@
           </div>
           <div class="row items-end">
             <div>
-              <!-- <btn-basic-right
-                color="secondary"
-                label="리뷰 쓰기"
-                icon="edit"
-                size="md"
-              />
-              <btn-basic-right
-                color="secondary"
-                label="공유"
-                icon="share"
-                size="md"
-              /> -->
               <btn-basic
                 color="grey-6"
                 label="리뷰 쓰기"
@@ -457,8 +445,6 @@ export default defineComponent({
         // border: 1px solid rgb(141, 141, 141);
         border-radius: 4px;
       }
-    }
-    .recent_review {
     }
   }
 

@@ -10,18 +10,23 @@
         >
           {{ cnote.cnote_title }}
         </div>
-        <div class="btn_like_wrap">
-          <btn-like
-            :user_id="cnote.user_id"
-            :id_what="cnote.cnote_id"
-            like_what="cnote"
-            :is_liked="cnote.user_cnote_liked"
-            :likeit_cnt="cnote.cnote_liked_cnt"
-          /><btn-book-mark
-            :user_id="cnote.user_id"
-            :cnote_id="cnote.cnote_id"
-            :is_marked="cnote.user_cnote_marked"
-          />
+        <div class="btns_wrap row no-wrap">
+          <div class="btn_like_wrap">
+            <btn-like
+              :user_id="cnote.user_id"
+              :id_what="cnote.cnote_id"
+              like_what="cnote"
+              :is_liked="cnote.user_cnote_liked"
+              :likeit_cnt="cnote.cnote_liked_cnt"
+            />
+          </div>
+          <div class="btn_bookmark_wrap">
+            <btn-book-mark
+              :user_id="cnote.user_id"
+              :cnote_id="cnote.cnote_id"
+              :is_marked="cnote.user_cnote_marked"
+            />
+          </div>
         </div>
       </q-card-section>
       <q-card-section horizontal class="coffee_info_wrap row q-pt-none q-pr-md">
@@ -123,7 +128,12 @@ export default defineComponent({
     .btn_like_wrap {
       min-width: 68px !important;
       position: relative;
+      left: 14px;
+    }
+    .btn_bookmark_wrap {
+      position: relative;
       left: 7px;
+      top: 1px;
     }
   }
   .card_image {
