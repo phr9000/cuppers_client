@@ -34,7 +34,12 @@
           class="col-5 q-pr-sm review_image"
           :initial-ratio="16 / 9"
           :src="review.review_thumbnail"
-        />
+          ><div
+            class="rounded-borders absolute-full text-subtitle2 flex flex-center"
+          >
+            모든 이미지 보기
+          </div>
+        </q-img>
       </q-card-section>
       <q-card-section
         class="review_bottom row justify-between items-center q-mb-sm"
@@ -195,6 +200,16 @@ export default defineComponent({
     .btn_like {
       position: relative;
       left: -8px;
+    }
+  }
+  .absolute-full {
+    cursor: pointer;
+    background: rgba(69, 69, 69, 0.15);
+    transition: all 0.5s;
+    color: transparent;
+    &:hover {
+      background: rgba(0, 0, 0, 0.35);
+      color: $grey-4;
     }
   }
 }

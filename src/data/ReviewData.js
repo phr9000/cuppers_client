@@ -5,7 +5,7 @@ export default [
     user_id: 1,
     user_name: '동글동글동글이',
     user_thumbnail:
-      'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
+      'https://yt3.ggpht.com/TKujBMF0rkAEiGuNak656MrI1RdNBZMpZmTOSiyYgxUk0eVjwdJL_yttq8FeE-HUDorXYe7mYL8=s88-c-k-c0x00ffffff-no-rj',
     menu_name: '파나마 잰슨 게이샤 워시드',
     menu_type: 'br',
     is_signature: false,
@@ -50,7 +50,33 @@ export default [
     user_review_liked: true,
     review_liked_cnt: 142,
     review_thumbnail:
-      'https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal'
+      'https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal',
+    reivew_image: [
+      {
+        // 첫번째 메뉴판 이미지
+        image_review_type: 'm',
+        image_review_url: 'url',
+        thumbnail: 'url'
+      },
+      {
+        // 첫번째 일반 이미지
+        image_review_type: 'g',
+        image_review_url: 'url',
+        thumbnail: 'url'
+      },
+      {
+        // 두번째 일반 이미지
+        image_review_type: 'g',
+        image_review_url: 'url',
+        thumbnail: 'url'
+      },
+      {
+        // 세번째 일반 이미지
+        image_review_type: 'g',
+        image_review_url: 'url',
+        thumbnail: 'url'
+      }
+    ]
   },
   {
     review_id: 2,
