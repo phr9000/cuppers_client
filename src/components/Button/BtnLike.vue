@@ -6,7 +6,7 @@
     dense
     rounded
     color="red-4"
-    class="likeit_wrap row items-center"
+    class="btn_like row no-wrap items-center"
   >
     <q-icon v-if="isLiked" size="xs" class="icon_fav colored" name="favorite" />
     <q-icon v-else size="xs" class="icon_fav" name="favorite_border" />
@@ -66,7 +66,7 @@ export default {
 .block {
   font-size: 4rem !important;
 }
-.likeit_wrap {
+.btn_like {
   cursor: pointer;
 
   .icon_fav {

@@ -42,6 +42,12 @@
     </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>btn-basic-right</p>
+      <btn-basic-right
+        color="primary"
+        label="가입서베이"
+        icon="account_circle"
+        to="/login/signup"
+      />
       <btn-basic-right color="primary" label="리뷰 쓰기" icon="mail" />
       <btn-basic-right color="secondary" label="리뷰 쓰기" icon="edit" />
       <btn-basic-right color="secondary" label="공유" icon="share" />
@@ -57,10 +63,25 @@
       <btn-icon color="grey-7" icon="menu" />
     </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
-      <p>btn-logo, btn-my-avatar, btn-req-new-cafe</p>
+      <p>btn-logo, btn-req-new-cafe, btn-my-avatar, btn-avatar</p>
       <btn-logo to="/" />
       <btn-req-new-cafe to="reqnewcafe" />
       <btn-my-avatar to="profile" />
+      <btn-avatar to="profile" />
+    </div>
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      <p>btn-like, btn-been-there, btn-mark</p>
+      <div class="row items-center">
+        <btn-like
+          :user_id="0"
+          like_what="cafe"
+          :id_what="0"
+          :is_liked="false"
+          :likeit_cnt="100"
+        />
+        <btn-been-there :user_id="0" :cafe_id="0" :been_there="false" />
+        <btn-book-mark :user_id="0" :cnote_id="0" :is_marked="false" />
+      </div>
     </div>
   </q-page>
 </template>
@@ -72,7 +93,11 @@ import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import BtnIcon from 'src/components/Button/BtnIcon.vue'
 import BtnLogo from 'src/components/Button/BtnLogo.vue'
 import BtnMyAvatar from 'src/components/Button/BtnMyAvatar.vue'
+import BtnAvatar from 'src/components/Button/BtnAvatar.vue'
 import BtnReqNewCafe from 'src/components/Button/BtnReqNewCafe.vue'
+import BtnLike from 'src/components/Button/BtnLike.vue'
+import BtnBeenThere from 'src/components/Button/BtnBeenThere.vue'
+import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
 
 export default defineComponent({
   components: {
@@ -81,7 +106,11 @@ export default defineComponent({
     BtnIcon,
     BtnLogo,
     BtnReqNewCafe,
-    BtnMyAvatar
+    BtnMyAvatar,
+    BtnAvatar,
+    BtnLike,
+    BtnBeenThere,
+    BtnBookMark
   },
   data() {
     return {}

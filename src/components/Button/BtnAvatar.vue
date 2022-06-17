@@ -15,8 +15,7 @@ export default defineComponent({
     },
     url: {
       type: String,
-      default:
-        'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83'
+      default: '/public/icons/avatar.jpg'
     }
   },
   methods: {

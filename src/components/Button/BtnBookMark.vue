@@ -8,48 +8,42 @@
     color="secondary"
     class="likeit_wrap row items-center"
   >
-    <q-icon
-      v-if="beenThere"
-      size="xs"
-      class="icon_fav colored"
-      name="beenhere"
-    />
-    <q-icon v-else size="xs" class="icon_fav" name="beenhere" />
-    <span class="likeit_cnt" :class="{ colored: beenThere }">가본곳</span>
+    <q-icon v-if="marked" size="xs" class="icon_fav colored" name="bookmark" />
+    <q-icon v-else size="xs" class="icon_fav" name="bookmark_border" />
   </q-btn>
 </template>
 <script>
 export default {
-  name: 'BtnBeenThere',
+  name: 'BtnBookMark',
   components: {},
   props: {
     user_id: { type: Number, required: true }, // 로그인한 사용자의 아이디
-    cafe_id: { type: Number, required: true },
-    been_there: {
+    cnote_id: { type: Number, required: true },
+    is_marked: {
       type: Boolean,
       required: true
-    } // 가본곳 눌렀는지 여부
+    } // 북마크 했는지 여부
   },
   data() {
     return {
-      beenThere: false
+      marked: false
     }
   },
   mounted() {
-    this.beenThere = this.been_there
+    this.marked = this.is_marked
   },
   methods: {
     handleCLick() {
-      if (this.beenThere) {
-        this.beenThere = false
+      if (this.marked) {
+        this.marked = false
         console.log(
-          `user:id(${this.user_id}) just unchecked beenthere this cafe:id(${this.cafe_id})`
+          `user:id(${this.user_id}) just unchecked bookmark this cnote:id(${this.cnote_id})`
           // 추후 백엔드 호출
         )
       } else {
-        this.beenThere = true
+        this.marked = true
         console.log(
-          `user:id(${this.user_id}) just checked beenthere this cafe:id(${this.cafe_id})`
+          `user:id(${this.user_id}) just checked bookmark this cnote:id(${this.cnote_id})`
           // 추후 백엔드 호출
         )
       }
@@ -62,8 +56,7 @@ export default {
   cursor: pointer;
 
   .icon_fav {
-    transform: scale(0.95);
-    transform: translateY(1px);
+    transform: scale(1.25);
     color: $grey-5;
     &.colored {
       color: $teal-4;
