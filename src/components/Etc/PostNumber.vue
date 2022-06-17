@@ -52,10 +52,10 @@ export default {
   },
   data() {
     return {
-      postcode: '',
       address: '',
       detailAddress: '',
-      extraAddress: ''
+      extraAddress: '',
+      postcode: ''
     }
   },
   computed: {},
@@ -103,10 +103,10 @@ export default {
     sendData() {
       this.$emit(
         'sendPostData',
-        this.postcode,
         this.address,
         this.detailAddress,
-        this.extraAddress
+        this.extraAddress,
+        this.postcode
       )
     }
   }
