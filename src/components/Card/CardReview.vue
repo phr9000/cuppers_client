@@ -199,7 +199,7 @@ export default defineComponent({
     padding: 4px 16px 8px 16px;
     .btn_like {
       position: relative;
-      left: -8px;
+      left: -5px;
     }
   }
   .absolute-full {
