@@ -1,0 +1,71 @@
+{
+  "keywords": [
+    {
+      "keyword_id": 1,
+      "keyword_name": "화사한 산미",
+      "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fcoffee-plant.png?alt=media&token=1baf5dec-7d9a-412a-b7d2-b3671340ce00",
+      "keyword_type": "coffee"
+    },
+    {
+      "keyword_id": 2,
+      "keyword_name": "바디감",
+      "keyword_icon": null,
+      "keyword_type": "coffee"
+    },
+    {
+      "keyword_id": 3,
+      "keyword_name": "다크초콜릿",
+      "keyword_icon": null,
+      "keyword_type": "coffee"
+    },
+    {
+      "keyword_id": 4,
+      "keyword_name": "내추럴",
+      "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fnatural.png?alt=media&token=8c9fd720-ebb5-45c0-8f60-94a133a69e90",
+      "keyword_type": "coffee"
+    },
+    {
+      "keyword_id": 5,
+      "keyword_name": "라이트 로스팅",
+      "keyword_icon": null,
+      "keyword_type": "coffee"
+    }
+  ],
+  "brewingOptions": [
+    {
+      "brewing_option_id": 1,
+      "brewing_name": "푸어오버,드립",
+      "brewing_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fdrip.png?alt=media&token=617f72c5-0532-4568-ade6-44bb2e267d46"
+    },
+    {
+      "brewing_option_id": 2,
+      "brewing_name": "케멕스",
+      "brewing_icon": null
+    },
+    {
+      "brewing_option_id": 3,
+      "brewing_name": "사이폰",
+      "brewing_icon": null
+    },
+    {
+      "brewing_option_id": 4,
+      "brewing_name": "콜드브루",
+      "brewing_icon": null
+    },
+    {
+      "brewing_option_id": 5,
+      "brewing_name": "에어로프레스",
+      "brewing_icon": null
+    },
+    {
+      "brewing_option_id": 6,
+      "brewing_name": "모카포트",
+      "brewing_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fmocha-port.png?alt=media&token=5cb8c4a3-2187-46c2-8c54-15b1453cf15f"
+    },
+    {
+      "brewing_option_id": 7,
+      "brewing_name": "프렌치프레스",
+      "brewing_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Ffrench-press.png?alt=media&token=3c5fe697-8872-42c8-9177-586071983329"
+    }
+  ]
+}
