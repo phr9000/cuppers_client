@@ -46,7 +46,7 @@
         color="primary"
         label="가입서베이"
         icon="account_circle"
-        to="/login/signup"
+        to="/signup"
       />
       <btn-basic-right color="primary" label="리뷰 쓰기" icon="mail" />
       <btn-basic-right color="secondary" label="리뷰 쓰기" icon="edit" />

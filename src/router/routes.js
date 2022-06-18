@@ -23,6 +23,10 @@ const routes = [
       {
         path: 'newcafe',
         component: () => import('src/pages/AddNewCafePage.vue')
+      },
+      {
+        path: 'signup',
+        component: () => import('src/pages/SurveyPage.vue')
       }
     ]
   },
