@@ -22,13 +22,20 @@
           <!-- dim -->
           <div class="dim"></div>
         </div>
-        <!-- 등록페이지에서 사용 -->
+        <!-- (등록페이지) 공개여부  -->
         <q-toggle
           class="public-btn"
           v-model="accept"
           label="커핑노트 공개여부"
           v-if="writeType"
         />
+        <!-- (상세페이지) 좋아요, 북마크 영역 -->
+        <div class="row bage-area">
+          <div class="flex flex-center bage-area-inner">
+            <div class="like-area">좋아요</div>
+            <div class="bookmark-area">북마크</div>
+          </div>
+        </div>
         <!-- content 영역 -->
         <div class="content-area">
           <div class="content-inner">
@@ -121,6 +128,20 @@ export default {
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
     }
+    // 좋아요, 북마크 영역
+    .bage-area {
+      .bage-area-inner {
+        justify-content: flex-end;
+        padding: 20px 40px 0px 40px;
+        .like-area {
+          margin-right: 20px;
+          cursor: pointer;
+        }
+        .bookmark-area {
+          cursor: pointer;
+        }
+      }
+    }
 
     // content 영역
     .content-area {
@@ -139,7 +160,6 @@ export default {
           -webkit-box-shadow: none;
           -moz-box-shadow: none;
           box-shadow: none;
-
           resize: none; /*remove the resize handle on the bottom right*/
         }
       }
