@@ -22,13 +22,19 @@
           <!-- dim -->
           <div class="dim"></div>
         </div>
-
-        <div class="content-area">test</div>
+        <!-- 등록페이지에서 사용 -->
         <q-toggle
           class="public-btn"
           v-model="accept"
           label="커핑노트 공개여부"
+          v-if="writeType"
         />
+        <!-- content 영역 -->
+        <div class="content-area">
+          <div class="content-inner">
+            <textarea class="contents" v-model="editor.content"> </textarea>
+          </div>
+        </div>
       </div>
     </div>
   </q-page>
@@ -40,8 +46,11 @@ export default {
     return {
       editor: {
         title: '핸드드립을 맛있게 내리는 팁 - 2',
-        description: '지난 글에서 이야기 했던 것을 이어나가려 한다.'
-      }
+        description: '지난 글에서 이야기 했던 것을 이어나가려 한다.',
+        content:
+          'Text in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaks'
+      },
+      wrtieType: false
     }
   }
 }
@@ -55,6 +64,7 @@ export default {
   // editor container
   .editor-container {
     width: 100%;
+    // title 영역
     .title-area {
       position: relative;
       z-index: 1;
@@ -66,6 +76,7 @@ export default {
       background-image: url('https://wishbeen-seoul.s3.ap-northeast-2.amazonaws.com/plan/1498208096160_17881746_1930702927147954_3202367211201101824_n.jpg');
       background-repeat: no-repeat;
       background-size: cover;
+      background-attachment: fixed;
       &:after {
         display: block;
         content: '';
@@ -109,6 +120,29 @@ export default {
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    // content 영역
+    .content-area {
+      width: 100%;
+      height: 100%;
+      .content-inner {
+        padding: 60px 40px;
+        // TODO: textarea 높이 스크립트 바꿔야됨 지금은 스크롤 생김
+        .contents {
+          width: 100%;
+          min-height: 200px; // 임의로 글자 높이에 맞춰 설정함
+          height: auto !important;
+          border: none;
+          // overflow: auto;
+          outline: none;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+
+          resize: none; /*remove the resize handle on the bottom right*/
+        }
+      }
     }
   }
 }
