@@ -82,7 +82,7 @@ export default {
       overflow: hidden;
       background-image: url('https://wishbeen-seoul.s3.ap-northeast-2.amazonaws.com/plan/1498208096160_17881746_1930702927147954_3202367211201101824_n.jpg');
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: 100% auto;
       background-attachment: fixed;
       &:after {
         display: block;
