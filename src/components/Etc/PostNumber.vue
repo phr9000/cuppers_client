@@ -1,9 +1,8 @@
 <template>
   <btn-basic
     size="xs"
-    type="button"
     label="주소 찾기"
-    @click="execDaumPostcode()"
+    @click="execDaumPostcode"
     color="primary"
   />
 </template>
