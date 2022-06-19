@@ -31,11 +31,7 @@
       </div>
     </div>
     <div v-if="aromaNotes" class="aromanote_wrap">
-      <badge-aroma
-        v-for="aroma in aromaNotes"
-        :key="aroma.keyword_name"
-        :value="aroma.keyword_name"
-      />
+      <badge-aroma v-for="aroma in aromaNotes" :key="aroma" :value="aroma" />
     </div>
   </div>
 </template>
@@ -49,11 +45,9 @@ export default {
   components: { BadgeAroma },
   props: {
     name: { type: String, default: '음료 이름' },
-    aromaNotes: {
-      type: Array,
-      default: () => {
-        return null
-      }
+    menu_aromanote: {
+      type: String,
+      default: null
     },
     type: { type: String, default: 'br' },
     hot: { type: Number, default: null },
@@ -65,6 +59,16 @@ export default {
     return {
       priceHot: null,
       priceIce: null
+    }
+  },
+  computed: {
+    aromaNotes() {
+      // console.log(this.review.menu_aromanote)
+      if (this.menu_aromanote) {
+        return this.menu_aromanote.split(',')
+      } else {
+        return []
+      }
     }
   },
   mounted() {

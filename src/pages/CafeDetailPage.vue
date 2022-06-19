@@ -8,7 +8,7 @@
             {{ cafe.cafe_name_pr }}
           </div>
           <div class="q-ml-sm row items-center">
-            <span class="text-grey q-mr-xs">송파</span>
+            <span class="text-grey q-mr-xs">{{ cafe.cafe_region }}</span>
             <span class="text-grey-4">|</span>
             <q-icon size="xs" name="img:/icons/roastery.png" class="q-mx-xs" />
           </div>
@@ -82,6 +82,15 @@
                   />
                 </div>
               </div>
+              <!-- 카페 설명 -->
+              <div class="info start q-mb-xs">
+                <q-icon size="xs" name="place" class="icon" />
+
+                <div
+                  class="text_subtitle1 q-pr-xs"
+                  v-html="cafe.cafe_description"
+                ></div>
+              </div>
             </div>
 
             <!-- info_mid -->
@@ -134,7 +143,8 @@
                 </div>
                 <!-- 분점정보 -->
                 <div class="info q-mb-xs">
-                  <div class="text_subtitle1">분점 송파점 | 강남점</div>
+                  <btn-basic flat label="송파점" size="sm" />
+                  <div class="text_subtitle1">분점</div>
 
                   <q-icon size="xs" name="storefront" class="icon q-pl-xs" />
                 </div>
@@ -153,7 +163,7 @@
           </div>
 
           <!-- 커피메뉴 -->
-          <div class="subtitle q-pl-sm q-mb-md">커피 메뉴</div>
+          <div class="subtitle q-pl-sm q-my-md">커피 메뉴</div>
           <div class="coffe_menu col q-pl-md">
             <!-- info_top -->
             <div class="info_top">
@@ -167,7 +177,7 @@
                   <menu-item
                     v-for="menu in menuBrewing"
                     :name="menu.menu_name"
-                    :aromaNotes="menu.menu_aromanote"
+                    :menu_aromanote="menu.menu_aromanote"
                     :key="menu.menu_name"
                     :type="menu.menu_type"
                     :hot="menu.menu_price_hot"
@@ -187,7 +197,6 @@
                   <menu-item
                     v-for="menu in menuVariation"
                     :name="menu.menu_name"
-                    :aromaNotes="menu.menu_aromanote"
                     :key="menu.menu_name"
                     :type="menu.menu_type"
                     :hot="menu.menu_price_hot"
@@ -293,10 +302,6 @@
 <script>
 import { defineComponent } from 'vue'
 
-import cafeData from '../data/CafeData.json'
-import reviewData from '../data/ReviewData'
-import cnoteData from '../data/CnoteData'
-
 // import CafeInformation from '../components/Etc/CafeInformation.vue'
 // import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
 import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
@@ -312,13 +317,10 @@ import CardCnote from 'src/components/Card/CardCupNote.vue'
 export default defineComponent({
   name: 'CafeDetailPage',
   components: {
-    // CafeInformation,
     // InfiniteScroll,
     // CafeImageGrid,
-    // CafeMenu,
     BadgeCafe,
     BtnBasic,
-    // BtnBasicRight,
     BtnLike,
     BtnBeenThere,
     CardReview,
@@ -327,11 +329,6 @@ export default defineComponent({
   },
   data() {
     return {
-      // cafeMenuData,
-      // mainKeywordsData,
-      cafeData,
-      reviewData,
-      // userData,
       cafe: null,
       menuBrewing: null,
       menuVariation: null,
@@ -344,20 +341,46 @@ export default defineComponent({
     }
   },
   created() {
-    // console.log(cafeData[0])
-    // this.cafe = { ...cafeData[0] }
-    this.cafe = cafeData[0]
-    if (this.cafe.menu) {
-      this.menuBrewing = this.cafe.menu.filter((m) => m.menu_type === 'br')
-      this.menuVariation = this.cafe.menu.filter(
-        (menu) => menu.menu_type !== 'br'
-      )
-    }
+    let apiUrl = 'http://localhost:3000/cafe/1'
+    this.$axios
+      .get(apiUrl)
+      .then((result) => {
+        this.cafe = result.data
+        this.cafe.cafe_description = this.cafe.cafe_description.replace(
+          '#',
+          '<br>'
+        )
+        if (this.cafe.menu) {
+          this.menuBrewing = this.cafe.menu.filter((m) => m.menu_type === 'br')
+          this.menuVariation = this.cafe.menu.filter(
+            (menu) => menu.menu_type !== 'br'
+          )
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
+  mounted() {
+    let apiUrl = 'http://localhost:3000/review'
+    this.$axios
+      .get(apiUrl)
+      .then((result) => {
+        this.reviews = result.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
 
-    // console.log(this.cafe)
-    this.reviews = reviewData
-    // console.log(this.reviews)
-    this.cnotes = cnoteData
+    apiUrl = 'http://localhost:3000/cnote'
+    this.$axios
+      .get(apiUrl)
+      .then((result) => {
+        this.cnotes = result.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 })
 </script>
@@ -404,6 +427,12 @@ export default defineComponent({
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
+        &.start {
+          align-items: start;
+          .icon {
+            padding-top: 2px;
+          }
+        }
       }
       .info_mid {
         .cafe_keywords_wrap {
