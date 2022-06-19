@@ -61,6 +61,51 @@
             </textarea>
           </div>
         </div>
+        <div clss="bottom" style="background-color: #fbfbfb">
+          <!-- 커핑노트 카드 영역 -->
+          <ul>
+            <li class="couping-card-container" style="margin: 20px">
+              <div
+                class="couping-card-inner"
+                style="
+                  height: 200px;
+                  padding: 20px;
+                  border: 1px solid #ccc;
+                  border-radius: 18px;
+                "
+              >
+                couping card
+              </div>
+            </li>
+            <li class="couping-card-container" style="margin: 20px">
+              <div
+                class="couping-card-inner"
+                style="
+                  height: 200px;
+                  padding: 20px;
+                  border: 1px solid #ccc;
+                  border-radius: 18px;
+                "
+              >
+                couping card
+              </div>
+            </li>
+          </ul>
+          <!-- 유저 소개 영역 -->
+          <div class="user-card-container" style="margin: 20px">
+            <div
+              class="user-card-inner"
+              style="
+                height: 200px;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 18px;
+              "
+            >
+              user card
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </q-page>
@@ -243,6 +288,9 @@ export default {
           resize: none; /*remove the resize handle on the bottom right*/
         }
       }
+    }
+
+    .couping-card-container {
     }
   }
 }
