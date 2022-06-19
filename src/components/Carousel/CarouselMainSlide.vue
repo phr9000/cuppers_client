@@ -335,16 +335,25 @@ li {
         transform: translate(-50%, -50%);
         .title {
           width: 300px;
-          padding-bottom: 20px;
+          padding-bottom: 8px;
           font-size: 28px;
-          font-weight: 500;
-          word-break: break-all;
+          font-weight: normal;
+          word-break: keep-all;
+          letter-spacing: -0.25px;
+          line-height: 36px;
+          font-family: 'Nanum Myeongjo', sans-serif;
         }
         .desc {
           width: 250px;
           margin: 0 auto;
+          margin-bottom: 4px;
+          font-size: 12px;
           word-break: break-all;
-          padding-bottom: 15px;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          display: -webkit-box;
         }
       }
     }
