@@ -1,11 +1,10 @@
 <template>
-  <BtnBasic
+  <btn-basic
     size="xs"
     type="button"
     label="주소 찾기"
     @click="execDaumPostcode()"
     color="primary"
-    class="text-caption"
   />
 </template>
 
@@ -19,10 +18,9 @@ export default {
   data() {
     return {
       cafe_address_info: {
-        address: this.address,
-        detailAddress: this.address,
-        extraAddress: this.address,
-        postcode: this.postcode
+        address: '',
+        extraAddress: '',
+        postcode: ''
       }
     }
   },
@@ -64,6 +62,8 @@ export default {
           }
           // 우편번호를 입력한다.
           this.cafe_address_info.postcode = data.zonecode
+
+          this.sendData()
         }
       }).open()
     },

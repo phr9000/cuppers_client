@@ -37,6 +37,8 @@
         <div class="col-12 q-mx-xl q-mt-xl contents_block">
           <div class="row info-block">
             <q-input
+              v-model="cafe_info.cafe_address"
+              readonly
               type="text"
               id="address"
               label="주소 *"
@@ -44,9 +46,8 @@
               :rules="[(val) => !!val || 'Field is required']"
             />
             <div class="col-3 q-my-auto flex row-area">
-              <PostNumber
+              <post-number
                 size="md"
-                ref="PostNumber"
                 @sendPostData="getPostData"
                 padding="7px 20px"
                 class="button"
@@ -59,6 +60,7 @@
             <div class="col-7">
               <q-input
                 type="text"
+                v-model="cafe_info.cafe_address_detail"
                 id="detailAddress"
                 label="상세주소 *"
                 :rules="[(val) => !!val || 'Field is required']"
@@ -67,6 +69,7 @@
             <div class="col-4 q-ml-xs">
               <q-input
                 type="text"
+                v-model="cafe_info.cafe_postalcode"
                 label="우편번호 *"
                 :rules="[(val) => !!val || 'Field is required']"
               />
@@ -99,10 +102,10 @@
     </section>
     <section>
       <div class="text-center">
-        <BtnBasic
-          @click="show"
+        <btn-basic
+          @click="submitCafeInfo"
           color="primary"
-          size="sm"
+          size="md"
           label="카페 등록하기"
           icon="note"
           padding="10px 30px 10px 30px"
@@ -125,25 +128,27 @@ export default defineComponent({
   data() {
     return {
       cafe_info: {
-        cafe_name_pr: this.cafe_name_pr,
-        cafe_phone: this.cafe_phone,
-        cafe_operation_time: this.cafe_operation_time,
-        cafe_website: this.cafe_website
+        cafe_name_pr: '',
+        cafe_phone: '',
+        cafe_operation_time: '',
+        cafe_website: '',
+        cafe_address: '',
+        cafe_address_detail: '',
+        cafe_postalcode: '',
+        cafe_address_dong: ''
       }
     }
   },
-  computed: {
-    addressData(cafe_address_info) {
-      return cafe_address_info.address
-    }
-  },
+  computed: {},
   methods: {
-    show() {
-      console.log('카페정보: ', this.cafe_info)
-      this.$refs.PostNumber.sendData()
+    submitCafeInfo() {
+      console.log('카페정보출력테스트: ', this.cafe_info)
     },
-    getPostData(cafe_address_info) {
-      console.log('카페주소: ', cafe_address_info)
+    getPostData(payload) {
+      console.log('카페주소: ', payload)
+      this.cafe_info.cafe_address = payload.address
+      this.cafe_info.cafe_address_dong = payload.extraAddress
+      this.cafe_info.cafe_postalcode = payload.postcode
     }
   }
 })
