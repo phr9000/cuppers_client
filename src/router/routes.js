@@ -62,6 +62,14 @@ const routes = [
       {
         path: 'some',
         component: () => import('pages/test/SomeTest.vue')
+      },
+      {
+        path: 'cnotedetail',
+        component: () => import('pages/test/CnoteDetailPage.vue')
+      },
+      {
+        path: 'cnotedetail2',
+        component: () => import('pages/test/CnoteDetailPage2.vue')
       }
     ]
   },
