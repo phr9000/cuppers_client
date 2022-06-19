@@ -56,7 +56,7 @@
         <div class="q-my-xl">
           <btn-basic
             :dense="false"
-            size="md"
+            size="lg"
             to="map"
             color="secondary"
             label="지도 표시하기"

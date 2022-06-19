@@ -15,7 +15,7 @@ export default defineComponent({
     },
     url: {
       type: String,
-      default: '/public/icons/avatar_my.jpg'
+      default: '/icons/avatar_my.jpg'
     }
   },
   methods: {
