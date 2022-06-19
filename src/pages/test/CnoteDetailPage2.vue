@@ -59,20 +59,24 @@ export default {
       position: relative;
       z-index: 1;
       width: 100%;
+      max-height: 840px;
       // background-color: pink;
       border-bottom: 1px solid #cccc;
       overflow: hidden;
       background-image: url('https://wishbeen-seoul.s3.ap-northeast-2.amazonaws.com/plan/1498208096160_17881746_1930702927147954_3202367211201101824_n.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
       &:after {
         display: block;
         content: '';
         padding-bottom: 56.25%;
+        max-height: 840px;
       }
       .title-area-inner {
         width: 100%;
         position: absolute;
         z-index: 100;
-        bottom: 30px;
+        bottom: 4.285%;
         left: 0;
         z-index: 3;
         .input-box {
