@@ -125,7 +125,6 @@
 
 <script>
 import { defineComponent } from 'vue'
-import CafeData from 'src/data/CafeData.json'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import BtnIcon from 'src/components/Button/BtnIcon.vue'
 import CardCafeMap from 'src/components/Card/CardCafeMap.vue'
@@ -309,20 +308,28 @@ export default defineComponent({
       console.log(this.cafes[0])
     },
     loadData() {
-      this.cafesRaw = []
-      for (let i = 0; i < CafeData.length; i++) {
-        const cafe = {
-          ...CafeData[i],
-          latlng: new kakao.maps.LatLng(
-            CafeData[i]['cafe_latitude'],
-            CafeData[i]['cafe_longitude']
-          ),
-          marker: null
-        }
+      let apiUrl = 'http://localhost:3000/cafeLocations'
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.cafesRaw = []
+          for (let i = 0; i < result.data.length; i++) {
+            const cafe = {
+              ...result.data[i],
+              latlng: new kakao.maps.LatLng(
+                result.data[i]['cafe_latitude'],
+                result.data[i]['cafe_longitude']
+              ),
+              marker: null
+            }
 
-        this.cafesRaw.push(cafe)
-      }
-      console.log(this.cafesRaw)
+            this.cafesRaw.push(cafe)
+          }
+          console.log(this.cafesRaw)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     zoomIn() {
       this.map.setLevel(this.map.getLevel() - 1, { animate: true })
