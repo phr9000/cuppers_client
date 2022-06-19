@@ -70,6 +70,10 @@ const routes = [
       {
         path: 'cnotedetail2',
         component: () => import('pages/test/CnoteDetailPage2.vue')
+      },
+      {
+        path: 'carduserinfo',
+        component: () => import('pages/test/CardUserInfo.vue')
       }
     ]
   },

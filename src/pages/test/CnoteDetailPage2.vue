@@ -11,13 +11,34 @@
               placeholder="제목을 입력하세요"
               v-model="editor.title"
               class="input-box title"
+              :readonly="!writeType"
             />
             <input
               type="text"
               placeholder="제목을 입력하세요"
               v-model="editor.description"
               class="input-box description"
+              :readonly="!writeType"
             />
+          </div>
+          <!-- (상세페이지) 좋아요, 북마크 영역 -->
+          <div class="btns_wrap row no-wrap">
+            <div class="btn_like_wrap">
+              <btn-like
+                :user_id="cnote.user_id"
+                :id_what="cnote.cnote_id"
+                like_what="cnote"
+                :is_liked="cnote.user_cnote_liked"
+                :likeit_cnt="cnote.cnote_liked_cnt"
+              />
+            </div>
+            <div class="btn_bookmark_wrap">
+              <btn-book-mark
+                :user_id="cnote.user_id"
+                :cnote_id="cnote.cnote_id"
+                :is_marked="cnote.user_cnote_marked"
+              />
+            </div>
           </div>
           <!-- dim -->
           <div class="dim"></div>
@@ -25,21 +46,19 @@
         <!-- (등록페이지) 공개여부  -->
         <q-toggle
           class="public-btn"
-          v-model="accept"
           label="커핑노트 공개여부"
           v-if="writeType"
         />
-        <!-- (상세페이지) 좋아요, 북마크 영역 -->
-        <div class="row bage-area">
-          <div class="flex flex-center bage-area-inner">
-            <div class="like-area">좋아요</div>
-            <div class="bookmark-area">북마크</div>
-          </div>
-        </div>
+
         <!-- content 영역 -->
         <div class="content-area">
           <div class="content-inner">
-            <textarea class="contents" v-model="editor.content"> </textarea>
+            <textarea
+              class="contents"
+              v-model="editor.content"
+              :readonly="!writeType"
+            >
+            </textarea>
           </div>
         </div>
       </div>
@@ -48,17 +67,76 @@
 </template>
 
 <script>
+import BtnLike from 'src/components/Button/BtnLike.vue'
+import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
 export default {
+  components: { BtnLike, BtnBookMark },
+  props: {
+    cnote: {
+      type: Object,
+      default: () => {
+        return {
+          cnote_id: 1,
+          user_id: 1,
+          cnote_title: '한 잔의 커피는 나의 아낭케',
+          user_name: '동글동글동글이',
+          user_thumbnail:
+            'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
+          cnote_content:
+            '오늘도 정량을 비운 커피잔엔 내일 마실 한 잔의 커피를 그리워하는 마음이 말라버린 거품으로 남았다.오늘도 정량을 비운 커피잔엔 내일 마실 한 잔의 커피를 그리워하는 마음이 말라버린 거품으로 남았다.',
+          cnote_thumbnail:
+            'https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg',
+          created_at: '2022-06-10T10:58:54.000Z',
+          user_cnote_liked: true,
+          cnote_liked_cnt: 142,
+          user_cnote_marked: false
+        }
+      }
+    }
+  },
   data() {
     return {
       editor: {
         title: '핸드드립을 맛있게 내리는 팁 - 2',
         description: '지난 글에서 이야기 했던 것을 이어나가려 한다.',
         content:
-          'Text in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaks'
+          'Text in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaksText in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaks'
       },
-      wrtieType: false
+      writeType: false
     }
+  },
+  created() {
+    let apiUrl = 'http://localhost:3000//1'
+    this.$axios
+      .get(apiUrl)
+      .then((result) => {
+        this.cafe = result.data
+        this.cafe.cafe_description = this.cafe.cafe_description.replace(
+          '#',
+          '<br>'
+        )
+        if (this.cafe.menu) {
+          this.menuBrewing = this.cafe.menu.filter((m) => m.menu_type === 'br')
+          this.menuVariation = this.cafe.menu.filter(
+            (menu) => menu.menu_type !== 'br'
+          )
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
+  mounted() {
+    let apiUrl = 'localhost:3000/api/cnote/detail/7'
+    this.$axios
+      .get(apiUrl)
+      .then((result) => {
+        this.cnotedetail = result.data
+        console.log(this.cnotedtail)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 }
 </script>
@@ -129,16 +207,18 @@ export default {
       background-color: rgba(0, 0, 0, 0.5);
     }
     // 좋아요, 북마크 영역
-    .bage-area {
-      .bage-area-inner {
-        justify-content: flex-end;
-        padding: 20px 40px 0px 40px;
-        .like-area {
-          margin-right: 20px;
-          cursor: pointer;
-        }
-        .bookmark-area {
-          cursor: pointer;
+    .btns_wrap {
+      position: absolute;
+      top: 15px;
+      right: 21.1px;
+      z-index: 101;
+      .btn_like_wrap {
+        .btn_like {
+          .icon_fav {
+            &.colored {
+              color: #bdbdbd !important;
+            }
+          }
         }
       }
     }
@@ -148,7 +228,7 @@ export default {
       width: 100%;
       height: 100%;
       .content-inner {
-        padding: 60px 40px;
+        padding: 20px 40px;
         // TODO: textarea 높이 스크립트 바꿔야됨 지금은 스크롤 생김
         .contents {
           width: 100%;

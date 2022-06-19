@@ -8,7 +8,12 @@
     color="red-4"
     class="btn_like row no-wrap items-center"
   >
-    <q-icon v-if="isLiked" size="xs" class="icon_fav colored" name="favorite" />
+    <q-icon
+      v-if="isLiked"
+      size="xs"
+      class="icon_fav colored white"
+      name="favorite"
+    />
     <q-icon v-else size="xs" class="icon_fav" name="favorite_border" />
     <span class="likeit_cnt q-ml-xs text-h6" :class="{ colored: isLiked }">{{
       likeitCnt
