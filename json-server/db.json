@@ -1,22 +1,25 @@
 {
-  "keywords": [
+  "serveyKeywords": [
     {
       "keyword_id": 1,
       "keyword_name": "화사한 산미",
       "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fcoffee-plant.png?alt=media&token=1baf5dec-7d9a-412a-b7d2-b3671340ce00",
-      "keyword_type": "coffee"
+      "keyword_type": "coffee",
+      "reg_survey_imgurl": "https://cdn.shopify.com/s/files/1/0563/3294/3550/files/coffee-plant-leaves-stem_480x480.jpg?v=1628695949"
     },
     {
       "keyword_id": 2,
       "keyword_name": "바디감",
       "keyword_icon": null,
-      "keyword_type": "coffee"
+      "keyword_type": "coffee",
+      "reg_survey_imgurl": "https://i2.wp.com/baristanews.co.kr/wp-content/uploads/2017/11/body2.jpg?resize=640%2C427"
     },
     {
       "keyword_id": 3,
       "keyword_name": "다크초콜릿",
       "keyword_icon": null,
-      "keyword_type": "coffee"
+      "keyword_type": "coffee",
+      "reg_survey_imgurl": "https://steptohealth.co.kr/wp-content/uploads/2018/12/Benefits-of-Cocoa-1-e1544581102955.jpg"
     },
     {
       "keyword_id": 4,
@@ -29,43 +32,77 @@
       "keyword_name": "라이트 로스팅",
       "keyword_icon": null,
       "keyword_type": "coffee"
-    }
-  ],
-  "brewingOptions": [
-    {
-      "brewing_option_id": 1,
-      "brewing_name": "푸어오버,드립",
-      "brewing_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fdrip.png?alt=media&token=617f72c5-0532-4568-ade6-44bb2e267d46"
     },
     {
-      "brewing_option_id": 2,
-      "brewing_name": "케멕스",
-      "brewing_icon": null
+      "keyword_id": 201,
+      "keyword_name": "푸어오버,드립",
+      "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fdrip.png?alt=media&token=617f72c5-0532-4568-ade6-44bb2e267d46",
+      "keyword_type": "brewing"
     },
     {
-      "brewing_option_id": 3,
-      "brewing_name": "사이폰",
-      "brewing_icon": null
+      "keyword_id": 202,
+      "keyword_name": "케멕스",
+      "keyword_icon": null,
+      "keyword_type": "brewing",
+      "reg_survey_imgurl": "https://mblogthumb-phinf.pstatic.net/20150907_208/thepearlbarn_1441599871354CK9tk_JPEG/main.jpg?type=w2"
     },
     {
-      "brewing_option_id": 4,
-      "brewing_name": "콜드브루",
-      "brewing_icon": null
+      "keyword_id": 203,
+      "keyword_name": "사이폰",
+      "keyword_icon": null,
+      "keyword_type": "brewing",
+      "reg_survey_imgurl": "https://i1.wp.com/baristanews.co.kr/wp-content/uploads/2017/07/gh5tbuuodilayi6kk7t1-696x333.jpg?fit=696%2C333&ssl=1"
     },
     {
-      "brewing_option_id": 5,
-      "brewing_name": "에어로프레스",
-      "brewing_icon": null
+      "keyword_id": 204,
+      "keyword_name": "콜드브루",
+      "keyword_icon": null,
+      "keyword_type": "brewing",
+      "reg_survey_imgurl": "https://i.pinimg.com/564x/18/e6/89/18e689424991db78bf64a3310d5e2bb8.jpg"
     },
     {
-      "brewing_option_id": 6,
-      "brewing_name": "모카포트",
-      "brewing_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fmocha-port.png?alt=media&token=5cb8c4a3-2187-46c2-8c54-15b1453cf15f"
+      "keyword_id": 205,
+      "keyword_name": "에어로프레스",
+      "keyword_icon": null,
+      "keyword_type": "brewing"
     },
     {
-      "brewing_option_id": 7,
-      "brewing_name": "프렌치프레스",
-      "brewing_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Ffrench-press.png?alt=media&token=3c5fe697-8872-42c8-9177-586071983329"
+      "keyword_id": 206,
+      "keyword_name": "모카포트",
+      "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fmocha-port.png?alt=media&token=5cb8c4a3-2187-46c2-8c54-15b1453cf15f",
+      "keyword_type": "brewing",
+      "reg_survey_imgurl": "https://parisjoomin.com/wp-content/uploads/2021/03/D06C2525-CEA0-4A1D-AA1B-223B7698F6A7-1024x520.jpeg"
+    },
+    {
+      "keyword_id": 207,
+      "keyword_name": "프렌치프레스",
+      "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Ffrench-press.png?alt=media&token=3c5fe697-8872-42c8-9177-586071983329",
+      "keyword_type": "brewing"
+    },
+    {
+      "keyword_id": 301,
+      "keyword_name": "분위기 있는",
+      "keyword_icon": "",
+      "keyword_type": "cafe"
+    },
+    {
+      "keyword_id": 302,
+      "keyword_name": "커피에 대한 설명",
+      "keyword_icon": "",
+      "keyword_type": "cafe"
+    },
+    {
+      "keyword_id": 303,
+      "keyword_name": "뷰가 좋은",
+      "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fnice_view.png?alt=media&token=18f656dd-0a0d-464e-9d6d-42cd8f67efac",
+      "keyword_type": "cafe",
+      "reg_survey_imgurl": "https://post-phinf.pstatic.net/MjAyMDEwMjdfMTk1/MDAxNjAzNzkwMzgzNDM5.50qNOPt9uD-jkZCkvVQfhnS5Hr_Nt7dOLP4P07B1zHkg.3Dw0MaG3UtcJJO2Ttn4MDYDuopkgZ3hyG32r-AxFSDMg.JPEG/201026000001333_O.jpg?type=w1200"
+    },
+    {
+      "keyword_id": 304,
+      "keyword_name": "야외테라스",
+      "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Ftable.png?alt=media&token=b812ba13-0f8e-4cdb-aaef-b29adc246ec3",
+      "keyword_type": "cafe"
     }
   ],
   "cafeLocations": [

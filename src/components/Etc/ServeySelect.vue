@@ -13,10 +13,11 @@
         <div v-else class="q-mb-sm">
           <q-icon v-if="type === 'coffee'" size="md" name="img:/icons/br.png" />
           <q-icon
-            v-if="type === 'brewingOption'"
+            v-else-if="type === 'brewing'"
             size="md"
             name="img:/icons/gr.png"
           />
+          <q-icon v-else size="md" name="img:/icons/cafe.png" />
         </div>
 
         <div class="text-center">{{ text }}</div>
@@ -37,7 +38,7 @@ export default {
   name: 'ServeySelect',
   props: {
     id: { type: Number, required: true },
-    type: { type: String, required: true }, // 'coffee' or 'cafe' or 'brewingOption'
+    type: { type: String, required: true }, // 'coffee' or 'cafe' or 'brewing'
     text: {
       type: String,
       required: true
@@ -48,7 +49,7 @@ export default {
     },
     bg: {
       type: String,
-      default: ''
+      default: 'https://t1.daumcdn.net/cfile/blog/2362A136560CB9B501'
     }
   },
   data() {
@@ -56,11 +57,7 @@ export default {
       checked: false
     }
   },
-  computed: {
-    iconName() {
-      return `img:/icons/br.png`
-    }
-  },
+  computed: {},
   methods: {
     handleClick() {
       if (!this.checked) {
