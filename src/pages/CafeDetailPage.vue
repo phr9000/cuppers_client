@@ -264,7 +264,11 @@
 
       <!-- 페이지네이션 -->
       <div class="q-pa-lg flex flex-center">
-        <q-pagination v-model="current" :max="5" direction-links />
+        <q-pagination
+          v-model="current"
+          :max="total_review_page"
+          direction-links
+        />
       </div>
     </section>
 
@@ -337,7 +341,14 @@ export default defineComponent({
       reviewTotalCnt: 0,
       cnotes: [],
       cnoteTotalCnt: 0,
-      current: 1 // for pagination
+      current: 1, // for pagination
+      total_review_page: 1
+      // reviews_per_page: 4
+    }
+  },
+  watch: {
+    current(newPage) {
+      this.getReviews(newPage) // go to that page number
     }
   },
   created() {
@@ -350,29 +361,26 @@ export default defineComponent({
           '#',
           '<br>'
         )
+
+        // 브루잉(필터) 메뉴, 배리에이션 메뉴 구분
         if (this.cafe.menu) {
           this.menuBrewing = this.cafe.menu.filter((m) => m.menu_type === 'br')
           this.menuVariation = this.cafe.menu.filter(
             (menu) => menu.menu_type !== 'br'
           )
         }
+
+        // review count 로 토탈 페이지 계산
+        this.total_review_page = Math.ceil(this.cafe.total_review / 4)
       })
       .catch((err) => {
         console.log(err)
       })
   },
   mounted() {
-    let apiUrl = `${process.env.API}/review`
-    this.$axios
-      .get(apiUrl)
-      .then((result) => {
-        this.reviews = result.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.getReviews(1) // 1 page
 
-    apiUrl = `${process.env.API}/cnote`
+    let apiUrl = `${process.env.API}/cnote`
     this.$axios
       .get(apiUrl)
       .then((result) => {
@@ -381,6 +389,19 @@ export default defineComponent({
       .catch((err) => {
         console.log(err)
       })
+  },
+  methods: {
+    getReviews(page) {
+      let apiUrl = `${process.env.API}/review?_page=${page}&_limit=4`
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.reviews = result.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 })
 </script>
