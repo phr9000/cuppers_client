@@ -2,7 +2,7 @@
   <q-page class="constrain_sm">
     <section class="q-py-md">
       <div class="text-center text-h5">
-        <span>카페정보</span>
+        <span>새로운 카페를 등록해주세요</span>
       </div>
     </section>
     <section class="q-mx-xl q-my-xl q-pb-xl">
@@ -12,26 +12,20 @@
         >
       </div>
       <div class="bg-amber-1 q-py-sm q-mt-md background">
+        <div class="flex justify-center q-mt-md">
+          <q-icon size="md" name="house" class="q-pl-sm" />
+          <span class="text-h6">카페정보</span>
+        </div>
         <!-- 카페 이름 -->
-        <div class="col-12 q-mx-xl q-my-xl contents_block">
-          <div class="row info-block">
+        <div class="q-mx-xl q-my-xl contents_block">
+          <div class="col-12">
             <q-input
               label="카페이름 *"
               v-model="cafe_info.cafe_name_pr"
               type="text"
               :rules="[(val) => !!val || 'Field is required']"
-              class="col-8 input-area"
+              class="col-12 input-area"
             />
-            <div class="col-3 q-my-auto row-area">
-              <BtnBasic
-                type="button"
-                label="중복 확인"
-                size="md"
-                color="primary"
-                padding="7px 20px"
-                class="button"
-              />
-            </div>
           </div>
         </div>
         <div class="col-12 q-mx-xl q-mt-xl contents_block">
@@ -100,6 +94,27 @@
         </div>
       </div>
     </section>
+    <section class="q-mx-xl q-my-xl q-pb-xl">
+      <div class="bg-amber-1 q-py-sm q-mt-md background">
+        <div class="flex justify-center q-mt-md">
+          <q-icon size="md" name="coffee" class="q-pl-sm" />
+          <span class="text-h6">커피정보</span>
+        </div>
+        <div class="flex justify-end q-mr-xl">
+          <btn-basic
+            @click="createMenu"
+            size="md"
+            label="메뉴 추가"
+            color="primary"
+            icon="add"
+            padding="7px 15px 7px 15px"
+          />
+        </div>
+        <div>
+          <card-add-menu />
+        </div>
+      </div>
+    </section>
     <section>
       <div class="text-center">
         <btn-basic
@@ -119,11 +134,13 @@
 import { defineComponent } from 'vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import PostNumber from 'src/components/Etc/PostNumber.vue'
+import CardAddMenu from 'src/components/Card/CardAddMenu.vue'
 export default defineComponent({
   name: 'AddNewCafePage',
   components: {
     BtnBasic,
-    PostNumber
+    PostNumber,
+    CardAddMenu
   },
   data() {
     return {
@@ -139,7 +156,6 @@ export default defineComponent({
       }
     }
   },
-  computed: {},
   methods: {
     submitCafeInfo() {
       console.log('카페정보출력테스트: ', this.cafe_info)
@@ -149,7 +165,8 @@ export default defineComponent({
       this.cafe_info.cafe_address = payload.address
       this.cafe_info.cafe_address_dong = payload.extraAddress
       this.cafe_info.cafe_postalcode = payload.postcode
-    }
+    },
+    createMenu() {}
   }
 })
 </script>
