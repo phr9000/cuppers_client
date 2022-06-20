@@ -3,9 +3,9 @@
     <header-global />
 
     <q-page-container>
-      <transition name="slide-fade">
-        <router-view />
-      </transition>
+      <!-- <transition name="slide-fade"> -->
+      <router-view />
+      <!-- </transition> -->
     </q-page-container>
   </q-layout>
 </template>
@@ -22,12 +22,12 @@ export default defineComponent({
 })
 </script>
 <style>
-.fade-enter-active,
+/* .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.4s;
 }
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
+} */
 </style>
