@@ -51,58 +51,54 @@
         />
 
         <!-- content 영역 -->
-        <div class="content-area">
-          <div class="content-inner">
-            <textarea
-              class="contents"
-              v-model="editor.content"
-              :readonly="!writeType"
-            >
-            </textarea>
+        <div class="content-container">
+          <div class="content-area">
+            <div class="content-inner">
+              <textarea
+                class="contents"
+                v-model="editor.content"
+                :readonly="!writeType"
+              >
+              </textarea>
+            </div>
           </div>
-        </div>
-        <div clss="bottom" style="background-color: #fbfbfb">
-          <!-- 커핑노트 카드 영역 -->
-          <ul>
-            <li class="couping-card-container" style="margin: 20px">
-              <div
-                class="couping-card-inner"
-                style="
-                  height: 200px;
-                  padding: 20px;
-                  border: 1px solid #ccc;
-                  border-radius: 18px;
-                "
-              >
-                couping card
+          <div class="bottom">
+            <!-- 선택한 사진 영역 -->
+            <div class="img-container">
+              <h3 class="title">선택한 사진(슬라이드)</h3>
+              <div class="img-inner">
+                <div class="img-area"><span class="">img1</span></div>
+                <div class="img-area"><span>img2</span></div>
+                <div class="img-area"><span>img3</span></div>
               </div>
-            </li>
-            <li class="couping-card-container" style="margin: 20px">
-              <div
-                class="couping-card-inner"
-                style="
-                  height: 200px;
-                  padding: 20px;
-                  border: 1px solid #ccc;
-                  border-radius: 18px;
-                "
-              >
-                couping card
+            </div>
+            <!-- 커핑노트 카드 영역 -->
+            <!-- 220622 회의때 의논하기 빼는게 더 나은거 같아서.. 아님 디자인 수정 !!!!!!! -->
+            <ul style="display: none">
+              <li class="cafe-card-container">
+                <card-cup-note></card-cup-note>
+              </li>
+              <li class="cafe-card-container">
+                <card-cup-note></card-cup-note>
+              </li>
+            </ul>
+            <!-- 유저 소개 영역 -->
+            <div class="user-card-container">
+              <div class="user-card-inner" style="">
+                <div class="profile-img"></div>
+                <div class="user-email-area" style="line-height: 24px">
+                  test@gmail.com
+                </div>
+                <div
+                  class="desc"
+                  style="line-height: 24px; margin-bottom: 10px"
+                >
+                  여행자의 시선으로, 카페를 기록합니다.
+                </div>
+                <div class="follow-btn">
+                  <button class="btn">+ 팔로우</button>
+                </div>
               </div>
-            </li>
-          </ul>
-          <!-- 유저 소개 영역 -->
-          <div class="user-card-container" style="margin: 20px">
-            <div
-              class="user-card-inner"
-              style="
-                height: 200px;
-                padding: 20px;
-                border: 1px solid #ccc;
-                border-radius: 18px;
-              "
-            >
-              user card
             </div>
           </div>
         </div>
@@ -114,8 +110,9 @@
 <script>
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
+import CardCupNote from 'src/components/Card/CardCupNote.vue'
 export default {
-  components: { BtnLike, BtnBookMark },
+  components: { BtnLike, BtnBookMark, CardCupNote },
   props: {
     cnote: {
       type: Object,
@@ -143,6 +140,8 @@ export default {
     return {
       editor: {
         title: '핸드드립을 맛있게 내리는 팁 - 2',
+        user: 'test@gmail.com',
+        created_at: 'Jun 22 2022',
         description: '지난 글에서 이야기 했던 것을 이어나가려 한다.',
         content:
           'Text in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaksText in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaks'
@@ -217,8 +216,9 @@ export default {
         width: 100%;
         position: absolute;
         z-index: 100;
-        bottom: 4.285%;
-        left: 0;
+        bottom: 9.285%;
+        left: 50%;
+        transform: translate(-50%, 0);
         z-index: 3;
         .input-box {
           width: 100%;
@@ -269,11 +269,18 @@ export default {
     }
 
     // content 영역
+    .content-container {
+      margin: 0 60px;
+    }
     .content-area {
       width: 100%;
       height: 100%;
       .content-inner {
+        margin: 0 auto;
         padding: 20px 40px;
+        padding-top: 100px;
+        width: 991px;
+
         // TODO: textarea 높이 스크립트 바꿔야됨 지금은 스크롤 생김
         .contents {
           width: 100%;
@@ -290,7 +297,90 @@ export default {
       }
     }
 
-    .couping-card-container {
+    .bottom {
+      padding: 0 40px;
+
+      // 선택한 사진 영역
+      .img-container {
+        // height: 200px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        padding-top: 0;
+        width: 900px;
+        border-radius: 18px;
+
+        .title {
+          padding: 0;
+          font-size: 20px;
+        }
+        .img-inner {
+          display: flex;
+          max-width: 900px;
+          height: 300px;
+
+          .img-area {
+            position: relative;
+            margin-right: 20px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 18px;
+            background-color: #fff;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+              rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            &:after {
+              display: block;
+              content: '';
+              padding-bottom: 100%;
+            }
+            span {
+              position: absolute;
+              top: 10px;
+              left: 10px;
+            }
+          }
+        }
+      }
+      .cafe-card-container {
+        margin-bottom: 20px;
+        .card {
+          height: 300px !important;
+          .card_image {
+            width: 300px;
+            > div {
+              padding-bottom: 56.25% !important;
+            }
+          }
+          .absolute-full {
+            height: 255px !important;
+          }
+        }
+      }
+      .user-card-container {
+        position: relative;
+        .user-card-inner {
+          position: absolute;
+          left: 0;
+          height: 200px;
+          padding: 20px;
+          margin-bottom: 10px;
+          border-radius: 18px;
+          .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            background-color: #fefefe;
+          }
+          .follow-btn {
+            .btn {
+              cursor: pointer;
+              background-color: #000;
+              color: #fff;
+              border-radius: 10px;
+            }
+          }
+        }
+      }
     }
   }
 }
