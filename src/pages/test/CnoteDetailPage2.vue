@@ -80,7 +80,7 @@
             </div>
             <!-- 커핑노트 카드 영역 -->
             <!-- 220622 회의때 의논하기 빼는게 더 나은거 같아서.. 아님 디자인 수정 !!!!!!! -->
-            <ul style="display: none">
+            <ul>
               <li class="cafe-card-container">
                 <card-cup-note></card-cup-note>
               </li>
@@ -284,13 +284,13 @@ export default {
 
     // content 영역
     .content-container {
-      margin: 0 60px;
+      margin: 0 160px;
     }
     .content-area {
       width: 100%;
       height: 100%;
       .content-inner {
-        margin: 0 auto;
+        // margin: 0 auto;
         padding: 20px 40px;
         padding-top: 100px;
         width: 991px;
@@ -317,7 +317,7 @@ export default {
       // 선택한 사진 영역
       .img-container {
         // height: 200px;
-        margin: 0 auto;
+        // margin: 0 auto;
         margin-bottom: 20px;
         padding-top: 0;
         width: 900px;
