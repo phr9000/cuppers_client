@@ -14,9 +14,22 @@ export default defineComponent({
     return {}
   },
   mounted() {
-    this.axiosTest()
+    // this.axiosTest()
+    this.backEndCallTest()
   },
   methods: {
+    backEndCallTest() {
+      // console.log(process.env.API)
+      let apiUrl = `${process.env.API}/api/cafe/1`
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          console.log(result)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     axiosTest() {
       // 이렇게 하는건 테스트 실패
       // console.log(this.$api.baseURL)
