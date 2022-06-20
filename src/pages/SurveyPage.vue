@@ -88,7 +88,7 @@ export default {
     }
   },
   created() {
-    let apiUrl = 'http://localhost:3000/serveyKeywords'
+    let apiUrl = `${process.env.API}/serveyKeywords`
     this.$axios
       .get(apiUrl)
       .then((result) => {

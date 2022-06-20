@@ -57,7 +57,7 @@
     <!-- Image Grid -->
     <section class="q-mx-xs q-px-sm q-pt-xs">
       <!-- Image Grid -->
-      <q-img class="rounded" src="/public/GRIDIMAGES_TEMP.JPG" />
+      <q-img class="rounded" src="/GRIDIMAGES_TEMP.JPG" />
     </section>
 
     <!-- 기본정보, 커피메뉴 & 최근리뷰 컨테이너 -->
@@ -130,7 +130,7 @@
                   <div class="text_subtitle1">시설 정보</div>
                 </div>
                 <div class="q-pl-lg q-pb-sm">
-                  <q-img width="210px" src="/public/facility.png" />
+                  <q-img width="210px" src="/facility.png" />
                 </div>
               </div>
 
@@ -270,7 +270,7 @@
 
     <!-- 지도 미리보기 -->
     <section class="q-mx-xs q-px-sm q-pt-xs">
-      <q-img class="rounded" src="/public/MAP_TEMP.JPG" />
+      <q-img class="rounded" src="/MAP_TEMP.JPG" />
     </section>
 
     <!-- 커핑 노트 -->
@@ -341,7 +341,7 @@ export default defineComponent({
     }
   },
   created() {
-    let apiUrl = 'http://localhost:3000/cafe/1'
+    let apiUrl = `${process.env.API}/cafe/1`
     this.$axios
       .get(apiUrl)
       .then((result) => {
@@ -362,7 +362,7 @@ export default defineComponent({
       })
   },
   mounted() {
-    let apiUrl = 'http://localhost:3000/review'
+    let apiUrl = `${process.env.API}/review`
     this.$axios
       .get(apiUrl)
       .then((result) => {
@@ -372,7 +372,7 @@ export default defineComponent({
         console.log(err)
       })
 
-    apiUrl = 'http://localhost:3000/cnote'
+    apiUrl = `${process.env.API}/cnote`
     this.$axios
       .get(apiUrl)
       .then((result) => {

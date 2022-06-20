@@ -308,7 +308,7 @@ export default defineComponent({
       console.log(this.cafes[0])
     },
     loadData() {
-      let apiUrl = 'http://localhost:3000/cafeLocations'
+      let apiUrl = `${process.env.API}/cafeLocations`
       this.$axios
         .get(apiUrl)
         .then((result) => {
