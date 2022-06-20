@@ -4,7 +4,7 @@
       <btn-avatar :url="review.user_thumbnail" />
       <div class="q-ml-sm user_name">{{ review.user_name }}</div>
     </div>
-    <q-card class="card_review" flat bordered>
+    <q-card class="card_review" bordered>
       <q-card-section class="cafe_info row items-center justify-between">
         <div @click="cafeNameClick" class="text-h5 cafe_name q-mb-xs q-mr-xs">
           {{ review.cafe_name }}
@@ -165,6 +165,8 @@ export default defineComponent({
 }
 .card_review {
   background-color: $card-bg-color;
+  box-shadow: 0 1px 9px rgb(0 0 0 / 14%), 0 2px 2px rgb(0 0 0 / 10%),
+    0 3px 1px -2px rgb(0 0 0 / 4%);
   border: 1px solid $grey-4;
   .cafe_info {
     .cafe_name {

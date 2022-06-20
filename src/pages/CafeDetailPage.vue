@@ -14,6 +14,7 @@
           </div>
         </div>
       </div>
+      <!-- 좋아요 가본곳 리뷰수 -->
       <div class="col q-mb-xs">
         <div class="row justify-between">
           <div class="row items-center">
@@ -57,7 +58,8 @@
     <!-- Image Grid -->
     <section class="q-mx-xs q-px-sm q-pt-xs">
       <!-- Image Grid -->
-      <q-img class="rounded" src="/GRIDIMAGES_TEMP.JPG" />
+      <!-- <q-img class="rounded" src="/GRIDIMAGES_TEMP.JPG" /> -->
+      <image-grid class="image-grid rounded" />
     </section>
 
     <!-- 기본정보, 커피메뉴 & 최근리뷰 컨테이너 -->
@@ -308,7 +310,7 @@ import { defineComponent } from 'vue'
 
 // import CafeInformation from '../components/Etc/CafeInformation.vue'
 // import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
-import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
+import ImageGrid from '../components/Etc/ImageGrid.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 
@@ -322,7 +324,7 @@ export default defineComponent({
   name: 'CafeDetailPage',
   components: {
     // InfiniteScroll,
-    // CafeImageGrid,
+    ImageGrid,
     BadgeCafe,
     BtnBasic,
     BtnLike,
