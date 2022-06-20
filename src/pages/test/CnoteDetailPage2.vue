@@ -20,6 +20,12 @@
               class="input-box description"
               :readonly="!writeType"
             />
+            <div class="writer-info flex column">
+              <div class="date">{{ editor.created_at }}</div>
+              <div clsss="user" style="margin-right: 15px">
+                {{ editor.user }}
+              </div>
+            </div>
           </div>
           <!-- (상세페이지) 좋아요, 북마크 영역 -->
           <div class="btns_wrap row no-wrap">
@@ -82,23 +88,20 @@
                 <card-cup-note></card-cup-note>
               </li>
             </ul>
-            <!-- 유저 소개 영역 -->
-            <div class="user-card-container">
-              <div class="user-card-inner" style="">
-                <div class="profile-img"></div>
-                <div class="user-email-area" style="line-height: 24px">
-                  test@gmail.com
-                </div>
-                <div
-                  class="desc"
-                  style="line-height: 24px; margin-bottom: 10px"
-                >
-                  여행자의 시선으로, 카페를 기록합니다.
-                </div>
-                <div class="follow-btn">
-                  <button class="btn">+ 팔로우</button>
-                </div>
-              </div>
+          </div>
+        </div>
+        <!-- 유저 소개 영역 -->
+        <div class="user-card-container">
+          <div class="user-card-inner" style="">
+            <div class="profile-img"></div>
+            <div class="user-email-area" style="line-height: 24px">
+              test@gmail.com
+            </div>
+            <div class="desc" style="line-height: 24px; margin-bottom: 10px">
+              여행자의 시선으로, 카페를 기록합니다.
+            </div>
+            <div class="follow-btn">
+              <button class="btn">+ 팔로우</button>
             </div>
           </div>
         </div>
@@ -240,6 +243,17 @@ export default {
             left: 0;
           }
         }
+        .writer-info {
+          position: absolute;
+          bottom: -60%;
+          right: 20px;
+          // transform: translate(-50%, 0);
+          color: #fff;
+          opacity: 0.8;
+          .user {
+            margin-right: 15px;
+          }
+        }
       }
     }
     .dim {
@@ -355,29 +369,32 @@ export default {
           }
         }
       }
-      .user-card-container {
-        position: relative;
-        .user-card-inner {
-          position: absolute;
-          left: 0;
-          height: 200px;
-          padding: 20px;
-          margin-bottom: 10px;
-          border-radius: 18px;
-          .profile-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 1px solid #ccc;
-            background-color: #fefefe;
-          }
-          .follow-btn {
-            .btn {
-              cursor: pointer;
-              background-color: #000;
-              color: #fff;
-              border-radius: 10px;
-            }
+    }
+    .user-card-container {
+      width: 100%;
+      padding: 20px;
+      background-color: #eaeaea;
+      .user-card-inner {
+        // position: absolute;
+        margin-left: 10%;
+        height: 200px;
+        padding: 20px;
+        margin-bottom: 10px;
+        border-radius: 18px;
+        .profile-img {
+          width: 50px;
+          height: 50px;
+          margin-bottom: 5px;
+          border-radius: 50%;
+          border: 1px solid #ccc;
+          background-color: #003333;
+        }
+        .follow-btn {
+          .btn {
+            cursor: pointer;
+            background-color: #000;
+            color: #fff;
+            border-radius: 10px;
           }
         }
       }

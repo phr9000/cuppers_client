@@ -1,6 +1,6 @@
 <template>
   <div class="card-user-info-container">
-    <div class="card-user-info-inner">test11</div>
+    <div class="card-user-info-inner">test</div>
   </div>
 </template>
 <script>
