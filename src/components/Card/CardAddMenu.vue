@@ -1,7 +1,7 @@
 <template>
   <div class="q-px-xl q-mx-lg q-my-lg q-py-md bg-white addcard">
     <q-section class="row flex justify-between">
-      <q-icon size="" />
+      <q-icon size="sm" name="clear" />
     </q-section>
     <q-section class="row flex justify-between">
       <q-input type="text" label="메뉴이름" class="col-8" />

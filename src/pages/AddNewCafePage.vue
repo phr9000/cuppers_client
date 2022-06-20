@@ -1,6 +1,6 @@
 <template>
   <q-page class="constrain_sm">
-    <section class="q-py-md">
+    <section class="q-py-md section">
       <div class="text-center text-h5">
         <span>새로운 카페를 등록해주세요</span>
       </div>
@@ -41,7 +41,7 @@
             />
             <div class="col-3 q-my-auto flex row-area">
               <post-number
-                size="md"
+                size="sm"
                 @sendPostData="getPostData"
                 padding="7px 20px"
                 class="button"
@@ -87,7 +87,7 @@
             <q-input label="영업시간" v-model="cafe_info.cafe_operation_time" />
           </div>
         </div>
-        <div class="q-mx-xl q-mt-xl q-my-xl contents_block">
+        <div class="q-mx-xl q-my-xl contents_block">
           <div class="col-12">
             <q-input label="웹사이트" v-model="cafe_info.cafe_website" />
           </div>
@@ -171,6 +171,9 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
+.section {
+  border-bottom: 2px solid #ccc;
+}
 .asterisk {
   color: rgb(255, 136, 0);
 }
@@ -191,9 +194,6 @@ export default defineComponent({
   }
   .contents_block {
     margin: 48px 15px;
-    .button {
-      size: 0.5rem;
-    }
   }
 }
 </style>
