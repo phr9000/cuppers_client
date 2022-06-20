@@ -28,10 +28,10 @@
       <btn-basic label="사이즈 sm" size="sm" />
       <btn-basic label="리뷰 쓰기" size="md" />
       <btn-basic label="링크 공유" size="md" />
-      <btn-basic label="dense false" size="md" :dense="false" />
+      <btn-basic label="dense false" size="lg" :dense="false" />
+      <btn-basic label="dense" size="lg" />
       <btn-basic label="커스텀패딩" size="md" padding="2px 10px 2px 15px" />
       <btn-basic
-        :dense="false"
         size="md"
         to="map"
         color="primary"
@@ -39,6 +39,8 @@
         icon="map"
         padding="4px 15px 4px 15px"
       />
+      <btn-basic to="/test/cnotedetail2" label="커핑노트 디테일" size="md" />
+      <btn-basic to="/test/carduserinfo" label="carduserinfo" size="md" />
     </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>btn-basic-right</p>

@@ -14,6 +14,7 @@
           </div>
         </div>
       </div>
+      <!-- 좋아요 가본곳 리뷰수 -->
       <div class="col q-mb-xs">
         <div class="row justify-between">
           <div class="row items-center">
@@ -57,7 +58,8 @@
     <!-- Image Grid -->
     <section class="q-mx-xs q-px-sm q-pt-xs">
       <!-- Image Grid -->
-      <q-img class="rounded" src="/public/GRIDIMAGES_TEMP.JPG" />
+      <!-- <q-img class="rounded" src="/GRIDIMAGES_TEMP.JPG" /> -->
+      <image-grid class="image-grid rounded" />
     </section>
 
     <!-- 기본정보, 커피메뉴 & 최근리뷰 컨테이너 -->
@@ -130,7 +132,7 @@
                   <div class="text_subtitle1">시설 정보</div>
                 </div>
                 <div class="q-pl-lg q-pb-sm">
-                  <q-img width="210px" src="/public/facility.png" />
+                  <q-img width="210px" src="/facility.png" />
                 </div>
               </div>
 
@@ -264,13 +266,17 @@
 
       <!-- 페이지네이션 -->
       <div class="q-pa-lg flex flex-center">
-        <q-pagination v-model="current" :max="5" direction-links />
+        <q-pagination
+          v-model="current"
+          :max="total_review_page"
+          direction-links
+        />
       </div>
     </section>
 
     <!-- 지도 미리보기 -->
     <section class="q-mx-xs q-px-sm q-pt-xs">
-      <q-img class="rounded" src="/public/MAP_TEMP.JPG" />
+      <q-img class="rounded" src="/MAP_TEMP.JPG" />
     </section>
 
     <!-- 커핑 노트 -->
@@ -304,7 +310,7 @@ import { defineComponent } from 'vue'
 
 // import CafeInformation from '../components/Etc/CafeInformation.vue'
 // import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
-import CafeImageGrid from '../components/Etc/CafeImageGrid.vue'
+import ImageGrid from '../components/Etc/ImageGrid.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 
@@ -318,7 +324,7 @@ export default defineComponent({
   name: 'CafeDetailPage',
   components: {
     // InfiniteScroll,
-    // CafeImageGrid,
+    ImageGrid,
     BadgeCafe,
     BtnBasic,
     BtnLike,
@@ -337,11 +343,18 @@ export default defineComponent({
       reviewTotalCnt: 0,
       cnotes: [],
       cnoteTotalCnt: 0,
-      current: 1 // for pagination
+      current: 1, // for pagination
+      total_review_page: 1
+      // reviews_per_page: 4
+    }
+  },
+  watch: {
+    current(newPage) {
+      this.getReviews(newPage) // go to that page number
     }
   },
   created() {
-    let apiUrl = 'http://localhost:3000/cafe/1'
+    let apiUrl = `${process.env.API}/cafe/1`
     this.$axios
       .get(apiUrl)
       .then((result) => {
@@ -350,29 +363,26 @@ export default defineComponent({
           '#',
           '<br>'
         )
+
+        // 브루잉(필터) 메뉴, 배리에이션 메뉴 구분
         if (this.cafe.menu) {
           this.menuBrewing = this.cafe.menu.filter((m) => m.menu_type === 'br')
           this.menuVariation = this.cafe.menu.filter(
             (menu) => menu.menu_type !== 'br'
           )
         }
+
+        // review count 로 토탈 페이지 계산
+        this.total_review_page = Math.ceil(this.cafe.total_review / 4)
       })
       .catch((err) => {
         console.log(err)
       })
   },
   mounted() {
-    let apiUrl = 'http://localhost:3000/review'
-    this.$axios
-      .get(apiUrl)
-      .then((result) => {
-        this.reviews = result.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.getReviews(1) // 1 page
 
-    apiUrl = 'http://localhost:3000/cnote'
+    let apiUrl = `${process.env.API}/cnote`
     this.$axios
       .get(apiUrl)
       .then((result) => {
@@ -381,6 +391,19 @@ export default defineComponent({
       .catch((err) => {
         console.log(err)
       })
+  },
+  methods: {
+    getReviews(page) {
+      let apiUrl = `${process.env.API}/review?_page=${page}&_limit=4`
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.reviews = result.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 })
 </script>

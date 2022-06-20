@@ -13,10 +13,18 @@ export default defineComponent({
   data() {
     return {}
   },
-  mounted() {},
+  mounted() {
+    this.axiosTest()
+  },
   methods: {
     axiosTest() {
-      let apiUrl = 'http://localhost:3000/posts'
+      // 이렇게 하는건 테스트 실패
+      // console.log(this.$api.baseURL)
+      // let apiUrl = `${this.$api}/cnote`
+
+      // 아래와 같은 방법으로 해결
+      console.log(process.env.API)
+      let apiUrl = `${process.env.API}/cnote`
       this.$axios
         .get(apiUrl)
         .then((result) => {
