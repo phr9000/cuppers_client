@@ -100,19 +100,48 @@
           <q-icon size="md" name="coffee" class="q-pl-sm" />
           <span class="text-h6">커피정보</span>
         </div>
-        <div class="flex justify-end q-mr-xl">
-          <btn-basic
-            @click="createMenu"
-            size="md"
-            label="메뉴 추가"
-            color="primary"
-            icon="add"
-            padding="7px 15px 7px 15px"
-          />
-        </div>
-        <div>
-          <card-add-menu />
-        </div>
+        <section class="q-my-xl">
+          <div class="flex justify-between q-mx-xl">
+            <span class="text-h6">Brewing Coffee</span>
+            <btn-basic
+              @click="createBrewing"
+              size="sm"
+              label="메뉴 추가"
+              color="primary"
+              icon="add"
+              padding="7px 15px 7px 15px"
+            />
+          </div>
+          <div>
+            <card-add-brewing
+              :cafeMenu="cafe_menu"
+              v-for="cafe_menu in showBrewing"
+              :key="cafe_menu"
+              @deleteCard="deleteMenu"
+            />
+          </div>
+        </section>
+        <section class="q-my-xl">
+          <div class="flex justify-between q-mx-xl">
+            <span class="text-h6">Variation Coffee</span>
+            <btn-basic
+              @click="createVariation"
+              size="sm"
+              label="메뉴 추가"
+              color="primary"
+              icon="add"
+              padding="7px 15px 7px 15px"
+            />
+          </div>
+          <div>
+            <card-add-variation
+              :cafeMenu="cafe_menu"
+              v-for="cafe_menu in showVariation"
+              :key="cafe_menu"
+              @deleteCard="deleteMenu"
+            />
+          </div>
+        </section>
       </div>
     </section>
     <section>
@@ -134,13 +163,16 @@
 import { defineComponent } from 'vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import PostNumber from 'src/components/Etc/PostNumber.vue'
-import CardAddMenu from 'src/components/Card/CardAddMenu.vue'
+import CardAddBrewing from 'src/components/Card/CardAddBrewing.vue'
+import CardAddVariation from 'src/components/Card/CardAddVariation.vue'
+
 export default defineComponent({
   name: 'AddNewCafePage',
   components: {
     BtnBasic,
     PostNumber,
-    CardAddMenu
+    CardAddBrewing,
+    CardAddVariation
   },
   data() {
     return {
@@ -152,7 +184,27 @@ export default defineComponent({
         cafe_address: '',
         cafe_address_detail: '',
         cafe_postalcode: '',
-        cafe_address_dong: ''
+        cafe_address_dong: '',
+        cafe_menu: [
+          {
+            menu_id: 1,
+            menu_name: '',
+            menu_price_hot: null,
+            menu_price_ice: null,
+            menu_type: 'br',
+            is_signature: null,
+            menu_aromanote: ''
+          },
+          {
+            menu_id: 2,
+            menu_name: '',
+            menu_price_hot: null,
+            menu_price_ice: null,
+            menu_type: 'va',
+            is_signature: null,
+            menu_aromanote: ''
+          }
+        ]
       }
     }
   },
@@ -166,7 +218,49 @@ export default defineComponent({
       this.cafe_info.cafe_address_dong = payload.extraAddress
       this.cafe_info.cafe_postalcode = payload.postcode
     },
-    createMenu() {}
+    createBrewing() {
+      let cafeMenu = {
+        menu_id: 1,
+        menu_name: '',
+        menu_price_hot: null,
+        menu_price_ice: null,
+        menu_type: 'br',
+        is_signature: null,
+        menu_aromanote: ''
+      }
+      this.cafe_info.cafe_menu.push(cafeMenu)
+      console.log(this.cafe_info.cafe_menu)
+    },
+    createVariation() {
+      let cafeMenu = {
+        menu_id: 1,
+        menu_name: '',
+        menu_price_hot: null,
+        menu_price_ice: null,
+        menu_type: 'va',
+        is_signature: null,
+        menu_aromanote: ''
+      }
+      this.cafe_info.cafe_menu.push(cafeMenu)
+      console.log(this.cafe_info.cafe_menu)
+    },
+
+    deleteMenu(cafeMenu) {
+      this.cafe_info.cafe_menu.pop(cafeMenu)
+      console.log(this.cafe_info.cafe_menu)
+    }
+  },
+  computed: {
+    showBrewing() {
+      return this.cafe_info.cafe_menu.filter(
+        (cafe_menu) => cafe_menu.menu_type === 'br'
+      )
+    },
+    showVariation() {
+      return this.cafe_info.cafe_menu.filter(
+        (cafe_menu) => cafe_menu.menu_type === 'va'
+      )
+    }
   }
 })
 </script>
