@@ -1,6 +1,6 @@
 <template>
   <div class="card_container">
-    <q-card class="card" bordered>
+    <q-card class="card" flat bordered>
       <q-card-section
         class="card_title_wrap row no-wrap items-start justify-between"
       >
@@ -114,8 +114,6 @@ export default defineComponent({
   }
 }
 .card {
-  box-shadow: 0 1px 9px rgb(0 0 0 / 14%), 0 2px 2px rgb(0 0 0 / 10%),
-    0 3px 1px -2px rgb(0 0 0 / 4%);
   background-color: $card-bg-color;
   border: 1px solid $grey-4;
   transition: all 0.5s;
