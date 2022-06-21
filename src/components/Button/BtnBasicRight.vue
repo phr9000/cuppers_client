@@ -4,8 +4,16 @@
     outline
     rounded
     :size="size"
-    class="btn q-mr-xs"
-    :class="[size === 'sm' ? btnSmClass : size === 'md' ? btnMdClass : '']"
+    class="btn_basic_right q-mr-xs"
+    :class="[
+      size === 'sm'
+        ? btnSmClass
+        : size === 'md'
+        ? btnMdClass
+        : size === 'lg'
+        ? btnLgClass
+        : ''
+    ]"
     :color="color"
     :icon-right="icon"
     :label="label"
@@ -24,18 +32,40 @@ export default defineComponent({
   data() {
     return {
       btnSmClass: 'btn_sm',
-      btnMdClass: 'btn_md'
+      btnMdClass: 'btn_md',
+      btnLgClass: 'btn_lg'
     }
   }
 })
 </script>
-<style lang="scss" scoped>
-.btn_sm {
-  padding: 2px 8px;
-  font-size: 12px !important;
-}
-.btn_md {
-  padding: 2px 10px;
-  font-size: 15px !important;
+<style lang="scss">
+.btn_basic_right {
+  &.btn_sm {
+    padding: 3px 9px 3px 9px;
+    font-size: 13px !important;
+    line-height: 13px;
+    min-height: 13px;
+    i {
+      font-size: 1.2rem !important;
+    }
+  }
+  &.btn_md {
+    padding: 3px 11px 3px 11px;
+    font-size: 14px !important;
+    line-height: 14px;
+    min-height: 14px;
+    i {
+      font-size: 1.2rem !important;
+    }
+  }
+  &.btn_lg {
+    padding: 3px 13px 3px 13px;
+    // font-size: 18px !important;
+    // line-height: 18px;
+    // min-height: 18px;
+    i {
+      font-size: 1.6rem !important;
+    }
+  }
 }
 </style>

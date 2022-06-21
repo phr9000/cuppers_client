@@ -43,12 +43,12 @@
           <div class="row items-end">
             <div>
               <btn-basic
-                color="grey-6"
+                color="grey-8"
                 label="리뷰 쓰기"
                 icon="edit"
                 size="sm"
               />
-              <btn-basic color="grey-6" label="공유" icon="share" size="sm" />
+              <btn-basic color="grey-8" label="공유" icon="share" size="sm" />
             </div>
           </div>
         </div>
@@ -56,10 +56,10 @@
     </section>
 
     <!-- Image Grid -->
-    <section class="q-mx-xs q-px-sm q-pt-xs">
+    <section v-if="cafeImages" class="q-mx-xs q-px-sm q-pt-xs">
       <!-- Image Grid -->
       <!-- <q-img class="rounded" src="/GRIDIMAGES_TEMP.JPG" /> -->
-      <image-grid class="image-grid rounded" />
+      <image-grid class="image-grid rounded" :images="cafeImages" />
     </section>
 
     <!-- 기본정보, 커피메뉴 & 최근리뷰 컨테이너 -->
@@ -346,8 +346,9 @@ export default defineComponent({
       reviews: [],
       cnotes: [],
       current: 1, // for pagination
-      maxReivewPage: 1 // for pagination
+      maxReivewPage: 1, // for pagination
       // reviews_per_page: 4
+      cafeImages: null
     }
   },
   watch: {
@@ -364,9 +365,7 @@ export default defineComponent({
   },
   methods: {
     loadCafe(cafe_id) {
-      console.log('loadCafe')
       // cafe info load
-
       let apiUrl = `${process.env.API}/cafe/${cafe_id}`
       this.$axios
         .get(apiUrl)
@@ -376,6 +375,9 @@ export default defineComponent({
             '#',
             '<br>'
           )
+
+          // 해당카페 대표이미지 5개 호출 for 이미지 그리드
+          this.getImages(cafe_id)
 
           // 브루잉(필터) 메뉴, 배리에이션 메뉴 구분
           if (this.cafe.menu) {
@@ -402,6 +404,20 @@ export default defineComponent({
             .catch((err) => {
               console.log(err)
             })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getImages(cafe_id) {
+      let apiUrl = `${process.env.API}/cafeImages/${cafe_id}?_limit=5`
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.cafeImages = result.data.images.filter((item) => {
+            return item.type === 'g'
+          })
+          // console.log(this.cafeImages)
         })
         .catch((err) => {
           console.log(err)

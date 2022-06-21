@@ -399,24 +399,7 @@
       "beenThere": {
         "user_cafe_beenthere": false
       },
-      "image": [
-        {
-          "type": "m",
-          "cafe_image_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg"
-        },
-        {
-          "type": "m",
-          "cafe_image_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMzBfMjkw%2FMDAxNTcyNDI0NTk4MTYx.HdNerEs_L2Z1TxqzYckhxhji3CA6Gw5a53dLpe6rsWEg.hBN-QpP9UTTwBQht6jkO2Y9ES3NrZdw2LCO2WjDYVg8g.JPEG.rohati%2F%25BF%25A503.jpg"
-        },
-        {
-          "type": "g",
-          "cafe_image_url": "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/287536110_411860404177592_6995850544426415784_n.jpg?stp=dst-jpg_e35_s480x480&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=twL1ElIfF-wAX-sByZU&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT9uRRdj5GqvusAtbgg1HgSoFSnBNFZRrtQOteUS0tOqxA&oe=62B149C7&_nc_sid=8fd12b"
-        },
-        {
-          "type": "g",
-          "cafe_image_url": "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/288114218_853641705593396_7265799358911394713_n.jpg?stp=dst-jpg_e35_s480x480&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=PQKCuHWrveAAX9o7ADq&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT_vgcCpljQETKvq9MCvEKPs5WfVzVEgEDfG772kQ3Zq8Q&oe=62B283CF&_nc_sid=8fd12b"
-        }
-      ],
+
       "keywords": [
         {
           "keyword_name": "커피에 대한 설명",
@@ -950,6 +933,54 @@
       "user_lv": 1,
       "user_introduce": "Hello, I'm 555",
       "user_thumbnail": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg"
+    }
+  ],
+  "cafeImages": [
+    {
+      "id": 1,
+      "images": [
+        {
+          "type": "g",
+          "url": "http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg"
+        },
+        {
+          "type": "m",
+          "url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg"
+        },
+        {
+          "type": "g",
+          "url": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F6b2fd03bd1188c38d3a5e955d40935136cfb3cc1%3Foriginal"
+        },
+        {
+          "type": "g",
+          "url": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F5fb21e7f1775e3fcfd99541858d9ab556c7ae1bb%3Foriginal"
+        },
+        {
+          "type": "g",
+          "url": "http://bwissue.com/files/attach/images/243/259/163/9ec8eedca21a955d1b5207af3430cc5e.jpg"
+        },
+        {
+          "type": "g",
+          "url": "http://bwissue.com/files/attach/images/243/259/163/f98081dc093e8643c46661905215329b.jpg"
+        }
+      ]
+    },
+    {
+      "id": 404,
+      "images": [
+        {
+          "type": "m",
+          "url": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=https%3A%2F%2Fpostfiles.pstatic.net%2FMjAyMTA3MDdfMSAg%2FMDAxNjI1NjEyODIzODgw.yG46lyzyhROwSQe_I78pyuJ-z9pETKPufpWmMx99CuYg.MEL9q5Z2lbQFoK0IqgBHXk49n_fIlQW3HkDO1NSkhSkg.JPEG.99hyunuk%2F20210702%25EF%25BC%25BF124349.jpg%3Ftype%3Dw966"
+        },
+        {
+          "type": "g",
+          "url": "https://mblogthumb-phinf.pstatic.net/20160628_107/yunchun4_1467125095857uc026_JPEG/%BF%A5%BA%F1%BE%F0%BD%BA_%2815%29.jpg?type=w2"
+        },
+        {
+          "type": "g",
+          "url": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Fpostfiles6.naver.net%2FMjAxOTExMTJfMjgw%2FMDAxNTczNTQxMjQ1MTcw.YpC1sJDlW4qYELjdu0uTM87k23KQdIQDg44XL3U2JLQg.DMJRdOuj6hK6Xw_zxszqHa6I2Rzeec3wA9LEk6c2AVUg.JPEG.smoothies%2FDSC04213.JPG%3Ftype%3Dw966"
+        }
+      ]
     }
   ]
 }
