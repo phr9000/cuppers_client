@@ -52,6 +52,10 @@ const routes = [
         component: () => import('pages/test/CardTest.vue')
       },
       {
+        path: 'card2',
+        component: () => import('pages/test/CardTest2.vue')
+      },
+      {
         path: 'modal',
         component: () => import('pages/test/ModalTest.vue')
       },
