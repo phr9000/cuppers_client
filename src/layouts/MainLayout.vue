@@ -4,7 +4,7 @@
 
     <q-page-container>
       <!-- <transition name="slide-fade"> -->
-      <router-view />
+      <router-view :key="$route.fullPath" />
       <!-- </transition> -->
     </q-page-container>
   </q-layout>

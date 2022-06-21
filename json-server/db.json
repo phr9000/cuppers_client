@@ -507,7 +507,7 @@
       "cafe_phone": "02-449-9967",
       "cafe_barista_info": null,
       "cafe_webpage": "https://smartstore.naver.com/coffeeambience",
-      "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
+      "cafe_description": "커피앰비언스 송리단길점 #카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
       "cafe_menu_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg",
       "cafe_menu_updated": null,
       "cafe_view": 0,
@@ -518,10 +518,10 @@
       "cafe_shutdown_time": null,
       "likeIt": {
         "user_cafe_liked": true,
-        "count": 114
+        "count": 1
       },
       "beenThere": {
-        "user_cafe_beenthere": false
+        "user_cafe_beenthere": true
       },
       "image": [
         {

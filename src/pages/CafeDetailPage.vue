@@ -136,16 +136,23 @@
                 </div>
               </div>
 
-              <div class="info_right col-12 col-md-5">
+              <div class="info_right column justify-end col-12 col-md-5">
                 <!-- 전화번호 -->
-                <div class="info q-mb-xs">
+                <div class="info justify-end q-mb-xs">
                   <div class="text_subtitle1">{{ cafe.cafe_phone }}</div>
 
                   <q-icon size="xs" name="phone_in_talk" class="icon q-pl-xs" />
                 </div>
                 <!-- 분점정보 -->
-                <div class="info q-mb-xs">
-                  <btn-basic flat label="송파점" size="sm" />
+                <div v-if="cafe.branches" class="info justify-end q-mb-xs">
+                  <btn-basic
+                    v-for="branch in cafe.branches"
+                    :key="branch.cafe_id"
+                    :label="branch.branch_name"
+                    size="sm"
+                    color="grey-5"
+                    @click="clickBranch(branch.cafe_id)"
+                  />
                   <div class="text_subtitle1">분점</div>
 
                   <q-icon size="xs" name="storefront" class="icon q-pl-xs" />
@@ -247,7 +254,9 @@
     <section class="cafe_review_section q-pa-md">
       <!--  -->
       <div class="title_wrap row justify-between items-center">
-        <div class="subtitle q-pl-sm">{{ reviewTotalCnt }}건의 방문자 리뷰</div>
+        <div class="subtitle q-pl-sm">
+          {{ cafe.total_review }}건의 방문자 리뷰
+        </div>
         <div class="row items-center q-pr-sm">
           <btn-basic color="grey-6" label="추천순" size="sm" />
           <btn-basic color="grey-6" label="최신순" size="sm" />
@@ -266,11 +275,7 @@
 
       <!-- 페이지네이션 -->
       <div class="q-pa-lg flex flex-center">
-        <q-pagination
-          v-model="current"
-          :max="total_review_page"
-          direction-links
-        />
+        <q-pagination v-model="current" :max="maxReivewPage" direction-links />
       </div>
     </section>
 
@@ -283,7 +288,7 @@
     <section class="cafe_review_section q-pa-md">
       <!--  -->
       <div class="title_wrap row justify-between items-center">
-        <div class="subtitle q-pl-sm">{{ cnoteTotalCnt }}건의 커핑노트</div>
+        <div class="subtitle q-pl-sm">{{ cafe.total_cnote }}건의 커핑노트</div>
         <div class="row items-center q-pr-sm">
           <btn-basic color="grey-6" label="추천순" size="sm" />
           <btn-basic color="grey-6" label="최신순" size="sm" />
@@ -308,7 +313,6 @@
 <script>
 import { defineComponent } from 'vue'
 
-// import CafeInformation from '../components/Etc/CafeInformation.vue'
 // import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
 import ImageGrid from '../components/Etc/ImageGrid.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
@@ -340,11 +344,9 @@ export default defineComponent({
       menuVariation: null,
       recent_review: {},
       reviews: [],
-      reviewTotalCnt: 0,
       cnotes: [],
-      cnoteTotalCnt: 0,
       current: 1, // for pagination
-      total_review_page: 1
+      maxReivewPage: 1 // for pagination
       // reviews_per_page: 4
     }
   },
@@ -354,45 +356,57 @@ export default defineComponent({
     }
   },
   created() {
-    let apiUrl = `${process.env.API}/cafe/1`
-    this.$axios
-      .get(apiUrl)
-      .then((result) => {
-        this.cafe = result.data
-        this.cafe.cafe_description = this.cafe.cafe_description.replace(
-          '#',
-          '<br>'
-        )
-
-        // 브루잉(필터) 메뉴, 배리에이션 메뉴 구분
-        if (this.cafe.menu) {
-          this.menuBrewing = this.cafe.menu.filter((m) => m.menu_type === 'br')
-          this.menuVariation = this.cafe.menu.filter(
-            (menu) => menu.menu_type !== 'br'
-          )
-        }
-
-        // review count 로 토탈 페이지 계산
-        this.total_review_page = Math.ceil(this.cafe.total_review / 4)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    // console.log('created')
+    this.loadCafe(this.$route.params.id)
   },
   mounted() {
-    this.getReviews(1) // 1 page
-
-    let apiUrl = `${process.env.API}/cnote`
-    this.$axios
-      .get(apiUrl)
-      .then((result) => {
-        this.cnotes = result.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    // console.log('mounted')
   },
   methods: {
+    loadCafe(cafe_id) {
+      console.log('loadCafe')
+      // cafe info load
+
+      let apiUrl = `${process.env.API}/cafe/${cafe_id}`
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.cafe = result.data
+          this.cafe.cafe_description = this.cafe.cafe_description.replace(
+            '#',
+            '<br>'
+          )
+
+          // 브루잉(필터) 메뉴, 배리에이션 메뉴 구분
+          if (this.cafe.menu) {
+            this.menuBrewing = this.cafe.menu.filter(
+              (m) => m.menu_type === 'br'
+            )
+            this.menuVariation = this.cafe.menu.filter(
+              (menu) => menu.menu_type !== 'br'
+            )
+          }
+
+          // review count 로 토탈 페이지 계산
+          this.maxReivewPage = Math.ceil(this.cafe.total_review / 4)
+
+          // 해당카페 모든 리뷰 호출 (1 page)
+          this.getReviews(1) // 추후 (cafe_id, 1)로 수정
+
+          let apiUrl = `${process.env.API}/cnote`
+          this.$axios
+            .get(apiUrl)
+            .then((result) => {
+              this.cnotes = result.data
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     getReviews(page) {
       let apiUrl = `${process.env.API}/review?_page=${page}&_limit=4`
       this.$axios
@@ -403,6 +417,9 @@ export default defineComponent({
         .catch((err) => {
           console.log(err)
         })
+    },
+    clickBranch(cafe_id) {
+      this.$router.push({ path: `/cafe/${cafe_id}` })
     }
   }
 })
@@ -462,14 +479,6 @@ export default defineComponent({
           border: 1px solid $border-color;
           padding: 6px 10px;
           border-radius: $border-radius;
-        }
-        .info_right {
-          display: flex;
-          flex-direction: column;
-          justify-content: end;
-          .info {
-            justify-content: end;
-          }
         }
       }
       .info_bottom {
