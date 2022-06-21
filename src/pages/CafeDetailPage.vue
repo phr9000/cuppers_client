@@ -305,6 +305,11 @@
       <!-- <infinite-scroll /> -->
     </section>
   </q-page>
+  <q-page v-else class="cafe_detail_page constrain">
+    <div class="flex flex-center text-grey-5">
+      <h4>존재하지 않는 카페입니다.</h4>
+    </div>
+  </q-page>
 
   <!-- 저작권 문구
 "icons created by www.flaticon.com from Freepik" -->
