@@ -4,7 +4,7 @@
       <btn-avatar :url="review.user_thumbnail" />
       <div class="q-ml-sm user_name">{{ review.user_name }}</div>
     </div>
-    <q-card class="card_review" bordered>
+    <q-card class="card_review" bordered flat>
       <q-card-section class="cafe_info row items-center justify-between">
         <div @click="cafeNameClick" class="text-h5 cafe_name q-mb-xs q-mr-xs">
           {{ review.cafe_name }}
@@ -17,8 +17,8 @@
           />
         </div>
       </q-card-section>
-      <q-card-section horizontal class="coffee_info_wrap row q-pt-none q-pr-md">
-        <div class="coffee_info q-py-none q-px-md">
+      <q-card-section class="coffee_info_wrap row q-pt-md q-pr-md">
+        <div class="col-12 col-sm-7 coffee_info q-py-none q-pl-xs q-pr-md">
           <menu-item
             :name="review.menu_name"
             :menu_aromanote="review.menu_aromanote"
@@ -31,7 +31,7 @@
           </div>
         </div>
         <q-img
-          class="col-5 q-pr-sm review_image"
+          class="col-12 col-sm-5 q-pr-sm review_image"
           :initial-ratio="16 / 9"
           :src="thumbnail"
           ><div
@@ -83,10 +83,10 @@ export default defineComponent({
           user_thumbnail:
             'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
           menu_name: '브라질 아이피 옐로우버본 내추럴',
-          menu_aromanote: '감귤,모과,볶은 땅콩,캐러멜',
+          menu_aromanote: '감귤,모과,볶은 땅콩,캐러멜,깔끔한 여운',
           is_signature: true,
           review_description:
-            '커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳',
+            '커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳. ',
           created_at: '2022-06-11 12:24:55',
           cafe_name: '커피앰비언스',
           review_keyword: [
@@ -184,10 +184,13 @@ export default defineComponent({
 }
 .card_review {
   background-color: $card-bg-color;
-  box-shadow: 0 1px 9px rgb(0 0 0 / 14%), 0 2px 2px rgb(0 0 0 / 10%),
-    0 3px 1px -2px rgb(0 0 0 / 4%);
+  // box-shadow: 0 1px 9px rgb(0 0 0 / 14%), 0 2px 2px rgb(0 0 0 / 10%),
+  //   0 3px 1px -2px rgb(0 0 0 / 4%);
   border: 1px solid $grey-4;
   .cafe_info {
+    padding-bottom: 0;
+    max-height: 100px;
+    overflow-y: hidden;
     .cafe_name {
       transition: all 0.5s;
       color: $grey-9;
@@ -199,6 +202,10 @@ export default defineComponent({
     .cafe_keywords_wrap {
       flex-wrap: nowrap;
     }
+  }
+  .caption {
+    max-height: 100px;
+    overflow-y: auto;
   }
   .review_image {
     border-radius: 4px;

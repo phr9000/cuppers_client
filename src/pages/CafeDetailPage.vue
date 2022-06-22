@@ -57,9 +57,9 @@
                 color="grey-8"
                 label="리뷰 쓰기"
                 icon="edit"
-                size="sm"
+                size="md"
               />
-              <btn-basic color="grey-8" label="공유" icon="share" size="sm" />
+              <btn-basic color="grey-8" label="공유" icon="share" size="md" />
             </div>
           </div>
         </div>

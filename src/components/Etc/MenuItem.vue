@@ -99,4 +99,9 @@ export default {
   padding: 0 0.3rem;
   margin: 3px 0;
 }
+
+.aromanote_wrap {
+  max-height: 48px;
+  overflow-y: hidden;
+}
 </style>

@@ -41,9 +41,9 @@ export default defineComponent({
 .btn_basic {
   &.btn_sm {
     padding: 3px 9px 3px 9px;
-    font-size: 12px !important;
-    line-height: 14px;
-    min-height: 14px;
+    font-size: 13px !important;
+    line-height: 13px;
+    min-height: 13px;
     i {
       font-size: 1.2rem !important;
     }
