@@ -11,7 +11,7 @@
           >는 필수항목 입니다</span
         >
       </div>
-      <div class="bg-amber-1 q-py-sm q-mt-md background">
+      <div class="q-py-sm q-mt-md background">
         <div class="flex justify-center q-mt-md">
           <q-icon size="md" name="house" class="q-pl-sm" />
           <span class="text-h6">카페정보</span>
@@ -41,8 +41,9 @@
             />
             <div class="col-3 q-my-auto flex row-area">
               <post-number
-                size="sm"
+                size="md"
                 @sendPostData="getPostData"
+                label="주소 찾기"
                 padding="7px 20px"
                 class="button"
               />
@@ -95,7 +96,7 @@
       </div>
     </section>
     <section class="q-mx-xl q-my-xl q-pb-xl">
-      <div class="bg-amber-1 q-py-sm q-mt-md background">
+      <div class="q-py-sm q-mt-md background">
         <div class="flex justify-center q-mt-md">
           <q-icon size="md" name="coffee" class="q-pl-sm" />
           <span class="text-h6">커피정보</span>
@@ -113,11 +114,14 @@
             />
           </div>
           <div>
-            <card-add-brewing
+            <card-add-menu
               :cafeMenu="cafe_menu"
               v-for="cafe_menu in showBrewing"
               :key="cafe_menu"
               @deleteCard="deleteMenu"
+              class="bg-amber-1"
+              :cafe_menu="cafe_menu"
+              :menu_type="'br'"
             />
           </div>
         </section>
@@ -134,11 +138,13 @@
             />
           </div>
           <div>
-            <card-add-variation
+            <card-add-menu
               :cafeMenu="cafe_menu"
               v-for="cafe_menu in showVariation"
               :key="cafe_menu"
               @deleteCard="deleteMenu"
+              class="bg-amber-1"
+              :menu_type="'va'"
             />
           </div>
         </section>
@@ -163,16 +169,14 @@
 import { defineComponent } from 'vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import PostNumber from 'src/components/Etc/PostNumber.vue'
-import CardAddBrewing from 'src/components/Card/CardAddBrewing.vue'
-import CardAddVariation from 'src/components/Card/CardAddVariation.vue'
+import CardAddMenu from 'src/components/Card/CardAddMenu.vue'
 
 export default defineComponent({
   name: 'AddNewCafePage',
   components: {
     BtnBasic,
     PostNumber,
-    CardAddBrewing,
-    CardAddVariation
+    CardAddMenu
   },
   data() {
     return {
@@ -196,7 +200,7 @@ export default defineComponent({
             menu_aromanote: ''
           },
           {
-            menu_id: 2,
+            menu_id: 1,
             menu_name: '',
             menu_price_hot: null,
             menu_price_ice: null,
@@ -219,8 +223,8 @@ export default defineComponent({
       this.cafe_info.cafe_postalcode = payload.postcode
     },
     createBrewing() {
-      let cafeMenu = {
-        menu_id: 1,
+      let new_cafe_menu = {
+        menu_id: null,
         menu_name: '',
         menu_price_hot: null,
         menu_price_ice: null,
@@ -228,26 +232,23 @@ export default defineComponent({
         is_signature: null,
         menu_aromanote: ''
       }
-      this.cafe_info.cafe_menu.push(cafeMenu)
+      this.cafe_info.cafe_menu.push(new_cafe_menu)
       console.log(this.cafe_info.cafe_menu)
     },
     createVariation() {
-      let cafeMenu = {
-        menu_id: 1,
+      let new_cafe_menu = {
+        menu_id: null,
         menu_name: '',
         menu_price_hot: null,
         menu_price_ice: null,
         menu_type: 'va',
-        is_signature: null,
-        menu_aromanote: ''
+        is_signature: null
       }
-      this.cafe_info.cafe_menu.push(cafeMenu)
+      this.cafe_info.cafe_menu.push(new_cafe_menu)
       console.log(this.cafe_info.cafe_menu)
     },
-
-    deleteMenu(cafeMenu) {
-      this.cafe_info.cafe_menu.pop(cafeMenu)
-      console.log(this.cafe_info.cafe_menu)
+    deleteMenu(index) {
+      this.cafe_info.cafe_menu.splice(index, 1)
     }
   },
   computed: {
@@ -275,7 +276,6 @@ export default defineComponent({
 .background {
   outline: 1px solid #ccc;
   box-sizing: content-box;
-  border-radius: 15px;
   .info-block {
     display: flex;
     justify-content: space-between;
