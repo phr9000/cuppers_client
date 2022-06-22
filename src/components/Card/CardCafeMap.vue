@@ -128,9 +128,7 @@ export default defineComponent({
             user_cafe_liked: true,
             count: 114
           },
-          beenThere: {
-            user_cafe_beenthere: false
-          },
+          user_beenthere: false,
           keywords: [
             {
               keyword_name: '커피에 대한 설명',

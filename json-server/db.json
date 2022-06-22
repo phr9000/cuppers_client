@@ -122,9 +122,7 @@
         "user_cafe_liked": true,
         "count": 114
       },
-      "beenThere": {
-        "user_cafe_beenthere": false
-      },
+      "user_beenthere": false,
       "keywords": [
         {
           "keyword_name": "커피에 대한 설명",
@@ -186,9 +184,7 @@
         "user_cafe_liked": true,
         "count": 43
       },
-      "beenThere": {
-        "user_cafe_beenthere": false
-      },
+      "user_beenthere": false,
       "keywords": [
         {
           "keyword_name": "커피에 대한 설명",
@@ -390,37 +386,38 @@
       "cafe_menu_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg",
       "cafe_menu_updated": null,
       "cafe_view": 0,
-      "cafe_status": "inactive",
       "is_headquater": null,
       "headquater_id": null,
       "cafe_sns": "https://www.instagram.com/coffee_ambience",
       "cafe_shutdown_time": null,
-      "review_count": 32,
+      "review_cnt": 6,
+      "cnote_cnt": 3,
       "cafe_type": "로스터리",
       "likeIt": {
         "user_cafe_liked": true,
         "count": 114
       },
-      "beenThere": {
-        "user_cafe_beenthere": false
-      },
-
+      "user_beenthere": false,
       "keywords": [
         {
           "keyword_name": "커피에 대한 설명",
-          "keyword_type": "cafe"
+          "keyword_type": "cafe",
+          "icon": null
         },
         {
           "keyword_name": "내추럴 커피",
-          "keyword_type": "cafe"
+          "keyword_type": "cafe",
+          "icon": null
         },
         {
           "keyword_name": "추출도구 선택 가능",
-          "keyword_type": "cafe"
+          "keyword_type": "cafe",
+          "icon": null
         },
         {
           "keyword_name": "분위기가 좋은",
-          "keyword_type": "cafe"
+          "keyword_type": "cafe",
+          "icon": null
         }
       ],
       "operationTime": [
@@ -480,8 +477,18 @@
         { "cafe_id": 404, "branch_name": "송리단점" },
         { "cafe_id": 405, "branch_name": "양평점" }
       ],
-      "total_review": 6,
-      "total_cnote": 3
+      "facility": [
+        {
+          "name": "내부 화장실",
+          "icon": null,
+          "type": null
+        },
+        {
+          "name": "와이파이",
+          "icon": null,
+          "type": null
+        }
+      ]
     },
     {
       "id": 404,
@@ -499,52 +506,33 @@
       "cafe_menu_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg",
       "cafe_menu_updated": null,
       "cafe_view": 0,
-      "cafe_status": "inactive",
       "is_headquater": null,
       "headquater_id": null,
       "cafe_sns": "https://www.instagram.com/coffee_ambience",
       "cafe_shutdown_time": null,
+      "review_cnt": 6,
+      "cnote_cnt": 3,
+      "cafe_type": "베이커리",
       "likeIt": {
-        "user_cafe_liked": true,
-        "count": 1
+        "user_cafe_liked": false,
+        "count": 42
       },
-      "beenThere": {
-        "user_cafe_beenthere": true
-      },
-      "image": [
-        {
-          "type": "m",
-          "cafe_image_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg"
-        },
-        {
-          "type": "m",
-          "cafe_image_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMzBfMjkw%2FMDAxNTcyNDI0NTk4MTYx.HdNerEs_L2Z1TxqzYckhxhji3CA6Gw5a53dLpe6rsWEg.hBN-QpP9UTTwBQht6jkO2Y9ES3NrZdw2LCO2WjDYVg8g.JPEG.rohati%2F%25BF%25A503.jpg"
-        },
-        {
-          "type": "g",
-          "cafe_image_url": "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/287536110_411860404177592_6995850544426415784_n.jpg?stp=dst-jpg_e35_s480x480&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=twL1ElIfF-wAX-sByZU&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT9uRRdj5GqvusAtbgg1HgSoFSnBNFZRrtQOteUS0tOqxA&oe=62B149C7&_nc_sid=8fd12b"
-        },
-        {
-          "type": "g",
-          "cafe_image_url": "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/288114218_853641705593396_7265799358911394713_n.jpg?stp=dst-jpg_e35_s480x480&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=PQKCuHWrveAAX9o7ADq&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT_vgcCpljQETKvq9MCvEKPs5WfVzVEgEDfG772kQ3Zq8Q&oe=62B283CF&_nc_sid=8fd12b"
-        }
-      ],
+      "user_beenthere": true,
       "keywords": [
         {
+          "keyword_name": "채광 좋은 카페",
+          "keyword_type": "cafe",
+          "icon": null
+        },
+        {
           "keyword_name": "커피에 대한 설명",
-          "keyword_type": "cafe"
+          "keyword_type": "cafe",
+          "icon": null
         },
         {
           "keyword_name": "내추럴 커피",
-          "keyword_type": "cafe"
-        },
-        {
-          "keyword_name": "추출도구 선택 가능",
-          "keyword_type": "cafe"
-        },
-        {
-          "keyword_name": "분위기가 좋은",
-          "keyword_type": "cafe"
+          "keyword_type": "cafe",
+          "icon": null
         }
       ],
       "operationTime": [
@@ -603,6 +591,18 @@
       "branches": [
         { "cafe_id": 1, "branch_name": "본점" },
         { "cafe_id": 405, "branch_name": "양평점" }
+      ],
+      "facility": [
+        {
+          "name": "주차장",
+          "icon": null,
+          "type": null
+        },
+        {
+          "name": "와이파이",
+          "icon": null,
+          "type": null
+        }
       ]
     }
   ],
@@ -640,25 +640,24 @@
       ],
       "user_review_liked": true,
       "review_liked_cnt": 142,
-      "review_thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal",
       "reivew_image": [
         {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
           "image_review_type": "m",
-          "image_review_url": "url",
-          "thumbnail": "url"
-        },
-        {
-          "image_review_type": "g",
-          "image_review_url": "url",
-          "thumbnail": "url"
-        },
-        {
-          "image_review_type": "g",
-          "image_review_url": "url",
-          "thumbnail": "url"
-        },
-        {
-          "image_review_type": "g",
           "image_review_url": "url",
           "thumbnail": "url"
         }

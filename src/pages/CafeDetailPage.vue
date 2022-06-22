@@ -36,7 +36,7 @@
               <btn-been-there
                 :user_id="1"
                 :cafe_id="cafe.cafe_id"
-                :been_there="cafe.beenThere.user_cafe_beenthere"
+                :been_there="cafe.user_beenthere"
               />
             </div>
 
