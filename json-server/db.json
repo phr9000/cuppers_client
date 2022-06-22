@@ -395,6 +395,8 @@
       "headquater_id": null,
       "cafe_sns": "https://www.instagram.com/coffee_ambience",
       "cafe_shutdown_time": null,
+      "review_count": 32,
+      "cafe_type": "로스터리",
       "likeIt": {
         "user_cafe_liked": true,
         "count": 114

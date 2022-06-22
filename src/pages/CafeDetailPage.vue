@@ -4,13 +4,16 @@
     <section class="cafe_title_section column q-px-lg q-pt-lg">
       <div class="col">
         <div class="row items-center">
-          <div class="title text-h5 cafe_name q-mb-xs">
+          <div class="title text-h5 cafe_name q-mb-xs q-mr-sm">
             {{ cafe.cafe_name_pr }}
           </div>
-          <div class="q-ml-sm row items-center">
-            <span class="text-grey q-mr-xs">{{ cafe.cafe_region }}</span>
-            <span class="text-grey-4">|</span>
-            <q-icon size="xs" name="img:/icons/roastery.png" class="q-mx-xs" />
+          <div class="row items-center">
+            <span v-if="cafe.cafe_type === '로스터리'" class="icon_cafe_type"
+              ><q-icon size="xs" name="img:/icons/roastery.png" class="icon"
+            /></span>
+            <span class="text-subtitle1 text-grey q-pt-xs">
+              {{ cafe.cafe_region }}</span
+            >
           </div>
         </div>
       </div>
@@ -38,7 +41,15 @@
             </div>
 
             <!-- 리뷰수 -->
-            <div>(리뷰수)</div>
+            <div>
+              <a href="#review_section">
+                <btn-review
+                  class="btn_review"
+                  :cafe_id="cafe.cafe_id"
+                  :review_cnt="cafe.review_count"
+                />
+              </a>
+            </div>
           </div>
           <div class="row items-end">
             <div>
@@ -251,33 +262,39 @@
     <q-separator />
 
     <!-- 리뷰 -->
-    <section class="cafe_review_section q-pa-md">
-      <!--  -->
-      <div class="title_wrap row justify-between items-center">
-        <div class="subtitle q-pl-sm">
-          {{ cafe.total_review }}건의 방문자 리뷰
+    <a name="review_section">
+      <section class="cafe_review_section q-pa-md">
+        <!--  -->
+        <div class="title_wrap row justify-between items-center">
+          <div class="subtitle q-pl-sm">
+            {{ cafe.total_review }}건의 방문자 리뷰
+          </div>
+          <div class="row items-center q-pr-sm">
+            <btn-basic color="grey-6" label="추천순" size="sm" />
+            <btn-basic color="grey-6" label="최신순" size="sm" />
+          </div>
         </div>
-        <div class="row items-center q-pr-sm">
-          <btn-basic color="grey-6" label="추천순" size="sm" />
-          <btn-basic color="grey-6" label="최신순" size="sm" />
-        </div>
-      </div>
 
-      <div class="reviews_container row justify-between">
-        <div
-          class="review_wrap"
-          v-for="review in reviews"
-          :key="review.review_id"
-        >
-          <card-review :review="review" />
+        <div class="reviews_container row justify-between">
+          <div
+            class="review_wrap"
+            v-for="review in reviews"
+            :key="review.review_id"
+          >
+            <card-review :review="review" />
+          </div>
         </div>
-      </div>
 
-      <!-- 페이지네이션 -->
-      <div class="q-pa-lg flex flex-center">
-        <q-pagination v-model="current" :max="maxReivewPage" direction-links />
-      </div>
-    </section>
+        <!-- 페이지네이션 -->
+        <div class="q-pa-lg flex flex-center">
+          <q-pagination
+            v-model="current"
+            :max="maxReivewPage"
+            direction-links
+          />
+        </div>
+      </section>
+    </a>
 
     <!-- 지도 미리보기 -->
     <section class="q-mx-xs q-px-sm q-pt-xs">
@@ -325,6 +342,7 @@ import BtnBasic from 'src/components/Button/BtnBasic.vue'
 
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnBeenThere from 'src/components/Button/BtnBeenThere.vue'
+import BtnReview from 'src/components/Button/BtnReview.vue'
 import CardReview from '../components/Card/CardReview.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
 import CardCnote from 'src/components/Card/CardCupNote.vue'
@@ -338,6 +356,7 @@ export default defineComponent({
     BtnBasic,
     BtnLike,
     BtnBeenThere,
+    BtnReview,
     CardReview,
     CardCnote,
     MenuItem
@@ -456,6 +475,7 @@ export default defineComponent({
 }
 .cafe_detail_page {
   color: $grey-8;
+
   .subtitle {
     font-size: 1.4rem;
     // font-weight: 500;
@@ -464,6 +484,14 @@ export default defineComponent({
 
   // 상단 타이틀 섹션
   .cafe_title_section {
+    .icon_cafe_type {
+      padding-bottom: 2px;
+      position: relative;
+      left: 3px;
+      .icon {
+        opacity: 0.8;
+      }
+    }
     .title {
       font-size: 1.6rem;
       font-weight: 500;
@@ -475,7 +503,11 @@ export default defineComponent({
     }
     .btn_been_there {
       position: relative;
-      left: -18px;
+      left: -16px;
+    }
+    .btn_review {
+      position: relative;
+      left: -24px;
     }
   }
 

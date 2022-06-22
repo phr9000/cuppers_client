@@ -1,5 +1,5 @@
 <template>
-  <!-- Card, 카페 추천리스트 -->
+  <!-- 카페카드 (지도화면) -->
   <q-card class="card_cafe overflow-hidden">
     <btn-icon
       @click="clickClose"
@@ -11,19 +11,13 @@
     <q-img class="border-rad" :ratio="16 / 9" :src="cafe.cafe_thumbnail" />
 
     <q-card-section class="title_wrap">
-      <!-- 위치 아이콘 및 거리 -->
-      <!-- <div class="location absolute column items-center" style="">
-        <div class="q-mt-xs text-grey text-caption">
-          <q-icon name="place" /> {{ distance }}
-        </div>
-      </div> -->
-      <div class="row justify-between items-center no-wrap q-mb-xs">
+      <div class="row justify-between items-start no-wrap q-mb-xs">
         <div class="row items-center">
           <div class="title text-left text-h5 q-mr-sm">
             {{ cafe.cafe_name_pr }}
           </div>
           <div class="row items-center">
-            <span v-if="cafe.cafe_type === '로스터리'" class="icon"
+            <span v-if="cafe.cafe_type === '로스터리'" class="icon_cafe_type"
               ><q-icon size="xs" name="img:/icons/roastery.png" class=""
             /></span>
             <span class="text-subtitle1 text-grey q-pt-xs">
@@ -37,7 +31,7 @@
             class="bg-grey-2"
             :rounded="false"
             icon="open_in_new"
-            color="grey-9"
+            color="grey-7"
             label="상세보기"
             padding="4px 8px "
           />
@@ -209,7 +203,7 @@ export default defineComponent({
     border-radius: 50%;
     transform: scale(1.2);
   }
-  .icon {
+  .icon_cafe_type {
     padding-bottom: 1px;
     padding-right: 6px;
     // position: relative;
@@ -217,6 +211,7 @@ export default defineComponent({
   }
   .btn_detail {
     min-width: 100px;
+    padding-top: 3px;
   }
   .btn_like {
     position: relative;
