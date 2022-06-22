@@ -27,8 +27,8 @@
                 :user_id="1"
                 :id_what="cafe.cafe_id"
                 like_what="cafe"
-                :is_liked="cafe.likeIt.user_cafe_liked"
-                :likeit_cnt="cafe.likeIt.count"
+                :is_liked="cafe.user_like"
+                :likeit_cnt="cafe.like_cnt"
               />
             </div>
             <!-- 가본곳 버튼 -->
@@ -401,6 +401,12 @@ export default defineComponent({
         .get(apiUrl)
         .then((result) => {
           this.cafe = result.data
+
+          // 0,1 -> boolean
+          this.cafe.user_like = this.cafe.user_like === 1 ? true : false
+          this.cafe.user_beenthere =
+            this.cafe.user_beenthere === 1 ? true : false
+
           this.cafe.cafe_description = this.cafe.cafe_description.replace(
             '#',
             '<br>'

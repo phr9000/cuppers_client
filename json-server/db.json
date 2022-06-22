@@ -393,10 +393,8 @@
       "review_cnt": 6,
       "cnote_cnt": 3,
       "cafe_type": "로스터리",
-      "likeIt": {
-        "user_cafe_liked": true,
-        "count": 114
-      },
+      "like_cnt": 114,
+      "user_like": 0,
       "user_beenthere": false,
       "keywords": [
         {
@@ -513,10 +511,8 @@
       "review_cnt": 6,
       "cnote_cnt": 3,
       "cafe_type": "베이커리",
-      "likeIt": {
-        "user_cafe_liked": false,
-        "count": 42
-      },
+      "like_cnt": 133,
+      "user_like": 1,
       "user_beenthere": true,
       "keywords": [
         {
