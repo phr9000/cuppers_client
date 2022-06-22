@@ -322,9 +322,14 @@
       <!-- <infinite-scroll /> -->
     </section>
   </q-page>
+
+  <q-page v-else-if="loading" class="constrain">
+    <skeleton-cafe-detail />
+  </q-page>
+
   <q-page v-else class="cafe_detail_page constrain">
     <div class="flex flex-center text-grey-5">
-      <h4>존재하지 않는 카페입니다.</h4>
+      <h4>존재하지 않는 카페 또는 잘못된 접근입니다.</h4>
     </div>
   </q-page>
 
@@ -339,13 +344,13 @@ import { defineComponent } from 'vue'
 import ImageGrid from '../components/Etc/ImageGrid.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
-
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnBeenThere from 'src/components/Button/BtnBeenThere.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
 import CardReview from '../components/Card/CardReview.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
 import CardCnote from 'src/components/Card/CardCupNote.vue'
+import SkeletonCafeDetail from 'src/components/Skeleton/SkeletonCafeDetail.vue'
 
 export default defineComponent({
   name: 'CafeDetailPage',
@@ -359,11 +364,13 @@ export default defineComponent({
     BtnReview,
     CardReview,
     CardCnote,
-    MenuItem
+    MenuItem,
+    SkeletonCafeDetail
   },
   data() {
     return {
       cafe: null,
+      loading: true,
       menuBrewing: null,
       menuVariation: null,
       recent_review: {},
@@ -380,15 +387,18 @@ export default defineComponent({
       this.getReviews(newPage) // go to that page number
     }
   },
-  created() {
-    // console.log('created')
-    this.loadCafe(this.$route.params.id)
+  async created() {
+    // load delay test
+    setTimeout(() => {
+      this.loadCafe(this.$route.params.id)
+    }, 100)
   },
   mounted() {
     // console.log('mounted')
   },
   methods: {
     loadCafe(cafe_id) {
+      this.loading = true
       // cafe info load
       let apiUrl = `${process.env.API}/cafe/${cafe_id}`
       this.$axios
@@ -428,6 +438,8 @@ export default defineComponent({
             .catch((err) => {
               console.log(err)
             })
+
+          this.loading = false
         })
         .catch((err) => {
           console.log(err)
