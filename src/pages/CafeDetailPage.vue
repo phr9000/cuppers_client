@@ -42,13 +42,13 @@
 
             <!-- 리뷰수 -->
             <div>
-              <a href="#review_section">
-                <btn-review
-                  class="btn_review"
-                  :cafe_id="cafe.cafe_id"
-                  :review_cnt="cafe.review_cnt"
-                />
-              </a>
+              <!-- <a href="#review_section"> $route.fullPath 와 호환되지 않아 새로고침 되는 문제 때문에 -->
+              <btn-review
+                class="btn_review"
+                :cafe_id="cafe.cafe_id"
+                :review_cnt="cafe.review_cnt"
+              />
+              <!-- </a> -->
             </div>
           </div>
           <div class="row items-end">
@@ -262,39 +262,35 @@
     <q-separator />
 
     <!-- 리뷰 -->
-    <a name="review_section">
-      <section class="cafe_review_section q-pa-md">
-        <!--  -->
-        <div class="title_wrap row justify-between items-center">
-          <div class="subtitle q-pl-sm">
-            {{ cafe.review_cnt }}건의 방문자 리뷰
-          </div>
-          <div class="row items-center q-pr-sm">
-            <btn-basic color="grey-6" label="추천순" size="sm" />
-            <btn-basic color="grey-6" label="최신순" size="sm" />
-          </div>
+    <!-- <a name="review_section"> -->
+    <section class="cafe_review_section q-pa-md">
+      <!--  -->
+      <div class="title_wrap row justify-between items-center">
+        <div class="subtitle q-pl-sm">
+          {{ cafe.review_cnt }}건의 방문자 리뷰
         </div>
+        <div class="row items-center q-pr-sm">
+          <btn-basic color="grey-6" label="추천순" size="sm" />
+          <btn-basic color="grey-6" label="최신순" size="sm" />
+        </div>
+      </div>
 
-        <div class="reviews_container row justify-between">
-          <div
-            class="review_wrap"
-            v-for="review in reviews"
-            :key="review.review_id"
-          >
-            <card-review :review="review" />
-          </div>
+      <div class="reviews_container row justify-between">
+        <div
+          class="review_wrap"
+          v-for="review in reviews"
+          :key="review.review_id"
+        >
+          <card-review :review="review" />
         </div>
+      </div>
 
-        <!-- 페이지네이션 -->
-        <div class="q-pa-lg flex flex-center">
-          <q-pagination
-            v-model="current"
-            :max="maxReivewPage"
-            direction-links
-          />
-        </div>
-      </section>
-    </a>
+      <!-- 페이지네이션 -->
+      <div class="q-pa-lg flex flex-center">
+        <q-pagination v-model="current" :max="maxReivewPage" direction-links />
+      </div>
+    </section>
+    <!-- </a> -->
 
     <!-- 지도 미리보기 -->
     <section class="q-mx-xs q-px-sm q-pt-xs">
