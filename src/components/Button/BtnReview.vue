@@ -9,7 +9,7 @@
     class="btn row no-wrap items-center"
   >
     <q-icon size="xs" class="icon_fav" name="notes" />
-    <span class="review_cnt q-ml-xs text-h6"> {{ reviewCnt }}</span>
+    <span class="review_cnt q-ml-xs text-h6"> {{ review_cnt }}</span>
   </q-btn>
 </template>
 <script>
@@ -25,13 +25,10 @@ export default {
   },
   data() {
     return {
-      reviewCnt: 0,
       icon: 'favorite_border'
     }
   },
-  mounted() {
-    this.reviewCnt = this.review_cnt
-  },
+  mounted() {},
   methods: {
     handleCLick() {
       console.log('click')

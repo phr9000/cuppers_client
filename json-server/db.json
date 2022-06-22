@@ -692,7 +692,28 @@
       ],
       "user_review_liked": true,
       "review_liked_cnt": 142,
-      "review_thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+      "reivew_image": [
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "m",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        }
+      ]
     },
     {
       "review_id": 3,
@@ -743,9 +764,28 @@
       ],
       "user_review_liked": true,
       "review_liked_cnt": 142,
-      "review_thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal",
-      "total_review": 5,
-      "total_cnote": 2
+      "reivew_image": [
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "m",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        }
+      ]
     },
     {
       "review_id": 4,
@@ -780,7 +820,28 @@
       ],
       "user_review_liked": true,
       "review_liked_cnt": 142,
-      "review_thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+      "reivew_image": [
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "m",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        }
+      ]
     },
     {
       "review_id": 5,
@@ -814,7 +875,28 @@
       ],
       "user_review_liked": true,
       "review_liked_cnt": 142,
-      "review_thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+      "reivew_image": [
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "m",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        }
+      ]
     },
     {
       "review_id": 6,
@@ -848,7 +930,28 @@
       ],
       "user_review_liked": true,
       "review_liked_cnt": 142,
-      "review_thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+      "reivew_image": [
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "g",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        },
+        {
+          "image_review_type": "m",
+          "image_review_url": "url",
+          "thumbnail": "url"
+        }
+      ]
     }
   ],
   "cnote": [

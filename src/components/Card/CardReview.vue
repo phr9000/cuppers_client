@@ -33,7 +33,7 @@
         <q-img
           class="col-5 q-pr-sm review_image"
           :initial-ratio="16 / 9"
-          :src="review.review_thumbnail"
+          :src="thumbnail"
           ><div
             class="rounded-borders absolute-full text-subtitle2 flex flex-center"
           >
@@ -121,15 +121,36 @@ export default defineComponent({
           ],
           user_review_liked: true,
           review_liked_cnt: 142,
-          review_thumbnail:
-            'https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal'
+          reivew_image: [
+            {
+              image_review_type: 'g',
+              image_review_url: 'url',
+              thumbnail:
+                'https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal'
+            },
+            {
+              image_review_type: 'g',
+              image_review_url: 'url',
+              thumbnail: 'url'
+            },
+            {
+              image_review_type: 'g',
+              image_review_url: 'url',
+              thumbnail: 'url'
+            },
+            {
+              image_review_type: 'm',
+              image_review_url: 'url',
+              thumbnail: 'url'
+            }
+          ]
         }
       }
     }
   },
   data() {
     return {
-      // aromaNotes: []
+      thumbnail: ''
     }
   },
   computed: {
@@ -144,10 +165,8 @@ export default defineComponent({
     }
   },
   mounted() {
-    // this.aromaNotes = this.review.menu_aromanote.split(',')
-    // console.log(this.review.menu_aromanote)
-    // const temp = this.review.menu_aromanote.split(',')
-    // console.log(temp)
+    console.log(this.review.reivew_image[0]['thumbnail'])
+    this.thumbnail = this.review.reivew_image[0]['thumbnail']
   },
   methods: {
     cafeNameClick() {

@@ -46,7 +46,7 @@
                 <btn-review
                   class="btn_review"
                   :cafe_id="cafe.cafe_id"
-                  :review_cnt="cafe.review_count"
+                  :review_cnt="cafe.review_cnt"
                 />
               </a>
             </div>
@@ -267,7 +267,7 @@
         <!--  -->
         <div class="title_wrap row justify-between items-center">
           <div class="subtitle q-pl-sm">
-            {{ cafe.total_review }}건의 방문자 리뷰
+            {{ cafe.review_cnt }}건의 방문자 리뷰
           </div>
           <div class="row items-center q-pr-sm">
             <btn-basic color="grey-6" label="추천순" size="sm" />
@@ -305,7 +305,7 @@
     <section class="cafe_review_section q-pa-md">
       <!--  -->
       <div class="title_wrap row justify-between items-center">
-        <div class="subtitle q-pl-sm">{{ cafe.total_cnote }}건의 커핑노트</div>
+        <div class="subtitle q-pl-sm">{{ cafe.cnote_cnt }}건의 커핑노트</div>
         <div class="row items-center q-pr-sm">
           <btn-basic color="grey-6" label="추천순" size="sm" />
           <btn-basic color="grey-6" label="최신순" size="sm" />
@@ -424,7 +424,7 @@ export default defineComponent({
           }
 
           // review count 로 토탈 페이지 계산
-          this.maxReivewPage = Math.ceil(this.cafe.total_review / 4)
+          this.maxReivewPage = Math.ceil(this.cafe.review_cnt / 4)
 
           // 해당카페 모든 리뷰 호출 (1 page)
           this.getReviews(1) // 추후 (cafe_id, 1)로 수정
