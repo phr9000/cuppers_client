@@ -64,6 +64,7 @@ export default {
 
           if (data.userSelectedType === 'R') {
             // 사용자가 도로명 주소를 선택했을 경우
+            this.payload.address = data.roadAddress
 
             // 선택한 도로명 주소로 좌표 얻어오기
             this.getCoordsByAddress(data.roadAddress)
