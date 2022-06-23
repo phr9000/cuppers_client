@@ -116,8 +116,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-#map {
-  display: none;
-}
-</style>
+<style lang="scss" scoped></style>

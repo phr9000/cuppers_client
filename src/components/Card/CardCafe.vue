@@ -178,20 +178,10 @@ export default defineComponent({
   width: 100%;
   min-width: 500px;
   max-width: 900px;
-  margin: 0 16px 16px 0;
   .thumbnail {
     border-radius: $border-radius;
     max-height: 268px;
   }
-  // .title_wrap {
-  //   padding-right: 70px;
-  //   @media (max-width: 962px) {
-  //     padding-right: 65px;
-  //   }
-  //   @media (max-width: 722px) {
-  //     padding-right: 65px;
-  //   }
-  // }
   .icon {
     padding-right: 4px;
   }
@@ -213,7 +203,6 @@ export default defineComponent({
     position: relative;
     left: -12px;
   }
-
   .caption {
     color: $grey-8;
     height: 40px;
@@ -223,17 +212,11 @@ export default defineComponent({
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
-
   .info {
     color: $grey-8;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
   }
-  // .text-h6 {
-  //   @media (max-width: 962px) {
-  //     font-size: 1rem;
-  //   }
-  // }
 }
 </style>

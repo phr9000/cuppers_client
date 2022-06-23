@@ -158,7 +158,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    console.log(this.review.reivew_image[0]['thumbnail'])
+    // console.log(this.review.reivew_image[0]['thumbnail'])
     this.thumbnail = this.review.reivew_image[0]['thumbnail']
   },
   methods: {
