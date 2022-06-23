@@ -456,12 +456,17 @@
       "facility": [
         {
           "name": "내부 화장실",
-          "icon": null,
+          "icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Ftoilet.png?alt=media&token=38cb6aa1-2ce8-4419-893e-321506f64a97",
           "type": null
         },
         {
-          "name": "와이파이",
-          "icon": null,
+          "name": "WIFI",
+          "icon": "eva-wifi",
+          "type": null
+        },
+        {
+          "name": "주차가능",
+          "icon": "eva-car",
           "type": null
         }
       ]

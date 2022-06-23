@@ -139,8 +139,14 @@
                   <q-icon size="xs" name="info" class="icon q-pr-xs" />
                   <div class="text_subtitle1">시설 정보</div>
                 </div>
-                <div class="q-pl-lg q-pb-sm">
-                  <q-img width="210px" src="/facility.png" />
+                <div class="row items-center q-pl-lg q-pb-sm">
+                  <facility-item
+                    class="q-pr-sm"
+                    v-for="item in cafe.facility"
+                    :key="item.name"
+                    :name="item.name"
+                    :icon="item.icon"
+                  />
                 </div>
               </div>
 
@@ -171,7 +177,7 @@
               <!-- 홈페이지 -->
               <div class="info q-mb-xs">
                 <div class="text_subtitle1 cafe_sns">
-                  {{ cafe.cafe_sns }}
+                  {{ cafe.cafe_webpage }}
                 </div>
 
                 <q-icon size="xs" name="language" class="icon q-pl-xs" />
@@ -235,7 +241,7 @@
 
           <!-- 대표 메뉴 이미지 -->
           <div
-            v-if="menuImages.length > 0"
+            v-if="menuImages && menuImages.length > 0"
             class="menu_image_wrap column items-end q-mt-md"
           >
             <div class="info q-mb-xs">
@@ -345,6 +351,7 @@ import BtnBeenThere from 'src/components/Button/BtnBeenThere.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
 import CardReview from '../components/Card/CardReview.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
+import FacilityItem from 'src/components/Etc/FacilityItem.vue'
 import CardCnote from 'src/components/Card/CardCupNote.vue'
 import SkeletonCafeDetail from 'src/components/Skeleton/SkeletonCafeDetail.vue'
 
@@ -361,6 +368,7 @@ export default defineComponent({
     CardReview,
     CardCnote,
     MenuItem,
+    FacilityItem,
     SkeletonCafeDetail
   },
   data() {
