@@ -96,7 +96,7 @@
           label="모든 마커 삭제"
         />
         <btn-basic
-          @click="clickMarker(1)"
+          @click="showCafeInfo(1)"
           color="primary"
           label="마커 클릭/다시 클릭"
         />
@@ -154,7 +154,7 @@ export default defineComponent({
           //latlng: new kakao.maps.LatLng(37.5015764, 127.124833)
         }
       ], // 필터링된 카페 리스트
-      map: null,
+      map: null, // 카카오맵 인스턴스
       currentLocation: null,
       locationLoading: false,
       search: '',
@@ -201,12 +201,12 @@ export default defineComponent({
         this.showCard = flase
       }
     },
-    clickMarker(cafeId) {
+    showCafeInfo(cafe_id) {
       if (this.targetCafe) {
         this.targetCafe = null
       } else {
         const find = this.cafes.filter((cafe) => {
-          return cafe['cafe_id'] === cafeId
+          return cafe['cafe_id'] === cafe_id
         })[0]
         console.log(find)
         this.targetCafe = { ...find }
@@ -260,16 +260,32 @@ export default defineComponent({
     showCafesMarker() {
       // 지도에 여러개 마커 표시
       for (let i = 0; i < this.cafes.length; i++) {
+        const cafe_id = this.cafes[i].cafe_id
+        const position = this.cafes[i].latlng
+        console.log(cafe_id)
         // 마커를 생성합니다
         const marker = new kakao.maps.Marker({
           map: this.map, // 마커를 표시할 지도
-          position: this.cafes[i].latlng // 마커를 표시할 위치
+          position: position // 마커를 표시할 위치
         })
+
+        // 마커 클릭 이벤트 등록
+        kakao.maps.event.addListener(marker, 'click', () => {
+          this.handleClickMarker(cafe_id, position)
+        })
+
         this.cafes[i].marker = marker
 
         marker.setMap(this.map)
       }
       // 지도에 여러개 마커 표시
+    },
+    test() {
+      console.log('test')
+    },
+    handleClickMarker(cafe_id, position) {
+      console.log('marker 클릭 : ', cafe_id, position)
+      this.map.panTo(position)
     },
     setCafesBounds() {
       // 지도 범위 재설정 하기
@@ -294,18 +310,28 @@ export default defineComponent({
       // 지도를 생성한 이후 작업들
       this.loadData()
 
-      // 테스트 cafes[0]에 앰비언스 마커 표시
+      // 테스트
+      // cafes[0]에 앰비언스 마커 표시
       console.log(this.cafes[0])
-      const latlng = new kakao.maps.LatLng(37.5015764, 127.124833)
+      const position = new kakao.maps.LatLng(37.5015764, 127.124833)
+      // 마커를 생성합니다
+      const marker = new kakao.maps.Marker({
+        map: this.map, // 마커를 표시할 지도
+        position: position // 마커를 표시할 위치
+      })
+
+      // 마커 클릭 이벤트 등록
+      kakao.maps.event.addListener(marker, 'click', () => {
+        this.handleClickMarker(1, position)
+      })
+
       this.cafes[0] = {
         ...this.cafes[0],
-        latlng: latlng,
-        marker: new kakao.maps.Marker({
-          map: this.map, // 마커를 표시할 지도
-          position: latlng
-        })
+        latlng: position,
+        marker: marker
       }
-      console.log(this.cafes[0])
+      // console.log(this.cafes[0])
+      // 테스트 끝
     },
     loadData() {
       let apiUrl = `${process.env.API}/cafeLocations`
@@ -325,7 +351,7 @@ export default defineComponent({
 
             this.cafesRaw.push(cafe)
           }
-          console.log(this.cafesRaw)
+          // console.log(this.cafesRaw)
         })
         .catch((err) => {
           console.log(err)

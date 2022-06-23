@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="col-12 q-mx-xl q-mt-xl contents_block">
-          <div class="row info-block">
+          <div class="row info-block items-center">
             <q-input
               v-model="cafe_info.cafe_address"
               readonly
@@ -39,9 +39,8 @@
               class="col-8 input-area"
               :rules="[(val) => !!val || 'Field is required']"
             />
-            <div class="col-3 q-my-auto flex row-area">
+            <div class="col-3 flex row-area">
               <post-number
-                size="md"
                 @sendPostData="getPostData"
                 label="주소 찾기"
                 padding="7px 20px"
