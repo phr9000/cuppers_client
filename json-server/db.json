@@ -115,55 +115,37 @@
       "cafe_latitude": 37.5015764,
       "cafe_longitude": 127.124833,
       "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
-      "cafe_thumbnail": "http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg",
-      "review_count": 32,
       "cafe_type": "로스터리",
-      "likeIt": {
-        "user_cafe_liked": true,
-        "count": 114
-      },
+      "cafe_img": "http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg",
+      "like_cnt": 114,
+      "user_liked": true,
+      "review_cnt": 32,
       "user_beenthere": false,
-      "keywords": [
+      "cafe_keyword": [
         {
-          "keyword_name": "커피에 대한 설명",
-          "keyword_type": "cafe"
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
         },
         {
-          "keyword_name": "내추럴 커피",
-          "keyword_type": "cafe"
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
         },
         {
-          "keyword_name": "추출도구 선택 가능",
-          "keyword_type": "cafe"
+          "keyword_id": 12,
+          "keyword_name": "추출도구 선택 가능"
         },
         {
-          "keyword_name": "분위기가 좋은",
-          "keyword_type": "cafe"
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
         }
       ],
-      "operationTime": [
+      "cafe_opTime": [
         {
           "operation_day": "월",
           "operation_time": "정기휴무"
         },
         {
-          "operation_day": "화",
-          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
-        },
-        {
-          "operation_day": "수",
-          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
-        },
-        {
-          "operation_day": "목",
-          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
-        },
-        {
-          "operation_day": "금",
-          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
-        },
-        {
-          "operation_day": "토",
+          "operation_day": "화~토",
           "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
         },
         {
@@ -226,8 +208,8 @@
       "cafe_id": 3,
       "cafe_name_pr": "나무사이로",
       "cafe_name_sc": "",
-      "cafe_region": "종로",
-      "cafe_address": "서울특별시 종로구 사직로8길 21 (내자동)",
+      "cafe_address": "서울특별시 종로구 사직로8길 21",
+      "cafe_region": "내자동",
       "cafe_latitude": 37.5761744,
       "cafe_longitude": 126.9711353,
       "cafe_description": "전통 한옥 리뉴얼, 인테리어가 좋은 곳"
@@ -383,53 +365,49 @@
       "cafe_barista_info": null,
       "cafe_webpage": "https://smartstore.naver.com/coffeeambience",
       "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
-      "cafe_menu_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg",
       "cafe_menu_updated": null,
-      "cafe_view": 0,
-      "is_headquater": null,
-      "headquater_id": null,
-      "cafe_sns": "https://www.instagram.com/coffee_ambience",
       "cafe_shutdown_time": null,
-      "review_cnt": 6,
-      "cnote_cnt": 3,
       "cafe_type": "로스터리",
+      "recent_review_id": 2,
       "like_cnt": 114,
       "user_like": 0,
-      "user_beenthere": false,
-      "keywords": [
+      "user_beenthere": 0,
+      "review_cnt": 6,
+      "cnote_cnt": 3,
+      "opTime": [
         {
-          "keyword_name": "커피에 대한 설명",
-          "keyword_type": "cafe",
-          "icon": null
+          "day": "월",
+          "time": "정기휴무"
         },
         {
-          "keyword_name": "내추럴 커피",
-          "keyword_type": "cafe",
-          "icon": null
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
         },
         {
-          "keyword_name": "추출도구 선택 가능",
-          "keyword_type": "cafe",
-          "icon": null
-        },
-        {
-          "keyword_name": "분위기가 좋은",
-          "keyword_type": "cafe",
-          "icon": null
+          "day": "일",
+          "time": "정기휴무"
         }
       ],
-      "operationTime": [
+      "keywords": [
         {
-          "operation_day": "월",
-          "operation_time": "정기휴무"
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명",
+          "icon": null
         },
         {
-          "operation_day": "화~토",
-          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
+          "keyword_id": 4,
+          "keyword_name": "내추럴 커피",
+          "icon": null
         },
         {
-          "operation_day": "일",
-          "operation_time": "정기휴무"
+          "keyword_id": 5,
+          "keyword_name": "추출도구 선택 가능",
+          "icon": null
+        },
+        {
+          "keyword_id": 21,
+          "keyword_name": "분위기가 좋은",
+          "icon": null
         }
       ],
       "menu": [
@@ -438,7 +416,7 @@
           "menu_price_hot": 6000,
           "menu_price_ice": null,
           "menu_type": "br",
-          "is_signature": true,
+          "is_signature": 1,
           "menu_aromanote": "플로럴,레몬그라스,오렌지,샤인머스캣,백도,쥬시하고 긴 여운"
         },
         {
@@ -446,7 +424,7 @@
           "menu_price_hot": 5500,
           "menu_price_ice": null,
           "menu_type": "br",
-          "is_signature": false,
+          "is_signature": 0,
           "menu_aromanote": "감귤,모과,볶은 땅콩,캐러멜"
         },
         {
@@ -454,21 +432,21 @@
           "menu_price_hot": 3800,
           "menu_price_ice": 3800,
           "menu_type": "va",
-          "is_signature": false
+          "is_signature": 0
         },
         {
           "menu_name": "카페라떼",
           "menu_price_hot": 4400,
           "menu_price_ice": 4800,
           "menu_type": "va",
-          "is_signature": false
+          "is_signature": 0
         },
         {
           "menu_name": "플랫화이트",
           "menu_price_hot": null,
           "menu_price_ice": 4900,
           "menu_type": "va",
-          "is_signature": false
+          "is_signature": 1
         }
       ],
       "branches": [
@@ -503,46 +481,43 @@
       "cafe_description": "커피앰비언스 송리단길점 #카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
       "cafe_menu_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg",
       "cafe_menu_updated": null,
-      "cafe_view": 0,
-      "is_headquater": null,
-      "headquater_id": null,
-      "cafe_sns": "https://www.instagram.com/coffee_ambience",
       "cafe_shutdown_time": null,
-      "review_cnt": 6,
-      "cnote_cnt": 3,
       "cafe_type": "베이커리",
+      "recent_review_id": 2,
       "like_cnt": 133,
       "user_like": 1,
-      "user_beenthere": true,
-      "keywords": [
+      "user_beenthere": 0,
+      "review_cnt": 6,
+      "cnote_cnt": 3,
+      "opTime": [
         {
-          "keyword_name": "채광 좋은 카페",
-          "keyword_type": "cafe",
-          "icon": null
+          "day": "월",
+          "time": "정기휴무"
         },
         {
-          "keyword_name": "커피에 대한 설명",
-          "keyword_type": "cafe",
-          "icon": null
+          "day": "화~토",
+          "time": "11:30 - 21:30"
         },
         {
-          "keyword_name": "내추럴 커피",
-          "keyword_type": "cafe",
-          "icon": null
+          "day": "일",
+          "time": "정기휴무"
         }
       ],
-      "operationTime": [
+      "keywords": [
         {
-          "operation_day": "월",
-          "operation_time": "정기휴무"
+          "keyword_id": 1,
+          "keyword_name": "채광 좋은 카페",
+          "icon": null
         },
         {
-          "operation_day": "화~토",
-          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
+          "keyword_id": 4,
+          "keyword_name": "커피에 대한 설명",
+          "icon": null
         },
         {
-          "operation_day": "일",
-          "operation_time": "정기휴무"
+          "keyword_id": 5,
+          "keyword_name": "내추럴 커피",
+          "icon": null
         }
       ],
       "menu": [
@@ -551,7 +526,7 @@
           "menu_price_hot": 6000,
           "menu_price_ice": null,
           "menu_type": "br",
-          "is_signature": true,
+          "is_signature": 1,
           "menu_aromanote": "플로럴,레몬그라스,오렌지,샤인머스캣,백도,쥬시하고 긴 여운"
         },
         {
@@ -559,7 +534,7 @@
           "menu_price_hot": 5500,
           "menu_price_ice": null,
           "menu_type": "br",
-          "is_signature": false,
+          "is_signature": 0,
           "menu_aromanote": "감귤,모과,볶은 땅콩,캐러멜"
         },
         {
@@ -567,21 +542,21 @@
           "menu_price_hot": 3800,
           "menu_price_ice": 3800,
           "menu_type": "va",
-          "is_signature": false
+          "is_signature": 0
         },
         {
           "menu_name": "카페라떼",
           "menu_price_hot": 4400,
           "menu_price_ice": 4800,
           "menu_type": "va",
-          "is_signature": false
+          "is_signature": 0
         },
         {
           "menu_name": "플랫화이트",
           "menu_price_hot": null,
           "menu_price_ice": 4900,
           "menu_type": "va",
-          "is_signature": false
+          "is_signature": 0
         }
       ],
       "branches": [
@@ -612,7 +587,7 @@
       "menu_type": "br",
       "menu_name": "파나마 잰슨 게이샤 워시드",
       "menu_aromanote": "플로럴,레몬그라스,오렌지,샤인머스캣,백도,쥬시하고 긴 여운",
-      "is_signature": false,
+      "is_signature": 0,
       "review_description": "커피에 진심인 카페. ☕️ \n다양한 드립 커피가 많아서 고르는 데 고민이 많이 되었어요.\n마지막까지 고민하던 종류 시음 하게 해주셔서 넘넘 감사했습니다!  사장님 센스👍🏾\n드립커피 보다 아메리카노를 선호 했었는데 드립커피에 대한 인식을 바꿔준 카페입니다!!!\n다음에 커피 마시러 또 방문 할게요😘",
       "created_at": "2022-06-11 12:24:55",
       "cafe_name": "커피앰비언스",
@@ -668,7 +643,7 @@
       "menu_name": "아메리카노",
       "menu_aromanote": "초콜렛,볶은 땅콩,살짝신맛",
       "menu_type": "va",
-      "is_signature": false,
+      "is_signature": 0,
       "review_description": "커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
       "created_at": "2022-06-11 12:24:55",
       "cafe_name": "커피앰비언스",
@@ -720,7 +695,7 @@
       "menu_name": "브라질 아이피 옐로우버본 내추럴",
       "menu_aromanote": "감귤,살구,볶은 땅콩,캐러멜",
       "menu_type": "br",
-      "is_signature": false,
+      "is_signature": 0,
       "review_description": "브라질 아이피 옐로우버본 내추럴 우아하고 맛있었습니다. 😊",
       "created_at": "2022-06-11 12:24:55",
       "cafe_name": "커피앰비언스",
@@ -792,7 +767,7 @@
       "menu_name": "플랫화이트",
       "menu_aromanote": "",
       "menu_type": "va",
-      "is_signature": true,
+      "is_signature": 1,
       "review_description": "커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
       "created_at": "2022-06-11 12:24:55",
       "cafe_name": "커피앰비언스",
@@ -847,7 +822,7 @@
       "user_thumbnail": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg",
       "menu_name": "카페라떼",
       "menu_type": "va",
-      "is_signature": false,
+      "is_signature": 0,
       "review_description": "너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
       "created_at": "2022-06-11 12:24:55",
       "cafe_name": "커피앰비언스",
@@ -902,7 +877,7 @@
       "user_thumbnail": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg",
       "menu_name": "플랫화이트",
       "menu_type": "va",
-      "is_signature": true,
+      "is_signature": 1,
       "review_description": " 갈 때 마다 마음이 편안해지는 곳, 가끔 헤메기도 하고 자주 못 가지만 커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
       "created_at": "2022-06-11 12:24:55",
       "cafe_name": "커피앰비언스",

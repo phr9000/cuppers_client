@@ -125,15 +125,12 @@
                   />
 
                   <div class="cafe_keywords_wrap text_subtitle1 q-pt-xs">
-                    <div
-                      v-for="time in cafe.operationTime"
-                      :key="time.operation_day"
-                    >
-                      {{ time.operation_day }} : {{ time.operation_time }}
+                    <div v-for="time in cafe.opTime" :key="time.day">
+                      {{ time.day }} : {{ time.time }}
                     </div>
-                    <div class="text-red-5">
+                    <!-- <div class="text-red-5">
                       영업시간을 클릭했을때만 크게 보여주도록 (like googlemap)
-                    </div>
+                    </div> -->
                   </div>
                 </div>
 
@@ -237,7 +234,10 @@
           </div>
 
           <!-- 대표 메뉴 이미지 -->
-          <div class="menu_image_wrap column items-end q-mt-md">
+          <div
+            v-if="menuImages.length > 0"
+            class="menu_image_wrap column items-end q-mt-md"
+          >
             <div class="info q-mb-xs">
               <q-icon size="xs" name="img:/icons/menu.png" class="q-mx-xs" />
               <div class="text_subtitle1">메뉴판 이미지</div>
@@ -246,7 +246,7 @@
               class="menu_image"
               width="80%"
               height="130px"
-              :src="cafe.cafe_menu_url"
+              :src="menuImages[0].url"
             >
               <div
                 class="rounded-borders absolute-full text-subtitle2 flex flex-center"
@@ -375,7 +375,8 @@ export default defineComponent({
       current: 1, // for pagination
       maxReivewPage: 1, // for pagination
       // reviews_per_page: 4
-      cafeImages: null
+      cafeImages: null,
+      menuImages: null
     }
   },
   watch: {
@@ -454,6 +455,9 @@ export default defineComponent({
         .then((result) => {
           this.cafeImages = result.data.images.filter((item) => {
             return item.type === 'g'
+          })
+          this.menuImages = result.data.images.filter((item) => {
+            return item.type === 'm'
           })
           // console.log(this.cafeImages)
         })

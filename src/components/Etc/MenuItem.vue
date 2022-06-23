@@ -11,7 +11,7 @@
         <div class="name" :class="{ is_review: is_review }">
           {{ name }}
         </div>
-        <div v-if="is_signature" class="badge_signature">SIGNATURE</div>
+        <div v-if="is_signature === 1" class="badge_signature">SIGNATURE</div>
       </div>
       <div class="row items-center">
         <q-icon
@@ -52,7 +52,7 @@ export default {
     type: { type: String, default: 'br' },
     hot: { type: Number, default: null },
     ice: { type: Number, default: null },
-    is_signature: { type: Boolean, default: false },
+    is_signature: { type: Number, default: 0 },
     is_review: { type: Boolean, default: false }
   },
   data() {

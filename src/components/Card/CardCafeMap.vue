@@ -82,8 +82,8 @@
         <q-icon size="xs" name="calendar_today" class="icon q-pt-xs" />
 
         <div class="cafe_keywords_wrap text_subtitle1 q-pt-xs">
-          {{ cafe.operationTimeToday.operation_day }} :
-          {{ cafe.operationTimeToday.operation_time }}
+          {{ cafe.opTime.day }} :
+          {{ cafe.opTime.time }}
         </div>
       </div>
     </q-card-section>
@@ -148,9 +148,9 @@ export default defineComponent({
             }
           ],
           // today only
-          operationTimeToday: {
-            operation_day: '수',
-            operation_time: '11:30 - 21:30 (21:00 라스트오더)'
+          opTime: {
+            day: '수',
+            time: '11:30 - 21:30 (21:00 라스트오더)'
           }
         }
       }
@@ -200,6 +200,9 @@ export default defineComponent({
     z-index: 1;
     border-radius: 50%;
     transform: scale(1.2);
+  }
+  .icon {
+    padding-right: 4px;
   }
   .icon_cafe_type {
     padding-bottom: 1px;
