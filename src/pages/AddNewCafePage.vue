@@ -114,13 +114,12 @@
           </div>
           <div>
             <card-add-menu
-              :cafeMenu="cafe_menu"
-              v-for="cafe_menu in showBrewing"
-              :key="cafe_menu"
+              v-for="(cafe_menu, index) in onlyBrewing"
+              :key="index"
               @deleteCard="deleteMenu"
-              class="bg-amber-1"
-              :cafe_menu="cafe_menu"
-              :menu_type="'br'"
+              @newCafeMenu="createBrewing"
+              :menu_id="cafe_menu.menu_id"
+              :menu_type="cafe_menu.menu_type"
             />
           </div>
         </section>
@@ -128,7 +127,8 @@
           <div class="flex justify-between q-mx-xl">
             <span class="text-h6">Variation Coffee</span>
             <btn-basic
-              @click="createVariation"
+              @click="getVariation"
+              @new_cafe_menu="new_cafe_menu"
               size="sm"
               label="메뉴 추가"
               color="primary"
@@ -138,12 +138,12 @@
           </div>
           <div>
             <card-add-menu
-              :cafeMenu="cafe_menu"
-              v-for="cafe_menu in showVariation"
-              :key="cafe_menu"
+              v-for="(cafe_menu, index) in onlyVariation"
+              :key="index"
               @deleteCard="deleteMenu"
-              class="bg-amber-1"
-              :menu_type="'va'"
+              @newCafeMenu="createVariation"
+              :menu_id="cafe_menu.menu_id"
+              :menu_type="cafe_menu.menu_type"
             />
           </div>
         </section>
@@ -190,22 +190,19 @@ export default defineComponent({
         cafe_address_dong: '',
         cafe_menu: [
           {
-            menu_id: 1,
-            menu_name: '',
-            menu_price_hot: null,
-            menu_price_ice: null,
+            menu_name: 'Hello',
             menu_type: 'br',
-            is_signature: null,
+            menu_price_hot: 6000,
+            menu_price_ice: 6500,
+            is_signature: true,
             menu_aromanote: ''
           },
           {
-            menu_id: 1,
-            menu_name: '',
-            menu_price_hot: null,
-            menu_price_ice: null,
+            menu_name: 'Hello',
             menu_type: 'va',
-            is_signature: null,
-            menu_aromanote: ''
+            menu_price_hot: 6000,
+            menu_price_ice: 6500,
+            is_signature: true
           }
         ]
       }
@@ -221,29 +218,12 @@ export default defineComponent({
       this.cafe_info.cafe_address_dong = payload.extraAddress
       this.cafe_info.cafe_postalcode = payload.postcode
     },
-    createBrewing() {
-      let new_cafe_menu = {
-        menu_id: null,
-        menu_name: '',
-        menu_price_hot: null,
-        menu_price_ice: null,
-        menu_type: 'br',
-        is_signature: null,
-        menu_aromanote: ''
-      }
-      this.cafe_info.cafe_menu.push(new_cafe_menu)
+    createBrewing(newCafeMenu) {
+      this.cafe_info.cafe_menu.push(newCafeMenu)
       console.log(this.cafe_info.cafe_menu)
     },
-    createVariation() {
-      let new_cafe_menu = {
-        menu_id: null,
-        menu_name: '',
-        menu_price_hot: null,
-        menu_price_ice: null,
-        menu_type: 'va',
-        is_signature: null
-      }
-      this.cafe_info.cafe_menu.push(new_cafe_menu)
+    createVariation(newCafeMenu) {
+      this.cafe_info.cafe_menu.push(newCafeMenu)
       console.log(this.cafe_info.cafe_menu)
     },
     deleteMenu(index) {
@@ -251,12 +231,12 @@ export default defineComponent({
     }
   },
   computed: {
-    showBrewing() {
+    onlyBrewing() {
       return this.cafe_info.cafe_menu.filter(
         (cafe_menu) => cafe_menu.menu_type === 'br'
       )
     },
-    showVariation() {
+    onlyVariation() {
       return this.cafe_info.cafe_menu.filter(
         (cafe_menu) => cafe_menu.menu_type === 'va'
       )

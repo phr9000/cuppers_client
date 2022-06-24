@@ -57,7 +57,6 @@ export default {
       checked: false
     }
   },
-  computed: {},
   methods: {
     handleClick() {
       if (!this.checked) {
