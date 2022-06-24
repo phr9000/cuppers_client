@@ -111,16 +111,17 @@
       "cafe_id": 1,
       "cafe_name_pr": "커피앰비언스",
       "cafe_address": "서울 송파구 송이로17길 51",
-      "cafe_region": "가락동",
+      "cafe_region": "송파",
+      "cafe_address_dong": "(가락동)",
+      "cafe_type": "로스터리",
       "cafe_latitude": 37.5015764,
       "cafe_longitude": 127.124833,
       "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
-      "cafe_type": "로스터리",
       "cafe_img": "http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg",
       "like_cnt": 114,
-      "user_liked": true,
+      "user_liked": 1,
       "review_cnt": 32,
-      "user_beenthere": false,
+      "user_beenthere": 0,
       "cafe_keyword": [
         {
           "keyword_id": 1,
@@ -158,15 +159,17 @@
       "cafe_id": 2,
       "cafe_name_pr": "이월로스터스 송파2호점",
       "cafe_region": "송파",
+      "cafe_address_dong": "(송파동)",
       "cafe_address": "서울 송파구 백제고분로 426",
+      "cafe_type": "",
       "cafe_latitude": 37.5088605,
       "cafe_longitude": 127.111623,
       "cafe_description": "아인슈페너가 맛있는 집으로 12월라테와 함께 시그니처 메뉴다. 브라질무산소발효커피, 콜롬비아게이샤워시드, 온두라스스내셔널위너 등 다양한 종류의 필터 커피도 추천할 만하다. 티라미수를 비롯한 디저트 메뉴도 다양하게 있다.",
-      "likeIt": {
-        "user_cafe_liked": true,
-        "count": 43
-      },
-      "user_beenthere": false,
+      "cafe_img": "",
+      "like_cnt": 114,
+      "user_liked": 1,
+      "review_cnt": 32,
+      "user_beenthere": 0,
       "keywords": [
         {
           "keyword_name": "커피에 대한 설명",
@@ -206,149 +209,294 @@
     },
     {
       "cafe_id": 3,
-      "cafe_name_pr": "나무사이로",
+      "cafe_name_pr": "김대기 커피스쿨",
       "cafe_name_sc": "",
-      "cafe_address": "서울특별시 종로구 사직로8길 21",
-      "cafe_region": "내자동",
-      "cafe_latitude": 37.5761744,
-      "cafe_longitude": 126.9711353,
-      "cafe_description": "전통 한옥 리뉴얼, 인테리어가 좋은 곳"
+      "cafe_region": "송파",
+      "cafe_address_dong": "(가락동)",
+      "cafe_address": "서울 송파구 중대로10길 7-1",
+      "cafe_type": "로스터리",
+      "cafe_latitude": 37.49321734,
+      "cafe_longitude": 127.1220155,
+      "cafe_description": "커피교육, 스페셜커피, 커피여행, 창업컨설팅 등 커피에 관하여 모든것을 취급하고 있습니다.",
+      "cafe_img": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=f400_300&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210108_189%2F1610095090698jzQ6D_JPEG%2FIMG_2325.jpg",
+      "like_cnt": 333,
+      "user_liked": 1,
+      "review_cnt": 333,
+      "user_beenthere": 1,
+      "cafe_keyword": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 12,
+          "keyword_name": "추출도구 선택 가능"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "cafe_opTime": [
+        {
+          "operation_day": "월",
+          "operation_time": "정기휴무"
+        },
+        {
+          "operation_day": "화~토",
+          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "operation_day": "일",
+          "operation_time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 4,
-      "cafe_name_pr": "데바스테이트",
-      "cafe_name_sc": "devastate",
-      "cafe_region": "청담",
-      "cafe_address": "서울특별시 강남구 선릉로162길 51 (청담동)",
-      "cafe_latitude": 37.5229625,
-      "cafe_longitude": 127.0498309,
-      "cafe_description": ""
+      "cafe_name_pr": "나무사이로",
+      "cafe_name_sc": "",
+      "cafe_region": "종로",
+      "cafe_address_dong": "(내자동)",
+      "cafe_address": "서울특별시 종로구 사직로8길 21",
+      "cafe_type": "",
+      "cafe_latitude": 37.5761744,
+      "cafe_longitude": 126.9711353,
+      "like_cnt": 44,
+      "user_liked": 0,
+      "review_cnt": 44,
+      "user_beenthere": 0,
+      "cafe_keyword": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 12,
+          "keyword_name": "추출도구 선택 가능"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "cafe_opTime": [
+        {
+          "operation_day": "월",
+          "operation_time": "정기휴무"
+        },
+        {
+          "operation_day": "화~토",
+          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "operation_day": "일",
+          "operation_time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 5,
-      "cafe_name_pr": "디폴트밸류",
-      "cafe_name_sc": "default value",
-      "cafe_region": "서대문",
-      "cafe_address": "서울특별시 서대문구 성산로 333 (연희동)",
-      "cafe_latitude": 37.5661525,
-      "cafe_longitude": 126.9273379,
-      "cafe_description": "브루잉을 사이폰으로 추출하는 곳, 다양한 하우스 블렌드 선택가능"
+      "cafe_name_pr": "데바스테이트",
+      "cafe_name_sc": "devastate",
+      "cafe_region": "압구정, 청담",
+      "cafe_address_dong": "(청담동)",
+      "cafe_address": "서울특별시 강남구 선릉로162길 51",
+      "cafe_type": "",
+      "cafe_latitude": 37.5229625,
+      "cafe_longitude": 127.0498309,
+      "like_cnt": 55,
+      "user_liked": 0,
+      "review_cnt": 55,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 6,
-      "cafe_name_pr": "메쉬커피",
-      "cafe_name_sc": "Mesh Coffee",
-      "cafe_region": "성수",
-      "cafe_address": "서울특별시 성동구 서울숲길 43 (성수동1가)",
-      "cafe_latitude": 37.5480807,
-      "cafe_longitude": 127.0424403,
-      "cafe_description": "테이크아웃 전문점"
+      "cafe_name_pr": "디폴트밸류",
+      "cafe_name_sc": "default value",
+      "cafe_region": "서대문",
+      "cafe_address_dong": "(연희동)",
+      "cafe_address": "서울특별시 서대문구 성산로 333",
+      "cafe_type": "",
+      "cafe_latitude": 37.5661525,
+      "cafe_longitude": 126.9273379,
+      "like_cnt": 66,
+      "user_liked": 0,
+      "review_cnt": 66,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 7,
-      "cafe_name_pr": "딥블루레이크",
-      "cafe_name_sc": "Deep blue lake",
-      "cafe_region": "망원",
-      "cafe_address": "서울특별시 마포구 포은로6길 11 (망원동)",
-      "cafe_latitude": 37.5557753,
-      "cafe_longitude": 126.9056354,
-      "cafe_description": "원두구매고객에게 음료 무료, 협소한 공간, 딥블루 컬러의 3층 건물 외관이 인상적인 스페셜티 커피 전문점. 북유럽 스타일의 라이트 로스팅을 추구하는 곳"
+      "cafe_name_pr": "메쉬커피",
+      "cafe_name_sc": "Mesh Coffee",
+      "cafe_region": "성수",
+      "cafe_address_dong": "(성수동1가)",
+      "cafe_address": "서울특별시 성동구 서울숲길 43",
+      "cafe_type": "",
+      "cafe_latitude": 37.5480807,
+      "cafe_longitude": 127.0424403,
+      "like_cnt": 77,
+      "user_liked": 0,
+      "review_cnt": 77,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 8,
-      "cafe_name_pr": "모모스커피 ",
-      "cafe_name_sc": "Momos",
-      "cafe_region": "부산",
-      "cafe_address": "부산광역시 금정구 오시게로 20 (부곡동)",
-      "cafe_latitude": 35.2192318,
-      "cafe_longitude": 129.0864874,
-      "cafe_description": "오션뷰, 항구뷰"
+      "cafe_name_pr": "딥블루레이크",
+      "cafe_name_sc": "Deep blue lake",
+      "cafe_region": "망원",
+      "cafe_address_dong": "(망원동)",
+      "cafe_address": "서울특별시 마포구 포은로6길 11",
+      "cafe_type": "",
+      "cafe_latitude": 37.5557753,
+      "cafe_longitude": 126.9056354,
+      "like_cnt": 88,
+      "user_liked": 0,
+      "review_cnt": 88,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 9,
-      "cafe_name_pr": "커피몽타주",
-      "cafe_name_sc": "Coffee Montage",
-      "cafe_region": "강동",
-      "cafe_address": "서울특별시 강동구 올림픽로48길 23-12 (성내동) 상지빌딩",
-      "cafe_latitude": 37.5294864,
-      "cafe_longitude": 127.1218454,
-      "cafe_description": "에스프레소 머신은 달라코르테 XT 3그룹이며, 브루잉은 싱글오리진 원두 2가지 중 선택할 수 있다. 추출 도구는 재현성을 위하여 하리오 V60, 한 가지 추출 도구를 사용한다. "
+      "cafe_name_pr": "모모스커피 ",
+      "cafe_name_sc": "Momos",
+      "cafe_region": "부산",
+      "cafe_address_dong": "(부곡동)",
+      "cafe_address": "부산광역시 금정구 오시게로 20",
+      "cafe_type": "",
+      "cafe_latitude": 35.2192318,
+      "cafe_longitude": 129.0864874,
+      "like_cnt": 99,
+      "user_liked": 0,
+      "review_cnt": 99,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 10,
-      "cafe_name_pr": "커피 템플",
-      "cafe_name_sc": "Coffee Temple",
-      "cafe_region": "제주",
-      "cafe_address": "제주특별자치도 제주시 영평길 269 (월평동)",
-      "cafe_latitude": 33.478135,
-      "cafe_longitude": 126.57017,
-
-      "cafe_description": ""
+      "cafe_name_pr": "커피몽타주",
+      "cafe_name_sc": "Coffee Montage",
+      "cafe_region": "강동",
+      "cafe_address_dong": "(성내동)",
+      "cafe_address": "서울특별시 강동구 올림픽로48길 23-12",
+      "cafe_type": "",
+      "cafe_latitude": 37.5294864,
+      "cafe_longitude": 127.1218454,
+      "like_cnt": 100,
+      "user_liked": 0,
+      "review_cnt": 100,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 11,
-      "cafe_name_pr": "밀로커피로스터스",
-      "cafe_name_sc": "millo coffee roasters",
-      "cafe_region": "홍대",
-      "cafe_address": "서울특별시 마포구 양화로 18안길 36 (동교동)",
-      "cafe_latitude": 37.5570165,
-      "cafe_longitude": 126.9265929,
-
-      "cafe_description": "시그니처 메뉴인 몽블랑이 유명 (처음 방문한 고객들은 몽블랑을 가장 많이 시키는 것으로 보임). 일본의 조용한 동네 구석에 자리 잡은 카페 같은 분위기를 풍기는 곳"
+      "cafe_name_pr": "커피 템플",
+      "cafe_name_sc": "Coffee Temple",
+      "cafe_region": "제주",
+      "cafe_address_dong": "(월평동)",
+      "cafe_address": "제주특별자치도 제주시 영평길 269",
+      "cafe_type": "",
+      "cafe_latitude": 33.478135,
+      "cafe_longitude": 126.57017,
+      "like_cnt": 101,
+      "user_liked": 0,
+      "review_cnt": 101,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 12,
-      "cafe_name_pr": "보헤미안박이추커피",
-      "cafe_name_sc": "",
-      "cafe_region": "강원",
-      "cafe_address": "강원도 강릉시 연곡면 홍질목길 55-11",
-      "cafe_latitude": 37.8645982,
-      "cafe_longitude": 128.8423849,
-      "cafe_description": "구형 열풍 로스터를 사용한 프렌치 로스팅으로 원두를 강하게 로스팅하는 것이 특징"
+      "cafe_name_pr": "밀로커피로스터스",
+      "cafe_name_sc": "millo coffee roasters",
+      "cafe_region": "홍대",
+      "cafe_address_dong": "(동교동)",
+      "cafe_address": "서울특별시 마포구 양화로 18안길 36",
+      "cafe_type": "",
+      "cafe_latitude": 37.5570165,
+      "cafe_longitude": 126.9265929,
+      "like_cnt": 102,
+      "user_liked": 0,
+      "review_cnt": 102,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 13,
-      "cafe_name_pr": "유의미 커피로스터즈",
+      "cafe_name_pr": "보헤미안박이추커피",
       "cafe_name_sc": "",
-      "cafe_region": "경기",
-      "cafe_address": "경기도 화성시 동탄대로 469-12 KR 앨리스빌 1085호",
-      "cafe_latitude": 37.1964891,
-      "cafe_longitude": 127.0972802,
-
-      "cafe_description": ""
+      "cafe_region": "강원",
+      "cafe_address_dong": "",
+      "cafe_address": "강원도 강릉시 연곡면 홍질목길 55-11",
+      "cafe_type": "",
+      "cafe_latitude": 37.8645982,
+      "cafe_longitude": 128.8423849,
+      "like_cnt": 103,
+      "user_liked": 0,
+      "review_cnt": 103,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 14,
-      "cafe_name_pr": "180커피로스터스",
-      "cafe_name_sc": "180 Coffee Roasters",
+      "cafe_name_pr": "유의미 커피로스터즈",
+      "cafe_name_sc": "",
       "cafe_region": "경기",
-      "cafe_address": "경기도 성남시 분당구 문정로144번길 4 (율동)",
-      "cafe_latitude": 37.3825129,
-      "cafe_longitude": 127.1516272,
-
-      "cafe_description": ""
+      "cafe_address_dong": "",
+      "cafe_address": "경기도 화성시 동탄대로 469-12 KR 앨리스빌 1085호",
+      "cafe_type": "",
+      "cafe_latitude": 37.1964891,
+      "cafe_longitude": 127.0972802,
+      "like_cnt": 104,
+      "user_liked": 0,
+      "review_cnt": 104,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 15,
-      "cafe_name_pr": "헬카페로스터즈",
-      "cafe_name_sc": "HELL CAFE ROASTERS",
-      "cafe_region": "서울",
-      "cafe_address": "서울특별시 용산구 보광로 76 (보광동)",
-      "cafe_latitude": 37.5302764,
-      "cafe_longitude": 126.9969941,
-
-      "cafe_description": "강배전 로스팅으로 유명함, 커피에 대한 고집 있는 듯, 불친절하다는 리뷰 속출"
+      "cafe_name_pr": "180커피로스터스",
+      "cafe_name_sc": "180 Coffee Roasters",
+      "cafe_region": "경기",
+      "cafe_address_dong": "(율동)",
+      "cafe_address": "경기도 성남시 분당구 문정로144번길 4",
+      "cafe_type": "",
+      "cafe_latitude": 37.3825129,
+      "cafe_longitude": 127.1516272,
+      "like_cnt": 105,
+      "user_liked": 0,
+      "review_cnt": 105,
+      "user_beenthere": 0
     },
     {
       "cafe_id": 16,
+      "cafe_name_pr": "헬카페로스터즈",
+      "cafe_name_sc": "HELL CAFE ROASTERS",
+      "cafe_region": "용산, 이태원",
+      "cafe_address_dong": "(보광동)",
+      "cafe_address": "서울특별시 용산구 보광로 76",
+      "cafe_type": "",
+      "cafe_latitude": 37.5302764,
+      "cafe_longitude": 126.9969941,
+      "like_cnt": 106,
+      "user_liked": 0,
+      "review_cnt": 106,
+      "user_beenthere": 0
+    },
+    {
+      "cafe_id": 17,
       "cafe_name_pr": "리사르커피로스터스",
       "cafe_name_sc": "LEESAR COFFEE ROASTERS",
-      "cafe_region": "서울",
-      "cafe_address": "서울특별시 중구 다산로8길 16-7 (신당동)",
+      "cafe_region": "중구",
+      "cafe_address_dong": "(신당동)",
+      "cafe_address": "서울특별시 중구 다산로8길 16-7",
+      "cafe_type": "",
       "cafe_latitude": 37.5524436,
       "cafe_longitude": 127.0104206,
-
-      "cafe_description": "오전 오후 3시간씩 영업, 입식, 한국에서 최초로 이탈리안 에스프레소 바 소개('12년)"
+      "like_cnt": 107,
+      "user_liked": 0,
+      "review_cnt": 107,
+      "user_beenthere": 0
     }
   ],
   "cafe": [
@@ -696,7 +844,7 @@
       "cafe_id": 1,
       "user_id": 3,
       "user_name": "무",
-      "user_thumbnail": "https://w.namu.la/s/b218d67d6b4b65fad38074425c1a3e2d5397260382434a1395c8863b2047f35044cb055bf8458dd3506ae38bf061db2bdbbc38d672baab01cb8113531ea918c06a35ba05736510b574f8a24bcec19081cb20873c5d97ec1271201c0a08e1b771",
+      "user_thumbnail": "https://picsum.photos/32",
       "menu_name": "브라질 아이피 옐로우버본 내추럴",
       "menu_aromanote": "감귤,살구,볶은 땅콩,캐러멜",
       "menu_type": "br",
@@ -744,7 +892,7 @@
         {
           "image_review_type": "g",
           "image_review_url": "url",
-          "thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+          "thumbnail": "https://picsum.photos/200"
         },
         {
           "image_review_type": "g",
@@ -934,11 +1082,11 @@
     {
       "cnote_id": 1,
       "user_id": 1,
-      "cnote_title": "두시간 걸려 서울 갈 필요 없다 안산으로 모여",
+      "cnote_title": "송파구 오래된 로스터리 3곳",
       "user_name": "Marilyn",
       "user_thumbnail": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg",
       "cnote_content": "미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는 것이라고...",
-      "cnote_thumbnail": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-48729525/original/f62e1b1a-d6af-438b-82ce-95c51a4e0ca1.jpeg?im_w=720",
+      "cnote_thumbnail": "https://picsum.photos/200",
       "created_at": "2022-06-15 12:24:55",
       "user_cnote_liked": true,
       "cnote_liked_cnt": 142,

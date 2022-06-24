@@ -13,13 +13,13 @@
         </q-tabs>
 
         <!-- tab1: map-search -->
-        <q-list v-show="tab === 'search'">
+        <q-list v-show="tab === 'search'" class="column q-pa-sm">
           <q-input
             @keyup.enter="doSearch"
             v-model="search"
             dense
             placeholder="키워드 / 지역으로 검색"
-            class="q-mx-auto q-my-sm text-grey-5"
+            class="text-center q-px-auto text-grey-5"
             style="width: 90%"
             hint="키워드 / 지역으로 검색하세요"
           >
@@ -158,7 +158,7 @@ export default defineComponent({
       currentLocation: null,
       locationLoading: false,
       search: '',
-      drawerOpen: true,
+      drawerOpen: false,
       tab: 'search', // 'search', 'mylist',
       searching: false,
       targetCafe: null,
