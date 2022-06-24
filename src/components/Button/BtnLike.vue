@@ -29,7 +29,7 @@ export default {
     like_what: { type: String, required: true }, // 'review' or 'cnote' or 'cafe'
     id_what: { type: Number, required: true }, // 'review_id' or 'cnote_id' or 'cafe_id'
     is_liked: {
-      type: Boolean,
+      type: Number,
       required: true
     }, // 좋아요 했는지 여부
     likeit_cnt: {
@@ -45,7 +45,7 @@ export default {
     }
   },
   mounted() {
-    this.isLiked = this.is_liked
+    this.isLiked = this.is_liked === 1 ? true : false
     this.likeitCnt = this.likeit_cnt
   },
   methods: {

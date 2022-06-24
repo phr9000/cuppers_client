@@ -140,7 +140,7 @@
           "keyword_name": "COE 취급"
         }
       ],
-      "cafe_opTime": [
+      "opTime": [
         {
           "operation_day": "월",
           "operation_time": "정기휴무"
@@ -241,18 +241,18 @@
           "keyword_name": "COE 취급"
         }
       ],
-      "cafe_opTime": [
+      "opTime": [
         {
-          "operation_day": "월",
-          "operation_time": "정기휴무"
+          "day": "월",
+          "time": "정기휴무"
         },
         {
-          "operation_day": "화~토",
-          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
         },
         {
-          "operation_day": "일",
-          "operation_time": "정기휴무"
+          "day": "일",
+          "time": "정기휴무"
         }
       ]
     },
@@ -288,7 +288,7 @@
           "keyword_name": "COE 취급"
         }
       ],
-      "cafe_opTime": [
+      "opTime": [
         {
           "operation_day": "월",
           "operation_time": "정기휴무"

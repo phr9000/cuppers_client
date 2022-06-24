@@ -3,21 +3,26 @@
   <q-card class="card_cafe row overflow-hidden">
     <div class="col-5 q-pl-md q-py-md">
       <!-- style="max-width: 280px; max-height: 320px" -->
-      <q-img class="thumbnail" :ratio="3 / 4" :src="cafe.cafe_thumbnail" />
+      <q-img
+        height="200px"
+        class="thumbnail"
+        :ratio="3 / 4"
+        :src="cafe.cafe_img"
+      />
     </div>
 
     <div class="col-7">
       <q-card-section class="title_wrap">
         <div class="row justify-between items-start q-mb-xs">
           <div class="row items-center">
-            <div class="title text-left text-h5 q-mr-sm">
+            <div class="title text-left text-h6 q-mr-sm">
               {{ cafe.cafe_name_pr }}
             </div>
             <div class="row items-center">
               <span v-if="cafe.cafe_type === '로스터리'" class="icon_cafe_type"
-                ><q-icon size="xs" name="img:/icons/roastery.png" class=""
+                ><q-icon size="14px" name="img:/icons/roastery.png"
               /></span>
-              <span class="text-subtitle1 text-grey q-pt-xs">
+              <span class="text-subtitle2 text-grey q-pt-xs">
                 {{ cafe.cafe_region }}</span
               >
             </div>
@@ -41,13 +46,13 @@
             :user_id="1"
             :id_what="cafe.cafe_id"
             like_what="cafe"
-            :is_liked="cafe.likeIt.user_cafe_liked"
-            :likeit_cnt="cafe.likeIt.count"
+            :is_liked="cafe.user_liked"
+            :likeit_cnt="cafe.like_cnt"
           />
           <btn-review
             class="btn_review"
             :cafe_id="cafe.cafe_id"
-            :review_cnt="cafe.review_count"
+            :review_cnt="cafe.review_cnt"
           />
         </div>
         <div class="caption text-caption overflow-hidden">
@@ -79,8 +84,8 @@
           <q-icon size="xs" name="calendar_today" class="icon q-pt-xs" />
 
           <div class="cafe_keywords_wrap text_subtitle1 q-pt-xs">
-            {{ cafe.opTime.day }} :
-            {{ cafe.opTime.time }}
+            {{ cafe.opTime[0].day }} :
+            {{ cafe.opTime[0].time }}
           </div>
         </div>
       </q-card-section>
@@ -109,45 +114,53 @@ export default defineComponent({
       default: () => {
         return {
           cafe_id: 1,
-          cafe_name_pr: '커피앰비언스',
+          cafe_name_pr: '커피앰비언스 (송파구)',
           cafe_address: '서울 송파구 송이로17길 51',
-          cafe_region: '가락동',
+          cafe_region: '송파',
+          cafe_address_dong: '(가락동)',
+          cafe_type: '로스터리',
           cafe_latitude: 37.5015764,
           cafe_longitude: 127.124833,
           cafe_description:
             '‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.',
-          cafe_thumbnail:
+          cafe_img:
             'http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg',
-          review_count: 32,
-          cafe_type: '로스터리',
-          likeIt: {
-            user_cafe_liked: true,
-            count: 114
-          },
-          user_beenthere: false,
+          like_cnt: 114,
+          user_liked: 1,
+          review_cnt: 32,
+          user_beenthere: 0,
           keywords: [
             {
-              keyword_name: '커피에 대한 설명',
-              keyword_type: 'cafe'
+              keyword_id: 1,
+              keyword_name: '커피에 대한 설명'
             },
             {
-              keyword_name: '내추럴 커피',
-              keyword_type: 'cafe'
+              keyword_id: 11,
+              keyword_name: '내추럴 커피'
             },
             {
-              keyword_name: '추출도구 선택 가능',
-              keyword_type: 'cafe'
+              keyword_id: 12,
+              keyword_name: '추출도구 선택 가능'
             },
             {
-              keyword_name: '분위기가 좋은',
-              keyword_type: 'cafe'
+              keyword_id: 13,
+              keyword_name: 'COE 취급'
             }
           ],
-          // today only
-          opTime: {
-            day: '수',
-            time: '11:30 - 21:30 (21:00 라스트오더)'
-          }
+          opTime: [
+            {
+              day: '월',
+              time: '정기휴무'
+            },
+            {
+              day: '화~토',
+              time: '11:30 - 21:30 (21:00 라스트오더)'
+            },
+            {
+              day: '일',
+              time: '정기휴무'
+            }
+          ]
         }
       }
     },
