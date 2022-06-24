@@ -14,23 +14,29 @@
 
         <!-- tab1: map-search -->
         <q-list v-show="tab === 'search'" class="column q-pa-sm">
+          <!-- 검색창 -->
           <q-input
-            @keyup.enter="doSearch"
+            @keyup.enter="handleClickSearch"
             v-model="search"
             dense
             placeholder="키워드 / 지역으로 검색"
-            class="text-center q-px-auto text-grey-5"
-            style="width: 90%"
+            class="text-center text-grey-5"
+            style="width: 100%"
             hint="키워드 / 지역으로 검색하세요"
           >
             <template v-slot:prepend>
-              <q-btn @click="doSearch" round dense flat icon="search" />
+              <q-btn
+                @click="handleClickSearch"
+                round
+                dense
+                flat
+                icon="search"
+              />
             </template>
           </q-input>
-          <!-- <q-space />
-          <q-btn round dense flat icon="menu" class="q-mr-xs" /> -->
-          <!-- 검색 결과 표시 -->
-          <div class="q-ma-xs q-pa-xs custom_test radius_border">
+
+          <!-- 검색 결과 표시 (카페 카드) -->
+          <div class="q-my-xs q-pa-xs custom_test radius_border">
             <div v-for="cafe in cafes" :key="cafe.cafe_id">
               {{ cafe.cafe_name_pr }}
             </div>
@@ -81,15 +87,16 @@
       </div>
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
         <btn-basic
-          @click="searchTest('송파')"
+          @click="doSearch('송파')"
           color="secondary"
           label="송파 검색"
         />
         <btn-basic
-          @click="searchTest('강동')"
+          @click="doSearch('강동')"
           color="secondary"
           label="강동 검색"
         />
+        <btn-basic @click="test2()" color="secondary" label="지도 리셋?" />
         <btn-basic
           @click="clearAllMarkers"
           color="warning"
@@ -140,19 +147,19 @@ export default defineComponent({
     return {
       cafesRaw: null, // 현재 불러온 전체 카페 리스트
       cafes: [
-        {
-          cafe_id: 1,
-          cafe_name_pr: '커피앰비언스',
-          cafe_name_sc: '',
-          cafe_region: '송파',
-          cafe_address: '서울 송파구 송이로17길 51',
-          cafe_latitude: 37.5015764,
-          cafe_longitude: 127.124833,
-          cafe_phone: '02-449-9967',
-          cafe_description:
-            '‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.'
-          //latlng: new kakao.maps.LatLng(37.5015764, 127.124833)
-        }
+        // {
+        //   cafe_id: 1,
+        //   cafe_name_pr: '커피앰비언스',
+        //   cafe_name_sc: '',
+        //   cafe_region: '송파',
+        //   cafe_address: '서울 송파구 송이로17길 51',
+        //   cafe_latitude: 37.5015764,
+        //   cafe_longitude: 127.124833,
+        //   cafe_phone: '02-449-9967',
+        //   cafe_description:
+        //     '‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.'
+        //   //latlng: new kakao.maps.LatLng(37.5015764, 127.124833)
+        // }
       ], // 필터링된 카페 리스트
       map: null, // 카카오맵 인스턴스
       currentLocation: null,
@@ -220,49 +227,78 @@ export default defineComponent({
         this.cafes[i].marker.setMap(null)
       }
     },
-    searchTest(search) {
-      this.search = search
-      this.doSearch()
-    },
-    doSearch() {
+    handleClickSearch() {
+      console.log('handleClickSearch: ', this.search)
       if (this.cafes.length > 0) {
         // 모든 마커를 삭제
         this.clearAllMarkers()
       }
       if (this.search === '') {
         console.log('검색어를 입력하세요')
+        this.$q.dialog({
+          title: 'Error',
+          message: '검색어를 입력하세요.'
+        })
         return
       }
       if (this.searching === true) {
         return
       }
+      this.doSearch(this.search)
+    },
+    doSearch(search) {
+      console.log('doSearch:', search)
+      if (search !== this.search) {
+        this.search = search
+      }
       this.searching = true
-      console.log('doSearch: ', this.search)
 
       // cafeData로 부터 검색
-      this.cafes = this.cafesRaw.filter((cafe) => {
-        return cafe['cafe_region'] === this.search
-      })
+      // this.cafes = this.cafesRaw.filter((cafe) => {
+      //   return cafe['cafe_region'] === this.search
+      // })
+      let apiUrl = `${process.env.API}/cafeLocations?cafe_name_pr_like=${search}`
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.cafes = []
+          for (let i = 0; i < result.data.length; i++) {
+            const cafe = {
+              ...result.data[i],
+              latlng: new kakao.maps.LatLng(
+                result.data[i]['cafe_latitude'],
+                result.data[i]['cafe_longitude']
+              ),
+              marker: null
+            }
 
-      console.log(this.cafes)
-      if (this.cafes.length < 1) {
-        console.log('검색 결과가 없습니다')
-        this.$q.dialog({
-          title: 'Error',
-          message: '검색 결과가 없습니다.'
+            this.cafes.push(cafe)
+          }
+
+          // console.log(this.cafes)
+          if (this.cafes.length < 1) {
+            console.log('검색 결과가 없습니다. ', this.cafes.length)
+            this.$q.dialog({
+              title: 'Error',
+              message: '검색 결과가 없습니다.'
+            })
+          } else {
+            this.showCafesMarker()
+            this.setCafesBounds()
+          }
+          this.searching = false
+
+          // console.log(this.cafesRaw)
         })
-      } else {
-        this.showCafesMarker()
-        this.setCafesBounds()
-      }
-      this.searching = false
+        .catch((err) => {
+          console.log(err)
+        })
     },
     showCafesMarker() {
       // 지도에 여러개 마커 표시
       for (let i = 0; i < this.cafes.length; i++) {
         const cafe_id = this.cafes[i].cafe_id
         const position = this.cafes[i].latlng
-        console.log(cafe_id)
         // 마커를 생성합니다
         const marker = new kakao.maps.Marker({
           map: this.map, // 마커를 표시할 지도
@@ -281,7 +317,31 @@ export default defineComponent({
       // 지도에 여러개 마커 표시
     },
     test() {
-      console.log('test')
+      // 테스트
+      // cafes[0]에 앰비언스 마커 표시
+      console.log(this.cafes[0])
+      const position = new kakao.maps.LatLng(37.5015764, 127.124833)
+      // 마커를 생성합니다
+      const marker = new kakao.maps.Marker({
+        map: this.map, // 마커를 표시할 지도
+        position: position // 마커를 표시할 위치
+      })
+
+      // 마커 클릭 이벤트 등록
+      kakao.maps.event.addListener(marker, 'click', () => {
+        this.handleClickMarker(1, position)
+      })
+
+      this.cafes[0] = {
+        ...this.cafes[0],
+        latlng: position,
+        marker: marker
+      }
+      // console.log(this.cafes[0])
+      // 테스트 끝
+    },
+    test2() {
+      this.map.relayout()
     },
     handleClickMarker(cafe_id, position) {
       console.log('marker 클릭 : ', cafe_id, position)
@@ -308,32 +368,15 @@ export default defineComponent({
       this.map = new kakao.maps.Map(container, options) // 지도를 생성합니다
 
       // 지도를 생성한 이후 작업들
-      this.loadData()
+      // this.loadRawData() // 테스트
 
       // 테스트
-      // cafes[0]에 앰비언스 마커 표시
-      console.log(this.cafes[0])
-      const position = new kakao.maps.LatLng(37.5015764, 127.124833)
-      // 마커를 생성합니다
-      const marker = new kakao.maps.Marker({
-        map: this.map, // 마커를 표시할 지도
-        position: position // 마커를 표시할 위치
-      })
-
-      // 마커 클릭 이벤트 등록
-      kakao.maps.event.addListener(marker, 'click', () => {
-        this.handleClickMarker(1, position)
-      })
-
-      this.cafes[0] = {
-        ...this.cafes[0],
-        latlng: position,
-        marker: marker
-      }
-      // console.log(this.cafes[0])
+      //this.test()
       // 테스트 끝
+      // 앰비언스 검색 테스트
+      this.doSearch('앰비언스')
     },
-    loadData() {
+    loadRawData() {
       let apiUrl = `${process.env.API}/cafeLocations`
       this.$axios
         .get(apiUrl)
@@ -419,6 +462,13 @@ export default defineComponent({
     },
     toggleDrawer() {
       this.drawerOpen = !this.drawerOpen
+
+      // 좌측 drawer 줄어든 이후 지도 우측 빈 타일 보여지는 부분 수정
+      if (!this.drawerOpen) {
+        setTimeout(() => {
+          this.map.relayout()
+        }, 300)
+      }
     }
   }
 })
