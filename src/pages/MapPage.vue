@@ -5,7 +5,7 @@
       <div id="map"></div>
 
       <!-- 왼쪽 drawer -->
-      <q-drawer v-model="drawerOpen" show-if-above bordered>
+      <q-drawer width="382" v-model="drawerOpen" show-if-above bordered>
         <!-- tab -->
         <q-tabs v-model="tab" inline-label class="shadow-2">
           <q-tab name="search" icon="search" label="검색" />
@@ -13,14 +13,14 @@
         </q-tabs>
 
         <!-- tab1: map-search -->
-        <q-list v-show="tab === 'search'" class="column q-pa-sm">
+        <q-list v-show="tab === 'search'" class="column q-py-sm">
           <!-- 검색창 -->
           <q-input
             @keyup.enter="handleClickSearch"
             v-model="search"
             dense
             placeholder="키워드 / 지역으로 검색"
-            class="text-center text-grey-5"
+            class="text-center text-grey-5 q-px-md"
             style="width: 100%"
             hint="키워드 / 지역으로 검색하세요"
           >
@@ -36,9 +36,9 @@
           </q-input>
 
           <!-- 검색 결과 표시 (카페 카드) -->
-          <div class="q-my-xs q-pa-xs custom_test radius_border">
+          <div class="q-my-sm custom_test">
             <div v-for="cafe in cafes" :key="cafe.cafe_id">
-              {{ cafe.cafe_name_pr }}
+              <card-cafe-small />
             </div>
           </div>
         </q-list>
@@ -135,13 +135,15 @@ import { defineComponent } from 'vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import BtnIcon from 'src/components/Button/BtnIcon.vue'
 import CardCafeMap from 'src/components/Card/CardCafeMap.vue'
+import CardCafeSmall from 'src/components/Card/CardCafeSmall.vue'
 
 export default defineComponent({
   name: 'MapPage',
   components: {
     BtnBasic,
     BtnIcon,
-    CardCafeMap
+    CardCafeMap,
+    CardCafeSmall
   },
   data() {
     return {
@@ -463,12 +465,15 @@ export default defineComponent({
     toggleDrawer() {
       this.drawerOpen = !this.drawerOpen
 
+      setTimeout(() => {
+        this.map.relayout()
+      }, 300)
       // 좌측 drawer 줄어든 이후 지도 우측 빈 타일 보여지는 부분 수정
-      if (!this.drawerOpen) {
-        setTimeout(() => {
-          this.map.relayout()
-        }, 300)
-      }
+      // if (!this.drawerOpen) {
+      //   setTimeout(() => {
+      //     this.map.relayout()
+      //   }, 300)
+      // }
     }
   }
 })

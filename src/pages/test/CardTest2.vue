@@ -1,5 +1,12 @@
 <template>
   <q-page class="q-pa-sm">
+    <!-- CardCafe 카페카드(small) -->
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      <p>card-cafe 카페카드samll (검색결과리스트)</p>
+      <div class="row">
+        <div style="width: 382px"><card-cafe-small /></div>
+      </div>
+    </div>
     <!-- CardCafe 카페카드(block) -->
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>card-cafe 카페카드(block)</p>
@@ -33,9 +40,14 @@
 import { defineComponent } from 'vue'
 import CardCafeMap from 'src/components/Card/CardCafeMap.vue'
 import CardCafe from 'src/components/Card/CardCafe.vue'
+import CardCafeSmall from 'src/components/Card/CardCafeSmall.vue'
 
 export default defineComponent({
-  components: { CardCafeMap, CardCafe },
+  components: {
+    CardCafeMap,
+    CardCafe,
+    CardCafeSmall
+  },
   data() {
     return {}
   },
