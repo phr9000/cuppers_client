@@ -20,7 +20,7 @@ export default {
     user_id: { type: Number, required: true }, // 로그인한 사용자의 아이디
     cnote_id: { type: Number, required: true },
     is_marked: {
-      type: Boolean,
+      type: Number,
       required: true
     } // 북마크 했는지 여부
   },
@@ -30,7 +30,7 @@ export default {
     }
   },
   mounted() {
-    this.marked = this.is_marked
+    this.marked = this.is_marked === 1 ? true : false
   },
   methods: {
     handleCLick() {

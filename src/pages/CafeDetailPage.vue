@@ -27,7 +27,7 @@
                 :user_id="1"
                 :id_what="cafe.cafe_id"
                 like_what="cafe"
-                :is_liked="cafe.user_like"
+                :is_liked="cafe.user_liked"
                 :likeit_cnt="cafe.like_cnt"
               />
             </div>
@@ -162,7 +162,7 @@
                   <btn-basic
                     v-for="branch in cafe.branches"
                     :key="branch.cafe_id"
-                    :label="branch.branch_name"
+                    :label="branch.cafe_name_pr"
                     size="sm"
                     color="grey-5"
                     @click="clickBranch(branch.cafe_id)"
@@ -405,14 +405,16 @@ export default defineComponent({
     loadCafe(cafe_id) {
       this.loading = true
       // cafe info load
-      let apiUrl = `${process.env.API}/cafe/${cafe_id}`
+      // let apiUrl = `${process.env.API}/cafe/${cafe_id}` // json-server
+      let apiUrl = `${process.env.API}/cafe/${cafe_id}?user_id=2` // real-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
           this.cafe = result.data
 
           // 0,1 -> boolean
-          this.cafe.user_like = this.cafe.user_like === 1 ? true : false
+          // this.cafe.user_liked = this.cafe.user_liked === 1 ? true : false
+          // console.log(this.cafe.user_liked)
           this.cafe.user_beenthere =
             this.cafe.user_beenthere === 1 ? true : false
 
@@ -440,15 +442,8 @@ export default defineComponent({
           // 해당카페 모든 리뷰 호출 (1 page)
           this.getReviews(1) // 추후 (cafe_id, 1)로 수정
 
-          let apiUrl = `${process.env.API}/cnote`
-          this.$axios
-            .get(apiUrl)
-            .then((result) => {
-              this.cnotes = result.data
-            })
-            .catch((err) => {
-              console.log(err)
-            })
+          // 해당카페 모든 커핑노트 호출 (1 page)
+          this.getCnotes(1) // 추후 (cafe_id, 1)로 수정
 
           this.loading = false
         })
@@ -457,7 +452,8 @@ export default defineComponent({
         })
     },
     getImages(cafe_id) {
-      let apiUrl = `${process.env.API}/cafeImages/${cafe_id}?_limit=5`
+      let apiUrl = `http://localhost:3004/cafeImages/${cafe_id}?_limit=5` // json-server
+      // let apiUrl = `${process.env.API}/cafeImages/${cafe_id}?_limit=5` // real-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
@@ -474,11 +470,25 @@ export default defineComponent({
         })
     },
     getReviews(page) {
-      let apiUrl = `${process.env.API}/review?_page=${page}&_limit=4`
+      let apiUrl = `http://localhost:3004/review?_page=${page}&_limit=4`
+      // json-server
+      // let apiUrl = `${process.env.API}/review?_page=${page}&_limit=4` // real-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
           this.reviews = result.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getCnotes(page) {
+      let apiUrl = `http://localhost:3004/cnote` // json-server
+      // let apiUrl = `${process.env.API}/cnote` // real-server
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.cnotes = result.data
         })
         .catch((err) => {
           console.log(err)

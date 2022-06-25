@@ -103,14 +103,12 @@
               />
             </div>
             <div class="txt-area">
-              <div class="title">
-                두시간 걸려 서울 갈 필요 없다 안산으로 모여
-              </div>
+              <div class="title">미니멀리즘으로 사는것은 어렵지만</div>
               <div class="desc">
                 미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는
                 것이라고...
               </div>
-              <div class="writer">by 주하</div>
+              <div class="writer">by</div>
             </div>
             <div class="dim"></div>
           </li>
