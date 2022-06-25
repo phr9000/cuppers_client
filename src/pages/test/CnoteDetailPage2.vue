@@ -85,9 +85,9 @@
                     v-for="image in cnote"
                     :key="image.name"
                   >
-                    <!-- <div class="img-container">
-                      <img />
-                    </div> -->
+                    <div class="img-container">
+                      <img :src="image.cnoteImg" />
+                    </div>
                   </swiper-slide>
                 </swiper>
               </div>
@@ -176,6 +176,9 @@ export default {
         content:
           'Text in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaksText in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaks'
       },
+      img: {
+        cnoteImg: ''
+      },
       writeType: false,
       swiperOption: {
         slidesPerView: '3',
@@ -219,7 +222,22 @@ export default {
       })
       .catch((err) => {
         console.log(err)
-      })
+      }),
+      this.getCnoteImg()
+  },
+  methods: {
+    getCnoteImg() {
+      let apiUrl = 'localhost:3000/api/cnote/img/7'
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.cnoteImg = result.data
+          console.log(this.cnoteImg)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 }
 </script>
