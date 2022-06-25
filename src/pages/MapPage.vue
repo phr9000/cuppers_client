@@ -5,7 +5,7 @@
       <div id="map"></div>
 
       <!-- 왼쪽 drawer -->
-      <q-drawer width="382" v-model="drawerOpen" show-if-above bordered>
+      <q-drawer :width="382" v-model="drawerOpen" show-if-above bordered>
         <!-- tab -->
         <q-tabs v-model="tab" inline-label class="shadow-2">
           <q-tab name="search" icon="search" label="검색" />
@@ -34,11 +34,33 @@
               />
             </template>
           </q-input>
+          <div class="row q-px-md q-pt-sm">
+            <btn-basic
+              @click="doSearch('송파')"
+              color="secondary"
+              label="송파"
+            />
+            <btn-basic
+              @click="doSearch('강동')"
+              color="secondary"
+              label="강동"
+            />
+            <!-- <btn-basic
+              @click="doSearch('부산')"
+              color="secondary"
+              label="부산"
+            /> -->
+          </div>
 
           <!-- 검색 결과 표시 (카페 카드) -->
           <div class="q-my-sm custom_test">
             <div v-for="cafe in cafes" :key="cafe.cafe_id">
-              <card-cafe-small />
+              <card-cafe-small
+                :cafe="cafe"
+                :keywords="cafe.keywords"
+                :today="cafe.today"
+                @click="setTarget(cafe.cafe_id)"
+              />
             </div>
           </div>
         </q-list>
@@ -71,17 +93,18 @@
       />
 
       <!-- 마커 클릭시 표시되는 인포 윈도우 -->
-      <section v-if="targetCafe" class="info_window_wrap">
+      <section v-if="targetCafe" class="target_cafe_wrap">
         <card-cafe-map
-          @close="hideCard"
-          :title="targetCafe.cafe_name_pr"
-          :caption="targetCafe.cafe_description"
+          @close="clearTarget"
+          :cafe="targetCafe"
+          :keywords="targetCafe.keywords"
+          :today="targetCafe.today"
         />
       </section>
     </div>
 
     <!-- 테스트 영역 -->
-    <section>
+    <section v-if="false">
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
         현재위치: {{ currentLocation }}
       </div>
@@ -102,11 +125,11 @@
           color="warning"
           label="모든 마커 삭제"
         />
-        <btn-basic
-          @click="showCafeInfo(1)"
+        <!-- <btn-basic
+          @click="setTarget(1)"
           color="primary"
           label="마커 클릭/다시 클릭"
-        />
+        /> -->
       </div>
 
       <!-- 검색 결과 표시 -->
@@ -118,10 +141,7 @@
         </div>
       </div>
       <!-- 클릭한 카페 -->
-      <div
-        v-if="targetCafe && showCard"
-        class="q-ma-xs q-pa-xs custom_test radius_border"
-      >
+      <div v-if="targetCafe" class="q-ma-xs q-pa-xs custom_test radius_border">
         targetCafe
         <q-separator />
         {{ targetCafe.cafe_name_pr }}
@@ -170,8 +190,8 @@ export default defineComponent({
       drawerOpen: false,
       tab: 'search', // 'search', 'mylist',
       searching: false,
-      targetCafe: null,
-      showCard: false
+      targetCafe: null
+      // showCard: false
     }
   },
   computed: {
@@ -199,32 +219,22 @@ export default defineComponent({
     }
   },
   methods: {
-    hideCard() {
-      console.log('hide')
-      this.showCard = flase
-    },
     clearTarget() {
-      console.log('clearTarget')
       if (this.targetCafe) {
         this.targetCafe = null
-        this.showCard = flase
       }
     },
-    showCafeInfo(cafe_id) {
-      if (this.targetCafe) {
-        this.targetCafe = null
-      } else {
-        const find = this.cafes.filter((cafe) => {
-          return cafe['cafe_id'] === cafe_id
-        })[0]
-        console.log(find)
-        this.targetCafe = { ...find }
-        console.log(this.targetCafe)
-      }
+    setTarget(cafe_id) {
+      this.clearTarget()
+      const find = this.cafes.filter((cafe) => {
+        return cafe['cafe_id'] === cafe_id
+      })[0]
+      this.targetCafe = { ...find }
     },
     clearAllMarkers() {
+      this.clearTarget()
       // 모든 마커를 삭제
-      console.log('모든 마커를 삭제')
+      // console.log('모든 마커를 삭제')
       for (let i = 0; i < this.cafes.length; i++) {
         this.cafes[i].marker.setMap(null)
       }
@@ -249,6 +259,7 @@ export default defineComponent({
       this.doSearch(this.search)
     },
     doSearch(search) {
+      this.clearAllMarkers()
       console.log('doSearch:', search)
       if (search !== this.search) {
         this.search = search
@@ -259,19 +270,26 @@ export default defineComponent({
       // this.cafes = this.cafesRaw.filter((cafe) => {
       //   return cafe['cafe_region'] === this.search
       // })
-      let apiUrl = `${process.env.API}/cafeLocations?cafe_name_pr_like=${search}`
+      let apiUrl = `http://localhost:3004/cafeLocations?cafe_name_pr_like=${search}` // json-server
+      // let apiUrl = `${process.env.API}/????` // real-server
+
       this.$axios
         .get(apiUrl)
         .then((result) => {
           this.cafes = []
           for (let i = 0; i < result.data.length; i++) {
-            const cafe = {
+            let cafe = {
               ...result.data[i],
               latlng: new kakao.maps.LatLng(
                 result.data[i]['cafe_latitude'],
                 result.data[i]['cafe_longitude']
               ),
               marker: null
+            }
+            // console.log(cafe)
+            if (result.data[i].opTime) {
+              cafe = { ...cafe, today: result.data[i].opTime[0] }
+              // console.log(cafe)
             }
 
             this.cafes.push(cafe)
@@ -348,6 +366,7 @@ export default defineComponent({
     handleClickMarker(cafe_id, position) {
       console.log('marker 클릭 : ', cafe_id, position)
       this.map.panTo(position)
+      this.setTarget(cafe_id)
     },
     setCafesBounds() {
       // 지도 범위 재설정 하기
@@ -379,7 +398,8 @@ export default defineComponent({
       this.doSearch('앰비언스')
     },
     loadRawData() {
-      let apiUrl = `${process.env.API}/cafeLocations`
+      let apiUrl = `http://localhost:3004/cafeLocations` // json-server
+      // let apiUrl = `${process.env.API}/cafeLocations` // real-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
@@ -483,12 +503,12 @@ export default defineComponent({
 .map_wrap {
   position: relative;
   overflow: hidden;
-  // width: calc(100%-300px);
-  height: 500px;
+  // width: calc(100% - 382px);
+  height: calc(100vh - 50px);
 
   #map {
-    width: calc(100%-300px);
-    height: 500px;
+    width: 100%;
+    height: 100%;
   }
 
   .zoom_control {
@@ -526,11 +546,12 @@ export default defineComponent({
     z-index: 1;
   }
 
-  .info_window_wrap {
+  // 마커 클릭시 표시되는 인포 윈도우
+  .target_cafe_wrap {
     position: absolute;
     top: 15px;
     left: 15px;
-    width: 240px;
+    width: 300px;
     z-index: 1;
   }
 }

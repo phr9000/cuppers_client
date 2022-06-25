@@ -122,36 +122,40 @@
       "user_liked": 1,
       "review_cnt": 32,
       "user_beenthere": 0,
-      "cafe_keyword": [
+      "keywords": [
         {
           "keyword_id": 1,
-          "keyword_name": "커피에 대한 설명"
+          "keyword_name": "앰비언스",
+          "icon": null
         },
         {
-          "keyword_id": 11,
-          "keyword_name": "내추럴 커피"
+          "keyword_id": 4,
+          "keyword_name": "내추럴 커피",
+          "icon": null
         },
         {
-          "keyword_id": 12,
-          "keyword_name": "추출도구 선택 가능"
+          "keyword_id": 5,
+          "keyword_name": "추출도구 선택 가능",
+          "icon": null
         },
         {
-          "keyword_id": 13,
-          "keyword_name": "COE 취급"
+          "keyword_id": 21,
+          "keyword_name": "COE 취급",
+          "icon": null
         }
       ],
       "opTime": [
         {
-          "operation_day": "월",
-          "operation_time": "정기휴무"
+          "day": "월",
+          "time": "정기휴무"
         },
         {
-          "operation_day": "화~토",
-          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
         },
         {
-          "operation_day": "일",
-          "operation_time": "정기휴무"
+          "day": "일",
+          "time": "정기휴무"
         }
       ]
     },
@@ -165,45 +169,49 @@
       "cafe_latitude": 37.5088605,
       "cafe_longitude": 127.111623,
       "cafe_description": "아인슈페너가 맛있는 집으로 12월라테와 함께 시그니처 메뉴다. 브라질무산소발효커피, 콜롬비아게이샤워시드, 온두라스스내셔널위너 등 다양한 종류의 필터 커피도 추천할 만하다. 티라미수를 비롯한 디저트 메뉴도 다양하게 있다.",
-      "cafe_img": "",
+      "cafe_img": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbkw5iC%2FbtqDTFEOs0y%2FfBgh3Oq5d8RGHBrgMjJ4O1%2Fimg.png",
       "like_cnt": 114,
       "user_liked": 1,
       "review_cnt": 32,
       "user_beenthere": 0,
       "keywords": [
         {
-          "keyword_name": "커피에 대한 설명",
-          "keyword_type": "cafe"
+          "keyword_id": 1,
+          "keyword_name": "이월에 대한 설명",
+          "icon": null
         },
         {
+          "keyword_id": 4,
           "keyword_name": "내추럴 커피",
-          "keyword_type": "cafe"
+          "icon": null
         },
         {
-          "keyword_name": "책 읽기 좋은",
-          "keyword_type": "cafe"
+          "keyword_id": 5,
+          "keyword_name": "추출도구 선택 가능",
+          "icon": null
         },
         {
-          "keyword_name": "아인슈페너",
-          "keyword_type": "coffee"
+          "keyword_id": 21,
+          "keyword_name": "분위기가 좋은",
+          "icon": null
         }
       ],
-      "operationTime": [
+      "opTime": [
         {
-          "operation_day": "월~목",
-          "operation_time": "09:30~22:30"
+          "day": "월~목",
+          "time": "09:30~22:30"
         },
         {
-          "operation_day": "금, 토",
-          "operation_time": "09:30~23:00"
+          "day": "금, 토",
+          "time": "09:30~23:00"
         },
         {
-          "operation_day": "일",
-          "operation_time": "정기휴무"
+          "day": "일",
+          "time": "정기휴무"
         },
         {
-          "operation_day": "명절",
-          "operation_time": "명절 당일 휴무"
+          "day": "명절",
+          "time": "명절 당일 휴무"
         }
       ]
     },
@@ -223,7 +231,58 @@
       "user_liked": 1,
       "review_cnt": 333,
       "user_beenthere": 1,
-      "cafe_keyword": [
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명",
+          "icon": null
+        },
+        {
+          "keyword_id": 4,
+          "keyword_name": "발효 커피",
+          "icon": null
+        },
+        {
+          "keyword_id": 5,
+          "keyword_name": "다양한 원두",
+          "icon": null
+        },
+        {
+          "keyword_id": 21,
+          "keyword_name": "게이샤",
+          "icon": null
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
+    },
+    {
+      "cafe_id": 4,
+      "cafe_name_pr": "나무사이로",
+      "cafe_name_sc": "",
+      "cafe_region": "종로",
+      "cafe_address_dong": "(내자동)",
+      "cafe_address": "서울특별시 종로구 사직로8길 21",
+      "cafe_type": "",
+      "cafe_latitude": 37.5761744,
+      "cafe_longitude": 126.9711353,
+      "like_cnt": 44,
+      "user_liked": 0,
+      "review_cnt": 44,
+      "user_beenthere": 0,
+      "keywords": [
         {
           "keyword_id": 1,
           "keyword_name": "커피에 대한 설명"
@@ -257,20 +316,20 @@
       ]
     },
     {
-      "cafe_id": 4,
-      "cafe_name_pr": "나무사이로",
-      "cafe_name_sc": "",
-      "cafe_region": "종로",
-      "cafe_address_dong": "(내자동)",
-      "cafe_address": "서울특별시 종로구 사직로8길 21",
+      "cafe_id": 5,
+      "cafe_name_pr": "데바스테이트",
+      "cafe_name_sc": "devastate",
+      "cafe_region": "압구정, 청담",
+      "cafe_address_dong": "(청담동)",
+      "cafe_address": "서울특별시 강남구 선릉로162길 51",
       "cafe_type": "",
-      "cafe_latitude": 37.5761744,
-      "cafe_longitude": 126.9711353,
-      "like_cnt": 44,
+      "cafe_latitude": 37.5229625,
+      "cafe_longitude": 127.0498309,
+      "like_cnt": 55,
       "user_liked": 0,
-      "review_cnt": 44,
+      "review_cnt": 55,
       "user_beenthere": 0,
-      "cafe_keyword": [
+      "keywords": [
         {
           "keyword_id": 1,
           "keyword_name": "커피에 대한 설명"
@@ -290,33 +349,18 @@
       ],
       "opTime": [
         {
-          "operation_day": "월",
-          "operation_time": "정기휴무"
+          "day": "월",
+          "time": "정기휴무"
         },
         {
-          "operation_day": "화~토",
-          "operation_time": "11:30 - 21:30 (21:00 라스트오더)"
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
         },
         {
-          "operation_day": "일",
-          "operation_time": "정기휴무"
+          "day": "일",
+          "time": "정기휴무"
         }
       ]
-    },
-    {
-      "cafe_id": 5,
-      "cafe_name_pr": "데바스테이트",
-      "cafe_name_sc": "devastate",
-      "cafe_region": "압구정, 청담",
-      "cafe_address_dong": "(청담동)",
-      "cafe_address": "서울특별시 강남구 선릉로162길 51",
-      "cafe_type": "",
-      "cafe_latitude": 37.5229625,
-      "cafe_longitude": 127.0498309,
-      "like_cnt": 55,
-      "user_liked": 0,
-      "review_cnt": 55,
-      "user_beenthere": 0
     },
     {
       "cafe_id": 6,
@@ -331,7 +375,39 @@
       "like_cnt": 66,
       "user_liked": 0,
       "review_cnt": 66,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 12,
+          "keyword_name": "추출도구 선택 가능"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 7,
@@ -346,7 +422,39 @@
       "like_cnt": 77,
       "user_liked": 0,
       "review_cnt": 77,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 12,
+          "keyword_name": "추출도구 선택 가능"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 8,
@@ -361,7 +469,39 @@
       "like_cnt": 88,
       "user_liked": 0,
       "review_cnt": 88,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 12,
+          "keyword_name": "추출도구 선택 가능"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 9,
@@ -376,7 +516,39 @@
       "like_cnt": 99,
       "user_liked": 0,
       "review_cnt": 99,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 12,
+          "keyword_name": "추출도구 선택 가능"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 10,
@@ -388,10 +560,40 @@
       "cafe_type": "",
       "cafe_latitude": 37.5294864,
       "cafe_longitude": 127.1218454,
+      "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
+      "cafe_img": "https://mblogthumb-phinf.pstatic.net/MjAyMDA1MzFfMjQ3/MDAxNTkwOTMzNjk1MDcw.kvI-vWQxjZf8LnJodAzAvqPAFQfOkURowH9C3QamgHcg.hFmdNlNUTXcd9JCCo950FYdjZr4Ku_H45XfK7zJu-esg.JPEG.phantasma86/KakaoTalk_20200531_131457452_12.jpg?type=w800",
       "like_cnt": 100,
       "user_liked": 0,
       "review_cnt": 100,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 11,
@@ -406,7 +608,35 @@
       "like_cnt": 101,
       "user_liked": 0,
       "review_cnt": 101,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 12,
@@ -421,7 +651,35 @@
       "like_cnt": 102,
       "user_liked": 0,
       "review_cnt": 102,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 13,
@@ -436,7 +694,35 @@
       "like_cnt": 103,
       "user_liked": 0,
       "review_cnt": 103,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 14,
@@ -451,7 +737,35 @@
       "like_cnt": 104,
       "user_liked": 0,
       "review_cnt": 104,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 15,
@@ -466,7 +780,35 @@
       "like_cnt": 105,
       "user_liked": 0,
       "review_cnt": 105,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 16,
@@ -481,7 +823,35 @@
       "like_cnt": 106,
       "user_liked": 0,
       "review_cnt": 106,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     },
     {
       "cafe_id": 17,
@@ -496,13 +866,41 @@
       "like_cnt": 107,
       "user_liked": 0,
       "review_cnt": 107,
-      "user_beenthere": 0
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월",
+          "time": "정기휴무"
+        },
+        {
+          "day": "화~토",
+          "time": "11:30 - 21:30 (21:00 라스트오더)"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        }
+      ]
     }
   ],
   "cafe": [
     {
-      "id": 1,
-      "cafe_id": 1,
+      "id": 4,
+      "cafe_id": 4,
       "cafe_name_pr": "커피앰비언스",
       "cafe_name_sc": "",
       "cafe_address": "서울 송파구 송이로17길 51",
@@ -620,11 +1018,11 @@
       ]
     },
     {
-      "id": 404,
-      "cafe_id": 404,
+      "id": 21,
+      "cafe_id": 21,
       "cafe_name_pr": "커피앰비언스 송리단길점",
       "cafe_name_sc": "",
-      "cafe_address": "서울 송파구 송리단길 404",
+      "cafe_address": "서울 송파구 송리단길 21",
       "cafe_region": "송파동",
       "cafe_latitude": 37.5015764,
       "cafe_longitude": 127.124833,
@@ -762,8 +1160,8 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_review_liked": true,
-      "review_liked_cnt": 142,
+      "user_review_liked": 1,
+      "review_liked_cnt": 55,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -814,8 +1212,8 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_review_liked": true,
-      "review_liked_cnt": 142,
+      "user_review_liked": 1,
+      "review_liked_cnt": 553,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -886,7 +1284,7 @@
           "keyword_type": "coffee"
         }
       ],
-      "user_review_liked": true,
+      "user_review_liked": 1,
       "review_liked_cnt": 142,
       "reivew_image": [
         {
@@ -942,7 +1340,7 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_review_liked": true,
+      "user_review_liked": 1,
       "review_liked_cnt": 142,
       "reivew_image": [
         {
@@ -997,8 +1395,8 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_review_liked": true,
-      "review_liked_cnt": 142,
+      "user_review_liked": 0,
+      "review_liked_cnt": 43,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1052,8 +1450,8 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_review_liked": true,
-      "review_liked_cnt": 142,
+      "user_review_liked": 1,
+      "review_liked_cnt": 13,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1088,9 +1486,9 @@
       "cnote_content": "미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는 것이라고...",
       "cnote_thumbnail": "https://picsum.photos/200",
       "created_at": "2022-06-15 12:24:55",
-      "user_cnote_liked": true,
+      "user_cnote_liked": 1,
       "cnote_liked_cnt": 142,
-      "user_cnote_marked": false
+      "user_cnote_marked": 0
     },
     {
       "cnote_id": 2,
@@ -1101,9 +1499,9 @@
       "cnote_content": "생각해보면 돌아봤을 때 더 기억에 더 남는 장소가 있다. abc 카페가 나에겐 그런 카페인 것 같다..",
       "cnote_thumbnail": "https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg",
       "created_at": "2022-06-11 12:24:55",
-      "user_cnote_liked": false,
+      "user_cnote_liked": 0,
       "cnote_liked_cnt": 52,
-      "user_cnote_marked": false
+      "user_cnote_marked": 1
     },
     {
       "cnote_id": 1,
@@ -1114,9 +1512,9 @@
       "cnote_content": "미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는 것이라고...미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는 것이라고...",
       "cnote_thumbnail": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-48729525/original/f62e1b1a-d6af-438b-82ce-95c51a4e0ca1.jpeg?im_w=720",
       "created_at": "2022-06-15 12:24:55",
-      "user_cnote_liked": false,
+      "user_cnote_liked": 0,
       "cnote_liked_cnt": 32,
-      "user_cnote_marked": false
+      "user_cnote_marked": 0
     }
   ],
   "user": [
@@ -1127,7 +1525,7 @@
       "user_email": "cuppers@cuppers.com",
       "user_lv": 1,
       "user_introduce": "Hello",
-      "user_thumbnail": "https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83"
+      "user_thumbnail_url": "https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83"
     },
     {
       "id": 2,
@@ -1168,7 +1566,7 @@
   ],
   "cafeImages": [
     {
-      "id": 1,
+      "id": 4,
       "images": [
         {
           "type": "g",

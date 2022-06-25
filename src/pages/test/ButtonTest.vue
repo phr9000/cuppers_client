@@ -3,7 +3,7 @@
     버튼 테스트
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>btn-basic</p>
-      <btn-basic to="/cafe/1" label="앰비언스 상세" />
+      <btn-basic to="/cafe/4" label="앰비언스 상세" />
       <btn-basic to="/test/card" color="secondary" label="카드 테스트" />
       <btn-basic to="/test/card2" label="카드 테스트2" />
       <btn-basic to="/test/icon" color="dark" label="아이콘 테스트" />

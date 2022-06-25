@@ -18,6 +18,7 @@
             <div class="title text-left text-h6 q-mr-sm">
               {{ cafe.cafe_name_pr }}
             </div>
+            <!-- type and region -->
             <div class="row items-center">
               <span v-if="cafe.cafe_type === '로스터리'" class="icon_cafe_type"
                 ><q-icon size="14px" name="img:/icons/roastery.png"
