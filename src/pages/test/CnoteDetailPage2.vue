@@ -77,16 +77,15 @@
                   class="imgSwiper"
                   ref="mySwiper"
                   :options="swiperOption"
-                  @slideChange="slideChangeTransitionStart"
                   :pagination="{ type: 'progressbar' }"
                 >
                   <swiper-slide
                     class="slide"
-                    v-for="image in cnote"
-                    :key="image.name"
+                    v-for="cnoteImg in cnoteImgs"
+                    :key="cnoteImg.images_cnote_id"
                   >
                     <div class="img-container">
-                      <img :src="image.cnoteImg" />
+                      <img :src="cnoteImg.images_cnote_url" />
                     </div>
                   </swiper-slide>
                 </swiper>
@@ -177,7 +176,7 @@ export default {
           'Text in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaksText in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaks'
       },
       img: {
-        cnoteImg: ''
+        cnoteImgs: ''
       },
       writeType: false,
       swiperOption: {
@@ -191,48 +190,31 @@ export default {
       }
     }
   },
-  created() {
-    let apiUrl = 'http://localhost:3000//1'
-    this.$axios
-      .get(apiUrl)
-      .then((result) => {
-        this.cafe = result.data
-        this.cafe.cafe_description = this.cafe.cafe_description.replace(
-          '#',
-          '<br>'
-        )
-        if (this.cafe.menu) {
-          this.menuBrewing = this.cafe.menu.filter((m) => m.menu_type === 'br')
-          this.menuVariation = this.cafe.menu.filter(
-            (menu) => menu.menu_type !== 'br'
-          )
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  },
+  created() {},
   mounted() {
-    let apiUrl = 'localhost:3000/api/cnote/detail/7'
-    this.$axios
-      .get(apiUrl)
-      .then((result) => {
-        this.cnotedetail = result.data
-        console.log(this.cnotedtail)
-      })
-      .catch((err) => {
-        console.log(err)
-      }),
-      this.getCnoteImg()
+    this.getcnoteDetail()
+    this.getCnoteImg()
   },
   methods: {
-    getCnoteImg() {
-      let apiUrl = 'localhost:3000/api/cnote/img/7'
+    getcnoteDetail() {
+      let apiUrl = 'http://localhost:3000/api/cnote/detail/7'
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          this.cnoteImg = result.data
-          console.log(this.cnoteImg)
+          this.cnotedetail = result.data
+          console.log(this.cnotedtail)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getCnoteImg() {
+      let apiUrl = 'http://localhost:3000/api/cnote/img/7'
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.cnoteImgs = result.data
+          console.log(this.cnoteImgs)
         })
         .catch((err) => {
           console.log(err)
