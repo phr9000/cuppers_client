@@ -70,37 +70,14 @@
           </div>
           <div class="bottom">
             <!-- 선택한 사진 영역 -->
-            <div class="img-container">
+            <!-- <div class="img-container">
               <h3 class="title">선택한 사진(슬라이드)</h3>
-              <div class="img-inner">
-                <swiper
-                  class="imgSwiper"
-                  ref="mySwiper"
-                  :options="swiperOption"
-                  :pagination="{ type: 'progressbar' }"
-                >
-                  <swiper-slide
-                    class="slide"
-                    v-for="cnoteImg in cnoteImgs"
-                    :key="cnoteImg.images_cnote_id"
-                  >
-                    <div class="img-container">
-                      <img :src="cnoteImg.images_cnote_url" />
-                    </div>
-                  </swiper-slide>
-                </swiper>
-              </div>
+              <div class="img-inner"></div>
+            </div> -->
+
+            <div v-for="cnoteImg in cnoteImgs" :key="cnoteImg.images_cnote_id">
+              <img :src="cnoteImg.images_cnote_url" />
             </div>
-            <!-- 커핑노트 카드 영역 -->
-            <!-- 220622 회의때 의논하기 빼는게 더 나은거 같아서.. 아님 디자인 수정 !!!!!!! -->
-            <!-- <ul>
-              <li class="cafe-card-container">
-                <card-cup-note></card-cup-note>
-              </li>
-              <li class="cafe-card-container">
-                <card-cup-note></card-cup-note>
-              </li>
-            </ul> -->
           </div>
         </div>
         <!-- 유저 소개 영역 -->
@@ -129,14 +106,14 @@ import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
 // import CardCupNote from 'src/components/Card/CardCupNote.vue'
 // import
 import { ref } from 'vue'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css'
+// import { Swiper, SwiperSlide } from 'swiper/vue'
+// import 'swiper/css'
 import SwiperCore, { Pagination } from 'swiper'
-import 'swiper/scss'
-import 'swiper/scss/pagination'
+// import 'swiper/scss'
+// import 'swiper/scss/pagination'
 SwiperCore.use([Pagination])
 export default {
-  components: { BtnLike, BtnBookMark, Swiper, SwiperSlide },
+  components: { BtnLike, BtnBookMark },
   props: {
     cnote: {
       type: Object,
@@ -161,9 +138,9 @@ export default {
     }
   },
   computed: {
-    swiper() {
-      return this.$refs.mySwiper
-    }
+    // swiper() {
+    //   return this.$refs.mySwiper
+    // }
   },
   data() {
     return {
@@ -429,19 +406,18 @@ export default {
       }
     }
   }
-
+  .swiper {
+    height: 100%;
+  }
   .imgSwiper {
-    overflow: hidden;
-    position: relative;
-    max-width: 1600px;
-    padding: 4px 11rem;
+    width: 900px;
     &:before,
     &:after {
       content: '';
       position: absolute;
       top: 0;
       z-index: 2;
-      width: 100px;
+      // width: 100px;
       height: 100%;
       background-color: white;
     }
@@ -453,9 +429,11 @@ export default {
     }
 
     .swiper-wrapper {
-      align-items: stretch;
+      // align-items: stretch;
     }
     .swiper-slide {
+      width: 33%;
+      width: 300px;
       height: auto;
     }
   }
