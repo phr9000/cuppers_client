@@ -51,6 +51,12 @@
         label="사진 모두 보기"
         padding="3px 8px "
       />
+      <btn-basic
+        to="/test/imageupload"
+        label="이미지 업로드"
+        icon="image"
+        padding="5px 10px"
+      />
     </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>btn-basic-right</p>

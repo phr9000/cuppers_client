@@ -78,6 +78,10 @@ const routes = [
       {
         path: 'carduserinfo',
         component: () => import('pages/test/CardUserInfo.vue')
+      },
+      {
+        path: 'imageupload',
+        component: () => import('pages/test/ImageUploadTest.vue')
       }
     ]
   },
