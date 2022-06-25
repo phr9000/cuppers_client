@@ -73,21 +73,35 @@
             <div class="img-container">
               <h3 class="title">선택한 사진(슬라이드)</h3>
               <div class="img-inner">
-                <div class="img-area"><span class="">img1</span></div>
-                <div class="img-area"><span>img2</span></div>
-                <div class="img-area"><span>img3</span></div>
+                <swiper
+                  class="imgSwiper"
+                  ref="mySwiper"
+                  :options="swiperOption"
+                  @slideChange="slideChangeTransitionStart"
+                  :pagination="{ type: 'progressbar' }"
+                >
+                  <swiper-slide
+                    class="slide"
+                    v-for="image in cnote"
+                    :key="image.name"
+                  >
+                    <!-- <div class="img-container">
+                      <img />
+                    </div> -->
+                  </swiper-slide>
+                </swiper>
               </div>
             </div>
             <!-- 커핑노트 카드 영역 -->
             <!-- 220622 회의때 의논하기 빼는게 더 나은거 같아서.. 아님 디자인 수정 !!!!!!! -->
-            <ul>
+            <!-- <ul>
               <li class="cafe-card-container">
                 <card-cup-note></card-cup-note>
               </li>
               <li class="cafe-card-container">
                 <card-cup-note></card-cup-note>
               </li>
-            </ul>
+            </ul> -->
           </div>
         </div>
         <!-- 유저 소개 영역 -->
@@ -113,9 +127,17 @@
 <script>
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
-import CardCupNote from 'src/components/Card/CardCupNote.vue'
+// import CardCupNote from 'src/components/Card/CardCupNote.vue'
+// import
+import { ref } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
+import SwiperCore, { Pagination } from 'swiper'
+import 'swiper/scss'
+import 'swiper/scss/pagination'
+SwiperCore.use([Pagination])
 export default {
-  components: { BtnLike, BtnBookMark, CardCupNote },
+  components: { BtnLike, BtnBookMark, Swiper, SwiperSlide },
   props: {
     cnote: {
       type: Object,
@@ -139,6 +161,11 @@ export default {
       }
     }
   },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper
+    }
+  },
   data() {
     return {
       editor: {
@@ -149,7 +176,16 @@ export default {
         content:
           'Text in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaksText in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaks'
       },
-      writeType: false
+      writeType: false,
+      swiperOption: {
+        slidesPerView: '3',
+        spaceBetween: 6, // swiper-slide 사이의 간격 지정
+        slidesOffsetBefore: 0, // slidesOffsetBefore는 첫번째 슬라이드의 시작점에 대한 변경할 때 사용
+        slidesOffsetAfter: 0, // slidesOffsetAfter는 마지막 슬라이드 시작점 + 마지막 슬라이드 너비에 해당하는 위치의 변경이 필요할 때 사용
+        freeMode: true, // freeMode를 사용시 스크롤하는 느낌으로 구현 가능
+        centerInsufficientSlides: true, // 컨텐츠의 수량에 따라 중앙정렬 여부를 결정함,
+        touchRatio: 0 //드래그 금지
+      }
     }
   },
   created() {
@@ -316,13 +352,6 @@ export default {
 
       // 선택한 사진 영역
       .img-container {
-        // height: 200px;
-        // margin: 0 auto;
-        margin-bottom: 20px;
-        padding-top: 0;
-        width: 900px;
-        border-radius: 18px;
-
         .title {
           padding: 0;
           font-size: 20px;
@@ -398,6 +427,36 @@ export default {
           }
         }
       }
+    }
+  }
+
+  .imgSwiper {
+    overflow: hidden;
+    position: relative;
+    max-width: 1600px;
+    padding: 4px 11rem;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      z-index: 2;
+      width: 100px;
+      height: 100%;
+      background-color: white;
+    }
+    &:before {
+      left: 0;
+    }
+    &:after {
+      right: 0;
+    }
+
+    .swiper-wrapper {
+      align-items: stretch;
+    }
+    .swiper-slide {
+      height: auto;
     }
   }
 }
