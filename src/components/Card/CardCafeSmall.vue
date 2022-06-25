@@ -35,8 +35,8 @@
           </div>
         </div>
 
+        <!-- 영업시간 -->
         <q-card-section v-if="today" class="q-pa-none">
-          <!-- 영업시간 -->
           <div class="info q-mb-xs">
             <q-icon size="xs" name="calendar_today" class="icon icon_cal" />
 

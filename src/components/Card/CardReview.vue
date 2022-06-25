@@ -112,7 +112,7 @@ export default defineComponent({
               keyword_name: '분위기가 좋은'
             }
           ],
-          user_review_liked: true,
+          user_review_liked: 1,
           review_liked_cnt: 142,
           reivew_image: [
             {
