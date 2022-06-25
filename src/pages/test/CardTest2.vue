@@ -24,9 +24,6 @@
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>card-cafe-map 카페카드(지도화면)</p>
       <div class="row">
-        <div class="q-mr-sm" style="width: 500px">
-          <card-cafe-map @close="handleClose" />
-        </div>
         <div class="q-mr-sm" style="width: 400px">
           <card-cafe-map @close="handleClose" />
         </div>

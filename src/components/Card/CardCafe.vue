@@ -63,7 +63,7 @@
 
       <q-card-section class="q-pt-none">
         <!-- 키워드 -->
-        <div class="info q-mb-xs">
+        <div class="info info_key q-mb-xs">
           <q-icon size="xs" name="tag" class="icon q-mb-xs" />
           <div class="cafe_keywords_wrap">
             <badge-cafe
@@ -81,7 +81,11 @@
         </div>
         <!-- 영업시간 -->
         <div class="info q-mb-xs">
-          <q-icon size="xs" name="calendar_today" class="icon q-pt-xs" />
+          <q-icon
+            size="xs"
+            name="calendar_today"
+            class="icon icon_cal q-pt-xs"
+          />
 
           <div class="cafe_keywords_wrap text_subtitle1 q-pt-xs">
             {{ cafe.opTime[0].day }} :
@@ -230,6 +234,15 @@ export default defineComponent({
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+    &.info_key {
+      align-items: start;
+      .icon {
+        padding-top: 2px;
+      }
+    }
+    .icon_cal {
+      transform: scale(0.85);
+    }
   }
 }
 </style>

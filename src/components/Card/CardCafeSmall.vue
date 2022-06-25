@@ -13,14 +13,6 @@
               <div class="text_title text-left q-mr-sm">
                 {{ cafe.cafe_name_pr }}
               </div>
-              <!-- <div class="row items-center">
-              <span v-if="cafe.cafe_type === '로스터리'" class="icon_cafe_type"
-                ><q-icon size="xs" name="img:/icons/roastery.png" class=""
-              /></span>
-              <span class="text-subtitle1 text-grey q-pt-xs">
-                {{ cafe.cafe_region }}</span
-              >
-            </div> -->
             </div>
           </div>
           <div class="btns row justify-start items-center no-wrap q-mb-xs">
@@ -43,14 +35,14 @@
           </div>
         </div>
 
-        <q-card-section class="q-pa-none">
+        <q-card-section v-if="today" class="q-pa-none">
           <!-- 영업시간 -->
           <div class="info q-mb-xs">
             <q-icon size="xs" name="calendar_today" class="icon icon_cal" />
 
             <div class="text_caption q-pt-xs">
-              {{ cafe.opTime[0].day }} :
-              {{ cafe.opTime[0].time }}
+              {{ today.day }} :
+              {{ today.time }}
             </div>
           </div>
         </q-card-section>
@@ -59,13 +51,13 @@
         <!-- style="max-width: 280px; max-height: 320px" -->
         <q-img class="thumbnail" :ratio="1" :src="cafe.cafe_img" /></div
     ></q-card-section>
-    <q-card-section class="q-pa-none">
+    <q-card-section v-if="keywords" class="q-pa-none">
       <!-- 키워드 -->
       <div class="info q-mb-xs">
         <q-icon size="xs" name="tag" class="icon icon_key" />
         <div class="cafe_keywords_wrap">
           <badge-cafe
-            v-for="keyword in cafe.keywords"
+            v-for="keyword in keywords"
             :key="keyword.keyword_name"
             :value="keyword.keyword_name"
           />
@@ -108,40 +100,20 @@ export default defineComponent({
           like_cnt: 114,
           user_liked: 1,
           review_cnt: 32,
-          user_beenthere: 0,
-          keywords: [
-            {
-              keyword_id: 1,
-              keyword_name: '커피에 대한 설명'
-            },
-            {
-              keyword_id: 11,
-              keyword_name: '내추럴 커피'
-            },
-            {
-              keyword_id: 12,
-              keyword_name: '추출도구 선택 가능'
-            },
-            {
-              keyword_id: 13,
-              keyword_name: 'COE 취급'
-            }
-          ],
-          opTime: [
-            {
-              day: '월',
-              time: '정기휴무'
-            },
-            {
-              day: '화~토',
-              time: '11:30 - 21:30 (21:00 라스트오더)'
-            },
-            {
-              day: '일',
-              time: '정기휴무'
-            }
-          ]
+          user_beenthere: 0
         }
+      }
+    },
+    keywords: {
+      type: Array,
+      default: () => {
+        return null
+      }
+    },
+    today: {
+      type: Object,
+      default: () => {
+        return null
       }
     }
   },
@@ -186,7 +158,6 @@ export default defineComponent({
   }
   .thumbnail {
     border-radius: $border-radius-md;
-    // height: 124px;
   }
   .btn_detail {
     min-width: 100px;
@@ -208,15 +179,15 @@ export default defineComponent({
     align-items: flex-start;
     .icon {
       // padding-top: 1px;
-      transform: scale(0.88);
       padding-right: 4px;
       &.icon_cal {
         padding-top: 5px;
+        transform: scale(0.85);
       }
       &.icon_key {
         padding-top: 2px;
+        transform: scale(0.95);
       }
-      // transform: translateY();
     }
   }
 }

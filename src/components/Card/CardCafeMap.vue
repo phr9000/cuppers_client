@@ -13,7 +13,7 @@
     <q-card-section class="title_wrap">
       <div class="row justify-between items-start no-wrap q-mb-xs">
         <div class="row items-center">
-          <div class="title text-left text-h5 q-mr-sm">
+          <div class="title text-left text-h6 q-mr-sm">
             {{ cafe.cafe_name_pr }}
           </div>
           <div class="row items-center">
@@ -25,10 +25,26 @@
             >
           </div>
         </div>
-
-        <div class="btn_detail">
+      </div>
+      <div class="row justify-between items-center no-wrap q-mb-xs">
+        <div class="row no-wrap">
+          <btn-like
+            class="btn_like"
+            :user_id="1"
+            :id_what="cafe.cafe_id"
+            like_what="cafe"
+            :is_liked="cafe.user_liked"
+            :likeit_cnt="cafe.like_cnt"
+          />
+          <btn-review
+            class="btn_review"
+            :cafe_id="cafe.cafe_id"
+            :review_cnt="cafe.review_cnt"
+          />
+        </div>
+        <div class="">
           <btn-basic-right
-            class="bg-grey-2"
+            class="btn_detail bg-grey-2"
             :rounded="false"
             icon="open_in_new"
             color="grey-7"
@@ -36,21 +52,6 @@
             padding="4px 8px "
           />
         </div>
-      </div>
-      <div class="row justify-start items-center no-wrap q-mb-xs">
-        <btn-like
-          class="btn_like"
-          :user_id="1"
-          :id_what="cafe.cafe_id"
-          like_what="cafe"
-          :is_liked="cafe.user_liked"
-          :likeit_cnt="cafe.like_cnt"
-        />
-        <btn-review
-          class="btn_review"
-          :cafe_id="cafe.cafe_id"
-          :review_cnt="cafe.review_cnt"
-        />
       </div>
       <div class="caption text-caption overflow-hidden">
         {{ cafe.cafe_description }}
@@ -61,7 +62,7 @@
 
     <q-card-section class="">
       <!-- 키워드 -->
-      <div class="info q-mb-xs">
+      <div class="info info_key q-mb-xs">
         <q-icon size="xs" name="tag" class="icon q-mb-xs" />
         <div class="cafe_keywords_wrap">
           <badge-cafe
@@ -79,7 +80,7 @@
       </div>
       <!-- 영업시간 -->
       <div class="info q-mb-xs">
-        <q-icon size="xs" name="calendar_today" class="icon q-pt-xs" />
+        <q-icon size="xs" name="calendar_today" class="icon icon_cal q-pt-xs" />
 
         <div class="cafe_keywords_wrap text_subtitle1 q-pt-xs">
           {{ cafe.opTime[0].day }} :
@@ -192,15 +193,6 @@ export default defineComponent({
 .card_cafe {
   width: 100%;
 
-  // .title_wrap {
-  //   padding-right: 70px;
-  //   @media (max-width: 962px) {
-  //     padding-right: 65px;
-  //   }
-  //   @media (max-width: 722px) {
-  //     padding-right: 65px;
-  //   }
-  // }
   .btn_close {
     position: absolute;
     top: 0px;
@@ -219,8 +211,8 @@ export default defineComponent({
     // left: -3px;
   }
   .btn_detail {
-    min-width: 100px;
-    padding-top: 3px;
+    width: 90px;
+    margin-top: 3px;
   }
   .btn_like {
     position: relative;
@@ -246,11 +238,15 @@ export default defineComponent({
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+    &.info_key {
+      align-items: start;
+      .icon {
+        padding-top: 2px;
+      }
+    }
+    .icon_cal {
+      transform: scale(0.85);
+    }
   }
-  // .text-h6 {
-  //   @media (max-width: 962px) {
-  //     font-size: 1rem;
-  //   }
-  // }
 }
 </style>
