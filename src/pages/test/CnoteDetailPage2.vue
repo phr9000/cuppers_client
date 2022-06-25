@@ -70,14 +70,30 @@
           </div>
           <div class="bottom">
             <!-- 선택한 사진 영역 -->
-            <!-- <div class="img-container">
-              <h3 class="title">선택한 사진(슬라이드)</h3>
-              <div class="img-inner"></div>
-            </div> -->
-
+            <div class="img-container">
+              <h3 class="title">선택한 사진</h3>
+              <div class="img-inner">
+                <swiper
+                  class="imgSwiper"
+                  ref="mySwiper"
+                  :options="swiperOption"
+                  :pagination="{ type: 'progressbar' }"
+                  :slides-per-view="2"
+                  :space-between="10"
+                >
+                  <swiper-slide
+                    v-for="cnoteImg in cnoteImgs"
+                    :key="cnoteImg.images_cnote_id"
+                  >
+                    <img :src="cnoteImg.images_cnote_url" />
+                  </swiper-slide>
+                </swiper>
+              </div>
+            </div>
+            <!--
             <div v-for="cnoteImg in cnoteImgs" :key="cnoteImg.images_cnote_id">
               <img :src="cnoteImg.images_cnote_url" />
-            </div>
+            </div> -->
           </div>
         </div>
         <!-- 유저 소개 영역 -->
@@ -106,14 +122,14 @@ import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
 // import CardCupNote from 'src/components/Card/CardCupNote.vue'
 // import
 import { ref } from 'vue'
-// import { Swiper, SwiperSlide } from 'swiper/vue'
-// import 'swiper/css'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
 import SwiperCore, { Pagination } from 'swiper'
-// import 'swiper/scss'
-// import 'swiper/scss/pagination'
+import 'swiper/scss'
+import 'swiper/scss/pagination'
 SwiperCore.use([Pagination])
 export default {
-  components: { BtnLike, BtnBookMark },
+  components: { BtnLike, BtnBookMark, Swiper, SwiperSlide },
   props: {
     cnote: {
       type: Object,
@@ -138,9 +154,9 @@ export default {
     }
   },
   computed: {
-    // swiper() {
-    //   return this.$refs.mySwiper
-    // }
+    swiper() {
+      return this.$refs.mySwiper
+    }
   },
   data() {
     return {
@@ -152,18 +168,16 @@ export default {
         content:
           'Text in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaksText in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaks'
       },
-      img: {
-        cnoteImgs: ''
-      },
+      cnoteImgs: '',
       writeType: false,
       swiperOption: {
-        slidesPerView: '3',
-        spaceBetween: 6, // swiper-slide 사이의 간격 지정
+        slidesPerView: '2',
+        spaceBetween: 10, // swiper-slide 사이의 간격 지정
         slidesOffsetBefore: 0, // slidesOffsetBefore는 첫번째 슬라이드의 시작점에 대한 변경할 때 사용
         slidesOffsetAfter: 0, // slidesOffsetAfter는 마지막 슬라이드 시작점 + 마지막 슬라이드 너비에 해당하는 위치의 변경이 필요할 때 사용
         freeMode: true, // freeMode를 사용시 스크롤하는 느낌으로 구현 가능
         centerInsufficientSlides: true, // 컨텐츠의 수량에 따라 중앙정렬 여부를 결정함,
-        touchRatio: 0 //드래그 금지
+        touchRatio: 0
       }
     }
   },
@@ -179,7 +193,7 @@ export default {
         .get(apiUrl)
         .then((result) => {
           this.cnotedetail = result.data
-          console.log(this.cnotedtail)
+          console.log(this.cnotedetail)
         })
         .catch((err) => {
           console.log(err)
@@ -334,6 +348,7 @@ export default {
           font-size: 20px;
         }
         .img-inner {
+          margin-bottom: 30px;
           display: flex;
           max-width: 900px;
           height: 300px;
@@ -432,9 +447,9 @@ export default {
       // align-items: stretch;
     }
     .swiper-slide {
-      width: 33%;
-      width: 300px;
-      height: auto;
+      img {
+        width: 100%;
+      }
     }
   }
 }
