@@ -71,7 +71,7 @@
           <div class="bottom">
             <!-- 선택한 사진 영역 -->
             <div class="img-container">
-              <h3 class="title">선택한 사진</h3>
+              <!-- <h3 class="title">선택한 사진</h3> -->
               <div class="img-inner">
                 <swiper
                   class="imgSwiper"
@@ -89,15 +89,26 @@
                 </swiper>
               </div>
             </div>
-            <!--
-            <div v-for="cnoteImg in cnoteImgs" :key="cnoteImg.images_cnote_id">
-              <img :src="cnoteImg.images_cnote_url" />
-            </div> -->
+            <!-- 카페 카드 -->
+            <div class="cafe-card-container">
+              <div class="cafe-card-inner">
+                <card-cafe class="cafe-card" :cafe="cafe"></card-cafe>
+                <div>슬라이드 사진 1에 대한 카페 설명</div>
+              </div>
+              <div class="cafe-card-inner">
+                <card-cafe class="cafe-card" :cafe="cafe"></card-cafe>
+                <div>슬라이드 사진 2에 대한 카페 설명</div>
+              </div>
+              <div class="cafe-card-inner">
+                <card-cafe class="cafe-card" :cafe="cafe"></card-cafe>
+                <div>슬라이드 사진 3에 대한 카페 설명</div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- 유저 소개 영역 -->
         <div class="user-card-container">
-          <div class="user-card-inner" style="">
+          <div class="user-card-inner">
             <div class="profile-img"></div>
             <div class="user-email-area" style="line-height: 24px">
               test@gmail.com
@@ -116,11 +127,11 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
-// import CardCupNote from 'src/components/Card/CardCupNote.vue'
-// import
-import { ref } from 'vue'
+import CardCafe from 'src/components/Card/CardCafe.vue'
+// swiper
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import SwiperCore, { Pagination } from 'swiper'
@@ -128,7 +139,13 @@ import 'swiper/scss'
 import 'swiper/scss/pagination'
 SwiperCore.use([Pagination])
 export default {
-  components: { BtnLike, BtnBookMark, Swiper, SwiperSlide },
+  components: {
+    BtnLike,
+    BtnBookMark,
+    Swiper,
+    SwiperSlide,
+    CardCafe
+  },
   props: {
     cnote: {
       type: Object,
@@ -168,7 +185,61 @@ export default {
           'Text in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaksText in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaks'
       },
       cnoteImgs: '',
-      writeType: false
+      writeType: false,
+      cafe: {
+        cafe_id: 4,
+        cafe_name_pr: '이월로스터스 송파2호점 (송파구)',
+        cafe_address: '서울 송파구 송이로17길 51',
+        cafe_region: '송파',
+        cafe_address_dong: '(가락동)',
+        cafe_type: '로스터리',
+        cafe_latitude: 37.5015764,
+        cafe_longitude: 127.124833,
+        cafe_description:
+          '‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.',
+        cafe_img:
+          'http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg',
+        like_cnt: 114,
+        user_liked: 1,
+        review_cnt: 32,
+        user_beenthere: 0,
+        keywords: [
+          {
+            keyword_id: 1,
+            keyword_name: '앰비언스',
+            icon: null
+          },
+          {
+            keyword_id: 4,
+            keyword_name: '내추럴 커피',
+            icon: null
+          },
+          {
+            keyword_id: 5,
+            keyword_name: '추출도구 선택 가능',
+            icon: null
+          },
+          {
+            keyword_id: 21,
+            keyword_name: 'COE 취급',
+            icon: null
+          }
+        ],
+        opTime: [
+          {
+            day: '월',
+            time: '정기휴무'
+          },
+          {
+            day: '화~토',
+            time: '11:30 - 21:30 (21:00 라스트오더)'
+          },
+          {
+            day: '일',
+            time: '정기휴무'
+          }
+        ]
+      },
       // swiperOption: {
       //   slidesPerView: '2',
       //   spaceBetween: 10, // swiper-slide 사이의 간격 지정
@@ -177,7 +248,8 @@ export default {
       //   freeMode: true, // freeMode를 사용시 스크롤하는 느낌으로 구현 가능
       //   centerInsufficientSlides: true, // 컨텐츠의 수량에 따라 중앙정렬 여부를 결정함,
       //   touchRatio: 0
-      // }
+      // },
+      isLiked: true
     }
   },
   created() {},
@@ -299,11 +371,35 @@ export default {
       z-index: 101;
       .btn_like_wrap {
         .btn_like {
+          &:hover {
+            .icon_fav,
+            .likeit_cnt {
+              color: #bdbdbd !important;
+            }
+          }
           .icon_fav {
             &.colored {
               color: #bdbdbd !important;
             }
           }
+          .likeit_cnt {
+            &.colored {
+              color: #bdbdbd !important;
+            }
+          }
+        }
+      }
+    }
+    .likeit_wrap {
+      &:hover {
+        .icon_fav {
+          color: #bdbdbd !important;
+        }
+      }
+
+      .icon_fav {
+        &.colored {
+          color: #bdbdbd !important;
         }
       }
     }
@@ -318,7 +414,7 @@ export default {
       .content-inner {
         // margin: 0 auto;
         padding: 20px 40px;
-        padding-top: 100px;
+        padding-top: 80px;
         width: 991px;
 
         // TODO: textarea 높이 스크립트 바꿔야됨 지금은 스크롤 생김
@@ -375,7 +471,7 @@ export default {
           }
         }
       }
-      .cafe-card-container {
+      .cafe-card-inner {
         margin-bottom: 20px;
         .card {
           height: 300px !important;
@@ -387,6 +483,15 @@ export default {
           }
           .absolute-full {
             height: 255px !important;
+          }
+        }
+      }
+      .cafe-card-container {
+        padding-bottom: 30px;
+        .cafe-card {
+          margin: 10px 0;
+          &:last-child {
+            padding-bottom: 0;
           }
         }
       }
