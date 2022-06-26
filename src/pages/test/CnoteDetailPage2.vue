@@ -145,9 +145,9 @@ export default {
           cnote_thumbnail:
             'https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg',
           created_at: '2022-06-10T10:58:54.000Z',
-          user_cnote_liked: true,
+          user_cnote_liked: 1,
           cnote_liked_cnt: 142,
-          user_cnote_marked: false
+          user_cnote_marked: 0
         }
       }
     }
