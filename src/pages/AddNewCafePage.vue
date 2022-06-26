@@ -2,7 +2,7 @@
   <q-page class="constrain_sm">
     <section class="q-py-md section">
       <div class="text-center text-h5">
-        <span>새로운 카페를 등록해주세요</span>
+        <span class="title">새로운 카페를 등록해주세요</span>
       </div>
     </section>
     <section class="q-mx-xl q-my-xl q-pb-xl">
@@ -245,15 +245,40 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
+.q-my-xl {
+  margin-bottom: 0;
+}
+.constrain_sm {
+  padding-bottom: 50px;
+}
+.q-mt-md {
+  padding-bottom: 20px;
+}
 .section {
-  border-bottom: 2px solid #ccc;
+  position: relative;
+
+  // border-bottom: 2px solid #ccc;
+  &:after {
+    content: '';
+    display: block;
+    width: 55px;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    border: 2px solid $primary;
+  }
+  .title {
+    font-weight: 500;
+  }
 }
 .asterisk {
   color: rgb(255, 136, 0);
 }
 
 .background {
-  outline: 1px solid #ccc;
+  // outline: 1px solid #ccc;
   box-sizing: content-box;
   .info-block {
     display: flex;
