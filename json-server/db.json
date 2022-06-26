@@ -996,8 +996,8 @@
         }
       ],
       "branches": [
-        { "cafe_id": 404, "branch_name": "송리단점" },
-        { "cafe_id": 405, "branch_name": "양평점" }
+        { "cafe_id": 404, "cafe_name_pr": "송리단점" },
+        { "cafe_id": 405, "cafe_name_pr": "양평점" }
       ],
       "facility": [
         {

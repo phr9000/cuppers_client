@@ -188,7 +188,7 @@ export default {
       writeType: false,
       cafe: {
         cafe_id: 4,
-        cafe_name_pr: '이월로스터스 송파2호점 (송파구)',
+        cafe_name_pr: '커피앰비언스 (송파구)',
         cafe_address: '서울 송파구 송이로17길 51',
         cafe_region: '송파',
         cafe_address_dong: '(가락동)',

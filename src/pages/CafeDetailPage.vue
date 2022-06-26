@@ -90,8 +90,8 @@
                 <div class="cafe_keywords_wrap">
                   <badge-cafe
                     v-for="keyword in cafe.keywords"
-                    :key="keyword.keyword_name"
-                    :value="keyword.keyword_name"
+                    :key="keyword.name"
+                    :value="keyword.name"
                   />
                 </div>
               </div>
@@ -411,12 +411,6 @@ export default defineComponent({
         .get(apiUrl)
         .then((result) => {
           this.cafe = result.data
-
-          // 0,1 -> boolean
-          // this.cafe.user_liked = this.cafe.user_liked === 1 ? true : false
-          // console.log(this.cafe.user_liked)
-          this.cafe.user_beenthere =
-            this.cafe.user_beenthere === 1 ? true : false
 
           this.cafe.cafe_description = this.cafe.cafe_description.replace(
             '#',

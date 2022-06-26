@@ -1,13 +1,10 @@
 <template>
   <div class="card_container">
-    <q-card class="card" flat bordered>
+    <q-card @click="handleCLickCnoteCard" class="card" flat bordered>
       <q-card-section
         class="card_title_wrap row no-wrap items-start justify-between"
       >
-        <div
-          class="text-h5 card_title q-mb-xs q-mr-xs"
-          @click="cnoteTitleClick"
-        >
+        <div class="text-h5 card_title q-mb-xs q-mr-xs">
           {{ cnote.cnote_title }}
         </div>
         <div class="btns_wrap row no-wrap">
@@ -99,9 +96,10 @@ export default defineComponent({
     }
   },
   methods: {
-    cnoteTitleClick() {
-      console.log(`cnote id(${this.cnote.cnote_id}) clicked`)
-      // this.$router.push({ path: '/cafedetail/1' })
+    handleCLickCnoteCard() {
+      const cnote_id = this.cnote.cnote_id
+      // console.log(`cnote id(${cnote_id}) clicked`)
+      this.$router.push({ path: `/cnote/${cnote_id}` })
     }
   }
 })
