@@ -253,7 +253,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 // 1) swiper slide 너비 설정 (important 넣는 이유는 무시될 가능성 있어서)
 .swiper-wrapper {
   .swiper-slide:nth-child(1) {
