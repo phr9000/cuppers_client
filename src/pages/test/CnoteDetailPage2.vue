@@ -453,4 +453,9 @@ export default {
     }
   }
 }
+.swiper-pagination-progressbar {
+  .swiper-pagination-progressbar-fill {
+    border: 1px solid red;
+  }
+}
 </style>

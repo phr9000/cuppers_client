@@ -7,6 +7,7 @@
       navigation
       :pagination="{ clickable: true }"
       :scrollbar="{ draggable: false }"
+      :slides-per-view="2"
     >
       <swiper-slide>
         <ul class="slide-container slide-container1">
