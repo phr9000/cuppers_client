@@ -51,13 +51,13 @@
         <!-- style="max-width: 280px; max-height: 320px" -->
         <q-img class="thumbnail" :ratio="1" :src="cafe.cafe_img" /></div
     ></q-card-section>
-    <q-card-section v-if="keywords" class="q-pa-none">
+    <q-card-section v-if="cafe.keywords" class="q-pa-none">
       <!-- 키워드 -->
       <div class="info q-mb-xs">
         <q-icon size="xs" name="tag" class="icon icon_key" />
         <div class="cafe_keywords_wrap">
           <badge-cafe
-            v-for="keyword in keywords"
+            v-for="keyword in cafe.keywords"
             :key="keyword.keyword_name"
             :value="keyword.keyword_name"
           />
@@ -102,12 +102,6 @@ export default defineComponent({
           review_cnt: 32,
           user_beenthere: 0
         }
-      }
-    },
-    keywords: {
-      type: Array,
-      default: () => {
-        return null
       }
     },
     today: {

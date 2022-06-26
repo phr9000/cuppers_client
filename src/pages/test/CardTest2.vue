@@ -4,41 +4,32 @@
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>card-cafe 카페카드samll (검색결과리스트)</p>
       <div class="row">
-        <div style="width: 382px"><card-cafe-small /></div>
+        <div style="width: 382px"><card-cafe-small :today="today" /></div>
       </div>
     </div>
+
     <!-- CardCafe 카페카드(block) -->
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>card-cafe 카페카드(block)</p>
       <div class="row">
         <div class="q-mr-sm" style="width: 100%">
-          <card-cafe />
+          <card-cafe :cafe="cafe" />
         </div>
         <div class="q-mr-sm" style="width: 700px">
-          <card-cafe />
+          <card-cafe :cafe="cafe" />
         </div>
-        <div style="width: 500px"><card-cafe /></div>
       </div>
     </div>
+
     <!-- CardCafeMap 카페카드(지도화면) -->
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>card-cafe-map 카페카드(지도화면)</p>
       <div class="row">
         <div class="q-mr-sm" style="width: 400px">
-          <card-cafe-map
-            :cafe="cafe"
-            :keywords="keywords"
-            :today="today"
-            @close="handleClose"
-          />
+          <card-cafe-map :cafe="cafe" :today="today" @close="handleClose" />
         </div>
         <div style="width: 300px">
-          <card-cafe-map
-            :cafe="cafe"
-            :keywords="keywords"
-            :today="today"
-            @close="handleClose"
-          />
+          <card-cafe-map :cafe="cafe" :today="today" @close="handleClose" />
         </div>
       </div>
     </div>
@@ -60,7 +51,7 @@ export default defineComponent({
   data() {
     return {
       cafe: {
-        cafe_id: 1,
+        cafe_id: 4,
         cafe_name_pr: '이월로스터스 송파2호점 (송파구)',
         cafe_address: '서울 송파구 송이로17길 51',
         cafe_region: '송파',
@@ -75,30 +66,44 @@ export default defineComponent({
         like_cnt: 114,
         user_liked: 1,
         review_cnt: 32,
-        user_beenthere: 0
+        user_beenthere: 0,
+        keywords: [
+          {
+            keyword_id: 1,
+            keyword_name: '앰비언스',
+            icon: null
+          },
+          {
+            keyword_id: 4,
+            keyword_name: '내추럴 커피',
+            icon: null
+          },
+          {
+            keyword_id: 5,
+            keyword_name: '추출도구 선택 가능',
+            icon: null
+          },
+          {
+            keyword_id: 21,
+            keyword_name: 'COE 취급',
+            icon: null
+          }
+        ],
+        opTime: [
+          {
+            day: '월',
+            time: '정기휴무'
+          },
+          {
+            day: '화~토',
+            time: '11:30 - 21:30 (21:00 라스트오더)'
+          },
+          {
+            day: '일',
+            time: '정기휴무'
+          }
+        ]
       },
-      keywords: [
-        {
-          keyword_id: 1,
-          keyword_name: '앰비언스',
-          icon: null
-        },
-        {
-          keyword_id: 4,
-          keyword_name: '내추럴 커피',
-          icon: null
-        },
-        {
-          keyword_id: 5,
-          keyword_name: '추출도구 선택 가능',
-          icon: null
-        },
-        {
-          keyword_id: 21,
-          keyword_name: 'COE 취급',
-          icon: null
-        }
-      ],
       today: {
         day: '월',
         time: '정기휴무'

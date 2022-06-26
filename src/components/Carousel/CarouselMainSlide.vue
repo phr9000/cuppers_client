@@ -1,12 +1,12 @@
 <template>
-  <div class="slide-container">
+  <div class="main-slide-container">
     <swiper
       ref="mySwiper"
       :options="swiperOption"
-      @slideChange="slideChangeTransitionStart"
       navigation
       :pagination="{ clickable: true }"
       :scrollbar="{ draggable: false }"
+      :slides-per-view="2"
     >
       <swiper-slide>
         <ul class="slide-container slide-container1">
@@ -252,157 +252,160 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss">
 // 1) swiper slide 너비 설정 (important 넣는 이유는 무시될 가능성 있어서)
-.swiper-wrapper {
-  .swiper-slide:nth-child(1) {
-    width: 320px !important;
-    margin-left: 1.6rem;
-  }
-  .swiper-slide:nth-child(2) {
-    width: 960px !important;
-    li {
-      width: 33.4% !important;
-    }
-  }
-  .swiper-slide:nth-child(3) {
-    width: 320px !important;
-  }
-  .swiper-slide:nth-child(4) {
-    width: 960px !important;
-    li {
-      width: 33.4% !important;
-    }
-  }
-}
 
-.slide {
-  position: relative;
-  .dim {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    transition: opacity 0.3s ease-in-out;
-    background-color: #000;
-    opacity: 0.4;
+.main-slide-container {
+  .swiper-wrapper {
+    .swiper-slide:nth-child(1) {
+      width: 320px !important;
+      margin-left: 1.6rem;
+    }
+    .swiper-slide:nth-child(2) {
+      width: 960px !important;
+      li {
+        width: 33.4% !important;
+      }
+    }
+    .swiper-slide:nth-child(3) {
+      width: 320px !important;
+    }
+    .swiper-slide:nth-child(4) {
+      width: 960px !important;
+      li {
+        width: 33.4% !important;
+      }
+    }
   }
-}
 
-.swiper-button-disabled {
-  display: none;
-}
-ul {
-  padding: 0 !important;
-  margin: 0;
-}
-li {
-  list-style: none;
-}
-.swiper-slide {
-  overflow: hidden;
-}
-.swiper {
-  overflow: hidden;
-  height: 520px;
-  .slide-container {
-    margin: 0 !important;
-    display: flex;
-    .slide {
-      position: relative;
-      cursor: pointer;
-      overflow: hidden;
-      &:hover {
-        .dim {
-          opacity: 0.6;
-        }
-        .img-area {
-          transition: all 0.4s;
-          transform: scale(1.1);
-        }
-      }
-
-      .txt-area {
-        position: absolute;
-        z-index: 2;
-        color: #fff;
-        text-align: center;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        .title {
-          width: 300px;
-          padding-bottom: 8px;
-          font-size: 28px;
-          font-weight: normal;
-          word-break: keep-all;
-          letter-spacing: -0.25px;
-          line-height: 36px;
-          font-family: 'Nanum Myeongjo', sans-serif;
-        }
-        .desc {
-          width: 250px;
-          margin: 0 auto;
-          margin-bottom: 4px;
-          font-size: 12px;
-          word-break: break-all;
-          text-overflow: ellipsis;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          display: -webkit-box;
-        }
-      }
-    }
-    &.slide-container1 {
-      width: 320px;
-      flex-direction: column;
-      .swiper-slide {
-        width: 320px !important;
-      }
-      .slide {
-        height: 260px;
-      }
-    }
-    &.slide-container2 {
-      flex-direction: row;
+  .slide {
+    position: relative;
+    .dim {
+      position: absolute;
       width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transition: opacity 0.3s ease-in-out;
+      background-color: #000;
+      opacity: 0.4;
+    }
+  }
+
+  .swiper-button-disabled {
+    display: none;
+  }
+  ul {
+    padding: 0 !important;
+    margin: 0;
+  }
+  li {
+    list-style: none;
+  }
+  .swiper-slide {
+    overflow: hidden;
+  }
+  .swiper {
+    overflow: hidden;
+    height: 520px;
+    .slide-container {
+      margin: 0 !important;
+      display: flex;
       .slide {
-        width: 33%;
-        height: 280px;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        &:hover {
+          .dim {
+            opacity: 0.6;
+          }
+          .img-area {
+            transition: all 0.4s;
+            transform: scale(1.1);
+          }
+        }
+
+        .txt-area {
+          position: absolute;
+          z-index: 2;
+          color: #fff;
+          text-align: center;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          .title {
+            width: 300px;
+            padding-bottom: 8px;
+            font-size: 28px;
+            font-weight: normal;
+            word-break: keep-all;
+            letter-spacing: -0.25px;
+            line-height: 36px;
+            font-family: 'Nanum Myeongjo', sans-serif;
+          }
+          .desc {
+            width: 250px;
+            margin: 0 auto;
+            margin-bottom: 4px;
+            font-size: 12px;
+            word-break: break-all;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
+          }
+        }
+      }
+      &.slide-container1 {
+        width: 320px;
+        flex-direction: column;
+        .swiper-slide {
+          width: 320px !important;
+        }
+        .slide {
+          height: 260px;
+        }
+      }
+      &.slide-container2 {
+        flex-direction: row;
+        width: 100%;
+        .slide {
+          width: 33%;
+          height: 280px;
+        }
       }
     }
   }
-}
-.swiper-pagination-bullet {
-  opacity: 1;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-.swiper-pagination-bullet-active {
-  opacity: 1;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-.swiper-button-prev {
-  width: 100px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: #fff;
-  color: #333;
-  opacity: 0.3;
-}
-.swiper-button-next {
-  width: 100px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: #fff;
-  color: #333;
-  opacity: 0.3;
+  .swiper-pagination-bullet {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  .swiper-button-prev {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #333;
+    opacity: 0.3;
+  }
+  .swiper-button-next {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #333;
+    opacity: 0.3;
+  }
 }
 </style>

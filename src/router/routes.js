@@ -27,6 +27,10 @@ const routes = [
       {
         path: 'signup',
         component: () => import('src/pages/SurveyPage.vue')
+      },
+      {
+        path: 'cnotedetail',
+        component: () => import('src/pages/CnoteDetailPage.vue')
       }
     ]
   },
@@ -71,10 +75,7 @@ const routes = [
         path: 'cnotedetail',
         component: () => import('pages/test/CnoteDetailPage.vue')
       },
-      {
-        path: 'cnotedetail2',
-        component: () => import('pages/test/CnoteDetailPage2.vue')
-      },
+
       {
         path: 'carduserinfo',
         component: () => import('pages/test/CardUserInfo.vue')
