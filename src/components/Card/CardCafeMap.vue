@@ -61,9 +61,9 @@
 
     <q-separator />
 
-    <q-card-section class="">
+    <q-card-section class="key_and_address">
       <!-- 키워드 -->
-      <div class="info info_key q-mb-xs">
+      <div v-if="cafe.keywords" class="info info_key q-mb-xs">
         <q-icon size="xs" name="tag" class="icon q-mb-xs" />
         <div class="cafe_keywords_wrap">
           <badge-cafe
@@ -114,36 +114,12 @@ export default defineComponent({
       type: Object,
       default: () => {
         return null
-        // {
-        //   cafe_id: 1,
-        //   cafe_name_pr: '커피앰비언스 (송파구)',
-        //   cafe_address: '서울 송파구 송이로17길 51',
-        //   cafe_region: '송파',
-        //   cafe_address_dong: '(가락동)',
-        //   cafe_type: '로스터리',
-        //   cafe_latitude: 37.5015764,
-        //   cafe_longitude: 127.124833,
-        //   cafe_description:
-        //     '‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.',
-        //   cafe_img:
-        //     'http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg',
-        //   like_cnt: 114,
-        //   user_liked: 1,
-        //   review_cnt: 32,
-        //   user_beenthere: 0
-        // }
-      },
-      keywords: {
-        type: Array,
-        default: () => {
-          return null
-        }
-      },
-      today: {
-        type: Object,
-        default: () => {
-          return null
-        }
+      }
+    },
+    today: {
+      type: Object,
+      default: () => {
+        return null
       }
     }
   },
