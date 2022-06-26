@@ -76,7 +76,6 @@
                 <swiper
                   class="imgSwiper"
                   ref="mySwiper"
-                  :options="swiperOption"
                   :pagination="{ type: 'progressbar' }"
                   :slides-per-view="2"
                   :space-between="10"
@@ -215,7 +214,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .cupping-writer-container {
   width: 100%;
   // height: 100%;
@@ -345,6 +344,7 @@ export default {
       .img-container {
         .title {
           padding: 0;
+          line-height: normal;
           font-size: 20px;
         }
         .img-inner {
@@ -451,11 +451,14 @@ export default {
         width: 100%;
       }
     }
-  }
-}
-.swiper-pagination-progressbar {
-  .swiper-pagination-progressbar-fill {
-    border: 1px solid red;
+    .swiper-pagination-progressbar {
+      background-color: #ccc;
+      z-index: 100;
+      .swiper-pagination-progressbar-fill {
+        background-color: #000;
+        bottom: 0;
+      }
+    }
   }
 }
 </style>
