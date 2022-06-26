@@ -26,7 +26,7 @@ export default {
     user_id: { type: Number, required: true }, // 로그인한 사용자의 아이디
     cafe_id: { type: Number, required: true },
     been_there: {
-      type: Boolean,
+      type: Number,
       required: true
     } // 가본곳 눌렀는지 여부
   },
@@ -36,7 +36,7 @@ export default {
     }
   },
   mounted() {
-    this.beenThere = this.been_there
+    this.beenThere = this.been_there === 1 ? true : false
   },
   methods: {
     handleCLick() {

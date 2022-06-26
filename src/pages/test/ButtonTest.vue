@@ -116,11 +116,11 @@
           :user_id="0"
           like_what="cafe"
           :id_what="0"
-          :is_liked="false"
+          :is_liked="0"
           :likeit_cnt="100"
         />
-        <btn-been-there :user_id="0" :cafe_id="0" :been_there="false" />
-        <btn-book-mark :user_id="0" :cnote_id="0" :is_marked="false" />
+        <btn-been-there :user_id="0" :cafe_id="0" :been_there="0" />
+        <btn-book-mark :user_id="0" :cnote_id="0" :is_marked="0" />
       </div>
     </div>
   </q-page>
