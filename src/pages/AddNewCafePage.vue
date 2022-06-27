@@ -120,7 +120,7 @@
               @deleteCard="deleteMenu"
               :menu_id="cafe_menu.menu_id"
               :menu_type="cafe_menu.menu_type"
-              ref="CardAddMenu"
+              ref="CafeAddMenu"
             />
           </div>
         </section>
@@ -191,6 +191,7 @@ export default defineComponent({
         cafe_address_dong: '',
         cafe_menu: [
           {
+            menu_id: null,
             menu_name: '',
             menu_type: 'br',
             menu_price_hot: null,
@@ -199,6 +200,7 @@ export default defineComponent({
             menu_aromanote: ''
           },
           {
+            menu_id: null,
             menu_name: '',
             menu_type: 'va',
             menu_price_hot: null,
@@ -219,15 +221,15 @@ export default defineComponent({
       this.cafe_info.cafe_address_dong = payload.extraAddress
       this.cafe_info.cafe_postalcode = payload.postcode
     },
-    getBrewing(new_cafe_menu) {
-      this.$refs.CardAddMenu.handleMenuCard(new_cafe_menu)
+    getBrewing(index) {
+      this.$refs.CardAddMenu[index].handleMenuCard()
     },
     createBrewing(new_cafe_menu) {
       this.cafe_info.cafe_menu.push(new_cafe_menu)
       console.log(this.cafe_info.cafe_menu)
     },
-    getVariation(new_cafe_menu) {
-      this.$refs.CardAddMenu.handleMenuCard(new_cafe_menu)
+    getVariation(index) {
+      this.$refs.CardAddMenu[index].handleMenuCard()
     },
     createVariation(new_cafe_menu) {
       this.cafe_info.cafe_menu.push(new_cafe_menu)

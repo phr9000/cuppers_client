@@ -36,7 +36,7 @@
       />
     </div>
     <div>
-      <div v-if="menu_type === 'br'">
+      <div>
         <q-input
           v-model="new_cafe_menu.menu_aromanote"
           type="text"
@@ -60,6 +60,7 @@ export default {
   data() {
     return {
       new_cafe_menu: {
+        menu_id: null,
         menu_name: '',
         menu_price_hot: 0,
         menu_price_ice: 0,
@@ -73,13 +74,32 @@ export default {
     deleteCard() {
       this.$emit('deleteCard')
     }, // AddNewCafePage에서 handleMenuCard를 실행해야 함.
-    handleMenuCard() {
-      if (this.new_cafe_menu.menu_type === 'br') {
-        this.$emit('newBrewingMenu', this.new_cafe_menu)
-      } else {
-        this.$emit('newVariationMenu', this.new_cafe_menu)
+    callMenuData() {
+      let MenuData = {
+        menu_id: 2,
+        menu_name: '',
+        menu_price_hot: 0,
+        menu_price_ice: 0,
+        is_signature: false,
+        menu_aromanote: '',
+        menu_type: ''
       }
+      return MenuData
+    },
+    sendData(MenuData) {
+      console.log(MenuData)
+      // this.$emit('newMenu', this.MenuData)
+    },
+    consoleData() {
+      console.log('Hello')
     }
+    // handleMenuCard() {
+    //   if (this.new_cafe_menu.menu_type === 'br') {
+    //     this.$emit('newBrewingMenu', this.new_cafe_menu)
+    //   } else {
+    //     this.$emit('newVariationMenu', this.new_cafe_menu)
+    //   }
+    // }
   }
 }
 </script>

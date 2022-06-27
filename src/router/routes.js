@@ -83,6 +83,10 @@ const routes = [
       {
         path: 'imageupload',
         component: () => import('pages/test/ImageUploadTest.vue')
+      },
+      {
+        path: 'cardmenutest',
+        component: () => import('pages/test/CardMenuTest.vue')
       }
     ]
   },

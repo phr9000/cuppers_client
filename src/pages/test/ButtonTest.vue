@@ -57,6 +57,13 @@
         icon="image"
         padding="5px 10px"
       />
+
+      <btn-basic
+        to="/test/cardmenutest"
+        label="메뉴 추가"
+        icon="note"
+        padding="5px 10px"
+      />
     </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>btn-basic-right</p>
