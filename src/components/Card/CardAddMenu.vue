@@ -74,7 +74,11 @@ export default {
       this.$emit('deleteCard')
     }, // AddNewCafePage에서 handleMenuCard를 실행해야 함.
     handleMenuCard() {
-      this.$emit('newCafeMenu', this.new_cafe_menu)
+      if (this.new_cafe_menu.menu_type === 'br') {
+        this.$emit('newBrewingMenu', this.new_cafe_menu)
+      } else {
+        this.$emit('newVariationMenu', this.new_cafe_menu)
+      }
     }
   }
 }
