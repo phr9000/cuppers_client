@@ -30,7 +30,9 @@ export default {
   },
   mounted() {},
   methods: {
-    handleCLick() {
+    handleCLick(event) {
+      event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
+
       console.log('click')
     }
   }

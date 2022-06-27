@@ -88,7 +88,8 @@ export default {
     }
   },
   created() {
-    let apiUrl = `${process.env.API}/serveyKeywords`
+    let apiUrl = `${process.env.API_LOCAL}/serveyKeywords` // json-server
+    // let apiUrl = `${process.env.API}/serveyKeywords` // real-server
     this.$axios
       .get(apiUrl)
       .then((result) => {

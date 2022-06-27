@@ -6,16 +6,25 @@
     dense
     rounded
     color="red-4"
-    class="btn_like row no-wrap items-center"
+    class="btn_like"
   >
-    <q-icon v-if="isLiked" size="xs" class="icon_fav colored" name="favorite" />
-    <q-icon v-else size="xs" class="icon_fav" name="favorite_border" />
-    <span class="likeit_cnt q-ml-xs text-h6" :class="{ colored: isLiked }">{{
-      likeitCnt
-    }}</span>
+    <div class="row no-wrap items-center">
+      <q-icon
+        v-if="isLiked"
+        size="xs"
+        class="icon_fav colored"
+        name="favorite"
+      />
+      <q-icon v-else size="xs" class="icon_fav" name="favorite_border" />
+      <span class="likeit_cnt q-ml-xs text-h6" :class="{ colored: isLiked }">{{
+        computedCnt
+      }}</span>
+    </div>
   </q-btn>
 </template>
 <script>
+import useFommatter from 'src/composables/useFommatter'
+const { formatNumber } = useFommatter()
 export default {
   name: 'BtnLike',
   components: {},
@@ -39,12 +48,23 @@ export default {
       icon: 'favorite_border'
     }
   },
+  computed: {
+    computedCnt() {
+      if (this.likeitCnt >= 1000) {
+        return formatNumber(this.likeitCnt / 1000, '#,###.#') + 'K'
+      } else {
+        return this.likeitCnt
+      }
+    }
+  },
   mounted() {
     this.isLiked = this.is_liked === 1 ? true : false
     this.likeitCnt = this.likeit_cnt
   },
   methods: {
-    handleCLick() {
+    handleCLick(event) {
+      event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
+
       if (this.isLiked) {
         this.isLiked = false
         this.likeitCnt--

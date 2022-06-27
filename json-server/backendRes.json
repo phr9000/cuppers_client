@@ -241,5 +241,22 @@
         }
       ]
     }
+  ],
+  "review": [
+    {
+      "review_id": 4,
+      "cafe_id": 4,
+      "user_id": 2,
+      "review_drink": "파나마 잰슨 게이샤 워시드",
+      "review_content": "커피에 진심인 카페. ☕️ \\n다양한 드립 커피가 많아서 고르는 데 고민이 많이 되었어요.\\n마지막까지 고민하던 종류 시음 하게 해주셔서 넘넘 감사했습니다!  사장님 센스??\\n드립커피 보다 아메리카노를 선호 했었는데 드립커피에 대한 인식을 바꿔준 카페입니다!!!\\n다음에 커피 마시러 또 방문 할게요?",
+      "created_at": "2022-06-26T05:18:27.000Z",
+      "review_img": "",
+      "user_nickname": "성우",
+      "user_thumbnail_url": null,
+      "like_cnt": 0,
+      "user_liked": 0,
+      "review_keyword": [],
+      "review_images": []
+    }
   ]
 }

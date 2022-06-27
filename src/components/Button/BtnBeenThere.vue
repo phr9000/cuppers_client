@@ -39,7 +39,9 @@ export default {
     this.beenThere = this.been_there === 1 ? true : false
   },
   methods: {
-    handleCLick() {
+    handleCLick(event) {
+      event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
+
       if (this.beenThere) {
         this.beenThere = false
         console.log(
