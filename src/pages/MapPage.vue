@@ -270,7 +270,7 @@ export default defineComponent({
       // this.cafes = this.cafesRaw.filter((cafe) => {
       //   return cafe['cafe_region'] === this.search
       // })
-      let apiUrl = `http://localhost:3004/cafeLocations?cafe_name_pr_like=${search}` // json-server
+      let apiUrl = `${process.env.API_LOCAL}/cafeLocations?cafe_name_pr_like=${search}` // json-server
       // let apiUrl = `${process.env.API}/????` // real-server
 
       this.$axios
@@ -398,7 +398,7 @@ export default defineComponent({
       this.doSearch('앰비언스')
     },
     loadRawData() {
-      let apiUrl = `http://localhost:3004/cafeLocations` // json-server
+      let apiUrl = `${process.env.API_LOCAL}/cafeLocations` // json-server
       // let apiUrl = `${process.env.API}/cafeLocations` // real-server
       this.$axios
         .get(apiUrl)

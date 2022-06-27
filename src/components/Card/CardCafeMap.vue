@@ -15,8 +15,9 @@
         <div class="row items-center">
           <div class="title text-left text-h6 q-mr-sm">
             {{ cafe.cafe_name_pr }}
+            <!-- type and region -->
             <span class="row items-center">
-              <span v-if="cafe.cafe_type === '로스터리'" class="icon_cafe_type"
+              <span v-if="cafe.cafe_type === 'r'" class="icon_cafe_type"
                 ><q-icon size="14px" name="img:/icons/roastery.png" class=""
               /></span>
               <span class="text-subtitle1 text-grey q-pt-xs">
@@ -24,7 +25,6 @@
               >
             </span>
           </div>
-          <!-- type and region -->
         </div>
       </div>
       <div class="row justify-between items-center no-wrap q-mb-xs">
@@ -162,7 +162,7 @@ export default defineComponent({
     // left: -3px;
   }
   .btn_detail {
-    width: 90px;
+    width: 93px;
     margin-top: 3px;
   }
   .btn_like {

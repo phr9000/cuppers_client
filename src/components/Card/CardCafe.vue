@@ -19,7 +19,7 @@
             </div>
             <!-- type and region -->
             <div class="row items-center">
-              <span v-if="cafe.cafe_type === '로스터리'" class="icon_cafe_type"
+              <span v-if="cafe.cafe_type === 'r'" class="icon_cafe_type"
                 ><q-icon size="14px" name="img:/icons/roastery.png"
               /></span>
               <span class="text-subtitle2 text-grey q-pt-xs">

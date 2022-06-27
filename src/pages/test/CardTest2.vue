@@ -56,7 +56,7 @@ export default defineComponent({
         cafe_address: '서울 송파구 송이로17길 51',
         cafe_region: '송파',
         cafe_address_dong: '(가락동)',
-        cafe_type: '로스터리',
+        cafe_type: 'r',
         cafe_latitude: 37.5015764,
         cafe_longitude: 127.124833,
         cafe_description:
