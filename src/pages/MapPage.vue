@@ -219,26 +219,6 @@ export default defineComponent({
     }
   },
   methods: {
-    clearTarget() {
-      if (this.targetCafe) {
-        this.targetCafe = null
-      }
-    },
-    setTarget(cafe_id) {
-      this.clearTarget()
-      const find = this.cafes.filter((cafe) => {
-        return cafe['cafe_id'] === cafe_id
-      })[0]
-      this.targetCafe = { ...find }
-    },
-    clearAllMarkers() {
-      this.clearTarget()
-      // 모든 마커를 삭제
-      // console.log('모든 마커를 삭제')
-      for (let i = 0; i < this.cafes.length; i++) {
-        this.cafes[i].marker.setMap(null)
-      }
-    },
     handleClickSearch() {
       console.log('handleClickSearch: ', this.search)
       if (this.cafes.length > 0) {
@@ -319,10 +299,25 @@ export default defineComponent({
       for (let i = 0; i < this.cafes.length; i++) {
         const cafe_id = this.cafes[i].cafe_id
         const position = this.cafes[i].latlng
+
+        // 마커이미지 정의
+        var imageSrc = '/public/icons/marker.png', // 마커이미지의 주소입니다
+          imageSize = new kakao.maps.Size(34, 44), // 마커이미지의 크기입니다
+          imageOption = { offset: new kakao.maps.Point(17, 44) } // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+        var markerImage = new kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
+        )
+        // markerPosition = new kakao.maps.LatLng(37.54699, 127.09598) // 마커가 표시될 위치입니다
+
         // 마커를 생성합니다
         const marker = new kakao.maps.Marker({
           map: this.map, // 마커를 표시할 지도
-          position: position // 마커를 표시할 위치
+          position: position, // 마커를 표시할 위치
+          image: markerImage
         })
 
         // 마커 클릭 이벤트 등록
@@ -335,6 +330,28 @@ export default defineComponent({
         marker.setMap(this.map)
       }
       // 지도에 여러개 마커 표시
+    },
+    clearTarget() {
+      if (this.targetCafe) {
+        this.targetCafe = null
+      }
+    },
+    // 검색결과 카페카드 클릭 처리
+    setTarget(cafe_id) {
+      this.clearTarget()
+      const find = this.cafes.filter((cafe) => {
+        return cafe['cafe_id'] === cafe_id
+      })[0]
+      this.targetCafe = { ...find }
+      this.map.panTo(this.targetCafe.latlng)
+    },
+    // 모든 마커를 삭제
+    clearAllMarkers() {
+      this.clearTarget()
+      // console.log('모든 마커를 삭제')
+      for (let i = 0; i < this.cafes.length; i++) {
+        this.cafes[i].marker.setMap(null)
+      }
     },
     test() {
       // 테스트
@@ -363,9 +380,8 @@ export default defineComponent({
     test2() {
       this.map.relayout()
     },
-    handleClickMarker(cafe_id, position) {
-      console.log('marker 클릭 : ', cafe_id, position)
-      this.map.panTo(position)
+    handleClickMarker(cafe_id) {
+      console.log('marker 클릭 : ', cafe_id)
       this.setTarget(cafe_id)
     },
     setCafesBounds() {
