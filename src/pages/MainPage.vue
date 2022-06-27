@@ -2,7 +2,7 @@
   <q-page>
     <section class="column">
       <div class="q-pl-xl col">
-        <h3 class="q-mb-lg main_tile">따뜻한<br />커피 한 잔이<br />좋다☕</h3>
+        <h3 class="q-mb-lg main_tile">커피를<br />커피답게<br />커퍼스' ☕</h3>
       </div>
     </section>
     <carousel-main-slide :mainCnoteData="mainCnoteData" />

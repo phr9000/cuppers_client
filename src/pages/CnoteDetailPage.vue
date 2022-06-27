@@ -34,15 +34,15 @@
                 :user_id="cnote.user_id"
                 :id_what="cnote.cnote_id"
                 like_what="cnote"
-                :is_liked="cnote.user_cnote_liked"
-                :likeit_cnt="cnote.cnote_liked_cnt"
+                :is_liked="cnote.user_liked"
+                :likeit_cnt="cnote.like_cnt"
               />
             </div>
             <div class="btn_bookmark_wrap">
               <btn-book-mark
                 :user_id="cnote.user_id"
                 :cnote_id="cnote.cnote_id"
-                :is_marked="cnote.user_cnote_marked"
+                :is_marked="cnote.user_marked"
               />
             </div>
           </div>
@@ -162,9 +162,9 @@ export default {
           cnote_thumbnail:
             'https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg',
           created_at: '2022-06-10T10:58:54.000Z',
-          user_cnote_liked: 1,
-          cnote_liked_cnt: 142,
-          user_cnote_marked: 0
+          user_liked: 1,
+          like_cnt: 142,
+          user_marked: 0
         }
       }
     }
@@ -188,7 +188,7 @@ export default {
       writeType: false,
       cafe: {
         cafe_id: 4,
-        cafe_name_pr: '이월로스터스 송파2호점 (송파구)',
+        cafe_name_pr: '커피앰비언스 (송파구)',
         cafe_address: '서울 송파구 송이로17길 51',
         cafe_region: '송파',
         cafe_address_dong: '(가락동)',
@@ -548,9 +548,9 @@ export default {
       right: 0;
     }
 
-    .swiper-wrapper {
-      // align-items: stretch;
-    }
+    // .swiper-wrapper {
+    //  align-items: stretch;
+    // }
     .swiper-slide {
       img {
         width: 100%;

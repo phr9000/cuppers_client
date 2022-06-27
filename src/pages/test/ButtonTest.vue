@@ -39,7 +39,7 @@
         icon="map"
         padding="4px 15px 4px 15px"
       />
-      <btn-basic to="/test/cnotedetail2" label="커핑노트 디테일" size="md" />
+      <btn-basic to="/cnote/4" label="커핑노트 디테일" size="md" />
       <btn-basic to="/test/carduserinfo" label="carduserinfo" size="md" />
 
       <!-- 사진 모두 보기 -->

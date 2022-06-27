@@ -1,13 +1,10 @@
 <template>
   <div class="card_container">
-    <q-card class="card" flat bordered>
+    <q-card @click="handleCLickCnoteCard" class="card" flat bordered>
       <q-card-section
         class="card_title_wrap row no-wrap items-start justify-between"
       >
-        <div
-          class="text-h5 card_title q-mb-xs q-mr-xs"
-          @click="cnoteTitleClick"
-        >
+        <div class="text-h5 card_title q-mb-xs q-mr-xs">
           {{ cnote.cnote_title }}
         </div>
         <div class="btns_wrap row no-wrap">
@@ -16,15 +13,15 @@
               :user_id="cnote.user_id"
               :id_what="cnote.cnote_id"
               like_what="cnote"
-              :is_liked="cnote.user_cnote_liked"
-              :likeit_cnt="cnote.cnote_liked_cnt"
+              :is_liked="cnote.user_liked"
+              :likeit_cnt="cnote.like_cnt"
             />
           </div>
           <div class="btn_bookmark_wrap">
             <btn-book-mark
               :user_id="cnote.user_id"
               :cnote_id="cnote.cnote_id"
-              :is_marked="cnote.user_cnote_marked"
+              :is_marked="cnote.user_marked"
             />
           </div>
         </div>
@@ -83,9 +80,9 @@ export default defineComponent({
           cnote_thumbnail:
             'https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg',
           created_at: '2022-06-10T10:58:54.000Z',
-          user_cnote_liked: true,
-          cnote_liked_cnt: 142,
-          user_cnote_marked: false
+          user_liked: 1,
+          like_cnt: 142,
+          user_marked: 0
         }
       }
     }
@@ -99,9 +96,10 @@ export default defineComponent({
     }
   },
   methods: {
-    cnoteTitleClick() {
-      console.log(`cnote id(${this.cnote.cnote_id}) clicked`)
-      // this.$router.push({ path: '/cafedetail/1' })
+    handleCLickCnoteCard() {
+      const cnote_id = this.cnote.cnote_id
+      // console.log(`cnote id(${cnote_id}) clicked`)
+      this.$router.push({ path: `/cnote/${cnote_id}` })
     }
   }
 })

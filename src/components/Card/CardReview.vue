@@ -49,8 +49,8 @@
             :user_id="1"
             :id_what="review.review_id"
             like_what="review"
-            :is_liked="review.user_review_liked"
-            :likeit_cnt="review.review_liked_cnt"
+            :is_liked="review.user_liked"
+            :likeit_cnt="review.like_cnt"
           />
         </div>
 
@@ -112,8 +112,8 @@ export default defineComponent({
               keyword_name: '분위기가 좋은'
             }
           ],
-          user_review_liked: 1,
-          review_liked_cnt: 142,
+          user_liked: 1,
+          like_cnt: 142,
           reivew_image: [
             {
               image_review_type: 'g',

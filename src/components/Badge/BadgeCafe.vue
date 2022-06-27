@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'BadgeAroma',
+  name: 'BadgeCafe',
   props: {
     value: {
       type: String,
