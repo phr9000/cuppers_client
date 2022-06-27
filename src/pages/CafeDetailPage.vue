@@ -252,7 +252,7 @@
               class="menu_image"
               width="80%"
               height="130px"
-              :src="menuImages[0].url"
+              :src="menuImages[0].cafe_image_url"
             >
               <div
                 class="rounded-borders absolute-full text-subtitle2 flex flex-center"
@@ -446,25 +446,27 @@ export default defineComponent({
         })
     },
     getImages(cafe_id) {
-      let apiUrl = `http://localhost:3004/cafeImages/${cafe_id}?_limit=5` // json-server
-      // let apiUrl = `${process.env.API}/cafeImages/${cafe_id}?_limit=5` // real-server
+      // let apiUrl = `${process.env.API_LOCAL}/cafeImages?_limit=5` // json-server
+      let apiUrl = `${process.env.API}/cafe/image/${cafe_id}` // real-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          this.cafeImages = result.data.images.filter((item) => {
+          console.log(result.data)
+
+          this.cafeImages = result.data.filter((item) => {
             return item.type === 'g'
           })
-          this.menuImages = result.data.images.filter((item) => {
+          this.menuImages = result.data.filter((item) => {
             return item.type === 'm'
           })
-          // console.log(this.cafeImages)
+          console.log(this.menuImages)
         })
         .catch((err) => {
           console.log(err)
         })
     },
     getReviews(page) {
-      let apiUrl = `http://localhost:3004/review?_page=${page}&_limit=4`
+      let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4`
       // json-server
       // let apiUrl = `${process.env.API}/review?_page=${page}&_limit=4` // real-server
       this.$axios
@@ -477,7 +479,7 @@ export default defineComponent({
         })
     },
     getCnotes(page) {
-      let apiUrl = `http://localhost:3004/cnote` // json-server
+      let apiUrl = `${process.env.API_LOCAL}/cnote` // json-server
       // let apiUrl = `${process.env.API}/cnote` // real-server
       this.$axios
         .get(apiUrl)

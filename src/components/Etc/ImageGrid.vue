@@ -2,61 +2,77 @@
   <div class="image_grid_wrap">
     <!-- 1-->
     <div v-if="images.length == 1" class="image_grid">
-      <q-img class="col img_1" ratio="1" :src="images[0].url" />
+      <q-img class="col img_1" ratio="1" :src="images[0].cafe_image_url" />
     </div>
     <!-- 2 -->
     <div v-if="images.length == 2" class="image_grid row">
       <div class="col">
-        <q-img class="col img_1" ratio="1" :src="images[0].url" />
+        <q-img class="col img_1" ratio="1" :src="images[0].cafe_image_url" />
       </div>
       <div class="col q-ml-sm">
-        <q-img class="col img_1" ratio="1" :src="images[1].url" />
+        <q-img class="col img_1" ratio="1" :src="images[1].cafe_image_url" />
       </div>
     </div>
     <!-- 3 -->
     <div v-if="images.length == 3" class="image_grid row">
       <div class="col">
-        <q-img class="col img_1" ratio="1" :src="images[0].url" />
+        <q-img class="col img_1" ratio="1" :src="images[0].cafe_image_url" />
       </div>
       <div class="col q-ml-sm">
-        <q-img class="img_3" :ratio="2 / 1" :src="images[1].url" />
-        <q-img class="img_3 q-mt-sm" :ratio="2 / 1" :src="images[2].url" />
+        <q-img class="img_3" :ratio="2 / 1" :src="images[1].cafe_image_url" />
+        <q-img
+          class="img_3 q-mt-sm"
+          :ratio="2 / 1"
+          :src="images[2].cafe_image_url"
+        />
       </div>
     </div>
     <!-- 4 -->
     <div v-if="images.length == 4" class="image_grid row">
       <div class="col">
-        <q-img class="col img_1" ratio="1" :src="images[0].url" />
+        <q-img class="col img_1" ratio="1" :src="images[0].cafe_image_url" />
       </div>
       <div class="col q-ml-sm">
-        <q-img class="img_3" :ratio="2 / 1" :src="images[1].url" />
+        <q-img class="img_3" :ratio="2 / 1" :src="images[1].cafe_image_url" />
         <div class="row justify-between no-wrap">
           <q-img
             class="img_4 q-mt-sm q-mr-sm"
             :ratio="1"
-            :src="images[2].url"
+            :src="images[2].cafe_image_url"
           />
-          <q-img class="img_4 q-mt-sm" :ratio="1" :src="images[3].url" />
+          <q-img
+            class="img_4 q-mt-sm"
+            :ratio="1"
+            :src="images[3].cafe_image_url"
+          />
         </div>
       </div>
     </div>
     <!-- 5 -->
     <div v-if="images.length == 5" class="image_grid row">
       <div class="col">
-        <q-img class="col img_1" ratio="1" :src="images[0].url" />
+        <q-img class="col img_1" ratio="1" :src="images[0].cafe_image_url" />
       </div>
       <div class="col q-ml-sm">
         <div class="row justify-between no-wrap">
-          <q-img class="img_4 q-mr-sm" :ratio="1" :src="images[1].url" />
-          <q-img class="img_4" :ratio="1" :src="images[2].url" />
+          <q-img
+            class="img_4 q-mr-sm"
+            :ratio="1"
+            :src="images[1].cafe_image_url"
+          />
+          <q-img class="img_4" :ratio="1" :src="images[2].cafe_image_url" />
         </div>
         <div class="row justify-between no-wrap">
           <q-img
             class="img_4 q-mt-sm q-mr-sm"
             :ratio="1"
-            :src="images[3].url"
+            :src="images[3].cafe_image_url"
           />
-          <q-img class="img_4 q-mt-sm" :ratio="1" :src="images[4].url" />
+          <q-img
+            class="img_4 q-mt-sm"
+            :ratio="1"
+            :src="images[4].cafe_image_url"
+          />
         </div>
       </div>
     </div>
@@ -87,23 +103,28 @@ export default {
         return [
           {
             id: 1,
-            url: 'https://i.picsum.photos/id/665/800/400.jpg?hmac=xBBSVZk-QQKzSBwMPZFuUB1qHQUUUdY-yj07SqeErXA'
+            cafe_image_url:
+              'https://i.picsum.photos/id/665/800/400.jpg?hmac=xBBSVZk-QQKzSBwMPZFuUB1qHQUUUdY-yj07SqeErXA'
           },
           {
             id: 2,
-            url: 'https://i.picsum.photos/id/494/500/500.jpg?hmac=8aIJmZKMhyh9DfX0RscKrxfxRhyDKHvOnQ_pgMkJ6ZM'
+            cafe_image_url:
+              'https://i.picsum.photos/id/494/500/500.jpg?hmac=8aIJmZKMhyh9DfX0RscKrxfxRhyDKHvOnQ_pgMkJ6ZM'
           },
           {
             id: 3,
-            url: 'https://i.picsum.photos/id/756/500/500.jpg?hmac=rZynM_D3hiy3CIW1AZZNAr6m3jBex9SM1bFvp5mKPso'
+            cafe_image_url:
+              'https://i.picsum.photos/id/756/500/500.jpg?hmac=rZynM_D3hiy3CIW1AZZNAr6m3jBex9SM1bFvp5mKPso'
           },
           {
             id: 4,
-            url: 'https://i.picsum.photos/id/385/500/500.jpg?hmac=pT0ThioZsCmxd0zsVbCnveh0RNWI6uuH1MdOU_w1Wmw'
+            cafe_image_url:
+              'https://i.picsum.photos/id/385/500/500.jpg?hmac=pT0ThioZsCmxd0zsVbCnveh0RNWI6uuH1MdOU_w1Wmw'
           },
           {
             id: 5,
-            url: 'https://i.picsum.photos/id/816/500/500.jpg?hmac=Mm5UFwEiRKNt_afeZgiP-32k0ybnIMniitzcSJKFxaM'
+            cafe_image_url:
+              'https://i.picsum.photos/id/816/500/500.jpg?hmac=Mm5UFwEiRKNt_afeZgiP-32k0ybnIMniitzcSJKFxaM'
           }
         ]
       }

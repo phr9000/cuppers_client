@@ -1132,16 +1132,18 @@
     {
       "review_id": 1,
       "cafe_id": 1,
+      "cafe_name": "커피앰비언스",
       "user_id": 1,
       "user_name": "동글동글동글이",
       "user_thumbnail": "https://yt3.ggpht.com/TKujBMF0rkAEiGuNak656MrI1RdNBZMpZmTOSiyYgxUk0eVjwdJL_yttq8FeE-HUDorXYe7mYL8=s88-c-k-c0x00ffffff-no-rj",
-      "menu_type": "br",
       "menu_name": "파나마 잰슨 게이샤 워시드",
+      "menu_type": "br",
       "menu_aromanote": "플로럴,레몬그라스,오렌지,샤인머스캣,백도,쥬시하고 긴 여운",
       "is_signature": 0,
       "review_description": "커피에 진심인 카페. ☕️ \n다양한 드립 커피가 많아서 고르는 데 고민이 많이 되었어요.\n마지막까지 고민하던 종류 시음 하게 해주셔서 넘넘 감사했습니다!  사장님 센스👍🏾\n드립커피 보다 아메리카노를 선호 했었는데 드립커피에 대한 인식을 바꿔준 카페입니다!!!\n다음에 커피 마시러 또 방문 할게요😘",
+      "user_liked": 1,
+      "like_cnt": 55,
       "created_at": "2022-06-11 12:24:55",
-      "cafe_name": "커피앰비언스",
       "review_keyword": [
         {
           "keyword_name": "커피에 대한 설명",
@@ -1160,8 +1162,6 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_review_liked": 1,
-      "review_liked_cnt": 55,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1212,8 +1212,8 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_review_liked": 1,
-      "review_liked_cnt": 553,
+      "user_liked": 1,
+      "like_cnt": 553,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1284,8 +1284,8 @@
           "keyword_type": "coffee"
         }
       ],
-      "user_review_liked": 1,
-      "review_liked_cnt": 142,
+      "user_liked": 1,
+      "like_cnt": 142,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1340,8 +1340,8 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_review_liked": 1,
-      "review_liked_cnt": 142,
+      "user_liked": 1,
+      "like_cnt": 142,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1395,8 +1395,8 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_review_liked": 0,
-      "review_liked_cnt": 43,
+      "user_liked": 0,
+      "like_cnt": 43,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1450,8 +1450,8 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_review_liked": 1,
-      "review_liked_cnt": 13,
+      "user_liked": 1,
+      "like_cnt": 13,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1566,50 +1566,28 @@
   ],
   "cafeImages": [
     {
-      "id": 4,
-      "images": [
-        {
-          "type": "g",
-          "url": "http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg"
-        },
-        {
-          "type": "m",
-          "url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg"
-        },
-        {
-          "type": "g",
-          "url": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F6b2fd03bd1188c38d3a5e955d40935136cfb3cc1%3Foriginal"
-        },
-        {
-          "type": "g",
-          "url": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F5fb21e7f1775e3fcfd99541858d9ab556c7ae1bb%3Foriginal"
-        },
-        {
-          "type": "g",
-          "url": "http://bwissue.com/files/attach/images/243/259/163/9ec8eedca21a955d1b5207af3430cc5e.jpg"
-        },
-        {
-          "type": "g",
-          "url": "http://bwissue.com/files/attach/images/243/259/163/f98081dc093e8643c46661905215329b.jpg"
-        }
-      ]
+      "type": "g",
+      "cafe_image_url": "http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg"
     },
     {
-      "id": 404,
-      "images": [
-        {
-          "type": "m",
-          "url": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=https%3A%2F%2Fpostfiles.pstatic.net%2FMjAyMTA3MDdfMSAg%2FMDAxNjI1NjEyODIzODgw.yG46lyzyhROwSQe_I78pyuJ-z9pETKPufpWmMx99CuYg.MEL9q5Z2lbQFoK0IqgBHXk49n_fIlQW3HkDO1NSkhSkg.JPEG.99hyunuk%2F20210702%25EF%25BC%25BF124349.jpg%3Ftype%3Dw966"
-        },
-        {
-          "type": "g",
-          "url": "https://mblogthumb-phinf.pstatic.net/20160628_107/yunchun4_1467125095857uc026_JPEG/%BF%A5%BA%F1%BE%F0%BD%BA_%2815%29.jpg?type=w2"
-        },
-        {
-          "type": "g",
-          "url": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Fpostfiles6.naver.net%2FMjAxOTExMTJfMjgw%2FMDAxNTczNTQxMjQ1MTcw.YpC1sJDlW4qYELjdu0uTM87k23KQdIQDg44XL3U2JLQg.DMJRdOuj6hK6Xw_zxszqHa6I2Rzeec3wA9LEk6c2AVUg.JPEG.smoothies%2FDSC04213.JPG%3Ftype%3Dw966"
-        }
-      ]
+      "type": "m",
+      "cafe_image_url": "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fmyplace-phinf.pstatic.net%2F20220416_100%2F1650083168081dXSqF_JPEG%2Fupload_353d3acbc634392a3cfd4cbc476d9e12.jpeg"
+    },
+    {
+      "type": "g",
+      "cafe_image_url": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F6b2fd03bd1188c38d3a5e955d40935136cfb3cc1%3Foriginal"
+    },
+    {
+      "type": "g",
+      "cafe_image_url": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F5fb21e7f1775e3fcfd99541858d9ab556c7ae1bb%3Foriginal"
+    },
+    {
+      "type": "g",
+      "cafe_image_url": "http://bwissue.com/files/attach/images/243/259/163/9ec8eedca21a955d1b5207af3430cc5e.jpg"
+    },
+    {
+      "type": "g",
+      "cafe_image_url": "http://bwissue.com/files/attach/images/243/259/163/f98081dc093e8643c46661905215329b.jpg"
     }
   ]
 }
