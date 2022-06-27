@@ -81,7 +81,7 @@ export default defineComponent({
             'https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg',
           created_at: '2022-06-10T10:58:54.000Z',
           user_liked: 1,
-          like_cnt: 142,
+          like_cnt: 1142,
           user_marked: 0
         }
       }
@@ -124,9 +124,9 @@ export default defineComponent({
       color: $grey-9;
     }
     .btn_like_wrap {
-      min-width: 68px !important;
       position: relative;
-      left: 14px;
+      left: 16px;
+      top: -1px;
     }
     .btn_bookmark_wrap {
       position: relative;
