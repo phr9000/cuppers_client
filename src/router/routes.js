@@ -87,6 +87,10 @@ const routes = [
       {
         path: 'cardmenutest',
         component: () => import('pages/test/CardMenuTest.vue')
+      },
+      {
+        path: 'childref',
+        component: () => import('pages/test/ChildRefTest.vue')
       }
     ]
   },
