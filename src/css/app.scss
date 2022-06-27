@@ -1,9 +1,9 @@
 // app global css in SCSS form
 @import url(./_header.scss);
 
-* {
-  // scroll-behavior: smooth;
-}
+// * {
+//   // scroll-behavior: smooth;
+// }
 
 .constrain {
   max-width: 1200px;
@@ -32,4 +32,22 @@ ul {
 }
 a {
   text-decoration: none;
+}
+
+.small_screen_only {
+  @media (max-width: $breakpoint-xs-max) {
+    display: block;
+  }
+  @media (min-width: $breakpoint-sm-min) {
+    display: none;
+  }
+}
+
+.large_screen_only {
+  @media (max-width: $breakpoint-xs-max) {
+    display: none;
+  }
+  @media (min-width: $breakpoint-sm-min) {
+    display: block;
+  }
 }

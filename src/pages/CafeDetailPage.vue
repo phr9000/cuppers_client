@@ -77,7 +77,7 @@
     <section class="cafe_information_section column">
       <section class="cafe_detail_wrap row">
         <!-- 기본정보, 커피메뉴 -->
-        <div class="cafe_basic_info_wrap col-7 q-pa-md">
+        <div class="col-12 col-sm-7 cafe_basic_info_wrap q-pa-md">
           <!-- 기본정보 -->
           <div class="subtitle q-pl-sm q-mb-md">기본 정보</div>
           <div class="cafe_basic_info col q-pl-md">
@@ -232,9 +232,11 @@
         </div>
 
         <!-- 최근리뷰, 메뉴판 -->
-        <div class="col-5 q-py-md q-pr-md column justify-between align-end">
+        <div
+          class="review_menu_container col-12 col-sm-5 q-py-md q-pr-md column justify-between align-end"
+        >
           <!-- 최근 리뷰 -->
-          <div class="recent_review">
+          <div class="recent_review large_screen_only">
             <div class="subtitle q-mb-xs">최근 리뷰</div>
             <card-review />
           </div>
@@ -242,7 +244,7 @@
           <!-- 대표 메뉴 이미지 -->
           <div
             v-if="menuImages && menuImages.length > 0"
-            class="menu_image_wrap column items-end q-mt-md"
+            class="menu_image_wrap column"
           >
             <div class="info q-mb-xs">
               <q-icon size="xs" name="img:/icons/menu.png" class="q-mx-xs" />
@@ -250,7 +252,7 @@
             </div>
             <q-img
               class="menu_image"
-              width="80%"
+              width="100%"
               height="130px"
               :src="menuImages[0].cafe_image_url"
             >
@@ -269,7 +271,7 @@
 
     <!-- 리뷰 -->
     <!-- <a name="review_section"> -->
-    <section class="cafe_review_section q-pa-md">
+    <section class="review_section q-pa-md">
       <!--  -->
       <div class="title_wrap row justify-between items-center">
         <div class="subtitle q-pl-sm">
@@ -281,9 +283,9 @@
         </div>
       </div>
 
-      <div class="reviews_container row justify-between">
+      <div class="cards_container row justify-between">
         <div
-          class="review_wrap"
+          class="cards_wrap"
           v-for="review in reviews"
           :key="review.review_id"
         >
@@ -304,7 +306,7 @@
     </section>
 
     <!-- 커핑 노트 -->
-    <section class="cafe_review_section q-pa-md">
+    <section class="cnote_section q-pa-md">
       <!--  -->
       <div class="title_wrap row justify-between items-center">
         <div class="subtitle q-pl-sm">{{ cafe.cnote_cnt }}건의 커핑노트</div>
@@ -314,8 +316,8 @@
         </div>
       </div>
 
-      <div class="reviews_container row justify-between">
-        <div v-for="cnote in cnotes" :key="cnote.cnote_id" class="review_wrap">
+      <div class="cards_container row justify-between">
+        <div class="cards_wrap" v-for="cnote in cnotes" :key="cnote.cnote_id">
           <card-cnote :cnote="cnote" />
         </div>
       </div>
@@ -586,25 +588,43 @@ export default defineComponent({
           }
         }
       }
+      .review_menu_container {
+        @media (max-width: $breakpoint-xs-max) {
+          padding: 0;
+        }
+        .menu_image_wrap {
+          padding-top: 16px;
+          align-items: end;
+          @media (max-width: $breakpoint-xs-max) {
+            align-items: start;
+            padding-top: 0;
+            margin: 0 16px 16px 32px;
+          }
 
-      .menu_image {
-        // border: 1px solid rgb(141, 141, 141);
-        border-radius: 4px;
+          .menu_image {
+            // border: 1px solid rgb(141, 141, 141);
+            border-radius: 4px;
+          }
+        }
       }
     }
   }
 
-  // 리뷰 섹션
-  .cafe_review_section {
-    .reviews_container {
-      .review_wrap {
-        // display: -webkit-box;
-        // display: inline-block;
-        padding: 8px 8px;
-        max-width: 50%;
-      }
+  .cards_wrap {
+    padding: 8px 8px;
+    width: 50%;
+    @media (max-width: 749px) {
+      width: 100%;
     }
   }
+
+  // // 리뷰 섹션
+  // .review_section {
+  // }
+
+  // // 커핑노트 섹션
+  // .cnote_section {
+  // }
 
   .cafe_basic_info,
   .coffe_menu {
