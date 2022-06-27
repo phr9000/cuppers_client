@@ -33,7 +33,9 @@ export default {
     this.marked = this.is_marked === 1 ? true : false
   },
   methods: {
-    handleCLick() {
+    handleCLick(event) {
+      event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
+
       if (this.marked) {
         this.marked = false
         console.log(
