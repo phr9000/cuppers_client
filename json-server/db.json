@@ -113,7 +113,7 @@
       "cafe_address": "서울 송파구 송이로17길 51",
       "cafe_region": "송파",
       "cafe_address_dong": "(가락동)",
-      "cafe_type": "로스터리",
+      "cafe_type": "r",
       "cafe_latitude": 37.5015764,
       "cafe_longitude": 127.124833,
       "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
@@ -222,7 +222,7 @@
       "cafe_region": "송파",
       "cafe_address_dong": "(가락동)",
       "cafe_address": "서울 송파구 중대로10길 7-1",
-      "cafe_type": "로스터리",
+      "cafe_type": "r",
       "cafe_latitude": 37.49321734,
       "cafe_longitude": 127.1220155,
       "cafe_description": "커피교육, 스페셜커피, 커피여행, 창업컨설팅 등 커피에 관하여 모든것을 취급하고 있습니다.",
@@ -560,7 +560,7 @@
       "cafe_type": "",
       "cafe_latitude": 37.5294864,
       "cafe_longitude": 127.1218454,
-      "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
+      "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
       "cafe_img": "https://mblogthumb-phinf.pstatic.net/MjAyMDA1MzFfMjQ3/MDAxNTkwOTMzNjk1MDcw.kvI-vWQxjZf8LnJodAzAvqPAFQfOkURowH9C3QamgHcg.hFmdNlNUTXcd9JCCo950FYdjZr4Ku_H45XfK7zJu-esg.JPEG.phantasma86/KakaoTalk_20200531_131457452_12.jpg?type=w800",
       "like_cnt": 100,
       "user_liked": 0,
@@ -910,10 +910,10 @@
       "cafe_phone": "02-449-9967",
       "cafe_barista_info": null,
       "cafe_webpage": "https://smartstore.naver.com/coffeeambience",
-      "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
+      "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 r 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
       "cafe_menu_updated": null,
       "cafe_shutdown_time": null,
-      "cafe_type": "로스터리",
+      "cafe_type": "r",
       "recent_review_id": 2,
       "like_cnt": 114,
       "user_like": 0,
@@ -1208,7 +1208,7 @@
           "keyword_type": "cafe"
         },
         {
-          "keyword_name": "로스터리",
+          "keyword_name": "r",
           "keyword_type": "cafe"
         }
       ],
@@ -1486,9 +1486,9 @@
       "cnote_content": "미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는 것이라고...",
       "cnote_thumbnail": "https://picsum.photos/200",
       "created_at": "2022-06-15 12:24:55",
-      "user_cnote_liked": 1,
-      "cnote_liked_cnt": 142,
-      "user_cnote_marked": 0
+      "user_liked": 1,
+      "like_cnt": 142,
+      "user_marked": 0
     },
     {
       "cnote_id": 2,
@@ -1499,9 +1499,9 @@
       "cnote_content": "생각해보면 돌아봤을 때 더 기억에 더 남는 장소가 있다. abc 카페가 나에겐 그런 카페인 것 같다..",
       "cnote_thumbnail": "https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg",
       "created_at": "2022-06-11 12:24:55",
-      "user_cnote_liked": 0,
-      "cnote_liked_cnt": 52,
-      "user_cnote_marked": 1
+      "user_liked": 0,
+      "like_cnt": 52,
+      "user_marked": 1
     },
     {
       "cnote_id": 1,
@@ -1512,9 +1512,9 @@
       "cnote_content": "미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는 것이라고...미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는 것이라고...",
       "cnote_thumbnail": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-48729525/original/f62e1b1a-d6af-438b-82ce-95c51a4e0ca1.jpeg?im_w=720",
       "created_at": "2022-06-15 12:24:55",
-      "user_cnote_liked": 0,
-      "cnote_liked_cnt": 32,
-      "user_cnote_marked": 0
+      "user_liked": 0,
+      "like_cnt": 32,
+      "user_marked": 0
     }
   ],
   "user": [
