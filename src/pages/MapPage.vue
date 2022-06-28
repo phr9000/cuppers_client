@@ -35,6 +35,7 @@
             </template>
           </q-input>
           <div class="row q-px-md q-pt-sm">
+            <btn-basic @click="doSearch('*')" color="secondary" label="전체" />
             <btn-basic
               @click="doSearch('송파')"
               color="secondary"
@@ -45,11 +46,6 @@
               color="secondary"
               label="강동"
             />
-            <!-- <btn-basic
-              @click="doSearch('부산')"
-              color="secondary"
-              label="부산"
-            /> -->
           </div>
 
           <!-- 검색 결과 표시 (카페 카드) -->
@@ -101,10 +97,28 @@
           :today="targetCafe.today"
         />
       </section>
+
+      <!-- 현재위치에서 재검색 -->
+      <!-- <div style="">카페이름</div> -->
+      <btn-basic
+        v-if="researchBtnShow"
+        @click="researchInCurrentPosition"
+        class="btn_search_current"
+        :class="{ show: researchBtnFullOpacity }"
+        :outline="true"
+        :flat="false"
+        size="lg"
+        to="map"
+        color="primary"
+        label="현재위치에서 재검색"
+        icon="map"
+        padding="4px 18px"
+      />
     </div>
 
     <!-- 테스트 영역 -->
     <section v-if="false">
+      <div v-html="boundMsg"></div>
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
         현재위치: {{ currentLocation }}
       </div>
@@ -136,6 +150,7 @@
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
         검색 결과 표시
         <q-separator />
+
         <div v-for="cafe in cafes" :key="cafe.cafe_id">
           {{ cafe.cafe_name_pr }}
         </div>
@@ -190,8 +205,10 @@ export default defineComponent({
       drawerOpen: false,
       tab: 'search', // 'search', 'mylist',
       searching: false,
-      targetCafe: null
-      // showCard: false
+      targetCafe: null,
+      researchBtnFullOpacity: true,
+      researchBtnShow: true,
+      boundMsg: '' // 현재바운드정보 테스트
     }
   },
   computed: {
@@ -219,6 +236,36 @@ export default defineComponent({
     }
   },
   methods: {
+    initMap() {
+      const container = document.getElementById('map')
+      const options = {
+        center: new kakao.maps.LatLng(37.501523, 127.1248332, 16), // 커피 앰비언스 16?
+        level: 5 // 지도의 확대 레벨 (클수록 확대)
+      }
+
+      this.map = new kakao.maps.Map(container, options) // 지도를 생성합니다
+
+      // 지도가 이동, 확대, 축소로 인해 지도영역이 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+      kakao.maps.event.addListener(this.map, 'bounds_changed', () => {
+        this.handeBoundsChanged()
+      })
+
+      // 지도를 생성한 이후 작업들
+
+      // 테스트
+      // this.loadRawData()
+      // this.test()
+      // 앰비언스 검색 테스트
+      // this.doSearch('앰비언스')
+      // 테스트 끝
+    },
+    handeBoundsChanged() {
+      console.log('bounds_changed')
+      if (!this.researchBtnShow) {
+        this.researchBtnShow = true
+        this.researchBtnFullOpacity = true
+      }
+    },
     handleClickSearch() {
       console.log('handleClickSearch: ', this.search)
       if (this.cafes.length > 0) {
@@ -238,26 +285,46 @@ export default defineComponent({
       }
       this.doSearch(this.search)
     },
-    doSearch(search) {
+    doSearch(search, bounds) {
       this.clearAllMarkers()
-      console.log('doSearch:', search)
-      if (search !== this.search) {
+
+      // json-server
+      let apiUrl = `${process.env.API_LOCAL}/cafeLocations`
+      if (search !== '*') {
+        apiUrl += `?cafe_name_pr_like=${search}`
+      } else {
+        search = ''
+      }
+      // json-server
+
+      // real-server
+      // let apiUrl = `${process.env.API}/????`
+      // real-server
+
+      if (this.search !== search) {
         this.search = search
       }
       this.searching = true
-
-      // cafeData로 부터 검색
-      // this.cafes = this.cafesRaw.filter((cafe) => {
-      //   return cafe['cafe_region'] === this.search
-      // })
-      let apiUrl = `${process.env.API_LOCAL}/cafeLocations?cafe_name_pr_like=${search}` // json-server
-      // let apiUrl = `${process.env.API}/????` // real-server
 
       this.$axios
         .get(apiUrl)
         .then((result) => {
           this.cafes = []
           for (let i = 0; i < result.data.length; i++) {
+            const cf = result.data[i]
+
+            // bounds가 있다면 bounds안에 안들어오면 skip
+            if (bounds) {
+              if (
+                cf['cafe_latitude'] < bounds.lat_min ||
+                cf['cafe_latitude'] > bounds.lat_max ||
+                cf['cafe_longitude'] < bounds.long_min ||
+                cf['cafe_longitude'] > bounds.long_max
+              ) {
+                continue
+              }
+            }
+
             let cafe = {
               ...result.data[i],
               latlng: new kakao.maps.LatLng(
@@ -266,39 +333,98 @@ export default defineComponent({
               ),
               marker: null
             }
-            // console.log(cafe)
+
             if (result.data[i].opTime) {
               cafe = { ...cafe, today: result.data[i].opTime[0] }
-              // console.log(cafe)
             }
 
             this.cafes.push(cafe)
           }
 
-          // console.log(this.cafes)
           if (this.cafes.length < 1) {
-            console.log('검색 결과가 없습니다. ', this.cafes.length)
-            this.$q.dialog({
-              title: 'Error',
-              message: '검색 결과가 없습니다.'
-            })
+            // console.log('검색 결과가 없습니다. ', this.cafes.length)
+            // this.$q.dialog({
+            //   title: 'Error',
+            //   message: '검색 결과가 없습니다.'
+            // })
           } else {
             this.showCafesMarker()
-            this.setCafesBounds()
+            if (!bounds) {
+              this.setCafesBounds()
+            }
           }
           this.searching = false
-
-          // console.log(this.cafesRaw)
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+    // 현재위치에서 재검색
+    researchInCurrentPosition() {
+      console.log('researchInCurrentPosition')
+
+      // 재검색 버튼 숨기기
+      this.researchBtnFullOpacity = false
+      setTimeout(() => {
+        this.researchBtnShow = false
+      }, 500)
+
+      // 현지도 정보 가져오기
+      const bounds = this.getBounds()
+
+      // 바운드로 검색
+      this.doSearch(this.search, bounds)
+
+      // 필터링
+      // this.filteringWithBounds(bounds)
+    },
+    getBounds() {
+      // 지도 영역정보를 얻어옵니다
+      const bounds = this.map.getBounds()
+
+      // 영역정보의 남서쪽 정보를 얻어옵니다
+      const swLatlng = bounds.getSouthWest()
+
+      // 영역정보의 북동쪽 정보를 얻어옵니다
+      const neLatlng = bounds.getNorthEast()
+
+      // let message =
+      //   '<p>영역좌표는 남서쪽 위도, 경도는  ' +
+      //   swLatlng.toString() +
+      //   '이고 <br>'
+      // message += '북동쪽 위도, 경도는  ' + neLatlng.toString() + '입니다 </p>'
+      // console.log(swLatlng, neLatlng)
+      // this.boundMsg = message
+      const resBounds = {
+        lat_min: swLatlng.Ma,
+        long_min: swLatlng.La,
+        lat_max: neLatlng.Ma,
+        long_max: neLatlng.La
+      }
+      return resBounds
+    },
+    // 테스트
+    filteringWithBounds(bounds) {
+      this.cafes = this.cafes.filter((cafe) => {
+        if (
+          cafe.cafe_latitude > bounds.lat_min &&
+          cafe.cafe_latitude < bounds.lat_max &&
+          cafe.cafe_longitude > bounds.long_min &&
+          cafe.cafe_longitude < bounds.long_max
+        ) {
+          return cafe
+        }
+      })
     },
     showCafesMarker() {
       // 지도에 여러개 마커 표시
       for (let i = 0; i < this.cafes.length; i++) {
         const cafe_id = this.cafes[i].cafe_id
         const position = this.cafes[i].latlng
+        const map = this.map
+        const content = '<div style="">' + this.cafes[i].cafe_name_pr + '</div>'
+        // const content =
+        //   '<div style="position: absolute; top: 0; left: 0; z-index: 1000;background:white">카페이름</div>'
 
         // 마커이미지 정의
         var imageSrc = '/public/icons/marker.png', // 마커이미지의 주소입니다
@@ -329,6 +455,7 @@ export default defineComponent({
 
         marker.setMap(this.map)
       }
+
       // 지도에 여러개 마커 표시
     },
     clearTarget() {
@@ -395,24 +522,7 @@ export default defineComponent({
       this.map.setBounds(bounds)
       // 지도 범위 재설정 하기
     },
-    initMap() {
-      const container = document.getElementById('map')
-      const options = {
-        center: new kakao.maps.LatLng(37.501523, 127.1248332, 16), // 커피 앰비언스 16?
-        level: 5 // 지도의 확대 레벨 (클수록 확대)
-      }
-
-      this.map = new kakao.maps.Map(container, options) // 지도를 생성합니다
-
-      // 지도를 생성한 이후 작업들
-      // this.loadRawData() // 테스트
-
-      // 테스트
-      //this.test()
-      // 테스트 끝
-      // 앰비언스 검색 테스트
-      this.doSearch('앰비언스')
-    },
+    // test
     loadRawData() {
       let apiUrl = `${process.env.API_LOCAL}/cafeLocations` // json-server
       // let apiUrl = `${process.env.API}/cafeLocations` // real-server
@@ -529,8 +639,8 @@ export default defineComponent({
 
   .zoom_control {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 20px;
+    right: 20px;
     width: 36px;
     height: 80px;
     overflow: hidden;
@@ -555,10 +665,27 @@ export default defineComponent({
     }
   }
 
+  .btn_search_current {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
+    font-weight: 400;
+    background-color: $grey-3 !important;
+
+    transition: all 0.5s;
+    opacity: 0;
+    &.show {
+      opacity: 0.8;
+    }
+    // background: rgba(255, 255, 255, 0.8) !important;
+  }
+
   .btn_current_location {
     position: absolute;
-    bottom: 15px;
-    right: 15px;
+    bottom: 30px;
+    right: 30px;
     z-index: 1;
   }
 
