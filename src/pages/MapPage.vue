@@ -101,10 +101,9 @@
       <!-- 현재위치에서 재검색 -->
       <!-- <div style="">카페이름</div> -->
       <btn-basic
-        v-if="researchBtnShow"
         @click="researchInCurrentPosition"
         class="btn_search_current"
-        :class="{ show: researchBtnFullOpacity }"
+        :class="{ fade: researchBtnFade }"
         :outline="true"
         :flat="false"
         size="lg"
@@ -117,7 +116,14 @@
     </div>
 
     <!-- 테스트 영역 -->
-    <section v-if="false">
+    <section v-if="true">
+      <div class="q-ma-xs q-pa-xs custom_test radius_border">
+        level: {{ mapLevel }} lastSearchPosition: {{ lastSearchPosition }}
+        <br />
+        distance: {{ distance }}
+        <br />
+        distance: {{ distest }}
+      </div>
       <div v-html="boundMsg"></div>
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
         현재위치: {{ currentLocation }}
@@ -139,23 +145,18 @@
           color="warning"
           label="모든 마커 삭제"
         />
-        <!-- <btn-basic
-          @click="setTarget(1)"
-          color="primary"
-          label="마커 클릭/다시 클릭"
-        /> -->
       </div>
 
-      <!-- 검색 결과 표시 -->
+      <!-- 검색 결과 표시 테스트 -->
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
-        검색 결과 표시
+        검색 결과 표시 테스트
         <q-separator />
 
         <div v-for="cafe in cafes" :key="cafe.cafe_id">
           {{ cafe.cafe_name_pr }}
         </div>
       </div>
-      <!-- 클릭한 카페 -->
+      <!-- 클릭한 카페 테스트 -->
       <div v-if="targetCafe" class="q-ma-xs q-pa-xs custom_test radius_border">
         targetCafe
         <q-separator />
@@ -206,9 +207,12 @@ export default defineComponent({
       tab: 'search', // 'search', 'mylist',
       searching: false,
       targetCafe: null,
-      researchBtnFullOpacity: true,
-      researchBtnShow: true,
-      boundMsg: '' // 현재바운드정보 테스트
+      researchBtnFade: true,
+      boundMsg: '', // 현재바운드정보 테스트
+      mapLevel: null,
+      lastSearchPosition: null,
+      distance: 0,
+      distest: 0
     }
   },
   computed: {
@@ -259,11 +263,33 @@ export default defineComponent({
       // this.doSearch('앰비언스')
       // 테스트 끝
     },
+    // 지도 위치 변경될때마다 호출되는 콜백
     handeBoundsChanged() {
-      console.log('bounds_changed')
-      if (!this.researchBtnShow) {
-        this.researchBtnShow = true
-        this.researchBtnFullOpacity = true
+      if (this.searching) {
+        return
+      }
+      // console.log('bounds_changed')
+      // if (this.researchBtnFade) {
+      //   this.researchBtnFade = false
+      // }
+      if (this.lastSearchPosition === null) {
+        return
+      }
+      this.mapLevel = this.map.getLevel()
+
+      const centerNow = this.map.getCenter()
+
+      this.distance = Math.sqrt(
+        Math.pow(centerNow.La - this.lastSearchPosition.La, 2) +
+          Math.pow(centerNow.Ma - this.lastSearchPosition.Ma, 2)
+      )
+      const dist_correction =
+        (2000 * this.distance) / Math.pow(this.mapLevel, 2)
+      this.distest = dist_correction
+      // distance가 특정 수치 이상이고 현재 fade상태이면
+      // fade 해제하고 버튼 보여줌
+      if (dist_correction > 1) {
+        this.researchBtnFade = false
       }
     },
     handleClickSearch() {
@@ -286,6 +312,18 @@ export default defineComponent({
       this.doSearch(this.search)
     },
     doSearch(search, bounds) {
+      this.searching = true
+
+      // 초기화
+      this.distance = 0
+      this.distest = 0
+      // 재검색 버튼 숨기기
+      this.researchBtnFade = true
+
+      // 테스트 중심좌표 저장
+      this.lastSearchPosition = this.map.getCenter()
+      console.log(this.lastSearchPosition)
+
       this.clearAllMarkers()
 
       // json-server
@@ -304,7 +342,6 @@ export default defineComponent({
       if (this.search !== search) {
         this.search = search
       }
-      this.searching = true
 
       this.$axios
         .get(apiUrl)
@@ -363,19 +400,13 @@ export default defineComponent({
     researchInCurrentPosition() {
       console.log('researchInCurrentPosition')
 
-      // 재검색 버튼 숨기기
-      this.researchBtnFullOpacity = false
-      setTimeout(() => {
-        this.researchBtnShow = false
-      }, 500)
-
       // 현지도 정보 가져오기
       const bounds = this.getBounds()
 
       // 바운드로 검색
       this.doSearch(this.search, bounds)
 
-      // 필터링
+      // 필터링 (테스트)
       // this.filteringWithBounds(bounds)
     },
     getBounds() {
@@ -479,33 +510,6 @@ export default defineComponent({
       for (let i = 0; i < this.cafes.length; i++) {
         this.cafes[i].marker.setMap(null)
       }
-    },
-    test() {
-      // 테스트
-      // cafes[0]에 앰비언스 마커 표시
-      console.log(this.cafes[0])
-      const position = new kakao.maps.LatLng(37.5015764, 127.124833)
-      // 마커를 생성합니다
-      const marker = new kakao.maps.Marker({
-        map: this.map, // 마커를 표시할 지도
-        position: position // 마커를 표시할 위치
-      })
-
-      // 마커 클릭 이벤트 등록
-      kakao.maps.event.addListener(marker, 'click', () => {
-        this.handleClickMarker(1, position)
-      })
-
-      this.cafes[0] = {
-        ...this.cafes[0],
-        latlng: position,
-        marker: marker
-      }
-      // console.log(this.cafes[0])
-      // 테스트 끝
-    },
-    test2() {
-      this.map.relayout()
     },
     handleClickMarker(cafe_id) {
       console.log('marker 클릭 : ', cafe_id)
@@ -620,6 +624,28 @@ export default defineComponent({
       //     this.map.relayout()
       //   }, 300)
       // }
+    },
+    test() {
+      //   // 테스트
+      //   // cafes[0]에 앰비언스 마커 표시
+      //   console.log(this.cafes[0])
+      //   const position = new kakao.maps.LatLng(37.5015764, 127.124833)
+      //   // 마커를 생성합니다
+      //   const marker = new kakao.maps.Marker({
+      //     map: this.map, // 마커를 표시할 지도
+      //     position: position // 마커를 표시할 위치
+      //   })
+      //   // 마커 클릭 이벤트 등록
+      //   kakao.maps.event.addListener(marker, 'click', () => {
+      //     this.handleClickMarker(1, position)
+      //   })
+      //   this.cafes[0] = {
+      //     ...this.cafes[0],
+      //     latlng: position,
+      //     marker: marker
+      //   }
+      //   // console.log(this.cafes[0])
+      //   // 테스트 끝
     }
   }
 })
@@ -630,7 +656,7 @@ export default defineComponent({
   position: relative;
   overflow: hidden;
   // width: calc(100% - 382px);
-  height: calc(100vh - 50px);
+  height: calc(85vh - 50px);
 
   #map {
     width: 100%;
@@ -674,11 +700,16 @@ export default defineComponent({
     font-weight: 400;
     background-color: $grey-3 !important;
 
-    transition: all 0.5s;
-    opacity: 0;
-    &.show {
-      opacity: 0.8;
+    transition: all 0.3s;
+    opacity: 1;
+    &.fade {
+      opacity: 0;
+      cursor: grab;
+      pointer-events: none;
     }
+    // &.fullopacity {
+    //   opacity: 1;
+    // }
     // background: rgba(255, 255, 255, 0.8) !important;
   }
 
