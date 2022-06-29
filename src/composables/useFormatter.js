@@ -91,8 +91,8 @@ const formatNumber = (amount, format) => {
   return sign + currencySymbol + String(v) + String(d) + lastSymbol
 }
 
-const useFommatter = () => {
+const useFormatter = () => {
   return { formatNumber }
 }
 
-export default useFommatter
+export default useFormatter

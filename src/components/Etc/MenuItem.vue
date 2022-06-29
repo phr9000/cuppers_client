@@ -38,8 +38,8 @@
 
 <script>
 import BadgeAroma from 'src/components/Badge/BadgeAroma.vue'
-import useFommatter from 'src/composables/useFommatter'
-const { formatNumber } = useFommatter()
+import useFormatter from 'src/composables/useFormatter'
+const { formatNumber } = useFormatter()
 
 export default {
   components: { BadgeAroma },

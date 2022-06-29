@@ -23,8 +23,8 @@
   </q-btn>
 </template>
 <script>
-import useFommatter from 'src/composables/useFommatter'
-const { formatNumber } = useFommatter()
+import useFormatter from 'src/composables/useFormatter'
+const { formatNumber } = useFormatter()
 export default {
   name: 'BtnLike',
   components: {},
