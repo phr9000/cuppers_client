@@ -122,7 +122,7 @@
         <br />
         distance: {{ distance }}
         <br />
-        distance: {{ distest }}
+        distance(보정치): {{ distest }}
       </div>
       <div v-html="boundMsg"></div>
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
@@ -242,16 +242,6 @@ export default defineComponent({
     }
   },
   methods: {
-    createMarkerImage(imageSrc, imageSize, imageOption) {
-      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-      const markerImage = new kakao.maps.MarkerImage(
-        imageSrc,
-        imageSize,
-        imageOption
-      )
-
-      return markerImage
-    },
     initMap() {
       const container = document.getElementById('map')
       const options = {
@@ -305,12 +295,14 @@ export default defineComponent({
 
       const centerNow = this.map.getCenter()
 
+      // 마지막 검색 중심지점과 현지도 중심지도 사이의 거리
       this.distance = Math.sqrt(
         Math.pow(centerNow.La - this.lastSearchPosition.La, 2) +
           Math.pow(centerNow.Ma - this.lastSearchPosition.Ma, 2)
       )
       const dist_correction =
-        (2000 * this.distance) / Math.pow(this.mapLevel, 2)
+        (280 * (14 - this.mapLevel) * this.distance) /
+        Math.pow(this.mapLevel, 2)
       this.distest = dist_correction
       // distance가 특정 수치 이상이고 현재 fade상태이면
       // fade 해제하고 버튼 보여줌
@@ -348,7 +340,6 @@ export default defineComponent({
 
       // 테스트 중심좌표 저장
       this.lastSearchPosition = this.map.getCenter()
-      console.log(this.lastSearchPosition)
 
       this.clearAllMarkers()
 
@@ -424,8 +415,6 @@ export default defineComponent({
     },
     // 현재위치에서 재검색
     researchInCurrentPosition() {
-      console.log('researchInCurrentPosition')
-
       // 현지도 정보 가져오기
       const bounds = this.getBounds()
 
@@ -472,6 +461,16 @@ export default defineComponent({
           return cafe
         }
       })
+    },
+    createMarkerImage(imageSrc, imageSize, imageOption) {
+      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+      const markerImage = new kakao.maps.MarkerImage(
+        imageSrc,
+        imageSize,
+        imageOption
+      )
+
+      return markerImage
     },
     showCafesMarker() {
       // 지도에 여러개 마커 표시
