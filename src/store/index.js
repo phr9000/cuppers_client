@@ -2,6 +2,7 @@ import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 
 // import example from './module-example'
+import map from './map'
 
 /*
  * If not building with SSR mode, you can
@@ -16,6 +17,7 @@ export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
       // example
+      map
     },
 
     // enable strict mode (adds overhead!)
