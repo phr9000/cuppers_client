@@ -1,4 +1,159 @@
 {
+  "mainKeywords": [
+    { "keyword_id": 0, "keyword_name": "전망이 좋은" },
+    { "keyword_id": 1, "keyword_name": "소개팅하기 좋은" },
+    { "keyword_id": 2, "keyword_name": "연인과 같이  가면 좋은" },
+    { "keyword_id": 3, "keyword_name": "분위기가 좋은" },
+    { "keyword_id": 4, "keyword_name": "바리스타 챔피언" },
+    { "keyword_id": 5, "keyword_name": "바다가 보이는" },
+    { "keyword_id": 6, "keyword_name": "테라스가 있는" },
+    { "keyword_id": 7, "keyword_name": "낮에만 영업하는" },
+    { "keyword_id": 8, "keyword_name": "연중무휴" },
+    { "keyword_id": 9, "keyword_name": "정원이나 산책로가 있는" },
+    { "keyword_id": 10, "keyword_name": "브런치 메뉴가 있는" },
+    { "keyword_id": 11, "keyword_name": "루프탑이 있는" },
+    { "keyword_id": 12, "keyword_name": "새벽까지 영업하는" },
+    { "keyword_id": 13, "keyword_name": "미술 작품이 있는" },
+    { "keyword_id": 14, "keyword_name": "야경이 유명한" },
+    { "keyword_id": 15, "keyword_name": "반려동물 동반 가능" },
+    { "keyword_id": 16, "keyword_name": "공연이 있는" },
+    { "keyword_id": 17, "keyword_name": "한옥 인테리어" },
+    { "keyword_id": 18, "keyword_name": "블루리본에 선정된" },
+    { "keyword_id": 19, "keyword_name": "블루리본에 선정된" },
+    { "keyword_id": 20, "keyword_name": "블루리본에 선정된" },
+    { "keyword_id": 21, "keyword_name": "블루리본에 선정된" },
+    { "keyword_id": 22, "keyword_name": "블루리본에 선정된" },
+    { "keyword_id": 23, "keyword_name": "블루리본에 선정된" }
+  ],
+  "mainCafes": [
+    {
+      "cafe_id": 1,
+      "cafe_name_pr": "커피앰비언스 (송파구)",
+      "cafe_address": "서울 송파구 송이로17길 51",
+      "cafe_region": "송파",
+      "cafe_address_dong": "(가락동)",
+      "cafe_type": "r",
+      "cafe_latitude": 37.5015764,
+      "cafe_longitude": 127.124833,
+      "cafe_description": "‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.",
+      "cafe_img": "http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg",
+      "like_cnt": 114,
+      "user_liked": 1,
+      "review_cnt": 32,
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "앰비언스",
+          "icon": null
+        },
+        {
+          "keyword_id": 4,
+          "keyword_name": "내추럴 커피",
+          "icon": null
+        },
+        {
+          "keyword_id": 5,
+          "keyword_name": "추출도구 선택 가능",
+          "icon": null
+        },
+        {
+          "keyword_id": 21,
+          "keyword_name": "COE 취급",
+          "icon": null
+        }
+      ]
+    },
+    {
+      "cafe_id": 2,
+      "cafe_name_pr": "이월로스터스 송파2호점 (송파구)",
+      "cafe_region": "송파",
+      "cafe_address_dong": "(송파동)",
+      "cafe_address": "서울 송파구 백제고분로 426",
+      "cafe_type": "",
+      "cafe_latitude": 37.5088605,
+      "cafe_longitude": 127.111623,
+      "cafe_description": "아인슈페너가 맛있는 집으로 12월라테와 함께 시그니처 메뉴다. 브라질무산소발효커피, 콜롬비아게이샤워시드, 온두라스스내셔널위너 등 다양한 종류의 필터 커피도 추천할 만하다. 티라미수를 비롯한 디저트 메뉴도 다양하게 있다.",
+      "cafe_img": "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbkw5iC%2FbtqDTFEOs0y%2FfBgh3Oq5d8RGHBrgMjJ4O1%2Fimg.png",
+      "like_cnt": 114,
+      "user_liked": 1,
+      "review_cnt": 32,
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "이월에 대한 설명",
+          "icon": null
+        },
+        {
+          "keyword_id": 4,
+          "keyword_name": "내추럴 커피",
+          "icon": null
+        },
+        {
+          "keyword_id": 5,
+          "keyword_name": "추출도구 선택 가능",
+          "icon": null
+        },
+        {
+          "keyword_id": 21,
+          "keyword_name": "분위기가 좋은",
+          "icon": null
+        }
+      ],
+      "opTime": [
+        {
+          "day": "월~목",
+          "time": "09:30~22:30"
+        },
+        {
+          "day": "금, 토",
+          "time": "09:30~23:00"
+        },
+        {
+          "day": "일",
+          "time": "정기휴무"
+        },
+        {
+          "day": "명절",
+          "time": "명절 당일 휴무"
+        }
+      ]
+    },
+    {
+      "cafe_id": 9,
+      "cafe_name_pr": "모모스커피 ",
+      "cafe_name_sc": "Momos",
+      "cafe_region": "부산",
+      "cafe_address_dong": "(부곡동)",
+      "cafe_address": "부산광역시 금정구 오시게로 20",
+      "cafe_type": "",
+      "cafe_latitude": 35.2192318,
+      "cafe_longitude": 129.0864874,
+      "like_cnt": 99,
+      "user_liked": 0,
+      "review_cnt": 99,
+      "user_beenthere": 0,
+      "keywords": [
+        {
+          "keyword_id": 1,
+          "keyword_name": "커피에 대한 설명"
+        },
+        {
+          "keyword_id": 11,
+          "keyword_name": "내추럴 커피"
+        },
+        {
+          "keyword_id": 12,
+          "keyword_name": "추출도구 선택 가능"
+        },
+        {
+          "keyword_id": 13,
+          "keyword_name": "COE 취급"
+        }
+      ]
+    }
+  ],
   "serveyKeywords": [
     {
       "keyword_id": 1,

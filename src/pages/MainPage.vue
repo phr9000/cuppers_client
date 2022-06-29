@@ -3,28 +3,10 @@
     <section class="column">
       <div class="q-pl-xl col">
         <h3 class="q-mb-lg main_tile">커피를<br />커피답게<br />커퍼스' ☕</h3>
+        {{ currentLocation }}
       </div>
     </section>
-    <carousel-main-slide :mainCnoteData="mainCnoteData" />
-    <section class="bottom_container text-center column constrain_md">
-      <!-- 커핑 노트 KEYWORD -->
-      <div class="title-area">
-        <h4 class="q-mb-md text-primary keyword-title">커핑 노트 KEYWORD</h4>
-        <p class="txt_keyword q-mb-xl keyword-des">
-          키워드로 분류된 다양한 커핑 노트
-        </p>
-      </div>
-      <section class="column keywords_container">
-        <div class="row">
-          <btn-main
-            v-for="keyword in keywords"
-            :key="keyword.id"
-            :id="keyword.id"
-            :keyword="keyword.keyword"
-          />
-        </div>
-      </section>
-    </section>
+    <!-- 3 -->
     <section class="bg-grey-1">
       <div class="bottom_container text-center column constrain_md">
         <!-- 추천 카페 -->
@@ -38,19 +20,10 @@
           <div class="card_wrap q-mr-md">
             <card-cafe-main
               title="커피리브레 연남점연남점연남점"
-              distance="3.4km"
+              :distance="distance"
               imgUrl="http://designcoffee.com/web/images/TAG/Round7/coffee%20libre_interview%20(3).jpg"
             />
           </div>
-          <div class="card_wrap q-mr-md">
-            <card-cafe-main
-              title="커피 앰비언스"
-              distance="300m"
-              caption="‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페. 한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다."
-              imgUrl="https://blog.kakaocdn.net/dn/TRtov/btqviGyD7Xs/4YJRM8qw366Wr5TpVofhRk/img.png"
-            />
-          </div>
-          <div class="card_wrap q-mr-md"><card-cafe-main /></div>
         </div>
 
         <div class="q-my-xl">
@@ -66,17 +39,42 @@
         </div>
       </div>
     </section>
+
+    <!-- 1 -->
+    <carousel-main-slide />
+
+    <!-- 2 -->
+    <section class="bottom_container text-center column constrain_md">
+      <!-- 커핑 노트 KEYWORD -->
+      <div class="title-area">
+        <h4 class="q-mb-md text-primary keyword-title">커핑 노트 KEYWORD</h4>
+        <p class="txt_keyword q-mb-xl keyword-des">
+          키워드로 분류된 다양한 커핑 노트
+        </p>
+      </div>
+      <section class="column keywords_container">
+        <div class="row">
+          <btn-main
+            v-for="keyword in keywords"
+            :key="keyword.keyword_id"
+            :id="keyword.keyword_id"
+            :keyword="keyword.keyword_name"
+          />
+        </div>
+      </section>
+    </section>
   </q-page>
 </template>
 
 <script>
-import mainKeywordsData from '../data/mainKeywordsData'
-
 import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CarouselMainSlide from 'src/components/Carousel/CarouselMainSlide.vue'
 import BtnMain from 'src/components/Button/BtnMain.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
-import mainCnoteData from 'src/data/mainCnoteData'
+import useFormatter from 'src/composables/useFormatter'
+const { formatNumber } = useFormatter()
+import useDistance from 'src/composables/useDistance'
+const { getDistanceFromLatLng } = useDistance()
 
 export default {
   name: 'MainPage',
@@ -88,12 +86,77 @@ export default {
   },
   data() {
     return {
-      keywords: mainKeywordsData,
-      mainCnoteData,
-      cnote: []
+      keywords: null,
+      currentLocation: null,
+      distance: '0',
+      cafes: []
     }
   },
-  methods: {}
+  computed: {
+    locationSupported() {
+      if ('geolocation' in navigator) return true
+      return false
+    }
+  },
+  created() {
+    let apiUrl = `${process.env.API_LOCAL}/mainKeywords` // json-server
+    // let apiUrl = `${process.env.API}/mainKeywords` // real-server
+
+    this.$axios
+      .get(apiUrl)
+      .then((result) => {
+        this.keywords = result.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
+  mounted() {
+    // 리브레 좌표
+    const libre = {
+      lat: 37.541501,
+      lng: 127.1285397
+    }
+    if (this.locationSupported) {
+      this.setCurrentLocation()
+    }
+    this.loadCafe()
+  },
+  methods: {
+    handleClickKeyword(id) {
+      console.log('keyword_id: ', id)
+    },
+    setCurrentLocation() {
+      // this.locationLoading = true
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.currentLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            city: null
+          }
+        },
+        (err) => {
+          this.locationError()
+        },
+        { timeout: 1500 }
+      )
+    },
+    loadCafe() {
+      // json-server
+      let apiUrl = `${process.env.API_LOCAL}/cafeLocations?_limit=3`
+
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          // this.keywords = result.data
+          console.log(result.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }
 }
 </script>
 <style lang="scss" scope>
