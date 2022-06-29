@@ -74,11 +74,14 @@ import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CarouselMainSlide from 'src/components/Carousel/CarouselMainSlide.vue'
 import BtnMain from 'src/components/Button/BtnMain.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
-import useFormatter from 'src/composables/useFormatter'
-const { formatNumber } = useFormatter()
+// import useFormatter from 'src/composables/useFormatter'
+// const { formatNumber } = useFormatter()
 import useDistance from 'src/composables/useDistance'
 const { getDistanceFromLatLng } = useDistance()
-const MAX_TRY = 3
+
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
   name: 'MainPage',
   components: {
@@ -86,6 +89,20 @@ export default {
     CardCafeMain,
     BtnMain,
     BtnBasic
+  },
+  setup() {
+    const $store = useStore()
+
+    const locState = computed({
+      get: () => $store.state.map.loc,
+      set: (val) => {
+        $store.commit('map/setLoc', val)
+      }
+    })
+
+    return {
+      locState
+    }
   },
   data() {
     return {
@@ -96,23 +113,13 @@ export default {
       try: 0
     }
   },
-  computed: {
-    locationSupported() {
-      if ('geolocation' in navigator) return true
-      return false
-    }
-  },
+  computed: {},
   created() {
     // Load Carousel
   },
   mounted() {
     // Load Keywords
     this.loadKeywords()
-
-    // 내위치(위도,경도) 좌표 구하기
-    if (this.locationSupported) {
-      this.setCurrentLocation()
-    }
 
     // Load Cafes Recommended 추천 카페
     this.loadCafes()
@@ -148,7 +155,10 @@ export default {
             this.cafes.push(cafe)
           }
 
-          //console.log(result.data)
+          if (this.locState) {
+            this.currentLocation = this.locState
+            this.calculateDistance()
+          }
         })
         .catch((err) => {
           console.log(err)
@@ -157,31 +167,9 @@ export default {
     handleClickKeyword(id) {
       console.log('keyword_id: ', id)
     },
-    setCurrentLocation() {
-      // this.locationLoading = true
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.currentLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            city: null
-          }
-          console.log('currentLocation: ', this.currentLocation)
-          this.calculateDistance()
-        },
-        (err) => {
-          if (this.try < MAX_TRY) {
-            this.try++
-            console.log('try again')
-            this.setCurrentLocation()
-          } else {
-            this.locationError()
-          }
-        },
-        { timeout: 1500 }
-      )
-    },
+    // 현재위치 기준으로 각 카페의 거리 계산
     calculateDistance() {
+      console.log('calculateDistance')
       this.cafes.forEach((cafe) => {
         let dist = getDistanceFromLatLng(
           this.currentLocation.lat,

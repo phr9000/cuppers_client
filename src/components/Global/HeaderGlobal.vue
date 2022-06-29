@@ -10,8 +10,8 @@
         aria-label="Menu"
         @click="clickMenu"
       />
-      <q-toolbar-title class="font_caveat"
-        ><btn-logo to="/" />
+      <q-toolbar-title class="row items-center"
+        ><btn-logo class="font_caveat" to="/" />
         <q-btn
           to="/test"
           class="text-grey-3"
@@ -20,6 +20,7 @@
           icon="cruelty_free"
           aria-label="Menu"
         />
+        <current-location class="text-grey-3" />
       </q-toolbar-title>
 
       <q-btn to="/map" class="q-mr-sm" flat color="primary" label="카페찾기" />
@@ -36,8 +37,9 @@ import { defineComponent } from 'vue'
 import BtnLogo from '../Button/BtnLogo.vue'
 import BtnMyAvatar from '../Button/BtnMyAvatar.vue'
 import BtnReqNewCafe from '../Button/BtnReqNewCafe.vue'
+import CurrentLocation from './CurrentLocation.vue'
 export default defineComponent({
-  components: { BtnLogo, BtnReqNewCafe, BtnMyAvatar },
+  components: { BtnLogo, BtnReqNewCafe, BtnMyAvatar, CurrentLocation },
   props: {
     hasBtnMenu: { type: Boolean, default: false }
   },

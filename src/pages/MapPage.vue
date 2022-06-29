@@ -98,7 +98,7 @@
 
       <!-- current location - 현재 위치 버튼 -->
       <btn-icon
-        @click="setCurrentLocation"
+        @click="panToCurrentLocation"
         class="btn_current_location"
         icon="my_location"
       />
@@ -170,6 +170,9 @@ import BtnIcon from 'src/components/Button/BtnIcon.vue'
 import CardCafeMap from 'src/components/Card/CardCafeMap.vue'
 import CardCafeSmall from 'src/components/Card/CardCafeSmall.vue'
 
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default defineComponent({
   name: 'MapPage',
   components: {
@@ -177,6 +180,20 @@ export default defineComponent({
     BtnIcon,
     CardCafeMap,
     CardCafeSmall
+  },
+  setup() {
+    const $store = useStore()
+
+    const locState = computed({
+      get: () => $store.state.map.loc,
+      set: (val) => {
+        $store.commit('map/setLoc', val)
+      }
+    })
+
+    return {
+      locState
+    }
   },
   data() {
     return {
@@ -198,7 +215,7 @@ export default defineComponent({
       ], // 필터링된 카페 리스트
       map: null, // 카카오맵 인스턴스
       currentLocation: null,
-      locationLoading: false,
+      // locationLoading: false,
       search: '',
       drawerOpen: false,
       tab: 'search', // 'search', 'mylist',
@@ -215,13 +232,17 @@ export default defineComponent({
       clickImage: null
     }
   },
-  computed: {
-    locationSupported() {
-      if ('geolocation' in navigator) return true
-      return false
-    }
-  },
+  computed: {},
+  created() {},
   mounted() {
+    setTimeout(() => {
+      console.log(this.locState)
+      if (this.locState === null) {
+        this.locationError()
+        return
+      }
+    }, 200)
+    this.currentLocation = this.locState
     //console.log(process.env.KAKAO_API)
 
     if (!window.kakao || !window.kakao.maps) {
@@ -549,83 +570,15 @@ export default defineComponent({
       this.map.setBounds(bounds)
       // 지도 범위 재설정 하기
     },
-    // test
-    loadRawData() {
-      let apiUrl = `${process.env.API_LOCAL}/cafeLocations` // json-server
-      // let apiUrl = `${process.env.API}/cafeLocations` // real-server
-      this.$axios
-        .get(apiUrl)
-        .then((result) => {
-          this.cafesRaw = []
-          for (let i = 0; i < result.data.length; i++) {
-            const cafe = {
-              ...result.data[i],
-              latlng: new kakao.maps.LatLng(
-                result.data[i]['cafe_latitude'],
-                result.data[i]['cafe_longitude']
-              ),
-              marker: null
-            }
-
-            this.cafesRaw.push(cafe)
-          }
-          // console.log(this.cafesRaw)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
     zoomIn() {
       this.map.setLevel(this.map.getLevel() - 1, { animate: true })
     },
     zoomOut() {
       this.map.setLevel(this.map.getLevel() + 1, { animate: true })
     },
-    setCurrentLocation() {
-      this.locationLoading = true
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.currentLocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            city: null
-          }
-          // 현재 위치로 지도 이동
-          this.panTo(this.currentLocation.lat, this.currentLocation.lng)
-
-          // 동네(city) 얻어오기
-          this.getCityAndCountry(position)
-        },
-        (err) => {
-          this.locationError()
-        },
-        { timeout: 1500 }
-      )
-    },
-    getCityAndCountry(position) {
-      let apiUrl = `https://geocode.xyz/${position.coords.latitude},${position.coords.longitude}?json=1`
-      this.$axios
-        .get(apiUrl)
-        .then((result) => {
-          this.locationSuccess(result)
-        })
-        .catch((err) => {
-          this.locationError()
-        })
-    },
-    locationError() {
-      //console.log('위치를 찾을 수 없습니다.')
-      this.$q.dialog({
-        title: 'Error',
-        message: '위치를 찾을 수 없습니다. 잠시후 다시 시도해 주세요.'
-      })
-      this.locationLoading = false
-    },
-    locationSuccess(result) {
-      this.currentLocation.city = result.data.city
-      // console.log(result.data.city)
-      console.log(result.data.country)
-      this.locationLoading = false
+    panToCurrentLocation() {
+      // 현재 위치로 지도 이동
+      this.panTo(this.currentLocation.lat, this.currentLocation.lng)
     },
     panTo(lat, lng) {
       // 이동할 위도 경도 위치를 생성합니다
@@ -634,6 +587,12 @@ export default defineComponent({
       // 지도 중심을 부드럽게 이동시킵니다
       // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
       this.map.panTo(moveLatLon)
+    },
+    locationError() {
+      this.$q.dialog({
+        title: 'Error',
+        message: '위치를 찾을 수 없습니다. 잠시후 다시 시도해 주세요.'
+      })
     },
     toggleDrawer() {
       this.drawerOpen = !this.drawerOpen
