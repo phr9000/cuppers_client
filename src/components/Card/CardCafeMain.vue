@@ -12,8 +12,9 @@
           color="primary"
           icon="place"
         />
-        <div class="q-mt-xs text-grey text-caption">
-          <q-icon name="place" /> {{ distance }}
+        <div class="row items-center q-mt-xs text-grey text-caption">
+          <q-icon name="place" />
+          <div class="distance">{{ distance }}Km</div>
         </div>
       </div>
       <div class="text-left text-h6 cafe-title">
@@ -44,7 +45,7 @@ export default defineComponent({
       default: 'https://cdn.quasar.dev/img/parallax2.jpg'
     },
     title: { type: String, default: '커퍼즈커피 본점' },
-    distance: { type: String, default: '4.7km' },
+    distance: { type: Number, default: 0 },
     caption: {
       type: String,
       default:
@@ -84,11 +85,11 @@ export default defineComponent({
     top: -28px;
     right: 12px;
     @media (max-width: 962px) {
-      top: -21px;
+      top: -23px;
     }
     .icon_place {
-      width: 56px;
-      height: 56px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       @media (max-width: 962px) {
         width: 42px;

@@ -1,8 +1,5 @@
 /* Distance between two lat/lng coordinates in km using the Haversine formula */
 const getDistanceFromLatLng = (lat1, lng1, lat2, lng2) => {
-  if (typeof miles === 'undefined') {
-    miles = false
-  }
   function deg2rad(deg) {
     return deg * (Math.PI / 180)
   }

@@ -3,43 +3,8 @@
     <section class="column">
       <div class="q-pl-xl col">
         <h3 class="q-mb-lg main_tile">커피를<br />커피답게<br />커퍼스' ☕</h3>
-        {{ currentLocation }}
       </div>
     </section>
-    <!-- 3 -->
-    <section class="bg-grey-1">
-      <div class="bottom_container text-center column constrain_md">
-        <!-- 추천 카페 -->
-        <div class="title-area">
-          <h4 class="q-mb-md text-primary keyword-title">Today's CAFE</h4>
-          <p class="txt_keyword q-mb-xl keyword-des">
-            좋아할 만한 카페를 준비했어요
-          </p>
-        </div>
-        <div class="recommends_container row q-mt-xl">
-          <div class="card_wrap q-mr-md">
-            <card-cafe-main
-              title="커피리브레 연남점연남점연남점"
-              :distance="distance"
-              imgUrl="http://designcoffee.com/web/images/TAG/Round7/coffee%20libre_interview%20(3).jpg"
-            />
-          </div>
-        </div>
-
-        <div class="q-my-xl">
-          <btn-basic
-            :dense="false"
-            size="lg"
-            to="map"
-            color="secondary"
-            label="지도 표시하기"
-            icon="map"
-            padding="5px 15px"
-          />
-        </div>
-      </div>
-    </section>
-
     <!-- 1 -->
     <carousel-main-slide />
 
@@ -63,6 +28,44 @@
         </div>
       </section>
     </section>
+
+    <!-- 3 개발중 임시로 가장위 -->
+    <section class="bg-grey-1">
+      <div class="bottom_container text-center column constrain_md">
+        <!-- 추천 카페 -->
+        <div class="title-area">
+          <h4 class="q-mb-md text-primary keyword-title">Today's CAFE</h4>
+          <p class="txt_keyword q-mb-xl keyword-des">
+            좋아할 만한 카페를 준비했어요
+          </p>
+        </div>
+        <div class="recommends_container row q-mt-xl">
+          <div
+            v-for="cafe in cafes"
+            :key="cafe.cafe_id"
+            class="card_wrap q-mr-md"
+          >
+            <card-cafe-main
+              :title="cafe.cafe_name_pr"
+              :distance="cafe.distance"
+              :imgUrl="cafe.cafe_img"
+            />
+          </div>
+        </div>
+
+        <div class="q-my-xl">
+          <btn-basic
+            :dense="false"
+            size="lg"
+            to="map"
+            color="secondary"
+            label="지도 표시하기"
+            icon="map"
+            padding="5px 15px"
+          />
+        </div>
+      </div>
+    </section>
   </q-page>
 </template>
 
@@ -75,7 +78,7 @@ import useFormatter from 'src/composables/useFormatter'
 const { formatNumber } = useFormatter()
 import useDistance from 'src/composables/useDistance'
 const { getDistanceFromLatLng } = useDistance()
-
+const MAX_TRY = 3
 export default {
   name: 'MainPage',
   components: {
@@ -89,7 +92,8 @@ export default {
       keywords: null,
       currentLocation: null,
       distance: '0',
-      cafes: []
+      cafes: [],
+      try: 0
     }
   },
   computed: {
@@ -99,30 +103,57 @@ export default {
     }
   },
   created() {
-    let apiUrl = `${process.env.API_LOCAL}/mainKeywords` // json-server
-    // let apiUrl = `${process.env.API}/mainKeywords` // real-server
-
-    this.$axios
-      .get(apiUrl)
-      .then((result) => {
-        this.keywords = result.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    // Load Carousel
   },
   mounted() {
-    // 리브레 좌표
-    const libre = {
-      lat: 37.541501,
-      lng: 127.1285397
-    }
+    // Load Keywords
+    this.loadKeywords()
+
+    // 내위치(위도,경도) 좌표 구하기
     if (this.locationSupported) {
       this.setCurrentLocation()
     }
-    this.loadCafe()
+
+    // Load Cafes Recommended 추천 카페
+    this.loadCafes()
   },
   methods: {
+    loadKeywords() {
+      let apiUrl = `${process.env.API_LOCAL}/mainKeywords` // json-server
+      // let apiUrl = `${process.env.API}/mainKeywords` // real-server
+
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.keywords = result.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    loadCafes() {
+      // json-server
+      let apiUrl = `${process.env.API_LOCAL}/mainCafes?_limit=3`
+
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.cafes = []
+          for (let i = 0; i < result.data.length; i++) {
+            let cafe = {
+              ...result.data[i],
+              distance: 0
+            }
+
+            this.cafes.push(cafe)
+          }
+
+          //console.log(result.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     handleClickKeyword(id) {
       console.log('keyword_id: ', id)
     },
@@ -135,26 +166,40 @@ export default {
             lng: position.coords.longitude,
             city: null
           }
+          console.log('currentLocation: ', this.currentLocation)
+          this.calculateDistance()
         },
         (err) => {
-          this.locationError()
+          if (this.try < MAX_TRY) {
+            this.try++
+            console.log('try again')
+            this.setCurrentLocation()
+          } else {
+            this.locationError()
+          }
         },
         { timeout: 1500 }
       )
     },
-    loadCafe() {
-      // json-server
-      let apiUrl = `${process.env.API_LOCAL}/cafeLocations?_limit=3`
+    calculateDistance() {
+      this.cafes.forEach((cafe) => {
+        let dist = getDistanceFromLatLng(
+          this.currentLocation.lat,
+          this.currentLocation.lng,
+          cafe.cafe_latitude,
+          cafe.cafe_longitude
+        )
+        console.log(dist)
 
-      this.$axios
-        .get(apiUrl)
-        .then((result) => {
-          // this.keywords = result.data
-          console.log(result.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+        dist = parseInt(dist)
+
+        cafe.distance = dist
+      })
+    },
+    locationError() {
+      console.log('현재 위치를 찾을 수 없습니다.')
+
+      this.locationLoading = false
     }
   }
 }

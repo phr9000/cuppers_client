@@ -390,16 +390,16 @@ export default defineComponent({
             }
 
             let cafe = {
-              ...result.data[i],
+              ...cf,
               latlng: new kakao.maps.LatLng(
-                result.data[i]['cafe_latitude'],
-                result.data[i]['cafe_longitude']
+                cf['cafe_latitude'],
+                cf['cafe_longitude']
               ),
               marker: null
             }
 
-            if (result.data[i].opTime) {
-              cafe = { ...cafe, today: result.data[i].opTime[0] }
+            if (cf.opTime) {
+              cafe = { ...cafe, today: cf.opTime[0] }
             }
 
             this.cafes.push(cafe)
