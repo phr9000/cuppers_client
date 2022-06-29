@@ -14,6 +14,14 @@
 
         <!-- tab1: map-search -->
         <q-list v-show="tab === 'search'" class="column q-py-sm">
+          <q-checkbox
+            label="현 지도 내 검색"
+            v-model="searchInMap"
+            class="q-pr-sm text-grey-6"
+            left-label
+            color="secondary"
+            size="sm"
+          />
           <!-- 검색창 -->
           <q-input
             @keyup.enter="handleClickSearch"
@@ -35,21 +43,25 @@
             </template>
           </q-input>
           <div class="row q-px-md q-pt-sm">
-            <btn-basic @click="doSearch('*')" color="secondary" label="전체" />
             <btn-basic
-              @click="doSearch('송파')"
+              @click="handleClickSearch('*')"
+              color="secondary"
+              label="전체"
+            />
+            <btn-basic
+              @click="handleClickSearch('송파')"
               color="secondary"
               label="송파"
             />
             <btn-basic
-              @click="doSearch('강동')"
+              @click="handleClickSearch('강동')"
               color="secondary"
               label="강동"
             />
           </div>
 
           <!-- 검색 결과 표시 (카페 카드) -->
-          <div class="q-my-sm custom_test">
+          <div v-if="cafes.length > 0" class="q-my-sm">
             <div v-for="cafe in cafes" :key="cafe.cafe_id">
               <card-cafe-small
                 :cafe="cafe"
@@ -58,6 +70,9 @@
                 @click="setTarget(cafe.cafe_id)"
               />
             </div>
+          </div>
+          <div v-else class="q-my-lg text-grey flex flex-center">
+            <p>검색된 카페가 없습니다.</p>
           </div>
         </q-list>
 
@@ -128,24 +143,6 @@
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
         현재위치: {{ currentLocation }}
       </div>
-      <div class="q-ma-xs q-pa-xs custom_test radius_border">
-        <btn-basic
-          @click="doSearch('송파')"
-          color="secondary"
-          label="송파 검색"
-        />
-        <btn-basic
-          @click="doSearch('강동')"
-          color="secondary"
-          label="강동 검색"
-        />
-        <btn-basic @click="test2()" color="secondary" label="지도 리셋?" />
-        <btn-basic
-          @click="clearAllMarkers"
-          color="warning"
-          label="모든 마커 삭제"
-        />
-      </div>
 
       <!-- 검색 결과 표시 테스트 -->
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
@@ -206,12 +203,13 @@ export default defineComponent({
       drawerOpen: false,
       tab: 'search', // 'search', 'mylist',
       searching: false,
+      searchInMap: false, // 현지도 내 검색 체크박스
       targetCafe: null,
       researchBtnFade: true,
-      boundMsg: '', // 현재바운드정보 테스트
       mapLevel: null,
       lastSearchPosition: null,
       distance: 0,
+      boundMsg: '', // 현재바운드정보 테스트출력
       distest: 0, // distance 보정치 테스트출력
       normalImage: null,
       clickImage: null
@@ -310,13 +308,12 @@ export default defineComponent({
         this.researchBtnFade = false
       }
     },
-    handleClickSearch() {
-      console.log('handleClickSearch: ', this.search)
-      if (this.cafes.length > 0) {
-        // 모든 마커를 삭제
-        this.clearAllMarkers()
-      }
-      if (this.search === '') {
+    // 검색 버튼 클릭, 또는 enter
+    handleClickSearch(search) {
+      // console.log(typeof search)
+      if (typeof search == 'string') {
+        this.search = search
+      } else if (this.search === '') {
         console.log('검색어를 입력하세요')
         this.$q.dialog({
           title: 'Error',
@@ -324,10 +321,23 @@ export default defineComponent({
         })
         return
       }
+
       if (this.searching === true) {
         return
       }
-      this.doSearch(this.search)
+
+      // console.log('handleClickSearch: ', this.search)
+      if (this.cafes.length > 0) {
+        // 모든 마커를 삭제
+        this.clearAllMarkers()
+      }
+
+      let bounds = null
+      if (this.searchInMap) {
+        // 현지도 바운더리 정보 가져오기
+        bounds = this.getBounds()
+      }
+      this.doSearch(this.search, bounds)
     },
     doSearch(search, bounds) {
       this.searching = true
@@ -415,7 +425,7 @@ export default defineComponent({
     },
     // 현재위치에서 재검색
     researchInCurrentPosition() {
-      // 현지도 정보 가져오기
+      // 현지도 바운더리 정보 가져오기
       const bounds = this.getBounds()
 
       // 바운드로 검색
@@ -669,7 +679,7 @@ export default defineComponent({
   position: relative;
   overflow: hidden;
   // width: calc(100% - 382px);
-  height: calc(85vh - 50px);
+  height: calc(90vh - 50px);
 
   #map {
     width: 100%;
