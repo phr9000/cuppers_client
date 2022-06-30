@@ -5,15 +5,22 @@
       <div id="map"></div>
 
       <!-- 왼쪽 drawer -->
-      <q-drawer :width="382" v-model="drawerOpen" show-if-above bordered>
+      <q-drawer :width="362" v-model="drawerOpen" show-if-above bordered>
         <!-- tab -->
-        <q-tabs v-model="tab" inline-label class="shadow-2">
+        <q-tabs
+          v-model="tab"
+          inline-label
+          class="text-h1 text-primary shadow-2"
+        >
           <q-tab name="search" icon="search" label="검색" />
           <q-tab name="mylist" icon="list" label="내목록" />
         </q-tabs>
 
         <!-- tab1: map-search -->
-        <q-list v-show="tab === 'search'" class="column q-py-sm">
+        <section
+          v-show="tab === 'search'"
+          class="section_search column q-py-sm"
+        >
           <q-checkbox
             label="현 지도 내 검색"
             v-model="searchInMap"
@@ -22,46 +29,82 @@
             color="secondary"
             size="sm"
           />
-          <!-- 검색창 -->
-          <q-input
-            @keyup.enter="handleClickSearch"
-            v-model="search"
-            dense
-            placeholder="키워드 / 지역으로 검색"
-            class="text-center text-grey-5 q-px-md"
-            style="width: 100%"
-            hint="키워드 / 지역으로 검색하세요"
-          >
-            <template v-slot:prepend>
-              <q-btn
-                @click="handleClickSearch"
-                round
-                dense
-                flat
-                icon="search"
+          <!-- 검색 모듈 -->
+          <div class="search_module">
+            <q-input
+              @keyup.enter="handleClickSearch"
+              v-model="search"
+              dense
+              placeholder="키워드 / 지역으로 검색"
+              class="text-center text-grey-5 q-px-md"
+              style="width: 100%"
+              hint="키워드 / 지역으로 검색하세요"
+            >
+              <template v-slot:prepend>
+                <q-btn
+                  @click="handleClickSearch"
+                  round
+                  dense
+                  flat
+                  icon="search"
+                />
+              </template>
+            </q-input>
+            <div class="row q-px-md q-pt-sm">
+              <btn-basic
+                @click="handleClickSearch('*')"
+                color="secondary"
+                label="전체"
               />
-            </template>
-          </q-input>
-          <div class="row q-px-md q-pt-sm">
-            <btn-basic
-              @click="handleClickSearch('*')"
-              color="secondary"
-              label="전체"
-            />
-            <btn-basic
-              @click="handleClickSearch('송파')"
-              color="secondary"
-              label="송파"
-            />
-            <btn-basic
-              @click="handleClickSearch('강동')"
-              color="secondary"
-              label="강동"
-            />
+              <btn-basic
+                @click="handleClickSearch('송파')"
+                color="secondary"
+                label="송파"
+              />
+              <btn-basic
+                @click="handleClickSearch('강동')"
+                color="secondary"
+                label="강동"
+              />
+            </div>
+
+            <!-- 정렬 -->
+            <div class="q-mt-sm q-mt-md">
+              <div class="row justify-end items-center">
+                <!-- <btn-basic
+                  class="btn_sort"
+                  :class="{ active: sort === 'like' }"
+                  @click="handleClickSort('like')"
+                  color="grey-6"
+                  label="추천순"
+                  size="sm"
+                />
+                <btn-basic
+                  class="btn_sort active"
+                  :class="{ active: sort === 'distance' }"
+                  @click="handleClickSort('distance')"
+                  color="grey-6"
+                  label="거리순"
+                  size="sm"
+                /> -->
+
+                <q-tabs
+                  active-color="secondary"
+                  v-model="sort"
+                  dense
+                  class="text-grey-6"
+                >
+                  <q-tab class="btn_sort" name="like" label="추천순" />
+                  <q-tab class="btn_sort" name="distance" label="거리순" />
+                </q-tabs>
+              </div>
+            </div>
           </div>
 
+          <q-separator class="" />
+
           <!-- 검색 결과 표시 (카페 카드) -->
-          <div v-if="cafes.length > 0" class="q-my-sm">
+          <q-list v-if="cafes.length > 0" class="search_result q-mb-sm">
             <div v-for="cafe in cafes" :key="cafe.cafe_id">
               <card-cafe-small
                 :cafe="cafe"
@@ -70,16 +113,16 @@
                 @click="setTarget(cafe.cafe_id)"
               />
             </div>
-          </div>
+          </q-list>
           <div v-else class="q-my-lg text-grey flex flex-center">
             <p>검색된 카페가 없습니다.</p>
           </div>
-        </q-list>
+        </section>
 
         <!-- tab2: map-my-list -->
-        <q-list v-show="tab === 'mylist'">
+        <section v-show="tab === 'mylist'">
           <q-item-label header> 마이리스트 </q-item-label>
-        </q-list>
+        </section>
       </q-drawer>
 
       <!-- 지도 확대, 축소 컨트롤 div -->
@@ -229,7 +272,8 @@ export default defineComponent({
       boundMsg: '', // 현재바운드정보 테스트출력
       distest: 0, // distance 보정치 테스트출력
       normalImage: null,
-      clickImage: null
+      clickImage: null,
+      sort: '' // none or like or distance
     }
   },
   computed: {},
@@ -276,7 +320,7 @@ export default defineComponent({
       })
 
       // 지도를 생성한 이후 작업들
-      const imageSrc = '/public/icons/marker.png' // 마커이미지의 주소입니다
+      const imageSrc = '/icons/marker.png' // 마커이미지의 주소입니다
       const imageSrcClick = '/public/icons/marker_active.png' // 마커이미지의 주소입니다
       const imageSize = new kakao.maps.Size(34, 44) // 마커이미지의 크기입니다
       const imageOption = { offset: new kakao.maps.Point(17, 44) } // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의
@@ -359,6 +403,10 @@ export default defineComponent({
         bounds = this.getBounds()
       }
       this.doSearch(this.search, bounds)
+    },
+    handleClickSort(sort) {
+      console.log('handleClickSort:', sort)
+      this.sort = sort
     },
     doSearch(search, bounds) {
       this.searching = true
@@ -519,11 +567,6 @@ export default defineComponent({
         // 마커 클릭 이벤트 등록
         kakao.maps.event.addListener(marker, 'click', () => {
           this.handleClickMarker(cafe_id, position)
-
-          this.cafes.forEach((cafe) => {
-            cafe.marker.setImage(this.normalImage)
-          })
-          marker.setImage(this.clickImage)
         })
 
         this.cafes[i].marker = marker
@@ -545,6 +588,16 @@ export default defineComponent({
         return cafe['cafe_id'] === cafe_id
       })[0]
       this.targetCafe = { ...find }
+
+      // target cafe 마커 활성황, 이외의 마커는 비활성화
+      this.cafes.forEach((cafe) => {
+        if (cafe.cafe_id === cafe_id) {
+          cafe.marker.setImage(this.clickImage)
+        } else {
+          cafe.marker.setImage(this.normalImage)
+        }
+      })
+
       this.map.panTo(this.targetCafe.latlng)
     },
     // 모든 마커를 삭제
@@ -640,6 +693,15 @@ export default defineComponent({
   // width: calc(100% - 382px);
   height: calc(90vh - 50px);
 
+  .section_search {
+    .search_module {
+      .btn_sort {
+        border-radius: 18px;
+        min-height: 28px;
+        padding: 0px 18px;
+      }
+    }
+  }
   #map {
     width: 100%;
     height: 100%;
