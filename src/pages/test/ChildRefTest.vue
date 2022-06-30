@@ -35,6 +35,7 @@ export default {
     changeArrayVal() {
       for (let i = 0; i < this.array.length; i++) {
         this.$refs.childOfArray[i].changeVal()
+        // this.array.push()
       }
     }
   }
