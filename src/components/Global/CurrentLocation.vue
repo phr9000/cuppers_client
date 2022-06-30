@@ -1,5 +1,5 @@
 <template>
-  <div>{{ locState }}</div>
+  <div v-show="false">{{ locState }}</div>
 </template>
 <script>
 import { defineComponent } from 'vue'

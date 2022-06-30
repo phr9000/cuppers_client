@@ -40,7 +40,7 @@ export default defineComponent({
 <style lang="scss">
 .btn_basic {
   &.btn_sm {
-    padding: 3px 9px 3px 9px;
+    padding: 4px 9px 3px 9px;
     font-size: 13px !important;
     line-height: 13px;
     min-height: 13px;

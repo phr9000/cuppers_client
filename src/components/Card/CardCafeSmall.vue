@@ -49,8 +49,16 @@
       </div>
       <div class="col-4 q-pl-md q-pt-xs">
         <!-- style="max-width: 280px; max-height: 320px" -->
-        <q-img class="thumbnail" :ratio="1" :src="cafe.cafe_img" /></div
-    ></q-card-section>
+        <q-img class="thumbnail" :ratio="1" :src="cafe.cafe_img" />
+        <div
+          v-if="distance > -1"
+          class="row items-center justify-end q-mt-xs text-grey text-caption"
+        >
+          <q-icon name="place" />
+          <div class="distance">{{ distance }}Km</div>
+        </div>
+      </div></q-card-section
+    >
     <q-card-section v-if="cafe.keywords" class="q-pa-none">
       <!-- 키워드 -->
       <div class="info q-mb-xs">
@@ -72,6 +80,12 @@ import { defineComponent } from 'vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
+
+// composables
+import useDistance from 'src/composables/useDistance'
+const { getDistanceFromLatLng } = useDistance()
+import useFormatter from 'src/composables/useFormatter'
+const { formatNumber } = useFormatter()
 
 export default defineComponent({
   name: 'CardCafeSmall',
@@ -109,10 +123,39 @@ export default defineComponent({
       default: () => {
         return null
       }
+    },
+    curLoc: {
+      type: Object,
+      default: () => {
+        return null
+      }
     }
   },
   data() {
     return {}
+  },
+  computed: {
+    distance() {
+      try {
+        if (this.curLoc) {
+          const dist = getDistanceFromLatLng(
+            this.curLoc.lat,
+            this.curLoc.lng,
+            this.cafe.cafe_latitude,
+            this.cafe.cafe_longitude
+          )
+          if (dist > 5) {
+            dist = formatNumber(dist, '#,###')
+          } else {
+            formatNumber(dist, '#,###.#')
+          }
+          return dist
+        }
+      } catch {
+        return -1
+      }
+      return -1
+    }
   },
   mounted() {},
   methods: {
