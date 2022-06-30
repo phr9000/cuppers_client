@@ -144,7 +144,12 @@ export default defineComponent({
             this.cafe.cafe_latitude,
             this.cafe.cafe_longitude
           )
-          return formatNumber(dist, '#,###.#')
+          if (dist > 5) {
+            dist = formatNumber(dist, '#,###')
+          } else {
+            formatNumber(dist, '#,###.#')
+          }
+          return dist
         }
       } catch {
         return -1
