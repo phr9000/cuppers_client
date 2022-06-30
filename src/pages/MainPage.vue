@@ -74,10 +74,12 @@ import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CarouselMainSlide from 'src/components/Carousel/CarouselMainSlide.vue'
 import BtnMain from 'src/components/Button/BtnMain.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
-// import useFormatter from 'src/composables/useFormatter'
-// const { formatNumber } = useFormatter()
+
+// composables
 import useDistance from 'src/composables/useDistance'
 const { getDistanceFromLatLng } = useDistance()
+// import useFormatter from 'src/composables/useFormatter'
+// const { formatNumber } = useFormatter()
 
 import { computed } from 'vue'
 import { useStore } from 'vuex'

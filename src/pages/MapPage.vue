@@ -110,6 +110,7 @@
                 :cafe="cafe"
                 :keywords="cafe.keywords"
                 :today="cafe.today"
+                :curLoc="locState"
                 @click="setTarget(cafe.cafe_id)"
               />
             </div>
@@ -268,7 +269,7 @@ export default defineComponent({
       researchBtnFade: true,
       mapLevel: null,
       lastSearchPosition: null,
-      distance: 0,
+      distance: 0, // 마지막 검색이후 지도 이동거리값(실제 km 아님)
       boundMsg: '', // 현재바운드정보 테스트출력
       distest: 0, // distance 보정치 테스트출력
       normalImage: null,
