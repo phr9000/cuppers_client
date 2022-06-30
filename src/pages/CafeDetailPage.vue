@@ -78,10 +78,10 @@
       <section class="cafe_detail_wrap row">
         <!-- 기본정보, 커피메뉴 -->
         <div class="col-12 col-sm-7 cafe_basic_info_wrap q-pa-md">
-          <!-- 기본정보 -->
           <div class="subtitle q-pl-sm q-mb-md">기본 정보</div>
+          <!-- 기본정보 -->
           <div class="cafe_basic_info col q-pl-md">
-            <!-- info_top -->
+            <!-- 기본정보1 : 키워드, 카페설명 -->
             <div class="info_top">
               <!-- 키워드 -->
               <div class="info q-mb-xs">
@@ -105,8 +105,7 @@
                 ></div>
               </div>
             </div>
-
-            <!-- info_mid -->
+            <!-- 기본정보2 : 주소, 영업시간, 시설, 분점  -->
             <div class="info_mid row justify-between">
               <div class="info_left col-12 col-md-7">
                 <!-- 주소 -->
@@ -162,7 +161,7 @@
                   <btn-basic
                     v-for="branch in cafe.branches"
                     :key="branch.cafe_id"
-                    :label="branch.cafe_name_pr"
+                    :label="branch.cafe_branch_name"
                     size="sm"
                     color="grey-5"
                     @click="clickBranch(branch.cafe_id)"
@@ -173,6 +172,7 @@
                 </div>
               </div>
             </div>
+            <!-- 기본정보2 : 홈페이지  -->
             <div class="info_bottom">
               <!-- 홈페이지 -->
               <div class="info q-mb-xs">
@@ -414,10 +414,9 @@ export default defineComponent({
         .then((result) => {
           this.cafe = result.data
 
-          this.cafe.cafe_description = this.cafe.cafe_description.replace(
-            '#',
-            '<br>'
-          )
+          this.cafe.cafe_description = this.cafe.cafe_description
+            ? this.cafe.cafe_description.replace('#', '<br>')
+            : ''
 
           // 해당카페 대표이미지 5개 호출 for 이미지 그리드
           this.getImages(cafe_id)
