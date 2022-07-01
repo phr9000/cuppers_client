@@ -252,7 +252,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 // 1) swiper slide 너비 설정 (important 넣는 이유는 무시될 가능성 있어서)
 
 .main-slide-container {
