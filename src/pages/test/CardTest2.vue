@@ -33,6 +33,23 @@
         </div>
       </div>
     </div>
+
+    <!-- card-cafe-main 카페카드-메인 -->
+    <div class="q-ma-xs q-pa-xs custom_test radius_border">
+      <p>card-cafe-main 카페카드-메인</p>
+      <div class="row">
+        <div class="q-mr-sm" style="width: 500px"><card-cafe-main /></div>
+        <div class="q-mr-sm" style="width: 400px">
+          <card-cafe-main
+            title="커피 앰비언스"
+            caption="‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페. 한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다."
+            imgUrl="https://blog.kakaocdn.net/dn/TRtov/btqviGyD7Xs/4YJRM8qw366Wr5TpVofhRk/img.png"
+            distance="3"
+          />
+        </div>
+        <div style="width: 300px"><card-cafe-main /></div>
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -41,12 +58,14 @@ import { defineComponent } from 'vue'
 import CardCafeMap from 'src/components/Card/CardCafeMap.vue'
 import CardCafe from 'src/components/Card/CardCafe.vue'
 import CardCafeSmall from 'src/components/Card/CardCafeSmall.vue'
+import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 
 export default defineComponent({
   components: {
     CardCafeMap,
     CardCafe,
-    CardCafeSmall
+    CardCafeSmall,
+    CardCafeMain
   },
   data() {
     return {

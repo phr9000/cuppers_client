@@ -4,11 +4,13 @@
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>card-cnote 커핑노트카드</p>
       <div class="row">
-        <div class="q-mr-sm" style="width: 500px"><card-cnote /></div>
-        <div class="q-mr-sm" style="width: 400px">
-          <card-cnote />
+        <div class="q-mr-sm" style="width: 500px">
+          <card-cnote :cnote="cnote" />
         </div>
-        <div style="width: 300px"><card-cnote /></div>
+        <div class="q-mr-sm" style="width: 400px">
+          <card-cnote :cnote="cnote" />
+        </div>
+        <div style="width: 300px"><card-cnote :cnote="cnote" /></div>
       </div>
     </div>
 
@@ -24,22 +26,6 @@
       </div>
     </div>
 
-    <!-- card-cafe-main 카페카드-메인 -->
-    <div class="q-ma-xs q-pa-xs custom_test radius_border">
-      <p>card-cafe-main 카페카드-메인</p>
-      <div class="row">
-        <div class="q-mr-sm" style="width: 500px"><card-cafe-main /></div>
-        <div class="q-mr-sm" style="width: 400px">
-          <card-cafe-main
-            title="커피 앰비언스"
-            distance="300m"
-            caption="‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페. 한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다."
-            imgUrl="https://blog.kakaocdn.net/dn/TRtov/btqviGyD7Xs/4YJRM8qw366Wr5TpVofhRk/img.png"
-          />
-        </div>
-        <div style="width: 300px"><card-cafe-main /></div>
-      </div>
-    </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>card-sample</p>
 
@@ -51,14 +37,47 @@
 <script>
 import { defineComponent } from 'vue'
 import CardSample from 'src/components/Card/CardSample.vue'
-import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CardReview from 'src/components/Card/CardReview.vue'
 import CardCnote from 'src/components/Card/CardCupNote.vue'
 
 export default defineComponent({
-  components: { CardSample, CardCafeMain, CardReview, CardCnote },
+  components: {
+    CardSample,
+    CardReview,
+    CardCnote
+  },
   data() {
-    return {}
+    return {
+      cnote: null
+      // {
+      //   cnote_id: 1,
+      //   user_id: 1,
+      //   cnote_title: '한 잔의 커피는 나의 아낭케',
+      //   user_name: '동글동글동글이',
+      //   user_thumbnail:
+      //     'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
+      //   cnote_content:
+      //     '오늘도 정량을 비운 커피잔엔 내일 마실 한 잔의 커피를 그리워하는 마음이 말라버린 거품으로 남았다.오늘도 정량을 비운 커피잔엔 내일 마실 한 잔의 커피를 그리워하는 마음이 말라버린 거품으로 남았다.',
+      //   cnote_thumbnail:
+      //     'https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg',
+      //   created_at: '2022-06-10T10:58:54.000Z',
+      //   user_liked: 1,
+      //   like_cnt: 1142,
+      //   user_marked: 0
+      // }
+    }
+  },
+  mounted() {
+    let apiUrl = `${process.env.API_LOCAL}/cnote/1` // json-server
+
+    this.$axios
+      .get(apiUrl)
+      .then((result) => {
+        this.cnote = result.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 })
 </script>

@@ -1,57 +1,54 @@
 <template>
-  <div class="card_container">
-    <q-card @click="handleCLickCnoteCard" class="card" flat bordered>
-      <q-card-section
-        class="card_title_wrap row no-wrap items-start justify-between"
-      >
-        <div class="text-h5 card_title q-mb-xs q-mr-xs">
-          {{ cnote.cnote_title }}
+  <q-card v-if="cnote" @click="handleCLickCnoteCard" class="card" flat bordered>
+    <q-card-section
+      class="card_title_wrap row no-wrap items-start justify-between"
+    >
+      <div class="text-h5 card_title q-mb-xs q-mr-xs">
+        {{ cnote.cnote_title }}
+      </div>
+      <div class="btns_wrap row no-wrap">
+        <div class="btn_like_wrap">
+          <btn-like
+            :user_id="cnote.user_id"
+            :id_what="cnote.cnote_id"
+            like_what="cnote"
+            :is_liked="cnote.user_liked"
+            :likeit_cnt="cnote.like_cnt"
+          />
         </div>
-        <div class="btns_wrap row no-wrap">
-          <div class="btn_like_wrap">
-            <btn-like
-              :user_id="cnote.user_id"
-              :id_what="cnote.cnote_id"
-              like_what="cnote"
-              :is_liked="cnote.user_liked"
-              :likeit_cnt="cnote.like_cnt"
-            />
-          </div>
-          <div class="btn_bookmark_wrap">
-            <btn-book-mark
-              :user_id="cnote.user_id"
-              :cnote_id="cnote.cnote_id"
-              :is_marked="cnote.user_marked"
-            />
-          </div>
+        <div class="btn_bookmark_wrap">
+          <btn-book-mark
+            :user_id="cnote.user_id"
+            :cnote_id="cnote.cnote_id"
+            :is_marked="cnote.user_marked"
+          />
         </div>
-      </q-card-section>
-      <q-card-section horizontal class="coffee_info_wrap row q-pt-none q-pr-md">
-        <div class="coffee_info q-py-none q-px-md">
-          <div class="caption text-caption text-grey q-my-sm">
-            {{ cnote.cnote_content }}
-          </div>
+      </div>
+    </q-card-section>
+    <q-card-section horizontal class="coffee_info_wrap row q-pt-none q-pr-md">
+      <div class="coffee_info q-py-none q-px-md">
+        <div class="caption text-caption text-grey q-my-sm">
+          {{ cnote.cnote_content }}
         </div>
-        <q-img
-          class="col-5 q-pr-sm card_image"
-          :initial-ratio="1"
-          :src="cnote.cnote_thumbnail"
-          ><div
-            class="rounded-borders absolute-full text-subtitle2 flex flex-center"
-          ></div>
-        </q-img>
-      </q-card-section>
-      <q-card-section
-        class="card_bottom row justify-between items-center q-mb-m"
-        ><div class="user_info row items-center">
-          <btn-avatar :url="cnote.user_thumbnail" />
-          <div class="q-ml-sm user_name">{{ cnote.user_name }}</div>
-        </div>
+      </div>
+      <q-img
+        class="col-5 q-pr-sm card_image"
+        :initial-ratio="1"
+        :src="cnote.cnote_thumbnail"
+        ><div
+          class="rounded-borders absolute-full text-subtitle2 flex flex-center"
+        ></div>
+      </q-img>
+    </q-card-section>
+    <q-card-section class="card_bottom row justify-between items-center q-mb-m"
+      ><div class="user_info row items-center">
+        <btn-avatar :url="cnote.user_thumbnail" />
+        <div class="q-ml-sm user_name">{{ cnote.user_name }}</div>
+      </div>
 
-        <div class="text-grey">{{ createDate }}</div>
-      </q-card-section>
-    </q-card>
-  </div>
+      <div class="text-grey">{{ createDate }}</div>
+    </q-card-section>
+  </q-card>
 </template>
 
 <script>
@@ -68,22 +65,7 @@ export default defineComponent({
     cnote: {
       type: Object,
       default: () => {
-        return {
-          cnote_id: 1,
-          user_id: 1,
-          cnote_title: '한 잔의 커피는 나의 아낭케',
-          user_name: '동글동글동글이',
-          user_thumbnail:
-            'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
-          cnote_content:
-            '오늘도 정량을 비운 커피잔엔 내일 마실 한 잔의 커피를 그리워하는 마음이 말라버린 거품으로 남았다.오늘도 정량을 비운 커피잔엔 내일 마실 한 잔의 커피를 그리워하는 마음이 말라버린 거품으로 남았다.',
-          cnote_thumbnail:
-            'https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg',
-          created_at: '2022-06-10T10:58:54.000Z',
-          user_liked: 1,
-          like_cnt: 1142,
-          user_marked: 0
-        }
+        return null
       }
     }
   },
