@@ -36,19 +36,29 @@
 
           <q-tab-panels v-model="tab" vertical>
             <q-tab-panel name="cnote" class="constrain_md">
-              <div class="text-h4 text-center q-mb-md">커핑노트</div>
+              <div class="page_title text-h4 text-center q-mb-md">커핑노트</div>
               <p></p>
 
               <!-- 커핑 노트 -->
-              <section class="cnote_section q-pa-md">
-                <div class="cards_container row justify-between">
+              <section
+                class="cnote_section row justify-between align-start q-pa-md bg-grey-2"
+              >
+                <div class="cards_container">
                   <div
                     class="cards_wrap"
                     v-for="cnote in cnotes"
                     :key="cnote.cnote_id"
                   >
-                    <card-cup-note :cnote="cnote" />
+                    <card-cnote-li :cnote="cnote" />
                   </div>
+                </div>
+                <div class="side_wrap bg-white">
+                  <div>추천작가</div>
+                  <ul class="rec_user_wrap">
+                    <li>Marilyn</li>
+                    <li>뚱땅</li>
+                    <li>무</li>
+                  </ul>
                 </div>
 
                 <!-- <infinite-scroll /> -->
@@ -79,13 +89,13 @@
 </template>
 
 <script>
-import CardCupNote from 'src/components/Card/CardCupNote.vue'
+import CardCnoteLi from 'src/components/Card/CardCnoteLi.vue'
 import ModalSearch from 'src/components/Modal/ModalSearch.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'CoffeeSNSPage',
-  components: { ModalSearch, CardCupNote },
+  components: { ModalSearch, CardCnoteLi },
   data() {
     return {
       title: 'coffee sns page',
@@ -115,3 +125,15 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss" scoped>
+.page_title {
+  width: 700px;
+}
+.cards_wrap {
+  width: 700px;
+}
+.side_wrap {
+  width: 200px;
+  height: 100%;
+}
+</style>

@@ -76,6 +76,8 @@ export default defineComponent({
             }
             // X 분전
             return parseInt(diff) + '분전'
+          } else if (diff < 3600) {
+            return parseInt(diff / 60) + '시간전'
           } else {
             let time = toDate(created_parse)
             return format(time, 'MMM dd. yyyy')
