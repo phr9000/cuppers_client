@@ -1,12 +1,12 @@
 <template>
   <!-- edit 할 곳  -->
-  <div id="editor" class="editor-container">test</div>
+  <div id="editor" class="editor-container"></div>
   <div class="btn-box">
     <button class="send-btn" @click="sendCnote()">등록하기</button>
   </div>
-  <div class="btn-box">
+  <!-- <div class="btn-box">
     <button class="send-btn" @click="getImage()">images보기</button>
-  </div>
+  </div> -->
   <!-- 에디터 내용을 받을 곳  -->
   <div id="contents" @change="onChange()"></div>
 </template>
@@ -14,6 +14,11 @@
 <script>
 import Editor from '@toast-ui/editor'
 import '@toast-ui/editor/dist/toastui-editor.css'
+import '@toast-ui/editor/dist/i18n/ko-kr'
+import 'tui-color-picker/dist/tui-color-picker.css'
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css'
+
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
 // const onUploadImage = async (blob, callback) => {
 //   console.log(blob)
 // }
@@ -35,6 +40,16 @@ export default {
       previewStyle: 'vertical',
       previewStyle: 'tab',
       viewer: true,
+      language: 'ko-KR',
+      hideModeSwitch: true,
+      plugins: [colorSyntax],
+      toolbarItems: [
+        ['heading', 'bold', 'italic', 'strike'],
+        ['hr'],
+        ['ul', 'ol', 'indent', 'outdent'],
+        ['image'],
+        ['scrollSync']
+      ],
       hooks: {
         addImageBlobHook: async (blob, callback) => {
           console.log(blob)
