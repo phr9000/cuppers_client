@@ -45,6 +45,7 @@
         </div>
         <div class="">
           <btn-basic-right
+            @click="goDetail"
             class="btn_detail bg-grey-2"
             :rounded="false"
             icon="open_in_new"
@@ -128,12 +129,11 @@ export default defineComponent({
   },
   mounted() {},
   methods: {
-    handleClickCard() {
+    goDetail() {
       // 해당 카페의 상세 페이지로 이동
-      console.log('card clicked. cafe_id: ', this.cafe.cafe_id)
+      this.$router.push(`/cafe/${this.cafe.cafe_id}`)
     },
     clickClose() {
-      console.log('close clicked.')
       this.$emit('close')
     }
   }

@@ -104,8 +104,7 @@
           <div class="flex justify-between q-mx-xl">
             <span class="text-h6">Brewing Coffee</span>
             <btn-basic
-              @click="getBrewing"
-              @newBrewingMenu="createBrewing"
+              @click="addBrewing"
               size="sm"
               label="메뉴 추가"
               color="primary"
@@ -115,12 +114,12 @@
           </div>
           <div>
             <card-add-menu
-              v-for="(cafe_menu, index) in onlyBrewing"
+              v-for="(menu, index) in this.cafe_info.cafe_menu"
               :key="index"
-              @deleteCard="deleteMenu"
-              :menu_id="cafe_menu.menu_id"
-              :menu_type="cafe_menu.menu_type"
-              ref="CafeAddMenu"
+              :menu_id="index"
+              menu_type="br"
+              ref="CardAddMenu"
+              @printBrewing="printBrewing"
             />
           </div>
         </section>
@@ -128,8 +127,6 @@
           <div class="flex justify-between q-mx-xl">
             <span class="text-h6">Variation Coffee</span>
             <btn-basic
-              @click="getVariation"
-              @newVariationMenu="createVariation"
               size="sm"
               label="메뉴 추가"
               color="primary"
@@ -137,16 +134,7 @@
               padding="7px 15px 7px 15px"
             />
           </div>
-          <div>
-            <card-add-menu
-              v-for="(cafe_menu, index) in onlyVariation"
-              :key="index"
-              @deleteCard="deleteMenu"
-              :menu_id="cafe_menu.menu_id"
-              :menu_type="cafe_menu.menu_type"
-              ref="CafeAddMenu"
-            />
-          </div>
+          <div></div>
         </section>
       </div>
     </section>
@@ -180,6 +168,7 @@ export default defineComponent({
   },
   data() {
     return {
+      count: 0,
       cafe_info: {
         cafe_name_pr: '',
         cafe_phone: '',
@@ -189,26 +178,17 @@ export default defineComponent({
         cafe_address_detail: '',
         cafe_postalcode: '',
         cafe_address_dong: '',
-        cafe_menu: [
-          {
-            menu_id: null,
-            menu_name: '',
-            menu_type: 'br',
-            menu_price_hot: null,
-            menu_price_ice: null,
-            is_signature: true,
-            menu_aromanote: ''
-          },
-          {
-            menu_id: null,
-            menu_name: '',
-            menu_type: 'va',
-            menu_price_hot: null,
-            menu_price_ice: null,
-            is_signature: true
-          }
-        ]
+        cafe_menu: []
       }
+    }
+  },
+  // create() {
+  //   let apiUrl = `${process.env.API_LOCAL}/`
+  // },
+  // 페이지 로드 시 Default로 들어갈 메뉴카드 Brewing과 Variation
+  mounted() {
+    for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
+      this.$refs.CardAddMenu[i].new_menu
     }
   },
   methods: {
@@ -221,34 +201,23 @@ export default defineComponent({
       this.cafe_info.cafe_address_dong = payload.extraAddress
       this.cafe_info.cafe_postalcode = payload.postcode
     },
-    getBrewing(index) {
-      this.$refs.CardAddMenu[index].handleMenuCard()
+    // 메뉴 추가 버튼 클릭 시 추가되는 메뉴카드
+    addBrewing() {
+      console.log('Hi')
+      /*
+      v-for와 ref를 같이 사용할 경우 아래와 같이 ref를 통해 참조한 컴포넌트에 인덱스를 붙여야 하는데,
+      동적으로 컴포넌트 생성할 때, 배열의 길이만큼 기하급수적으로 컴포넌트가 생성됨.
+      지금 상황에서는 배열에 아무것도 없기 때문에 아래 Loop가 실행되지 않으며,
+      때문에 컴포넌트를 참조할 수 없는 상황. 만약 Default로 배열을 밀어넣게 되면 양방향 바인딩이 안됨.
+      */
+      for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
+        this.$refs.CardAddMenu[i].sendBrewing()
+      }
     },
-    createBrewing(new_cafe_menu) {
-      this.cafe_info.cafe_menu.push(new_cafe_menu)
+    printBrewing(new_menu) {
+      console.log(new_menu)
+      this.cafe_info.cafe_menu.push(new_menu)
       console.log(this.cafe_info.cafe_menu)
-    },
-    getVariation(index) {
-      this.$refs.CardAddMenu[index].handleMenuCard()
-    },
-    createVariation(new_cafe_menu) {
-      this.cafe_info.cafe_menu.push(new_cafe_menu)
-      console.log(this.cafe_info.cafe_menu)
-    },
-    deleteMenu(index) {
-      this.cafe_info.cafe_menu.splice(index, 1)
-    }
-  },
-  computed: {
-    onlyBrewing() {
-      return this.cafe_info.cafe_menu.filter(
-        (cafe_menu) => cafe_menu.menu_type === 'br'
-      )
-    },
-    onlyVariation() {
-      return this.cafe_info.cafe_menu.filter(
-        (cafe_menu) => cafe_menu.menu_type === 'va'
-      )
     }
   }
 })

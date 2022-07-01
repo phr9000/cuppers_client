@@ -5,40 +5,41 @@
   >
     <div class="row flex justify-end">
       <!-- CardMenu 제거 -->
-      <btn-icon @click="deleteCard" size="xs" icon="close" color="red" />
+      <btn-icon size="xs" icon="close" color="red" />
     </div>
     <div class="row flex justify-between">
       <q-input
-        v-model="new_cafe_menu.menu_name"
+        v-model="new_menu.menu_name"
         type="text"
         label="메뉴이름"
         class="col-8"
       />
       <div class="col-2 row justify-evenly align-center">
         <!-- Signature Menu 선택 -->
-        <q-checkbox v-model="new_cafe_menu.is_signature" size="20px"
+        <q-checkbox v-model="new_menu.is_signature" size="20px"
           ><span class="q-px-md">Signature</span></q-checkbox
         >
       </div>
     </div>
     <div class="row flex justify-between align-item">
       <q-input
-        v-model="new_cafe_menu.menu_price_hot"
+        v-model="new_menu.menu_price_hot"
         label="Hot"
         class="col-5"
         type="number"
       />
       <q-input
-        v-model="new_cafe_menu.menu_price_ice"
+        v-model="new_menu.menu_price_ice"
         label="Ice"
         class="col-5"
         type="number"
       />
     </div>
     <div>
-      <div>
+      <div v-if="menu_type === 'br'">
+        <!-- Brewing // Variation-->
         <q-input
-          v-model="new_cafe_menu.menu_aromanote"
+          v-model="new_menu.menu_aromanote"
           type="text"
           label="Aromanote"
         />
@@ -59,47 +60,22 @@ export default {
   },
   data() {
     return {
-      new_cafe_menu: {
-        menu_id: null,
+      // 부모 컴포넌트 AddNewCafePage에 전달할 메뉴 데이터 선언
+      new_menu: {
         menu_name: '',
         menu_price_hot: 0,
         menu_price_ice: 0,
         is_signature: false,
-        menu_aromanote: '',
-        menu_type: ''
+        menu_aromanote: ''
       }
     }
   },
   methods: {
-    deleteCard() {
-      this.$emit('deleteCard')
-    }, // AddNewCafePage에서 handleMenuCard를 실행해야 함.
-    callMenuData() {
-      let MenuData = {
-        menu_id: 2,
-        menu_name: '',
-        menu_price_hot: 0,
-        menu_price_ice: 0,
-        is_signature: false,
-        menu_aromanote: '',
-        menu_type: ''
-      }
-      return MenuData
-    },
-    sendData(MenuData) {
-      console.log(MenuData)
-      // this.$emit('newMenu', this.MenuData)
-    },
-    consoleData() {
+    // 부모 컴포넌트 AddNewCafePage의 메뉴 추가 버튼과 연결된 메소드
+    sendBrewing() {
       console.log('Hello')
+      this.$emit('printBrewing', this.new_menu) // 위에 선언된 new_menu를 printMenu로 전달.
     }
-    // handleMenuCard() {
-    //   if (this.new_cafe_menu.menu_type === 'br') {
-    //     this.$emit('newBrewingMenu', this.new_cafe_menu)
-    //   } else {
-    //     this.$emit('newVariationMenu', this.new_cafe_menu)
-    //   }
-    // }
   }
 }
 </script>
