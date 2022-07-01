@@ -65,23 +65,6 @@ export default {
     sendCnote() {
       console.log(this.editor.getHTML())
     },
-    addImageBlobHook: (blob, callback) => {
-      const onUploadImage = async (blob, callback) => {
-        console.log(blob)
-        const formData = new FormData()
-        formData.append('image', blob)
-        const res = await axios
-          .post('http://localhost:3000/api/upload/image', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-          })
-          .catch((e) => {
-            console.log(e)
-          })
-        conole.log(res)
-        callback(res.path, 'alt text')
-        return false
-      }
-    },
     getImage() {
       console.log(this.images)
     }
@@ -89,4 +72,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scope></style>
