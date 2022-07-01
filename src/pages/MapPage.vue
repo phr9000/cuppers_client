@@ -106,7 +106,7 @@
           <!-- 검색 결과 표시 (카페 카드) -->
           <q-list v-if="cafes.length > 0" class="search_result q-mb-sm">
             <div v-for="cafe in cafes" :key="cafe.cafe_id">
-              <card-cafe-small
+              <card-cafe-li
                 :cafe="cafe"
                 :keywords="cafe.keywords"
                 :today="cafe.today"
@@ -212,7 +212,7 @@ import { defineComponent } from 'vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import BtnIcon from 'src/components/Button/BtnIcon.vue'
 import CardCafeMap from 'src/components/Card/CardCafeMap.vue'
-import CardCafeSmall from 'src/components/Card/CardCafeSmall.vue'
+import CardCafeLi from 'src/components/Card/CardCafeLi.vue'
 
 import { computed } from 'vue'
 import { useStore } from 'vuex'
@@ -223,7 +223,7 @@ export default defineComponent({
     BtnBasic,
     BtnIcon,
     CardCafeMap,
-    CardCafeSmall
+    CardCafeLi
   },
   setup() {
     const $store = useStore()

@@ -88,7 +88,7 @@ import useFormatter from 'src/composables/useFormatter'
 const { formatNumber } = useFormatter()
 
 export default defineComponent({
-  name: 'CardCafeSmall',
+  name: 'CardCafeLi',
   components: {
     BtnLike,
     BtnReview,
@@ -145,11 +145,10 @@ export default defineComponent({
             this.cafe.cafe_longitude
           )
           if (dist > 5) {
-            dist = formatNumber(dist, '#,###')
+            return formatNumber(dist, '#,###')
           } else {
-            formatNumber(dist, '#,###.#')
+            return formatNumber(dist, '#,###.#')
           }
-          return dist
         }
       } catch {
         return -1

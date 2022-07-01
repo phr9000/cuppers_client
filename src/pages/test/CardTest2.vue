@@ -4,7 +4,7 @@
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>card-cafe 카페카드samll (검색결과리스트)</p>
       <div class="row">
-        <div style="width: 382px"><card-cafe-small :today="today" /></div>
+        <div style="width: 382px"><card-cafe-li :today="today" /></div>
       </div>
     </div>
 
@@ -57,14 +57,14 @@
 import { defineComponent } from 'vue'
 import CardCafeMap from 'src/components/Card/CardCafeMap.vue'
 import CardCafe from 'src/components/Card/CardCafe.vue'
-import CardCafeSmall from 'src/components/Card/CardCafeSmall.vue'
+import CardCafeLi from 'src/components/Card/CardCafeLi.vue'
 import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 
 export default defineComponent({
   components: {
     CardCafeMap,
     CardCafe,
-    CardCafeSmall,
+    CardCafeLi,
     CardCafeMain
   },
   data() {
