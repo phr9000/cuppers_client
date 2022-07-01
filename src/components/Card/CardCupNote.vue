@@ -73,14 +73,11 @@ export default defineComponent({
     createDate() {
       let time = toDate(Date.parse(this.cnote.created_at))
       return format(time, 'MMM dd. yyyy')
-      // let time = this.cnote.created_at
-      // return created_at
     }
   },
   methods: {
     handleCLickCnoteCard() {
       const cnote_id = this.cnote.cnote_id
-      // console.log(`cnote id(${cnote_id}) clicked`)
       this.$router.push({ path: `/cnote/${cnote_id}` })
     }
   }
