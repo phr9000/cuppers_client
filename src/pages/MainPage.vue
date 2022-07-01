@@ -194,7 +194,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .bottom_container {
   padding: 100px 16px;
   width: 945px;

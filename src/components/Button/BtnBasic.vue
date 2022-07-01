@@ -37,7 +37,7 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .btn_basic {
   &.btn_sm {
     padding: 4px 9px 3px 9px;

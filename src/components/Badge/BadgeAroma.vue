@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .badge_aroma_note {
   color: $brown-3;
   border: 1px solid $brown-3;

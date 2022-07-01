@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .badge_cafe_keyword {
   cursor: pointer;
   color: $teal-4;
