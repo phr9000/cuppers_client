@@ -5,7 +5,7 @@
       <!-- 글 올리기 -->
       <span class="send-btn" @click="sendCnote()">글 로스팅하기</span>
       <!-- 공개여부 -->
-      <label class="switch" style="display: flex">
+      <label class="switch">
         <input
           type="checkbox"
           v-model="isPublic"
@@ -13,7 +13,7 @@
         />
         <span class="slider round"></span>
       </label>
-      <div>
+      <div style="min-width: 40px">
         <span
           class="public-txt public"
           v-if="isPublic"
@@ -43,7 +43,6 @@
     </div>
     <div id="editor" class="editor-">
       <!-- 에디터 내용을 받을 곳  -->
-      <div id="contents" @change="onChange()"></div>
     </div>
   </q-page>
 </template>
@@ -88,6 +87,7 @@ export default {
       viewer: true,
       language: 'ko-KR',
       hideModeSwitch: true,
+      placeholder: '-',
       plugins: [colorSyntax],
       toolbarItems: [
         ['heading', 'bold', 'italic', 'strike'],
@@ -136,7 +136,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss">
+// toast ui 모듈에서 가져오는거라 scoped 하면 안되요~
+// 유니크 클래스 : editor-container //
 .editor-container {
   padding-top: 15px;
 
@@ -149,9 +151,11 @@ export default {
       height: 450px;
       border-bottom: 1px solid #eee;
       @media (max-width: 700px) {
+        margin-top: 20px;
         height: 200px;
       }
       @media (max-width: 500px) {
+        margin-top: 36px;
         height: 120px;
       }
       .input-box {
@@ -160,8 +164,12 @@ export default {
         color: #333;
         font-size: 38px;
         text-align: center;
+        transition: all 0.5s;
         @media (max-width: 500px) {
           font-size: 18px;
+        }
+        &:focus {
+          padding-bottom: 20px;
         }
       }
     }
@@ -170,7 +178,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: right;
-    margin-right: 40px;
+    margin-right: 20px;
+    @media (max-width: 1200px) {
+      margin-right: 10px;
+    }
 
     .send-btn {
       margin-right: 10px;

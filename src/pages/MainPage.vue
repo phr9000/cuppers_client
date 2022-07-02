@@ -215,9 +215,9 @@ export default {
   .recommends_container {
     .card_wrap {
       width: 293px;
-      transition: all 0.5s;
+      transition: all 0.8s;
       &:hover {
-        transform: scale(1.1);
+        transform: translatey(-3px);
       }
       &:nth-child(3n) {
         margin-right: 0;

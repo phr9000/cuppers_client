@@ -253,8 +253,9 @@ export default {
 </script>
 
 <style lang="scss">
+// 유니크 클래스 : main-slide-container//
 // 1) swiper slide 너비 설정 (important 넣는 이유는 무시될 가능성 있어서)
-
+// TODO: 사이즈별 반응형 swiper-slide vue3 방법 찾기
 .main-slide-container {
   .swiper-wrapper {
     .swiper-slide:nth-child(1) {
