@@ -17,15 +17,11 @@
             <div class="title text-left text-h6 q-mr-sm">
               {{ cafe.cafe_name_pr }}
             </div>
-            <!-- type and region -->
-            <div class="row items-center">
-              <span v-if="cafe.cafe_type === 'r'" class="icon_cafe_type"
-                ><q-icon size="14px" name="img:/icons/roastery.png"
-              /></span>
-              <span class="text-subtitle2 text-grey q-pt-xs">
-                {{ cafe.cafe_region }}</span
-              >
-            </div>
+            <!-- cafe type, region -->
+            <cafe-type
+              :cafe_type="cafe.cafe_type"
+              :cafe_region="cafe.cafe_region"
+            />
           </div>
 
           <div class="btn_detail">
@@ -104,6 +100,7 @@ import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
 import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
+import CafeType from 'src/components/Etc/CafeType.vue'
 
 export default defineComponent({
   name: 'CardCafe',
@@ -111,7 +108,8 @@ export default defineComponent({
     BtnLike,
     BtnReview,
     BtnBasicRight,
-    BadgeCafe
+    BadgeCafe,
+    CafeType
   },
   props: {
     cafe: {

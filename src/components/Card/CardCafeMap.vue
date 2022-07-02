@@ -15,15 +15,11 @@
         <div class="row items-center">
           <div class="title text-left text-h6 q-mr-sm">
             {{ cafe.cafe_name_pr }}
-            <!-- type and region -->
-            <span class="row items-center">
-              <span v-if="cafe.cafe_type === 'r'" class="icon_cafe_type"
-                ><q-icon size="14px" name="img:/icons/roastery.png" class=""
-              /></span>
-              <span class="text-subtitle1 text-grey q-pt-xs">
-                {{ cafe.cafe_region }}</span
-              >
-            </span>
+            <!-- cafe type, region -->
+            <cafe-type
+              :cafe_type="cafe.cafe_type"
+              :cafe_region="cafe.cafe_region"
+            />
           </div>
         </div>
       </div>
@@ -51,7 +47,7 @@
             icon="open_in_new"
             color="grey-7"
             label="상세보기"
-            padding="4px 8px "
+            padding="4px 8px"
           />
         </div>
       </div>
@@ -100,6 +96,7 @@ import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
 import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
+import CafeType from 'src/components/Etc/CafeType.vue'
 
 export default defineComponent({
   name: 'CardCafeMap',
@@ -108,7 +105,8 @@ export default defineComponent({
     BtnLike,
     BtnReview,
     BtnBasicRight,
-    BadgeCafe
+    BadgeCafe,
+    CafeType
   },
   props: {
     cafe: {
@@ -143,7 +141,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .card_cafe {
   width: 100%;
-
   .btn_close {
     position: absolute;
     top: 0px;
@@ -155,14 +152,8 @@ export default defineComponent({
   .icon {
     padding-right: 4px;
   }
-  .icon_cafe_type {
-    padding-bottom: 1px;
-    padding-right: 6px;
-    // position: relative;
-    // left: -3px;
-  }
   .btn_detail {
-    width: 93px;
+    width: 100px;
     margin-top: 3px;
   }
   .btn_like {
