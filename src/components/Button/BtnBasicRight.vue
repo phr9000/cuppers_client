@@ -38,7 +38,7 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .btn_basic_right {
   &.btn_sm {
     padding: 3px 9px 3px 9px;
@@ -46,7 +46,7 @@ export default defineComponent({
     line-height: 13px;
     min-height: 13px;
     i {
-      font-size: 1.2rem !important;
+      font-size: 1rem !important;
     }
   }
   &.btn_md {
@@ -55,7 +55,7 @@ export default defineComponent({
     line-height: 14px;
     min-height: 14px;
     i {
-      font-size: 1.2rem !important;
+      font-size: 1rem;
     }
   }
   &.btn_lg {

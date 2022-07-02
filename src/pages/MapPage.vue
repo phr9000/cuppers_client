@@ -71,31 +71,14 @@
             <!-- 정렬 -->
             <div class="q-mt-sm q-mt-md">
               <div class="row justify-end items-center">
-                <!-- <btn-basic
-                  class="btn_sort"
-                  :class="{ active: sort === 'like' }"
-                  @click="handleClickSort('like')"
-                  color="grey-6"
-                  label="추천순"
-                  size="sm"
-                />
-                <btn-basic
-                  class="btn_sort active"
-                  :class="{ active: sort === 'distance' }"
-                  @click="handleClickSort('distance')"
-                  color="grey-6"
-                  label="거리순"
-                  size="sm"
-                /> -->
-
                 <q-tabs
                   active-color="secondary"
                   v-model="sort"
                   dense
-                  class="text-grey-6"
+                  class="sort_tabs text-grey-6"
                 >
-                  <q-tab class="btn_sort" name="like" label="추천순" />
-                  <q-tab class="btn_sort" name="distance" label="거리순" />
+                  <q-tab class="tab" name="like" label="추천순" />
+                  <q-tab class="tab" name="distance" label="거리순" />
                 </q-tabs>
               </div>
             </div>
@@ -219,12 +202,7 @@ import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'MapPage',
-  components: {
-    BtnBasic,
-    BtnIcon,
-    CardCafeMap,
-    CardCafeLi
-  },
+  components: { BtnBasic, BtnIcon, CardCafeMap, CardCafeLi },
   setup() {
     const $store = useStore()
 
@@ -278,6 +256,11 @@ export default defineComponent({
     }
   },
   computed: {},
+  watch: {
+    sort(newVal) {
+      console.log('chagne sort to: ', newVal)
+    }
+  },
   created() {},
   mounted() {
     setTimeout(() => {
@@ -413,6 +396,7 @@ export default defineComponent({
       this.searching = true
 
       // 초기화
+      this.sort = ''
       this.distance = 0
       this.distest = 0
       // 재검색 버튼 숨기기
@@ -692,14 +676,21 @@ export default defineComponent({
   position: relative;
   overflow: hidden;
   // width: calc(100% - 382px);
-  height: calc(90vh - 50px);
+  height: calc(100vh - 50px);
 
   .section_search {
     .search_module {
-      .btn_sort {
-        border-radius: 18px;
-        min-height: 28px;
-        padding: 0px 18px;
+      .sort_tabs {
+        margin-right: 0px;
+        .tab {
+          border-radius: 18px;
+          min-height: 26px;
+          height: 26px;
+          padding: 0px 12px;
+          &.active {
+            color: $primary !important;
+          }
+        }
       }
     }
   }
