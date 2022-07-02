@@ -5,7 +5,28 @@
       <!-- 글 올리기 -->
       <span class="send-btn" @click="sendCnote()">글 로스팅하기</span>
       <!-- 공개여부 -->
-      <q-toggle class="public-btn" label="공개" v-if="writeType" />
+      <label class="switch" style="display: flex">
+        <input
+          type="checkbox"
+          v-model="isPublic"
+          @click="isPublic = !isPublic"
+        />
+        <span class="slider round"></span>
+      </label>
+      <div>
+        <span
+          class="public-txt public"
+          v-if="isPublic"
+          style="position: relative; padding: 0 4px; padding-left: 10px"
+          >공개</span
+        >
+        <span
+          class="public-txt"
+          v-if="!isPublic"
+          style="position: relative; padding: 0 4px"
+          >비공개</span
+        >
+      </div>
     </div>
     <div class="title-container">
       <div
@@ -44,15 +65,16 @@ export default {
   components: {},
   data() {
     return {
+      isPublic: true,
       editor: null,
       writeType: true,
-      images: [],
       backgroundImg: '',
-      // 가라데이터 (cafe_id, user_id)
+      images: [],
+      cafe_id: [3, 4, 5],
       cnote: {
-        cafe_id: '3',
         user_id: '2',
-        title: ''
+        title: '',
+        content: ''
       }
     }
   },
@@ -103,10 +125,12 @@ export default {
   methods: {
     sendCnote() {
       console.log(this.editor.getHTML())
+      console.log(this.images)
     },
     getImage() {
       console.log(this.images)
     }
+
     // cnote post 저장하기
   }
 }
@@ -146,7 +170,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: right;
-    margin-right: 10px;
+    margin-right: 40px;
 
     .send-btn {
       margin-right: 10px;
@@ -166,6 +190,84 @@ export default {
     padding: 20px;
     padding-top: 15px;
   }
+
+  // slide toggle
+  /* The switch - the box around the slider */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 51px;
+    height: 27px;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: '';
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 6px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  input:checked + .slider {
+    background-color: $dark;
+  }
+
+  input:focus + .slider {
+    // box-shadow: 0 0 1px #2196f3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .public-txt {
+    font-size: 12px;
+    color: #666;
+    // &.public {
+    //   &:before {
+    //     content: '';
+    //     position: relative;
+    //     margin-left: 6px;
+    //   }
+    // }
+  }
+
+  // 에디터 style
   .toastui-editor-defaultUI {
     border: none;
   }
