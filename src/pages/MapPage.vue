@@ -158,7 +158,7 @@
     </div>
 
     <!-- 테스트 영역 -->
-    <section v-if="true">
+    <section v-if="false">
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
         level: {{ mapLevel }} lastSearchPosition: {{ lastSearchPosition }}
         <br />
@@ -676,7 +676,7 @@ export default defineComponent({
   position: relative;
   overflow: hidden;
   // width: calc(100% - 382px);
-  height: calc(100vh - 50px);
+  height: calc(100vh - 51px);
 
   .section_search {
     .search_module {

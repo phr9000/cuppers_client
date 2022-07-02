@@ -3,3 +3,8 @@
 .font_caveat {
   font-family: 'Caveat', cursive;
 }
+
+/* 헤더 아래 border 연하게 처리 */
+.q-layout__section--marginal {
+  background-color: transparent;
+}
