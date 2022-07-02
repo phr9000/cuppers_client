@@ -1,14 +1,17 @@
 <template>
   <!-- edit 할 곳  -->
-  <div id="editor" class="editor-container"></div>
-  <div class="btn-box">
-    <button class="send-btn" @click="sendCnote()">등록하기</button>
-  </div>
-  <!-- <div class="btn-box">
-    <button class="send-btn" @click="getImage()">images보기</button>
-  </div> -->
-  <!-- 에디터 내용을 받을 곳  -->
-  <div id="contents" @change="onChange()"></div>
+  <q-page class="editor-container">
+    <div class="btn-box">
+      <span class="send-btn" @click="sendCnote()">글 로스팅하기</span>
+    </div>
+    <div class="title-container">
+      <div class="title-container-inner">제목을 입력해주세요</div>
+    </div>
+    <div id="editor" class="editor-">
+      <!-- 에디터 내용을 받을 곳  -->
+      <div id="contents" @change="onChange()"></div>
+    </div>
+  </q-page>
 </template>
 
 <script>
@@ -87,4 +90,48 @@ export default {
 }
 </script>
 
-<style lang="scss" scope></style>
+<style lang="scss" scope>
+.editor-container {
+  padding-top: 1rem;
+
+  .title-container {
+    width: 100%;
+    .title-container-inner {
+      // padding: px;
+      padding-top: 20px;
+      height: 450px;
+      border-bottom: 1px solid #eee;
+      color: #ccc;
+      font-size: 38px;
+      text-align: center;
+    }
+  }
+  .btn-box {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-right: 20px;
+    .send-btn {
+      padding: 5px 7px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #666;
+      border-radius: 15px;
+      border: 1px solid #bbb;
+    }
+  }
+  #editor {
+    padding: 20px;
+    padding-top: 15px;
+  }
+  .toastui-editor-defaultUI {
+    border: none;
+  }
+  .toastui-editor-defaultUI-toolbar {
+    background-color: transparent;
+    border-bottom: 0;
+    border-radius: 0;
+    justify-content: right;
+  }
+}
+</style>

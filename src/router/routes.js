@@ -76,8 +76,8 @@ const routes = [
         component: () => import('pages/test/CnoteDetailTest.vue')
       },
       {
-        path: 'cnotedetail2',
-        component: () => import('pages/test/CnoteDetailTest2.vue')
+        path: 'cnotewrite',
+        component: () => import('pages/test/CnoteWrite.vue')
       },
       {
         path: 'carduserinfo',
@@ -94,10 +94,6 @@ const routes = [
       {
         path: 'childref',
         component: () => import('pages/test/ChildRefTest.vue')
-      },
-      {
-        path: 'imgtest',
-        component: () => import('pages/test/ImgTest.vue')
       }
     ]
   },
