@@ -69,9 +69,9 @@ export default {
       writeType: true,
       backgroundImg: '',
       images: [],
-      cafe_id: [3, 4, 5],
+      cafeids: [3, 4, 5],
       cnote: {
-        user_id: '2',
+        user_id: '3',
         title: '',
         content: ''
       }
@@ -122,10 +122,30 @@ export default {
       }
     })
   },
+  created() {
+    // this.sendCnote()
+  },
   methods: {
     sendCnote() {
-      console.log(this.editor.getHTML())
-      console.log(this.images)
+      // console.log(this.editor.getHTML())
+      this.cnote.content = this.editor.getHTML()
+      this.$axios
+        .post(`${process.env.API}/cnote`, {
+          param: {
+            user_id: this.cnote.user_id,
+            cnote_title: this.cnote.title,
+            cnote_content: this.cnote.content,
+            cnote_published: this.isPublic
+          }
+        })
+        .then((response) => {
+          console.log(response)
+          alert('성공적으로 보내짐')
+        })
+        .catch((ex) => {
+          alert('post 실패')
+          console.log(ex)
+        })
     },
     getImage() {
       console.log(this.images)
