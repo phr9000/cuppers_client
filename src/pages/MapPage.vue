@@ -78,7 +78,7 @@
                   class="sort_tabs text-grey-6"
                 >
                   <q-tab class="tab" name="like" label="추천순" />
-                  <q-tab class="tab" name="distance" label="거리순" />
+                  <q-tab class="tab" name="dist" label="거리순" />
                 </q-tabs>
               </div>
             </div>
@@ -235,6 +235,7 @@ export default defineComponent({
         //   //latlng: new kakao.maps.LatLng(37.5015764, 127.124833)
         // }
       ], // 필터링된 카페 리스트
+      totalCnt: 0,
       map: null, // 카카오맵 인스턴스
       currentLocation: null,
       // locationLoading: false,
@@ -252,13 +253,15 @@ export default defineComponent({
       distest: 0, // distance 보정치 테스트출력
       normalImage: null,
       clickImage: null,
-      sort: '' // none or like or distance
+      sort: '' // none or like or dist
     }
   },
   computed: {},
   watch: {
-    sort(newVal) {
-      console.log('chagne sort to: ', newVal)
+    sort(sort) {
+      console.log('chagne sort to: ', sort)
+      this.sort = sort
+      this.handleClickSearch()
     }
   },
   created() {},
@@ -318,13 +321,6 @@ export default defineComponent({
         imageSize,
         imageOption
       )
-
-      // 테스트
-      // this.loadRawData()
-      // this.test()
-      // 앰비언스 검색 테스트
-      // this.doSearch('앰비언스')
-      // 테스트 끝
     },
     // 지도 위치 변경될때마다 호출되는 콜백
     handeBoundsChanged() {
@@ -388,36 +384,51 @@ export default defineComponent({
       }
       this.doSearch(this.search, bounds)
     },
-    handleClickSort(sort) {
-      console.log('handleClickSort:', sort)
-      this.sort = sort
-    },
     doSearch(search, bounds) {
       this.searching = true
 
       // 초기화
-      this.sort = ''
+      const SORT = this.sort
+      const ORDER = SORT === 'like' ? 'a' : 'd'
+      const PAGE = 1
+      const LIMIT = 5
+
+      // this.sort = ''
       this.distance = 0
       this.distest = 0
       // 재검색 버튼 숨기기
       this.researchBtnFade = true
 
       // 테스트 중심좌표 저장
-      this.lastSearchPosition = this.map.getCenter()
+      const center = this.map.getCenter()
+      this.lastSearchPosition = center
 
       this.clearAllMarkers()
 
       // json-server
-      let apiUrl = `${process.env.API_LOCAL}/cafeLocations`
-      if (search !== '*') {
-        apiUrl += `?cafe_name_pr_like=${search}`
-      } else {
-        search = ''
-      }
+      // let apiUrl = `${process.env.API_LOCAL}/cafeLocations`
+      // if (search !== '*') {
+      //   apiUrl += `?cafe_name_pr_like=${search}`
+      // } else {
+      //   search = ''
+      // }
       // json-server
 
       // real-server
-      // let apiUrl = `${process.env.API}/????`
+      //http://localhost:3000/api/cafe?user=3&search=커피&lat_min=33.478135&lat_max=37.7&long_min=125.927&long_max=129&current_lat=37.5015764&current_long=127.124833&page=1&limit=3&order=like&sort=d
+      if (search === '*') {
+        search = ''
+      }
+      let apiUrl = `${process.env.API}/cafe?search=${search}&user=&page=${PAGE}&limit=${LIMIT}&sort=${SORT}&order=${ORDER}&current_lat=${center.La}&current_long=${center.Ma}`
+
+      if (bounds) {
+        apiUrl += `&lat_min=${bounds.lat_min}&lat_max=${bounds.lat_max}&long_min=${bounds.long_min}&long_max=${bounds.long_max}`
+      } else {
+        apiUrl += `&lat_min=&lat_max=&long_min=&long_max=`
+      }
+
+      console.log(center)
+      console.log(apiUrl)
       // real-server
 
       if (this.search !== search) {
@@ -427,21 +438,22 @@ export default defineComponent({
       this.$axios
         .get(apiUrl)
         .then((result) => {
+          this.totalCnt = result.data.totalCnt
           this.cafes = []
-          for (let i = 0; i < result.data.length; i++) {
-            const cf = result.data[i]
+          for (let i = 0; i < result.data.arr.length; i++) {
+            const cf = result.data.arr[i]
 
-            // bounds가 있다면 bounds안에 안들어오면 skip
-            if (bounds) {
-              if (
-                cf['cafe_latitude'] < bounds.lat_min ||
-                cf['cafe_latitude'] > bounds.lat_max ||
-                cf['cafe_longitude'] < bounds.long_min ||
-                cf['cafe_longitude'] > bounds.long_max
-              ) {
-                continue
-              }
-            }
+            // bounds가 있다면 bounds안에 안들어오면 skip // json-server
+            // if (bounds) {
+            //   if (
+            //     cf['cafe_latitude'] < bounds.lat_min ||
+            //     cf['cafe_latitude'] > bounds.lat_max ||
+            //     cf['cafe_longitude'] < bounds.long_min ||
+            //     cf['cafe_longitude'] > bounds.long_max
+            //   ) {
+            //     continue
+            //   }
+            // }
 
             let cafe = {
               ...cf,
@@ -458,6 +470,7 @@ export default defineComponent({
 
             this.cafes.push(cafe)
           }
+          console.log(this.cafes)
 
           if (this.cafes.length < 1) {
             // console.log('검색 결과가 없습니다. ', this.cafes.length)
@@ -484,9 +497,6 @@ export default defineComponent({
 
       // 바운드로 검색
       this.doSearch(this.search, bounds)
-
-      // 필터링 (테스트)
-      // this.filteringWithBounds(bounds)
     },
     getBounds() {
       // 지도 영역정보를 얻어옵니다
@@ -512,19 +522,6 @@ export default defineComponent({
         long_max: neLatlng.La
       }
       return resBounds
-    },
-    // 테스트
-    filteringWithBounds(bounds) {
-      this.cafes = this.cafes.filter((cafe) => {
-        if (
-          cafe.cafe_latitude > bounds.lat_min &&
-          cafe.cafe_latitude < bounds.lat_max &&
-          cafe.cafe_longitude > bounds.long_min &&
-          cafe.cafe_longitude < bounds.long_max
-        ) {
-          return cafe
-        }
-      })
     },
     createMarkerImage(imageSrc, imageSize, imageOption) {
       // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
@@ -558,8 +555,6 @@ export default defineComponent({
 
         marker.setMap(this.map)
       }
-
-      // 지도에 여러개 마커 표시
     },
     clearTarget() {
       if (this.targetCafe) {
@@ -638,34 +633,6 @@ export default defineComponent({
       setTimeout(() => {
         this.map.relayout()
       }, 300)
-      // 좌측 drawer 줄어든 이후 지도 우측 빈 타일 보여지는 부분 수정
-      // if (!this.drawerOpen) {
-      //   setTimeout(() => {
-      //     this.map.relayout()
-      //   }, 300)
-      // }
-    },
-    test() {
-      //   // 테스트
-      //   // cafes[0]에 앰비언스 마커 표시
-      //   console.log(this.cafes[0])
-      //   const position = new kakao.maps.LatLng(37.5015764, 127.124833)
-      //   // 마커를 생성합니다
-      //   const marker = new kakao.maps.Marker({
-      //     map: this.map, // 마커를 표시할 지도
-      //     position: position // 마커를 표시할 위치
-      //   })
-      //   // 마커 클릭 이벤트 등록
-      //   kakao.maps.event.addListener(marker, 'click', () => {
-      //     this.handleClickMarker(1, position)
-      //   })
-      //   this.cafes[0] = {
-      //     ...this.cafes[0],
-      //     latlng: position,
-      //     marker: marker
-      //   }
-      //   // console.log(this.cafes[0])
-      //   // 테스트 끝
     }
   }
 })
@@ -743,10 +710,6 @@ export default defineComponent({
       cursor: grab;
       pointer-events: none;
     }
-    // &.fullopacity {
-    //   opacity: 1;
-    // }
-    // background: rgba(255, 255, 255, 0.8) !important;
   }
 
   .btn_current_location {
