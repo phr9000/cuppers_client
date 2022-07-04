@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page ref="scrollTargetRef">
     <div>
       <q-splitter v-model="splitterModel">
         <template v-slot:before>
@@ -10,8 +10,8 @@
         </template>
 
         <template v-slot:after>
-          <q-tab-panels class="" v-model="tab" vertical>
-            <q-tab-panel name="cnote" class="tab_panel constrain_md bg-grey-1">
+          <q-tab-panels class="bg-grey-1" v-model="tab" vertical>
+            <q-tab-panel name="cnote" class="constrain_md tab_panel">
               <cnote-list />
             </q-tab-panel>
 

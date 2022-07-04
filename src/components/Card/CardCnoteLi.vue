@@ -12,7 +12,10 @@
           <div class="row justify-between items-start q-mb-xs">
             <div class="row items-center">
               <div class="text_title text-left q-mr-sm">
-                {{ cnote.cnote_title }} - {{ cnote.cnote_description }}
+                {{ cnote.cnote_title
+                }}<span v-if="cnote.cnote_description">
+                  - {{ cnote.cnote_description }}</span
+                >
               </div>
             </div>
           </div>
@@ -63,16 +66,17 @@ export default defineComponent({
       try {
         if (this.cnote.created_at) {
           const created_parse = Date.parse(this.cnote.created_at)
-          console.log(created_parse) // 1656678895000
+          // console.log(created_parse) // 1656678895000
           const current_parse = Date.parse(new Date())
-          console.log(current_parse) // 1656678969000
-          const diff = (current_parse - created_parse) / 60000
-          console.log(diff) // 현재시간과차이 (분)
+          // console.log(current_parse) // 1656920503000
 
+          // 현재시간과차이 (분)
+          const diff = (current_parse - created_parse) / 60000
+
+          // 작성시간이 현시간 기준 1시간 미만
           if (diff < 60) {
-            // 작성시간이 현시간 기준 1시간 미만
             if (diff < 1) {
-              return 조금전
+              return '조금전'
             }
             // X 분전
             return parseInt(diff) + '분전'
@@ -105,7 +109,12 @@ export default defineComponent({
 .card {
   width: 100%;
   min-width: 300px;
-  border-bottom: 1px solid $grey-4;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 8%), 0 2px 2px rgb(0 0 0 / 14%),
+    0 3px 1px -2px rgb(0 0 0 / 12%) !important;
+  // border-radius: $border-radius;
+  // background-color: aqua;
+  // border-bottom: 1px solid $grey-4;
+
   cursor: pointer;
   &:hover {
     background-color: $grey-2;
