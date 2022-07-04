@@ -106,6 +106,20 @@
         <!-- tab2: map-my-list -->
         <section v-show="tab === 'mylist'">
           <q-item-label header> 마이리스트 </q-item-label>
+          <q-list bordered>
+            <q-item
+              v-for="item in mylist"
+              :key="item.mylist_id"
+              clickable
+              v-ripple
+            >
+              <q-item-section avatar>
+                <q-icon color="primary" name="bluetooth" />
+              </q-item-section>
+
+              <q-item-section>{{ item.mylist_name }}</q-item-section>
+            </q-item>
+          </q-list>
         </section>
       </q-drawer>
 
@@ -206,6 +220,10 @@ export default defineComponent({
   setup() {
     const $store = useStore()
 
+    const uid = computed({
+      get: () => $store.state.user.uid
+    })
+
     const locState = computed({
       get: () => $store.state.map.loc,
       set: (val) => {
@@ -214,6 +232,7 @@ export default defineComponent({
     })
 
     return {
+      uid,
       locState
     }
   },
@@ -253,19 +272,26 @@ export default defineComponent({
       distest: 0, // distance 보정치 테스트출력
       normalImage: null,
       clickImage: null,
-      sort: '' // none or like or dist
+      sort: '', // none or like or dis
+      mylist: []
     }
   },
   computed: {},
   watch: {
-    sort(sort) {
-      console.log('chagne sort to: ', sort)
-      this.sort = sort
+    sort(val) {
+      console.log('chagne sort to: ', val)
+      this.sort = val
       this.handleClickSearch()
+    },
+    tab(val) {
+      if (val === 'mylist') {
+        this.loadMyList()
+      }
     }
   },
   created() {},
   mounted() {
+    console.log('uid:', this.uid)
     setTimeout(() => {
       console.log(this.locState)
       if (this.locState === null) {
@@ -384,7 +410,7 @@ export default defineComponent({
       }
       this.doSearch(this.search, bounds)
     },
-    doSearch(search, bounds) {
+    doSearch(search, bounds = null) {
       this.searching = true
 
       // 초기화
@@ -435,6 +461,9 @@ export default defineComponent({
         this.search = search
       }
 
+      this.loadCafes(apiUrl, bounds)
+    },
+    loadCafes(apiUrl, bounds = null) {
       this.$axios
         .get(apiUrl)
         .then((result) => {
@@ -485,6 +514,20 @@ export default defineComponent({
             }
           }
           this.searching = false
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 마이리스트 목록 가져오기
+    loadMyList() {
+      console.log('loadMyList')
+      let apiUrl = `${process.env.API}/cafe/mylist/all/${this.uid}` // real-server
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.mylist = result.data
+          console.log(this.mylist)
         })
         .catch((err) => {
           console.log(err)
