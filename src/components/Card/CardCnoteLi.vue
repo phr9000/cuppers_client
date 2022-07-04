@@ -76,9 +76,10 @@ export default defineComponent({
             }
             // X 분전
             return parseInt(diff) + '분전'
-          } else if (diff < 3600) {
+          } else if (diff < 1440) {
             return parseInt(diff / 60) + '시간전'
           } else {
+            // 하루이상 지난 게시글은 날짜로 표시
             let time = toDate(created_parse)
             return format(time, 'MMM dd. yyyy')
           }
