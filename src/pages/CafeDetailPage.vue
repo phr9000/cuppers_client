@@ -375,7 +375,9 @@ export default defineComponent({
   },
   data() {
     return {
-      cafe: null,
+      cafe: null, // api 에서 laod
+      cafeMenu: null, // api 에서 laod
+      cafeFacility: null, // api 에서 laod
       loading: true,
       menuBrewing: null,
       menuVariation: null,
@@ -404,6 +406,7 @@ export default defineComponent({
     // console.log('mounted')
   },
   methods: {
+    // 카페 기본정보 로드
     loadCafe(cafe_id) {
       this.loading = true
       // cafe info load
@@ -421,26 +424,41 @@ export default defineComponent({
           // 해당카페 대표이미지 5개 호출 for 이미지 그리드
           this.getImages(cafe_id)
 
-          // 브루잉(필터) 메뉴, 배리에이션 메뉴 구분
-          if (this.cafe.menu) {
-            this.menuBrewing = this.cafe.menu.filter(
-              (m) => m.menu_type === 'br'
-            )
-            this.menuVariation = this.cafe.menu.filter(
-              (menu) => menu.menu_type !== 'br'
-            )
-          }
+          // 카페 메뉴와 시설정보 로드
+          this.loadCafeInfo(cafe_id)
 
           // review count 로 토탈 페이지 계산
           this.maxReivewPage = Math.ceil(this.cafe.review_cnt / 4)
 
           // 해당카페 모든 리뷰 호출 (1 page)
-          this.getReviews(1) // 추후 (cafe_id, 1)로 수정
+          this.loadReviews(1) // 추후 (cafe_id, 1)로 수정
 
           // 해당카페 모든 커핑노트 호출 (1 page)
-          this.getCnotes(1) // 추후 (cafe_id, 1)로 수정
+          this.loadCnotes(1) // 추후 (cafe_id, 1)로 수정
 
           this.loading = false
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 카페 메뉴와 시설정보 로드
+    loadCafeInfo(cafe_id) {
+      let apiUrl = `${process.env.API}/cafe/info/${cafe_id}` // real-server
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          console.log(result.data)
+          this.cafeMenu = result.data['cafeMenu']
+          this.cafeFacility = result.data['cafeFacility']
+
+          // 브루잉(필터) 메뉴, 배리에이션 메뉴 구분
+          if (this.cafeMenu) {
+            this.menuBrewing = this.cafeMenu.filter((m) => m.menu_type === 'br')
+            this.menuVariation = this.cafeMenu.filter(
+              (menu) => menu.menu_type !== 'br'
+            )
+          }
         })
         .catch((err) => {
           console.log(err)
@@ -460,13 +478,12 @@ export default defineComponent({
           this.menuImages = result.data.filter((item) => {
             return item.type === 'm'
           })
-          console.log(this.menuImages)
         })
         .catch((err) => {
           console.log(err)
         })
     },
-    getReviews(page) {
+    loadReviews(page) {
       let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4`
       // json-server
       // let apiUrl = `${process.env.API}/review?_page=${page}&_limit=4` // real-server
@@ -479,7 +496,7 @@ export default defineComponent({
           console.log(err)
         })
     },
-    getCnotes(page) {
+    loadCnotes(page) {
       let apiUrl = `${process.env.API_LOCAL}/cnote` // json-server
       // let apiUrl = `${process.env.API}/cnote` // real-server
       this.$axios
