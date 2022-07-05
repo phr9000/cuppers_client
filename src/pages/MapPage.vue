@@ -151,6 +151,9 @@
           :cafe="targetCafe"
           :keywords="targetCafe.keywords"
           :today="targetCafe.today"
+          :cafeFacility="targetCafe.cafeFacility"
+          :menuBrewing="targetCafe.menuBrewing"
+          :menuVariation="targetCafe.menuVariation"
         />
       </section>
 
@@ -610,7 +613,17 @@ export default defineComponent({
       const find = this.cafes.filter((cafe) => {
         return cafe['cafe_id'] === cafe_id
       })[0]
-      this.targetCafe = { ...find }
+
+      // 시설 정보와 메뉴 정보 필드도 생성
+      this.targetCafe = {
+        ...find,
+        cafeFacility: null,
+        menuBrewing: null,
+        menuVariation: null
+      }
+
+      // 시설 정보와 메뉴 정보를 로드
+      this.loadCafeInfo(cafe_id)
 
       // target cafe 마커 활성황, 이외의 마커는 비활성화
       this.cafes.forEach((cafe) => {
@@ -622,6 +635,36 @@ export default defineComponent({
       })
 
       this.map.panTo(this.targetCafe.latlng)
+    },
+    // 카페 메뉴와 시설정보 로드
+    loadCafeInfo(cafe_id) {
+      console.log('loadCafeInfo')
+      let apiUrl = `${process.env.API}/cafe/info/${cafe_id}` // real-server
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          console.log(result.data)
+          if (this.targetCafe) {
+            const facility = result.data['cafeFacility']
+            if (facility.length > 0) {
+              this.targetCafe.cafeFacility = facility
+            }
+
+            const cafeMenu = result.data['cafeMenu']
+            // 브루잉(필터) 메뉴, 배리에이션 메뉴 구분
+            if (cafeMenu.length > 0) {
+              this.targetCafe.menuBrewing = cafeMenu.filter(
+                (m) => m.menu_type === 'br'
+              )
+              this.targetCafe.menuVariation = cafeMenu.filter(
+                (menu) => menu.menu_type !== 'br'
+              )
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     // 모든 마커를 삭제
     clearAllMarkers() {

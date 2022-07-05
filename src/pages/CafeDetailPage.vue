@@ -141,7 +141,7 @@
                 <div class="row items-center q-pl-lg q-pb-sm">
                   <facility-item
                     class="q-pr-sm"
-                    v-for="item in cafe.facility"
+                    v-for="item in cafeFacility"
                     :key="item.name"
                     :name="item.name"
                     :icon="item.icon"

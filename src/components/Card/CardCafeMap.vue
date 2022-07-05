@@ -70,12 +70,14 @@
           />
         </div>
       </div>
+
       <!-- 주소 -->
       <div class="info q-mb-xs">
         <q-icon size="xs" name="place" class="icon" />
 
         <div class="text_subtitle1">{{ cafe.cafe_address }}</div>
       </div>
+
       <!-- 영업시간 -->
       <div v-if="today" class="info q-mb-xs">
         <q-icon size="xs" name="calendar_today" class="icon icon_cal q-pt-xs" />
@@ -83,6 +85,63 @@
         <div class="cafe_keywords_wrap text_subtitle1 q-pt-xs">
           {{ today.day }} :
           {{ today.time }}
+        </div>
+      </div>
+
+      <!-- 시설정보 -->
+      <div class="info q-mb-xs">
+        <q-icon size="xs" name="info" class="icon q-pr-xs" />
+        <div class="text_subtitle1">시설 정보</div>
+      </div>
+      <div class="row items-center q-pl-sm q-pb-sm">
+        <facility-item
+          class="q-pr-sm"
+          v-for="item in cafeFacility"
+          :key="item.name"
+          :name="item.name"
+          :icon="item.icon"
+        />
+      </div>
+    </q-card-section>
+
+    <q-separator v-if="menuBrewing || menuVariation" />
+
+    <q-card-section v-if="menuBrewing || menuVariation" class="key_and_address">
+      <!-- 브루잉 메뉴 -->
+      <div v-if="menuBrewing">
+        <div class="info q-mb-xs">
+          <q-icon size="xs" name="info" class="icon q-pr-xs" />
+          <div class="text_subtitle1">브루잉 메뉴</div>
+        </div>
+        <div class="q-pl-sm q-pr-xs q-pb-sm">
+          <menu-item
+            v-for="menu in menuBrewing"
+            :name="menu.menu_name"
+            :menu_aromanote="menu.menu_aromanote"
+            :key="menu.menu_name"
+            :type="menu.menu_type"
+            :hot="menu.menu_price_hot"
+            :ice="menu.menu_price_ice"
+            :is_signature="menu.is_signature"
+          />
+        </div>
+      </div>
+
+      <div v-if="menuVariation">
+        <!-- 배리에이션 메뉴 -->
+        <div class="info q-mb-xs">
+          <q-icon size="xs" name="info" class="icon q-pr-xs" />
+          <div class="text_subtitle1">배리에이션 메뉴</div>
+        </div>
+        <div class="q-pl-sm q-pr-xs q-pb-sm">
+          <menu-item
+            v-for="menu in menuVariation"
+            :name="menu.menu_name"
+            :key="menu.menu_name"
+            :type="menu.menu_type"
+            :hot="menu.menu_price_hot"
+            :ice="menu.menu_price_ice"
+          />
         </div>
       </div>
     </q-card-section>
@@ -97,6 +156,8 @@ import BtnReview from 'src/components/Button/BtnReview.vue'
 import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import CafeType from 'src/components/Etc/CafeType.vue'
+import MenuItem from 'src/components/Etc/MenuItem.vue'
+import FacilityItem from 'src/components/Etc/FacilityItem.vue'
 
 export default defineComponent({
   name: 'CardCafeMap',
@@ -106,7 +167,9 @@ export default defineComponent({
     BtnReview,
     BtnBasicRight,
     BadgeCafe,
-    CafeType
+    CafeType,
+    MenuItem,
+    FacilityItem
   },
   props: {
     cafe: {
@@ -117,6 +180,24 @@ export default defineComponent({
     },
     today: {
       type: Object,
+      default: () => {
+        return null
+      }
+    },
+    cafeFacility: {
+      type: Array,
+      default: () => {
+        return null
+      }
+    },
+    menuBrewing: {
+      type: Array,
+      default: () => {
+        return null
+      }
+    },
+    menuVariation: {
+      type: Array,
       default: () => {
         return null
       }

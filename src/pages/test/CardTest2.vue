@@ -26,10 +26,22 @@
       <p>card-cafe-map 카페카드(지도화면)</p>
       <div class="row">
         <div class="q-mr-sm" style="width: 400px">
-          <card-cafe-map :cafe="cafe" :today="today" @close="handleClose" />
+          <card-cafe-map
+            :cafe="cafe"
+            :today="today"
+            :cafeFacility="cafeFacility"
+            @close="handleClose"
+          />
         </div>
         <div style="width: 300px">
-          <card-cafe-map :cafe="cafe" :today="today" @close="handleClose" />
+          <card-cafe-map
+            :cafe="cafe"
+            :today="today"
+            :cafeFacility="cafeFacility"
+            :menuBrewing="menuBrewing"
+            :menuVariation="menuVariation"
+            @close="handleClose"
+          />
         </div>
       </div>
     </div>
@@ -126,7 +138,79 @@ export default defineComponent({
       today: {
         day: '월',
         time: '정기휴무'
-      }
+      },
+      cafeFacility: [
+        {
+          name: '내부 화장실',
+          icon: null,
+          type: null
+        },
+        {
+          name: '와이파이',
+          icon: 'eva-wifi',
+          type: null
+        },
+        {
+          name: '주차장',
+          icon: 'eva-car',
+          type: null
+        }
+      ],
+      menuBrewing: [
+        {
+          menu_id: 3,
+          cafe_id: 1,
+          menu_name: '파나마 잰슨 게이샤 워시드',
+          menu_price_hot: 6000,
+          menu_price_ice: null,
+          menu_type: 'br',
+          menu_aromanote:
+            '플로럴,레몬그라스,오렌지,샤인머스캣,백도,쥬시하고 긴 여운',
+          is_signature: 1
+        },
+        {
+          menu_id: 4,
+          cafe_id: 1,
+          menu_name: '브라질 아이피 옐로우버본 내추럴',
+          menu_price_hot: 5500,
+          menu_price_ice: null,
+          menu_type: 'br',
+          menu_aromanote: '감귤,모과,볶은 땅콩,캐러멜',
+          is_signature: 0
+        }
+      ],
+      menuVariation: [
+        {
+          menu_id: 5,
+          cafe_id: 1,
+          menu_name: '아메리카노',
+          menu_price_hot: 3800,
+          menu_price_ice: 3800,
+          menu_type: 'va',
+          menu_aromanote: null,
+          is_signature: 0
+        },
+        {
+          menu_id: 6,
+          cafe_id: 1,
+          menu_name: '카페라떼',
+          menu_price_hot: 4400,
+          menu_price_ice: 4400,
+          menu_type: 'va',
+          menu_aromanote: null,
+          is_signature: 0
+        },
+        {
+          menu_id: 7,
+          cafe_id: 1,
+          menu_name: '플랫화이트',
+          menu_price_hot: null,
+          menu_price_ice: 4900,
+          menu_type: 'va',
+          menu_aromanote: null,
+          is_signature: 1
+        }
+      ]
     }
   },
   methods: {
