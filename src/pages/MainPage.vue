@@ -55,13 +55,12 @@
 
         <div class="q-my-xl">
           <btn-basic
-            :dense="false"
-            size="lg"
+            size="md"
             to="map"
-            color="secondary"
-            label="지도 표시하기"
+            color="primary"
+            label="지도에서 보기"
             icon="map"
-            padding="5px 15px"
+            padding="6px 18px"
           />
         </div>
       </div>
@@ -128,10 +127,8 @@ export default {
   },
   methods: {
     loadKeywords() {
-      console.log(process.env)
-      let apiUrl = `${process.env.API_LOCAL}/mainKeywords` // json-server
-
-      // let apiUrl = `${process.env.API}/mainKeywords` // real-server
+      // let apiUrl = `${process.env.API_LOCAL}/mainKeywords` // json-server
+      let apiUrl = `${process.env.API}/keyword/landing` // real-server
 
       this.$axios
         .get(apiUrl)
@@ -144,25 +141,31 @@ export default {
     },
     loadCafes() {
       // json-server
-      let apiUrl = `${process.env.API_LOCAL}/mainCafes?_limit=3`
+      // let apiUrl = `${process.env.API_LOCAL}/mainCafes?_limit=3`
+      // real-server
+      // 추천카페 backend api 가 생길때 까지 가까운 카페 3개 보여주도록
+      let apiUrl = `${process.env.API}/cafe?current_lat=37.5415013&current_long=127.1285397&page=1&limit=3&sort=dist&order=a`
+      if (this.locState) {
+        apiUrl = `${process.env.API}/cafe?current_lat=${this.locState.lat}&current_long=${this.locState.lng}&page=1&limit=3&sort=dist&order=a`
+      }
 
       this.$axios
         .get(apiUrl)
         .then((result) => {
           this.cafes = []
-          for (let i = 0; i < result.data.length; i++) {
+          for (let i = 0; i < result.data.arr.length; i++) {
             let cafe = {
-              ...result.data[i],
-              distance: 0
+              ...result.data.arr[i]
             }
+            cafe.distance = parseInt(Math.sqrt(cafe.distance) * 111)
 
             this.cafes.push(cafe)
           }
 
-          if (this.locState) {
-            this.currentLocation = this.locState
-            this.calculateDistance()
-          }
+          // if (this.locState) {
+          //   this.currentLocation = this.locState
+          //   this.calculateDistance()
+          // }
         })
         .catch((err) => {
           console.log(err)
