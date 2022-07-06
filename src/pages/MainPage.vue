@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <section class="column">
+    <section class="section_top column">
       <div class="q-pl-xl col">
         <h3 class="q-mb-lg main_tile">커피를<br />커피답게<br />커퍼스' ☕</h3>
       </div>
@@ -65,6 +65,7 @@
         </div>
       </div>
     </section>
+    <btn-scroll-top-vanilla />
   </q-page>
 </template>
 
@@ -73,6 +74,7 @@ import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CarouselMainSlide from 'src/components/Carousel/CarouselMainSlide.vue'
 import BtnMain from 'src/components/Button/BtnMain.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
+import BtnScrollTopVanilla from 'src/components/Scroll/BtnScrollTopVanilla.vue'
 
 // composables
 import useDistance from 'src/composables/useDistance'
@@ -89,7 +91,8 @@ export default {
     CarouselMainSlide,
     CardCafeMain,
     BtnMain,
-    BtnBasic
+    BtnBasic,
+    BtnScrollTopVanilla
   },
   setup() {
     const $store = useStore()
