@@ -117,8 +117,7 @@
               v-for="(menu, index) in this.cafe_info.cafe_menu"
               :key="index"
               ref="CardAddMenu"
-              >{{ index }}</card-add-menu
-            >
+            />
           </div>
         </section>
         <section class="q-my-xl">
@@ -138,9 +137,7 @@
               v-for="(menu, index) in this.cafe_info.cafe_menu"
               :key="index"
               ref="CardAddMenu"
-            >
-              {{ index }}
-            </card-add-menu>
+            />
           </div>
         </section>
       </div>
@@ -200,7 +197,7 @@ export default defineComponent({
   methods: {
     async submitCafeInfo() {
       await this.$axios
-        .post(`${process.env.API}/cafe/1`, {
+        .post(`${process.env.API}/cafe/`, {
           params: {
             cafe_name_pr: this.cafe_name_pr,
             cafe_address: this.cafe_address,
@@ -243,19 +240,7 @@ export default defineComponent({
       }
     }
   },
-  computed: {
-    onlyBrewing() {
-      return this.cafe_info.cafe_menu.filter(
-        (cafe_menu) => cafe_menu.menu_type == 'br'
-      )
-    }
-    //   onlyVariation() {
-    //     return this.cafe_info.cafe_menu.filter(
-    //       (cafe_menu) => cafe_menu.menu_type === 'va'
-    //     )
-    //   }
-    // }
-  }
+  computed: {}
 })
 </script>
 <style lang="scss" scoped>

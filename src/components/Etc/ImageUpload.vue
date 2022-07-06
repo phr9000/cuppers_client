@@ -3,9 +3,9 @@
     <div class="row flex justify-between align-center">
       <div>
         <span class="text-h6">카페 이미지</span
-        ><span class="q-px-sm text-subtitle2 grey-4"
-          >{{ this.uploadImageIndex }} /5</span
-        >
+        ><span class="q-px-sm text-subtitle2 grey-4">{{
+          file ? file.name : '선택된 파일이 없습니다.'
+        }}</span>
       </div>
       <div>
         <label for="file" class="text-h6 addButton">
@@ -24,8 +24,13 @@
       </div>
     </div>
     <q-card class="q-my-lg row uploadedImage">
-      <div v-for="(file, index) in files" :key="index" class="flex">
-        <img :src="file.preview" class="q-py-sm q-px-md imageBox" />
+      <img :src="images[0].thumbnail_url" alt="" />
+      <div v-for="(image, index) in images" :key="index" class="flex">
+        <img
+          :src="image.url"
+          :alt="image.filename"
+          class="q-py-sm q-px-md imageBox"
+        />
         <!-- <q-card class="text-center deleteCard">지우기</q-card> -->
       </div>
     </q-card>
@@ -34,33 +39,88 @@
 <script>
 import resizeImageSquare from 'src/composables/image-resize-square'
 import resizeImage from 'src/composables/image-resize'
+
 export default {
   name: 'imageUpload',
 
   data() {
     return {
+      // files: [],
+      // filesPreview: [],
+      // uploadImageIndex: 0
       files: [],
-      filesPreview: [],
-      uploadImageIndex: 0
+      file: null,
+      images: [
+        {
+          type: '',
+          name: '',
+          cafe_image_url: '',
+          thumbnail_url: ''
+        }
+      ]
     }
   },
   methods: {
     imageUpload(event) {
-      console.log(reader.$refs.files.files)
-      let num = -1
-      for (let i = 0; i < this.$refs.files.files.length; i++) {
-        this.files = [
-          ...this.files,
-          {
-            file: this.$refs.files.files[i],
-            preview: URL.createObjectURL(this.$refs.files.files[i]),
-            number: i
-          }
-        ]
-        num = i
+      if (!this.images.type) {
+        this.images = []
       }
-      this.uploadImageIndex = num++
-      console.log(this.files)
+      const files = event.target.files
+      const file = files[0]
+
+      resizeImageSquare({
+        file: file,
+        maxSize: 200
+      })
+        .then((resizedImage) => {
+          const url = URL.createObjectURL(resizedImage)
+          console.log(url)
+          let image = {
+            type: 'g',
+            name: file.name,
+            cafe_image_url: url,
+            thumbnail_url: url
+          }
+          console.log(image)
+          this.images.push(image)
+          console.log('images: ', this.images)
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+
+      // for (let i = 0; i < files.length; i++) {
+      //   const file = files[i]
+      //   resizeImage({ file: file, maxSize: 512, square: false })
+      //     .then((resizedImage) => {
+      //       const path = `images/${file.name}` // ${cafe_info.cafe_name} 추가 예정
+      //       const url = URL.createObjectURL(file)
+      //       this.images.push({
+      //         name: file.name,
+      //         path: path,
+      //         url: url,
+      //         type: 'g'
+      //       })
+      //     })
+      //     .catch((err) => {
+      //       console.error(err)
+      //     })
+      // }
+      // console.log(reader.$refs.files.files)
+      // let num = -1
+      // for (let i = 0; i < this.$refs.files.files.length; i++) {
+      //   this.files = [
+      //     ...this.files,
+      //     {
+      //       file: this.$refs.files.files[i],
+      //       preview: URL.createObjectURL(this.$refs.files.files[i]),
+      //       number: i
+      //     }
+      //   ]
+      //   num = i
+      // }
+      // this.uploadImageIndex = num++
+      // console.log(this.files)
     }
   }
 }
@@ -77,19 +137,15 @@ export default {
   padding: 10px;
   position: relative;
   display: flex;
-  height: 160px;
-  background-color: $primary;
+  height: 240px;
 
   .imageBox {
     position: relative;
-    width: 250px;
-    height: 200px;
     border-radius: 5px;
     transition: color, 0.3s;
     cursor: pointer;
   }
   .imageBox:hover {
-    background-color: $primary;
     opacity: 0.7;
   }
   // .deleteCard {
