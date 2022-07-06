@@ -3,9 +3,30 @@
     <div>
       <q-splitter v-model="splitterModel">
         <template v-slot:before>
-          <q-tabs v-model="tab" inline-label vertical class="text-teal q-py-lg">
-            <q-tab name="cnote" icon="mail" label="커핑노트" class="q-my-sm" />
-            <q-tab name="review" icon="alarm" label="리뷰" />
+          <q-tabs
+            v-model="tab"
+            inline-label
+            vertical
+            active-color="red-4"
+            class="text-grey q-py-lg"
+          >
+            <div class="text-center">
+              <btn-basic
+                size="md"
+                to="/cnote/write"
+                color="grey"
+                label="커핑노트 쓰기"
+                icon="note_alt"
+                padding="4px 15px 4px 15px"
+              />
+            </div>
+            <q-tab
+              name="cnote"
+              icon="rate_review"
+              label="커핑노트"
+              class="q-my-sm"
+            />
+            <q-tab name="review" icon="reviews" label="리뷰" />
           </q-tabs>
         </template>
 
@@ -15,7 +36,7 @@
               <cnote-list />
             </q-tab-panel>
 
-            <q-tab-panel name="review" class="constrain_md">
+            <q-tab-panel name="review" class="constrain_md tab_panel">
               <review-list />
             </q-tab-panel>
           </q-tab-panels>
@@ -26,13 +47,14 @@
 </template>
 
 <script>
+import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import CnoteList from 'src/components/List/CnoteList.vue'
 import ReviewList from 'src/components/List/ReviewList.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'CoffeeSNSPage',
-  components: { CnoteList, ReviewList },
+  components: { BtnBasic, CnoteList, ReviewList },
   data() {
     return {
       tab: 'cnote', // current tab
