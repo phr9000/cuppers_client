@@ -35,6 +35,13 @@
         size="md"
         to="map"
         color="primary"
+        label="커핑노트 쓰기"
+        icon="edit"
+        padding="4px 15px 4px 15px"
+      /><btn-basic
+        size="md"
+        to="map"
+        color="primary"
         label="지도 표시하기"
         icon="map"
         padding="4px 15px 4px 15px"
@@ -81,9 +88,10 @@
       <btn-basic-right size="sm" color="secondary" label="공유" icon="share" />
       <btn-basic-right size="lg" color="primary" label="리뷰" icon="mail" />
       <btn-basic-right
+        to="/test"
         size="lg"
         color="secondary"
-        label="리뷰 쓰기"
+        label="커핑노트step2"
         icon="edit"
       />
       <btn-basic-right size="lg" color="secondary" label="공유" icon="share" />

@@ -1,5 +1,5 @@
 <template>
-  <q-page ref="scrollTargetRef">
+  <q-page>
     <div>
       <q-splitter v-model="splitterModel">
         <template v-slot:before>
@@ -43,6 +43,8 @@
         </template>
       </q-splitter>
     </div>
+
+    <btn-scroll-top />
   </q-page>
 </template>
 
@@ -50,11 +52,12 @@
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import CnoteList from 'src/components/List/CnoteList.vue'
 import ReviewList from 'src/components/List/ReviewList.vue'
+import BtnScrollTop from 'src/components/Scroll/BtnScrollTop.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'CoffeeSNSPage',
-  components: { BtnBasic, CnoteList, ReviewList },
+  components: { BtnBasic, CnoteList, ReviewList, BtnScrollTop },
   data() {
     return {
       tab: 'cnote', // current tab

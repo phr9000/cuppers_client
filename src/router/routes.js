@@ -22,6 +22,10 @@ const routes = [
       },
       {
         path: 'newcafe',
+        component: () => import('src/pages/ReqNewCafePage.vue')
+      },
+      {
+        path: 'addnewcafe',
         component: () => import('src/pages/AddNewCafePage.vue')
       },
       {
@@ -31,6 +35,10 @@ const routes = [
       {
         path: 'cnote/:id',
         component: () => import('src/pages/CnoteDetailPage.vue')
+      },
+      {
+        path: 'cnote/write',
+        component: () => import('src/pages/test/CnoteWriteStep2.vue')
       }
     ]
   },
