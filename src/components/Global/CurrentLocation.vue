@@ -25,7 +25,9 @@ export default defineComponent({
     }
   },
   data() {
-    return {}
+    return {
+      try: 0
+    }
   },
   computed: {
     locationSupported() {
@@ -78,19 +80,19 @@ export default defineComponent({
       // console.log(result.data.city)
       console.log(result.data.country)
       this.locationLoading = false
-    },
-    // 추후 사용을 위해 남겨둠
-    getCityAndCountry(position) {
-      let apiUrl = `https://geocode.xyz/${position.coords.latitude},${position.coords.longitude}?json=1`
-      this.$axios
-        .get(apiUrl)
-        .then((result) => {
-          this.locationSuccess(result)
-        })
-        .catch((err) => {
-          this.locationError()
-        })
     }
+    // 추후 사용을 위해 남겨둠
+    // getCityAndCountry(position) {
+    //   let apiUrl = `https://geocode.xyz/${position.coords.latitude},${position.coords.longitude}?json=1`
+    //   this.$axios
+    //     .get(apiUrl)
+    //     .then((result) => {
+    //       this.locationSuccess(result)
+    //     })
+    //     .catch((err) => {
+    //       this.locationError()
+    //     })
+    // }
   }
 })
 </script>

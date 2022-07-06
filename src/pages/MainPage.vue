@@ -77,10 +77,8 @@ import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import BtnScrollTopVanilla from 'src/components/Scroll/BtnScrollTopVanilla.vue'
 
 // composables
-import useDistance from 'src/composables/useDistance'
-const { getDistanceFromLatLng } = useDistance()
-// import useFormatter from 'src/composables/useFormatter'
-// const { formatNumber } = useFormatter()
+// import useDistance from 'src/composables/useDistance'
+// const { getDistanceFromLatLng } = useDistance()
 
 import { computed } from 'vue'
 import { useStore } from 'vuex'
@@ -143,13 +141,12 @@ export default {
         })
     },
     loadCafes() {
-      // json-server
-      // let apiUrl = `${process.env.API_LOCAL}/mainCafes?_limit=3`
+      // json-server let apiUrl = `${process.env.API_LOCAL}/mainCafes?_limit=3`
       // real-server
       // 추천카페 backend api 가 생길때 까지 가까운 카페 3개 보여주도록
-      let apiUrl = `${process.env.API}/cafe?current_lat=37.5415013&current_long=127.1285397&page=1&limit=3&sort=dist&order=a`
+      let apiUrl = `${process.env.API}/cafe?search=&current_lat=37.5415013&current_long=127.1285397&page=1&limit=3&sort=dist&order=a`
       if (this.locState) {
-        apiUrl = `${process.env.API}/cafe?current_lat=${this.locState.lat}&current_long=${this.locState.lng}&page=1&limit=3&sort=dist&order=a`
+        apiUrl = `${process.env.API}/cafe?search=&current_lat=${this.locState.lat}&current_long=${this.locState.lng}&page=1&limit=3&sort=dist&order=a`
       }
 
       this.$axios
@@ -176,29 +173,24 @@ export default {
     },
     handleClickKeyword(id) {
       console.log('keyword_id: ', id)
-    },
-    // 현재위치 기준으로 각 카페의 거리 계산
-    calculateDistance() {
-      console.log('calculateDistance')
-      this.cafes.forEach((cafe) => {
-        let dist = getDistanceFromLatLng(
-          this.currentLocation.lat,
-          this.currentLocation.lng,
-          cafe.cafe_latitude,
-          cafe.cafe_longitude
-        )
-        console.log(dist)
-
-        dist = parseInt(dist)
-
-        cafe.distance = dist
-      })
-    },
-    locationError() {
-      console.log('현재 위치를 찾을 수 없습니다.')
-
-      this.locationLoading = false
     }
+    // 현재위치 기준으로 각 카페의 거리 계산
+    // calculateDistance() {
+    //   console.log('calculateDistance')
+    //   this.cafes.forEach((cafe) => {
+    //     let dist = getDistanceFromLatLng(
+    //       this.currentLocation.lat,
+    //       this.currentLocation.lng,
+    //       cafe.cafe_latitude,
+    //       cafe.cafe_longitude
+    //     )
+    //     console.log(dist)
+
+    //     dist = parseInt(dist)
+
+    //     cafe.distance = dist
+    //   })
+    // },
   }
 }
 </script>

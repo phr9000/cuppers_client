@@ -24,7 +24,7 @@ export default {
     }
   },
   mounted() {
-    this.uid = 2
+    this.uid = 3
   }
 }
 </script>

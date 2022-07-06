@@ -175,7 +175,7 @@
     </div>
 
     <!-- 테스트 영역 -->
-    <section v-if="false">
+    <section v-if="true">
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
         level: {{ mapLevel }} lastSearchPosition: {{ lastSearchPosition }}
         <br />
@@ -185,7 +185,7 @@
       </div>
       <div v-html="boundMsg"></div>
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
-        현재위치: {{ currentLocation }}
+        현재위치: {{ locState }}
       </div>
 
       <!-- 검색 결과 표시 테스트 -->
@@ -259,7 +259,7 @@ export default defineComponent({
       ], // 필터링된 카페 리스트
       totalCnt: 0,
       map: null, // 카카오맵 인스턴스
-      currentLocation: null,
+      // currentLocation: null,
       // locationLoading: false,
       search: '',
       drawerOpen: false,
@@ -294,15 +294,17 @@ export default defineComponent({
   },
   created() {},
   mounted() {
-    console.log('uid:', this.uid)
-    setTimeout(() => {
-      console.log(this.locState)
-      if (this.locState === null) {
-        this.locationError()
-        return
-      }
-    }, 200)
-    this.currentLocation = this.locState
+    // console.log('uid:', this.uid)
+
+    // setTimeout(() => {
+    //   console.log(this.locState)
+    //   if (this.locState === null) {
+    //     this.locationError()
+    //     return
+    //   }
+    // }, 200)
+    // this.currentLocation = this.locState
+
     //console.log(process.env.KAKAO_API)
 
     if (!window.kakao || !window.kakao.maps) {
@@ -502,7 +504,7 @@ export default defineComponent({
 
             this.cafes.push(cafe)
           }
-          console.log(this.cafes)
+          // console.log(this.cafes)
 
           if (this.cafes.length < 1) {
             // console.log('검색 결과가 없습니다. ', this.cafes.length)
@@ -638,12 +640,11 @@ export default defineComponent({
     },
     // 카페 메뉴와 시설정보 로드
     loadCafeInfo(cafe_id) {
-      console.log('loadCafeInfo')
       let apiUrl = `${process.env.API}/cafe/info/${cafe_id}` // real-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          console.log(result.data)
+          // console.log(result.data)
           if (this.targetCafe) {
             const facility = result.data['cafeFacility']
             if (facility.length > 0) {
@@ -675,7 +676,7 @@ export default defineComponent({
       }
     },
     handleClickMarker(cafe_id) {
-      console.log('marker 클릭 : ', cafe_id)
+      // console.log('marker 클릭 : ', cafe_id)
       this.setTarget(cafe_id)
     },
     setCafesBounds() {
@@ -696,8 +697,12 @@ export default defineComponent({
       this.map.setLevel(this.map.getLevel() + 1, { animate: true })
     },
     panToCurrentLocation() {
-      // 현재 위치로 지도 이동
-      this.panTo(this.currentLocation.lat, this.currentLocation.lng)
+      if (this.locState) {
+        // 현재 위치로 지도 이동
+        this.panTo(this.locState.lat, this.locState.lng)
+      } else {
+        this.locationError()
+      }
     },
     panTo(lat, lng) {
       // 이동할 위도 경도 위치를 생성합니다
@@ -728,7 +733,6 @@ export default defineComponent({
 .map_wrap {
   position: relative;
   overflow: hidden;
-  // width: calc(100% - 382px);
   height: calc(100vh - 51px);
 
   .section_search {

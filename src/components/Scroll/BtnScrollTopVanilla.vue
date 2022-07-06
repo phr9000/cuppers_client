@@ -11,7 +11,6 @@
 
 <script>
 export default {
-  props: ['target'],
   data() {
     return {
       show: false
@@ -19,7 +18,6 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll)
-    console.log(this)
   },
   unmounted() {
     window.removeEventListener('scroll', this.handleScroll)
