@@ -44,8 +44,6 @@
           label="Aromanote"
         />
       </div>
-      {{ this.new_menu.menu_type }}
-      <slot></slot>
     </div>
   </q-card>
 </template>
@@ -78,11 +76,11 @@ export default {
   methods: {
     // 부모 컴포넌트 AddNewCafePage의 메뉴 추가 버튼과 연결된 메소드
     sendBrewing() {
-      let br = (this.new_menu.menu_type = 'br')
+      this.new_menu.menu_type = 'br'
       return this.new_menu
     },
     sendVariation() {
-      let va = (this.new_menu.menu_type = 'va')
+      this.new_menu.menu_type = 'va'
       return this.new_menu
     }
   }

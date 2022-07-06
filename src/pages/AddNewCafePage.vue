@@ -104,7 +104,7 @@
           <div class="flex justify-between q-mx-xl">
             <span class="text-h6">Brewing Coffee</span>
             <btn-basic
-              @click="addbrewingType"
+              @click="addBrewingMenu"
               size="sm"
               label="메뉴 추가"
               color="primary"
@@ -124,7 +124,7 @@
           <div class="flex justify-between q-mx-xl">
             <span class="text-h6">Variation Coffee</span>
             <btn-basic
-              @click="addbrewingType"
+              @click="addvariationMenu"
               size="sm"
               label="메뉴 추가"
               color="primary"
@@ -133,11 +133,7 @@
             />
           </div>
           <div>
-            <card-add-menu
-              v-for="(menu, index) in this.cafe_info.cafe_menu"
-              :key="index"
-              ref="CardAddMenu"
-            />
+            <card-add-menu ref="CardAddMenu" />
           </div>
         </section>
       </div>
@@ -181,31 +177,17 @@ export default defineComponent({
         cafe_address_detail: '',
         cafe_postalcode: '',
         cafe_address_dong: '',
-        cafe_menu: [
-          {
-            menu_name: '',
-            menu_price_hot: 0,
-            menu_price_ice: 0,
-            is_signature: false,
-            menu_aromanote: '',
-            menu_type: ''
-          }
-        ]
+        cafe_menu: []
       }
     }
   },
   methods: {
     async submitCafeInfo() {
+      console.log('카페 등록: ', this.cafe_info)
       await this.$axios
-        .post(`${process.env.API}/cafe/`, {
+        .post(`${process.env.API}/cafe/cafe`, {
           params: {
-            cafe_name_pr: this.cafe_name_pr,
-            cafe_address: this.cafe_address,
-            cafe_address_detail: this.cafe_address_detail,
-            cafe_postalcode: this.cafe_postalcode,
-            cafe_phone: this.cafe_phone,
-            cafe_operation_time: this.cafe_operation_time,
-            cafe_website: this.cafe_website
+            cafe_info: this.cafe_info
           }
         })
         .then((response) => {
@@ -222,25 +204,15 @@ export default defineComponent({
       this.cafe_info.cafe_postalcode = payload.postcode
     },
     // 메뉴 추가 버튼 클릭 시 추가되는 메뉴카드
-    addbrewingType() {
-      for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
-        let menu_data = this.$refs.CardAddMenu[i].sendBrewing()
-        console.log(this.cafe_info.cafe_menu)
-        console.log(this.onlyBrewing)
-        return this.cafe_info.cafe_menu.push(menu_data)
-      }
+    addBrewingMenu() {
+      this.cafe_info.cafe_menu.push(this.$refs.CardAddMenu.sendBrewing())
+      console.log(this.cafe_info.cafe_menu)
     },
-    addvariationType() {
-      for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
-        let menu_data =
-          this.$refs.CardAddMenu[
-            this.cafe_info.cafe_menu.length - 1
-          ].sendVariation()
-        return this.cafe_info.cafe_menu.push(menu_data)
-      }
+    addvariationMenu() {
+      this.cafe_info.cafe_menu.push(this.$refs.CardAddMenu.sendVariation())
+      console.log(this.cafe_info.cafe_menu)
     }
-  },
-  computed: {}
+  }
 })
 </script>
 <style lang="scss" scoped>
