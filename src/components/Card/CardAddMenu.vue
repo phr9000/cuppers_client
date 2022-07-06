@@ -36,7 +36,7 @@
       />
     </div>
     <div>
-      <div v-if="menu_type === 'br'">
+      <div v-if="new_menu.menu_type === 'br'">
         <!-- Brewing // Variation-->
         <q-input
           v-model="new_menu.menu_aromanote"
@@ -44,6 +44,8 @@
           label="Aromanote"
         />
       </div>
+      {{ this.new_menu.menu_type }}
+      <slot></slot>
     </div>
   </q-card>
 </template>
@@ -55,8 +57,10 @@ export default {
     BtnIcon
   },
   props: {
-    menu_id: { type: Number, required: true },
-    menu_type: { type: String, required: true }
+    menu_id: {
+      type: Number,
+      default: 1
+    }
   },
   data() {
     return {
@@ -66,15 +70,20 @@ export default {
         menu_price_hot: 0,
         menu_price_ice: 0,
         is_signature: false,
-        menu_aromanote: ''
+        menu_aromanote: '',
+        menu_type: ''
       }
     }
   },
   methods: {
     // 부모 컴포넌트 AddNewCafePage의 메뉴 추가 버튼과 연결된 메소드
     sendBrewing() {
-      console.log('Hello')
-      this.$emit('printBrewing', this.new_menu) // 위에 선언된 new_menu를 printMenu로 전달.
+      let br = (this.new_menu.menu_type = 'br')
+      return this.new_menu
+    },
+    sendVariation() {
+      let va = (this.new_menu.menu_type = 'va')
+      return this.new_menu
     }
   }
 }

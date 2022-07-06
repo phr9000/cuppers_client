@@ -1,12 +1,15 @@
 <template>
-  <div class="q-pa-sm">( {{ id }} ) <input type="text" v-model="val" /></div>
+  <div class="q-pa-sm">
+    ( {{ id }} )
+    <input type="text" v-model="val" />
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      val: ''
+      val: 'Hello'
     }
   },
   props: ['id'],

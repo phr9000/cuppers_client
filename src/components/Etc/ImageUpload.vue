@@ -1,67 +1,107 @@
 <template>
-  <div class="row justify-center">
-    <div class="q-py-md">
-      <q-card class="uploader q-my-xl">
-        <div class="row justify-between">
-          <div class="text-h6">카페 사진 찾기</div>
-          <span v-for="g in imageTypeG" :key="g">{{ g.length }}</span>
-          <div>
-            <input type="file" multiple accept=".png, .jpg, .jpeg" />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="row justify-between uploader">
-        <div class="text-h6">메뉴 사진 찾기</div>
-        <span v-for="m in imageTypeG" :key="m">{{ m.length }}</span>
-        <div>
-          <input type="file" multiple accept=".png, .jpg, .jpeg" />
-        </div>
-      </q-card>
-      <button @click="consoleUrl">button</button>
+  <div class="q-px-xl q-py-lg">
+    <div class="row flex justify-between align-center">
+      <div>
+        <span class="text-h6">카페 이미지</span
+        ><span class="q-px-sm text-subtitle2 grey-4"
+          >{{ this.uploadImageIndex }} /5</span
+        >
+      </div>
+      <div>
+        <label for="file" class="text-h6 addButton">
+          <q-icon size="md" name="camera" />
+        </label>
+        <input
+          id="file"
+          type="file"
+          ref="files"
+          @change="imageUpload"
+          placeholder="사진 추가"
+          accept="/image"
+          multiple
+          class="uploadBox"
+        />
+      </div>
     </div>
+    <q-card class="q-my-lg row uploadedImage">
+      <div v-for="(file, index) in files" :key="index" class="flex">
+        <img :src="file.preview" class="q-py-sm q-px-md imageBox" />
+        <!-- <q-card class="text-center deleteCard">지우기</q-card> -->
+      </div>
+    </q-card>
   </div>
 </template>
 <script>
+import resizeImageSquare from 'src/composables/image-resize-square'
+import resizeImage from 'src/composables/image-resize'
 export default {
-  name: 'ImageUpload',
+  name: 'imageUpload',
+
   data() {
     return {
-      cafe_images: [
-        {
-          type: 'g',
-          cafe_image_url: '',
-          thumbnail_url: ''
-        },
-        {
-          type: 'm',
-          cafe_image_url: '',
-          thumbnail_url: ''
-        }
-      ]
+      files: [],
+      filesPreview: [],
+      uploadImageIndex: 0
     }
   },
   methods: {
-    consoleUrl() {
-      console.log(this.cafe_images)
-    }
-  },
-  computed: {
-    imageTypeG() {
-      return this.cafe_images.filter((cafe_images) => cafe_images.type === 'g')
-    },
-    imageTypeM() {
-      return this.cafe_images.filter((cafe_images) => cafe_images.type === 'm')
+    imageUpload(event) {
+      console.log(reader.$refs.files.files)
+      let num = -1
+      for (let i = 0; i < this.$refs.files.files.length; i++) {
+        this.files = [
+          ...this.files,
+          {
+            file: this.$refs.files.files[i],
+            preview: URL.createObjectURL(this.$refs.files.files[i]),
+            number: i
+          }
+        ]
+        num = i
+      }
+      this.uploadImageIndex = num++
+      console.log(this.files)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-.uploader {
-  width: 500px;
-  min-height: 250px;
-  .input-box {
-    margin: none;
-    padding: none;
+.addButton {
+  cursor: pointer;
+}
+.uploadBox {
+  visibility: hidden;
+  width: 0px;
+}
+.uploadedImage {
+  padding: 10px;
+  position: relative;
+  display: flex;
+  height: 160px;
+  background-color: $primary;
+
+  .imageBox {
+    position: relative;
+    width: 250px;
+    height: 200px;
+    border-radius: 5px;
+    transition: color, 0.3s;
+    cursor: pointer;
   }
+  .imageBox:hover {
+    background-color: $primary;
+    opacity: 0.7;
+  }
+  // .deleteCard {
+  //   position: absolute;
+  //   width: 70px;
+  //   height: 22px;
+  //   border: 1px solid #333;
+  //   background-color: antiquewhite;
+  //   top: 50%;
+  //   left: 50%;
+  //   margin-top: -11px;
+  //   margin-left: -35px;
+  // }
 }
 </style>

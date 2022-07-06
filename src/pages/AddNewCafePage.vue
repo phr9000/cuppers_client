@@ -104,7 +104,7 @@
           <div class="flex justify-between q-mx-xl">
             <span class="text-h6">Brewing Coffee</span>
             <btn-basic
-              @click="addBrewing"
+              @click="addbrewingType"
               size="sm"
               label="메뉴 추가"
               color="primary"
@@ -116,17 +116,16 @@
             <card-add-menu
               v-for="(menu, index) in this.cafe_info.cafe_menu"
               :key="index"
-              :menu_id="index"
-              menu_type="br"
               ref="CardAddMenu"
-              @printBrewing="printBrewing"
-            />
+              >{{ index }}</card-add-menu
+            >
           </div>
         </section>
         <section class="q-my-xl">
           <div class="flex justify-between q-mx-xl">
             <span class="text-h6">Variation Coffee</span>
             <btn-basic
+              @click="addbrewingType"
               size="sm"
               label="메뉴 추가"
               color="primary"
@@ -134,7 +133,15 @@
               padding="7px 15px 7px 15px"
             />
           </div>
-          <div></div>
+          <div>
+            <card-add-menu
+              v-for="(menu, index) in this.cafe_info.cafe_menu"
+              :key="index"
+              ref="CardAddMenu"
+            >
+              {{ index }}
+            </card-add-menu>
+          </div>
         </section>
       </div>
     </section>
@@ -168,7 +175,6 @@ export default defineComponent({
   },
   data() {
     return {
-      count: 0,
       cafe_info: {
         cafe_name_pr: '',
         cafe_phone: '',
@@ -178,22 +184,39 @@ export default defineComponent({
         cafe_address_detail: '',
         cafe_postalcode: '',
         cafe_address_dong: '',
-        cafe_menu: []
+        cafe_menu: [
+          {
+            menu_name: '',
+            menu_price_hot: 0,
+            menu_price_ice: 0,
+            is_signature: false,
+            menu_aromanote: '',
+            menu_type: ''
+          }
+        ]
       }
     }
   },
-  // create() {
-  //   let apiUrl = `${process.env.API_LOCAL}/`
-  // },
-  // 페이지 로드 시 Default로 들어갈 메뉴카드 Brewing과 Variation
-  mounted() {
-    for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
-      this.$refs.CardAddMenu[i].new_menu
-    }
-  },
   methods: {
-    submitCafeInfo() {
-      console.log('카페정보출력테스트: ', this.cafe_info)
+    async submitCafeInfo() {
+      await this.$axios
+        .post(`${process.env.API}/cafe/1`, {
+          params: {
+            cafe_name_pr: this.cafe_name_pr,
+            cafe_address: this.cafe_address,
+            cafe_address_detail: this.cafe_address_detail,
+            cafe_postalcode: this.cafe_postalcode,
+            cafe_phone: this.cafe_phone,
+            cafe_operation_time: this.cafe_operation_time,
+            cafe_website: this.cafe_website
+          }
+        })
+        .then((response) => {
+          console.log(response, '성공입니다')
+        })
+        .catch((err) => {
+          console.error(err, '실패입니다')
+        })
     },
     getPostData(payload) {
       console.log('카페주소: ', payload)
@@ -202,23 +225,36 @@ export default defineComponent({
       this.cafe_info.cafe_postalcode = payload.postcode
     },
     // 메뉴 추가 버튼 클릭 시 추가되는 메뉴카드
-    addBrewing() {
-      console.log('Hi')
-      /*
-      v-for와 ref를 같이 사용할 경우 아래와 같이 ref를 통해 참조한 컴포넌트에 인덱스를 붙여야 하는데,
-      동적으로 컴포넌트 생성할 때, 배열의 길이만큼 기하급수적으로 컴포넌트가 생성됨.
-      지금 상황에서는 배열에 아무것도 없기 때문에 아래 Loop가 실행되지 않으며,
-      때문에 컴포넌트를 참조할 수 없는 상황. 만약 Default로 배열을 밀어넣게 되면 양방향 바인딩이 안됨.
-      */
+    addbrewingType() {
       for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
-        this.$refs.CardAddMenu[i].sendBrewing()
+        let menu_data = this.$refs.CardAddMenu[i].sendBrewing()
+        console.log(this.cafe_info.cafe_menu)
+        console.log(this.onlyBrewing)
+        return this.cafe_info.cafe_menu.push(menu_data)
       }
     },
-    printBrewing(new_menu) {
-      console.log(new_menu)
-      this.cafe_info.cafe_menu.push(new_menu)
-      console.log(this.cafe_info.cafe_menu)
+    addvariationType() {
+      for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
+        let menu_data =
+          this.$refs.CardAddMenu[
+            this.cafe_info.cafe_menu.length - 1
+          ].sendVariation()
+        return this.cafe_info.cafe_menu.push(menu_data)
+      }
     }
+  },
+  computed: {
+    onlyBrewing() {
+      return this.cafe_info.cafe_menu.filter(
+        (cafe_menu) => cafe_menu.menu_type == 'br'
+      )
+    }
+    //   onlyVariation() {
+    //     return this.cafe_info.cafe_menu.filter(
+    //       (cafe_menu) => cafe_menu.menu_type === 'va'
+    //     )
+    //   }
+    // }
   }
 })
 </script>
