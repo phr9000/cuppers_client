@@ -40,8 +40,6 @@
           <li>무</li>
         </ul>
       </div>
-
-      <!-- <infinite-scroll /> -->
     </section>
     <!-- /커핑 노트 -->
   </div>
@@ -55,7 +53,11 @@ import InfScroll from '../Scroll/InfScroll.vue'
 
 export default defineComponent({
   name: 'CnoteList',
-  components: { ModalSearch, CardCnoteLi, InfScroll },
+  components: {
+    ModalSearch,
+    CardCnoteLi,
+    InfScroll
+  },
   data() {
     return {
       sort: null,

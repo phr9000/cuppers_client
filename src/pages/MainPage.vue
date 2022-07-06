@@ -65,7 +65,7 @@
         </div>
       </div>
     </section>
-    <btn-scroll-top-vanilla />
+    <btn-scroll-top />
   </q-page>
 </template>
 
@@ -74,7 +74,7 @@ import CardCafeMain from 'src/components/Card/CardCafeMain.vue'
 import CarouselMainSlide from 'src/components/Carousel/CarouselMainSlide.vue'
 import BtnMain from 'src/components/Button/BtnMain.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
-import BtnScrollTopVanilla from 'src/components/Scroll/BtnScrollTopVanilla.vue'
+import BtnScrollTop from 'src/components/Scroll/BtnScrollTop.vue'
 
 // composables
 // import useDistance from 'src/composables/useDistance'
@@ -90,7 +90,8 @@ export default {
     CardCafeMain,
     BtnMain,
     BtnBasic,
-    BtnScrollTopVanilla
+    BtnScrollTop
+    // BtnScrollTopVanilla
   },
   setup() {
     const $store = useStore()

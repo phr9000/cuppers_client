@@ -33,10 +33,12 @@
         <template v-slot:after>
           <q-tab-panels class="bg-grey-1" v-model="tab" vertical>
             <q-tab-panel name="cnote" class="constrain_md tab_panel">
+              <section class="section_top"></section>
               <cnote-list />
             </q-tab-panel>
 
             <q-tab-panel name="review" class="constrain_md tab_panel">
+              <section class="section_top"></section>
               <review-list />
             </q-tab-panel>
           </q-tab-panels>

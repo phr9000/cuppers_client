@@ -11,11 +11,14 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import { debounce } from 'quasar'
 
 export default {
   name: 'BtnScrollTop',
   setup() {
+    const show = ref(false)
+
     function onScroll(position) {
       // when this method is invoked then it means user
       // has scrolled the page to `position`
@@ -25,23 +28,20 @@ export default {
       console.log(position)
 
       if (position > 300) {
-        this.show = true
+        show.value = true
       } else {
-        this.show = false
+        show.value = false
       }
     }
 
     return {
+      show,
       onScroll: debounce(onScroll, 200) // debounce for 200ms
-    }
-  },
-  data() {
-    return {
-      show: false
     }
   },
   methods: {
     click() {
+      this.show = false
       this.smoothScroll('.section_top', 800)
     },
     smoothScroll(_target, _duration) {
@@ -75,8 +75,8 @@ export default {
 <style lang="scss" scoped>
 .btn_scroll_top {
   position: fixed;
-  right: 10px;
-  bottom: 10px;
+  right: 20px;
+  bottom: 20px;
   transition: all 0.3s;
   pointer-events: none; // 마우스 클릭 안되게
   opacity: 0;
