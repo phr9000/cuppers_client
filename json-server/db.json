@@ -1378,17 +1378,17 @@
   ],
   "review": [
     {
+      "id": 1,
       "review_id": 1,
       "cafe_id": 4,
-      "cafe_name": "커피앰비언스",
+      "cafe_name_pr": "커피앰비언스",
       "user_id": 1,
-      "user_name": "동글동글동글이",
-      "user_thumbnail": "https://yt3.ggpht.com/TKujBMF0rkAEiGuNak656MrI1RdNBZMpZmTOSiyYgxUk0eVjwdJL_yttq8FeE-HUDorXYe7mYL8=s88-c-k-c0x00ffffff-no-rj",
-      "menu_name": "파나마 잰슨 게이샤 워시드",
-      "menu_type": "br",
-      "menu_aromanote": "플로럴,레몬그라스,오렌지,샤인머스캣,백도,쥬시하고 긴 여운",
-      "is_signature": 0,
-      "review_description": "커피에 진심인 카페. ☕️ \n다양한 드립 커피가 많아서 고르는 데 고민이 많이 되었어요.\n마지막까지 고민하던 종류 시음 하게 해주셔서 넘넘 감사했습니다!  사장님 센스👍🏾\n드립커피 보다 아메리카노를 선호 했었는데 드립커피에 대한 인식을 바꿔준 카페입니다!!!\n다음에 커피 마시러 또 방문 할게요😘",
+      "user_nickname": "동글동글동글이",
+      "user_thumbnail_url": "https://yt3.ggpht.com/TKujBMF0rkAEiGuNak656MrI1RdNBZMpZmTOSiyYgxUk0eVjwdJL_yttq8FeE-HUDorXYe7mYL8=s88-c-k-c0x00ffffff-no-rj",
+      "review_drink": "파나마 잰슨 게이샤 워시드",
+      "review_img": "https://picsum.photos/200",
+      "drink_type": "br, sg",
+      "review_content": "커피에 진심인 카페. ☕️ \n다양한 드립 커피가 많아서 고르는 데 고민이 많이 되었어요.\n마지막까지 고민하던 종류 시음 하게 해주셔서 넘넘 감사했습니다!  사장님 센스👍🏾\n드립커피 보다 아메리카노를 선호 했었는데 드립커피에 대한 인식을 바꿔준 카페입니다!!!\n다음에 커피 마시러 또 방문 할게요😘",
       "user_liked": 1,
       "like_cnt": 55,
       "created_at": "2022-06-11 12:24:55",
@@ -1437,15 +1437,18 @@
       "review_id": 2,
       "cafe_id": 4,
       "user_id": 2,
-      "user_name": "길막",
-      "user_thumbnail": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/008_1.jpg",
-      "menu_name": "아메리카노",
-      "menu_aromanote": "초콜렛,볶은 땅콩,살짝신맛",
+      "user_nickname": "길막",
+      "user_thumbnail_url": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/008_1.jpg",
+      "review_drink": "아메리카노",
+      "review_img": "https://picsum.photos/200",
+      "drink_type": "va",
       "menu_type": "va",
       "is_signature": 0,
-      "review_description": "커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
+      "review_content": "커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
       "created_at": "2022-06-11 12:24:55",
-      "cafe_name": "커피앰비언스",
+      "cafe_name_pr": "커피앰비언스",
+      "user_liked": 1,
+      "like_cnt": 553,
       "review_keyword": [
         {
           "keyword_name": "커피에 대한 설명",
@@ -1460,8 +1463,6 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_liked": 1,
-      "like_cnt": 553,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1489,15 +1490,17 @@
       "review_id": 3,
       "cafe_id": 4,
       "user_id": 3,
-      "user_name": "무",
-      "user_thumbnail": "https://picsum.photos/32",
-      "menu_name": "브라질 아이피 옐로우버본 내추럴",
-      "menu_aromanote": "감귤,살구,볶은 땅콩,캐러멜",
-      "menu_type": "br",
+      "user_nickname": "무",
+      "user_thumbnail_url": "https://picsum.photos/32",
+      "review_drink": "브라질 아이피 옐로우버본 내추럴",
+      "review_img": "https://picsum.photos/200",
+      "drink_type": "br",
       "is_signature": 0,
-      "review_description": "브라질 아이피 옐로우버본 내추럴 우아하고 맛있었습니다. 😊",
+      "review_content": "브라질 아이피 옐로우버본 내추럴 우아하고 맛있었습니다. 😊",
       "created_at": "2022-06-11 12:24:55",
-      "cafe_name": "커피앰비언스",
+      "cafe_name_pr": "커피앰비언스",
+      "user_liked": 1,
+      "like_cnt": 142,
       "review_keyword": [
         {
           "keyword_name": "커피에 대한 설명",
@@ -1532,8 +1535,6 @@
           "keyword_type": "coffee"
         }
       ],
-      "user_liked": 1,
-      "like_cnt": 142,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1561,15 +1562,17 @@
       "review_id": 4,
       "cafe_id": 4,
       "user_id": 4,
-      "user_name": "삼색",
-      "user_thumbnail": "https://yt3.ggpht.com/ytc/AKedOLQ3XdNs05VFer97aov10LiES3hlI9FgfBnRo5SONQ=s88-c-k-c0x00ffffff-no-rj",
-      "menu_name": "플랫화이트",
-      "menu_aromanote": "",
-      "menu_type": "va",
+      "user_nickname": "삼색",
+      "user_thumbnail_url": "https://yt3.ggpht.com/ytc/AKedOLQ3XdNs05VFer97aov10LiES3hlI9FgfBnRo5SONQ=s88-c-k-c0x00ffffff-no-rj",
+      "review_drink": "플랫화이트",
+      "review_img": "https://picsum.photos/200",
+      "drink_type": "va",
       "is_signature": 1,
-      "review_description": "커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
+      "review_content": "커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
       "created_at": "2022-06-11 12:24:55",
-      "cafe_name": "커피앰비언스",
+      "cafe_name_pr": "커피앰비언스",
+      "user_liked": 1,
+      "like_cnt": 142,
       "review_keyword": [
         {
           "keyword_name": "커피에 대한 설명",
@@ -1588,8 +1591,6 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_liked": 1,
-      "like_cnt": 142,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1617,14 +1618,17 @@
       "review_id": 5,
       "cafe_id": 4,
       "user_id": 4,
-      "user_name": "Marilyn",
-      "user_thumbnail": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg",
-      "menu_name": "카페라떼",
-      "menu_type": "va",
+      "user_nickname": "Marilyn",
+      "user_thumbnail_url": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg",
+      "review_drink": "카페라떼",
+      "review_img": "https://picsum.photos/200",
+      "drink_type": "va",
       "is_signature": 0,
-      "review_description": "너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
+      "review_content": "너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
       "created_at": "2022-06-11 12:24:55",
-      "cafe_name": "커피앰비언스",
+      "cafe_name_pr": "커피앰비언스",
+      "user_liked": 0,
+      "like_cnt": 43,
       "review_keyword": [
         {
           "keyword_name": "커피에 대한 설명",
@@ -1643,8 +1647,6 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_liked": 0,
-      "like_cnt": 43,
       "reivew_image": [
         {
           "image_review_type": "g",
@@ -1672,14 +1674,17 @@
       "review_id": 6,
       "cafe_id": 4,
       "user_id": 4,
-      "user_name": "Marilyn",
-      "user_thumbnail": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg",
-      "menu_name": "플랫화이트",
+      "user_nickname": "Marilyn",
+      "user_thumbnail_url": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg",
+      "review_drink": "플랫화이트",
+      "review_img": "https://picsum.photos/200",
       "menu_type": "va",
       "is_signature": 1,
-      "review_description": " 갈 때 마다 마음이 편안해지는 곳, 가끔 헤메기도 하고 자주 못 가지만 커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
+      "review_content": " 갈 때 마다 마음이 편안해지는 곳, 가끔 헤메기도 하고 자주 못 가지만 커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳",
       "created_at": "2022-06-11 12:24:55",
-      "cafe_name": "커피앰비언스",
+      "cafe_name_pr": "커피앰비언스",
+      "user_liked": 1,
+      "like_cnt": 13,
       "review_keyword": [
         {
           "keyword_name": "커피에 대한 설명",
@@ -1698,8 +1703,6 @@
           "keyword_type": "cafe"
         }
       ],
-      "user_liked": 1,
-      "like_cnt": 13,
       "reivew_image": [
         {
           "image_review_type": "g",

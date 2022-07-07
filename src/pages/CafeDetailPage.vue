@@ -54,12 +54,12 @@
           <div class="row items-end">
             <div>
               <btn-basic
-                color="grey-8"
+                color="grey-6"
                 label="리뷰 쓰기"
                 icon="edit"
                 size="md"
               />
-              <btn-basic color="grey-8" label="공유" icon="share" size="md" />
+              <btn-basic color="grey-6" label="공유" icon="share" size="md" />
             </div>
           </div>
         </div>
@@ -236,9 +236,9 @@
           class="review_menu_container col-12 col-sm-5 q-py-md q-pr-md column justify-between align-end"
         >
           <!-- 최근 리뷰 -->
-          <div class="recent_review large_screen_only">
+          <div v-if="reviewRecent" class="recent_review large_screen_only">
             <div class="subtitle q-mb-xs">최근 리뷰</div>
-            <card-review />
+            <card-review :review="reviewRecent" />
           </div>
 
           <!-- 대표 메뉴 이미지 -->
@@ -306,8 +306,7 @@
     </section>
 
     <!-- 커핑 노트 -->
-    <section class="cnote_section q-pa-md">
-      <!--  -->
+    <!-- <section class="cnote_section q-pa-md">
       <div class="title_wrap row justify-between items-center">
         <div class="subtitle q-pl-sm">{{ cafe.cnote_cnt }}건의 커핑노트</div>
         <div class="row items-center q-pr-sm">
@@ -321,10 +320,7 @@
           <card-cnote :cnote="cnote" />
         </div>
       </div>
-
-      <!-- 인피니티 스크롤 -->
-      <!-- <infinite-scroll /> -->
-    </section>
+    </section> -->
   </q-page>
 
   <q-page v-else-if="loading" class="constrain">
@@ -354,13 +350,12 @@ import BtnReview from 'src/components/Button/BtnReview.vue'
 import CardReview from '../components/Card/CardReview.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
 import FacilityItem from 'src/components/Etc/FacilityItem.vue'
-import CardCnote from 'src/components/Card/CardCupNote.vue'
+// import CardCnote from 'src/components/Card/CardCupNote.vue'
 import SkeletonCafeDetail from 'src/components/Skeleton/SkeletonCafeDetail.vue'
 
 export default defineComponent({
   name: 'CafeDetailPage',
   components: {
-    // InfiniteScroll,
     ImageGrid,
     BadgeCafe,
     BtnBasic,
@@ -368,13 +363,14 @@ export default defineComponent({
     BtnBeenThere,
     BtnReview,
     CardReview,
-    CardCnote,
+    // CardCnote,
     MenuItem,
     FacilityItem,
     SkeletonCafeDetail
   },
   data() {
     return {
+      cafeId: null,
       cafe: null, // api 에서 laod
       cafeMenu: null, // api 에서 laod
       cafeFacility: null, // api 에서 laod
@@ -382,24 +378,27 @@ export default defineComponent({
       menuBrewing: null,
       menuVariation: null,
       recent_review: {},
+      reviewRecent: null,
       reviews: [],
-      cnotes: [],
+      // cnotes: [],
       current: 1, // for pagination
       maxReivewPage: 1, // for pagination
       // reviews_per_page: 4
       cafeImages: null,
-      menuImages: null
+      menuImages: null,
+      sort: 'recent' // for reviews sort
     }
   },
   watch: {
     current(newPage) {
-      this.getReviews(newPage) // go to that page number
+      this.loadReviews(newPage) // go to that page number
     }
   },
   async created() {
+    this.cafeId = this.$route.params.id
     // load delay test
     setTimeout(() => {
-      this.loadCafe(this.$route.params.id)
+      this.loadCafe(this.cafeId)
     }, 100)
   },
   mounted() {
@@ -411,7 +410,7 @@ export default defineComponent({
       this.loading = true
       // cafe info load
       // let apiUrl = `${process.env.API}/cafe/${cafe_id}` // json-server
-      let apiUrl = `${process.env.API}/cafe/${cafe_id}?user_id=2` // real-server
+      let apiUrl = `${process.env.API}/cafe/${cafe_id}?user_id=3` // real-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
@@ -470,7 +469,7 @@ export default defineComponent({
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          console.log(result.data)
+          // console.log(result.data)
 
           this.cafeImages = result.data.filter((item) => {
             return item.type === 'g'
@@ -484,30 +483,34 @@ export default defineComponent({
         })
     },
     loadReviews(page) {
-      let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4`
+      // let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4`
       // json-server
-      // let apiUrl = `${process.env.API}/review?_page=${page}&_limit=4` // real-server
+      let apiUrl = `${process.env.API}/review/${this.cafeId}?user_id=3&sort=${this.sort}&order=d&page=${page}&limit=4` // real-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
+          console.log(result.data)
+          if (!this.reviewRecent) {
+            this.reviewRecent = result.data[0]
+          }
           this.reviews = result.data
         })
         .catch((err) => {
           console.log(err)
         })
     },
-    loadCnotes(page) {
-      let apiUrl = `${process.env.API_LOCAL}/cnote` // json-server
-      // let apiUrl = `${process.env.API}/cnote` // real-server
-      this.$axios
-        .get(apiUrl)
-        .then((result) => {
-          this.cnotes = result.data
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
+    // loadCnotes(page) {
+    //   let apiUrl = `${process.env.API_LOCAL}/cnote` // json-server
+    //   // let apiUrl = `${process.env.API}/cnote` // real-server
+    //   this.$axios
+    //     .get(apiUrl)
+    //     .then((result) => {
+    //       this.cnotes = result.data
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // },
     clickBranch(cafe_id) {
       this.$router.push({ path: `/cafe/${cafe_id}` })
     }

@@ -1,17 +1,17 @@
 <template>
-  <div class="card_review_container">
+  <div v-if="review" class="card_review_container">
     <div class="user_info row items-center">
-      <btn-avatar :url="review.user_thumbnail" />
-      <div class="q-ml-sm user_name">{{ review.user_name }}</div>
+      <btn-avatar :url="user_thumbnail_url" />
+      <div class="q-ml-sm user_name">{{ review.user_nickname }}</div>
     </div>
     <q-card class="card_review" bordered flat>
       <q-card-section class="cafe_info row items-center justify-between">
         <div @click="cafeNameClick" class="text-h5 cafe_name q-mb-xs q-mr-xs">
-          {{ review.cafe_name }}
+          {{ review.cafe_name_pr }}
         </div>
         <div class="cafe_keywords_wrap">
           <badge-cafe
-            v-for="keyword in cafeKeywords"
+            v-for="keyword in review.review_keyword"
             :key="keyword.keyword_name"
             :value="keyword.keyword_name"
           />
@@ -20,20 +20,20 @@
       <q-card-section class="coffee_info_wrap row q-pt-md q-pr-md">
         <div class="col-12 col-sm-7 coffee_info q-py-none q-pl-xs q-pr-md">
           <menu-item
-            :name="review.menu_name"
-            :menu_aromanote="review.menu_aromanote"
-            :type="review.menu_type"
-            :is_signature="review.is_signature"
+            :name="review.review_drink"
+            :type="drinkType"
+            :is_signature="isSignature"
             :is_review="true"
           />
-          <div class="caption text-caption text-grey q-my-sm">
-            {{ review.review_description }}
-          </div>
+          <div
+            v-html="contentHTML"
+            class="caption text-caption text-grey q-my-sm"
+          ></div>
         </div>
         <q-img
           class="col-12 col-sm-5 q-pr-sm review_image"
           :initial-ratio="16 / 9"
-          :src="thumbnail"
+          :src="review.review_img"
           ><div
             class="rounded-borders absolute-full text-subtitle2 flex flex-center"
           >
@@ -75,75 +75,14 @@ export default defineComponent({
     review: {
       type: Object,
       default: () => {
-        return {
-          review_id: 1,
-          cafe_id: 1,
-          user_id: 1,
-          user_name: '동글동글동글이',
-          user_thumbnail:
-            'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
-          menu_name: '브라질 아이피 옐로우버본 내추럴',
-          menu_aromanote: '감귤,모과,볶은 땅콩,캐러멜,깔끔한 여운',
-          is_signature: 1,
-          review_description:
-            '커피 퀄리티와 바리스타의 역량(전문성), 분위기 3박자를 모두 갖춘 곳. 원두 라인업이 바뀔 때 마다 호기심 반 기대 반으로 들르게 된다. 너무 골목이라 가끔 헤메기도 하고 자주 못 가지만, 갈 때 마다 마음이 편안해지는 곳. ',
-          created_at: '2022-06-11 12:24:55',
-          cafe_name: '커피앰비언스',
-          review_keyword: [
-            {
-              keyword_name: '커피에 대한 설명'
-            },
-            {
-              keyword_name: '내추럴 커피'
-            },
-            {
-              keyword_name: '추출도구 선택 가능'
-            },
-            {
-              keyword_name: '분위기가 좋은'
-            },
-            {
-              keyword_name: '추출도구 선택 가능'
-            },
-            {
-              keyword_name: '분위기가 좋은'
-            },
-            {
-              keyword_name: '분위기가 좋은'
-            }
-          ],
-          user_liked: 1,
-          like_cnt: 142,
-          reivew_image: [
-            {
-              image_review_type: 'g',
-              image_review_url: 'url',
-              thumbnail:
-                'https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal'
-            },
-            {
-              image_review_type: 'g',
-              image_review_url: 'url',
-              thumbnail: 'url'
-            },
-            {
-              image_review_type: 'g',
-              image_review_url: 'url',
-              thumbnail: 'url'
-            },
-            {
-              image_review_type: 'm',
-              image_review_url: 'url',
-              thumbnail: 'url'
-            }
-          ]
-        }
+        return null
       }
     }
   },
   data() {
     return {
-      thumbnail: ''
+      thumbnail: '',
+      user_thumbnail_url: ''
     }
   },
   computed: {
@@ -155,15 +94,28 @@ export default defineComponent({
       return this.review.review_keyword.filter((key) => {
         return key.keyword_type === 'cafe'
       })
+    },
+    drinkType() {
+      const type = this.review.drink_type
+      return type.includes('br') ? 'br' : type.includes('va') ? 'va' : ''
+    },
+    isSignature() {
+      return this.review.drink_type.includes('sg') ? 1 : 0
+    },
+    contentHTML() {
+      return this.review.review_content.replaceAll('\\n', '<br />')
     }
   },
   mounted() {
     // console.log(this.review.reivew_image[0]['thumbnail'])
-    this.thumbnail = this.review.reivew_image[0]['thumbnail']
+    // this.thumbnail = this.review.reivew_image[0]['thumbnail']
+    // this.user_thumbnail_url =
+    // process.env.BASE_URL + this.review.user_thumbnail_url
+    // console.log(this.user_thumbnail_url)
   },
   methods: {
     cafeNameClick() {
-      this.$router.push({ path: `/cafedetail/${this.review.cafe_id}` })
+      this.$router.push({ path: `/cafe/${this.review.cafe_id}` })
     }
   }
 })

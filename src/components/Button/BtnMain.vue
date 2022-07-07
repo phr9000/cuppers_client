@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     word() {
-      return this.keyword.replace('\n', '<br />')
+      return this.keyword.replaceAll('\n', '<br>')
     }
   },
   methods: {
