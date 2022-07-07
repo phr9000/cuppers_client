@@ -111,19 +111,22 @@
               icon="add"
               padding="7px 15px 7px 15px"
             />
+
+            <btn-basic @click="addMenuId" />
           </div>
           <div>
             <card-add-menu
-              v-for="(menu, index) in this.cafe_info.cafe_menu"
-              :key="index"
+              v-for="menu in this.cafe_info.cafe_menu"
+              :key="menu.menu_id"
+              :menu_id="menu.menu_id"
               ref="CardAddMenu"
             />
           </div>
         </section>
         <section class="q-my-xl">
-          <div class="flex justify-between q-mx-xl">
-            <span class="text-h6">Variation Coffee</span>
-            <btn-basic
+          <!-- <div class="flex justify-between q-mx-xl">
+            <span class="text-h6">Variation Coffee</span> -->
+          <!-- <btn-basic
               @click="addvariationMenu"
               size="sm"
               label="메뉴 추가"
@@ -134,7 +137,7 @@
           </div>
           <div>
             <card-add-menu ref="CardAddMenu" />
-          </div>
+          </div> -->
         </section>
       </div>
     </section>
@@ -186,8 +189,11 @@ export default defineComponent({
       console.log('카페 등록: ', this.cafe_info)
       await this.$axios
         .post(`${process.env.API}/cafe/cafe`, {
-          params: {
+          cafe: {
             cafe_info: this.cafe_info
+          },
+          menu: {
+            cafe_menu: this.cafe_info.cafe_menu
           }
         })
         .then((response) => {
@@ -203,14 +209,19 @@ export default defineComponent({
       this.cafe_info.cafe_address_dong = payload.extraAddress
       this.cafe_info.cafe_postalcode = payload.postcode
     },
+
     // 메뉴 추가 버튼 클릭 시 추가되는 메뉴카드
-    addBrewingMenu() {
-      this.cafe_info.cafe_menu.push(this.$refs.CardAddMenu.sendBrewing())
+    addMenuId() {
+      const menu_id = this.cafe_info.cafe_menu.length + 1
+      this.cafe_info.cafe_menu.push({ menu_id: menu_id })
       console.log(this.cafe_info.cafe_menu)
+      console.log(menu_id)
     },
-    addvariationMenu() {
-      this.cafe_info.cafe_menu.push(this.$refs.CardAddMenu.sendVariation())
-      console.log(this.cafe_info.cafe_menu)
+    addBrewingMenu() {
+      let new_menu_arr = []
+      for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
+        new_menu_arr.push(this.$refs.CardAddMenu[i].sendBrewing())
+      }
     }
   }
 })

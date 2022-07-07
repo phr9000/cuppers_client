@@ -24,12 +24,11 @@
       </div>
     </div>
     <q-card class="q-my-lg row uploadedImage">
-      <img :src="images[0].thumbnail_url" alt="" />
-      <div v-for="(image, index) in images" :key="index" class="flex">
+      <div v-for="(image, index) in this.images" :key="index" class="flex">
         <img
-          :src="image.url"
-          :alt="image.filename"
+          :src="image.thumbnail_url"
           class="q-py-sm q-px-md imageBox"
+          alt=""
         />
         <!-- <q-card class="text-center deleteCard">지우기</q-card> -->
       </div>
@@ -53,7 +52,6 @@ export default {
       images: [
         {
           type: '',
-          name: '',
           cafe_image_url: '',
           thumbnail_url: ''
         }
@@ -62,65 +60,37 @@ export default {
   },
   methods: {
     imageUpload(event) {
-      if (!this.images.type) {
-        this.images = []
-      }
       const files = event.target.files
       const file = files[0]
+      console.log(files)
+      console.log(file)
 
-      resizeImageSquare({
-        file: file,
-        maxSize: 200
-      })
-        .then((resizedImage) => {
-          const url = URL.createObjectURL(resizedImage)
-          console.log(url)
-          let image = {
-            type: 'g',
-            name: file.name,
-            cafe_image_url: url,
-            thumbnail_url: url
+      let new_image = {
+        type: 'g',
+        cafe_image_url: '',
+        thumbnail_url: ''
+      }
+      this.images.push(new_image)
+      console.log(this.images)
+
+      resizeImageSquare({ file: file, maxSize: 200, square: true })
+        .then((uploadedImage) => {
+          console.log(uploadedImage)
+          for (let i = 0; i < this.images.length; i++) {
+            let thumb_url = URL.createObjectURL(uploadedImage)
+            this.images[i].thumbnail_url = thumb_url
           }
-          console.log(image)
-          this.images.push(image)
-          console.log('images: ', this.images)
         })
-        .catch((err) => {
-          console.error(err)
-        })
+        .catch((err) => console.error(err))
 
-      // for (let i = 0; i < files.length; i++) {
-      //   const file = files[i]
-      //   resizeImage({ file: file, maxSize: 512, square: false })
-      //     .then((resizedImage) => {
-      //       const path = `images/${file.name}` // ${cafe_info.cafe_name} 추가 예정
-      //       const url = URL.createObjectURL(file)
-      //       this.images.push({
-      //         name: file.name,
-      //         path: path,
-      //         url: url,
-      //         type: 'g'
-      //       })
-      //     })
-      //     .catch((err) => {
-      //       console.error(err)
-      //     })
-      // }
-      // console.log(reader.$refs.files.files)
-      // let num = -1
-      // for (let i = 0; i < this.$refs.files.files.length; i++) {
-      //   this.files = [
-      //     ...this.files,
-      //     {
-      //       file: this.$refs.files.files[i],
-      //       preview: URL.createObjectURL(this.$refs.files.files[i]),
-      //       number: i
-      //     }
-      //   ]
-      //   num = i
-      // }
-      // this.uploadImageIndex = num++
-      // console.log(this.files)
+      resizeImage({ file: file, maxSize: 512 })
+        .then((uploadedImage) => {
+          for (let i = 0; i < this.images.length; i++) {
+            let original_url = URL.createObjectURL(uploadedImage)
+            this.images[i].cafe_image_url = original_url
+          }
+        })
+        .catch((err) => console.error(err))
     }
   }
 }

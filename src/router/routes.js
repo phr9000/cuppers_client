@@ -98,6 +98,10 @@ const routes = [
       {
         path: 'childref',
         component: () => import('pages/test/ChildRefTest.vue')
+      },
+      {
+        path: 'inputref',
+        component: () => import('pages/test/InputRefTest.vue')
       }
     ]
   },

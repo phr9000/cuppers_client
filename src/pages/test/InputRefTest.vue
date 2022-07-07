@@ -38,7 +38,8 @@ export default {
       for (let i = 0; i < this.inputs.length; i++) {
         all.push(this.$refs.childOfInputs[i].getVal())
       }
-      console.log(all)
+      console.log('all: ', all)
+      console.log(this.inputs)
     }
   }
 }
