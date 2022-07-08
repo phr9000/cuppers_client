@@ -97,13 +97,26 @@ export default defineComponent({
     },
     drinkType() {
       const type = this.review.drink_type
-      return type.includes('br') ? 'br' : type.includes('va') ? 'va' : ''
+      if (type) {
+        return type.includes('br') ? 'br' : type.includes('va') ? 'va' : ''
+      } else {
+        return ''
+      }
     },
     isSignature() {
-      return this.review.drink_type.includes('sg') ? 1 : 0
+      const type = this.review.drink_type
+      if (type) {
+        return type.includes('sg') ? 1 : 0
+      } else {
+        return ''
+      }
     },
     contentHTML() {
-      return this.review.review_content.replaceAll('\\n', '<br />')
+      if (this.review.review_content) {
+        return this.review.review_content.replaceAll('\\n', '<br />')
+      } else {
+        return ''
+      }
     }
   },
   mounted() {
