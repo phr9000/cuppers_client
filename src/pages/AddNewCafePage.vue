@@ -111,8 +111,6 @@
               icon="add"
               padding="7px 15px 7px 15px"
             />
-
-            <btn-basic @click="addMenuId" />
           </div>
           <div>
             <card-add-menu
@@ -211,17 +209,16 @@ export default defineComponent({
     },
 
     // 메뉴 추가 버튼 클릭 시 추가되는 메뉴카드
-    addMenuId() {
-      const menu_id = this.cafe_info.cafe_menu.length + 1
-      this.cafe_info.cafe_menu.push({ menu_id: menu_id })
-      console.log(this.cafe_info.cafe_menu)
-      console.log(menu_id)
-    },
     addBrewingMenu() {
-      let new_menu_arr = []
-      for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
-        new_menu_arr.push(this.$refs.CardAddMenu[i].sendBrewing())
-      }
+      let new_menus = [
+        {
+          menu_id: 1
+        }
+      ]
+      // for (let i = 0; i < new_menus.length; i++) {
+      //   new_menus.push(i)
+      // }
+      console.log(new_menus)
     }
   }
 })
