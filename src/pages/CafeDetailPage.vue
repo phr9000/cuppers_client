@@ -67,10 +67,9 @@
     </section>
 
     <!-- Image Grid -->
-    <section v-if="cafeImages" class="q-mx-xs q-px-sm q-pt-xs">
+    <section v-if="cafeImages" class="q-mx-sm q-px-sm q-pt-xs">
       <!-- Image Grid -->
-      <!-- <q-img class="rounded" src="/GRIDIMAGES_TEMP.JPG" /> -->
-      <image-grid class="image-grid rounded" :images="cafeImages" />
+      <image-grid :images="cafeImages" />
     </section>
 
     <!-- 기본정보, 커피메뉴 & 최근리뷰 컨테이너 -->
@@ -308,8 +307,8 @@
     <!-- </a> -->
 
     <!-- 지도 미리보기 -->
-    <section class="q-mx-xs q-px-sm q-pt-xs">
-      <q-img class="rounded" src="/MAP_TEMP.JPG" />
+    <section v-if="showMiniMap" class="minimap q-mx-lg q-mb-xl">
+      <kakao-mini-map :lat="cafe.cafe_latitude" :lng="cafe.cafe_longitude" />
     </section>
 
     <!-- 커핑 노트 -->
@@ -357,7 +356,8 @@ import BtnReview from 'src/components/Button/BtnReview.vue'
 import CardReview from '../components/Card/CardReview.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
 import FacilityItem from 'src/components/Etc/FacilityItem.vue'
-import BtnSort from 'src/components/BtnGroup/BtnSort.vue'
+import KakaoMiniMap from 'src/components/Etc/KakaoMiniMap.vue'
+import BtnSort from 'src/components/Tab/BtnSort.vue'
 // import CardCnote from 'src/components/Card/CardCupNote.vue'
 
 import SkeletonCafeDetail from 'src/components/Skeleton/SkeletonCafeDetail.vue'
@@ -376,6 +376,7 @@ export default defineComponent({
     MenuItem,
     FacilityItem,
     SkeletonCafeDetail,
+    KakaoMiniMap,
     BtnSort
   },
   data() {
@@ -405,7 +406,8 @@ export default defineComponent({
           label: '최신순',
           val: 'recent'
         }
-      ]
+      ],
+      showMiniMap: false
     }
   },
   watch: {
@@ -434,6 +436,7 @@ export default defineComponent({
         .get(apiUrl)
         .then((result) => {
           this.cafe = result.data
+          this.loading = false
 
           this.cafe.cafe_description = this.cafe.cafe_description
             ? this.cafe.cafe_description.replace('#', '<br>')
@@ -452,9 +455,10 @@ export default defineComponent({
           this.loadReviews(1) // 추후 (cafe_id, 1)로 수정
 
           // 해당카페 모든 커핑노트 호출 (1 page)
-          this.loadCnotes(1) // 추후 (cafe_id, 1)로 수정
+          // this.loadCnotes(1) // 추후 (cafe_id, 1)로 수정
 
-          this.loading = false
+          // 미니맵에 카페의 위치를 표시
+          this.showMiniMap = true
         })
         .catch((err) => {
           console.log(err)
@@ -507,8 +511,7 @@ export default defineComponent({
     },
     // 리뷰 로드
     loadReviews(page) {
-      // json-server
-      // let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4`
+      // let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4` // json-server
       // real-server
       let apiUrl = `${process.env.API}/review/${this.cafeId}?user_id=3&sort=${this.sort}&order=d&page=${page}&limit=4`
       this.$axios
@@ -666,7 +669,12 @@ export default defineComponent({
   // // 리뷰 섹션
   // .review_section {
   // }
-
+  .minimap {
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    // border-radius: $border-radius;
+    // border: 1px solid $grey-4;
+  }
   // // 커핑노트 섹션
   // .cnote_section {
   // }
