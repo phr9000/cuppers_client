@@ -51,10 +51,10 @@
           @unchecked="deSelectCafeKeyword"
         />
       </div>
-      <!-- <div>선택한 키워드 : {{ selectedCoffeeKeywords }}</div>
+      <div>선택한 키워드 : {{ selectedCoffeeKeywords }}</div>
       <div>선택한 추출 방식 : {{ selectedBrewingKeywords }}</div>
       <div>선택한 카페 취향 : {{ selectedCafeKeywords }}</div>
-      <div>선택한 모든 취향 : {{ selectedAll }}</div> -->
+      <div>선택한 모든 취향 : {{ selectedAll }}</div>
 
       <div class="flex flex-center q-py-xl">
         <btn-basic-right
