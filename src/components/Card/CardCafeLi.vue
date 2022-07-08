@@ -49,7 +49,12 @@
       </div>
       <div class="col-4 q-pl-md q-pt-xs">
         <!-- style="max-width: 280px; max-height: 320px" -->
-        <q-img class="thumbnail" :ratio="1" :src="cafe.cafe_img" />
+        <q-img
+          v-if="cafe.cafe_img"
+          class="thumbnail"
+          :ratio="1"
+          :src="cafe.cafe_img"
+        />
         <div
           v-if="distance > -1"
           class="row items-center justify-end q-mt-xs text-grey text-caption"
@@ -135,7 +140,8 @@ export default defineComponent({
     return {}
   },
   computed: {
-    distance() {
+    // 삭제 보류
+    calDistance() {
       try {
         if (this.curLoc) {
           const dist = getDistanceFromLatLng(
@@ -154,6 +160,14 @@ export default defineComponent({
         return -1
       }
       return -1
+    },
+    distance() {
+      const dist = this.cafe.distance
+      if (dist > 5) {
+        return formatNumber(dist, '#,###')
+      } else {
+        return formatNumber(dist, '#,###.#')
+      }
     }
   },
   mounted() {},

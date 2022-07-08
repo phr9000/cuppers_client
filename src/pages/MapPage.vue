@@ -391,10 +391,10 @@ export default defineComponent({
         this.search = search
       } else if (this.search === '') {
         console.log('검색어를 입력하세요')
-        this.$q.dialog({
-          title: 'Error',
-          message: '검색어를 입력하세요.'
-        })
+        // this.$q.dialog({
+        //   title: 'Error',
+        //   message: '검색어를 입력하세요.'
+        // })
         return
       }
 
@@ -420,7 +420,7 @@ export default defineComponent({
 
       // 초기화
       const SORT = this.sort
-      const ORDER = SORT === 'like' ? 'a' : 'd'
+      const ORDER = SORT === 'like' ? 'd' : 'a' // 추천순일 경우 d, 거리순일 경우 a
       const PAGE = 1
       const LIMIT = 5
 
@@ -430,40 +430,42 @@ export default defineComponent({
       // 재검색 버튼 숨기기
       this.researchBtnFade = true
 
-      // 테스트 중심좌표 저장
+      // 중심좌표 저장
       const center = this.map.getCenter()
+      const MAP_CENTER_LAT = center.Ma
+      const MAP_CENTER_LONG = center.La
       this.lastSearchPosition = center
+      console.log('center', center)
 
       this.clearAllMarkers()
 
-      // json-server
-      // let apiUrl = `${process.env.API_LOCAL}/cafeLocations`
-      // if (search !== '*') {
-      //   apiUrl += `?cafe_name_pr_like=${search}`
-      // } else {
-      //   search = ''
-      // }
-      // json-server
-
-      // real-server
-      //http://localhost:3000/api/cafe?user=3&search=커피&lat_min=33.478135&lat_max=37.7&long_min=125.927&long_max=129&current_lat=37.5015764&current_long=127.124833&page=1&limit=3&order=like&sort=d
+      if (this.search !== search) {
+        this.search = search
+      }
       if (search === '*') {
         search = ''
       }
-      let apiUrl = `${process.env.API}/cafe?search=${search}&user=&page=${PAGE}&limit=${LIMIT}&sort=${SORT}&order=${ORDER}&current_lat=${center.La}&current_long=${center.Ma}`
+
+      let CENTER_LAT = ''
+      let CENTER_LONG = ''
+      if (this.searchInMap) {
+        // 지도의 중심
+        CENTER_LAT = MAP_CENTER_LAT
+        CENTER_LONG = MAP_CENTER_LONG
+      } else {
+        // 내위치
+        CENTER_LAT = this.locState.lat
+        CENTER_LONG = this.locState.lng
+      }
+
+      let apiUrl = `${process.env.API}/cafe?search=${search}&user=&page=${PAGE}&limit=${LIMIT}&sort=${SORT}&order=${ORDER}&current_lat=${CENTER_LAT}&current_long=${CENTER_LONG}`
+
+      // console.log(center) console.log(apiUrl)
 
       if (bounds) {
         apiUrl += `&lat_min=${bounds.lat_min}&lat_max=${bounds.lat_max}&long_min=${bounds.long_min}&long_max=${bounds.long_max}`
       } else {
         apiUrl += `&lat_min=&lat_max=&long_min=&long_max=`
-      }
-
-      console.log(center)
-      console.log(apiUrl)
-      // real-server
-
-      if (this.search !== search) {
-        this.search = search
       }
 
       this.loadCafes(apiUrl, bounds)
