@@ -31,6 +31,7 @@
     <div class="title-container">
       <div
         class="title-area-inner"
+        :class="{ 'background-filter': backImg }"
         v-bind:style="{ 'background-image': 'url(' + backgroundImg + ')' }"
       >
         <input
@@ -39,6 +40,35 @@
           class="input-box"
           v-model="cnote.title"
         />
+        <div>
+          <label
+            for="background-file"
+            class="background-img-btn image toastui-editor-toolbar-icons"
+            style="
+              display: inline-block;
+              width: 17.3px;
+              height: 17.5px;
+              z-index: 5;
+              position: absolute;
+              right: 60px;
+              top: 30px;
+              z-index: 5;
+              background-color: white;
+              cursor: pointer;
+              background-position-x: -315.5px;
+              background-position-y: -3.5px;
+              border-radius: 2px;
+              overflow: hidden;
+            "
+          >
+          </label>
+          <input
+            id="background-file"
+            type="file"
+            @change="uploadImg"
+            style="display: none"
+          />
+        </div>
       </div>
     </div>
     <div id="editor" class="editor-">
@@ -71,10 +101,11 @@ export default {
       images: [],
       cafe_id: [3, 4, 5],
       cnote: {
-        user_id: '2',
+        user_id: '3',
         title: '',
         content: ''
-      }
+      },
+      backImg: false
     }
   },
   mounted() {
@@ -125,10 +156,16 @@ export default {
   methods: {
     sendCnote() {
       console.log(this.editor.getHTML())
-      console.log(this.images)
+      this.images.push(this.images)
     },
     getImage() {
       console.log(this.images)
+    },
+    uploadImg(e) {
+      let file = e.target.files
+      let url = URL.createObjectURL(file[0])
+      this.backgroundImg = url
+      this.backImg = true
     }
 
     // cnote post 저장하기
@@ -147,24 +184,43 @@ export default {
     width: 100%;
     .title-area-inner {
       // padding: px;
+      position: relative;
       margin-top: 15px;
       height: 450px;
       border-bottom: 1px solid #eee;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: auto auto;
+      overflow: hidden;
+      &.background-filter {
+        &:after {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.3);
+          content: '';
+          display: block;
+          width: 100%;
+        }
+      }
       @media (max-width: 700px) {
         margin-top: 20px;
         height: 200px;
       }
       @media (max-width: 500px) {
         margin-top: 36px;
-        height: 120px;
+        // height: 120px;
       }
       .input-box {
         position: absolute;
         bottom: 100px;
-        color: #333;
+        z-index: 3;
+        color: #fff;
         font-size: 38px;
         text-align: center;
         transition: all 0.5s;
+        // font-weight: 500;
+        font-family: 'Nanum Myeongjo';
         @media (max-width: 500px) {
           font-size: 18px;
         }
