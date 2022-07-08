@@ -278,8 +278,15 @@
           {{ cafe.review_cnt }}건의 방문자 리뷰
         </div>
         <div class="row items-center q-pr-sm">
-          <btn-basic color="grey-6" label="추천순" size="sm" />
-          <btn-basic color="grey-6" label="최신순" size="sm" />
+          <!-- <btn-basic @click="changeSort('like')" label="추천순" size="sm" />
+          <btn-basic
+            @click="changeSort('recent')"
+            :class="{ 'red-4': sort === 'recent' }"
+            :disabled="sort === 'recent'"
+            label="최신순"
+            size="sm"
+          /> -->
+          <btn-sort :sort_items="sortItems" @change="changeSort" />
         </div>
       </div>
 
@@ -350,7 +357,9 @@ import BtnReview from 'src/components/Button/BtnReview.vue'
 import CardReview from '../components/Card/CardReview.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
 import FacilityItem from 'src/components/Etc/FacilityItem.vue'
+import BtnSort from 'src/components/BtnGroup/BtnSort.vue'
 // import CardCnote from 'src/components/Card/CardCupNote.vue'
+
 import SkeletonCafeDetail from 'src/components/Skeleton/SkeletonCafeDetail.vue'
 
 export default defineComponent({
@@ -366,7 +375,8 @@ export default defineComponent({
     // CardCnote,
     MenuItem,
     FacilityItem,
-    SkeletonCafeDetail
+    SkeletonCafeDetail,
+    BtnSort
   },
   data() {
     return {
@@ -377,7 +387,6 @@ export default defineComponent({
       loading: true,
       menuBrewing: null,
       menuVariation: null,
-      recent_review: {},
       reviewRecent: null,
       reviews: [],
       // cnotes: [],
@@ -386,7 +395,17 @@ export default defineComponent({
       // reviews_per_page: 4
       cafeImages: null,
       menuImages: null,
-      sort: 'recent' // for reviews sort
+      sort: 'recent', // for reviews sort
+      sortItems: [
+        {
+          label: '추천순',
+          val: 'like'
+        },
+        {
+          label: '최신순',
+          val: 'recent'
+        }
+      ]
     }
   },
   watch: {
@@ -482,35 +501,42 @@ export default defineComponent({
           console.log(err)
         })
     },
+    changeSort(val) {
+      this.sort = val
+      this.loadReviews(1)
+    },
+    // 리뷰 로드
     loadReviews(page) {
-      // let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4`
       // json-server
-      let apiUrl = `${process.env.API}/review/${this.cafeId}?user_id=3&sort=${this.sort}&order=d&page=${page}&limit=4` // real-server
+      // let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4`
+      // real-server
+      let apiUrl = `${process.env.API}/review/${this.cafeId}?user_id=3&sort=${this.sort}&order=d&page=${page}&limit=4`
       this.$axios
         .get(apiUrl)
         .then((result) => {
           console.log(result.data)
           if (!this.reviewRecent) {
-            this.reviewRecent = result.data[0]
+            this.reviewRecent = result.data.arr[0]
           }
-          this.reviews = result.data
+          this.reviews = result.data.arr
         })
         .catch((err) => {
           console.log(err)
         })
     },
-    // loadCnotes(page) {
-    //   let apiUrl = `${process.env.API_LOCAL}/cnote` // json-server
-    //   // let apiUrl = `${process.env.API}/cnote` // real-server
-    //   this.$axios
-    //     .get(apiUrl)
-    //     .then((result) => {
-    //       this.cnotes = result.data
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-    // },
+    // 삭제 보류
+    loadCnotes(page) {
+      let apiUrl = `${process.env.API_LOCAL}/cnote` // json-server
+      // let apiUrl = `${process.env.API}/cnote` // real-server
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.cnotes = result.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     clickBranch(cafe_id) {
       this.$router.push({ path: `/cafe/${cafe_id}` })
     }
