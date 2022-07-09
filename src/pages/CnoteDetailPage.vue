@@ -9,15 +9,13 @@
             <input
               type="text"
               placeholder="제목을 입력하세요"
-              v-model="editor.title"
               class="input-box title"
               :readonly="!writeType"
+              v-model="cnote_title"
             />
             <div class="writer-info flex column">
-              <div class="date">{{ editor.created_at }}</div>
-              <div clsss="user" style="margin-right: 15px">
-                {{ editor.user }}
-              </div>
+              <div class="date">{{ created_at }}</div>
+              <div clsss="user" style="margin-right: 15px">{{ user }}</div>
             </div>
           </div>
           <!-- (상세페이지) 좋아요, 북마크 영역 -->
@@ -52,25 +50,20 @@
         <!-- content 영역 -->
         <div class="content-container">
           <div class="content-area">
-            <div class="content-inner">
-              <textarea
-                class="contents"
-                v-model="editor.content"
-                :readonly="!writeType"
-              >
-              </textarea>
-            </div>
+            <div v-html="content"></div>
           </div>
         </div>
         <!-- 유저 소개 영역 -->
         <div class="user-card-container">
           <div class="user-card-inner">
-            <div class="profile-img"></div>
+            <div class="profile-img">
+              <img src="/icons/avatar.jpg" alt="profile 사진" />
+            </div>
             <div class="user-email-area" style="line-height: 24px">
-              test@gmail.com
+              {{ user }}
             </div>
             <div class="desc" style="line-height: 24px; margin-bottom: 10px">
-              여행자의 시선으로, 카페를 기록합니다.
+              {{ user_introduce }}
             </div>
             <div class="follow-btn">
               <button class="btn">+ 팔로우</button>
@@ -122,13 +115,11 @@ export default {
   },
   data() {
     return {
-      editor: {
-        title: '핸드드립을 맛있게 내리는 팁 - 2',
-        user: 'test@gmail.com',
-        created_at: 'Jun 22 2022',
-        content:
-          'Text in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaksText in a pre element\nis displayed in a fixed-width\nifont, and it preserves\nboth  spaces and\niline breaks'
-      },
+      cnote_title: '',
+      user: '',
+      user_introduce: '',
+      created_at: '',
+      content: '',
       cnoteImgs: '',
       writeType: false,
       isLiked: true
@@ -138,15 +129,34 @@ export default {
   mounted() {
     this.getcnoteDetail()
     this.getCnoteImg()
+    this.getUserInfo()
   },
   methods: {
     getcnoteDetail() {
-      let apiUrl = 'http://localhost:3000/api/cnote/detail/7'
+      let apiUrl = 'http://localhost:3000/api/cnote/detail/92'
       this.$axios
         .get(apiUrl)
         .then((result) => {
           this.cnotedetail = result.data
-          console.log(this.cnotedetail)
+          // 데이터베이스에서 받아온 content v-html 에 담아서 사용
+          this.content = this.cnotedetail[0].cnote_content
+          this.cnote_title = this.cnotedetail[0].cnote_title
+          this.created_at = this.cnotedetail[0].created_at.substring(0, 10)
+          this.user_id = this.cnotedetail[0].user_id
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getUserInfo() {
+      let apiUrl = 'http://localhost:3000/api/user/detail/3'
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.userInfo = result.data
+          console.log(this.userInfo[0])
+          this.user = this.userInfo[0].user_email
+          this.user_introduce = this.userInfo[0].user_introduce
         })
         .catch((err) => {
           console.log(err)
@@ -158,7 +168,7 @@ export default {
         .get(apiUrl)
         .then((result) => {
           this.cnoteImgs = result.data
-          console.log(this.cnoteImgs)
+          // console.log(this.cnoteImgs)
         })
         .catch((err) => {
           console.log(err)
@@ -330,8 +340,12 @@ export default {
           height: 50px;
           margin-bottom: 5px;
           border-radius: 50%;
-          border: 1px solid #ccc;
-          background-color: #003333;
+          // border: 1px solid #ccc;
+          // background-color: #003333;
+          overflow: hidden;
+          > img {
+            width: 100%;
+          }
         }
         .follow-btn {
           .btn {
@@ -343,6 +357,9 @@ export default {
         }
       }
     }
+  }
+  .date {
+    font-weight: 600;
   }
 }
 </style>

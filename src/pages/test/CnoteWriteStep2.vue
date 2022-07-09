@@ -47,6 +47,7 @@
           placeholder="제목을 입력하세요"
           class="input-box"
           v-model="cnote.cnote_title"
+          ref="title"
         />
         <div>
           <label
@@ -166,6 +167,7 @@ export default {
         this.cnote.cnote_title === 0
       ) {
         alert('제목을 입력해주세요')
+        this.$refs.title.focus()
         return false
       } else {
         this.$axios
@@ -261,7 +263,6 @@ export default {
       }
       @media (max-width: 500px) {
         margin-top: 36px;
-        // height: 120px;
       }
       .input-box {
         position: absolute;
@@ -401,13 +402,6 @@ export default {
   .public-txt {
     font-size: 12px;
     color: #666;
-    // &.public {
-    //   &:before {
-    //     content: '';
-    //     position: relative;
-    //     margin-left: 6px;
-    //   }
-    // }
   }
 
   // 에디터 style
