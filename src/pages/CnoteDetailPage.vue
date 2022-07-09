@@ -29,13 +29,13 @@
                 :likeit_cnt="cnote.like_cnt"
               />
             </div>
-            <div class="btn_bookmark_wrap">
+            <!-- <div class="btn_bookmark_wrap">
               <btn-book-mark
                 :user_id="cnote.user_id"
                 :cnote_id="cnote.cnote_id"
                 :is_marked="cnote.user_marked"
               />
-            </div>
+            </div> -->
           </div>
           <!-- dim -->
           <div class="dim"></div>
@@ -78,12 +78,12 @@
 <script>
 import { ref } from 'vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
-import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
+// import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
 // swiper
 export default {
   components: {
-    BtnLike,
-    BtnBookMark
+    BtnLike
+    // BtnBookMark
   },
   props: {
     cnote: {
@@ -188,6 +188,8 @@ export default {
     width: 100%;
     // title 영역
     .title-area {
+      font-family: 'Nanum Myeongjo';
+      // font-weight: 600;
       position: relative;
       z-index: 1;
       width: 100%;
@@ -224,7 +226,7 @@ export default {
           }
           &.title {
             left: 0;
-            font-size: 34px;
+            font-size: 38px;
           }
           &.description {
             left: 0;
