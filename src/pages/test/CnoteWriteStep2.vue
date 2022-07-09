@@ -103,7 +103,8 @@ export default {
       cnote: {
         user_id: '3',
         title: '',
-        content: ''
+        content: '',
+        cnote_img: ''
       },
       backImg: false
     }
@@ -161,11 +162,30 @@ export default {
     getImage() {
       console.log(this.images)
     },
-    uploadImg(e) {
+    async uploadImg(e) {
       let file = e.target.files
-      let url = URL.createObjectURL(file[0])
-      this.backgroundImg = url
-      this.backImg = true
+      // let url = URL.createObjectURL(file[0])
+      // this.backgroundImg = url
+      // this.backImg = true
+      const formData = new FormData()
+      const url = 'http://localhost:3000/static/images/'
+      formData.append('image', file[0])
+      const res = await this.$axios
+        .post('http://localhost:3000/api/upload/image', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+        .then((r) => {
+          // console.log(r)
+          // r.data.filename
+          this.backgroundImg = url + r.data.filename
+          this.cnote.cnote_img = r.data.path
+          console.log(this.cnote.cnote_img)
+        })
+      // console.log(res)
+      // return false
     }
 
     // cnote post 저장하기
