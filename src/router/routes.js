@@ -17,6 +17,10 @@ const routes = [
         component: () => import('src/pages/UserProfilePage.vue')
       },
       {
+        path: 'review/write',
+        component: () => import('src/pages/WriteReviewPage.vue')
+      },
+      {
         path: 'reqnewcafe',
         component: () => import('src/pages/ReqNewCafePage.vue')
       },

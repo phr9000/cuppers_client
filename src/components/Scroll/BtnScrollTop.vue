@@ -25,7 +25,7 @@ export default {
       //
       // `position` is an Integer designating the current
       // scroll position in pixels.
-      console.log(position)
+      // console.log(position)
 
       if (position > 300) {
         show.value = true

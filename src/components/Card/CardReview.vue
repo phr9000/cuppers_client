@@ -119,13 +119,7 @@ export default defineComponent({
       }
     }
   },
-  mounted() {
-    // console.log(this.review.reivew_image[0]['thumbnail'])
-    // this.thumbnail = this.review.reivew_image[0]['thumbnail']
-    // this.user_thumbnail_url =
-    // process.env.BASE_URL + this.review.user_thumbnail_url
-    // console.log(this.user_thumbnail_url)
-  },
+  mounted() {},
   methods: {
     cafeNameClick() {
       this.$router.push({ path: `/cafe/${this.review.cafe_id}` })

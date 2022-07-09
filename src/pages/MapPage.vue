@@ -265,8 +265,6 @@ export default defineComponent({
       cafes: [], // 필터링된 카페 리스트
       totalCnt: 0,
       map: null, // 카카오맵 인스턴스
-      // currentLocation: null,
-      // locationLoading: false,
       search: '',
       drawerOpen: false,
       tab: 'search', // 'search', 'mylist',
