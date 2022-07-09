@@ -67,10 +67,6 @@
       <!-- 에디터 내용을 받을 곳  -->
     </div>
   </q-page>
-  // 모달창
-  <div class="q-pa-md q-gutter-sm">
-    <q-btn label="Confirm" color="primary" @click="confirm" />
-  </div>
 </template>
 
 <script>
