@@ -84,14 +84,6 @@ const routes = [
         component: () => import('pages/test/CnoteDetailTest.vue')
       },
       {
-        path: 'cnotewrite1',
-        component: () => import('pages/test/CnoteWriteStep1.vue')
-      },
-      {
-        path: 'cnotewrite2',
-        component: () => import('pages/test/CnoteWriteStep2.vue')
-      },
-      {
         path: 'carduserinfo',
         component: () => import('pages/test/CardUserInfo.vue')
       },

@@ -3,7 +3,15 @@
   <q-page class="editor-container">
     <div class="btn-box">
       <!-- 글 올리기 -->
-      <span class="send-btn" @click="sendCnote()">글 로스팅하기</span>
+
+      <transition name="fade">
+        <span v-if="isWrote" class="send-btn edit" @click="editCnote()"
+          >글이 로스팅 되었습니다</span
+        >
+      </transition>
+      <span v-if="isWriting" class="send-btn" @click="sendCnote()"
+        >글 로스팅하기</span
+      >
       <!-- 공개여부 -->
       <label class="switch">
         <input
@@ -38,35 +46,19 @@
           type="text"
           placeholder="제목을 입력하세요"
           class="input-box"
-          v-model="cnote.title"
+          v-model="cnote.cnote_title"
         />
         <div>
           <label
             for="background-file"
             class="background-img-btn image toastui-editor-toolbar-icons"
-            style="
-              display: inline-block;
-              width: 17.3px;
-              height: 17.5px;
-              z-index: 5;
-              position: absolute;
-              right: 60px;
-              top: 30px;
-              z-index: 5;
-              background-color: white;
-              cursor: pointer;
-              background-position-x: -315.5px;
-              background-position-y: -3.5px;
-              border-radius: 2px;
-              overflow: hidden;
-            "
           >
           </label>
           <input
+            class="back-img-input"
             id="background-file"
             type="file"
             @change="uploadImg"
-            style="display: none"
           />
         </div>
       </div>
@@ -75,6 +67,10 @@
       <!-- 에디터 내용을 받을 곳  -->
     </div>
   </q-page>
+  // 모달창
+  <div class="q-pa-md q-gutter-sm">
+    <q-btn label="Confirm" color="primary" @click="confirm" />
+  </div>
 </template>
 
 <script>
@@ -85,25 +81,37 @@ import 'tui-color-picker/dist/tui-color-picker.css'
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css'
 
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
-// const onUploadImage = async (blob, callback) => {
-//   console.log(blob)
-// }
+
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'App',
   components: {},
+  setup() {
+    const $store = useStore()
+
+    const uid = computed({
+      get: () => $store.state.user.uid
+    })
+
+    return {
+      uid
+    }
+  },
   data() {
     return {
+      // isWriting: true,
+      isWrote: false,
       isPublic: true,
+      isWriting: true,
       editor: null,
       writeType: true,
       backgroundImg: '',
-      images: [],
-      cafe_id: [3, 4, 5],
       cnote: {
-        user_id: '3',
-        title: '',
-        content: '',
+        user_id: '',
+        cnote_title: '',
+        cnote_content: '',
         cnote_img: ''
       },
       backImg: false
@@ -156,17 +164,47 @@ export default {
   },
   methods: {
     sendCnote() {
-      console.log(this.editor.getHTML())
-      this.images.push(this.images)
+      this.cnote.cnote_content = this.editor.getHTML()
+      // store에서 user_id 받음
+      this.cnote.user_id = this.uid
+      if (
+        this.cnote.cnote_title === '' ||
+        this.cnote.cnote_title === null ||
+        this.cnote.cnote_title === 0
+      ) {
+        alert('제목을 입력해주세요')
+        return false
+      } else {
+        this.$axios
+          .post('http://localhost:3000/api/cnote', {
+            cnote: {
+              user_id: this.cnote.user_id,
+              cnote_title: this.cnote.cnote_title,
+              cnote_content: this.cnote.cnote_content,
+              cnote_published: this.isPublic,
+              cnote_img: this.cnote.cnote_img
+            }
+          })
+          .then((response) => {
+            setTimeout(() => {
+              alert('글이 성공적으로 로스팅 되었습니다.')
+              this.$router.push('/cnote/1')
+            }, 700)
+          })
+          .catch((ex) => {
+            alert('로스팅하는데 문제가 생겼습니다.')
+            console.log(ex)
+          })
+      }
+    },
+    editCnote() {
+      alert('내가 작성한 글 보러가기')
     },
     getImage() {
       console.log(this.images)
     },
     async uploadImg(e) {
       let file = e.target.files
-      // let url = URL.createObjectURL(file[0])
-      // this.backgroundImg = url
-      // this.backImg = true
       const formData = new FormData()
       const url = 'http://localhost:3000/static/images/'
       formData.append('image', file[0])
@@ -178,16 +216,12 @@ export default {
           console.log(e)
         })
         .then((r) => {
-          // console.log(r)
-          // r.data.filename
           this.backgroundImg = url + r.data.filename
           this.cnote.cnote_img = r.data.path
           console.log(this.cnote.cnote_img)
         })
-      // console.log(res)
-      // return false
+      this.backImg = true
     }
-
     // cnote post 저장하기
   }
 }
@@ -210,7 +244,7 @@ export default {
       border-bottom: 1px solid #eee;
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: auto auto;
+      // background-size: 100% auto;
       overflow: hidden;
       &.background-filter {
         &:after {
@@ -221,6 +255,9 @@ export default {
           content: '';
           display: block;
           width: 100%;
+        }
+        .input-box {
+          color: #fff;
         }
       }
       @media (max-width: 700px) {
@@ -235,7 +272,7 @@ export default {
         position: absolute;
         bottom: 100px;
         z-index: 3;
-        color: #fff;
+        color: #848484;
         font-size: 38px;
         text-align: center;
         transition: all 0.5s;
@@ -248,6 +285,26 @@ export default {
           padding-bottom: 20px;
         }
       }
+    }
+
+    .background-img-btn {
+      display: inline-block;
+      width: 17.3px;
+      height: 17.5px;
+      z-index: 5;
+      position: absolute;
+      right: 60px;
+      top: 30px;
+      z-index: 5;
+      background-color: white;
+      cursor: pointer;
+      background-position-x: -315.5px;
+      background-position-y: -3.5px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .back-img-input {
+      display: none;
     }
   }
   .btn-box {
@@ -267,6 +324,10 @@ export default {
       color: #666;
       border-radius: 15px;
       border: 1px solid #bbb;
+      &.edit {
+        color: #50a3a4;
+        border: 1px solid #50a3a4;
+      }
     }
     .public-btn {
       font-size: 12px;
@@ -379,6 +440,13 @@ export default {
       overflow: intial;
       height: auto;
     }
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 }
 </style>
