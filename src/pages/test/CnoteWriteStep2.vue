@@ -98,6 +98,7 @@ export default {
   data() {
     return {
       // isWriting: true,
+      images: [],
       isWrote: false,
       isPublic: true,
       isWriting: true,
@@ -143,8 +144,6 @@ export default {
               headers: { 'Content-Type': 'multipart/form-data' }
             })
             .then((r) => {
-              // console.log(r)
-              // console.log(r.data.path)
               this.images.push(r.data.path)
               callback(url + r.data.filename, 'alt text')
             })
@@ -152,8 +151,6 @@ export default {
               // console.log(e)
             })
           // console.log(res.path)
-
-          return false
         }
       }
     })
@@ -201,6 +198,8 @@ export default {
     },
     async uploadImg(e) {
       let file = e.target.files
+      console.log('here')
+      console.log(file)
       const formData = new FormData()
       const url = 'http://localhost:3000/static/images/'
       formData.append('image', file[0])
