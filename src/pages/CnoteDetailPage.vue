@@ -3,7 +3,10 @@
     <div class="cupping-writer-container">
       <!-- editor 영역 -->
       <div class="editor-container">
-        <div class="title-area">
+        <div
+          class="title-area"
+          v-bind:style="{ 'background-image': 'url(' + backgroundImg + ')' }"
+        >
           <!-- title 영역 -->
           <div class="title-area-inner">
             <input
@@ -122,7 +125,8 @@ export default {
       content: '',
       cnoteImgs: '',
       writeType: false,
-      isLiked: true
+      isLiked: true,
+      backgroundImg: ''
     }
   },
   created() {},
@@ -143,6 +147,7 @@ export default {
           this.cnote_title = this.cnotedetail[0].cnote_title
           this.created_at = this.cnotedetail[0].created_at.substring(0, 10)
           this.user_id = this.cnotedetail[0].user_id
+          this.backgroundImg = 'http://' + this.cnotedetail[0].cnote_img
         })
         .catch((err) => {
           console.log(err)
