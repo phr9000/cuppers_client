@@ -1,7 +1,7 @@
 <template>
   <q-page v-if="cafe" class="cafe_detail_page constrain">
     <!-- 카페이름 및 기본버튼들 -->
-    <section class="cafe_title_section column q-px-lg q-pt-lg">
+    <section class="cafe_title_section column q-pl-lg q-pr-md q-pt-lg">
       <div class="col">
         <div class="row items-center">
           <div class="title text-h5 cafe_name q-mb-xs q-mr-sm">
@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-      <!-- 좋아요 가본곳 리뷰수 -->
+      <!-- 좋아요 가본곳 리뷰수 리뷰 쓰기 -->
       <div class="col q-mb-xs">
         <div class="row justify-between">
           <div class="row items-center">
@@ -53,13 +53,25 @@
           </div>
           <div class="row items-end">
             <div>
+              <!-- 리뷰 쓰기 -->
               <btn-basic
-                color="grey-6"
+                to="/review/write"
+                class="btn_show_all bg-grey-2"
+                :rounded="false"
+                icon="note_alt"
+                color="grey-9"
                 label="리뷰 쓰기"
-                icon="edit"
-                size="md"
+                padding="3px 8px "
               />
-              <btn-basic color="grey-6" label="공유" icon="share" size="md" />
+              <!-- 공유 -->
+              <btn-basic
+                class="btn_show_all bg-grey-2"
+                :rounded="false"
+                icon="share"
+                color="grey-9"
+                label="공유"
+                padding="3px 8px "
+              />
             </div>
           </div>
         </div>
