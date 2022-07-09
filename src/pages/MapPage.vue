@@ -16,7 +16,7 @@
           <q-tab name="mylist" icon="list" label="내목록" />
         </q-tabs>
 
-        <!-- tab1: map-search -->
+        <!-- tab1: 검색 map-search -->
         <section
           v-show="tab === 'search'"
           class="section_search column q-py-sm"
@@ -70,16 +70,8 @@
 
             <!-- 정렬 -->
             <div class="q-mt-sm q-mt-md">
-              <div class="row justify-end items-center">
-                <q-tabs
-                  active-color="secondary"
-                  v-model="sort"
-                  dense
-                  class="sort_tabs text-grey-6"
-                >
-                  <q-tab class="tab" name="like" label="추천순" />
-                  <q-tab class="tab" name="dist" label="거리순" />
-                </q-tabs>
+              <div class="row justify-end items-center q-mb-sm">
+                <btn-sort :sort_items="sortItems" @change="changeSort" />
               </div>
             </div>
           </div>
@@ -103,23 +95,41 @@
           </div>
         </section>
 
-        <!-- tab2: map-my-list -->
+        <!-- tab2: 내목록 map-my-list -->
         <section v-show="tab === 'mylist'">
-          <q-item-label header> 마이리스트 </q-item-label>
-          <q-list bordered>
-            <q-item
-              v-for="item in mylist"
-              :key="item.mylist_id"
-              clickable
-              v-ripple
-            >
-              <q-item-section avatar>
-                <q-icon color="primary" name="bluetooth" />
-              </q-item-section>
-
-              <q-item-section>{{ item.mylist_name }}</q-item-section>
-            </q-item>
-          </q-list>
+          <!-- 마이리스트 -->
+          <map-my-list
+            v-if="!currentMyListItem"
+            :items="mylist"
+            @click_item="handleClickMyListItem"
+          />
+          <div v-else>
+            <q-item-label header>
+              <btn-icon
+                :flat="true"
+                size="sm"
+                color="grey-5"
+                icon="arrow_back_ios"
+                @click="currentMyListItem = null"
+              />
+              {{ currentMyListItem.mylist_name }}
+            </q-item-label>
+            <!-- 마이리스트 내부 카페 리스트 (카페 카드) -->
+            <q-list v-if="cafes.length > 0" class="search_result q-mb-sm">
+              <div v-for="cafe in cafes" :key="cafe.cafe_id">
+                <card-cafe-li
+                  :cafe="cafe"
+                  :keywords="cafe.keywords"
+                  :today="cafe.today"
+                  :curLoc="locState"
+                  @click="setTarget(cafe.cafe_id)"
+                />
+              </div>
+            </q-list>
+            <div v-else class="q-my-lg text-grey flex flex-center">
+              <p>검색된 카페가 없습니다.</p>
+            </div>
+          </div>
         </section>
       </q-drawer>
 
@@ -160,6 +170,7 @@
       <!-- 현재위치에서 재검색 -->
       <!-- <div style="">카페이름</div> -->
       <btn-basic
+        v-if="tab === 'search'"
         @click="researchInCurrentPosition"
         class="btn_search_current"
         :class="{ fade: researchBtnFade }"
@@ -168,7 +179,7 @@
         size="lg"
         to="map"
         color="primary"
-        label="현재위치에서 재검색"
+        label="이 지역에서 다시 찾기"
         icon="map"
         padding="4px 18px"
       />
@@ -213,13 +224,22 @@ import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import BtnIcon from 'src/components/Button/BtnIcon.vue'
 import CardCafeMap from 'src/components/Card/CardCafeMap.vue'
 import CardCafeLi from 'src/components/Card/CardCafeLi.vue'
+import BtnSort from 'src/components/Tab/BtnSort.vue'
+import MapMyList from 'src/components/List/MapMyList.vue'
 
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'MapPage',
-  components: { BtnBasic, BtnIcon, CardCafeMap, CardCafeLi },
+  components: {
+    BtnBasic,
+    BtnIcon,
+    CardCafeMap,
+    CardCafeLi,
+    BtnSort,
+    MapMyList
+  },
   setup() {
     const $store = useStore()
 
@@ -242,28 +262,13 @@ export default defineComponent({
   data() {
     return {
       cafesRaw: null, // 현재 불러온 전체 카페 리스트
-      cafes: [
-        // {
-        //   cafe_id: 1,
-        //   cafe_name_pr: '커피앰비언스',
-        //   cafe_name_sc: '',
-        //   cafe_region: '송파',
-        //   cafe_address: '서울 송파구 송이로17길 51',
-        //   cafe_latitude: 37.5015764,
-        //   cafe_longitude: 127.124833,
-        //   cafe_phone: '02-449-9967',
-        //   cafe_description:
-        //     '‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.'
-        //   //latlng: new kakao.maps.LatLng(37.5015764, 127.124833)
-        // }
-      ], // 필터링된 카페 리스트
+      cafes: [], // 필터링된 카페 리스트
       totalCnt: 0,
       map: null, // 카카오맵 인스턴스
-      // currentLocation: null,
-      // locationLoading: false,
       search: '',
       drawerOpen: false,
       tab: 'search', // 'search', 'mylist',
+      currentMyListItem: null,
       searching: false,
       searchInMap: false, // 현지도 내 검색 체크박스
       targetCafe: null,
@@ -275,19 +280,27 @@ export default defineComponent({
       distest: 0, // distance 보정치 테스트출력
       normalImage: null,
       clickImage: null,
-      sort: '', // none or like or dis
-      mylist: []
+      mylist: [],
+      sortItems: [
+        {
+          label: '추천순',
+          val: 'like'
+        },
+        {
+          label: '거리순',
+          val: 'dist'
+        }
+      ],
+      sort: '' // none or like or dis
     }
   },
   computed: {},
   watch: {
-    sort(val) {
-      console.log('chagne sort to: ', val)
-      this.sort = val
-      this.handleClickSearch()
-    },
     tab(val) {
-      if (val === 'mylist') {
+      if (val === 'search') {
+        // init
+        this.currentMyListItem = null
+      } else if (val === 'mylist') {
         this.loadMyList()
       }
     }
@@ -470,6 +483,11 @@ export default defineComponent({
 
       this.loadCafes(apiUrl, bounds)
     },
+    changeSort(val) {
+      console.log('chagne sort to: ', val)
+      this.sort = val
+      this.handleClickSearch()
+    },
     loadCafes(apiUrl, bounds = null) {
       this.$axios
         .get(apiUrl)
@@ -478,18 +496,6 @@ export default defineComponent({
           this.cafes = []
           for (let i = 0; i < result.data.arr.length; i++) {
             const cf = result.data.arr[i]
-
-            // bounds가 있다면 bounds안에 안들어오면 skip // json-server
-            // if (bounds) {
-            //   if (
-            //     cf['cafe_latitude'] < bounds.lat_min ||
-            //     cf['cafe_latitude'] > bounds.lat_max ||
-            //     cf['cafe_longitude'] < bounds.long_min ||
-            //     cf['cafe_longitude'] > bounds.long_max
-            //   ) {
-            //     continue
-            //   }
-            // }
 
             let cafe = {
               ...cf,
@@ -528,7 +534,9 @@ export default defineComponent({
     },
     // 마이리스트 목록 가져오기
     loadMyList() {
-      console.log('loadMyList')
+      this.clearAllMarkers()
+      this.cafes = []
+
       let apiUrl = `${process.env.API}/cafe/mylist/all/${this.uid}` // real-server
       this.$axios
         .get(apiUrl)
@@ -540,6 +548,27 @@ export default defineComponent({
           console.log(err)
         })
     },
+    // 마이리스트 내부 카페 리스트 가져오기
+    handleClickMyListItem(item) {
+      console.log(item)
+      this.currentMyListItem = item
+
+      let apiUrl = `${process.env.API_LOCAL}/mylist/${item.mylist_id}`
+      this.loadCafes(apiUrl)
+    },
+    // loadMyListCafes(mylist_id) {
+    //   console.log('loadMyListCafes', mylist_id)
+    //   let apiUrl = `${process.env.API_LOCAL}/mylist/${mylist_id}` // real-server
+    //   this.$axios
+    //     .get(apiUrl)
+    //     .then((result) => {
+    //       console.log(result.data)
+    //       this.cafes= this.
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // },
     // 현재위치에서 재검색
     researchInCurrentPosition() {
       // 현지도 바운더리 정보 가져오기

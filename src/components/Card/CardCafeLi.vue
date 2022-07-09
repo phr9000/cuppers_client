@@ -174,7 +174,7 @@ export default defineComponent({
   methods: {
     handleCardClick() {
       // 해당 카페 클릭 처리
-      console.log('card clicked. cafe_id: ', this.cafe.cafe_id)
+      // console.log('card clicked. cafe_id: ', this.cafe.cafe_id)
       // this.$router.push(`/cafe/${this.cafe.cafe_id}`)
     }
   }

@@ -2089,5 +2089,113 @@
       "type": "g",
       "cafe_image_url": "http://bwissue.com/files/attach/images/243/259/163/f98081dc093e8643c46661905215329b.jpg"
     }
+  ],
+  "mylist": [
+    {
+      "id": 5,
+      "totalCnt": 1,
+      "arr": [
+        {
+          "cafe_id": 1,
+          "cafe_name_pr": "나무사이로",
+          "cafe_name_sc": "",
+          "cafe_region": "종로",
+          "cafe_address_dong": "(내자동)",
+          "cafe_address": "서울특별시 종로구 사직로8길 21",
+          "cafe_type": "",
+          "cafe_latitude": 37.5761744,
+          "cafe_longitude": 126.9711353,
+          "like_cnt": 44,
+          "user_liked": 0,
+          "review_cnt": 44,
+          "user_beenthere": 0,
+          "keywords": [
+            {
+              "keyword_id": 1,
+              "keyword_name": "커피에 대한 설명"
+            },
+            {
+              "keyword_id": 11,
+              "keyword_name": "내추럴 커피"
+            },
+            {
+              "keyword_id": 12,
+              "keyword_name": "추출도구 선택 가능"
+            },
+            {
+              "keyword_id": 13,
+              "keyword_name": "COE 취급"
+            }
+          ],
+          "opTime": [
+            {
+              "day": "월",
+              "time": "정기휴무"
+            },
+            {
+              "day": "화~토",
+              "time": "11:30 - 21:30 (21:00 라스트오더)"
+            },
+            {
+              "day": "일",
+              "time": "정기휴무"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "totalCnt": 1,
+      "arr": [
+        {
+          "cafe_id": 6,
+          "cafe_name_pr": "디폴트밸류",
+          "cafe_name_sc": "default value",
+          "cafe_region": "서대문",
+          "cafe_address_dong": "(연희동)",
+          "cafe_address": "서울특별시 서대문구 성산로 333",
+          "cafe_type": "",
+          "cafe_latitude": 37.5661525,
+          "cafe_longitude": 126.9273379,
+          "like_cnt": 66,
+          "user_liked": 0,
+          "review_cnt": 66,
+          "user_beenthere": 0,
+          "keywords": [
+            {
+              "keyword_id": 1,
+              "keyword_name": "커피에 대한 설명"
+            },
+            {
+              "keyword_id": 11,
+              "keyword_name": "내추럴 커피"
+            },
+            {
+              "keyword_id": 12,
+              "keyword_name": "추출도구 선택 가능"
+            },
+            {
+              "keyword_id": 13,
+              "keyword_name": "COE 취급"
+            }
+          ],
+          "opTime": [
+            {
+              "day": "월",
+              "time": "정기휴무"
+            },
+            {
+              "day": "화~토",
+              "time": "11:30 - 21:30 (21:00 라스트오더)"
+            },
+            {
+              "day": "일",
+              "time": "정기휴무"
+            }
+          ]
+        }
+      ]
+    }
   ]
 }
