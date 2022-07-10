@@ -10,9 +10,14 @@
         <div class="">
           <div class="row justify-between items-start q-mb-xs">
             <div class="row items-center">
-              <div class="text_title text-left q-mr-sm">
+              <div class="text_title text-left">
                 {{ cafe.cafe_name_pr }}
               </div>
+              <!-- cafe type, region -->
+              <cafe-type
+                :cafe_type="cafe.cafe_type"
+                :cafe_region="cafe.cafe_region"
+              />
             </div>
           </div>
           <div class="btns row justify-start items-center no-wrap q-mb-xs">
@@ -30,17 +35,31 @@
               :review_cnt="cafe.review_cnt"
             />
           </div>
+
           <div class="caption text-caption overflow-hidden">
-            {{ cafe.cafe_description }}
+            <div v-if="cafe.cafe_description">{{ cafe.cafe_description }}</div>
+            <div v-else>
+              <!-- 키워드 -->
+              <div class="info q-mb-xs">
+                <q-icon size="xs" name="tag" class="icon icon_key" />
+                <div class="cafe_keywords_wrap">
+                  <badge-cafe
+                    v-for="keyword in cafe.keywords"
+                    :key="keyword.keyword_name"
+                    :value="keyword.keyword_name"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- 영업시간 -->
         <q-card-section v-if="today" class="q-pa-none">
-          <div class="info q-mb-xs">
+          <div class="info info_today q-mb-xs">
             <q-icon size="xs" name="calendar_today" class="icon icon_cal" />
 
-            <div class="text_caption q-pt-xs">
+            <div class="text q-pt-xs">
               {{ today.day }} :
               {{ today.time }}
             </div>
@@ -57,14 +76,17 @@
         />
         <div
           v-if="distance > -1"
-          class="row items-center justify-end q-mt-xs text-grey text-caption"
+          class="row items-center justify-end q-mt-xs q-pb-md text-grey text-caption"
         >
           <q-icon name="place" />
           <div class="distance">{{ distance }}Km</div>
         </div>
       </div></q-card-section
     >
-    <q-card-section v-if="cafe.keywords" class="q-pa-none">
+    <q-card-section
+      v-if="cafe.cafe_description && cafe.keywords"
+      class="q-pa-none"
+    >
       <!-- 키워드 -->
       <div class="info q-mb-xs">
         <q-icon size="xs" name="tag" class="icon icon_key" />
@@ -85,6 +107,7 @@ import { defineComponent } from 'vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
+import CafeType from 'src/components/Etc/CafeType.vue'
 
 // composables
 import useDistance from 'src/composables/useDistance'
@@ -97,30 +120,14 @@ export default defineComponent({
   components: {
     BtnLike,
     BtnReview,
-    BadgeCafe
+    BadgeCafe,
+    CafeType
   },
   props: {
     cafe: {
       type: Object,
       default: () => {
-        return {
-          cafe_id: 1,
-          cafe_name_pr: '커피앰비언스 (송파구)',
-          cafe_address: '서울 송파구 송이로17길 51',
-          cafe_region: '송파',
-          cafe_address_dong: '(가락동)',
-          cafe_type: '로스터리',
-          cafe_latitude: 37.5015764,
-          cafe_longitude: 127.124833,
-          cafe_description:
-            '‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.',
-          cafe_img:
-            'http://bwissue.com/files/attach/images/243/259/163/5f5e0b133235349e19e997c5bf5f9440.jpg',
-          like_cnt: 114,
-          user_liked: 1,
-          review_cnt: 32,
-          user_beenthere: 0
-        }
+        return null
       }
     },
     today: {
@@ -128,39 +135,39 @@ export default defineComponent({
       default: () => {
         return null
       }
-    },
-    curLoc: {
-      type: Object,
-      default: () => {
-        return null
-      }
     }
+    // curLoc: {
+    //   type: Object,
+    //   default: () => {
+    //     return null
+    //   }
+    // }
   },
   data() {
     return {}
   },
   computed: {
     // 삭제 보류
-    calDistance() {
-      try {
-        if (this.curLoc) {
-          const dist = getDistanceFromLatLng(
-            this.curLoc.lat,
-            this.curLoc.lng,
-            this.cafe.cafe_latitude,
-            this.cafe.cafe_longitude
-          )
-          if (dist > 5) {
-            return formatNumber(dist, '#,###')
-          } else {
-            return formatNumber(dist, '#,###.#')
-          }
-        }
-      } catch {
-        return -1
-      }
-      return -1
-    },
+    // calDistance() {
+    //   try {
+    //     if (this.curLoc) {
+    //       const dist = getDistanceFromLatLng(
+    //         this.curLoc.lat,
+    //         this.curLoc.lng,
+    //         this.cafe.cafe_latitude,
+    //         this.cafe.cafe_longitude
+    //       )
+    //       if (dist > 5) {
+    //         return formatNumber(dist, '#,###')
+    //       } else {
+    //         return formatNumber(dist, '#,###.#')
+    //       }
+    //     }
+    //   } catch {
+    //     return -1
+    //   }
+    //   return -1
+    // },
     distance() {
       const dist = this.cafe.distance
       if (dist > 5) {
@@ -215,7 +222,7 @@ export default defineComponent({
   }
   .caption {
     color: $grey-8;
-    height: 40px;
+    height: 43px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -227,12 +234,20 @@ export default defineComponent({
     display: flex;
     flex-wrap: nowrap;
     align-items: flex-start;
+    &.info_today {
+      align-items: center;
+      .text {
+        color: $grey-7;
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
     .icon {
       // padding-top: 1px;
       padding-right: 4px;
       &.icon_cal {
-        padding-top: 5px;
-        transform: scale(0.85);
+        padding-top: 1px;
+        transform: scale(0.8);
       }
       &.icon_key {
         padding-top: 2px;

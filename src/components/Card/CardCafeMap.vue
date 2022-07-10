@@ -51,7 +51,10 @@
           />
         </div>
       </div>
-      <div class="caption text-caption overflow-hidden">
+      <div
+        v-if="cafe.cafe_description"
+        class="caption text-caption overflow-hidden"
+      >
         {{ cafe.cafe_description }}
       </div>
     </q-card-section>

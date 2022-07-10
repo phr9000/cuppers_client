@@ -27,6 +27,7 @@ export default {
 <style lang="scss" scoped>
 .cafe_type {
   display: inline;
+  padding-left: 4px;
   .icon_cafe_type {
     padding-bottom: 1px;
     padding: 0 2px;

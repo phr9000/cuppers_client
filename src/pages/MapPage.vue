@@ -186,7 +186,7 @@
     </div>
 
     <!-- 테스트 영역 -->
-    <section v-if="true">
+    <section v-if="false">
       <div class="q-ma-xs q-pa-xs custom_test radius_border">
         level: {{ mapLevel }} lastSearchPosition: {{ lastSearchPosition }}
         <br />

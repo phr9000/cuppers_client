@@ -4,7 +4,9 @@
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>card-cafe 카페카드samll (검색결과리스트)</p>
       <div class="row">
-        <div style="width: 382px"><card-cafe-li :today="today" /></div>
+        <div style="width: 382px">
+          <card-cafe-li :cafe="cafe" :today="today" />
+        </div>
       </div>
     </div>
 
@@ -83,13 +85,14 @@ export default defineComponent({
     return {
       cafe: {
         cafe_id: 4,
-        cafe_name_pr: '이월로스터스 송파2호점 (송파구)',
+        cafe_name_pr: '커피 앰비언스',
         cafe_address: '서울 송파구 송이로17길 51',
         cafe_region: '송파',
         cafe_address_dong: '(가락동)',
-        cafe_type: 'r',
+        // cafe_type: 'r',
         cafe_latitude: 37.5015764,
         cafe_longitude: 127.124833,
+        distance: 4.512314,
         cafe_description:
           '‘커피를 커피답게’ 10년차 큐그레이더가 운영하는 호주식 로스터리 카페#한적한 주택가에 위치해 있으며, 카펜터, 아이리스, 헬로다크니스 등 3종의 자체 블렌딩을 비롯해 다양한 싱글오리진 원두 라인업을 갖추고 있다. 핸드드립 커피를 즐기는 이들에게 좋은 평을 받고 있다.',
         cafe_img:

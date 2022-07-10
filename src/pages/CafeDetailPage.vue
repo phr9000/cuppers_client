@@ -529,7 +529,6 @@ export default defineComponent({
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          console.log(result.data)
           if (!this.reviewRecent) {
             this.reviewRecent = result.data.arr[0]
           }

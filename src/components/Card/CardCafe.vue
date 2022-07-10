@@ -10,11 +10,11 @@
       />
     </div>
 
-    <div class="col-7">
+    <div class="col-7 column justify-between">
       <q-card-section class="title_wrap">
         <div class="row justify-between items-start q-mb-xs">
           <div class="row items-center">
-            <div class="title text-left text-h6 q-mr-sm">
+            <div class="title text-left text-h6">
               {{ cafe.cafe_name_pr }}
             </div>
             <!-- cafe type, region -->
@@ -51,7 +51,10 @@
             :review_cnt="cafe.review_cnt"
           />
         </div>
-        <div class="caption text-caption overflow-hidden">
+        <div
+          v-if="cafe.cafe_description"
+          class="caption text-caption overflow-hidden"
+        >
           {{ cafe.cafe_description }}
         </div>
         <q-separator class="q-mt-md" />
