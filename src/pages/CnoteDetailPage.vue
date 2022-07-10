@@ -270,20 +270,25 @@ export default {
       z-index: 101;
       .btn_like_wrap {
         .btn_like {
-          &:hover {
+          ::v-deep &:hover {
+            color: #bdbdbd;
             .icon_fav,
             .likeit_cnt {
-              color: #bdbdbd !important;
+              color: #bdbdbd;
             }
           }
-          .icon_fav {
-            &.colored {
-              color: #bdbdbd !important;
+          ::v-deep .icon_fav {
+            color: #bdbdbd;
+          }
+          ::v-deep .icon_fav {
+            ::v-deep &.colored {
+              color: #bdbdbd;
             }
           }
           .likeit_cnt {
-            &.colored {
-              color: #bdbdbd !important;
+            color: #bdbdbd;
+            ::v-deep &.colored {
+              color: #bdbdbd;
             }
           }
         }
@@ -291,13 +296,13 @@ export default {
     }
     .likeit_wrap {
       &:hover {
-        .icon_fav {
-          color: #bdbdbd !important;
+        ::v-deep .icon_fav {
+          color: #bdbdbd;
         }
       }
 
-      .icon_fav {
-        &.colored {
+      ::v-deep .icon_fav {
+        ::v-deep &.colored {
           color: #bdbdbd !important;
         }
       }
