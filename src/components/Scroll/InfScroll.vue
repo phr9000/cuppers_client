@@ -9,7 +9,6 @@
 export default {
   data() {
     return {
-      // cool: true, // testing..
       active: true
     }
   },
@@ -26,10 +25,6 @@ export default {
   methods: {
     // 화면상에서 관찰대상이 보여질 때 마다 이 콜백 부분이 실행된다.
     callback(entries, observer) {
-      // if (this.cool) {
-      //   console.log('now cooling down.')
-      //   return
-      // }
       if (!this.active) {
         return
       }
@@ -37,11 +32,9 @@ export default {
       entries.forEach((entry) => {
         // Each entry describes an intersection change for one observed
         if (entry.isIntersecting) {
-          this.$emit('entry')
-          // this.cool = true
-          // setTimeout(() => {
-          //   this.cool = false
-          // }, 300)
+          setTimeout(() => {
+            this.$emit('entry')
+          }, 500)
         }
       })
     },
