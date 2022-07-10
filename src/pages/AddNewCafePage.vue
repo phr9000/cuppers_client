@@ -118,7 +118,7 @@
               :key="menu.menu_id"
               :menu_id="menu.menu_id"
               ref="CardAddMenu"
-              :class="{ isLast: true }"
+              class="menuList"
             />
           </div>
         </section>
@@ -273,6 +273,9 @@ export default defineComponent({
   .info-block {
     display: flex;
     justify-content: space-between;
+  }
+  .menuList:last-child {
+    display: none;
   }
 }
 
