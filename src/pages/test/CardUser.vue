@@ -74,7 +74,7 @@ export default {
   text-align: center;
   .user-card-inner {
     padding: 10px 0;
-    padding-top: 25px;
+    padding-top: 20px;
   }
 
   .top {
@@ -98,7 +98,7 @@ export default {
     }
     &:after {
       position: absolute;
-      bottom: -15px;
+      bottom: -11px;
       left: 50%;
       transform: translate(-50%, 0);
       display: block;
@@ -115,7 +115,7 @@ export default {
 
   .bottom {
     .user-info {
-      margin-top: 10px;
+      margin-top: 6px;
       padding: 0 44px;
       display: flex;
       align-items: center;
@@ -123,8 +123,11 @@ export default {
       .box {
         width: 25%;
         padding-top: 10px;
+        > p {
+          margin: 0;
+        }
         .num {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 900;
           color: #474747;
           margin: 0;
@@ -142,10 +145,11 @@ export default {
       align-items: center;
       justify-content: center;
       .btn {
-        padding: 7px 5px;
-        font-weight: 500;
-        width: calc(35% - 10px);
+        padding: 5px 3px;
+        font-weight: bold;
+        width: calc(28% - 10px);
         border-radius: 18px;
+        font-size: 12px;
         cursor: pointer;
         &.follow {
           color: #fff;
@@ -163,8 +167,8 @@ export default {
   .close {
     cursor: pointer;
     position: absolute;
-    top: 3px;
-    right: -11px;
+    top: 0px;
+    right: -14px;
     float: left;
     display: inline-block;
     *display: inline;
@@ -175,7 +179,7 @@ export default {
   }
   .close3:after {
     content: '\00d7';
-    font-size: 30pt;
+    font-size: 23pt;
     line-height: 35px;
   }
 }
