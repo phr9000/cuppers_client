@@ -4,7 +4,9 @@
       <div>
         <span class="text-h6">카페 이미지</span
         ><span class="q-px-sm text-subtitle2 grey-4">{{
-          file ? file.name : '선택된 파일이 없습니다.'
+          this.images.length > 0
+            ? this.images.length + ' / 5'
+            : '선택된 파일이 없습니다'
         }}</span>
       </div>
       <div>
@@ -15,6 +17,7 @@
           id="file"
           type="file"
           ref="files"
+          @click="addImageId"
           @change="imageUpload"
           placeholder="사진 추가"
           accept="/image"
@@ -37,60 +40,48 @@
 </template>
 <script>
 import resizeImageSquare from 'src/composables/image-resize-square'
-import resizeImage from 'src/composables/image-resize'
 
 export default {
   name: 'imageUpload',
 
   data() {
     return {
-      // files: [],
-      // filesPreview: [],
-      // uploadImageIndex: 0
       files: [],
       file: null,
-      images: [
-        {
-          type: '',
-          cafe_image_url: '',
-          thumbnail_url: ''
-        }
-      ]
+      images: []
     }
   },
   methods: {
     imageUpload(event) {
-      const files = event.target.files
-      const file = files[0]
-      console.log(files)
-      console.log(file)
+      const maxImageLength = 5
+      if (this.images.length < maxImageLength) {
+        const files = event.target.files
+        const file = files[0]
+        const id = this.images.length + 1
 
-      let new_image = {
-        type: 'g',
-        cafe_image_url: '',
-        thumbnail_url: ''
+        // 원본 이미지 URL로 바꾸기
+        let new_original_url = URL.createObjectURL(file)
+        console.log(new_original_url)
+
+        // 썸네일 이미지 URL 만들기
+        resizeImageSquare({ file: file, maxSize: 200, square: true })
+          .then((uploadedImage) => {
+            // console.log(uploadedImage)
+            let new_thumbnail_url = URL.createObjectURL(uploadedImage)
+
+            let new_image = {
+              menu_id: id,
+              type: 'g',
+              cafe_image_url: new_original_url,
+              thumbnail_url: new_thumbnail_url
+            }
+            this.images.push(new_image)
+          })
+          .catch((err) => console.error(err))
+        console.log(this.images)
+      } else {
+        alert('이미지는 최대 5개까지 업로드할 수 있습니다')
       }
-      this.images.push(new_image)
-      console.log(this.images)
-
-      resizeImageSquare({ file: file, maxSize: 200, square: true })
-        .then((uploadedImage) => {
-          console.log(uploadedImage)
-          for (let i = 0; i < this.images.length; i++) {
-            let thumb_url = URL.createObjectURL(uploadedImage)
-            this.images[i].thumbnail_url = thumb_url
-          }
-        })
-        .catch((err) => console.error(err))
-
-      resizeImage({ file: file, maxSize: 512 })
-        .then((uploadedImage) => {
-          for (let i = 0; i < this.images.length; i++) {
-            let original_url = URL.createObjectURL(uploadedImage)
-            this.images[i].cafe_image_url = original_url
-          }
-        })
-        .catch((err) => console.error(err))
     }
   }
 }

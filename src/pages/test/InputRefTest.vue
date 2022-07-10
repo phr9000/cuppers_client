@@ -39,7 +39,6 @@ export default {
         all.push(this.$refs.childOfInputs[i].getVal())
       }
       console.log('all: ', all)
-      console.log(this.inputs)
     }
   }
 }

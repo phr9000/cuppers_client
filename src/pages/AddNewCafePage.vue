@@ -21,7 +21,7 @@
           <div class="col-12">
             <q-input
               label="카페이름 *"
-              v-model="cafe_info.cafe_name_pr"
+              v-model="cafe.cafe_name_pr"
               type="text"
               :rules="[(val) => !!val || 'Field is required']"
               class="col-12 input-area"
@@ -31,7 +31,7 @@
         <div class="col-12 q-mx-xl q-mt-xl contents_block">
           <div class="row info-block items-center">
             <q-input
-              v-model="cafe_info.cafe_address"
+              v-model="cafe.cafe_address"
               readonly
               type="text"
               id="address"
@@ -54,7 +54,7 @@
             <div class="col-7">
               <q-input
                 type="text"
-                v-model="cafe_info.cafe_address_detail"
+                v-model="cafe.cafe_address_detail"
                 id="detailAddress"
                 label="상세주소 *"
                 :rules="[(val) => !!val || 'Field is required']"
@@ -63,7 +63,7 @@
             <div class="col-4 q-ml-xs">
               <q-input
                 type="text"
-                v-model="cafe_info.cafe_postalcode"
+                v-model="cafe.cafe_postalcode"
                 label="우편번호 *"
                 :rules="[(val) => !!val || 'Field is required']"
               />
@@ -75,7 +75,7 @@
           <div class="col-12">
             <q-input
               label="대표전화 *"
-              v-model="cafe_info.cafe_phone"
+              v-model="cafe.cafe_phone"
               type="tel"
               mask="### -  #### - ####"
               :rules="[(val) => !!val || 'Field is required']"
@@ -84,12 +84,12 @@
         </div>
         <div class="q-mx-xl q-mt-xl q-my-xl contents_block">
           <div class="col-12">
-            <q-input label="영업시간" v-model="cafe_info.cafe_operation_time" />
+            <q-input label="영업시간" v-model="cafe.cafe_operation_time" />
           </div>
         </div>
         <div class="q-mx-xl q-my-xl contents_block">
           <div class="col-12">
-            <q-input label="웹사이트" v-model="cafe_info.cafe_website" />
+            <q-input label="웹사이트" v-model="cafe.cafe_website" />
           </div>
         </div>
       </div>
@@ -114,7 +114,7 @@
           </div>
           <div>
             <card-add-menu
-              v-for="menu in this.cafe_info.cafe_menu"
+              v-for="menu in this.cafe.cafe_menu"
               :key="menu.menu_id"
               :menu_id="menu.menu_id"
               ref="CardAddMenu"
@@ -169,7 +169,7 @@ export default defineComponent({
   },
   data() {
     return {
-      cafe_info: {
+      cafe: {
         cafe_name_pr: '',
         cafe_phone: '',
         cafe_operation_time: '',
@@ -179,20 +179,33 @@ export default defineComponent({
         cafe_postalcode: '',
         cafe_address_dong: '',
         cafe_menu: []
-      }
+      },
+      images: [],
+      menus: [
+        {
+          menu_id: 1
+        }
+      ]
     }
   },
   methods: {
-    async submitCafeInfo() {
-      console.log('카페 등록: ', this.cafe_info)
-      await this.$axios
-        .post(`${process.env.API}/cafe/cafe`, {
+    // verifyCafeName() {
+    //   let apiUrl = `${process.env.API_LOCAL}/api/`
+    //   this.$axios
+    //     .get(apiUrl)
+    //     .then((result) => console.log(result))
+    //     .catch((err) => console.error(err, '실패!'))
+    // },
+    submitCafeInfo() {
+      console.log('카페 등록: ', this.cafe)
+      this.$axios
+        .post('http://localhost:3000/api/cafe/cafe', {
           cafe: {
-            cafe_info: this.cafe_info
-          },
-          menu: {
-            cafe_menu: this.cafe_info.cafe_menu
+            cafe: this.cafe
           }
+          // menu: {
+          //   cafe_menu: this.cafe_info.cafe_menu
+          // }
         })
         .then((response) => {
           console.log(response, '성공입니다')
@@ -203,23 +216,20 @@ export default defineComponent({
     },
     getPostData(payload) {
       console.log('카페주소: ', payload)
-      this.cafe_info.cafe_address = payload.address
-      this.cafe_info.cafe_address_dong = payload.extraAddress
-      this.cafe_info.cafe_postalcode = payload.postcode
+      this.cafe.cafe_address = payload.address
+      this.cafe.cafe_address_dong = payload.extraAddress
+      this.cafe.cafe_postalcode = payload.postcode
     },
-
-    // 메뉴 추가 버튼 클릭 시 추가되는 메뉴카드
     addBrewingMenu() {
-      let new_menus = [
-        {
-          menu_id: 1
-        }
-      ]
-      // for (let i = 0; i < new_menus.length; i++) {
-      //   new_menus.push(i)
-      // }
-      console.log(new_menus)
+      console.log(this.menus.length)
+      let all = []
+      for (let i = 0; i < this.menus.length; i++) {
+        all.push(this.$refs.CardAddMenu[i].sendBrewing())
+        console.log(all)
+        console.log(this.menus)
+      }
     }
+    // 메뉴 추가 버튼 클릭 시 추가되는 메뉴카드
   }
 })
 </script>
