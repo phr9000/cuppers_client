@@ -72,6 +72,10 @@ const routes = [
         component: () => import('pages/test/CardTest2.vue')
       },
       {
+        path: 'card3',
+        component: () => import('pages/test/CardTest3.vue')
+      },
+      {
         path: 'modal',
         component: () => import('pages/test/ModalTest.vue')
       },
@@ -98,10 +102,6 @@ const routes = [
       {
         path: 'childref',
         component: () => import('pages/test/ChildRefTest.vue')
-      },
-      {
-        path: 'usercard',
-        component: () => import('pages/test/CardUser.vue')
       }
     ]
   },

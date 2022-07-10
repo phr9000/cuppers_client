@@ -1,7 +1,7 @@
 <template>
   <div v-if="review" class="card_review_container">
     <div class="user_info row items-center">
-      <btn-avatar :url="user_thumbnail_url" />
+      <btn-avatar :url="review.user_thumbnail_url" />
       <div class="q-ml-sm user_name">{{ review.user_nickname }}</div>
     </div>
     <q-card class="card_review" bordered flat>
@@ -80,10 +80,7 @@ export default defineComponent({
     }
   },
   data() {
-    return {
-      thumbnail: '',
-      user_thumbnail_url: ''
-    }
+    return {}
   },
   computed: {
     createDate() {
