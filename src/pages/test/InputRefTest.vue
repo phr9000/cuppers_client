@@ -32,6 +32,7 @@ export default {
       this.inputs.push({
         id: id
       })
+      console.log(this.inputs)
     },
     getAllInputValues() {
       let all = []

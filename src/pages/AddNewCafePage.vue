@@ -114,10 +114,11 @@
           </div>
           <div>
             <card-add-menu
-              v-for="menu in this.cafe.cafe_menu"
+              v-for="menu in menus"
               :key="menu.menu_id"
               :menu_id="menu.menu_id"
               ref="CardAddMenu"
+              :class="{ isLast: true }"
             />
           </div>
         </section>
@@ -177,16 +178,18 @@ export default defineComponent({
         cafe_address: '',
         cafe_address_detail: '',
         cafe_postalcode: '',
-        cafe_address_dong: '',
-        cafe_menu: []
+        cafe_address_dong: ''
       },
       images: [],
-      menus: [
-        {
-          menu_id: 1
-        }
-      ]
+      menus: []
     }
+  },
+  mounted() {
+    const id = this.menus.length + 1
+    this.menus.push({
+      menu_id: id
+    })
+    console.log(this.menus)
   },
   methods: {
     // verifyCafeName() {
@@ -221,15 +224,14 @@ export default defineComponent({
       this.cafe.cafe_postalcode = payload.postcode
     },
     addBrewingMenu() {
-      console.log(this.menus.length)
-      let all = []
+      let menu_list = []
       for (let i = 0; i < this.menus.length; i++) {
-        all.push(this.$refs.CardAddMenu[i].sendBrewing())
-        console.log(all)
-        console.log(this.menus)
+        menu_list.push(this.$refs.CardAddMenu[i].sendBrewing())
       }
+      console.log(menu_list)
+      const id = this.menus.length + 1
+      this.menus.push({ menu_id: id })
     }
-    // 메뉴 추가 버튼 클릭 시 추가되는 메뉴카드
   }
 })
 </script>
