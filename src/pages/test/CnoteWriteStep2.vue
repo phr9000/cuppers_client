@@ -203,7 +203,7 @@ export default {
       console.log('here')
       console.log(file)
       const formData = new FormData()
-      const url = 'http://localhost:3000/static/images/'
+      const url = 'static/images/'
       formData.append('image', file[0])
       const res = await this.$axios
         .post('http://localhost:3000/api/upload/image', formData, {
@@ -214,7 +214,7 @@ export default {
         })
         .then((r) => {
           this.backgroundImg = url + r.data.filename
-          this.cnote.cnote_img = r.data.path
+          this.cnote.cnote_img = url + r.data.filename
           console.log(this.cnote.cnote_img)
         })
       this.backImg = true
