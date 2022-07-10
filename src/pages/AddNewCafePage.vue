@@ -192,13 +192,16 @@ export default defineComponent({
     console.log(this.menus)
   },
   methods: {
-    // verifyCafeName() {
-    //   let apiUrl = `${process.env.API_LOCAL}/api/`
-    //   this.$axios
-    //     .get(apiUrl)
-    //     .then((result) => console.log(result))
-    //     .catch((err) => console.error(err, '실패!'))
-    // },
+    verifyCafeName() {
+      this.$axios
+        .post('http:localhost:3000/api/cafe/checkname', {
+          param: {
+            cafe_name_pr: this.cafe_name_pr
+          }
+        })
+        .then((result) => console.log('성공!', result))
+        .catch((err) => console.error('실패!', err))
+    },
     submitCafeInfo() {
       console.log('카페 등록: ', this.cafe)
       this.$axios

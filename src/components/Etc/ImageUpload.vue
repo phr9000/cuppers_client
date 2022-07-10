@@ -17,8 +17,7 @@
           id="file"
           type="file"
           ref="files"
-          @click="addImageId"
-          @change="imageUpload"
+          @change="uploadImage"
           placeholder="사진 추가"
           accept="/image"
           multiple
@@ -52,9 +51,10 @@ export default {
     }
   },
   methods: {
-    imageUpload(event) {
+    uploadImage(event) {
       const maxImageLength = 5
       if (this.images.length < maxImageLength) {
+        const url = 'http://localhost:3000/cafe/images'
         const files = event.target.files
         const file = files[0]
         const id = this.images.length + 1
@@ -75,6 +75,13 @@ export default {
               cafe_image_url: new_original_url,
               thumbnail_url: new_thumbnail_url
             }
+
+            // DB에 imageUpload
+            this.$axios
+              .post(url, new_image)
+              .then((response) => console.log('성공입니다', response))
+              .catch((err) => console.error('실패입니다', err))
+
             this.images.push(new_image)
           })
           .catch((err) => console.error(err))
@@ -82,7 +89,8 @@ export default {
       } else {
         alert('이미지는 최대 5개까지 업로드할 수 있습니다')
       }
-    }
+    },
+    getImage() {}
   }
 }
 </script>

@@ -82,6 +82,9 @@ export default {
     sendVariation() {
       this.new_menu.menu_type = 'va'
       return this.new_menu
+    },
+    deleteCard() {
+      console.log('!')
     }
   }
 }
