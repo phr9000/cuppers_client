@@ -4,11 +4,6 @@
     <div class="btn-box">
       <!-- 글 올리기 -->
 
-      <transition name="fade">
-        <span v-if="isWrote" class="send-btn edit" @click="editCnote()"
-          >글이 로스팅 되었습니다</span
-        >
-      </transition>
       <span v-if="isWriting" class="send-btn" @click="sendCnote()"
         >글 로스팅하기</span
       >
@@ -149,10 +144,7 @@ export default {
               this.images.push(r.data.path)
               callback(url + r.data.filename, 'alt text')
             })
-            .catch((e) => {
-              // console.log(e)
-            })
-          // console.log(res.path)
+            .catch((e) => {})
         }
       }
     })
@@ -211,9 +203,6 @@ export default {
           console.log(err)
         })
     },
-    editCnote() {
-      alert('내가 작성한 글 보러가기')
-    },
     getImage() {
       console.log(this.images)
     },
@@ -222,7 +211,7 @@ export default {
       console.log('here')
       console.log(file)
       const formData = new FormData()
-      const url = 'static/images/'
+      const url = 'http://localhost:3000/static/images/'
       formData.append('image', file[0])
       const res = await this.$axios
         .post('http://localhost:3000/api/upload/image', formData, {
