@@ -1,5 +1,8 @@
 export default function () {
   return {
-    uid: 3
+    user: {
+      uid: 0,
+      thumbUrl: '/icons/avatar_default.jpg'
+    }
   }
 }

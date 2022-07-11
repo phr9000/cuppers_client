@@ -13,6 +13,10 @@ const routes = [
         component: () => import('src/pages/CoffeeSNSPage.vue')
       },
       {
+        path: 'my',
+        component: () => import('src/pages/MyPage.vue')
+      },
+      {
         path: 'profile',
         component: () => import('src/pages/UserProfilePage.vue')
       },

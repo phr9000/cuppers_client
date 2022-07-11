@@ -1,3 +1,3 @@
-export function setUid(state, uid) {
-  state.uid = uid
+export function setUser(state, user) {
+  state.user = user
 }

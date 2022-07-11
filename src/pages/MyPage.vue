@@ -1,14 +1,18 @@
 <template>
-  <q-btn @click="clickMyAvatar" round size="sm" class="q-my-sm">
-    <q-avatar size="md"> <img :src="user.thumbUrl" /> </q-avatar
-  ></q-btn>
+  <q-page class="flex flex-center">
+    {{ title }}
+    <br />
+    {{ user }}
+  </q-page>
 </template>
+
 <script>
 import { defineComponent } from 'vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
+  name: 'MyProfilePage',
   setup() {
     const $store = useStore()
 
@@ -23,10 +27,12 @@ export default defineComponent({
       user
     }
   },
-  methods: {
-    clickMyAvatar() {
-      this.$router.push('/my')
+  components: {},
+  data() {
+    return {
+      title: 'my page'
     }
-  }
+  },
+  mounted() {}
 })
 </script>

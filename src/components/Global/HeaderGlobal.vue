@@ -27,7 +27,7 @@
       <q-btn to="/sns" class="q-mr-md" flat color="primary" label="커피SNS" />
       <div>
         <btn-req-new-cafe to="/newcafe" />
-        <btn-my-avatar to="/profile" />
+        <btn-my-avatar />
       </div>
     </q-toolbar>
   </q-header>

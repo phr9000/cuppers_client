@@ -1,7 +1,7 @@
 <template>
   <q-btn @click="clickAvatar" round size="sm" class="q-my-sm">
     <q-avatar size="md">
-      <img :src="url" />
+      <img :src="calUrl" />
     </q-avatar>
   </q-btn>
 </template>
@@ -15,7 +15,12 @@ export default defineComponent({
     },
     url: {
       type: String,
-      default: '/icons/avatar.jpg'
+      default: 'images/avatar/1/thumb.jpg'
+    }
+  },
+  computed: {
+    calUrl() {
+      return `${process.env.STATIC}/${this.url}`
     }
   },
   methods: {
