@@ -216,11 +216,44 @@ export default defineComponent({
       this.$axios
         .post('http://localhost:3000/api/cafe', {
           cafe: {
-            cafe: this.cafe
-          }
-          // menu: {
-          //   cafe_menu: this.cafe_info.cafe_menu
-          // }
+            cafe_name_pr: 'Cafe Muirhead',
+            cafe_name_sc: '',
+            cafe_address: 'Huangjinchengdao, Changning, Shanghai',
+            cafe_region: 'Gubei',
+            cafe_latitude: null,
+            cafe_longitude: null,
+            cafe_img: '/test/url'
+          },
+          images: [
+            {
+              type: 'g',
+              cafe_image_url: '/test/url/g',
+              thumbnail_url: '/test/url/thumb/g'
+            },
+            {
+              type: 'm',
+              cafe_image_url: '/test/url/m',
+              thumbnail_url: '/test/url/thumb/m'
+            }
+          ],
+          menus: [
+            {
+              menu_name: 'Blend 1',
+              menu_price_hot: 9000,
+              menu_price_ice: null,
+              menu_type: 'br',
+              menu_aromanote: 'dark chocolate',
+              is_signature: 1
+            },
+            {
+              menu_name: 'Blend 2',
+              menu_price_hot: 9500,
+              menu_price_ice: null,
+              menu_type: 'br',
+              menu_aromanote: 'tangerine',
+              is_signature: 0
+            }
+          ]
         })
         .then((response) => {
           console.log(response, '성공입니다')
