@@ -5,7 +5,7 @@
   >
     <div class="row flex justify-end">
       <!-- CardMenu 제거 -->
-      <btn-icon size="xs" icon="close" color="red" />
+      <btn-icon @click="deleteCard" size="xs" icon="close" color="red" />
     </div>
     <div class="row flex justify-between">
       <q-input
@@ -36,7 +36,7 @@
       />
     </div>
     <div>
-      <div v-if="new_menu.menu_type === 'br'">
+      <div v-if="menu_type === 'br'">
         <!-- Brewing // Variation-->
         <q-input
           v-model="new_menu.menu_aromanote"
@@ -58,6 +58,10 @@ export default {
     menu_id: {
       type: Number,
       required: true
+    },
+    menu_type: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -75,16 +79,13 @@ export default {
   },
   methods: {
     // 부모 컴포넌트 AddNewCafePage의 메뉴 추가 버튼과 연결된 메소드
-    sendBrewing() {
+    sendMenu() {
       this.new_menu.menu_type = 'br'
       return this.new_menu
     },
-    sendVariation() {
-      this.new_menu.menu_type = 'va'
-      return this.new_menu
-    },
-    deleteCard() {
-      console.log('!')
+    deleteCard(menu_id) {
+      console.log(this.menu_id)
+      this.$emit('deleteCard', this.menu_id)
     }
   }
 }

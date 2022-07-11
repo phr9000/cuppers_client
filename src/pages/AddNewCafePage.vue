@@ -114,19 +114,20 @@
           </div>
           <div>
             <card-add-menu
-              v-for="menu in menus"
+              v-for="menu in onlyBrewing"
               :key="menu.menu_id"
               :menu_id="menu.menu_id"
+              :menu_type="menu.menu_type"
+              @deleteCard="deleteCard"
               ref="CardAddMenu"
-              class="menuList"
             />
           </div>
         </section>
         <section class="q-my-xl">
-          <!-- <div class="flex justify-between q-mx-xl">
-            <span class="text-h6">Variation Coffee</span> -->
-          <!-- <btn-basic
-              @click="addvariationMenu"
+          <div class="flex justify-between q-mx-xl">
+            <span class="text-h6">Variation Coffee</span>
+            <btn-basic
+              @click="addVariationMenu"
               size="sm"
               label="메뉴 추가"
               color="primary"
@@ -135,8 +136,14 @@
             />
           </div>
           <div>
-            <card-add-menu ref="CardAddMenu" />
-          </div> -->
+            <card-add-menu
+              v-for="menu in onlyVariation"
+              :key="menu.menu_id"
+              :menu_id="menu.menu_id"
+              :menu_type="menu.menu_type"
+              ref="CardAddMenu"
+            />
+          </div>
         </section>
       </div>
     </section>
@@ -184,41 +191,42 @@ export default defineComponent({
       menus: []
     }
   },
-  mounted() {
-    const id = this.menus.length + 1
-    this.menus.push({
-      menu_id: id
-    })
-    console.log(this.menus)
-  },
   methods: {
     verifyCafeName() {
-      this.$axios
-        .post('http:localhost:3000/api/cafe/checkname', {
-          param: {
-            cafe_name_pr: this.cafe_name_pr
-          }
-        })
-        .then((result) => console.log('성공!', result))
-        .catch((err) => console.error('실패!', err))
+      // this.$axios
+      //   .post('http:localhost:3000/api/cafe/checkname', {
+      //     param: {
+      //       cafe_name_pr: this.cafe_name_pr
+      //     }
+      //   })
+      //   .then((result) => console.log('성공!', result))
+      //   .catch((err) => console.error('실패!', err))
     },
     submitCafeInfo() {
+      // 카페 등록하기
       console.log('카페 등록: ', this.cafe)
-      this.$axios
-        .post('http://localhost:3000/api/cafe/cafe', {
-          cafe: {
-            cafe: this.cafe
-          }
-          // menu: {
-          //   cafe_menu: this.cafe_info.cafe_menu
-          // }
-        })
-        .then((response) => {
-          console.log(response, '성공입니다')
-        })
-        .catch((err) => {
-          console.error(err, '실패입니다')
-        })
+
+      // 메뉴 등록하기
+      let menus = []
+      for (let i = 0; i < this.menus.length; i++) {
+        menus.push(this.$refs.CardAddMenu[i].sendMenu())
+      }
+      console.log('메뉴 등록: ', menus)
+      // this.$axios
+      //   .post('http://localhost:3000/api/cafe/cafe', {
+      //     cafe: {
+      //       cafe: this.cafe
+      //     }
+      //     // menu: {
+      //     //   cafe_menu: this.cafe_info.cafe_menu
+      //     // }
+      //   })
+      //   .then((response) => {
+      //     console.log(response, '성공입니다')
+      //   })
+      //   .catch((err) => {
+      //     console.error(err, '실패입니다')
+      //   })
     },
     getPostData(payload) {
       console.log('카페주소: ', payload)
@@ -227,13 +235,26 @@ export default defineComponent({
       this.cafe.cafe_postalcode = payload.postcode
     },
     addBrewingMenu() {
-      let menu_list = []
-      for (let i = 0; i < this.menus.length; i++) {
-        menu_list.push(this.$refs.CardAddMenu[i].sendBrewing())
-      }
-      console.log(menu_list)
       const id = this.menus.length + 1
-      this.menus.push({ menu_id: id })
+      this.menus.push({ menu_id: id, menu_type: 'br' })
+      console.log(this.menus)
+    },
+    addVariationMenu() {
+      const id = this.menus.length + 1
+      this.menus.push({ menu_id: id, menu_type: 'va' })
+      console.log(this.menus)
+    },
+    deleteCard(menu_id) {
+      console.log(menu_id)
+      this.menus = this.menus.filter((menu) => menu.menu_id !== menu_id)
+    }
+  },
+  computed: {
+    onlyBrewing() {
+      return this.menus.filter((menus) => menus.menu_type === 'br')
+    },
+    onlyVariation() {
+      return this.menus.filter((menus) => menus.menu_type === 'va')
     }
   }
 })
@@ -276,9 +297,6 @@ export default defineComponent({
   .info-block {
     display: flex;
     justify-content: space-between;
-  }
-  .menuList:last-child {
-    display: none;
   }
 }
 

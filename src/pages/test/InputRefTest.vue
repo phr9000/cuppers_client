@@ -5,7 +5,9 @@
       v-for="item in inputs"
       :key="item.id"
       :id="item.id"
+      :type="item.type"
       ref="childOfInputs"
+      @delVal="delVal"
     />
     <q-btn @click="getAllInputValues" label="get all Input Values" />
   </div>
@@ -21,7 +23,8 @@ export default {
     return {
       inputs: [
         {
-          id: 1
+          id: 1,
+          type: 1
         }
       ]
     }
@@ -29,8 +32,10 @@ export default {
   methods: {
     addInput() {
       const id = this.inputs.length + 1
+      const type = this.inputs.length + 1
       this.inputs.push({
-        id: id
+        id: id,
+        type: type
       })
       console.log(this.inputs)
     },
@@ -40,6 +45,10 @@ export default {
         all.push(this.$refs.childOfInputs[i].getVal())
       }
       console.log('all: ', all)
+    },
+    delVal(id) {
+      this.inputs = this.inputs.filter((input) => input.id !== id)
+      console.log(this.inputs)
     }
   }
 }
