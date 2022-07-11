@@ -1582,6 +1582,26 @@
       },
       "apiId": "cafe",
       "id": 19
+    },
+    {
+      "apiId": "cafe",
+      "id": 20
+    },
+    {
+      "cafe_info": "cafe_info",
+      "apiId": "cafe",
+      "id": 21
+    },
+    {
+      "cafe_name_pr": "Cafe Muirhead",
+      "cafe_name_sc": "",
+      "cafe_address": "Huangjinchengdao, Changning, Shanghai",
+      "cafe_region": "Gubei",
+      "cafe_latitude": null,
+      "cafe_longitude": null,
+      "cafe_img": "/test/url",
+      "apiId": "cafe",
+      "id": 22
     }
   ],
   "review": [

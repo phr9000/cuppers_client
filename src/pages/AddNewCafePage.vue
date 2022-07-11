@@ -141,6 +141,7 @@
               :key="menu.menu_id"
               :menu_id="menu.menu_id"
               :menu_type="menu.menu_type"
+              @deleteCard="deleteCard"
               ref="CardAddMenu"
             />
           </div>
@@ -212,21 +213,21 @@ export default defineComponent({
         menus.push(this.$refs.CardAddMenu[i].sendMenu())
       }
       console.log('메뉴 등록: ', menus)
-      // this.$axios
-      //   .post('http://localhost:3000/api/cafe/cafe', {
-      //     cafe: {
-      //       cafe: this.cafe
-      //     }
-      //     // menu: {
-      //     //   cafe_menu: this.cafe_info.cafe_menu
-      //     // }
-      //   })
-      //   .then((response) => {
-      //     console.log(response, '성공입니다')
-      //   })
-      //   .catch((err) => {
-      //     console.error(err, '실패입니다')
-      //   })
+      this.$axios
+        .post('http://localhost:3000/api/cafe', {
+          cafe: {
+            cafe: this.cafe
+          }
+          // menu: {
+          //   cafe_menu: this.cafe_info.cafe_menu
+          // }
+        })
+        .then((response) => {
+          console.log(response, '성공입니다')
+        })
+        .catch((err) => {
+          console.error(err, '실패입니다')
+        })
     },
     getPostData(payload) {
       console.log('카페주소: ', payload)
