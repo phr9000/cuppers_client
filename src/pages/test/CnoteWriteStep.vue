@@ -4,11 +4,6 @@
     <div class="btn-box">
       <!-- 글 올리기 -->
 
-      <transition name="fade">
-        <span v-if="isWrote" class="send-btn edit" @click="editCnote()"
-          >글이 로스팅 되었습니다</span
-        >
-      </transition>
       <span v-if="isWriting" class="send-btn" @click="sendCnote()"
         >글 로스팅하기</span
       >
@@ -112,7 +107,8 @@ export default {
         cnote_content: '',
         cnote_img: ''
       },
-      backImg: false
+      backImg: false,
+      cnote_id: ''
     }
   },
   mounted() {
@@ -148,10 +144,7 @@ export default {
               this.images.push(r.data.path)
               callback(url + r.data.filename, 'alt text')
             })
-            .catch((e) => {
-              // console.log(e)
-            })
-          // console.log(res.path)
+            .catch((e) => {})
         }
       }
     })
@@ -181,10 +174,14 @@ export default {
             }
           })
           .then((response) => {
-            setTimeout(() => {
-              alert('글이 성공적으로 로스팅 되었습니다.')
-              this.$router.push('/cnote/1')
-            }, 700)
+            console.log(response)
+            // setTimeout(() => {
+            //   this.getcnoteId()
+            //   this.cnote_id = localStorage.getItem(cnote_id)
+            //   // alert(this.cnote_id)
+            //   // alert('글이 성공적으로 로스팅 되었습니다.')
+            //   // this.$router.push('/cnote/${this.cnote_id}')
+            // }, 700)
           })
           .catch((ex) => {
             alert('로스팅하는데 문제가 생겼습니다.')
@@ -192,9 +189,21 @@ export default {
           })
       }
     },
-    editCnote() {
-      alert('내가 작성한 글 보러가기')
-    },
+    // getcnoteId() {
+    //   let apiUrl =
+    //     'http://localhost:3000/api/cnote/user_cnote_id/${this.cnote.user_id}'
+    //   this.$axios
+    //     .get(apiUrl)
+    //     .then((result) => {
+    //       this.cnote_id = result.data[0].cnote_id
+    //       localStorage.setItem('cnote_id', this.cnote_id)
+    //       // console.log(this.cnote_id)
+    //       localStorage.setItem('cnote_id', this.cnote_id)
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // },
     getImage() {
       console.log(this.images)
     },
@@ -203,7 +212,7 @@ export default {
       console.log('here')
       console.log(file)
       const formData = new FormData()
-      const url = 'static/images/'
+      const url = 'http://localhost:3000/static/images/'
       formData.append('image', file[0])
       const res = await this.$axios
         .post('http://localhost:3000/api/upload/image', formData, {

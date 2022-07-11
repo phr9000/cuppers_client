@@ -46,7 +46,7 @@ const routes = [
       },
       {
         path: 'cnote/write',
-        component: () => import('src/pages/test/CnoteWriteStep2.vue')
+        component: () => import('src/pages/test/CnoteWriteStep.vue')
       }
     ]
   },
