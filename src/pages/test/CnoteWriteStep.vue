@@ -174,13 +174,14 @@ export default {
             }
           })
           .then((response) => {
-            setTimeout(() => {
-              this.getcnoteId()
-              this.cnote_id = localStorage.getItem(cnote_id)
-              // alert(this.cnote_id)
-              // alert('글이 성공적으로 로스팅 되었습니다.')
-              // this.$router.push('/cnote/${this.cnote_id}')
-            }, 700)
+            console.log(response)
+            // setTimeout(() => {
+            //   this.getcnoteId()
+            //   this.cnote_id = localStorage.getItem(cnote_id)
+            //   // alert(this.cnote_id)
+            //   // alert('글이 성공적으로 로스팅 되었습니다.')
+            //   // this.$router.push('/cnote/${this.cnote_id}')
+            // }, 700)
           })
           .catch((ex) => {
             alert('로스팅하는데 문제가 생겼습니다.')
@@ -188,21 +189,21 @@ export default {
           })
       }
     },
-    getcnoteId() {
-      let apiUrl =
-        'http://localhost:3000/api/cnote/user_cnote_id/${this.cnote.user_id}'
-      this.$axios
-        .get(apiUrl)
-        .then((result) => {
-          this.cnote_id = result.data[0].cnote_id
-          localStorage.setItem('cnote_id', this.cnote_id)
-          // console.log(this.cnote_id)
-          localStorage.setItem('cnote_id', this.cnote_id)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
+    // getcnoteId() {
+    //   let apiUrl =
+    //     'http://localhost:3000/api/cnote/user_cnote_id/${this.cnote.user_id}'
+    //   this.$axios
+    //     .get(apiUrl)
+    //     .then((result) => {
+    //       this.cnote_id = result.data[0].cnote_id
+    //       localStorage.setItem('cnote_id', this.cnote_id)
+    //       // console.log(this.cnote_id)
+    //       localStorage.setItem('cnote_id', this.cnote_id)
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // },
     getImage() {
       console.log(this.images)
     },
