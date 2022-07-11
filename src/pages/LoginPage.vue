@@ -6,7 +6,7 @@
         <q-label>uid</q-label
         ><q-input v-model="uid" dense class="q-mb-sm"></q-input>
       </div>
-      <div><button @click="login">카카오 로그인</button></div>
+      <div><button @click="login">입력한 uid로 로그인</button></div>
       <div v-if="user">logged user: {{ user }}</div>
     </div>
   </q-page>
