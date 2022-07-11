@@ -42,13 +42,11 @@
 
             <!-- 리뷰수 -->
             <div>
-              <!-- <a href="#review_section"> $route.fullPath 와 호환되지 않아 새로고침 되는 문제 때문에 -->
               <btn-review
                 class="btn_review"
                 :cafe_id="cafe.cafe_id"
                 :review_cnt="cafe.review_cnt"
               />
-              <!-- </a> -->
             </div>
           </div>
           <div class="row items-end">
@@ -127,7 +125,7 @@
                 </div>
 
                 <!-- 영업시간 -->
-                <div class="info q-mb-xs">
+                <div v-if="cafe.opTime.length > 0" class="info q-mb-xs">
                   <q-icon
                     size="xs"
                     name="calendar_today"
@@ -145,46 +143,63 @@
                 </div>
 
                 <!-- 시설정보 -->
-                <div class="info q-mb-xs">
-                  <q-icon size="xs" name="info" class="icon q-pr-xs" />
-                  <div class="text_subtitle1">시설 정보</div>
+                <div v-if="cafeFacility">
+                  <div class="info q-mb-xs">
+                    <q-icon size="xs" name="info" class="icon q-pr-xs" />
+                    <div class="text_subtitle1">시설 정보</div>
+                  </div>
+                  <div class="row items-center q-pl-lg q-pb-sm">
+                    <facility-item
+                      class="q-pr-sm"
+                      v-for="item in cafeFacility"
+                      :key="item.name"
+                      :name="item.name"
+                      :icon="item.icon"
+                    />
+                  </div>
                 </div>
-                <div class="row items-center q-pl-lg q-pb-sm">
-                  <facility-item
-                    class="q-pr-sm"
-                    v-for="item in cafeFacility"
-                    :key="item.name"
-                    :name="item.name"
-                    :icon="item.icon"
-                  />
+
+                <!-- 분점정보 -->
+                <div v-if="cafe.branches" class="info branches q-mb-xs">
+                  <q-icon size="xs" name="storefront" class="icon" />
+                  <div class="label_branches text_subtitle1">분점</div>
+
+                  <div class="branches">
+                    <swiper
+                      :watchSlidesProgress="true"
+                      :slidesPerView="6"
+                      class="mySwiper"
+                    >
+                      <swiper-slide
+                        class="slide column justify-center"
+                        v-for="branch in cafe.branches"
+                        :key="branch.cafe_id"
+                      >
+                        <q-badge
+                          outline
+                          rounded
+                          class="badge_branch"
+                          @click="clickBranch(branch.cafe_id)"
+                        >
+                          {{ branch.cafe_branch_name }}
+                        </q-badge>
+                      </swiper-slide>
+                    </swiper>
+                  </div>
                 </div>
               </div>
 
               <div class="info_right column justify-end col-12 col-md-5">
                 <!-- 전화번호 -->
-                <div class="info justify-end q-mb-xs">
+                <div v-if="cafe.cafe_phone" class="info justify-end q-mb-xs">
                   <div class="text_subtitle1">{{ cafe.cafe_phone }}</div>
 
                   <q-icon size="xs" name="phone_in_talk" class="icon q-pl-xs" />
                 </div>
-                <!-- 분점정보 -->
-                <div v-if="cafe.branches" class="info justify-end q-mb-xs">
-                  <btn-basic
-                    v-for="branch in cafe.branches"
-                    :key="branch.cafe_id"
-                    :label="branch.cafe_branch_name"
-                    size="sm"
-                    color="grey-5"
-                    @click="clickBranch(branch.cafe_id)"
-                  />
-                  <div class="text_subtitle1">분점</div>
-
-                  <q-icon size="xs" name="storefront" class="icon q-pl-xs" />
-                </div>
               </div>
             </div>
             <!-- 기본정보2 : 홈페이지  -->
-            <div class="info_bottom">
+            <div v-if="cafe.cafe_webpage" class="info_bottom">
               <!-- 홈페이지 -->
               <div class="info q-mb-xs">
                 <div class="text_subtitle1 cafe_sns">
@@ -238,6 +253,13 @@
                   />
                 </div>
               </div>
+
+              <div v-if="!menuBrewing && !menuVariation">
+                <div class="info q-mb-xs">
+                  <q-icon size="xs" name="info" class="icon q-pr-xs" />
+                  <div class="text_subtitle1">아직 등록된 메뉴가 없습니다.</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -289,14 +311,6 @@
           {{ cafe.review_cnt }}건의 방문자 리뷰
         </div>
         <div class="row items-center q-pr-sm">
-          <!-- <btn-basic @click="changeSort('like')" label="추천순" size="sm" />
-          <btn-basic
-            @click="changeSort('recent')"
-            :class="{ 'red-4': sort === 'recent' }"
-            :disabled="sort === 'recent'"
-            label="최신순"
-            size="sm"
-          /> -->
           <btn-sort :sort_items="sortItems" @change="changeSort" />
         </div>
       </div>
@@ -357,6 +371,10 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/scss'
+import 'swiper/css/free-mode'
+import { FreeMode, Pagination } from 'swiper'
 
 // import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
 import ImageGrid from '../components/Etc/ImageGrid.vue'
@@ -389,7 +407,9 @@ export default defineComponent({
     FacilityItem,
     SkeletonCafeDetail,
     KakaoMiniMap,
-    BtnSort
+    BtnSort,
+    Swiper,
+    SwiperSlide
   },
   data() {
     return {
@@ -482,9 +502,12 @@ export default defineComponent({
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          console.log(result.data)
-          this.cafeMenu = result.data['cafeMenu']
-          this.cafeFacility = result.data['cafeFacility']
+          if (result.data['cafeMenu'].length > 0) {
+            this.cafeMenu = result.data['cafeMenu']
+          }
+          if (result.data['cafeFacility'].length > 0) {
+            this.cafeFacility = result.data['cafeFacility']
+          }
 
           // 브루잉(필터) 메뉴, 배리에이션 메뉴 구분
           if (this.cafeMenu) {
@@ -504,14 +527,27 @@ export default defineComponent({
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          // console.log(result.data)
-
-          this.cafeImages = result.data.filter((item) => {
-            return item.type === 'g'
-          })
-          this.menuImages = result.data.filter((item) => {
-            return item.type === 'm'
-          })
+          if (result.data.length > 0) {
+            this.cafeImages = result.data.filter((item) => {
+              return item.type === 'g'
+            })
+            this.menuImages = result.data.filter((item) => {
+              return item.type === 'm'
+            })
+          }
+          //
+          //
+          //
+          //
+          // 백엔드에서  타입으로 필터링하는 부분 되면 다시 작업 !!
+          //
+          //
+          //
+          //
+          // console.log(this.cafeImages.length)
+          // console.log(this.cafeImages)
+          // console.log(this.menuImages.length)
+          // console.log(this.menuImages)
         })
         .catch((err) => {
           console.log(err)
@@ -618,6 +654,31 @@ export default defineComponent({
           .icon {
             padding-top: 2px;
           }
+        }
+        .mySwiper {
+          width: 398px;
+        }
+        .slide {
+          min-width: 60px;
+        }
+        .badge_branch {
+          cursor: pointer;
+          color: $brown-3;
+          min-width: auto;
+          max-width: 48px;
+          text-align: center;
+          display: inline-block;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          &:hover {
+            background-color: $grey-2;
+          }
+        }
+
+        .label_branches {
+          min-width: 30px !important;
+          margin-right: 2px;
         }
       }
       .info_mid {
