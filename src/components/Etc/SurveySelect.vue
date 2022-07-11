@@ -1,5 +1,5 @@
 <template>
-  <q-img class="card" :src="bg">
+  <q-img class="card" :src="bgUrl">
     <div
       @click="handleClick"
       class="absolute-full text-subtitle2 flex flex-center"
@@ -7,7 +7,7 @@
       <div class="content column items-center q-pt-sm">
         <div v-if="icon" class="q-mb-sm">
           <q-avatar size="md" square>
-            <img :src="icon" />
+            <img :src="iconUrl" />
           </q-avatar>
         </div>
         <div v-else class="q-mb-sm">
@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: 'ServeySelect',
+  name: 'SurveySelect',
   props: {
     id: { type: Number, required: true },
     type: { type: String, required: true }, // 'coffee' or 'cafe' or 'brewing'
@@ -55,6 +55,26 @@ export default {
   data() {
     return {
       checked: false
+    }
+  },
+  computed: {
+    bgUrl() {
+      if (!this.bg || this.bg == '') {
+        if (this.type === 'coffee') {
+          return 'https://t1.daumcdn.net/cfile/blog/2362A136560CB9B501'
+        } else return 'https://t1.daumcdn.net/cfile/blog/2362A136560CB9B501'
+      } else {
+        if (this.bg.startsWith('images/')) {
+          return `${process.env.STATIC}/${this.bg}`
+        }
+        return this.bg
+      }
+    },
+    iconUrl() {
+      if (this.icon.startsWith('images/')) {
+        return `${process.env.STATIC}/${this.icon}`
+      }
+      return this.icon
     }
   },
   methods: {

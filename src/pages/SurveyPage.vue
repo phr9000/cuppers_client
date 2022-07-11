@@ -6,7 +6,7 @@
       </div>
       <h6>좋아하는 커피의 특징 (중복 선택 가능)</h6>
       <div class="row justify-start">
-        <servey-select
+        <survey-select
           class="q-ma-xs"
           v-for="keyword in coffeeKeywords"
           :key="keyword.keyword_id"
@@ -22,7 +22,7 @@
 
       <h6>좋아하는 추출 방식 (중복 선택 가능)</h6>
       <div class="row justify-start">
-        <servey-select
+        <survey-select
           class="q-ma-xs"
           v-for="keyword in brewingKeywords"
           :key="keyword.keyword_id"
@@ -38,7 +38,7 @@
 
       <h6>좋아하는 카페 (중복 선택 가능)</h6>
       <div class="row justify-start">
-        <servey-select
+        <survey-select
           class="q-ma-xs"
           v-for="keyword in cafeKeywords"
           :key="keyword.keyword_id"
@@ -71,11 +71,11 @@
 </template>
 
 <script>
-import ServeySelect from 'src/components/Etc/ServeySelect.vue'
+import SurveySelect from 'src/components/Etc/SurveySelect.vue'
 import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 
 export default {
-  components: { ServeySelect, BtnBasicRight },
+  components: { SurveySelect, BtnBasicRight },
   data() {
     return {
       coffeeKeywords: [],
@@ -88,8 +88,8 @@ export default {
     }
   },
   created() {
-    let apiUrl = `${process.env.API_LOCAL}/serveyKeywords` // json-server
-    // let apiUrl = `${process.env.API}/serveyKeywords` // real-server
+    // let apiUrl = `${process.env.API_LOCAL}/serveyKeywords` // json-/server
+    let apiUrl = `${process.env.API}/keyword/survey` // real-server
     this.$axios
       .get(apiUrl)
       .then((result) => {
@@ -100,6 +100,7 @@ export default {
         this.brewingKeywords = result.data.filter((item) => {
           return item.keyword_type === 'brewing'
         })
+        console.log(this.brewingKeywords)
         this.cafeKeywords = result.data.filter((item) => {
           return item.keyword_type === 'cafe'
         })
