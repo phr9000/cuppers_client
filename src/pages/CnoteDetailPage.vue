@@ -60,7 +60,7 @@
         <div class="user-card-container">
           <div class="user-card-inner">
             <div class="profile-img">
-              <img src="/icons/avatar.jpg" alt="profile 사진" />
+              <img src="/icons/hacker.png" alt="profile 사진" />
             </div>
             <div class="user-email-area" style="line-height: 24px">
               {{ user }}
@@ -323,6 +323,7 @@ export default {
       margin: 0 160px;
     }
     .content-area {
+      padding: 60px 0;
       width: 100%;
       height: 100%;
       .content-inner {
