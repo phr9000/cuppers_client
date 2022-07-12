@@ -97,37 +97,45 @@
 
         <!-- tab2: 내목록 map-my-list -->
         <section v-show="tab === 'mylist'">
-          <!-- 마이리스트 -->
-          <map-my-list
-            v-if="!currentMyListItem"
-            :items="mylist"
-            @click_item="handleClickMyListItem"
-          />
+          <div
+            v-if="!uid || uid < 1"
+            class="q-my-lg text-grey flex flex-center"
+          >
+            <p>로그인이 필요합니다.</p>
+          </div>
           <div v-else>
-            <q-item-label header>
-              <btn-icon
-                :flat="true"
-                size="sm"
-                color="grey-5"
-                icon="arrow_back_ios"
-                @click="currentMyListItem = null"
-              />
-              {{ currentMyListItem.mylist_name }}
-            </q-item-label>
-            <!-- 마이리스트 내부 카페 리스트 (카페 카드) -->
-            <q-list v-if="cafes.length > 0" class="search_result q-mb-sm">
-              <div v-for="cafe in cafes" :key="cafe.cafe_id">
-                <card-cafe-li
-                  :cafe="cafe"
-                  :keywords="cafe.keywords"
-                  :today="cafe.today"
-                  :curLoc="locState"
-                  @click="setTarget(cafe.cafe_id)"
+            <!-- 마이리스트 -->
+            <map-my-list
+              v-if="!currentMyListItem"
+              :items="mylist"
+              @click_item="handleClickMyListItem"
+            />
+            <div v-else>
+              <q-item-label header>
+                <btn-icon
+                  :flat="true"
+                  size="sm"
+                  color="grey-5"
+                  icon="arrow_back_ios"
+                  @click="currentMyListItem = null"
                 />
+                {{ currentMyListItem.mylist_name }}
+              </q-item-label>
+              <!-- 마이리스트 내부 카페 리스트 (카페 카드) -->
+              <q-list v-if="cafes.length > 0" class="search_result q-mb-sm">
+                <div v-for="cafe in cafes" :key="cafe.cafe_id">
+                  <card-cafe-li
+                    :cafe="cafe"
+                    :keywords="cafe.keywords"
+                    :today="cafe.today"
+                    :curLoc="locState"
+                    @click="setTarget(cafe.cafe_id)"
+                  />
+                </div>
+              </q-list>
+              <div v-else class="q-my-lg text-grey flex flex-center">
+                <p>검색된 카페가 없습니다.</p>
               </div>
-            </q-list>
-            <div v-else class="q-my-lg text-grey flex flex-center">
-              <p>검색된 카페가 없습니다.</p>
             </div>
           </div>
         </section>
@@ -244,7 +252,7 @@ export default defineComponent({
     const $store = useStore()
 
     const uid = computed({
-      get: () => $store.state.user.uid
+      get: () => $store.state.user.user.uid
     })
 
     const locState = computed({
@@ -536,8 +544,10 @@ export default defineComponent({
     loadMyList() {
       this.clearAllMarkers()
       this.cafes = []
+      console.log(this.uid)
 
       let apiUrl = `${process.env.API}/cafe/mylist/all/${this.uid}` // real-server
+      console.log(apiUrl)
       this.$axios
         .get(apiUrl)
         .then((result) => {
