@@ -5,6 +5,7 @@
     <btn-my-avatar />
     <br />
     {{ user }}
+    <button @click="logout">logout</button>
   </q-page>
 </template>
 
@@ -43,6 +44,15 @@ export default defineComponent({
       this.$router.push('/login')
     } else {
       console.log('로그인 정보 있음')
+    }
+  },
+  methods: {
+    logout() {
+      this.user = {
+        uid: 0,
+        thumbUrl: '/icons/avatar_default.jpg'
+      }
+      this.$router.push('/')
     }
   }
 })
