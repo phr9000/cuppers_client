@@ -25,6 +25,7 @@
               type="text"
               :rules="[(val) => !!val || 'Field is required']"
               class="col-12 input-area"
+              @blur="verifyCafeName"
             />
           </div>
         </div>
@@ -146,6 +147,9 @@
             />
           </div>
         </section>
+        <!-- <section>
+          <image-upload />
+        </section> -->
       </div>
     </section>
     <section>
@@ -168,6 +172,7 @@ import { defineComponent } from 'vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import PostNumber from 'src/components/Etc/PostNumber.vue'
 import CardAddMenu from 'src/components/Card/CardAddMenu.vue'
+// import ImageUpload from 'src/components/Etc/ImageUpload.vue'
 
 export default defineComponent({
   name: 'AddNewCafePage',
@@ -175,6 +180,7 @@ export default defineComponent({
     BtnBasic,
     PostNumber,
     CardAddMenu
+    // ImageUpload
   },
   data() {
     return {
@@ -194,18 +200,21 @@ export default defineComponent({
   },
   methods: {
     verifyCafeName() {
-      // this.$axios
-      //   .post('http:localhost:3000/api/cafe/checkname', {
-      //     param: {
-      //       cafe_name_pr: this.cafe_name_pr
-      //     }
-      //   })
-      //   .then((result) => console.log('성공!', result))
-      //   .catch((err) => console.error('실패!', err))
+      console.log(this.cafe.cafe_name_pr)
+      this.$axios
+        .post('http://localhost:3000/api/cafe/checkname', {
+          param: {
+            cafe_name_pr: this.cafe.cafe_name_pr
+          }
+        })
+        .then((response) => console.log(response))
+        .catch((err) => console.log(err))
     },
     submitCafeInfo() {
       // 카페 등록하기
-      console.log('카페 등록: ', this.cafe)
+      console.log('카페 등록: ', {
+        cafe: this.cafe
+      })
 
       // 메뉴 등록하기
       let menus = []
@@ -254,6 +263,8 @@ export default defineComponent({
               is_signature: 0
             }
           ]
+          // cafe: this.cafe,
+          // menus: [menus]
         })
         .then((response) => {
           console.log(response, '성공입니다')

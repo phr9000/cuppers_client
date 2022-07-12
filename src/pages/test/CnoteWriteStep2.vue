@@ -107,8 +107,8 @@ export default {
               headers: { 'Content-Type': 'multipart/form-data' }
             })
             .then((r) => {
-              // console.log(r)
-              // console.log(r.data.path)
+              console.log(r)
+              console.log(r.data.path)
               this.images.push(r.data.path)
               callback(url + r.data.filename, 'alt text')
             })

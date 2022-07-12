@@ -51,46 +51,66 @@ export default {
     }
   },
   methods: {
-    uploadImage(event) {
-      const maxImageLength = 5
-      if (this.images.length < maxImageLength) {
-        const url = 'http://localhost:3000/cafe/images'
-        const files = event.target.files
-        const file = files[0]
-        const id = this.images.length + 1
-
-        // 원본 이미지 URL로 바꾸기
-        let new_original_url = URL.createObjectURL(file)
-        console.log(new_original_url)
-
-        // 썸네일 이미지 URL 만들기
-        resizeImageSquare({ file: file, maxSize: 200, square: true })
-          .then((uploadedImage) => {
-            // console.log(uploadedImage)
-            let new_thumbnail_url = URL.createObjectURL(uploadedImage)
-
-            let new_image = {
-              menu_id: id,
+    async uploadImage(callback) {
+      const formData = new FormData()
+      const url = 'http://localhost:3000/static/images/'
+      formData.append('image', blob)
+      await this.$axios
+        .post('http://localhost:3000/api/upload/image', formData, {
+          images: [
+            {
               type: 'g',
-              cafe_image_url: new_original_url,
-              thumbnail_url: new_thumbnail_url
+              cafe_image_url: '/test/url/g',
+              thumbnail_url: '/test/url/thumb/g'
+            },
+            {
+              type: 'm',
+              cafe_image_url: '/test/url/m',
+              thumbnail_url: '/test/url/thumb/m'
             }
+          ]
+        })
+        .then((r) => {
+          console.log(response)
+          console.log(response.data.path)
+          callback(url + response.data.filename)
+        })
+        .catch((e) => {
+          // console.log(e)
+        })
+      // const maxImageLength = 5
+      // if (this.images.length < maxImageLength) {
+      //   const files = event.target.files
+      //   const file = files[0]
+      //   const id = this.images.length + 1
 
-            // DB에 imageUpload
-            this.$axios
-              .post(url, new_image)
-              .then((response) => console.log('성공입니다', response))
-              .catch((err) => console.error('실패입니다', err))
+      //   // 원본 이미지 URL로 바꾸기
+      //   let new_original_url = URL.createObjectURL(file)
+      //   console.log(new_original_url)
 
-            this.images.push(new_image)
-          })
-          .catch((err) => console.error(err))
-        console.log(this.images)
-      } else {
-        alert('이미지는 최대 5개까지 업로드할 수 있습니다')
-      }
-    },
-    getImage() {}
+      //   // 썸네일 이미지 URL 만들기
+      //   resizeImageSquare({ file: file, maxSize: 200, square: true })
+      //     .then((uploadedImage) => {
+      //       // console.log(uploadedImage)
+      //       let new_thumbnail_url = URL.createObjectURL(uploadedImage)
+
+      //       let new_image = {
+      //         menu_id: id,
+      //         type: 'g',
+      //         cafe_image_url: new_original_url,
+      //         thumbnail_url: new_thumbnail_url
+      //       }
+
+      //       // DB에 imageUpload
+      //       this.$axios
+      //       this.images.push(new_image)
+      //     })
+      //     .catch((err) => console.error(err))
+      //   console.log(this.images)
+      // } else {
+      //   alert('이미지는 최대 5개까지 업로드할 수 있습니다')
+      // }
+    }
   }
 }
 </script>
