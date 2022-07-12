@@ -117,7 +117,7 @@ export default {
   mounted() {
     this.editor = new Editor({
       el: document.querySelector('#editor'),
-      height: '500px',
+      // height: '500px',
       initialEditType: 'wysiwyg',
       previewStyle: 'vertical',
       previewStyle: 'tab',
@@ -237,10 +237,12 @@ export default {
       position: relative;
       margin-top: 15px;
       height: 450px;
+      max-height: 840px;
       border-bottom: 1px solid #eee;
       background-repeat: no-repeat;
-      background-position: center center;
-      // background-size: 100% auto;
+      background-size: cover;
+      background-position: 50% 50%;
+      background-attachment: fixed;
       overflow: hidden;
       &.background-filter {
         &:after {

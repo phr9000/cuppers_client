@@ -384,5 +384,8 @@ export default {
   .date {
     font-weight: 600;
   }
+  .footer_global {
+    display: none !important;
+  }
 }
 </style>
