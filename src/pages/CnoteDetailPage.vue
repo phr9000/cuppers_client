@@ -126,18 +126,29 @@ export default {
       cnoteImgs: '',
       writeType: false,
       isLiked: true,
-      backgroundImg: ''
+      backgroundImg: '',
+      cnoteId: null
     }
   },
-  created() {},
+  async created() {
+    this.cnoteId = this.$route.params.id
+    setTimeout(() => {
+      this.getcnoteDetail(this.cnoteId)
+    }, 100)
+    this.getcnoteDetail()
+    this.getCnoteImg()
+    this.getUserInfo()
+  },
   mounted() {
     this.getcnoteDetail()
     this.getCnoteImg()
     this.getUserInfo()
   },
   methods: {
-    getcnoteDetail() {
-      let apiUrl = 'http://localhost:3000/api/cnote/detail/92'
+    getcnoteDetail(cnoteId) {
+      let apiUrl = `http://localhost:3000/api/cnote/detail/${cnoteId}`
+      console.log('here')
+      console.log(apiUrl)
       this.$axios
         .get(apiUrl)
         .then((result) => {
@@ -147,7 +158,7 @@ export default {
           this.cnote_title = this.cnotedetail[0].cnote_title
           this.created_at = this.cnotedetail[0].created_at.substring(0, 10)
           this.user_id = this.cnotedetail[0].user_id
-          this.backgroundImg = 'http://' + this.cnotedetail[0].cnote_img
+          this.backgroundImg = this.cnotedetail[0].cnote_img
         })
         .catch((err) => {
           console.log(err)
@@ -159,7 +170,6 @@ export default {
         .get(apiUrl)
         .then((result) => {
           this.userInfo = result.data
-          console.log(this.userInfo[0])
           this.user = this.userInfo[0].user_email
           this.user_introduce = this.userInfo[0].user_introduce
         })

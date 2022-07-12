@@ -91,6 +91,9 @@ export default {
       uid
     }
   },
+  computed() {
+    this.matchHeight()
+  },
   data() {
     return {
       // isWriting: true,
@@ -174,14 +177,15 @@ export default {
             }
           })
           .then((response) => {
-            console.log(response)
-            // setTimeout(() => {
-            //   this.getcnoteId()
-            //   this.cnote_id = localStorage.getItem(cnote_id)
-            //   // alert(this.cnote_id)
-            //   // alert('글이 성공적으로 로스팅 되었습니다.')
-            //   // this.$router.push('/cnote/${this.cnote_id}')
-            // }, 700)
+            this.cnote_id = response.data.insertId
+            setTimeout(() => {
+              alert('글이 성공적으로 로스팅 되었습니다.')
+              // this.$router.push('/cnote/${this.cnote_id}')
+              this.$router.push({
+                path: `/cnote/${this.cnote_id}`,
+                params: { id: `${this.cnote_id}` }
+              })
+            }, 700)
           })
           .catch((ex) => {
             alert('로스팅하는데 문제가 생겼습니다.')
@@ -189,28 +193,11 @@ export default {
           })
       }
     },
-    // getcnoteId() {
-    //   let apiUrl =
-    //     'http://localhost:3000/api/cnote/user_cnote_id/${this.cnote.user_id}'
-    //   this.$axios
-    //     .get(apiUrl)
-    //     .then((result) => {
-    //       this.cnote_id = result.data[0].cnote_id
-    //       localStorage.setItem('cnote_id', this.cnote_id)
-    //       // console.log(this.cnote_id)
-    //       localStorage.setItem('cnote_id', this.cnote_id)
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-    // },
     getImage() {
-      console.log(this.images)
+      // console.log(this.images)
     },
     async uploadImg(e) {
       let file = e.target.files
-      console.log('here')
-      console.log(file)
       const formData = new FormData()
       const url = 'http://localhost:3000/static/images/'
       formData.append('image', file[0])
@@ -219,16 +206,19 @@ export default {
           headers: { 'Content-Type': 'multipart/form-data' }
         })
         .catch((e) => {
-          console.log(e)
+          // console.log(e)
         })
         .then((r) => {
           this.backgroundImg = url + r.data.filename
           this.cnote.cnote_img = url + r.data.filename
-          console.log(this.cnote.cnote_img)
+          // console.log(this.cnote.cnote_img)
         })
       this.backImg = true
     }
-    // cnote post 저장하기
+  },
+  matchHeight() {
+    let height = document.getElementsByClassName('toastui-editor').clientHeight
+    console.log(height)
   }
 }
 </script>
