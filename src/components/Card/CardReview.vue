@@ -12,8 +12,8 @@
         <div class="cafe_keywords_wrap">
           <badge-cafe
             v-for="keyword in review.review_keyword"
-            :key="keyword.keyword_name"
-            :value="keyword.keyword_name"
+            :key="keyword.name"
+            :value="keyword.name"
           />
         </div>
       </q-card-section>
@@ -33,7 +33,7 @@
         <q-img
           class="col-12 col-sm-5 q-pr-sm review_image"
           :initial-ratio="16 / 9"
-          :src="review.review_img"
+          :src="thumbUrl"
           ><div
             class="rounded-borders absolute-full text-subtitle2 flex flex-center"
           >
@@ -113,6 +113,16 @@ export default defineComponent({
         return this.review.review_content.replaceAll('\\n', '<br />')
       } else {
         return ''
+      }
+    },
+    thumbUrl() {
+      if (!this.review.review_img || this.review.review_img == '') {
+        return null
+      } else {
+        if (this.review.review_img.startsWith('images/')) {
+          return `${process.env.STATIC}/${this.review.review_img}`
+        }
+        return this.review.review_img
       }
     }
   },

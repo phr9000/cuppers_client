@@ -55,7 +55,7 @@
             <div>
               <!-- 리뷰 쓰기 -->
               <btn-basic
-                to="/review/write"
+                @click="clickWritingReview"
                 class="btn_show_all bg-grey-2"
                 :rounded="false"
                 icon="note_alt"
@@ -591,6 +591,9 @@ export default defineComponent({
     },
     clickBranch(cafe_id) {
       this.$router.push({ path: `/cafe/${cafe_id}` })
+    },
+    clickWritingReview() {
+      this.$router.push({ path: `/review/write/${this.cafeId}` })
     }
   }
 })

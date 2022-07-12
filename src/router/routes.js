@@ -21,7 +21,7 @@ const routes = [
         component: () => import('src/pages/UserProfilePage.vue')
       },
       {
-        path: 'review/write',
+        path: 'review/write/:id',
         component: () => import('src/pages/WriteReviewPage.vue')
       },
       {
