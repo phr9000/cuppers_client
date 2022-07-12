@@ -1,7 +1,9 @@
 <template>
   <q-page v-if="cafe" class="cafe_detail_page constrain">
     <!-- 카페이름 및 기본버튼들 -->
-    <section class="cafe_title_section column q-pl-lg q-pr-md q-pt-lg">
+    <section
+      class="cafe_title_section section_top column q-pl-lg q-pr-md q-pt-lg"
+    >
       <div class="col">
         <div class="row items-center">
           <div class="title text-h5 cafe_name q-mb-xs q-mr-sm">
@@ -124,41 +126,6 @@
                   <div class="text_subtitle1">{{ cafe.cafe_address }}</div>
                 </div>
 
-                <!-- 영업시간 -->
-                <div v-if="cafe.opTime.length > 0" class="info q-mb-xs">
-                  <q-icon
-                    size="xs"
-                    name="calendar_today"
-                    class="icon q-pt-xs"
-                  />
-
-                  <div class="cafe_keywords_wrap text_subtitle1 q-pt-xs">
-                    <div v-for="time in cafe.opTime" :key="time.day">
-                      {{ time.day }} : {{ time.time }}
-                    </div>
-                    <!-- <div class="text-red-5">
-                      영업시간을 클릭했을때만 크게 보여주도록 (like googlemap)
-                    </div> -->
-                  </div>
-                </div>
-
-                <!-- 시설정보 -->
-                <div v-if="cafeFacility">
-                  <div class="info q-mb-xs">
-                    <q-icon size="xs" name="info" class="icon q-pr-xs" />
-                    <div class="text_subtitle1">시설 정보</div>
-                  </div>
-                  <div class="row items-center q-pl-lg q-pb-sm">
-                    <facility-item
-                      class="q-pr-sm"
-                      v-for="item in cafeFacility"
-                      :key="item.name"
-                      :name="item.name"
-                      :icon="item.icon"
-                    />
-                  </div>
-                </div>
-
                 <!-- 분점정보 -->
                 <div v-if="cafe.branches" class="info branches q-mb-xs">
                   <q-icon size="xs" name="storefront" class="icon" />
@@ -187,6 +154,41 @@
                     </swiper>
                   </div>
                 </div>
+
+                <!-- 시설정보 -->
+                <div v-if="cafeFacility">
+                  <div class="info q-mb-xs">
+                    <q-icon size="xs" name="info" class="icon q-pr-xs" />
+                    <div class="text_subtitle1">시설 정보</div>
+                  </div>
+                  <div class="row items-center q-pl-lg q-pb-sm">
+                    <facility-item
+                      class="q-pr-sm"
+                      v-for="item in cafeFacility"
+                      :key="item.name"
+                      :name="item.name"
+                      :icon="item.icon"
+                    />
+                  </div>
+                </div>
+
+                <!-- 영업시간 -->
+                <div v-if="cafe.opTime.length > 0" class="info q-mb-xs">
+                  <q-icon
+                    size="xs"
+                    name="calendar_today"
+                    class="icon q-pt-xs"
+                  />
+
+                  <div class="cafe_keywords_wrap text_subtitle1 q-pt-xs">
+                    <div v-for="time in cafe.opTime" :key="time.day">
+                      {{ time.day }} : {{ time.time }}
+                    </div>
+                    <!-- <div class="text-red-5">
+                      영업시간을 클릭했을때만 크게 보여주도록 (like googlemap)
+                    </div> -->
+                  </div>
+                </div>
               </div>
 
               <div class="info_right column justify-end col-12 col-md-5">
@@ -198,6 +200,7 @@
                 </div>
               </div>
             </div>
+
             <!-- 기본정보2 : 홈페이지  -->
             <div v-if="cafe.cafe_webpage" class="info_bottom">
               <!-- 홈페이지 -->
@@ -353,6 +356,7 @@
         </div>
       </div>
     </section> -->
+    <btn-scroll-top />
   </q-page>
 
   <q-page v-else-if="loading" class="constrain">
@@ -373,10 +377,7 @@
 import { defineComponent } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/scss'
-import 'swiper/css/free-mode'
-import { FreeMode, Pagination } from 'swiper'
 
-// import InfiniteScroll from '../components/Scroll/InfiniteScroll.vue'
 import ImageGrid from '../components/Etc/ImageGrid.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
@@ -388,7 +389,7 @@ import MenuItem from 'src/components/Etc/MenuItem.vue'
 import FacilityItem from 'src/components/Etc/FacilityItem.vue'
 import KakaoMiniMap from 'src/components/Etc/KakaoMiniMap.vue'
 import BtnSort from 'src/components/Tab/BtnSort.vue'
-// import CardCnote from 'src/components/Card/CardCupNote.vue'
+import BtnScrollTop from 'src/components/Scroll/BtnScrollTop.vue'
 
 import SkeletonCafeDetail from 'src/components/Skeleton/SkeletonCafeDetail.vue'
 
@@ -408,6 +409,7 @@ export default defineComponent({
     SkeletonCafeDetail,
     KakaoMiniMap,
     BtnSort,
+    BtnScrollTop,
     Swiper,
     SwiperSlide
   },

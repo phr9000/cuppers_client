@@ -75,11 +75,12 @@ export default {
 <style lang="scss" scoped>
 .btn_scroll_top {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 40px;
+  bottom: 90px;
   transition: all 0.3s;
   pointer-events: none; // 마우스 클릭 안되게
   opacity: 0;
+  z-index: 2001;
   &.show {
     opacity: 1;
     pointer-events: initial;
