@@ -3,7 +3,8 @@
     버튼 테스트
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>btn-basic</p>
-      <btn-basic to="/cafe/1" label="앰비언스 상세" />
+      <btn-basic to="/cafe/1" label="앰비언스" />
+      <btn-basic to="/cafe/6" label="김대기" />
       <btn-basic to="/test/card" color="secondary" label="카드 테스트" />
       <btn-basic to="/test/card2" label="카드 테스트2" />
       <btn-basic to="/test/icon" color="dark" label="아이콘 테스트" />
@@ -26,21 +27,19 @@
         icon="mail"
       />
       <btn-basic label="사이즈 sm" size="sm" />
-      <btn-basic label="리뷰 쓰기" size="md" />
       <btn-basic :rounded="false" label="사각" size="md" />
       <btn-basic label="dense false" size="lg" :dense="false" />
       <btn-basic label="dense" size="lg" />
       <btn-basic label="커스텀패딩" size="md" padding="2px 10px 2px 15px" />
       <btn-basic
         size="md"
-        to="map"
         color="primary"
         label="커핑노트 쓰기"
         icon="edit"
         padding="4px 15px 4px 15px"
       /><btn-basic
         size="md"
-        to="map"
+        to="/map"
         color="primary"
         label="지도 표시하기"
         icon="map"
