@@ -107,7 +107,7 @@
                 </div>
               </div>
               <!-- 카페 설명 -->
-              <div class="info start q-mb-xs">
+              <div v-if="cafe.cafe_description" class="info start q-mb-xs">
                 <q-icon size="xs" name="place" class="icon" />
 
                 <div
@@ -120,7 +120,7 @@
             <div class="info_mid row justify-between">
               <div class="info_left col-12 col-md-7">
                 <!-- 주소 -->
-                <div class="info q-mb-xs">
+                <div v-if="cafe.cafe_address" class="info q-mb-xs">
                   <q-icon size="xs" name="place" class="icon" />
 
                   <div class="text_subtitle1">{{ cafe.cafe_address }}</div>
@@ -261,13 +261,31 @@
               <div v-if="!menuBrewing && !menuVariation">
                 <div class="info q-mb-xs">
                   <q-icon size="xs" name="info" class="icon q-pr-xs" />
-                  <div class="text_subtitle1">아직 등록된 메뉴가 없습니다.</div>
+                  <div class="text_subtitle1 text-grey">
+                    아직 등록된 메뉴가 없습니다.
+                  </div>
                 </div>
               </div>
 
               <!-- 메뉴판 이미지 (왼쪽) -->
-              <div v-if="!menuRight && menuImages && menuImages.length > 0">
-                <menu-image :url="menuImages[0].cafe_image_url" />
+              <!-- <div v-if="!menuRight && menuImages && menuImages.length > 0"> -->
+              <div v-if="!menuRight">
+                <div class="row q-mb-xs">
+                  <q-icon
+                    size="xs"
+                    name="img:/icons/menu.png"
+                    class="q-mr-xs"
+                  />
+                  <div class="text_subtitle1">메뉴판 이미지</div>
+                </div>
+                <menu-image
+                  v-if="menuImages && menuImages.length > 0"
+                  :url="menuImages[0].cafe_image_url"
+                  lr="left"
+                />
+                <div v-else class="q-pl-md text-grey">
+                  아직 등록된 이미지가 없습니다.
+                </div>
               </div>
             </div>
           </div>
@@ -284,8 +302,21 @@
           </div>
 
           <!-- 메뉴판 이미지 (오른쪽) -->
-          <div v-if="menuRight && menuImages && menuImages.length > 0">
-            <menu-image :url="menuImages[0].cafe_image_url" />
+
+          <div v-if="menuRight">
+            <div class="row q-mb-xs">
+              <q-icon
+                size="xs"
+                name="img:/icons/menu.png"
+                class="q-ml-md q-pl-xs q-mr-xs"
+              />
+              <div class="text_subtitle1">메뉴판 이미지</div>
+            </div>
+            <menu-image
+              v-if="menuImages && menuImages.length > 0"
+              :url="menuImages[0].cafe_image_url"
+              lr="right"
+            />
           </div>
         </div>
       </section>
@@ -306,6 +337,10 @@
         </div>
       </div>
 
+      <div v-if="cafe.review_cnt === 0" class="q-py-md text-center text-grey">
+        아직 등록된 리뷰가 없습니다.
+      </div>
+
       <div class="cards_container row justify-between">
         <div
           class="cards_wrap"
@@ -317,7 +352,7 @@
       </div>
 
       <!-- 페이지네이션 -->
-      <div class="q-pa-lg flex flex-center">
+      <div v-if="cafe.review_cnt > 0" class="q-pa-lg flex flex-center">
         <q-pagination v-model="current" :max="maxReivewPage" direction-links />
       </div>
     </section>
@@ -325,6 +360,11 @@
 
     <!-- 지도 미리보기 -->
     <section v-if="showMiniMap" class="minimap q-mx-lg q-mb-xl">
+      <!-- 등록된 메뉴 없을 때  -->
+      <div class="row items-center q-mb-xs">
+        <q-icon size="xs" name="info" class="icon q-pr-xs" />
+        <div class="text_subtitle1">카페 위치</div>
+      </div>
       <kakao-mini-map :lat="cafe.cafe_latitude" :lng="cafe.cafe_longitude" />
     </section>
 
@@ -751,16 +791,6 @@ export default defineComponent({
   .cafe_basic_info,
   .coffe_menu {
     max-width: 500px;
-  }
-  .absolute-full {
-    cursor: pointer;
-    background: rgba(69, 69, 69, 0.15);
-    transition: all 0.5s;
-    color: transparent;
-    &:hover {
-      background: rgba(0, 0, 0, 0.35);
-      color: $grey-4;
-    }
   }
 }
 </style>
