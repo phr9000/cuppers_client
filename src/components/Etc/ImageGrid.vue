@@ -1,5 +1,5 @@
 <template>
-  <div class="image_grid_wrap">
+  <div v-if="images.length > 0" class="image_grid_wrap">
     <!-- 1-->
     <div v-if="images.length == 1" class="image_grid">
       <q-img class="col img_1" ratio="1" :src="images[0].cafe_image_url" />
@@ -93,9 +93,6 @@ import BtnBasic from 'src/components/Button/BtnBasic.vue'
 
 export default {
   name: 'ImageGrid',
-  components: {
-    BtnBasic
-  },
   props: {
     images: {
       type: Array,

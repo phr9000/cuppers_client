@@ -135,7 +135,7 @@
                     <swiper
                       :watchSlidesProgress="true"
                       :slidesPerView="6"
-                      class="mySwiper"
+                      class="branch_swiper"
                     >
                       <swiper-slide
                         class="slide column justify-center"
@@ -239,8 +239,8 @@
                 </div>
               </div>
 
+              <!-- 배리에이션 메뉴 -->
               <div v-if="menuVariation">
-                <!-- 배리에이션 메뉴 -->
                 <div class="info q-mb-xs">
                   <q-icon size="xs" name="info" class="icon q-pr-xs" />
                   <div class="text_subtitle1">배리에이션 메뉴</div>
@@ -257,11 +257,17 @@
                 </div>
               </div>
 
+              <!-- 등록된 메뉴 없을 때  -->
               <div v-if="!menuBrewing && !menuVariation">
                 <div class="info q-mb-xs">
                   <q-icon size="xs" name="info" class="icon q-pr-xs" />
                   <div class="text_subtitle1">아직 등록된 메뉴가 없습니다.</div>
                 </div>
+              </div>
+
+              <!-- 메뉴판 이미지 (왼쪽) -->
+              <div v-if="!menuRight && menuImages && menuImages.length > 0">
+                <menu-image :url="menuImages[0].cafe_image_url" />
               </div>
             </div>
           </div>
@@ -269,7 +275,7 @@
 
         <!-- 최근리뷰, 메뉴판 -->
         <div
-          class="review_menu_container col-12 col-sm-5 q-py-md q-pr-md column justify-between align-end"
+          class="recent_review_wrap col-12 col-sm-5 q-py-md q-pr-md column justify-between align-end"
         >
           <!-- 최근 리뷰 -->
           <div v-if="reviewRecent" class="recent_review large_screen_only">
@@ -277,27 +283,9 @@
             <card-review :review="reviewRecent" />
           </div>
 
-          <!-- 대표 메뉴 이미지 -->
-          <div
-            v-if="menuImages && menuImages.length > 0"
-            class="menu_image_wrap column"
-          >
-            <div class="info q-mb-xs">
-              <q-icon size="xs" name="img:/icons/menu.png" class="q-mx-xs" />
-              <div class="text_subtitle1">메뉴판 이미지</div>
-            </div>
-            <q-img
-              class="menu_image"
-              width="100%"
-              height="130px"
-              :src="menuImages[0].cafe_image_url"
-            >
-              <div
-                class="rounded-borders absolute-full text-subtitle2 flex flex-center"
-              >
-                크게 보기
-              </div></q-img
-            >
+          <!-- 메뉴판 이미지 (오른쪽) -->
+          <div v-if="menuRight && menuImages && menuImages.length > 0">
+            <menu-image :url="menuImages[0].cafe_image_url" />
           </div>
         </div>
       </section>
@@ -386,6 +374,7 @@ import BtnBeenThere from 'src/components/Button/BtnBeenThere.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
 import CardReview from '../components/Card/CardReview.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
+import MenuImage from 'src/components/Etc/MenuImage.vue'
 import FacilityItem from 'src/components/Etc/FacilityItem.vue'
 import KakaoMiniMap from 'src/components/Etc/KakaoMiniMap.vue'
 import BtnSort from 'src/components/Tab/BtnSort.vue'
@@ -403,8 +392,8 @@ export default defineComponent({
     BtnBeenThere,
     BtnReview,
     CardReview,
-    // CardCnote,
     MenuItem,
+    MenuImage,
     FacilityItem,
     SkeletonCafeDetail,
     KakaoMiniMap,
@@ -422,6 +411,7 @@ export default defineComponent({
       loading: true,
       menuBrewing: null,
       menuVariation: null,
+      menuRight: false,
       reviewRecent: null,
       reviews: [],
       // cnotes: [],
@@ -513,6 +503,9 @@ export default defineComponent({
 
           // 브루잉(필터) 메뉴, 배리에이션 메뉴 구분
           if (this.cafeMenu) {
+            if (this.cafeMenu.length > 2) {
+              this.menuRight = true
+            }
             this.menuBrewing = this.cafeMenu.filter((m) => m.menu_type === 'br')
             this.menuVariation = this.cafeMenu.filter(
               (menu) => menu.menu_type !== 'br'
@@ -660,24 +653,37 @@ export default defineComponent({
             padding-top: 2px;
           }
         }
-        .mySwiper {
+        .branches {
           width: 398px;
-        }
-        .slide {
-          min-width: 60px;
-        }
-        .badge_branch {
-          cursor: pointer;
-          color: $brown-3;
-          min-width: auto;
-          max-width: 48px;
-          text-align: center;
-          display: inline-block;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-          &:hover {
-            background-color: $grey-2;
+          @media (max-width: $breakpoint-sm-max) {
+            width: 328px;
+          }
+          @media (max-width: 745px) {
+            width: 264px;
+          }
+          @media (max-width: $breakpoint-xs-max) {
+            width: 398px;
+          }
+          .branch_swiper {
+            width: 100%;
+          }
+          .slide {
+            min-width: 66px;
+          }
+          .badge_branch {
+            cursor: pointer;
+            color: $brown-3;
+            min-width: auto;
+            max-width: 48px;
+            // margin-right: 5px;
+            text-align: center;
+            display: inline-block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            &:hover {
+              background-color: $grey-2;
+            }
           }
         }
 
@@ -713,23 +719,9 @@ export default defineComponent({
           }
         }
       }
-      .review_menu_container {
+      .recent_review_wrap {
         @media (max-width: $breakpoint-xs-max) {
           padding: 0;
-        }
-        .menu_image_wrap {
-          padding-top: 16px;
-          align-items: end;
-          @media (max-width: $breakpoint-xs-max) {
-            align-items: start;
-            padding-top: 0;
-            margin: 0 16px 16px 32px;
-          }
-
-          .menu_image {
-            // border: 1px solid rgb(141, 141, 141);
-            border-radius: 4px;
-          }
         }
       }
     }
