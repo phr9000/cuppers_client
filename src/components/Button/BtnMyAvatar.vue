@@ -1,6 +1,6 @@
 <template>
   <q-btn @click="clickMyAvatar" round size="sm" class="q-my-sm">
-    <q-avatar size="md"> <img :src="user.thumbUrl" /> </q-avatar
+    <q-avatar size="md"> <img :src="url" /> </q-avatar
   ></q-btn>
 </template>
 <script>
@@ -14,14 +14,25 @@ export default defineComponent({
     const $store = useStore()
 
     const user = computed({
-      get: () => $store.state.user.user,
+      get: () => $store.state.auth.user,
       set: (val) => {
         $store.commit('user/setUser', val)
       }
     })
 
+    const url = computed({
+      get: () => {
+        if (user.value == null) {
+          return '/icons/avatar_default.jpg'
+        } else {
+          return user.value.thumbUrl
+        }
+      }
+    })
+
     return {
-      user
+      user,
+      url
     }
   },
   methods: {
