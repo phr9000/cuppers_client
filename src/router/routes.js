@@ -102,6 +102,10 @@ const routes = [
       {
         path: 'inputref',
         component: () => import('pages/test/InputRefTest.vue')
+      },
+      {
+        path: 'swiper',
+        component: () => import('pages/test/SwiperTest.vue')
       }
     ]
   },

@@ -1,6 +1,6 @@
 <template>
-  <div class="q-px-xl q-py-lg">
-    <div class="row flex justify-between align-center">
+  <section class="q-px-xl q-py-lg">
+    <section class="row flex justify-between align-center q-my-md">
       <div>
         <span class="text-h6">카페 이미지</span
         ><span class="q-px-sm text-subtitle2 grey-4">{{
@@ -11,7 +11,7 @@
       </div>
       <div>
         <label for="file" class="text-h6 addButton">
-          <q-icon size="md" name="camera" />
+          <q-icon size="md" name="eva-camera" />
         </label>
         <input
           id="file"
@@ -24,92 +24,139 @@
           class="uploadBox"
         />
       </div>
-    </div>
-    <q-card class="q-my-lg row uploadedImage">
-      <div v-for="(image, index) in this.images" :key="index" class="flex">
-        <img
-          :src="image.thumbnail_url"
-          class="q-py-sm q-px-md imageBox"
-          alt=""
-        />
-        <!-- <q-card class="text-center deleteCard">지우기</q-card> -->
-      </div>
-    </q-card>
-  </div>
+    </section>
+    <section>
+      <q-card>
+        <p class="q-py-md q-px-md text-brown-7">
+          * 방문하신 카페의 사진을 업로드해주세요.<br />
+          * 직접 촬영하지 않은 사진 또는 1000 x 1000 미만 해상도의 사진은 별도의
+          통보없이 삭제될 수 있습니다.
+        </p>
+        <p class="q-px-md"></p>
+      </q-card>
+    </section>
+    <section>
+      <q-card class="q-my-lg uploadedImage">
+        <swiper
+          :slidesPerView="5"
+          :spaceBetween="30"
+          class="swiper-container row"
+        >
+          <swiper-slide
+            class="slide column justify-center"
+            v-for="(image, index) in this.images"
+            :key="index"
+          >
+            <img
+              :src="image.thumbnail_url"
+              class="image_list q-my-sm q-mx-md"
+              alt=""
+            />
+            <button @click="deleteImage" class="deleteButton">지우기</button>
+            <!-- <q-card class="text-center deleteCard">지우기</q-card> -->
+          </swiper-slide>
+        </swiper>
+      </q-card>
+    </section>
+  </section>
 </template>
 <script>
-import resizeImageSquare from 'src/composables/image-resize-square'
+import useResize from 'src/composables/useResize'
+const { resizeImage, resizeImageSquare } = useResize()
+import { Swiper, SwiperSlide } from 'swiper/vue'
 
 export default {
   name: 'imageUpload',
-
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   data() {
     return {
       files: [],
-      file: null,
-      images: []
+      images: [
+        // {
+        //   type: 'g',
+        //   cafe_image_url: '/test/url/g',
+        //   thumbnail_url: '/test/url/thumb/g'
+        // },
+        // {
+        //   type: 'm',
+        //   cafe_image_url: '/test/url/g',
+        //   thumbnail_url: '/test/url/thumb/g'
+        // }
+      ]
     }
   },
   methods: {
-    async uploadImage(callback) {
-      const formData = new FormData()
-      const url = 'http://localhost:3000/static/images/'
-      formData.append('image', blob)
-      await this.$axios
-        .post('http://localhost:3000/api/upload/image', formData, {
-          images: [
-            {
-              type: 'g',
-              cafe_image_url: '/test/url/g',
-              thumbnail_url: '/test/url/thumb/g'
-            },
-            {
-              type: 'm',
-              cafe_image_url: '/test/url/m',
-              thumbnail_url: '/test/url/thumb/m'
-            }
-          ]
-        })
-        .then((r) => {
-          console.log(response)
-          console.log(response.data.path)
-          callback(url + response.data.filename)
-        })
-        .catch((e) => {
-          // console.log(e)
-        })
-      // const maxImageLength = 5
-      // if (this.images.length < maxImageLength) {
-      //   const files = event.target.files
-      //   const file = files[0]
-      //   const id = this.images.length + 1
+    uploadImage(event) {
+      const files = event.target.files
+      // const file = files[0]
+      // console.log('file', file)
 
-      //   // 원본 이미지 URL로 바꾸기
-      //   let new_original_url = URL.createObjectURL(file)
-      //   console.log(new_original_url)
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i]
+        let url = ''
+        let url_thumb = ''
 
-      //   // 썸네일 이미지 URL 만들기
-      //   resizeImageSquare({ file: file, maxSize: 200, square: true })
-      //     .then((uploadedImage) => {
-      //       // console.log(uploadedImage)
-      //       let new_thumbnail_url = URL.createObjectURL(uploadedImage)
+        const apiUrl = `${process.env.API}/upload/image`
 
-      //       let new_image = {
-      //         menu_id: id,
-      //         type: 'g',
-      //         cafe_image_url: new_original_url,
-      //         thumbnail_url: new_thumbnail_url
-      //       }
+        // 1. 메인 이미지 업로드
+        resizeImage({ file: file, maxSize: 2000 })
+          .then((blob) => {
+            const formData = new FormData()
+            formData.append('image', blob)
 
-      //       // DB에 imageUpload
-      //       this.$axios
-      //       this.images.push(new_image)
-      //     })
-      //     .catch((err) => console.error(err))
-      //   console.log(this.images)
-      // } else {
-      //   alert('이미지는 최대 5개까지 업로드할 수 있습니다')
-      // }
+            this.$axios
+              .post(apiUrl, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+              })
+              .then((response) => {
+                console.log(response)
+                url = response.data.url
+
+                // 2. 썸네일 이미지 업로드
+                resizeImageSquare({ file: file, maxSize: 300, square: true })
+                  .then((blob_thumb) => {
+                    const formData = new FormData()
+                    formData.append('image', blob_thumb)
+
+                    this.$axios
+                      .post(apiUrl, formData, {
+                        headers: { 'Content-Type': 'multipart/form-data' }
+                      })
+                      .then((response) => {
+                        console.log(response)
+                        url_thumb = response.data.url
+
+                        this.images.push({
+                          type: 'g',
+                          images_cafe_url: url,
+                          thumbnail_url: url_thumb
+                        })
+                        console.log(this.images)
+                      })
+                      .catch((err) => {
+                        console.error(err)
+                      })
+                  })
+                  .catch((err) => {
+                    console.error(err)
+                  })
+              })
+              .catch((err) => {
+                console.error(err)
+              })
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+
+        console.log(this.images)
+      }
+    },
+    deleteImage() {
+      console.log('Hello')
     }
   }
 }
@@ -126,27 +173,38 @@ export default {
   padding: 10px;
   position: relative;
   display: flex;
-  height: 240px;
+  height: 340px;
+  .swiper-container {
+    display: flex;
 
-  .imageBox {
-    position: relative;
-    border-radius: 5px;
-    transition: color, 0.3s;
-    cursor: pointer;
+    .slide {
+      min-width: 300px;
+      display: inline-block;
+      text-align: center;
+      .image_list {
+        cursor: pointer;
+        position: relative;
+        display: inline;
+        transition: opacity 0.3s;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+      .deleteButton {
+        display: none;
+        position: absolute;
+        width: 70px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+    .swiper-button {
+      color: #333;
+    }
   }
-  .imageBox:hover {
-    opacity: 0.7;
-  }
-  // .deleteCard {
-  //   position: absolute;
-  //   width: 70px;
-  //   height: 22px;
-  //   border: 1px solid #333;
-  //   background-color: antiquewhite;
-  //   top: 50%;
-  //   left: 50%;
-  //   margin-top: -11px;
-  //   margin-left: -35px;
-  // }
 }
 </style>

@@ -60,6 +60,7 @@
       <btn-basic to="/test/cardmenutest" label="메뉴 추가" padding="5px 10px" />
       <btn-basic to="/test/childref" label="child ref" padding="5px 10px" />
       <btn-basic to="/test/inputref" label="input ref" paddinfg="5px 10px" />
+      <btn-basic to="/test/swiper" label="swiper test" padding="5px 10px" />
     </div>
     <div class="q-ma-xs q-pa-xs custom_test radius_border">
       <p>btn-basic-right</p>

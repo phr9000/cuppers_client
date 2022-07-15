@@ -147,9 +147,9 @@
             />
           </div>
         </section>
-        <!-- <section>
-          <image-upload />
-        </section> -->
+        <section>
+          <image-upload ref="ImageUpload" />
+        </section>
       </div>
     </section>
     <section>
@@ -172,15 +172,15 @@ import { defineComponent } from 'vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import PostNumber from 'src/components/Etc/PostNumber.vue'
 import CardAddMenu from 'src/components/Card/CardAddMenu.vue'
-// import ImageUpload from 'src/components/Etc/ImageUpload.vue'
+import ImageUpload from 'src/components/Etc/ImageUpload.vue'
 
 export default defineComponent({
   name: 'AddNewCafePage',
   components: {
     BtnBasic,
     PostNumber,
-    CardAddMenu
-    // ImageUpload
+    CardAddMenu,
+    ImageUpload
   },
   data() {
     return {
@@ -199,15 +199,22 @@ export default defineComponent({
     }
   },
   methods: {
-    verifyCafeName() {
+    async verifyCafeName() {
       console.log(this.cafe.cafe_name_pr)
-      this.$axios
+      await this.$axios
         .post('http://localhost:3000/api/cafe/checkname', {
           param: {
             cafe_name_pr: this.cafe.cafe_name_pr
           }
         })
-        .then((response) => console.log(response))
+        .then((response) => {
+          console.log(response.data)
+          if (response.data.isAvailable == 1) {
+            console.log('사용할 수 있는 카페 이름입니다')
+          } else {
+            alert('이미 등록된 카페입니다')
+          }
+        })
         .catch((err) => console.log(err))
     },
     submitCafeInfo() {
@@ -222,49 +229,18 @@ export default defineComponent({
         menus.push(this.$refs.CardAddMenu[i].sendMenu())
       }
       console.log('메뉴 등록: ', menus)
+
+      // 이미지 등록하기
+      let images = this.$refs.ImageUpload.images
+      console.log(this.$refs.ImageUpload.images)
+      // console.log('이미지 등록: ', images)
+
+      // axios post
       this.$axios
         .post('http://localhost:3000/api/cafe', {
-          cafe: {
-            cafe_name_pr: 'Cafe Muirhead',
-            cafe_name_sc: '',
-            cafe_address: 'Huangjinchengdao, Changning, Shanghai',
-            cafe_region: 'Gubei',
-            cafe_latitude: null,
-            cafe_longitude: null,
-            cafe_img: '/test/url'
-          },
-          images: [
-            {
-              type: 'g',
-              cafe_image_url: '/test/url/g',
-              thumbnail_url: '/test/url/thumb/g'
-            },
-            {
-              type: 'm',
-              cafe_image_url: '/test/url/m',
-              thumbnail_url: '/test/url/thumb/m'
-            }
-          ],
-          menus: [
-            {
-              menu_name: 'Blend 1',
-              menu_price_hot: 9000,
-              menu_price_ice: null,
-              menu_type: 'br',
-              menu_aromanote: 'dark chocolate',
-              is_signature: 1
-            },
-            {
-              menu_name: 'Blend 2',
-              menu_price_hot: 9500,
-              menu_price_ice: null,
-              menu_type: 'br',
-              menu_aromanote: 'tangerine',
-              is_signature: 0
-            }
-          ]
-          // cafe: this.cafe,
-          // menus: [menus]
+          cafe: this.cafe,
+          menus: menus,
+          images: images
         })
         .then((response) => {
           console.log(response, '성공입니다')
