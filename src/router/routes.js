@@ -48,7 +48,7 @@ const routes = [
       },
       {
         path: 'cnote/write',
-        component: () => import('src/pages/test/CnoteWriteStep.vue'),
+        component: () => import('src/pages/CnoteWriteStep.vue'),
         meta: { requiresAuth: true }
       }
     ]

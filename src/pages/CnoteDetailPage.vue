@@ -60,7 +60,7 @@
         <div class="user-card-container">
           <div class="user-card-inner">
             <div class="profile-img">
-              <img src="/icons/hacker.png" alt="profile 사진" />
+              <q-img src="/icons/hacker.png" alt="profile 사진" />
             </div>
             <div class="user-email-area" style="line-height: 24px">
               {{ user }}
