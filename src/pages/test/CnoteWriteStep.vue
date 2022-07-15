@@ -84,7 +84,7 @@ export default {
     const $store = useStore()
 
     const uid = computed({
-      get: () => $store.state.user.uid
+      get: () => $store.state.auth.user.uid
     })
 
     return {

@@ -252,7 +252,7 @@ export default defineComponent({
     const $store = useStore()
 
     const uid = computed({
-      get: () => $store.state.user.user.uid
+      get: () => $store.state.auth.user.uid
     })
 
     const locState = computed({

@@ -22,7 +22,7 @@ export default defineComponent({
     const $store = useStore()
 
     const user = computed({
-      get: () => $store.state.user.user,
+      get: () => $store.state.auth.user,
       set: (val) => {
         $store.commit('user/setUser', val)
       }
@@ -39,20 +39,18 @@ export default defineComponent({
     }
   },
   mounted() {
-    if (!this.user || this.user.uid < 1) {
-      console.log('로그인 안된 상태, 로그인 페이지로 이동')
-      this.$router.push('/login')
-    } else {
-      console.log('로그인 정보 있음')
-    }
+    // if (!this.user || this.user.uid < 1) {
+    //   console.log('로그인 안된 상태, 로그인 페이지로 이동')
+    //   this.$router.push('/login')
+    // } else {
+    //   console.log('로그인 정보 있음')
+    // }
   },
   methods: {
     logout() {
-      this.user = {
-        uid: 0,
-        thumbUrl: '/icons/avatar_default.jpg'
-      }
-      this.$router.push('/')
+      this.user = null
+      this.$q.localStorage.remove('user')
+      this.$router.push('/login')
     }
   }
 })

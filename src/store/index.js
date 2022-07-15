@@ -1,7 +1,7 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 
-import user from './user'
+import auth from './auth'
 import map from './map'
 
 /*
@@ -16,7 +16,7 @@ import map from './map'
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
-      user,
+      auth,
       map
     },
 
