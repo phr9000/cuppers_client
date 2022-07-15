@@ -3,8 +3,7 @@
     <div class="column items-center">
       <div>login page</div>
       <div>
-        <q-label>uid</q-label
-        ><q-input v-model="uid" dense class="q-mb-sm"></q-input>
+        <q-input label="uid" v-model="uid" dense class="q-mb-sm"></q-input>
       </div>
       <div><button @click="login">입력한 uid로 로그인</button></div>
       <div v-if="user">logged user: {{ user }}</div>
@@ -22,9 +21,9 @@ export default defineComponent({
     const $store = useStore()
 
     const user = computed({
-      get: () => $store.state.user.user,
+      get: () => $store.state.auth.user,
       set: (val) => {
-        $store.commit('user/setUser', val)
+        $store.commit('auth/setUser', val)
       }
     })
 
@@ -37,12 +36,15 @@ export default defineComponent({
       uid: 0
     }
   },
+  created() {},
   methods: {
     login() {
+      const uid = parseInt(this.uid)
       this.user = {
-        uid: this.uid,
-        thumbUrl: `${process.env.STATIC}/images/avatar/${this.uid}/thumb.jpg`
+        uid: uid,
+        thumbUrl: `${process.env.STATIC}/images/avatar/${uid}/thumb.jpg`
       }
+      this.$q.localStorage.set('auth', this.user)
       this.$router.push('/')
     }
   }

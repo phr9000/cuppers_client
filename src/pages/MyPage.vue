@@ -24,7 +24,7 @@ export default defineComponent({
     const user = computed({
       get: () => $store.state.auth.user,
       set: (val) => {
-        $store.commit('user/setUser', val)
+        $store.commit('auth/setUser', val)
       }
     })
 
@@ -49,7 +49,7 @@ export default defineComponent({
   methods: {
     logout() {
       this.user = null
-      this.$q.localStorage.remove('user')
+      this.$q.localStorage.remove('auth')
       this.$router.push('/login')
     }
   }

@@ -97,10 +97,7 @@
 
         <!-- tab2: 내목록 map-my-list -->
         <section v-show="tab === 'mylist'">
-          <div
-            v-if="!uid || uid < 1"
-            class="q-my-lg text-grey flex flex-center"
-          >
+          <div v-if="user === null" class="q-my-lg text-grey flex flex-center">
             <p>로그인이 필요합니다.</p>
           </div>
           <div v-else>
@@ -251,8 +248,8 @@ export default defineComponent({
   setup() {
     const $store = useStore()
 
-    const uid = computed({
-      get: () => $store.state.auth.user.uid
+    const user = computed({
+      get: () => $store.state.auth.user
     })
 
     const locState = computed({
@@ -263,7 +260,7 @@ export default defineComponent({
     })
 
     return {
-      uid,
+      user,
       locState
     }
   },
@@ -309,25 +306,14 @@ export default defineComponent({
         // init
         this.currentMyListItem = null
       } else if (val === 'mylist') {
-        this.loadMyList()
+        if (this.user) {
+          this.loadMyList()
+        }
       }
     }
   },
   created() {},
   mounted() {
-    // console.log('uid:', this.uid)
-
-    // setTimeout(() => {
-    //   console.log(this.locState)
-    //   if (this.locState === null) {
-    //     this.locationError()
-    //     return
-    //   }
-    // }, 200)
-    // this.currentLocation = this.locState
-
-    //console.log(process.env.KAKAO_API)
-
     if (!window.kakao || !window.kakao.maps) {
       const script = document.createElement('script')
       // 동적 로딩을 위해서 autoload=false 추가
@@ -544,9 +530,8 @@ export default defineComponent({
     loadMyList() {
       this.clearAllMarkers()
       this.cafes = []
-      console.log(this.uid)
 
-      let apiUrl = `${process.env.API}/cafe/mylist/all/${this.uid}` // real-server
+      let apiUrl = `${process.env.API}/cafe/mylist/all/${this.user.uid}` // real-server
       console.log(apiUrl)
       this.$axios
         .get(apiUrl)
@@ -566,19 +551,6 @@ export default defineComponent({
       let apiUrl = `${process.env.API_LOCAL}/mylist/${item.mylist_id}`
       this.loadCafes(apiUrl)
     },
-    // loadMyListCafes(mylist_id) {
-    //   console.log('loadMyListCafes', mylist_id)
-    //   let apiUrl = `${process.env.API_LOCAL}/mylist/${mylist_id}` // real-server
-    //   this.$axios
-    //     .get(apiUrl)
-    //     .then((result) => {
-    //       console.log(result.data)
-    //       this.cafes= this.
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-    // },
     // 현재위치에서 재검색
     researchInCurrentPosition() {
       // 현지도 바운더리 정보 가져오기

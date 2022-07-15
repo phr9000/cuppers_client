@@ -14,7 +14,8 @@ const routes = [
       },
       {
         path: 'my',
-        component: () => import('src/pages/MyPage.vue')
+        component: () => import('src/pages/MyPage.vue'),
+        meta: { requiresAuth: true }
       },
       {
         path: 'profile',
@@ -22,7 +23,8 @@ const routes = [
       },
       {
         path: 'review/write/:id',
-        component: () => import('src/pages/WriteReviewPage.vue')
+        component: () => import('src/pages/WriteReviewPage.vue'),
+        meta: { requiresAuth: true }
       },
       {
         path: 'reqnewcafe',
@@ -46,7 +48,8 @@ const routes = [
       },
       {
         path: 'cnote/write',
-        component: () => import('src/pages/test/CnoteWriteStep.vue')
+        component: () => import('src/pages/test/CnoteWriteStep.vue'),
+        meta: { requiresAuth: true }
       }
     ]
   },

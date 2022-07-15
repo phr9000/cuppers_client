@@ -83,12 +83,12 @@ export default {
   setup() {
     const $store = useStore()
 
-    const uid = computed({
-      get: () => $store.state.auth.user.uid
+    const user = computed({
+      get: () => $store.state.auth.user
     })
 
     return {
-      uid
+      user
     }
   },
   computed() {
@@ -156,7 +156,7 @@ export default {
     sendCnote() {
       this.cnote.cnote_content = this.editor.getHTML()
       // store에서 user_id 받음
-      this.cnote.user_id = this.uid
+      this.cnote.user_id = this.user.uid
       if (
         this.cnote.cnote_title === '' ||
         this.cnote.cnote_title === null ||

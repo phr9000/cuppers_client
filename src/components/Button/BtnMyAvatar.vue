@@ -14,10 +14,7 @@ export default defineComponent({
     const $store = useStore()
 
     const user = computed({
-      get: () => $store.state.auth.user,
-      set: (val) => {
-        $store.commit('user/setUser', val)
-      }
+      get: () => $store.state.auth.user
     })
 
     const url = computed({
