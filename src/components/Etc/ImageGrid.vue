@@ -93,6 +93,7 @@ import BtnBasic from 'src/components/Button/BtnBasic.vue'
 
 export default {
   name: 'ImageGrid',
+  components: { BtnBasic },
   props: {
     images: {
       type: Array,
