@@ -7,7 +7,7 @@
       </div>
       <div><button @click="login">입력한 uid로 로그인</button></div>
       <div v-if="user">logged user: {{ user }}</div>
-      <button @click="kakaoLogin">카카오로 로그인 하기</button>
+      <button @click="kakaoLogin2">카카오로 로그인 하기</button>
       <button @click="kakaoLogout">카카오로그아웃</button>
       <button @click="kakaoOut">카카오탈퇴</button>
     </div>
@@ -18,8 +18,7 @@
 import { defineComponent } from 'vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-// console.log(process.env.KAKAO_API)
-window.Kakao.init(process.env.KAKAO_API) // 중복 호출 방지 해야함
+
 // 카카오로 로그인 -> 이메일,성별,연령대,닉네임 을 얻을 수 있음
 // -> backend로 "이메일" 전송 ->
 // 1. ->가입이 안되어있으면 -> 가입페이지로 redirect 이메일로 가입처리
@@ -46,8 +45,31 @@ export default defineComponent({
       uid: 0
     }
   },
-  created() {},
+  created() {
+    if (this.$store.getters['auth/isLoggedIn']) {
+      this.$router.push('/my')
+    }
+  },
   methods: {
+    kakaoLogin2() {
+      if (window.Kakao.isInitialized()) {
+        window.Kakao.Auth.login({
+          scope: 'profile_image, account_email, profile_nickname',
+          success: function (authObj) {
+            console.log(authObj)
+            window.Kakao.API.request({
+              url: '/v2/user/me',
+              success: (res) => {
+                const kakao_account = res.kakao_account
+                console.log(kakao_account)
+                var accessToken = Kakao.Auth.getAccessToken() // 액세스 토큰 할당
+                console.log(accessToken)
+              }
+            })
+          }
+        })
+      }
+    },
     kakaoLogin() {
       window.Kakao.API.request({
         url: '/v2/user/me',
@@ -61,7 +83,7 @@ export default defineComponent({
     },
     // 로그아웃
     kakaoLogout() {
-      Kakao.init(process.env.KAKAO_API)
+      // Kakao.init(process.env.KAKAO_API)
       Kakao.isInitialized()
       if (!Kakao.Auth.getAccessToken()) {
         // 토큰이 있는지 확인 (토큰 가져와보기)
