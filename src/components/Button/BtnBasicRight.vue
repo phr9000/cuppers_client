@@ -4,7 +4,7 @@
     outline
     rounded
     :size="size"
-    class="btn_basic_right q-mr-xs"
+    class="btn_basic_right"
     :class="[
       size === 'sm'
         ? btnSmClass

@@ -3,7 +3,7 @@
     <btn-basic
       v-for="item in sort_items"
       :key="item.val"
-      class="btn_sort"
+      class="btn_sort q-ml-xs"
       :class="{ active: current === item.val }"
       @click="changeSort(item.val)"
       :label="item.label"

@@ -1,9 +1,14 @@
 // app global css in SCSS form
 @import url(./_header.scss);
 
-// * {
-//   // scroll-behavior: smooth;
-// }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
 
 .constrain {
   max-width: 1200px;
@@ -28,14 +33,12 @@
   cursor: initial;
   pointer-events: none; // 마우스 클릭 안되게
 }
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-a {
-  text-decoration: none;
+.section_title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 2rem;
+  letter-spacing: 0.0125em;
+  color: $grey-9;
 }
 
 .small_screen_only {

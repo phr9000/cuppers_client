@@ -129,7 +129,6 @@ export default {
   },
   methods: {
     loadKeywords() {
-      // let apiUrl = `${process.env.API_LOCAL}/mainKeywords` // json-server
       let apiUrl = `${process.env.API}/keyword/landing` // real-server
 
       this.$axios

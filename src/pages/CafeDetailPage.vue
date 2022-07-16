@@ -56,7 +56,7 @@
               <!-- 리뷰 쓰기 -->
               <btn-basic
                 @click="clickWritingReview"
-                class="btn_show_all bg-grey-2"
+                class="btn_show_all bg-grey-2 q-mr-xs"
                 :rounded="false"
                 icon="note_alt"
                 color="grey-9"
