@@ -114,7 +114,7 @@
                   size="sm"
                   color="grey-5"
                   icon="arrow_back_ios"
-                  @click="currentMyListItem = null"
+                  @click="backToMylist"
                 />
                 {{ currentMyListItem.mylist_name }}
               </q-item-label>
@@ -543,13 +543,20 @@ export default defineComponent({
           console.log(err)
         })
     },
-    // 마이리스트 내부 카페 리스트 가져오기
+    // 마이리스트 내부 카페 리스트 가져오기 - 마이리스트 내부로 진입
     handleClickMyListItem(item) {
-      console.log(item)
+      this.clearAllMarkers()
+      // console.log(item)
       this.currentMyListItem = item
 
-      let apiUrl = `${process.env.API_LOCAL}/mylist/${item.mylist_id}`
+      // let apiUrl = `${process.env.API_LOCAL}/mylist/${item.mylist_id}`
+      let apiUrl = `${process.env.API}/cafe/mylist/one/${item.mylist_id}?user_id=${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
       this.loadCafes(apiUrl)
+    },
+    // 마이리스트 내부 목록에서 마이리스트 목록으로 돌아가기
+    backToMylist() {
+      // this.clearTarget()
+      this.currentMyListItem = null
     },
     // 현재위치에서 재검색
     researchInCurrentPosition() {
