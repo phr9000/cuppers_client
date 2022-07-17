@@ -1,29 +1,58 @@
 {
-  "mainKeywords": [
-    { "keyword_id": 0, "keyword_name": "전망이 좋은" },
-    { "keyword_id": 1, "keyword_name": "소개팅하기 좋은" },
-    { "keyword_id": 2, "keyword_name": "연인과 같이  가면 좋은" },
-    { "keyword_id": 3, "keyword_name": "분위기가 좋은" },
-    { "keyword_id": 4, "keyword_name": "바리스타 챔피언" },
-    { "keyword_id": 5, "keyword_name": "바다가 보이는" },
-    { "keyword_id": 6, "keyword_name": "테라스가 있는" },
-    { "keyword_id": 7, "keyword_name": "낮에만 영업하는" },
-    { "keyword_id": 8, "keyword_name": "연중무휴" },
-    { "keyword_id": 9, "keyword_name": "정원이나 산책로가 있는" },
-    { "keyword_id": 10, "keyword_name": "브런치 메뉴가 있는" },
-    { "keyword_id": 11, "keyword_name": "루프탑이 있는" },
-    { "keyword_id": 12, "keyword_name": "새벽까지 영업하는" },
-    { "keyword_id": 13, "keyword_name": "미술 작품이 있는" },
-    { "keyword_id": 14, "keyword_name": "야경이 유명한" },
-    { "keyword_id": 15, "keyword_name": "반려동물 동반 가능" },
-    { "keyword_id": 16, "keyword_name": "공연이 있는" },
-    { "keyword_id": 17, "keyword_name": "한옥 인테리어" },
-    { "keyword_id": 18, "keyword_name": "블루리본에 선정된" },
-    { "keyword_id": 19, "keyword_name": "블루리본에 선정된" },
-    { "keyword_id": 20, "keyword_name": "블루리본에 선정된" },
-    { "keyword_id": 21, "keyword_name": "블루리본에 선정된" },
-    { "keyword_id": 22, "keyword_name": "블루리본에 선정된" },
-    { "keyword_id": 23, "keyword_name": "블루리본에 선정된" }
+  "keywords": [
+    {
+      "keyword_id": 30,
+      "reg_survey_imgurl": "images/keyword/30/bg.jpg",
+      "is_active": 1,
+      "keyword_name": "분위기 있는",
+      "keyword_type": "cafe",
+      "keyword_icon": ""
+    },
+    {
+      "keyword_id": 31,
+      "reg_survey_imgurl": "images/keyword/31/bg.jpg",
+      "is_active": 1,
+      "keyword_name": "커피에 대한 설명",
+      "keyword_type": "cafe",
+      "keyword_icon": ""
+    },
+    {
+      "keyword_id": 32,
+      "reg_survey_imgurl": "images/keyword/32/bg.jpg",
+      "is_active": 1,
+      "keyword_name": "뷰가 좋은",
+      "keyword_type": "cafe",
+      "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fnice_view.png?alt=media&token=18f656dd-0a0d-464e-9d6d-42cd8f67efac"
+    },
+    {
+      "keyword_id": 33,
+      "reg_survey_imgurl": "images/keyword/33/bg.jpg",
+      "is_active": 1,
+      "keyword_name": "야외 테라스",
+      "keyword_type": "cafe",
+      "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Ftable.png?alt=media&token=b812ba13-0f8e-4cdb-aaef-b29adc246ec3"
+    },
+    {
+      "keyword_id": 42,
+      "reg_survey_imgurl": "images/keyword/42/bg.jpg",
+      "is_active": 1,
+      "keyword_name": "사진찍기 좋은",
+      "keyword_type": "cafe",
+      "keyword_icon": "images/keyword/42/selfie.png"
+    },
+    {
+      "keyword_id": 5,
+      "reg_survey_imgurl": "images/keyword/5/bg.jpg",
+      "is_active": 1,
+      "keyword_name": "노트북하기 좋은",
+      "keyword_type": "cafe",
+      "keyword_icon": null
+    },
+    {
+      "id": 106,
+      "keyword_id": 106,
+      "keyword_name": "파티하기 좋은"
+    }
   ],
   "mainCafes": [
     {
@@ -1244,8 +1273,14 @@
         }
       ],
       "branches": [
-        { "cafe_id": 404, "cafe_name_pr": "송리단점" },
-        { "cafe_id": 405, "cafe_name_pr": "양평점" }
+        {
+          "cafe_id": 404,
+          "cafe_name_pr": "송리단점"
+        },
+        {
+          "cafe_id": 405,
+          "cafe_name_pr": "양평점"
+        }
       ],
       "facility": [
         {
@@ -1359,8 +1394,14 @@
         }
       ],
       "branches": [
-        { "cafe_id": 1, "branch_name": "본점" },
-        { "cafe_id": 405, "branch_name": "양평점" }
+        {
+          "cafe_id": 1,
+          "branch_name": "본점"
+        },
+        {
+          "cafe_id": 405,
+          "branch_name": "양평점"
+        }
       ],
       "facility": [
         {

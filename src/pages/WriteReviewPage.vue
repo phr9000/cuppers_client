@@ -5,40 +5,74 @@
 
       <main class="createpost">
         <section class="keyword">
-          <div class="text-subtitle1">카페 키워드 (중복 선택 가능)</div>
-          <div class="row justify-start">
-            <survey-select
-              style="width: 120px; height: 130px"
-              class="q-ma-xs"
+          <div class="section_title q-mb-sm">방문하신 카페는 어땠나요?</div>
+          <div class="text-subtitle1 q-mb-sm">
+            카페 키워드 <span class="text-primary">(중복 선택 가능)</span>
+          </div>
+          <div class="keywords_container">
+            <keyword-select
               v-for="keyword in cafeKeywords"
               :key="keyword.keyword_id"
               :id="keyword.keyword_id"
-              :type="keyword.keyword_type"
               :text="keyword.keyword_name"
               :icon="keyword.keyword_icon"
               :bg="keyword.reg_survey_imgurl"
+              :by_user="keyword.by_user"
               @checked="selectCafeKeyword"
               @unchecked="deSelectCafeKeyword"
+              ref="keywordSelect"
             />
           </div>
-          <div>선택한 카페 키워드 : {{ selectedCafeKeywords }}</div>
+          <div class="q-my-sm">
+            <q-input
+              @keyup.enter="checkAndAddKeyword"
+              v-model="newKeyword"
+              placeholder="위 항목에 없는 키워드를 직접 입력해 주세요."
+              stack-label
+              outlined
+              dense
+              ><template v-slot:append>
+                <q-btn
+                  @click="checkAndAddKeyword"
+                  :loading="isAddingKeyword"
+                  round
+                  flat
+                  icon="add"
+                /> </template
+            ></q-input>
+          </div>
         </section>
 
         <q-separator class="q-my-md"></q-separator>
 
         <section class="drink">
-          <div class="text-subtitle1">드신 커피를 작성해 주세요.</div>
-          <div class="q-mb-sm">
-            <q-input
-              v-model="review.drink_type"
-              label="커피의 종류"
-              placeholder="체크 박스로 구현할 예정"
-              stack-label
-              outlined
-              :dense="dense"
+          <div class="section_title q-mb-sm">커피는 어땠나요?</div>
+          <div class="text-subtitle1">
+            커피의 종류 <span class="text-primary">(중복 선택 가능)</span>
+          </div>
+          <div class="q-gutter-sm">
+            <q-checkbox
+              v-model="selectedDrinkType"
+              val="br"
+              label="브루잉"
+              color="primary"
+            />
+            <q-checkbox
+              v-model="selectedDrinkType"
+              val="va"
+              label="배리에이션"
+              color="primary"
+            />
+            <q-checkbox
+              v-model="selectedDrinkType"
+              checked-icon="star"
+              unchecked-icon="star_border"
+              val="sg"
+              label="시그니처 메뉴"
+              color="secondary"
             />
           </div>
-          <div class="q-mb-sm">
+          <div class="q-mb-sm q-px-sm">
             <q-input
               v-model="review.review_drink"
               label="커피 이름"
@@ -47,7 +81,7 @@
               :dense="dense"
             />
           </div>
-          <div class="q-mb-sm">
+          <div class="q-mb-sm q-px-sm">
             <q-input
               v-model="review.review_content"
               label="드신 커피를 리뷰해주세요."
@@ -62,8 +96,8 @@
 
         <q-separator class="q-my-md"></q-separator>
 
-        <section class="image_upload">
-          <div class="row q-pb-md">
+        <section class="section_image_upload q-px-sm">
+          <div class="image_upload row q-pb-md">
             <div class="col-10">
               <div class="column">
                 <div class="text-subtitle1">음식‧실내외 사진</div>
@@ -105,16 +139,25 @@
         </section>
 
         <q-separator class="q-my-md"></q-separator>
-        <!-- <section>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="리뷰 제목"
-          v-model.trim="title"
-        />
-      </section> -->
       </main>
-      <button class="q-mt-lg" @click="postReview">리뷰 등록</button>
+
+      <!-- 리뷰 등록 -->
+      <btn-basic
+        class="bg-grey-2"
+        :rounded="false"
+        icon="dashboard"
+        color="grey-9"
+        label="리뷰 등록"
+        padding="4px 8px "
+        @click="postReview"
+      />
+
+      <div class="q-mt-xl q-px-sm">
+        선택한 카페 키워드: <strong>{{ selectedCafeKeywords }}</strong>
+      </div>
+      <div class="q-px-sm">
+        커피의 종류: <strong>{{ review.drink_type }}</strong>
+      </div>
     </section>
   </q-page>
 </template>
@@ -128,11 +171,12 @@ import { useStore } from 'vuex'
 import useResize from 'src/composables/useResize'
 const { resizeImage, resizeImageSquare } = useResize()
 
-import SurveySelect from 'src/components/Etc/SurveySelect.vue'
+import KeywordSelect from 'src/components/Badge/KeywordSelect.vue'
+import BtnBasic from 'src/components/Button/BtnBasic.vue'
 
 export default defineComponent({
   name: 'WriteReviewPage',
-  components: { SurveySelect },
+  components: { KeywordSelect, BtnBasic },
 
   setup() {
     const $store = useStore()
@@ -150,12 +194,15 @@ export default defineComponent({
       cafeId: null,
       dense: false,
       cafeKeywords: [], // 예시로 보여질 키워드
+      addedKeywords: [], // 예시로 보여질 키워드
+      newKeyword: '파티하기 좋은', // input으로 추가할 키워드
+      isAddingKeyword: false,
       files: [],
       review: {
         cafe_id: 1,
         user_id: 1,
         review_drink: '플랫화이트',
-        drink_type: 'va',
+        drink_type: '',
         review_content:
           '플랫화이트 Flat White 는 에스프레소에 크림처럼 고운 스팀밀크를 올린 커피 음료예요. 라떼나 카푸치노와 비슷하지만, 밀크폼이 좀 더 부드럽고 커피맛이 진한 게 특징이에요. 저는 모르는 카페를 갔을 때 카페 라떼를 주문하는 일은 거의 없어도 플랫화이트는 종종 시켜먹어요',
         review_img: 'images/review/26/g_01_thumb.jpg'
@@ -176,7 +223,15 @@ export default defineComponent({
       ],
       selectedCafeKeywords: [
         // { keyword_id: 3 }, { keyword_id: 3 }
+      ],
+      selectedDrinkType: [
+        // 'br', 'va', 'sg'
       ]
+    }
+  },
+  watch: {
+    selectedDrinkType(val) {
+      this.review.drink_type = val.toString()
     }
   },
   created() {
@@ -186,17 +241,111 @@ export default defineComponent({
   mounted() {},
   methods: {
     loadKeywords() {
-      let apiUrl = `${process.env.API}/keyword/survey` // real-server
+      // let apiUrl = `${process.env.API}/keyword/survey` // real-server
+      let apiUrl = `${process.env.API_LOCAL}/keywords` // json-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
+          // console.log(result.data)
           this.cafeKeywords = result.data.filter((item) => {
             return item.keyword_type === 'cafe'
           })
+          // this.cafeKeywords = result.data
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+    async checkAndAddKeyword() {
+      const newKeyword = this.newKeyword
+
+      // input value 유효성 검사
+      if (newKeyword.length < 3) {
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '세 글자 이상의 키워드만 가능합니다.',
+          color: 'info'
+        })
+
+        return
+      }
+      this.isAddingKeyword = true
+
+      setTimeout(() => {
+        this.addKeyword(newKeyword)
+      }, 300)
+    },
+    addKeyword(newKeyword) {
+      // back에 해당 키워드가 있는지 확인
+      let apiUrl = `${process.env.API_LOCAL}/keywords?q=${newKeyword}` // json-server
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          console.log(result.data.length)
+
+          // 있다면
+          // 해당 키워드의 keyword_id 를 구함
+
+          // 없다면
+          // 해당 키워드를 post, keyword_id 를 구함
+
+          const keyword_id = parseInt(Math.random() * (200 - 101) + 101)
+          console.log(keyword_id)
+          // json-server 테스트용 오브젝트
+          const payload = {
+            // 실제 api에선 keyword_name 만 전달하고 result로 온 keyword_id값을 사용해야함
+            id: keyword_id,
+            keyword_id: keyword_id,
+            keyword_name: newKeyword
+          }
+          console.log(payload)
+          // let formData = new FormData()
+          // formData.append('keyword_id', keyword_id)
+          // formData.append('keyword_name', newKeyword)
+
+          if (result.data.length === 0) {
+            apiUrl = `${process.env.API_LOCAL}/keywords`
+            this.$axios
+              .post(apiUrl, payload)
+              .then((result) => {
+                console.log(result)
+                // 실제 api에선 result로 온 keyword_id값을 사용해야함
+                const id = result.data.keyword_id
+
+                // cafeKeywords 에추가
+                this.cafeKeywords.push({
+                  keyword_id: id,
+                  keyword_name: newKeyword,
+                  by_user: true
+                })
+
+                // 방금 추가한 card의 ref를 가지고 체크상태로 변경
+                this.check(this.cafeKeywords.length - 1)
+
+                // selectedCafeKeywords 에추가
+                // this.selectedCafeKeywords.push({ keyword_id: keyword_id })
+
+                this.newKeyword = ''
+
+                this.isAddingKeyword = false
+              })
+              .catch((err) => {
+                console.log(err)
+                this.isAddingKeyword = false
+              })
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          this.isAddingKeyword = false
+        })
+    },
+    async check(i) {
+      setTimeout(() => {
+        // 방금 추가한 card의 ref를 가지고 체크상태로 변경
+        this.$refs.keywordSelect[i].handleClick()
+      }, 30)
     },
     selectCafeKeyword(id) {
       this.selectedCafeKeywords.push({ keyword_id: id })
@@ -240,7 +389,7 @@ export default defineComponent({
                 url = r.data.url
 
                 // 2. 썸네일 이미지 업로드
-                resizeImageSquare({ file: file, maxSize: 300, square: true })
+                resizeImageSquare({ file: file, maxSize: 500, square: true })
                   .then((blob_thumb) => {
                     const formData = new FormData()
                     formData.append('image', blob_thumb)
@@ -315,6 +464,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .createpost {
+  .keywords_container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, auto));
+    gap: 4px 4px;
+
+    @media (max-width: $breakpoint-xs-max) {
+      grid-template-columns: repeat(2, minmax(90px, auto));
+    }
+  }
   .image_upload {
     height: 102px;
   }
