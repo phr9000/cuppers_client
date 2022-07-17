@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: 'CardUser',
+  name: 'CardUserInfo',
   components: {},
   data() {
     return {
