@@ -7,9 +7,8 @@
       </div>
       <div><button @click="login">입력한 uid로 로그인</button></div>
       <div v-if="user">logged user: {{ user }}</div>
-      <button @click="kakaoLogin2">카카오로 로그인 하기</button>
+      <button @click="kakaoLogin">카카오로 로그인 하기</button>
       <button @click="kakaoLogout">카카오로그아웃</button>
-      <button @click="kakaoOut">카카오탈퇴</button>
     </div>
   </q-page>
 </template>
@@ -51,34 +50,72 @@ export default defineComponent({
     }
   },
   methods: {
-    kakaoLogin2() {
+    // kakaoLogin2() {
+    //   if (window.Kakao.isInitialized()) {
+    //     window.Kakao.Auth.login({
+    //       scope: 'profile_image, account_email, profile_nickname',
+    //       success: function (authObj) {
+    //         // console.log(authObj)
+    //         window.Kakao.API.request({
+    //           url: '/v2/user/me',
+    //           success: (res) => {
+    //             const kakao_account = res.kakao_account
+    //             console.log(kakao_account)
+    //             var accessToken = Kakao.Auth.getAccessToken() // 액세스 토큰 할당
+    //             console.log(accessToken)
+    //           }
+    //         })
+    //       },
+    //       async login(kakao_account) {
+    //         console.log(kakao_account)
+    //         await this.$axios.post('http://localhost:3000/api/login', {
+    //           login: [
+    //             {
+    //               user_email: kakao_account_email,
+    //               user_thumbnail_url: kakao_account.profile.thumbnail_image_url,
+    //               user_nickname: kakao_account.profile.nickname
+    //             },
+    //             {
+    //               user_email: kakao_account_email,
+    //               user_thumbnail_url: kakao_account.profile.thumbnail_image_url,
+    //               user_nickname: kakao_account.profile.nickname
+    //             }
+    //           ]
+    //         })
+    //       }
+    //     })
+    //   }
+    // },
+
+    // 로그인
+    kakaoLogin() {
       if (window.Kakao.isInitialized()) {
         window.Kakao.Auth.login({
           scope: 'profile_image, account_email, profile_nickname',
-          success: function (authObj) {
-            console.log(authObj)
-            window.Kakao.API.request({
-              url: '/v2/user/me',
-              success: (res) => {
-                const kakao_account = res.kakao_account
-                console.log(kakao_account)
-                var accessToken = Kakao.Auth.getAccessToken() // 액세스 토큰 할당
-                console.log(accessToken)
-              }
-            })
-          }
+          success: this.getProfile
         })
       }
     },
-    kakaoLogin() {
+
+    getProfile(authObj) {
       window.Kakao.API.request({
         url: '/v2/user/me',
         success: (res) => {
           const kakao_account = res.kakao_account
+          this.kLogin(kakao_account)
           console.log(kakao_account)
-          var accessToken = Kakao.Auth.getAccessToken() // 액세스 토큰 할당
-          console.log(accessToken)
         }
+      })
+    },
+    async kLogin(kakao_account) {
+      await this.$axios.post('http://localhost:3000/api/login', {
+        param: [
+          {
+            user_email: kakao_account.email,
+            user_thumbnail_url: kakao_account.profile.thumbnail_image_url,
+            user_nickname: kakao_account.profile.nickname
+          }
+        ]
       })
     },
     // 로그아웃
@@ -94,28 +131,6 @@ export default defineComponent({
       Kakao.Auth.logout(function () {
         // 카카오 로그아웃
         console.log(Kakao.Auth.getAccessToken())
-      })
-    },
-    // 탈퇴
-    kakaoOut() {
-      Kakao.init(process.env.KAKAO_API)
-      Kakao.isInitialized()
-      Kakao.Auth.setAccessToken(
-        QZigipQ81eBBhic4LGFlrRKDjQxgq8gZ7dFNhBIfCj10lwAAAYIEIhgM
-      )
-
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-          console.log(response)
-          callbackFunction() // 연결끊기(탈퇴)성공시 서버에서 처리할 함수
-        },
-        fail: function (error) {
-          alert(
-            '탈퇴처리가 미완료되었습니다. \n관리자에게 문의하시기 바랍니다.'
-          )
-          console.log(error)
-        }
       })
     },
     login() {
