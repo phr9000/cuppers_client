@@ -83,7 +83,7 @@ export default {
       this.new_menu.menu_type = 'br'
       return this.new_menu
     },
-    deleteCard(menu_id) {
+    deleteCard() {
       console.log(this.menu_id)
       this.$emit('deleteCard', this.menu_id)
     }

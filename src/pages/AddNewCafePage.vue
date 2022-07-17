@@ -198,6 +198,12 @@ export default defineComponent({
       menus: []
     }
   },
+  mounted() {
+    const id = this.menus.length + 1
+
+    this.menus.push({ menu_id: id, menu_type: 'br' })
+    this.menus.push({ menu_id: id, menu_type: 'va' })
+  },
   methods: {
     async verifyCafeName() {
       console.log(this.cafe.cafe_name_pr)
@@ -217,7 +223,7 @@ export default defineComponent({
         })
         .catch((err) => console.log(err))
     },
-    submitCafeInfo() {
+    async submitCafeInfo() {
       // 카페 등록하기
       console.log('카페 등록: ', {
         cafe: this.cafe
@@ -232,11 +238,17 @@ export default defineComponent({
 
       // 이미지 등록하기
       let images = this.$refs.ImageUpload.images
-      console.log(this.$refs.ImageUpload.images)
-      // console.log('이미지 등록: ', images)
+      console.log('이미지 등록: ', images)
 
-      // axios post
-      this.$axios
+      let payload = {
+        cafe: this.cafe,
+        menus: menus,
+        images: [...images]
+      }
+      console.log(payload)
+
+      // this.axios post
+      await this.$axios
         .post('http://localhost:3000/api/cafe', {
           cafe: this.cafe,
           menus: menus,
