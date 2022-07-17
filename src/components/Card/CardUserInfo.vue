@@ -1,17 +1,18 @@
 <template>
-  <div v-if="userCardActive">
-    <div class="user-card-container">
-      <div class="user-card-inner">
+  <div>
+    <!-- 유저 정보 -->
+    <div v-if="user_info" class="user_card_wrap">
+      <div class="user_card_inner">
         <!-- top -->
         <div class="top">
           <!-- user 사진 -->
           <div class="user-pic">
-            <img src="/icons/avatar.jpg" alt="profile 사진" />
+            <q-img :src="user_info.thumbUrl" alt="profile 사진" />
           </div>
           <!-- user 이름 -->
-          <strong class="user-name">hr@gmail.com</strong>
+          <strong class="user-name">{{ user_info.user_email }}</strong>
           <!-- user 소개 -->
-          <div class="user-intro">커피를 통해 세상을 아름답게</div>
+          <div class="user-intro">{{ user_info.user_introduce }}</div>
         </div>
 
         <div class="bottom">
@@ -35,13 +36,66 @@
             </div>
           </div>
           <!-- btn area -->
-          <div class="btn-area">
+          <!-- <div class="btn-area">
             <div class="btn follow">팔로우</div>
             <div class="btn see-more">자세히보기</div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- skeleton -->
+    <div v-else class="user_card_wrap">
+      <div class="user_card_inner">
+        <!-- top -->
+        <div class="top">
+          <!-- user 사진 -->
+          <div class="user-pic">
+            <q-skeleton type="QAvatar" />
+          </div>
+          <!-- user 이름 -->
+          <div class="user-name">
+            <q-skeleton
+              type="rect"
+              width="150px"
+              height="20px"
+              style="margin: 0 auto"
+            />
+          </div>
+          <!-- user 소개 -->
+          <div class="q-pt-xs">
+            <q-skeleton
+              type="rect"
+              width="150px"
+              height="14px"
+              style="margin: 0 auto"
+            />
+          </div>
+        </div>
+
+        <div class="bottom">
+          <div class="user-info">
+            <div class="box q-mt-xs" v-for="i in 4" :key="i">
+              <p class="num">
+                <q-skeleton
+                  type="rect"
+                  width="60px"
+                  height="20px"
+                  style="margin: 0 auto"
+                />
+              </p>
+              <p class="txt q-pt-xs">
+                <q-skeleton
+                  type="rect"
+                  width="60px"
+                  height="14px"
+                  style="margin: 0 auto"
+                />
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="close close3" @click="close()"></div>
     </div>
   </div>
 </template>
@@ -50,10 +104,16 @@
 export default {
   name: 'CardUserInfo',
   components: {},
-  data() {
-    return {
-      userCardActive: true
+  props: {
+    user_info: {
+      type: Object,
+      default: () => {
+        return null
+      }
     }
+  },
+  data() {
+    return {}
   },
   methods: {
     close() {
@@ -63,18 +123,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.user-card-container {
-  position: relative;
-  margin: 30px;
-  width: 350px;
-  height: auto;
-  // border: 1px solid #ccc;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  border-radius: 16px;
+.user_card_wrap {
   text-align: center;
-  .user-card-inner {
-    padding: 10px 0;
+  .user_card_inner {
+    padding: 0;
     padding-top: 20px;
   }
 
@@ -99,15 +151,16 @@ export default {
     }
     &:after {
       position: absolute;
-      bottom: -11px;
+      bottom: -7px;
       left: 50%;
       transform: translate(-50%, 0);
       display: block;
       content: '';
-      width: 80%;
-      border: 1px solid #eaeaea;
+      width: 95%;
+      border-bottom: 1px solid #eaeaea;
     }
     .user-intro {
+      padding-bottom: 8px;
       color: #a6a6a6;
       font-weight: 700;
       font-size: 12px;
@@ -123,7 +176,7 @@ export default {
       justify-content: center;
       .box {
         width: 25%;
-        padding-top: 10px;
+        padding: 12px 0;
         > p {
           margin: 0;
         }
@@ -137,7 +190,6 @@ export default {
           font-size: 12px;
           color: #bdbdbd;
           font-weight: 900;
-          margin-bottom: 10px;
         }
       }
     }
