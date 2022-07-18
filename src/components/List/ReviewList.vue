@@ -1,90 +1,91 @@
 <template>
-  <div class="text-h4 text-center q-mb-md">리뷰</div>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
-  <p>
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-    cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-    commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-  </p>
+  <div class="review_list">
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
+      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
+      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
+    </p>
+  </div>
 </template>
 
 <script>

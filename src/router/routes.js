@@ -9,10 +9,6 @@ const routes = [
         component: () => import('src/pages/CafeDetailPage.vue')
       },
       {
-        path: 'sns',
-        component: () => import('src/pages/CoffeeSNSPage.vue')
-      },
-      {
         path: 'my',
         component: () => import('src/pages/MyPage.vue'),
         meta: { requiresAuth: true }
@@ -24,7 +20,7 @@ const routes = [
       {
         path: 'review/write/:id',
         component: () => import('src/pages/WriteReviewPage.vue'),
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: false }
       },
       {
         path: 'reqnewcafe',
@@ -60,6 +56,21 @@ const routes = [
   {
     path: '/map',
     component: () => import('layouts/MapLayout.vue')
+  },
+  {
+    path: '/sns',
+    component: () => import('layouts/SNSLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/CnoteMainPage.vue') },
+      {
+        path: 'cnote',
+        component: () => import('pages/CnoteMainPage.vue')
+      },
+      {
+        path: 'review',
+        component: () => import('pages/ReviewMainPage.vue')
+      }
+    ]
   },
   {
     path: '/test',

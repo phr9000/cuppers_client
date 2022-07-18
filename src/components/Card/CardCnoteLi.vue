@@ -6,8 +6,8 @@
     flat
     class="card q-pa-md column overflow-hidden"
   >
-    <q-card-section class="row q-pa-none">
-      <div class="col-10">
+    <q-card-section class="card_inner q-pa-none">
+      <div class="inner_left">
         <div class="">
           <div class="row justify-between items-start q-mb-xs">
             <div class="row items-center">
@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="caption text-caption overflow-hidden">
-            {{ cnote.cnote_content }}
+            {{ delHtmlContent }}
           </div>
           <div class="info q-mb-xs">
             <div class="text-grey row items-center">
@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div class="col-2 q-pl-md q-pt-xs">
+      <div class="inner_right q-pl-md">
         <!-- style="max-width: 280px; max-height: 320px" -->
         <q-img class="thumbnail" :ratio="1" :src="cnote.cnote_thumbnail" /></div
     ></q-card-section>
@@ -62,6 +62,9 @@ export default defineComponent({
     return {}
   },
   computed: {
+    delHtmlContent() {
+      return this.cnote.cnote_content.replace(/<[^>]*>?/g, '')
+    },
     dateago() {
       try {
         if (this.cnote.created_at) {
@@ -111,9 +114,11 @@ export default defineComponent({
   min-width: 300px;
   box-shadow: 0 1px 5px rgb(0 0 0 / 8%), 0 2px 2px rgb(0 0 0 / 14%),
     0 3px 1px -2px rgb(0 0 0 / 12%) !important;
-  // border-radius: $border-radius;
-  // background-color: aqua;
-  // border-bottom: 1px solid $grey-4;
+
+  .card_inner {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+  }
 
   cursor: pointer;
   &:hover {
@@ -130,6 +135,8 @@ export default defineComponent({
   }
   .thumbnail {
     border-radius: $border-radius-md;
+    min-width: 100px;
+    min-height: 100px;
   }
   .caption {
     color: $grey-8;
