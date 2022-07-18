@@ -1774,7 +1774,6 @@
       "cnote_id": 1,
       "user_id": 1,
       "cnote_title": "10월에 마신 7개의 카페",
-      "cnote_description": "파주 - 성북 - 송파 - 영등포 - 문래 - 합정동 - 성수동서울숲",
       "user_name": "Marilyn",
       "user_thumbnail": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg",
       "cnote_content": "최고급 대형 스피커에서 내내 클래식 음악이 울려 퍼지는 음악 감상실. 음악이 이 공간을 가득 채우는 느낌이 묵직하게 들어 좋았다. 혼자 음악을 감상하며 여유롭게 사색을 즐기기에는 좋고, 여럿이서 대화를 나누고자 한다면 적합한 곳은 아니다. 인당 9천 원의 입장료가 있으며, 음료 맛에는 큰 기대를 하지 않고 열심히 분위기를 즐기는 편이 낫다. 가을에 파주 헤이리 마을을 찾는다면 한 번쯤 가볼 만한 명소다.",
@@ -2058,53 +2057,57 @@
       "user_marked": 0
     }
   ],
-  "user": [
+  "recUsers": [
     {
-      "id": 1,
-      "user_id": 1,
-      "user_name": "동글동글동글이",
-      "user_email": "cuppers@cuppers.com",
-      "user_lv": 1,
-      "user_introduce": "Hello",
-      "user_thumbnail_url": "https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83"
-    },
-    {
-      "id": 2,
-      "user_id": 2,
-      "user_name": "길막",
-      "user_email": "cuppers@cuppers.com",
-      "user_lv": 1,
-      "user_introduce": "Hello",
-      "user_thumbnail": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/008_1.jpg"
-    },
-    {
-      "id": 3,
-      "user_id": 3,
-      "user_name": "삼색",
-      "user_email": "cuppers@cuppers.com",
-      "user_lv": 1,
-      "user_introduce": "Hello",
-      "user_thumbnail": "https://yt3.ggpht.com/4wWds50BAyqbXstt2lDS7IcmCF3A0vdvqUnliJ3UukkRuBae0daZpAO_3uU-JwPO5SjXqflkRw=s176-c-k-c0x00ffffff-no-rj"
-    },
-    {
-      "id": 4,
-      "user_id": 4,
-      "user_name": "무",
-      "user_email": "cuppers@cuppers.com",
-      "user_lv": 1,
-      "user_introduce": "Hello",
-      "user_thumbnail": "https://i.pinimg.com/564x/ae/b2/9c/aeb29ca628a2e8c49feddbd0688f4c44.jpg"
-    },
-    {
-      "id": 5,
       "user_id": 5,
-      "user_name": "Marilyn",
-      "user_email": "cuppers@cuppers.com",
+      "user_introduce": "길막",
+      "user_thumbnail_url": "images/avatar/5/thumb.jpg",
+      "user_nickname": "길막",
+      "write_cnt": 124,
+      "follower_cnt": 1130
+    },
+    {
+      "user_id": 6,
+      "user_email": "test@test.com",
+      "user_introduce": "Three Color",
       "user_lv": 1,
-      "user_introduce": "Hello, I'm 555",
-      "user_thumbnail": "http://preview.kyobobook.co.kr/preview/008/epb/183/4801196447183/images/012_7.jpg"
+      "user_thumbnail_url": "images/avatar/6/thumb.jpg",
+      "user_nickname": "Three Color",
+      "write_cnt": 124,
+      "follower_cnt": 1130
+    },
+    {
+      "user_id": 7,
+      "user_email": "test@test.com",
+      "user_introduce": "뚱땅",
+      "user_lv": 1,
+      "user_thumbnail_url": "images/avatar/3/thumb.jpg",
+      "user_nickname": "뚱땅",
+      "write_cnt": 124,
+      "follower_cnt": 1130
+    },
+    {
+      "user_id": 9,
+      "user_email": "coffeeexplorer@test.com",
+      "user_introduce": "커피익스플로러",
+      "user_lv": 1,
+      "user_thumbnail_url": "images/avatar/4/thumb.jpg",
+      "user_nickname": "커피익스플로러",
+      "write_cnt": 124,
+      "follower_cnt": 1130
+    },
+    {
+      "user_id": 33,
+      "user_email": "test@test.com",
+      "user_introduce": "동글동글동글이",
+      "user_lv": 1,
+      "user_thumbnail_url": "",
+      "user_nickname": "동글동글동글이",
+      "write_cnt": 124,
+      "follower_cnt": 1130
     }
   ],
+
   "cafeImages": [
     {
       "type": "g",

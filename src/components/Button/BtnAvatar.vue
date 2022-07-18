@@ -15,12 +15,16 @@ export default defineComponent({
     },
     url: {
       type: String,
-      default: 'images/avatar/1/thumb.jpg'
+      default: 'images/avatar/0/thumb.jpg'
     }
   },
   computed: {
     calUrl() {
-      return `${process.env.STATIC}/${this.url}`
+      if (this.url !== '') {
+        return `${process.env.STATIC}/${this.url}`
+      } else {
+        return `${process.env.STATIC}/images/avatar/0/thumb.jpg`
+      }
     }
   },
   methods: {
