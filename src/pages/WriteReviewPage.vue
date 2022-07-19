@@ -195,13 +195,13 @@ export default defineComponent({
       dense: false,
       cafeKeywords: [], // 예시로 보여질 키워드
       addedKeywords: [], // 예시로 보여질 키워드
-      newKeyword: '파티하기 좋은', // input으로 추가할 키워드
+      newKeyword: '테스트', // input으로 추가할 키워드
       isAddingKeyword: false,
       files: [],
       review: {
         cafe_id: 1,
         user_id: 1,
-        review_drink: '플랫화이트',
+        review_drink: '아메리카노',
         drink_type: '',
         review_content:
           '플랫화이트 Flat White 는 에스프레소에 크림처럼 고운 스팀밀크를 올린 커피 음료예요. 라떼나 카푸치노와 비슷하지만, 밀크폼이 좀 더 부드럽고 커피맛이 진한 게 특징이에요. 저는 모르는 카페를 갔을 때 카페 라떼를 주문하는 일은 거의 없어도 플랫화이트는 종종 시켜먹어요',
@@ -241,8 +241,8 @@ export default defineComponent({
   mounted() {},
   methods: {
     loadKeywords() {
-      // let apiUrl = `${process.env.API}/keyword/survey` // real-server
-      let apiUrl = `${process.env.API_LOCAL}/keywords` // json-server
+      let apiUrl = `${process.env.API}/keyword/survey` // real-server
+      // let apiUrl = `${process.env.API_LOCAL}/keywords` // json-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
@@ -251,6 +251,7 @@ export default defineComponent({
             return item.keyword_type === 'cafe'
           })
           // this.cafeKeywords = result.data
+          console.log(this.cafeKeywords)
         })
         .catch((err) => {
           console.log(err)
@@ -260,6 +261,23 @@ export default defineComponent({
       const newKeyword = this.newKeyword
 
       // input value 유효성 검사
+      // 1. 이미 리스트에 있는 키워드
+      const isInArray = this.cafeKeywords.find(
+        (el) =>
+          el.keyword_name.replace(/\s/g, '') === newKeyword.replace(/\s/g, '')
+      )
+      if (isInArray) {
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '이미 보기로 불러온 키워드 입니다.',
+          color: 'info'
+        })
+
+        return
+      }
+
+      // 2. 글자수
       if (newKeyword.length < 3) {
         this.$q.notify({
           position: 'top',
@@ -270,71 +288,55 @@ export default defineComponent({
 
         return
       }
+
       this.isAddingKeyword = true
 
-      setTimeout(() => {
-        this.addKeyword(newKeyword)
-      }, 300)
+      // -> db에 keyword_name 전달하여 실제 keyword_id, keyword_name 을 가져옴
+      //    이 과정에서 db에 없다면 새로 추가
+
+      // setTimeout(() => {
+      this.addKeyword(newKeyword)
+      // }, 300)
     },
     addKeyword(newKeyword) {
-      // back에 해당 키워드가 있는지 확인
-      let apiUrl = `${process.env.API_LOCAL}/keywords?q=${newKeyword}` // json-server
+      // -> db에 keyword_name 전달하여 실제 keyword_id, keyword_name 을 가져옴
+      //    이 과정에서 db에 없다면 새로 추가
+      let apiUrl = `${process.env.API}/keyword/check`
       this.$axios
-        .get(apiUrl)
-        .then((result) => {
-          console.log(result.data.length)
-
-          // 있다면
-          // 해당 키워드의 keyword_id 를 구함
-
-          // 없다면
-          // 해당 키워드를 post, keyword_id 를 구함
-
-          const keyword_id = parseInt(Math.random() * (200 - 101) + 101)
-          console.log(keyword_id)
-          // json-server 테스트용 오브젝트
-          const payload = {
-            // 실제 api에선 keyword_name 만 전달하고 result로 온 keyword_id값을 사용해야함
-            id: keyword_id,
-            keyword_id: keyword_id,
+        .post(apiUrl, {
+          param: {
             keyword_name: newKeyword
           }
-          console.log(payload)
-          // let formData = new FormData()
-          // formData.append('keyword_id', keyword_id)
-          // formData.append('keyword_name', newKeyword)
+        })
+        .then((result) => {
+          console.log(result)
 
-          if (result.data.length === 0) {
-            apiUrl = `${process.env.API_LOCAL}/keywords`
-            this.$axios
-              .post(apiUrl, payload)
-              .then((result) => {
-                console.log(result)
-                // 실제 api에선 result로 온 keyword_id값을 사용해야함
-                const id = result.data.keyword_id
+          const isInArray = this.cafeKeywords.find(
+            (el) => el.keyword_id === result.data.keyword_id
+          )
 
-                // cafeKeywords 에추가
-                this.cafeKeywords.push({
-                  keyword_id: id,
-                  keyword_name: newKeyword,
-                  by_user: true
-                })
+          // 해당 keyword_id 가 이미 array에 있을 경우 추가하지 않음
+          if (isInArray) {
+            this.$q.notify({
+              position: 'top',
+              timeout: 1000,
+              message: '이미 보기로 불러온 키워드 입니다.',
+              color: 'info'
+            })
+          } else {
+            // cafeKeywords 에추가
+            this.cafeKeywords.push({
+              keyword_id: result.data.keyword_id,
+              keyword_name: result.data.keyword_name,
+              by_user: result.data.isNew === 1 ? true : false
+            })
 
-                // 방금 추가한 card의 ref를 가지고 체크상태로 변경
-                this.check(this.cafeKeywords.length - 1)
-
-                // selectedCafeKeywords 에추가
-                // this.selectedCafeKeywords.push({ keyword_id: keyword_id })
-
-                this.newKeyword = ''
-
-                this.isAddingKeyword = false
-              })
-              .catch((err) => {
-                console.log(err)
-                this.isAddingKeyword = false
-              })
+            // 방금 추가한 card의 ref를 가지고 체크상태로 변경
+            this.check(this.cafeKeywords.length - 1)
+            this.newKeyword = ''
           }
+
+          this.isAddingKeyword = false
         })
         .catch((err) => {
           console.log(err)
