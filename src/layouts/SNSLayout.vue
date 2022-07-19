@@ -15,7 +15,7 @@
     >
       <q-scroll-area class="fit">
         <q-list padding>
-          <q-item class="text-primary" clickable v-ripple>
+          <q-item to="/cnote/write" class="text-primary" clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="note_alt" />
             </q-item-section>

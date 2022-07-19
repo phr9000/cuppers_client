@@ -11,5 +11,26 @@
       "keyword_icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fcoffee-plant.png?alt=",
       "reg_survey_name": "좋아하는 커피의 특징 (중복 선택 가능)"
     }
-  ]
+  ],
+  "review": {
+    "cafe_id": 1,
+    "user_id": 3,
+    "review_drink": "플랫화이트",
+    "drink_type": "va",
+    "review_content": "플랫화이트 Flat White 는 에스프레소에 크림처럼 고운 스팀밀크를 올린 커피 음료예요. 라떼나 카푸치노와 비슷하지만, 밀크폼이 좀 더 부드럽고 커피맛이 진한 게 특징이에요. 저는 모르는 카페를 갔을 때 카페 라떼를 주문하는 일은 거의 없어도 플랫화이트는 종종 시켜먹어요",
+    "review_img": "https://picsum.photos/201"
+  },
+  "images": [
+    {
+      "images_review_type": "g",
+      "images_review_url": "1657443015789.jpg",
+      "thumbnail_url": "1657443015789.jpg"
+    },
+    {
+      "images_review_type": "m",
+      "images_review_url": "1657443035752.jpg",
+      "thumbnail_url": "1657443035752.jpg"
+    }
+  ],
+  "keywords": [{ "keyword_id": 1 }, { "keyword_id": 2 }]
 }

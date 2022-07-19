@@ -27,7 +27,6 @@ export default {
   },
   computed: {
     calUrl() {
-      console.log(this.url)
       if (this.url.startsWith('images/')) {
         return `${process.env.STATIC}/${this.url}`
       }

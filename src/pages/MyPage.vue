@@ -35,6 +35,9 @@ import CardUserInfo from 'src/components/Card/CardUserInfo.vue'
 
 export default defineComponent({
   name: 'MyPage',
+  components: {
+    CardUserInfo
+  },
   setup() {
     const $store = useStore()
 
@@ -48,9 +51,6 @@ export default defineComponent({
     return {
       user
     }
-  },
-  components: {
-    CardUserInfo
   },
   data() {
     return {

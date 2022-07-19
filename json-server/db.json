@@ -2073,8 +2073,8 @@
       "user_lv": 1,
       "user_thumbnail_url": "images/avatar/6/thumb.jpg",
       "user_nickname": "Three Color",
-      "write_cnt": 124,
-      "follower_cnt": 1130
+      "write_cnt": 32,
+      "follower_cnt": 61
     },
     {
       "user_id": 7,
@@ -2083,8 +2083,8 @@
       "user_lv": 1,
       "user_thumbnail_url": "images/avatar/3/thumb.jpg",
       "user_nickname": "뚱땅",
-      "write_cnt": 124,
-      "follower_cnt": 1130
+      "write_cnt": 224,
+      "follower_cnt": 101
     },
     {
       "user_id": 9,
@@ -2093,8 +2093,8 @@
       "user_lv": 1,
       "user_thumbnail_url": "images/avatar/4/thumb.jpg",
       "user_nickname": "커피익스플로러",
-      "write_cnt": 124,
-      "follower_cnt": 1130
+      "write_cnt": 32,
+      "follower_cnt": 44
     },
     {
       "user_id": 33,
@@ -2103,11 +2103,10 @@
       "user_lv": 1,
       "user_thumbnail_url": "",
       "user_nickname": "동글동글동글이",
-      "write_cnt": 124,
-      "follower_cnt": 1130
+      "write_cnt": 3,
+      "follower_cnt": 2
     }
   ],
-
   "cafeImages": [
     {
       "type": "g",

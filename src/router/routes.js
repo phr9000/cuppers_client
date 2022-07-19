@@ -20,7 +20,7 @@ const routes = [
       {
         path: 'review/write/:id',
         component: () => import('src/pages/WriteReviewPage.vue'),
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
       },
       {
         path: 'reqnewcafe',
@@ -48,7 +48,7 @@ const routes = [
       },
       {
         path: 'cnote/write',
-        component: () => import('src/pages/CnoteWriteStep.vue'),
+        component: () => import('src/pages/WriteCnotePage.vue'),
         meta: { requiresAuth: true }
       }
     ]
@@ -83,7 +83,7 @@ const routes = [
       },
       {
         path: 'icon',
-        component: () => import('pages/test/IconTest.vue')
+        component: () => import('pages/test/parent/IconTest.vue')
       },
       {
         path: 'card',
@@ -120,10 +120,6 @@ const routes = [
       {
         path: 'cardmenutest',
         component: () => import('pages/test/CardMenuTest.vue')
-      },
-      {
-        path: 'childref',
-        component: () => import('pages/test/ChildRefTest.vue')
       }
     ]
   },

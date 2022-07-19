@@ -50,7 +50,7 @@
                 />
               </template>
             </q-input>
-            <div class="row q-px-md q-pt-sm">
+            <div class="row q-px-md q-pt-sm q-gutter-xs">
               <btn-basic
                 @click="handleClickSearch('*')"
                 color="secondary"

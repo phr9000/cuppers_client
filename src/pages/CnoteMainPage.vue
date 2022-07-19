@@ -78,7 +78,7 @@ export default defineComponent({
       page: 0,
       limit: 10,
       order: 'recent', // 'recent' or 'like'
-      search: '$',
+      search: '',
       end: false, // inf scroll end
       recWriters: null,
       sortItems: [

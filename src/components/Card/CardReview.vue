@@ -168,6 +168,7 @@ export default defineComponent({
   }
   .review_image {
     border-radius: 4px;
+    max-height: 160px;
   }
   .review_bottom {
     padding: 4px 16px 8px 16px;

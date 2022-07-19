@@ -32,6 +32,7 @@
       <btn-basic label="dense" size="lg" />
       <btn-basic label="커스텀패딩" size="md" padding="2px 10px 2px 15px" />
       <btn-basic
+        to="/cnote/write"
         size="md"
         color="primary"
         label="커핑노트 쓰기"
