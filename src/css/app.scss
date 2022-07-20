@@ -9,6 +9,10 @@ ul {
 a {
   text-decoration: none;
 }
+::selection {
+  background: $primary;
+  color: $grey-1;
+}
 
 .constrain {
   max-width: 1200px;
