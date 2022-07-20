@@ -10,11 +10,11 @@
         }}</span>
       </div>
       <div>
-        <label for="file" class="text-h6 addButton">
+        <label for="cafe-file" class="text-h6 addButton">
           <q-icon size="sm" name="eva-camera" color="primary" /> 사진추가
         </label>
         <input
-          id="file"
+          id="cafe-file"
           type="file"
           ref="files"
           @change="uploadCafeImage"
@@ -35,7 +35,7 @@
     </section>
     <section>
       <div class="q-my-lg swiper-container">
-        <swiper :slidesPerView="3" class="swiper-wrapper row">
+        <swiper :slidesPerView="2" class="swiper-wrapper row">
           <swiper-slide
             class="slide"
             v-for="(image, index) in onlyCafeImage"
@@ -75,11 +75,11 @@
         }}</span>
       </div>
       <div>
-        <label for="file" class="text-h6 addButton">
+        <label for="menu-file" class="text-h6 addButton">
           <q-icon size="sm" name="eva-camera" color="primary" /> 사진추가
         </label>
         <input
-          id="file"
+          id="menu-file"
           type="file"
           ref="files"
           @change="uploadMenuImage"
@@ -100,7 +100,7 @@
     </section>
     <section>
       <div class="q-my-lg swiper-container">
-        <swiper :slidesPerView="3" class="swiper-wrapper row">
+        <swiper :slidesPerView="2" class="swiper-wrapper row">
           <swiper-slide
             class="slide"
             v-for="(image, index) in onlyMenuImage"
@@ -309,7 +309,7 @@ export default {
 .addButton {
   border: 1px solid $primary;
   border-radius: 15px;
-  padding: 3px 7px 4px 9px;
+  padding: 5px 10px 7px 12px;
   font-size: 14px;
   cursor: pointer;
 }
@@ -318,7 +318,7 @@ export default {
   width: 0px;
 }
 .swiper-container {
-  height: 280px;
+  height: 250px;
   padding: 10px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -327,7 +327,7 @@ export default {
     display: flex;
     text-align: center;
     .slide {
-      min-width: 300px;
+      min-width: 250px;
       display: inline-block;
 
       .image {

@@ -90,7 +90,7 @@
         </div>
         <div class="q-mx-xl q-my-xl contents_block">
           <div class="col-12">
-            <q-input label="웹사이트" v-model="cafe.cafe_website" />
+            <q-input label="웹사이트" v-model="cafe.cafe_website" type="url" />
           </div>
         </div>
       </div>
@@ -152,6 +152,18 @@
         </section>
       </div>
     </section>
+    <section class="q-mb-xl">
+      <div class="justify-center cafe_intro">
+        <span class="text-h6 cafe_intro_title">카페 소개</span>
+        <textarea
+          v-model="cafe.description"
+          name="캬페소개"
+          cols="80"
+          rows="10"
+          class="cafe_intro_textarea"
+        ></textarea>
+      </div>
+    </section>
     <section>
       <div class="text-center">
         <btn-basic
@@ -192,7 +204,8 @@ export default defineComponent({
         cafe_address: '',
         cafe_address_detail: '',
         cafe_postalcode: '',
-        cafe_address_dong: ''
+        cafe_address_dong: '',
+        cafe_description: ''
       },
       images: [],
       menus: []
@@ -328,6 +341,21 @@ export default defineComponent({
   .info-block {
     display: flex;
     justify-content: space-between;
+  }
+}
+
+.cafe_intro {
+  width: 80%;
+  position: relative;
+  margin: 0 auto;
+
+  .cafe_intro_textarea {
+  }
+
+  .cafe_intro_title {
+    position: absolute;
+    top: -35px;
+    left: 0;
   }
 }
 

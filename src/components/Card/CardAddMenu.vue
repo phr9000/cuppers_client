@@ -13,6 +13,7 @@
         type="text"
         label="메뉴이름"
         class="col-8"
+        :rules="[(val) => !!val || 'Field is required']"
       />
       <div class="col-2 row justify-evenly align-center">
         <!-- Signature Menu 선택 -->
@@ -26,13 +27,13 @@
         v-model="new_menu.menu_price_hot"
         label="Hot"
         class="col-5"
-        type="number"
+        type="text"
       />
       <q-input
         v-model="new_menu.menu_price_ice"
         label="Ice"
         class="col-5"
-        type="number"
+        type="text"
       />
     </div>
     <div>
