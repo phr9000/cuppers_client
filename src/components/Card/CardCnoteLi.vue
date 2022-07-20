@@ -30,7 +30,7 @@
               <div class="date">{{ dateago }}</div>
               <div class="dot">‧</div>
               <!-- <btn-avatar :url="cnote.user_thumbnail" /> -->
-              <div class="user_name">{{ cnote.user_name }}</div>
+              <div class="user_name">{{ cnote.user_nickname }}</div>
             </div>
           </div>
         </div>
