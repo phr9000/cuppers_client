@@ -200,13 +200,17 @@ export default defineComponent({
   },
   mounted() {
     const id = this.menus.length + 1
-
     this.menus.push({ menu_id: id, menu_type: 'br' })
     this.menus.push({ menu_id: id, menu_type: 'va' })
   },
   methods: {
     async verifyCafeName() {
-      console.log(this.cafe.cafe_name_pr)
+      let payload = {
+        param: {
+          cafe_name_pr: this.cafe.cafe_name_pr
+        }
+      }
+      console.log(payload)
       await this.$axios
         .post('http://localhost:3000/api/cafe/checkname', {
           param: {
@@ -223,43 +227,37 @@ export default defineComponent({
         })
         .catch((err) => console.log(err))
     },
-    async submitCafeInfo() {
-      // 카페 등록하기
-      console.log('카페 등록: ', {
-        cafe: this.cafe
-      })
-
+    submitCafeInfo() {
       // 메뉴 등록하기
-      let menus = []
+      const menus = []
       for (let i = 0; i < this.menus.length; i++) {
         menus.push(this.$refs.CardAddMenu[i].sendMenu())
       }
-      console.log('메뉴 등록: ', menus)
 
       // 이미지 등록하기
-      let images = this.$refs.ImageUpload.images
-      console.log('이미지 등록: ', images)
+      const images = [...this.$refs.ImageUpload.images]
 
       let payload = {
         cafe: this.cafe,
         menus: menus,
-        images: [...images]
+        images: images
       }
+
       console.log(payload)
 
-      // this.axios post
-      await this.$axios
-        .post('http://localhost:3000/api/cafe', {
-          cafe: this.cafe,
-          menus: menus,
-          images: images
-        })
-        .then((response) => {
-          console.log(response, '성공입니다')
-        })
-        .catch((err) => {
-          console.error(err, '실패입니다')
-        })
+      const apiUrl = `${process.env.API}/cafe`
+      // this.$axios
+      //   .post(apiUrl, {
+      //     cafe: this.cafe,
+      //     images: images,
+      //     menus: menus
+      //   })
+      //   .then((response) => {
+      //     console.log(response, '성공입니다')
+      //   })
+      //   .catch((err) => {
+      //     console.error(err, '실패입니다')
+      //   })
     },
     getPostData(payload) {
       console.log('카페주소: ', payload)

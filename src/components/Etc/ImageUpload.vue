@@ -2,7 +2,7 @@
   <section class="q-px-xl q-py-lg">
     <section class="row justify-between align-center q-my-md">
       <div>
-        <span class="text-h6">카페 이미지</span
+        <span class="text-h6">카페 사진</span
         ><span class="q-px-sm text-subtitle2 grey-4">{{
           onlyCafeImage.length > 0
             ? onlyCafeImage.length + ' / 5'
@@ -11,7 +11,7 @@
       </div>
       <div>
         <label for="file" class="text-h6 addButton">
-          <q-icon size="md" name="eva-camera" />
+          <q-icon size="sm" name="eva-camera" color="primary" /> 사진추가
         </label>
         <input
           id="file"
@@ -31,12 +31,11 @@
           * 직접 촬영하지 않은 사진 또는 1000 x 1000 미만 해상도의 사진은 별도의
           통보없이 삭제될 수 있습니다.
         </p>
-        <p class="q-px-md"></p>
       </q-card>
     </section>
     <section>
-      <q-card class="q-my-lg swiper-container">
-        <swiper :slidesPerView="1" class="swiper-wrapper row">
+      <div class="q-my-lg swiper-container">
+        <swiper :slidesPerView="3" class="swiper-wrapper row">
           <swiper-slide
             class="slide"
             v-for="(image, index) in onlyCafeImage"
@@ -55,17 +54,20 @@
               color="primary"
               label="지우기"
               padding="5px 15px"
+              class="deleteButton"
             />
           </swiper-slide>
         </swiper>
-      </q-card>
+      </div>
     </section>
   </section>
+
+  <!--------------------------------------------------------->
 
   <section class="q-px-xl q-py-lg">
     <section class="row justify-between align-center q-my-md">
       <div>
-        <span class="text-h6">메뉴 이미지</span
+        <span class="text-h6">메뉴 사진</span
         ><span class="q-px-sm text-subtitle2 grey-4">{{
           onlyMenuImage.length > 0
             ? onlyMenuImage.length + ' / 5'
@@ -74,14 +76,13 @@
       </div>
       <div>
         <label for="file" class="text-h6 addButton">
-          <q-icon size="md" name="camera" />
+          <q-icon size="sm" name="eva-camera" color="primary" /> 사진추가
         </label>
         <input
           id="file"
           type="file"
           ref="files"
           @change="uploadMenuImage"
-          placeholder="사진 추가"
           accept="/image"
           multiple
           class="uploadBox"
@@ -95,12 +96,11 @@
           * 직접 촬영하지 않은 사진 또는 1000 x 1000 미만 해상도의 사진은 별도의
           통보없이 삭제될 수 있습니다.
         </p>
-        <p class="q-px-md"></p>
       </q-card>
     </section>
     <section>
-      <q-card class="q-my-lg swiper-container">
-        <swiper :slidesPerView="1" class="swiper-wrapper row">
+      <div class="q-my-lg swiper-container">
+        <swiper :slidesPerView="3" class="swiper-wrapper row">
           <swiper-slide
             class="slide"
             v-for="(image, index) in onlyMenuImage"
@@ -112,17 +112,18 @@
                 class="image q-my-sm q-mx-md"
                 alt=""
               />
+              <btn-basic
+                @click="deleteImage"
+                size="md"
+                color="primary"
+                label="지우기"
+                padding="5px 15px"
+                class="deleteButton"
+              />
             </div>
-            <btn-basic
-              @click="deleteImage"
-              size="md"
-              color="primary"
-              label="지우기"
-              padding="5px 15px"
-            />
           </swiper-slide>
         </swiper>
-      </q-card>
+      </div>
     </section>
   </section>
 </template>
@@ -148,6 +149,7 @@ export default {
   },
   methods: {
     uploadCafeImage(event) {
+      console.log('uploadCafeImage is executed')
       const MAX_IMAGES_LENGTH = 5
       if (this.onlyCafeImage.length < MAX_IMAGES_LENGTH) {
         const files = event.target.files
@@ -191,7 +193,7 @@ export default {
 
                           this.images.push({
                             type: 'g',
-                            images_cafe_url: url,
+                            cafe_image_url: url,
                             thumbnail_url: url_thumb
                           })
                           console.log(this.images)
@@ -211,14 +213,14 @@ export default {
             .catch((err) => {
               console.error(err)
             })
-
-          console.log(this.images)
         }
       } else {
         alert('이미지는 최대 5개까지 업로드할 수 있습니다')
       }
     },
+
     uploadMenuImage(event) {
+      console.log('uploadMenuImage is executed')
       const MAX_IMAGES_LENGTH = 5
       if (this.onlyMenuImage.length < MAX_IMAGES_LENGTH) {
         const files = event.target.files
@@ -262,7 +264,7 @@ export default {
 
                           this.images.push({
                             type: 'm',
-                            images_cafe_url: url,
+                            cafe_image_url: url,
                             thumbnail_url: url_thumb
                           })
                           console.log(this.images)
@@ -282,8 +284,6 @@ export default {
             .catch((err) => {
               console.error(err)
             })
-
-          console.log(this.images)
         }
       } else {
         alert('이미지는 최대 5개까지 업로드할 수 있습니다')
@@ -307,6 +307,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .addButton {
+  border: 1px solid $primary;
+  border-radius: 15px;
+  padding: 3px 7px 4px 9px;
+  font-size: 14px;
   cursor: pointer;
 }
 .uploadBox {
@@ -314,8 +318,10 @@ export default {
   width: 0px;
 }
 .swiper-container {
-  height: 300px;
+  height: 280px;
   padding: 10px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 
   .swiper-wrapper {
     display: flex;
@@ -325,14 +331,16 @@ export default {
       display: inline-block;
 
       .image {
-        width: 250px;
+        width: 200px;
+        position: relative;
       }
 
       .deleteButton {
-        width: 70px;
-        border: 1px solid #333;
-        border-radius: 10px;
-        background-color: transparent;
+        width: 50px;
+        position: absolute;
+        top: 220px;
+        left: 50%;
+        transform: translate(-50%);
         cursor: pointer;
       }
     }
