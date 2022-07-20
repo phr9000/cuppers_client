@@ -81,8 +81,19 @@
     <!-- Image Grid -->
     <section v-if="cafeImages" class="q-mx-sm q-px-sm q-pt-xs">
       <!-- Image Grid -->
-      <image-grid :images="cafeImages" />
+      <image-grid
+        @showImagesAll="showImagesAll"
+        :cafe_id="cafeId"
+        :images="cafeImages"
+      />
     </section>
+
+    <!-- 사진 모두 보기 -->
+    <modal-swiper
+      :show="showModal"
+      :images="silierImages"
+      @close="showModal = false"
+    />
 
     <!-- 기본정보, 커피메뉴 & 최근리뷰 컨테이너 -->
     <section class="cafe_information_section column">
@@ -384,6 +395,8 @@
         </div>
       </div>
     </section> -->
+
+    <!-- scroll top -->
     <btn-scroll-top />
   </q-page>
 
@@ -419,6 +432,7 @@ import FacilityItem from 'src/components/Etc/FacilityItem.vue'
 import KakaoMiniMap from 'src/components/Etc/KakaoMiniMap.vue'
 import BtnSort from 'src/components/Tab/BtnSort.vue'
 import BtnScrollTop from 'src/components/Scroll/BtnScrollTop.vue'
+import ModalSwiper from 'src/components/Modal/ModalSwiper.vue'
 
 import SkeletonCafeDetail from 'src/components/Skeleton/SkeletonCafeDetail.vue'
 
@@ -440,7 +454,8 @@ export default defineComponent({
     BtnSort,
     BtnScrollTop,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    ModalSwiper
   },
   data() {
     return {
@@ -471,7 +486,9 @@ export default defineComponent({
           val: 'recent'
         }
       ],
-      showMiniMap: false
+      showMiniMap: false,
+      showModal: false,
+      silierImages: []
     }
   },
   watch: {
@@ -480,7 +497,7 @@ export default defineComponent({
     }
   },
   async created() {
-    this.cafeId = this.$route.params.id
+    this.cafeId = parseInt(this.$route.params.id)
     // load delay test
     setTimeout(() => {
       this.loadCafe(this.cafeId)
@@ -569,6 +586,15 @@ export default defineComponent({
             this.menuImages = result.data.filter((item) => {
               return item.type === 'm'
             })
+
+            // 슬라이더 이미지
+            result.data.map((img) => {
+              this.silierImages.push({
+                id: img.images_cafe_id,
+                url: img.cafe_image_url
+              })
+            })
+            console.log(this.silierImages)
           }
           //
           //
@@ -627,6 +653,10 @@ export default defineComponent({
     },
     clickWritingReview() {
       this.$router.push({ path: `/review/write/${this.cafeId}` })
+    },
+    showImagesAll() {
+      console.log(this.cafeId)
+      this.showModal = true
     }
   }
 })
@@ -775,18 +805,12 @@ export default defineComponent({
     }
   }
 
-  // // 리뷰 섹션
-  // .review_section {
-  // }
   .minimap {
     border-radius: $border-radius-md;
     overflow: hidden;
     // border-radius: $border-radius;
     // border: 1px solid $grey-4;
   }
-  // // 커핑노트 섹션
-  // .cnote_section {
-  // }
 
   .cafe_basic_info,
   .coffe_menu {

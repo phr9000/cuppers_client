@@ -79,6 +79,7 @@
 
     <!-- 사진 모두 보기 -->
     <btn-basic
+      @click="showImagesAll"
       class="btn_show_all bg-grey-2"
       :rounded="false"
       icon="dashboard"
@@ -98,34 +99,38 @@ export default {
     images: {
       type: Array,
       default: () => {
-        return [
-          {
-            id: 1,
-            cafe_image_url:
-              'https://i.picsum.photos/id/665/800/400.jpg?hmac=xBBSVZk-QQKzSBwMPZFuUB1qHQUUUdY-yj07SqeErXA'
-          },
-          {
-            id: 2,
-            cafe_image_url:
-              'https://i.picsum.photos/id/494/500/500.jpg?hmac=8aIJmZKMhyh9DfX0RscKrxfxRhyDKHvOnQ_pgMkJ6ZM'
-          },
-          {
-            id: 3,
-            cafe_image_url:
-              'https://i.picsum.photos/id/756/500/500.jpg?hmac=rZynM_D3hiy3CIW1AZZNAr6m3jBex9SM1bFvp5mKPso'
-          },
-          {
-            id: 4,
-            cafe_image_url:
-              'https://i.picsum.photos/id/385/500/500.jpg?hmac=pT0ThioZsCmxd0zsVbCnveh0RNWI6uuH1MdOU_w1Wmw'
-          },
-          {
-            id: 5,
-            cafe_image_url:
-              'https://i.picsum.photos/id/816/500/500.jpg?hmac=Mm5UFwEiRKNt_afeZgiP-32k0ybnIMniitzcSJKFxaM'
-          }
-        ]
+        return null
+        //   [
+        //   {
+        //     id: 1,
+        //     url: 'https://i.picsum.photos/id/665/800/400.jpg?hmac=xBBSVZk-QQKzSBwMPZFuUB1qHQUUUdY-yj07SqeErXA'
+        //   },
+        //   {
+        //     id: 2,
+        //     url: 'https://i.picsum.photos/id/494/500/500.jpg?hmac=8aIJmZKMhyh9DfX0RscKrxfxRhyDKHvOnQ_pgMkJ6ZM'
+        //   },
+        //   {
+        //     id: 3,
+        //     url: 'https://i.picsum.photos/id/756/500/500.jpg?hmac=rZynM_D3hiy3CIW1AZZNAr6m3jBex9SM1bFvp5mKPso'
+        //   },
+        //   {
+        //     id: 4,
+        //     url: 'https://i.picsum.photos/id/385/500/500.jpg?hmac=pT0ThioZsCmxd0zsVbCnveh0RNWI6uuH1MdOU_w1Wmw'
+        //   },
+        //   {
+        //     id: 5,
+        //     url: 'https://i.picsum.photos/id/816/500/500.jpg?hmac=Mm5UFwEiRKNt_afeZgiP-32k0ybnIMniitzcSJKFxaM'
+        //   }
+        // ]
       }
+    }
+  },
+  data() {
+    return {}
+  },
+  methods: {
+    showImagesAll() {
+      this.$emit('showImagesAll')
     }
   }
 }
