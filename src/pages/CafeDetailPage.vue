@@ -26,7 +26,7 @@
             <!-- 좋아요 버튼 -->
             <div class="btn_likeit q-mr-xs">
               <btn-like
-                :user_id="1"
+                :user_id="user.uid"
                 :id_what="cafe.cafe_id"
                 like_what="cafe"
                 :is_liked="cafe.user_liked"
@@ -416,6 +416,8 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/scss'
 
@@ -456,6 +458,17 @@ export default defineComponent({
     Swiper,
     SwiperSlide,
     ModalSwiper
+  },
+  setup() {
+    const $store = useStore()
+
+    const user = computed({
+      get: () => $store.state.auth.user
+    })
+
+    return {
+      user
+    }
   },
   data() {
     return {
@@ -512,10 +525,11 @@ export default defineComponent({
       this.loading = true
       // cafe info load
       // let apiUrl = `${process.env.API}/cafe/${cafe_id}` // json-server
-      let apiUrl = `${process.env.API}/cafe/${cafe_id}?user_id=3` // real-server
+      let apiUrl = `${process.env.API}/cafe/${cafe_id}?user_id=${this.user.uid}?user_id=3` // real-server
       this.$axios
         .get(apiUrl)
         .then((result) => {
+          console.log(result.data.user_liked)
           this.cafe = result.data
           this.loading = false
 
