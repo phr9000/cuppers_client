@@ -12,9 +12,9 @@
     <section class="bottom_container text-center column constrain_md">
       <!-- 커핑 노트 KEYWORD -->
       <div class="title-area">
-        <h4 class="q-mb-md text-primary keyword-title">커핑 노트 KEYWORD</h4>
+        <h4 class="q-mb-md text-primary keyword-title">CAFE KEYWORD</h4>
         <p class="txt_keyword q-mb-xl keyword-des">
-          키워드로 분류된 다양한 커핑 노트
+          키워드로 내게 맞는 카페를 찾아보세요
         </p>
       </div>
       <section class="column keywords_container">
