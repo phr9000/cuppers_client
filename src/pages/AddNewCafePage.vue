@@ -95,7 +95,7 @@
             <q-input
               type="time"
               hint="닫는 시간(평일)"
-              v-model="cafe.cafe_shotdown_time"
+              v-model="cafe.cafe_shutdown_time"
             />
           </div>
         </div>
@@ -214,10 +214,10 @@ export default defineComponent({
         cafe_region: '',
         cafe_webpage: '',
         cafe_description: '',
-        latitude: '',
-        longitude: '',
+        cafe_latitude: '',
+        cafe_longitude: '',
         cafe_res_time: '',
-        cafe_shotdown_time: ''
+        cafe_shutdown_time: ''
         // cafe_address_detail: '',
         // cafe_postalcode: '',
         // cafe_address_dong: '',
@@ -277,26 +277,26 @@ export default defineComponent({
 
       console.log(payload)
 
-      const apiUrl = `${process.env.API}/cafe`
-      this.$axios
-        .post(apiUrl, {
-          cafe: cafe,
-          images: images,
-          menus: menus
-        })
-        .then((response) => {
-          console.log(response, '성공입니다')
-        })
-        .catch((err) => {
-          console.error(err, '실패입니다')
-        })
+      // const apiUrl = `${process.env.API}/cafe`
+      // this.$axios
+      //   .post(apiUrl, {
+      //     cafe: cafe,
+      //     images: images,
+      //     menus: menus
+      //   })
+      //   .then((response) => {
+      //     console.log(response, '성공입니다')
+      //   })
+      //   .catch((err) => {
+      //     console.error(err, '실패입니다')
+      //   })
     },
     getPostData(payload) {
       console.log('카페주소: ', payload)
       this.cafe.cafe_address = payload.address
       this.cafe.cafe_region = payload.extraAddress
-      this.cafe.latitude = payload.latitude
-      this.cafe.longitude = payload.longitude
+      this.cafe.cafe_latitude = payload.latitude
+      this.cafe.cafe_longitude = payload.longitude
       // this.cafe.cafe_address_dong = payload.extraAddress
       this.cafe.cafe_postalcode = payload.postcode
       console.log(this.cafe)

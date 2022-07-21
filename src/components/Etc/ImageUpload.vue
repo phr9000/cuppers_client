@@ -33,6 +33,12 @@
     </section>
     <section>
       <div class="q-my-lg swiper-container">
+        <div
+          v-if="onlyCafeImage.length === 0"
+          class="q-pt-lg flex justify-center"
+        >
+          <img src="/noImage.png" alt="이미지가 등록되지 않음" />
+        </div>
         <swiper :slidesPerView="2" class="swiper-wrapper row">
           <swiper-slide
             class="slide"
@@ -42,13 +48,13 @@
             <div>
               <img :src="image.thumbnail_url" class="image q-my-sm q-mx-md" />
             </div>
-            <btn-basic
+            <q-btn
+              rounded
               @click="deleteImage"
-              size="md"
               color="primary"
               label="지우기"
-              padding="5px 15px"
               class="deleteButton"
+              padding="2px 15px"
             />
           </swiper-slide>
         </swiper>
@@ -92,6 +98,12 @@
     </section>
     <section>
       <div class="q-my-lg swiper-container">
+        <div
+          v-if="onlyMenuImage.length === 0"
+          class="q-pt-lg flex justify-center"
+        >
+          <img src="/noImage.png" alt="이미지가 등록되지 않음" />
+        </div>
         <swiper :slidesPerView="2" class="swiper-wrapper row">
           <swiper-slide
             class="slide"
@@ -106,8 +118,8 @@
               />
               <btn-basic
                 @click="deleteImage"
+                color="black"
                 size="md"
-                color="primary"
                 label="지우기"
                 padding="5px 15px"
                 class="deleteButton"
@@ -285,10 +297,8 @@ export default {
         alert('이미지는 최대 5개까지 업로드할 수 있습니다')
       }
     },
-    deleteImage(event) {
-      console.log(event)
-      console.log(this.images)
-      // this.images = this.images.filter((image) => images.index ! i == me)
+    deleteImage() {
+      console.log(cafe_image_url)
     }
   },
   computed: {
@@ -314,7 +324,7 @@ export default {
   width: 0px;
 }
 .swiper-container {
-  height: 250px;
+  height: 230px;
   padding: 10px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -323,20 +333,29 @@ export default {
     display: flex;
     text-align: center;
     .slide {
-      min-width: 250px;
+      min-width: 200px;
       display: inline-block;
-
+      position: relative;
+      &:hover {
+        .image {
+          opacity: 20%;
+        }
+        .deleteButton {
+          display: block;
+        }
+      }
       .image {
         width: 200px;
-        position: relative;
+        transition: 0.3s;
       }
-
       .deleteButton {
+        display: none;
         width: 50px;
         position: absolute;
-        top: 220px;
+        top: 45%;
         left: 50%;
         transform: translate(-50%);
+        transition: 0.5s;
         cursor: pointer;
       }
     }

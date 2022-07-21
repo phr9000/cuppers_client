@@ -28,14 +28,14 @@
         label="Hot"
         class="col-5"
         type="text"
-        mask="###,###"
+        mask="#,###"
       />
       <q-input
         v-model="new_menu.menu_price_ice"
         label="Ice"
         class="col-5"
         type="text"
-        mask="###,###"
+        mask="#,###"
       />
     </div>
     <div>
@@ -83,7 +83,7 @@ export default {
   methods: {
     // 부모 컴포넌트 AddNewCafePage의 메뉴 추가 버튼과 연결된 메소드
     sendMenu() {
-      this.new_menu.menu_type = 'br'
+      this.new_menu.menu_type = this.menu_type
       return this.new_menu
     },
     deleteCard() {
