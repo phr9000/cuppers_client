@@ -36,7 +36,7 @@
             <!-- 가본곳 버튼 -->
             <div class="btn_been_there q-mr-xs">
               <btn-been-there
-                :user_id="1"
+                :user_id="user.uid"
                 :cafe_id="cafe.cafe_id"
                 :been_there="cafe.user_beenthere"
               />
@@ -525,7 +525,8 @@ export default defineComponent({
       this.loading = true
       // cafe info load
       // let apiUrl = `${process.env.API}/cafe/${cafe_id}` // json-server
-      let apiUrl = `${process.env.API}/cafe/${cafe_id}?user_id=${this.user.uid}?user_id=3` // real-server
+      let apiUrl = `${process.env.API}/cafe/${cafe_id}?user_id=${this.user.uid}` // real-server
+      console.log(apiUrl)
       this.$axios
         .get(apiUrl)
         .then((result) => {

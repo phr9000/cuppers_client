@@ -70,7 +70,6 @@ export default {
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          // console.log(result)
           if (!result.data.error) {
             if (this.isLiked) {
               this.isLiked = false
@@ -87,7 +86,7 @@ export default {
             }
           } else {
             console.log(
-              'cafe_id 또는 user_id가 잘못되었습니다. 요청을 수행할 수 없습니다.'
+              `${this.id_what} 또는 user_id가 잘못되었습니다. 요청을 수행할 수 없습니다.`
             )
             console.log(apiUrl)
             console.log(result.data.error)

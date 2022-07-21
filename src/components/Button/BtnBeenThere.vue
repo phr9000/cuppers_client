@@ -37,24 +37,40 @@ export default {
   },
   mounted() {
     this.beenThere = this.been_there === 1 ? true : false
+    console.log(this.beenThere, this.been_there)
   },
   methods: {
     handleCLick(event) {
       event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
 
-      if (this.beenThere) {
-        this.beenThere = false
-        console.log(
-          `user:id(${this.user_id}) just unchecked beenthere this cafe:id(${this.cafe_id})`
-          // 추후 백엔드 호출
-        )
-      } else {
-        this.beenThere = true
-        console.log(
-          `user:id(${this.user_id}) just checked beenthere this cafe:id(${this.cafe_id})`
-          // 추후 백엔드 호출
-        )
-      }
+      let apiUrl = `${process.env.API}/cafe/beenthere/${this.user_id}/${this.cafe_id}` // real-server
+
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          if (!result.data.error) {
+            if (this.beenThere) {
+              this.beenThere = false
+              console.log(
+                `user:id(${this.user_id}) just unchecked beenthere this cafe:id(${this.cafe_id})`
+              )
+            } else {
+              this.beenThere = true
+              console.log(
+                `user:id(${this.user_id}) just checked beenthere this cafe:id(${this.cafe_id})`
+              )
+            }
+          } else {
+            console.log(
+              'cafe_id 또는 user_id가 잘못되었습니다. 요청을 수행할 수 없습니다.'
+            )
+            console.log(apiUrl)
+            console.log(result.data.error)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }
