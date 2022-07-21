@@ -28,12 +28,14 @@
         label="Hot"
         class="col-5"
         type="text"
+        mask="###,###"
       />
       <q-input
         v-model="new_menu.menu_price_ice"
         label="Ice"
         class="col-5"
         type="text"
+        mask="###,###"
       />
     </div>
     <div>
@@ -70,8 +72,8 @@ export default {
       // 부모 컴포넌트 AddNewCafePage에 전달할 메뉴 데이터 선언
       new_menu: {
         menu_name: '',
-        menu_price_hot: 0,
-        menu_price_ice: 0,
+        menu_price_hot: null,
+        menu_price_ice: null,
         is_signature: false,
         menu_aromanote: '',
         menu_type: ''

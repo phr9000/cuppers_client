@@ -23,7 +23,7 @@
               label="카페이름 *"
               v-model="cafe.cafe_name_pr"
               type="text"
-              :rules="[(val) => !!val || 'Field is required']"
+              :rules="[(val) => !!val || '카페 이름은 필수 항목입니다']"
               class="col-12 input-area"
               @blur="verifyCafeName"
             />
@@ -38,7 +38,7 @@
               id="address"
               label="주소 *"
               class="col-8 input-area"
-              :rules="[(val) => !!val || 'Field is required']"
+              :rules="[(val) => !!val || '카페 주소는 필수 항목입니다']"
             />
             <div class="col-3 flex row-area">
               <post-number
@@ -58,7 +58,7 @@
                 v-model="cafe.cafe_address_detail"
                 id="detailAddress"
                 label="상세주소 *"
-                :rules="[(val) => !!val || 'Field is required']"
+                :rules="[(val) => !!val || '상세 주소는 필수 항목입니다']"
               />
             </div>
             <div class="col-4 q-ml-xs">
@@ -66,7 +66,7 @@
                 type="text"
                 v-model="cafe.cafe_postalcode"
                 label="우편번호 *"
-                :rules="[(val) => !!val || 'Field is required']"
+                :rules="[(val) => !!val || '우편 번호는 필수 항목입니다']"
               />
             </div>
           </div>
@@ -79,18 +79,29 @@
               v-model="cafe.cafe_phone"
               type="tel"
               mask="### -  #### - ####"
-              :rules="[(val) => !!val || 'Field is required']"
+              :rules="[(val) => !!val || '대표 전화는 필수 항목입니다']"
             />
           </div>
         </div>
-        <div class="q-mx-xl q-mt-xl q-my-xl contents_block">
-          <div class="col-12">
-            <q-input label="영업시간" v-model="cafe.cafe_operation_time" />
+        <div class="q-mx-xl q-mt-xl q-my-xl row justify-between contents_block">
+          <div class="col-5">
+            <q-input
+              type="time"
+              hint="오픈 시간(평일)"
+              v-model="cafe.cafe_res_time"
+            />
+          </div>
+          <div class="col-5">
+            <q-input
+              type="time"
+              hint="닫는 시간(평일)"
+              v-model="cafe.cafe_shotdown_time"
+            />
           </div>
         </div>
         <div class="q-mx-xl q-my-xl contents_block">
           <div class="col-12">
-            <q-input label="웹사이트" v-model="cafe.cafe_website" type="url" />
+            <q-input label="웹사이트" v-model="cafe.cafe_webpage" type="url" />
           </div>
         </div>
       </div>
@@ -103,7 +114,7 @@
         </div>
         <section class="q-my-xl">
           <div class="flex justify-between q-mx-xl">
-            <span class="text-h6">Brewing Coffee</span>
+            <span class="text-h6">브루잉 커피</span>
             <btn-basic
               @click="addBrewingMenu"
               size="sm"
@@ -126,7 +137,7 @@
         </section>
         <section class="q-my-xl">
           <div class="flex justify-between q-mx-xl">
-            <span class="text-h6">Variation Coffee</span>
+            <span class="text-h6">베리에이션 커피</span>
             <btn-basic
               @click="addVariationMenu"
               size="sm"
@@ -156,7 +167,7 @@
       <div class="justify-center cafe_intro">
         <span class="text-h6 cafe_intro_title">카페 소개</span>
         <textarea
-          v-model="cafe.description"
+          v-model="cafe.cafe_description"
           name="캬페소개"
           cols="80"
           rows="10"
@@ -199,13 +210,18 @@ export default defineComponent({
       cafe: {
         cafe_name_pr: '',
         cafe_phone: '',
-        cafe_operation_time: '',
-        cafe_website: '',
         cafe_address: '',
-        cafe_address_detail: '',
-        cafe_postalcode: '',
-        cafe_address_dong: '',
-        cafe_description: ''
+        cafe_region: '',
+        cafe_webpage: '',
+        cafe_description: '',
+        latitude: '',
+        longitude: '',
+        cafe_res_time: '',
+        cafe_shotdown_time: ''
+        // cafe_address_detail: '',
+        // cafe_postalcode: '',
+        // cafe_address_dong: '',
+        // cafe_operation_time: '',
       },
       images: [],
       menus: []
@@ -241,6 +257,9 @@ export default defineComponent({
         .catch((err) => console.log(err))
     },
     submitCafeInfo() {
+      const cafe = { ...this.cafe }
+      console.log(cafe)
+
       // 메뉴 등록하기
       const menus = []
       for (let i = 0; i < this.menus.length; i++) {
@@ -251,7 +270,7 @@ export default defineComponent({
       const images = [...this.$refs.ImageUpload.images]
 
       let payload = {
-        cafe: this.cafe,
+        cafe: cafe,
         menus: menus,
         images: images
       }
@@ -259,24 +278,28 @@ export default defineComponent({
       console.log(payload)
 
       const apiUrl = `${process.env.API}/cafe`
-      // this.$axios
-      //   .post(apiUrl, {
-      //     cafe: this.cafe,
-      //     images: images,
-      //     menus: menus
-      //   })
-      //   .then((response) => {
-      //     console.log(response, '성공입니다')
-      //   })
-      //   .catch((err) => {
-      //     console.error(err, '실패입니다')
-      //   })
+      this.$axios
+        .post(apiUrl, {
+          cafe: cafe,
+          images: images,
+          menus: menus
+        })
+        .then((response) => {
+          console.log(response, '성공입니다')
+        })
+        .catch((err) => {
+          console.error(err, '실패입니다')
+        })
     },
     getPostData(payload) {
       console.log('카페주소: ', payload)
       this.cafe.cafe_address = payload.address
-      this.cafe.cafe_address_dong = payload.extraAddress
+      this.cafe.cafe_region = payload.extraAddress
+      this.cafe.latitude = payload.latitude
+      this.cafe.longitude = payload.longitude
+      // this.cafe.cafe_address_dong = payload.extraAddress
       this.cafe.cafe_postalcode = payload.postcode
+      console.log(this.cafe)
     },
     addBrewingMenu() {
       const id = this.menus.length + 1
@@ -350,6 +373,14 @@ export default defineComponent({
   margin: 0 auto;
 
   .cafe_intro_textarea {
+    width: 100%;
+    height: 200px;
+    box-sizing: border-box;
+    resize: none;
+    transition: border 0.5s;
+    &:focus {
+      border: 2px solid #7b3838;
+    }
   }
 
   .cafe_intro_title {

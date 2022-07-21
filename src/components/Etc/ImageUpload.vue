@@ -4,9 +4,7 @@
       <div>
         <span class="text-h6">카페 사진</span
         ><span class="q-px-sm text-subtitle2 grey-4">{{
-          onlyCafeImage.length > 0
-            ? onlyCafeImage.length + ' / 5'
-            : '선택된 이미지가 없습니다'
+          onlyCafeImage.length > 0 ? onlyCafeImage.length + ' / 5' : null
         }}</span>
       </div>
       <div>
@@ -42,11 +40,7 @@
             :key="index"
           >
             <div>
-              <img
-                :src="image.thumbnail_url"
-                class="image q-my-sm q-mx-md"
-                alt=""
-              />
+              <img :src="image.thumbnail_url" class="image q-my-sm q-mx-md" />
             </div>
             <btn-basic
               @click="deleteImage"
@@ -69,9 +63,7 @@
       <div>
         <span class="text-h6">메뉴 사진</span
         ><span class="q-px-sm text-subtitle2 grey-4">{{
-          onlyMenuImage.length > 0
-            ? onlyMenuImage.length + ' / 5'
-            : '선택된 이미지가 없습니다'
+          onlyMenuImage.length > 0 ? onlyMenuImage.length + ' / 5' : null
         }}</span>
       </div>
       <div>
@@ -145,6 +137,10 @@ export default {
     return {
       files: [],
       images: []
+    }
+  },
+  mounted() {
+    if (this.onlyCafeImage.length === 0) {
     }
   },
   methods: {
