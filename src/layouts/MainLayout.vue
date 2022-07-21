@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh Lpr fFf">
+  <q-layout view="hHh Lpr fFf" style="padding-bottom: 110px">
     <header-global />
 
     <q-page-container style="padding-bottom: 0px">
