@@ -65,19 +65,37 @@ export default {
     handleCLick(event) {
       event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
 
-      if (this.isLiked) {
-        this.isLiked = false
-        this.likeitCnt--
-        console.log(
-          `user:id(${this.user_id}) just dislike this ${this.like_what}:id(${this.id_what})  `
-        )
-      } else {
-        this.isLiked = true
-        this.likeitCnt++
-        console.log(
-          `user:id(${this.user_id}) just like this ${this.like_what}:id(${this.id_what})  `
-        )
-      }
+      let apiUrl = `${process.env.API}/${this.like_what}/like/${this.user_id}/${this.id_what}` // real-server
+
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          // console.log(result)
+          if (!result.data.error) {
+            if (this.isLiked) {
+              this.isLiked = false
+              this.likeitCnt--
+              console.log(
+                `user:id(${this.user_id}) just dislike this ${this.like_what}:id(${this.id_what})  `
+              )
+            } else {
+              this.isLiked = true
+              this.likeitCnt++
+              console.log(
+                `user:id(${this.user_id}) just like this ${this.like_what}:id(${this.id_what})  `
+              )
+            }
+          } else {
+            console.log(
+              'cafe_id 또는 user_id가 잘못되었습니다. 요청을 수행할 수 없습니다.'
+            )
+            console.log(apiUrl)
+            console.log(result.data.error)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }
