@@ -120,6 +120,14 @@ const routes = [
       {
         path: 'cardmenutest',
         component: () => import('pages/test/CardMenuTest.vue')
+      },
+      {
+        path: 'review',
+        component: () => import('pages/test/reviewPage.vue')
+      },
+      {
+        path: 'welcomeuser',
+        component: () => import('pages/test/WelcomeUser.vue')
       }
     ]
   },
