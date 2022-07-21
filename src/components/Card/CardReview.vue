@@ -46,7 +46,7 @@
       >
         <div class="btn_like">
           <btn-like
-            :user_id="1"
+            :user_id="user.uid"
             :id_what="review.review_id"
             like_what="review"
             :is_liked="review.user_liked"
@@ -61,8 +61,10 @@
 </template>
 
 <script>
-import { format, toDate } from 'date-fns'
 import { defineComponent } from 'vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+import { format, toDate } from 'date-fns'
 import BtnAvatar from 'src/components/Button/BtnAvatar.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
@@ -77,6 +79,17 @@ export default defineComponent({
       default: () => {
         return null
       }
+    }
+  },
+  setup() {
+    const $store = useStore()
+
+    const user = computed({
+      get: () => $store.state.auth.user
+    })
+
+    return {
+      user
     }
   },
   data() {

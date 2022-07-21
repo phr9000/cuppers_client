@@ -636,7 +636,7 @@ export default defineComponent({
     loadReviews(page) {
       // let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4` // json-server
       // real-server
-      let apiUrl = `${process.env.API}/review/${this.cafeId}?user_id=3&sort=${this.sort}&order=d&page=${page}&limit=4`
+      let apiUrl = `${process.env.API}/review/${this.cafeId}?user_id=${this.user.uid}&sort=${this.sort}&order=d&page=${page}&limit=4`
       this.$axios
         .get(apiUrl)
         .then((result) => {
