@@ -3,9 +3,9 @@
     <!-- 정렬 -->
     <div class="constrain_md">
       <div class="q-mt-sm q-px-md">
+        <div class="page_title">커핑노트</div>
         <div class="row justify-between items-center q-py-sm">
           <div></div>
-          <div class="page_title">커핑노트</div>
 
           <q-tabs
             active-color="secondary"
@@ -13,10 +13,36 @@
             dense
             class="text-grey-6"
           >
-            <modal-search />
-            <tab-sort :sort_items="sortItems" @change="changeSort" />
-            <!-- <q-tab class="btn_sort" name="like" label="추천순" />
-            <q-tab class="btn_sort" name="recent" label="최신순" /> -->
+            <!-- 커핑노트 검색 -->
+            <q-input
+              v-if="searchMode"
+              @keyup.enter="handleClickSearch"
+              @blur="searchMode = false"
+              v-model="search"
+              clearable
+              dense
+              placeholder="커핑노트 검색"
+              class="text-center text-grey-5 q-px-md"
+              style="width: 300px"
+            >
+              <template v-slot:prepend>
+                <q-btn
+                  @click="handleClickSearch"
+                  round
+                  dense
+                  flat
+                  icon="search"
+                />
+              </template>
+            </q-input>
+            <q-btn v-else @click="searchMode = true" flat icon="search"></q-btn>
+
+            <!-- 추천순 / 최신순 -->
+            <tab-sort
+              :sort_items="sortItems"
+              @change="changeSort"
+              style="height: 40px"
+            />
           </q-tabs>
         </div>
       </div>
@@ -51,7 +77,6 @@ import { defineComponent } from 'vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import ModalSearch from 'src/components/Modal/ModalSearch.vue'
 import CnoteList from 'src/components/List/CnoteList.vue'
 import WriterLi from 'src/components/ListItem/WriterLi.vue'
 import InfScroll from 'src/components/Scroll/InfScroll.vue'
@@ -59,7 +84,12 @@ import TabSort from 'src/components/Tab/TabSort.vue'
 
 export default defineComponent({
   name: 'CnoteMainPage',
-  components: { ModalSearch, CnoteList, WriterLi, InfScroll, TabSort },
+  components: {
+    CnoteList,
+    WriterLi,
+    InfScroll,
+    TabSort
+  },
   setup() {
     const $store = useStore()
 
@@ -73,6 +103,7 @@ export default defineComponent({
   },
   data() {
     return {
+      searchMode: false,
       sort: null,
       cnotes: [],
       page: 0,
@@ -119,6 +150,13 @@ export default defineComponent({
         .catch((err) => {
           console.log(err)
         })
+    },
+    handleClickSearch() {
+      // initList
+      this.cnotes = []
+      this.page = 0
+
+      this.loadCnotes()
     },
     loadRecWriters() {
       let apiUrl = `${process.env.API_LOCAL}/recUsers` // json-server
