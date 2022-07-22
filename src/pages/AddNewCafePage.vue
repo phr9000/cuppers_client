@@ -101,7 +101,32 @@
         </div>
         <div class="q-mx-xl q-my-xl contents_block">
           <div class="col-12">
-            <q-input label="웹사이트" v-model="cafe.cafe_webpage" type="url" />
+            <q-input
+              label="웹사이트"
+              hint="URL을 입력해주세요"
+              v-model="cafe.cafe_webpage"
+              type="url"
+            />
+          </div>
+        </div>
+        <div class="q-mx-xl q-my-xl contents_block">
+          <div class="col-12">
+            <q-input
+              label="분점 정보"
+              hint="쉼표로 구분해주세요"
+              v-model="cafe.cafe_branch_name"
+              type="url"
+            />
+          </div>
+        </div>
+        <div class="q-mx-xl q-my-xl contents_block">
+          <div class="col-12">
+            <q-input
+              label="바리스타 정보"
+              hint="바리스타의 수상/자격증 등을 입력해주세요"
+              v-model="cafe.cafe_branch_name"
+              type="url"
+            />
           </div>
         </div>
       </div>
@@ -164,14 +189,14 @@
       </div>
     </section>
     <section class="q-mb-xl">
-      <div class="justify-center cafe_intro">
-        <span class="text-h6 cafe_intro_title">카페 소개</span>
+      <div class="justify-center cafe_description">
+        <span class="text-h6 cafe_description_title">카페 소개</span>
         <textarea
           v-model="cafe.cafe_description"
           name="캬페소개"
           cols="80"
           rows="10"
-          class="cafe_intro_textarea"
+          class="cafe_description_text"
         ></textarea>
       </div>
     </section>
@@ -217,7 +242,8 @@ export default defineComponent({
         cafe_latitude: '',
         cafe_longitude: '',
         cafe_res_time: '',
-        cafe_shutdown_time: ''
+        cafe_shutdown_time: '',
+        cafe_branch_name: ''
         // cafe_address_detail: '',
         // cafe_postalcode: '',
         // cafe_address_dong: '',
@@ -228,9 +254,10 @@ export default defineComponent({
     }
   },
   mounted() {
-    const id = this.menus.length + 1
-    this.menus.push({ menu_id: id, menu_type: 'br' })
-    this.menus.push({ menu_id: id, menu_type: 'va' })
+    const ida = this.menus.length + 1
+    const idb = this.menus.length + 2
+    this.menus.push({ menu_id: ida, menu_type: 'br' })
+    this.menus.push({ menu_id: idb, menu_type: 'va' })
   },
   methods: {
     async verifyCafeName() {
@@ -367,12 +394,12 @@ export default defineComponent({
   }
 }
 
-.cafe_intro {
+.cafe_description {
   width: 80%;
   position: relative;
   margin: 0 auto;
 
-  .cafe_intro_textarea {
+  .cafe_description_textarea {
     width: 100%;
     height: 200px;
     box-sizing: border-box;
@@ -383,7 +410,7 @@ export default defineComponent({
     }
   }
 
-  .cafe_intro_title {
+  .cafe_description_title {
     position: absolute;
     top: -35px;
     left: 0;

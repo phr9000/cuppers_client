@@ -87,7 +87,6 @@ export default {
       return this.new_menu
     },
     deleteCard() {
-      console.log(this.menu_id)
       this.$emit('deleteCard', this.menu_id)
     }
   }
@@ -97,6 +96,7 @@ export default {
 .addcard {
   border: 1px solid #ccc;
   box-sizing: content-box;
+  border-radius: 15px;
   .clear {
     border: 1px solid $red;
     box-sizing: content-box;

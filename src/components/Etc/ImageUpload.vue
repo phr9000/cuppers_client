@@ -41,6 +41,7 @@
         </div>
         <swiper :slidesPerView="2" class="swiper-wrapper row">
           <swiper-slide
+            ref="ImageSlide"
             class="slide"
             v-for="(image, index) in onlyCafeImage"
             :key="index"
@@ -50,7 +51,7 @@
             </div>
             <q-btn
               rounded
-              @click="deleteImage"
+              @click="deleteImage(image)"
               color="primary"
               label="지우기"
               class="deleteButton"
@@ -106,6 +107,7 @@
         </div>
         <swiper :slidesPerView="2" class="swiper-wrapper row">
           <swiper-slide
+            ref="ImageSlide"
             class="slide"
             v-for="(image, index) in onlyMenuImage"
             :key="index"
@@ -116,13 +118,13 @@
                 class="image q-my-sm q-mx-md"
                 alt=""
               />
-              <btn-basic
-                @click="deleteImage"
-                color="black"
-                size="md"
+              <q-btn
+                rounded
+                @click="deleteImage(image)"
+                color="primary"
                 label="지우기"
-                padding="5px 15px"
                 class="deleteButton"
+                padding="2px 15px"
               />
             </div>
           </swiper-slide>
@@ -132,7 +134,6 @@
   </section>
 </template>
 <script>
-import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import useResize from 'src/composables/useResize'
 const { resizeImage, resizeImageSquare } = useResize()
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -142,8 +143,7 @@ export default {
   name: 'imageUpload',
   components: {
     Swiper,
-    SwiperSlide,
-    BtnBasic
+    SwiperSlide
   },
   data() {
     return {
@@ -161,6 +161,7 @@ export default {
       const MAX_IMAGES_LENGTH = 5
       if (this.onlyCafeImage.length < MAX_IMAGES_LENGTH) {
         const files = event.target.files
+        const image_id = this.images.length + 1
         // const file = files[0]
         // console.log('file', file)
 
@@ -200,6 +201,7 @@ export default {
                           url_thumb = response.data.url
 
                           this.images.push({
+                            image_id: image_id,
                             type: 'g',
                             cafe_image_url: url,
                             thumbnail_url: url_thumb
@@ -231,6 +233,7 @@ export default {
       console.log('uploadMenuImage is executed')
       const MAX_IMAGES_LENGTH = 5
       if (this.onlyMenuImage.length < MAX_IMAGES_LENGTH) {
+        const image_id = this.images.length + 1
         const files = event.target.files
         // const file = files[0]
         // console.log('file', file)
@@ -271,6 +274,7 @@ export default {
                           url_thumb = response.data.url
 
                           this.images.push({
+                            image_id: image_id,
                             type: 'm',
                             cafe_image_url: url,
                             thumbnail_url: url_thumb
@@ -297,8 +301,10 @@ export default {
         alert('이미지는 최대 5개까지 업로드할 수 있습니다')
       }
     },
-    deleteImage() {
-      console.log(cafe_image_url)
+    deleteImage(image) {
+      let image_id = image.image_id
+      console.log(image_id)
+      this.images = this.images.filter((image) => image.image_id !== image_id)
     }
   },
   computed: {
@@ -342,6 +348,9 @@ export default {
         }
         .deleteButton {
           display: block;
+          &:hover {
+            opacity: 50%;
+          }
         }
       }
       .image {
