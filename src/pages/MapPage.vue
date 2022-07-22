@@ -102,21 +102,25 @@
           </div>
           <div v-else>
             <!-- 마이리스트 -->
-            <map-my-list
-              v-if="!currentMyListItem"
-              :items="mylist"
-              @click_item="handleClickMyListItem"
-            />
+            <div v-if="!currentMyListItem">
+              <map-my-list
+                :mylist_items="mylist"
+                @click_like="handleClickMyListLike"
+                @click_beenthere="handleClickMyListBeenthere"
+                @click_item="handleClickMyListItem"
+              />
+            </div>
             <div v-else>
-              <q-item-label header>
+              <q-item-label header class="mylist_header row items-center">
                 <btn-icon
+                  class="btn_arrow_back"
                   :flat="true"
                   size="sm"
                   color="grey-5"
                   icon="arrow_back_ios"
                   @click="backToMylist"
                 />
-                {{ currentMyListItem.mylist_name }}
+                <div class="text">{{ currentMyListItem.mylist_name }}</div>
               </q-item-label>
               <!-- 마이리스트 내부 카페 리스트 (카페 카드) -->
               <q-list v-if="cafes.length > 0" class="search_result q-mb-sm">
@@ -482,7 +486,9 @@ export default defineComponent({
       this.sort = val
       this.handleClickSearch()
     },
-    loadCafes(apiUrl, bounds = null) {
+    loadCafes(apiUrl, bounds = null, liked = 0) {
+      console.log(apiUrl)
+      this.clearAllMarkers()
       this.$axios
         .get(apiUrl)
         .then((result) => {
@@ -499,6 +505,12 @@ export default defineComponent({
               ),
               marker: null
             }
+
+            // user_liked null 또는 undefined이면 추가
+            if (!result.data.arr[i].user_liked) {
+              cafe = { ...cafe, user_liked: liked }
+            }
+            console.log(cafe.user_liked)
 
             if (cf.opTime) {
               cafe = { ...cafe, today: cf.opTime[0] }
@@ -545,14 +557,21 @@ export default defineComponent({
     },
     // 마이리스트 내부 카페 리스트 가져오기 - 마이리스트 내부로 진입
     handleClickMyListItem(item) {
-      this.clearAllMarkers()
-      // console.log(item)
       this.currentMyListItem = item
 
-      // let apiUrl = `${process.env.API_LOCAL}/mylist/${item.mylist_id}`
       let apiUrl = `${process.env.API}/cafe/mylist/one/${item.mylist_id}?user_id=${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
       this.loadCafes(apiUrl)
     },
+    // 마이리스트 좋아요한 카페 불러오기
+    handleClickMyListLike() {
+      this.currentMyListItem = { mylist_name: '좋아요한 카페 ' }
+      // api/cafe/mypage/like/:user_id?current_lat=&current_long
+
+      let apiUrl = `${process.env.API}/cafe/mypage/like/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
+      this.loadCafes(apiUrl, null, 1)
+    },
+    // 마이리스트 가본곳 카페 불러오기
+    handleClickMyListBeenthere() {},
     // 마이리스트 내부 목록에서 마이리스트 목록으로 돌아가기
     backToMylist() {
       // this.clearTarget()
@@ -771,9 +790,28 @@ export default defineComponent({
       }
     }
   }
+
   #map {
     width: 100%;
     height: 100%;
+  }
+
+  .mylist_header {
+    // 마이리스트 내부에서 뒤로가는 버튼
+    .btn_arrow_back {
+      // position: absolute;
+      &:deep(i) {
+        position: relative;
+        left: 4px;
+        top: 1px;
+      }
+    }
+    .text {
+      font-size: 0.9rem;
+      padding-left: 10px;
+      position: relative;
+      top: 1px;
+    }
   }
 
   .zoom_control {
