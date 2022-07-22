@@ -1420,57 +1420,56 @@
   "review": [
     {
       "id": 1,
-      "review_id": 1,
-      "cafe_id": 4,
       "cafe_name_pr": "커피앰비언스",
+      "user_nickname": "AESTAS",
+      "user_thumbnail_url": "images/avatar/1/thumb.jpg",
+      "review_id": 28,
+      "cafe_id": 1,
       "user_id": 1,
-      "user_nickname": "동글동글동글이",
-      "user_thumbnail_url": "https://yt3.ggpht.com/TKujBMF0rkAEiGuNak656MrI1RdNBZMpZmTOSiyYgxUk0eVjwdJL_yttq8FeE-HUDorXYe7mYL8=s88-c-k-c0x00ffffff-no-rj",
       "review_drink": "파나마 잰슨 게이샤 워시드",
-      "review_img": "https://picsum.photos/200",
-      "drink_type": "br, sg",
-      "review_content": "커피에 진심인 카페. ☕️ \n다양한 드립 커피가 많아서 고르는 데 고민이 많이 되었어요.\n마지막까지 고민하던 종류 시음 하게 해주셔서 넘넘 감사했습니다!  사장님 센스👍🏾\n드립커피 보다 아메리카노를 선호 했었는데 드립커피에 대한 인식을 바꿔준 카페입니다!!!\n다음에 커피 마시러 또 방문 할게요😘",
-      "user_liked": 1,
-      "like_cnt": 55,
-      "created_at": "2022-06-11 12:24:55",
+      "drink_type": "br",
+      "review_content": "커피에 진심인 카페. ☕️ \\n다양한 드립 커피가 많아서 고르는 데 고민이 많이 되었어요.\\n마지막까지 고민하던 종류 시음 하게 해주셔서 넘넘 감사했습니다!  사장님 센스??\\n드립커피 보다 아메리카노를 선호 했었는데 드립커피에 대한 인식을 바꿔준 카페입니다!!!\\n다음에 커피 마시러 또 방문 할게요 ",
+      "created_at": "2022-07-21T01:41:02.000Z",
+      "review_img": "http://localhost:3000/static/images/review/28/1_thumb.jpg",
+      "like_cnt": 0,
+      "user_liked": 0,
       "review_keyword": [
         {
-          "keyword_name": "커피에 대한 설명",
-          "keyword_type": "cafe"
+          "review_id": 28,
+          "keyword_id": 30,
+          "name": "분위기 있는",
+          "icon": "",
+          "type": "cafe"
         },
         {
-          "keyword_name": "내추럴 커피",
-          "keyword_type": "cafe"
-        },
-        {
-          "keyword_name": "추출도구 선택 가능",
-          "keyword_type": "cafe"
-        },
-        {
-          "keyword_name": "분위기가 좋은",
-          "keyword_type": "cafe"
+          "review_id": 28,
+          "keyword_id": 32,
+          "name": "뷰가 좋은",
+          "icon": "https://firebasestorage.googleapis.com/v0/b/cuppers-test.appspot.com/o/icons%2Fnice_view.png?alt=media&token=18f656dd-0a0d-464e-9d6d-42cd8f67efac",
+          "type": "cafe"
         }
       ],
-      "reivew_image": [
+      "review_images": [
         {
-          "image_review_type": "g",
-          "image_review_url": "url",
-          "thumbnail": "https://img1.kakaocdn.net/cthumb/local/R0x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F125294936bad131662e8b4942b738e6189e61948%3Foriginal"
+          "images_review_id": 55,
+          "review_id": 28,
+          "images_review_type": "g",
+          "images_review_url": "images/review/28/1.jpg",
+          "thumbnail_url": "images/review/28/1_thumb.jpg"
         },
         {
-          "image_review_type": "g",
-          "image_review_url": "url",
-          "thumbnail": "url"
+          "images_review_id": 56,
+          "review_id": 28,
+          "images_review_type": "m",
+          "images_review_url": "images/review/28/3.jpg",
+          "thumbnail_url": "images/review/28/3_thumb.jpg"
         },
         {
-          "image_review_type": "g",
-          "image_review_url": "url",
-          "thumbnail": "url"
-        },
-        {
-          "image_review_type": "m",
-          "image_review_url": "url",
-          "thumbnail": "url"
+          "images_review_id": 57,
+          "review_id": 28,
+          "images_review_type": "g",
+          "images_review_url": "images/review/28/2.jpg",
+          "thumbnail_url": "images/review/28/2_thumb.jpg"
         }
       ]
     },

@@ -34,7 +34,6 @@
         <div class="q-mr-sm" style="width: 400px">
           <card-review :review="review" />
         </div>
-        <div style="width: 300px"><card-review :review="review" /></div>
       </div>
     </div>
 

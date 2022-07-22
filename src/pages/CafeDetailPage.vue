@@ -99,7 +99,7 @@
     <section class="cafe_information_section column">
       <section class="cafe_detail_wrap row">
         <!-- 기본정보, 커피메뉴 -->
-        <div class="col-12 col-sm-7 cafe_basic_info_wrap q-pa-md">
+        <div class="col-12 col-sm-6 cafe_basic_info_wrap q-pa-md">
           <div class="subtitle q-pl-sm q-mb-md">기본 정보</div>
           <!-- 기본정보 -->
           <div class="cafe_basic_info col q-pl-md">
@@ -304,7 +304,7 @@
 
         <!-- 최근리뷰, 메뉴판 -->
         <div
-          class="recent_review_wrap col-12 col-sm-5 q-py-md q-pr-md column justify-between align-end"
+          class="recent_review_wrap col-12 col-sm-6 q-py-md q-pr-md column justify-between align-end"
         >
           <!-- 최근 리뷰 -->
           <div v-if="reviewRecent" class="recent_review large_screen_only">

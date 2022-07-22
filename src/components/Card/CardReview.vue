@@ -17,8 +17,8 @@
           />
         </div>
       </q-card-section>
-      <q-card-section class="coffee_info_wrap row q-pt-md q-pr-md">
-        <div class="col-12 col-sm-7 coffee_info q-py-none q-pl-xs q-pr-md">
+      <q-card-section class="review_mid row q-pt-md q-pr-md">
+        <div class="q-py-none q-pl-xs q-pr-md">
           <menu-item
             :name="review.review_drink"
             :type="drinkType"
@@ -30,16 +30,30 @@
             class="caption text-caption text-grey q-my-sm"
           ></div>
         </div>
-        <q-img
-          class="col-12 col-sm-5 q-pr-sm review_image"
-          :initial-ratio="16 / 9"
-          :src="thumbUrl"
-          ><div
-            class="rounded-borders absolute-full text-subtitle2 flex flex-center"
+        <div class="carousel_wrap">
+          <div class="overay"></div>
+          <div @click="clickThumbnail" class="show_all">모든 이미지</div>
+          <q-carousel
+            v-if="images"
+            class="carousel"
+            animated
+            v-model="slide"
+            navigation
+            infinite
+            arrows
+            height="200px"
+            transition-prev="slide-right"
+            transition-next="slide-left"
+            control-type="flat"
           >
-            모든 이미지 보기
-          </div>
-        </q-img>
+            <q-carousel-slide
+              v-for="(img, i) in images"
+              :key="img.images_review_id"
+              :name="i"
+              :img-src="img.thumbnail_url"
+            />
+          </q-carousel>
+        </div>
       </q-card-section>
       <q-card-section
         class="review_bottom row justify-between items-center q-mb-sm"
@@ -93,7 +107,7 @@ export default defineComponent({
     }
   },
   data() {
-    return {}
+    return { slide: 0 }
   },
   computed: {
     createDate() {
@@ -128,21 +142,39 @@ export default defineComponent({
         return ''
       }
     },
-    thumbUrl() {
-      if (!this.review.review_img || this.review.review_img == '') {
-        return null
+    // thumbUrl() {
+    //   if (!this.review.review_img || this.review.review_img == '') {
+    //     return null
+    //   } else {
+    //     if (this.review.review_img.startsWith('images/')) {
+    //       return `${process.env.STATIC}/${this.review.review_img}`
+    //     }
+    //     return this.review.review_img
+    //   }
+    // },
+    images() {
+      if (this.review.review_images.length > 0) {
+        const images = this.review.review_images.map((img) => {
+          if (img.thumbnail_url.startsWith('images/')) {
+            img.thumbnail_url = `${process.env.STATIC}/${img.thumbnail_url}`
+          }
+          return img
+        })
+        console.log(images)
+        return images
       } else {
-        if (this.review.review_img.startsWith('images/')) {
-          return `${process.env.STATIC}/${this.review.review_img}`
-        }
-        return this.review.review_img
+        return null
       }
     }
   },
   mounted() {},
   methods: {
-    cafeNameClick() {
-      this.$router.push({ path: `/cafe/${this.review.cafe_id}` })
+    clickCafeName() {
+      console.log(this.review.review_images)
+      // this.$router.push({ path: `/cafe/${this.review.cafe_id}` })
+    },
+    clickThumbnail() {
+      console.log('show all images')
     }
   }
 })
@@ -175,13 +207,21 @@ export default defineComponent({
       flex-wrap: nowrap;
     }
   }
-  .caption {
-    max-height: 100px;
-    overflow-y: auto;
-  }
-  .review_image {
-    border-radius: 4px;
-    max-height: 160px;
+  .review_mid {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+
+    @media (max-width: 962px) {
+      grid-template-columns: 1fr 160px;
+    }
+
+    .caption {
+      max-height: 100px;
+      overflow-y: auto;
+    }
+    .review_image {
+      border-radius: 4px;
+    }
   }
   .review_bottom {
     padding: 4px 16px 8px 16px;
@@ -199,6 +239,77 @@ export default defineComponent({
       background: rgba(0, 0, 0, 0.35);
       color: $grey-4;
     }
+  }
+}
+.carousel_wrap {
+  position: relative;
+  border-radius: $border-radius;
+  max-height: 200px;
+
+  @media (max-width: 962px) {
+    max-height: 160px;
+  }
+
+  .overay {
+    pointer-events: none; // 마우스 클릭 안되게
+    position: absolute;
+    border-radius: $border-radius;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.45);
+    }
+  }
+  // 모든이미지 보기
+  .show_all {
+    // background-color: antiquewhite;
+    text-align: center;
+    color: antiquewhite;
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50%;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.3s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+.carousel {
+  border-radius: $border-radius;
+  max-height: 200px;
+
+  @media (max-width: 962px) {
+    max-height: 160px;
+  }
+
+  :deep(.q-carousel__navigation) {
+    transform: scale(0.6);
+    bottom: 0px;
+  }
+  :deep(.q-carousel__prev-arrow) {
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  :deep(.q-carousel__next-arrow) {
+    height: 100%;
+    top: 0;
+    right: 0;
+  }
+  :deep(.q-carousel__arrow .q-btn-item) {
+    height: 100%;
+    border-radius: 0;
   }
 }
 </style>
