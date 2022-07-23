@@ -10,9 +10,6 @@
       <div class="which">
         <div class="coffee">어떤 커피를 선호하세요?</div>
         <div class="cafe">어떤 카페를 찾고 계세요?</div>
-        <div class="desc">
-          설문조사를 기반으로 취향에 맞는 카페를 추천해드려요
-        </div>
       </div>
       <div class="answer">
         <h2>
@@ -32,7 +29,7 @@
 export default {
   data() {
     return {
-      userId: '3',
+      // userId: '3',
       thumnail:
         'http://k.kakaocdn.net/dn/d1t0Y3/btrFLDKumH5/UAJNJRs8AQ9CPtJ2UiK27k/img_640x640.jpg',
       nickname: '해람',
@@ -51,7 +48,22 @@ export default {
       charIndex: 1
     }
   },
+  created() {
+    this.userId = this.$route.params.userid
+    this.getUserInfo()
+  },
   methods: {
+    getUserInfo(userId) {
+      let apiUrl = `http://localhost:3000/api/user/detail/${userId}`
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          console.log(this.result)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     typeText() {
       if (this.charIndex < this.typeArray[this.typeArrayIndex].length) {
         if (!this.typeStatus) this.typeStatus = true
@@ -131,15 +143,15 @@ export default {
   margin: 0 auto;
   .user-info-container {
     width: 500px;
-    height: 650px;
+    height: 630px;
     margin: 60px auto;
     margin-top: 40px;
     padding: 20px;
     padding-top: 45px;
     text-align: center;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    border-radius: 10px;
+      rgba(0, 0, 0, 0.3) 5px 3px 7px -3px;
+    border-radius: 23px;
     @media (max-width: 700px) {
       width: 100%;
       box-shadow: none;
@@ -151,7 +163,7 @@ export default {
       margin: 0 auto;
       border-radius: 50%;
       overflow: hidden;
-      border: 4px solid #4374d9;
+      border: 4px solid #848484;
       > img {
         width: 100%;
       }
@@ -202,6 +214,12 @@ export default {
     .survey-btn-area {
       margin-top: 40px;
       .btn {
+        border-radius: 23px;
+        padding: 10px 34px;
+        background-color: #000;
+        color: #fff;
+        font-weight: 600;
+        font-size: 15px;
         animation: goToSurvey 1.5s /* 속도 */ linear 0s
           /* 처음부터 끝까지 일정 속도로 진행 */ infinite alternate; /* 무한 반복 */
       }

@@ -84,15 +84,15 @@ export default {
     const $store = useStore()
 
     const user = computed({
-      get: () => $store.state.auth.user
+      get: () => $store.state.auth.user,
+      set: (val) => {
+        $store.commit('auth/setUser', val)
+      }
     })
 
     return {
       user
     }
-  },
-  computed() {
-    this.matchHeight()
   },
   data() {
     return {
@@ -144,13 +144,20 @@ export default {
               headers: { 'Content-Type': 'multipart/form-data' }
             })
             .then((r) => {
-              this.images.push(r.data.path)
+              this.images.push(r.data.url)
               callback(url + r.data.filename, 'alt text')
             })
             .catch((e) => {})
         }
       }
     })
+  },
+  created() {
+    this.getAuthFromLocalStorage()
+    if (this.user == null) {
+      this.user = this.getAuthFromLocalStorage()
+      console.log(this.user)
+    }
   },
   methods: {
     sendCnote() {
@@ -177,13 +184,14 @@ export default {
             }
           })
           .then((response) => {
-            this.cnote_id = response.data.insertId
+            this.user_id = response.data.insertId
+
             setTimeout(() => {
               alert('글이 성공적으로 로스팅 되었습니다.')
               // this.$router.push('/cnote/${this.cnote_id}')
               this.$router.push({
-                path: `/cnote/${this.cnote_id}`,
-                params: { id: `${this.cnote_id}` }
+                path: `/welcomeuser/${this.user_id}`,
+                params: { id: `${this.user_id}` }
               })
             }, 700)
           })
@@ -214,11 +222,10 @@ export default {
           // console.log(this.cnote.cnote_img)
         })
       this.backImg = true
+    },
+    getAuthFromLocalStorage() {
+      return this.$q.localStorage.getItem('auth')
     }
-  },
-  matchHeight() {
-    let height = document.getElementsByClassName('toastui-editor').clientHeight
-    console.log(height)
   }
 }
 </script>

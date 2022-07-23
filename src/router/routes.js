@@ -50,6 +50,10 @@ const routes = [
         path: 'cnote/write',
         component: () => import('src/pages/WriteCnotePage.vue'),
         meta: { requiresAuth: true }
+      },
+      {
+        path: 'welcomeuser/:userid',
+        component: () => import('src/pages/WelcomeUser.vue')
       }
     ]
   },
@@ -124,10 +128,6 @@ const routes = [
       {
         path: 'review',
         component: () => import('pages/test/reviewPage.vue')
-      },
-      {
-        path: 'welcomeuser',
-        component: () => import('pages/test/WelcomeUser.vue')
       }
     ]
   },

@@ -7,7 +7,7 @@
       </div>
       <div><button @click="login">입력한 uid로 로그인</button></div>
       <div v-if="user">logged user: {{ user }}</div>
-      <button @click="kLogin">카카오로 로그인 하기</button>
+      <button @click="kakaoLogin">카카오로 로그인 하기</button>
       <button @click="kakaoLogout">카카오로그아웃</button>
     </div>
   </q-page>
@@ -50,65 +50,48 @@ export default defineComponent({
     }
   },
   methods: {
-    // kakaoLogin2() {
-    //   if (window.Kakao.isInitialized()) {
-    //     window.Kakao.Auth.login({
-    //       scope: 'profile_image, account_email, profile_nickname',
-    //       success: function (authObj) {
-    //         // console.log(authObj)
-    //         window.Kakao.API.request({
-    //           url: '/v2/user/me',
-    //           success: (res) => {
-    //             const kakao_account = res.kakao_account
-    //             console.log(kakao_account)
-    //             var accessToken = Kakao.Auth.getAccessToken() // 액세스 토큰 할당
-    //             console.log(accessToken)
-    //           }
-    //         })
-    //       },
-    //       async login(kakao_account) {
-    //         console.log(kakao_account)
-    //         await this.$axios.post('http://localhost:3000/api/login', {
-    //           login: [
-    //             {
-    //               user_email: kakao_account_email,
-    //               user_thumbnail_url: kakao_account.profile.thumbnail_image_url,
-    //               user_nickname: kakao_account.profile.nickname
-    //             },
-    //             {
-    //               user_email: kakao_account_email,
-    //               user_thumbnail_url: kakao_account.profile.thumbnail_image_url,
-    //               user_nickname: kakao_account.profile.nickname
-    //             }
-    //           ]
-    //         })
-    //       }
-    //     })
-    //   }
-    // },
-
-    // 로그인
-    async kLogin(kakao_account) {
-      await this.$axios.post('http://localhost:3000/api/login', {
-        param: [
-          {
-            user_email: kakao_account.email,
-            user_thumbnail_url: kakao_account.profile.thumbnail_image_url,
-            user_nickname: kakao_account.profile.nickname
-          }
-        ]
-      })
+    kakaoLogin() {
+      if (window.Kakao.isInitialized()) {
+        window.Kakao.Auth.login({
+          scope: 'profile_image, account_email, profile_nickname',
+          success: this.getProfile
+        })
+      }
     },
-
     getProfile(authObj) {
       window.Kakao.API.request({
         url: '/v2/user/me',
         success: (res) => {
           const kakao_account = res.kakao_account
           this.kLogin(kakao_account)
-          console.log(kakao_account)
         }
       })
+    },
+    async kLogin(kakao_account) {
+      console.log(kakao_account)
+      await this.$axios
+        .post('http://localhost:3000/api/login', {
+          param: [
+            {
+              user_email: kakao_account.email,
+              user_thumbnail_url: kakao_account.profile.profile_image_url,
+              user_nickname: kakao_account.profile.nickname
+            }
+          ]
+        })
+        .then((response) => {
+          this.user_id = response.data.insertId
+
+          alert('로그인이 되었습니다.')
+          this.$router.push({
+            path: `/welcomeuser/${this.user_id}`,
+            params: { userId: `${this.user_id}` }
+          })
+        })
+        .catch((ex) => {
+          alert('로스팅하는데 문제가 생겼습니다.')
+          console.log(ex)
+        })
     },
     // 로그아웃
     kakaoLogout() {
