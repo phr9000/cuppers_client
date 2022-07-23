@@ -304,19 +304,19 @@ export default defineComponent({
 
       console.log(payload)
 
-      // const apiUrl = `${process.env.API}/cafe`
-      // this.$axios
-      //   .post(apiUrl, {
-      //     cafe: cafe,
-      //     images: images,
-      //     menus: menus
-      //   })
-      //   .then((response) => {
-      //     console.log(response, '성공입니다')
-      //   })
-      //   .catch((err) => {
-      //     console.error(err, '실패입니다')
-      //   })
+      const apiUrl = `${process.env.API}/cafe`
+      this.$axios
+        .post(apiUrl, {
+          cafe: cafe,
+          images: images,
+          menus: menus
+        })
+        .then((response) => {
+          console.log(response, '성공입니다')
+        })
+        .catch((err) => {
+          console.error(err, '실패입니다')
+        })
     },
     getPostData(payload) {
       console.log('카페주소: ', payload)
