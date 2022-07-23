@@ -114,7 +114,7 @@ export default defineComponent({
         uid: uid,
         thumbUrl: `${process.env.STATIC}/images/avatar/${uid}/thumb.jpg`
       }
-      this.$q.localStorage.set('auth', this.user)
+      // this.$q.localStorage.set('auth', this.user)
       this.$router.push('/')
     }
   }

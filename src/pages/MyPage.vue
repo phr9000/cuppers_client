@@ -140,12 +140,6 @@ export default defineComponent({
     }
   },
   mounted() {
-    // if (!this.user || this.user.uid < 1) {
-    //   console.log('로그인 안된 상태, 로그인 페이지로 이동')
-    //   this.$router.push('/login')
-    // } else {
-    //   console.log('로그인 정보 있음')
-    // }
     setTimeout(() => {
       this.loadUserInfo()
     }, 300)
@@ -174,7 +168,7 @@ export default defineComponent({
     },
     logout() {
       this.user = null
-      this.$q.localStorage.remove('auth')
+      // this.$q.localStorage.remove('auth')
       this.$router.push('/login')
     }
   }
