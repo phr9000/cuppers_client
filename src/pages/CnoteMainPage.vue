@@ -206,7 +206,7 @@ export default defineComponent({
     @media (max-width: $breakpoint-sm-max) {
       display: block;
       margin: 0;
-      padding: 0 16px;
+      padding-right: 16px;
     }
   }
   .main_list {

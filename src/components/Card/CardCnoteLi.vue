@@ -37,7 +37,7 @@
       </div>
       <div class="inner_right q-pl-md">
         <!-- style="max-width: 280px; max-height: 320px" -->
-        <q-img class="thumbnail" :ratio="1" :src="cnote.cnote_thumbnail" /></div
+        <q-img class="thumbnail" :ratio="1" :src="cnote.cnote_img" /></div
     ></q-card-section>
     <q-card-section class="q-pa-none"> </q-card-section>
   </q-card>
@@ -134,7 +134,7 @@ export default defineComponent({
     -webkit-box-orient: vertical;
   }
   .thumbnail {
-    border-radius: $border-radius-md;
+    border-radius: $border-radius;
     min-width: 100px;
     min-height: 100px;
   }
