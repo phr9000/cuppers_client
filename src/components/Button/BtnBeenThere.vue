@@ -53,9 +53,27 @@ export default {
       if (this.user) {
         uid = this.user.uid
       } else {
-        console.log(
-          'user id가 없습니다. 로그인이 필요합니다. 로그인 하시겠습니까?'
-        )
+        this.$q.notify({
+          position: 'top',
+          timeout: 5000,
+          message: '로그인이 필요합니다. 로그인 하시겠습니까?',
+          color: 'primary',
+          actions: [
+            {
+              label: '로그인',
+              color: 'yellow',
+              handler: () => {
+                this.$router.push('/login')
+              }
+            },
+            {
+              label: '나중에',
+              color: 'grey',
+              handler: () => {}
+            }
+          ]
+        })
+
         return
       }
 
