@@ -5,7 +5,7 @@
   >
     <div class="row flex justify-end">
       <!-- CardMenu 제거 -->
-      <btn-icon size="xs" icon="close" color="red" />
+      <btn-icon @click="deleteCard" size="xs" icon="close" color="red" />
     </div>
     <div class="row flex justify-between">
       <q-input
@@ -13,6 +13,7 @@
         type="text"
         label="메뉴이름"
         class="col-8"
+        :rules="[(val) => !!val || 'Field is required']"
       />
       <div class="col-2 row justify-evenly align-center">
         <!-- Signature Menu 선택 -->
@@ -26,13 +27,15 @@
         v-model="new_menu.menu_price_hot"
         label="Hot"
         class="col-5"
-        type="number"
+        type="text"
+        mask="#,###"
       />
       <q-input
         v-model="new_menu.menu_price_ice"
         label="Ice"
         class="col-5"
-        type="number"
+        type="text"
+        mask="#,###"
       />
     </div>
     <div>
@@ -55,26 +58,36 @@ export default {
     BtnIcon
   },
   props: {
-    menu_id: { type: Number, required: true },
-    menu_type: { type: String, required: true }
+    menu_id: {
+      type: Number,
+      required: true
+    },
+    menu_type: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
       // 부모 컴포넌트 AddNewCafePage에 전달할 메뉴 데이터 선언
       new_menu: {
         menu_name: '',
-        menu_price_hot: 0,
-        menu_price_ice: 0,
+        menu_price_hot: null,
+        menu_price_ice: null,
         is_signature: false,
-        menu_aromanote: ''
+        menu_aromanote: '',
+        menu_type: ''
       }
     }
   },
   methods: {
     // 부모 컴포넌트 AddNewCafePage의 메뉴 추가 버튼과 연결된 메소드
-    sendBrewing() {
-      console.log('Hello')
-      this.$emit('printBrewing', this.new_menu) // 위에 선언된 new_menu를 printMenu로 전달.
+    sendMenu() {
+      this.new_menu.menu_type = this.menu_type
+      return this.new_menu
+    },
+    deleteCard() {
+      this.$emit('deleteCard', this.menu_id)
     }
   }
 }
@@ -83,6 +96,7 @@ export default {
 .addcard {
   border: 1px solid #ccc;
   box-sizing: content-box;
+  border-radius: 15px;
   .clear {
     border: 1px solid $red;
     box-sizing: content-box;

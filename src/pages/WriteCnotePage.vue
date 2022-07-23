@@ -104,6 +104,7 @@ export default {
       editor: null,
       writeType: true,
       backgroundImg: '',
+<<<<<<< HEAD:src/pages/WriteCnotePage.vue
       cnote: {
         user_id: '',
         cnote_title: '',
@@ -112,6 +113,15 @@ export default {
       },
       backImg: false,
       cnote_id: ''
+=======
+      images: [],
+      cafeids: [3, 4, 5],
+      cnote: {
+        user_id: '3',
+        title: '',
+        content: ''
+      }
+>>>>>>> 5b2fb278fd5679ae5b23b618742c794fb3b37cdf:src/pages/test/CnoteWriteStep2.vue
     }
   },
   mounted() {
@@ -144,8 +154,15 @@ export default {
               headers: { 'Content-Type': 'multipart/form-data' }
             })
             .then((r) => {
+<<<<<<< HEAD:src/pages/WriteCnotePage.vue
               this.images.push(r.data.url)
               callback(url + r.data.url, 'alt text')
+=======
+              console.log(r)
+              console.log(r.data.path)
+              this.images.push(r.data.path)
+              callback(url + r.data.filename, 'alt text')
+>>>>>>> 5b2fb278fd5679ae5b23b618742c794fb3b37cdf:src/pages/test/CnoteWriteStep2.vue
             })
             .catch((e) => {})
         }
@@ -153,6 +170,7 @@ export default {
     })
   },
   created() {
+<<<<<<< HEAD:src/pages/WriteCnotePage.vue
     this.getAuthFromLocalStorage()
     if (this.user == null) {
       this.user = this.getAuthFromLocalStorage()
@@ -200,6 +218,31 @@ export default {
             console.log(ex)
           })
       }
+=======
+    // this.sendCnote()
+  },
+  methods: {
+    sendCnote() {
+      // console.log(this.editor.getHTML())
+      this.cnote.content = this.editor.getHTML()
+      this.$axios
+        .post(`${process.env.API}/cnote`, {
+          param: {
+            user_id: this.cnote.user_id,
+            cnote_title: this.cnote.title,
+            cnote_content: this.cnote.content,
+            cnote_published: this.isPublic
+          }
+        })
+        .then((response) => {
+          console.log(response)
+          alert('성공적으로 보내짐')
+        })
+        .catch((ex) => {
+          alert('post 실패')
+          console.log(ex)
+        })
+>>>>>>> 5b2fb278fd5679ae5b23b618742c794fb3b37cdf:src/pages/test/CnoteWriteStep2.vue
     },
     getImage() {
       // console.log(this.images)

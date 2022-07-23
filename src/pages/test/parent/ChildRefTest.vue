@@ -8,13 +8,18 @@
     <q-btn @click="changeArrayVal" label="change Array Value" />
     <child v-for="arr in array" :key="arr.id" ref="childOfArray" />
   </div>
+
+  <q-btn @click="changeData" label="Add Array Value" />
+  <child-input v-for="(arr, index) in array" :key="index.id" ref="ChildInput" />
 </template>
 <script>
 import Child from 'src/pages/test/child/ChildComp.vue'
+import ChildInput from 'src/pages/test/child/ChildInput.vue'
 export default {
   name: 'ChildRefTest',
   components: {
-    Child
+    Child,
+    ChildInput
   },
   data() {
     return {
@@ -35,9 +40,21 @@ export default {
     changeArrayVal() {
       for (let i = 0; i < this.array.length; i++) {
         this.$refs.childOfArray[i].changeVal()
-        // this.array.push()
+      }
+    },
+    changeData() {
+      for (let i = 0; i < this.array.length; i++) {
+        let value = (this.$refs.ChildInput[this.array.length - 1].$data.val =
+          'Hi')
+        console.log(value)
       }
     }
+    // addInput() {
+    //   for (let i = 1; i < this.array.length; i++) {
+    //     let newEl = this.$refs.ChildInput[this.array.length - 1].getVal()
+    //     return this.array.push(newEl)
+    //   }
+    // }
   }
 }
 </script>

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "keywords": [
     {
       "keyword_id": 30,
@@ -52,6 +53,104 @@
       "id": 106,
       "keyword_id": 106,
       "keyword_name": "파티하기 좋은"
+=======
+  "mainKeywords": [
+    {
+      "keyword_id": 0,
+      "keyword_name": "전망이 좋은"
+    },
+    {
+      "keyword_id": 1,
+      "keyword_name": "소개팅하기 좋은"
+    },
+    {
+      "keyword_id": 2,
+      "keyword_name": "연인과 같이  가면 좋은"
+    },
+    {
+      "keyword_id": 3,
+      "keyword_name": "분위기가 좋은"
+    },
+    {
+      "keyword_id": 4,
+      "keyword_name": "바리스타 챔피언"
+    },
+    {
+      "keyword_id": 5,
+      "keyword_name": "바다가 보이는"
+    },
+    {
+      "keyword_id": 6,
+      "keyword_name": "테라스가 있는"
+    },
+    {
+      "keyword_id": 7,
+      "keyword_name": "낮에만 영업하는"
+    },
+    {
+      "keyword_id": 8,
+      "keyword_name": "연중무휴"
+    },
+    {
+      "keyword_id": 9,
+      "keyword_name": "정원이나 산책로가 있는"
+    },
+    {
+      "keyword_id": 10,
+      "keyword_name": "브런치 메뉴가 있는"
+    },
+    {
+      "keyword_id": 11,
+      "keyword_name": "루프탑이 있는"
+    },
+    {
+      "keyword_id": 12,
+      "keyword_name": "새벽까지 영업하는"
+    },
+    {
+      "keyword_id": 13,
+      "keyword_name": "미술 작품이 있는"
+    },
+    {
+      "keyword_id": 14,
+      "keyword_name": "야경이 유명한"
+    },
+    {
+      "keyword_id": 15,
+      "keyword_name": "반려동물 동반 가능"
+    },
+    {
+      "keyword_id": 16,
+      "keyword_name": "공연이 있는"
+    },
+    {
+      "keyword_id": 17,
+      "keyword_name": "한옥 인테리어"
+    },
+    {
+      "keyword_id": 18,
+      "keyword_name": "블루리본에 선정된"
+    },
+    {
+      "keyword_id": 19,
+      "keyword_name": "블루리본에 선정된"
+    },
+    {
+      "keyword_id": 20,
+      "keyword_name": "블루리본에 선정된"
+    },
+    {
+      "keyword_id": 21,
+      "keyword_name": "블루리본에 선정된"
+    },
+    {
+      "keyword_id": 22,
+      "keyword_name": "블루리본에 선정된"
+    },
+    {
+      "keyword_id": 23,
+      "keyword_name": "블루리본에 선정된"
+>>>>>>> 5b2fb278fd5679ae5b23b618742c794fb3b37cdf
     }
   ],
   "mainCafes": [
@@ -1415,6 +1514,150 @@
           "type": null
         }
       ]
+    },
+    {
+      "cafe": {
+        "cafe_info": {
+          "cafe_name_pr": "",
+          "cafe_phone": "",
+          "cafe_operation_time": "",
+          "cafe_website": "",
+          "cafe_address": "",
+          "cafe_address_detail": "",
+          "cafe_postalcode": "",
+          "cafe_address_dong": "",
+          "cafe_menu": []
+        }
+      },
+      "menu": {
+        "cafe_menu": []
+      },
+      "apiId": "cafe",
+      "id": 5
+    },
+    {
+      "cafe": {
+        "cafe_info": {
+          "cafe_name_pr": "",
+          "cafe_phone": "",
+          "cafe_operation_time": "",
+          "cafe_website": "",
+          "cafe_address": "",
+          "cafe_address_detail": "",
+          "cafe_postalcode": "",
+          "cafe_address_dong": "",
+          "cafe_menu": []
+        }
+      },
+      "menu": {
+        "cafe_menu": []
+      },
+      "apiId": "cafe",
+      "id": 6
+    },
+    {
+      "apiId": "cafe",
+      "id": 7
+    },
+    {
+      "apiId": "cafe",
+      "id": 8
+    },
+    {
+      "apiId": "cafe",
+      "id": 9
+    },
+    {
+      "apiId": "cafe",
+      "id": 10
+    },
+    {
+      "apiId": "cafe",
+      "id": 11
+    },
+    {
+      "apiId": "cafe",
+      "id": 12
+    },
+    {
+      "apiId": "cafe",
+      "id": 13
+    },
+    {
+      "apiId": "cafe",
+      "id": 14
+    },
+    {
+      "apiId": "cafe",
+      "id": 15
+    },
+    {
+      "cafe": {
+        "cafe_info": {
+          "cafe_name_pr": "",
+          "cafe_phone": "",
+          "cafe_operation_time": "",
+          "cafe_website": "",
+          "cafe_address": "",
+          "cafe_address_detail": "",
+          "cafe_postalcode": "",
+          "cafe_address_dong": "",
+          "cafe_menu": []
+        }
+      },
+      "menu": {
+        "cafe_menu": []
+      },
+      "apiId": "cafe",
+      "id": 16
+    },
+    {
+      "apiId": "cafe",
+      "id": 17
+    },
+    {
+      "apiId": "cafe",
+      "id": 18
+    },
+    {
+      "cafe": {
+        "cafe_info": {
+          "cafe_name_pr": "",
+          "cafe_phone": "",
+          "cafe_operation_time": "",
+          "cafe_website": "",
+          "cafe_address": "",
+          "cafe_address_detail": "",
+          "cafe_postalcode": "",
+          "cafe_address_dong": "",
+          "cafe_menu": []
+        }
+      },
+      "menu": {
+        "cafe_menu": []
+      },
+      "apiId": "cafe",
+      "id": 19
+    },
+    {
+      "apiId": "cafe",
+      "id": 20
+    },
+    {
+      "cafe_info": "cafe_info",
+      "apiId": "cafe",
+      "id": 21
+    },
+    {
+      "cafe_name_pr": "Cafe Muirhead",
+      "cafe_name_sc": "",
+      "cafe_address": "Huangjinchengdao, Changning, Shanghai",
+      "cafe_region": "Gubei",
+      "cafe_latitude": null,
+      "cafe_longitude": null,
+      "cafe_img": "/test/url",
+      "apiId": "cafe",
+      "id": 22
     }
   ],
   "review": [

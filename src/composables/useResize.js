@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const dataURItoBlob = (dataURI) => {
   const bytes =
     dataURI.split(',')[0].indexOf('base64') >= 0
@@ -10,6 +11,10 @@ const dataURItoBlob = (dataURI) => {
   return new Blob([ia], { type: mime })
 }
 
+=======
+// If you like - you can move this section into separate file
+// ------- Move from here -------
+>>>>>>> 5b2fb278fd5679ae5b23b618742c794fb3b37cdf
 const resizeImage = ({ file, maxSize }) => {
   const reader = new FileReader()
   const image = new Image()
@@ -52,6 +57,23 @@ const resizeImage = ({ file, maxSize }) => {
   })
 }
 
+<<<<<<< HEAD
+=======
+// If you like - you can move this section into separate file
+// ------- Move from here -------
+const dataURItoBlob = (dataURI) => {
+  const bytes =
+    dataURI.split(',')[0].indexOf('base64') >= 0
+      ? atob(dataURI.split(',')[1])
+      : unescape(dataURI.split(',')[1])
+  const mime = dataURI.split(',')[0].split(':')[1].split(';')[0]
+  const max = bytes.length
+  const ia = new Uint8Array(max)
+  for (let i = 0; i < max; i += 1) ia[i] = bytes.charCodeAt(i)
+  return new Blob([ia], { type: mime })
+}
+
+>>>>>>> 5b2fb278fd5679ae5b23b618742c794fb3b37cdf
 const resizeImageSquare = ({ file, maxSize, square = false }) => {
   const reader = new FileReader()
   const image = new Image()
@@ -112,8 +134,17 @@ const resizeImageSquare = ({ file, maxSize, square = false }) => {
     reader.readAsDataURL(file)
   })
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5b2fb278fd5679ae5b23b618742c794fb3b37cdf
 const useResize = () => {
   return { resizeImage, resizeImageSquare }
 }
 
 export default useResize
+<<<<<<< HEAD
+=======
+// uncomment once moved to resizeImage.js
+// ------- till here - into ./src/plugins/image-resize.js -------
+>>>>>>> 5b2fb278fd5679ae5b23b618742c794fb3b37cdf

@@ -21,23 +21,24 @@
           <div class="col-12">
             <q-input
               label="카페이름 *"
-              v-model="cafe_info.cafe_name_pr"
+              v-model="cafe.cafe_name_pr"
               type="text"
-              :rules="[(val) => !!val || 'Field is required']"
+              :rules="[(val) => !!val || '카페 이름은 필수 항목입니다']"
               class="col-12 input-area"
+              @blur="verifyCafeName"
             />
           </div>
         </div>
         <div class="col-12 q-mx-xl q-mt-xl contents_block">
           <div class="row info-block items-center">
             <q-input
-              v-model="cafe_info.cafe_address"
+              v-model="cafe.cafe_address"
               readonly
               type="text"
               id="address"
               label="주소 *"
               class="col-8 input-area"
-              :rules="[(val) => !!val || 'Field is required']"
+              :rules="[(val) => !!val || '카페 주소는 필수 항목입니다']"
             />
             <div class="col-3 flex row-area">
               <post-number
@@ -54,18 +55,18 @@
             <div class="col-7">
               <q-input
                 type="text"
-                v-model="cafe_info.cafe_address_detail"
+                v-model="cafe.cafe_address_detail"
                 id="detailAddress"
                 label="상세주소 *"
-                :rules="[(val) => !!val || 'Field is required']"
+                :rules="[(val) => !!val || '상세 주소는 필수 항목입니다']"
               />
             </div>
             <div class="col-4 q-ml-xs">
               <q-input
                 type="text"
-                v-model="cafe_info.cafe_postalcode"
+                v-model="cafe.cafe_postalcode"
                 label="우편번호 *"
-                :rules="[(val) => !!val || 'Field is required']"
+                :rules="[(val) => !!val || '우편 번호는 필수 항목입니다']"
               />
             </div>
           </div>
@@ -75,21 +76,57 @@
           <div class="col-12">
             <q-input
               label="대표전화 *"
-              v-model="cafe_info.cafe_phone"
+              v-model="cafe.cafe_phone"
               type="tel"
               mask="### -  #### - ####"
-              :rules="[(val) => !!val || 'Field is required']"
+              :rules="[(val) => !!val || '대표 전화는 필수 항목입니다']"
             />
           </div>
         </div>
-        <div class="q-mx-xl q-mt-xl q-my-xl contents_block">
-          <div class="col-12">
-            <q-input label="영업시간" v-model="cafe_info.cafe_operation_time" />
+        <div class="q-mx-xl q-mt-xl q-my-xl row justify-between contents_block">
+          <div class="col-5">
+            <q-input
+              type="time"
+              hint="오픈 시간(평일)"
+              v-model="cafe.cafe_res_time"
+            />
+          </div>
+          <div class="col-5">
+            <q-input
+              type="time"
+              hint="닫는 시간(평일)"
+              v-model="cafe.cafe_shutdown_time"
+            />
           </div>
         </div>
         <div class="q-mx-xl q-my-xl contents_block">
           <div class="col-12">
-            <q-input label="웹사이트" v-model="cafe_info.cafe_website" />
+            <q-input
+              label="웹사이트"
+              hint="URL을 입력해주세요"
+              v-model="cafe.cafe_webpage"
+              type="url"
+            />
+          </div>
+        </div>
+        <div class="q-mx-xl q-my-xl contents_block">
+          <div class="col-12">
+            <q-input
+              label="분점 정보"
+              hint="쉼표로 구분해주세요"
+              v-model="cafe.cafe_branch_name"
+              type="url"
+            />
+          </div>
+        </div>
+        <div class="q-mx-xl q-my-xl contents_block">
+          <div class="col-12">
+            <q-input
+              label="바리스타 정보"
+              hint="바리스타의 수상/자격증 등을 입력해주세요"
+              v-model="cafe.cafe_branch_name"
+              type="url"
+            />
           </div>
         </div>
       </div>
@@ -102,9 +139,9 @@
         </div>
         <section class="q-my-xl">
           <div class="flex justify-between q-mx-xl">
-            <span class="text-h6">Brewing Coffee</span>
+            <span class="text-h6">브루잉 커피</span>
             <btn-basic
-              @click="addBrewing"
+              @click="addBrewingMenu"
               size="sm"
               label="메뉴 추가"
               color="primary"
@@ -114,19 +151,20 @@
           </div>
           <div>
             <card-add-menu
-              v-for="(menu, index) in this.cafe_info.cafe_menu"
-              :key="index"
-              :menu_id="index"
-              menu_type="br"
+              v-for="menu in onlyBrewing"
+              :key="menu.menu_id"
+              :menu_id="menu.menu_id"
+              :menu_type="menu.menu_type"
+              @deleteCard="deleteCard"
               ref="CardAddMenu"
-              @printBrewing="printBrewing"
             />
           </div>
         </section>
         <section class="q-my-xl">
           <div class="flex justify-between q-mx-xl">
-            <span class="text-h6">Variation Coffee</span>
+            <span class="text-h6">베리에이션 커피</span>
             <btn-basic
+              @click="addVariationMenu"
               size="sm"
               label="메뉴 추가"
               color="primary"
@@ -134,8 +172,32 @@
               padding="7px 15px 7px 15px"
             />
           </div>
-          <div></div>
+          <div>
+            <card-add-menu
+              v-for="menu in onlyVariation"
+              :key="menu.menu_id"
+              :menu_id="menu.menu_id"
+              :menu_type="menu.menu_type"
+              @deleteCard="deleteCard"
+              ref="CardAddMenu"
+            />
+          </div>
         </section>
+        <section>
+          <image-upload ref="ImageUpload" />
+        </section>
+      </div>
+    </section>
+    <section class="q-mb-xl">
+      <div class="justify-center cafe_description">
+        <span class="text-h6 cafe_description_title">카페 소개</span>
+        <textarea
+          v-model="cafe.cafe_description"
+          name="캬페소개"
+          cols="80"
+          rows="10"
+          class="cafe_description_text"
+        ></textarea>
       </div>
     </section>
     <section>
@@ -158,66 +220,135 @@ import { defineComponent } from 'vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import PostNumber from 'src/components/Etc/PostNumber.vue'
 import CardAddMenu from 'src/components/Card/CardAddMenu.vue'
+import ImageUpload from 'src/components/Etc/ImageUpload.vue'
 
 export default defineComponent({
   name: 'AddNewCafePage',
   components: {
     BtnBasic,
     PostNumber,
-    CardAddMenu
+    CardAddMenu,
+    ImageUpload
   },
   data() {
     return {
-      count: 0,
-      cafe_info: {
+      cafe: {
         cafe_name_pr: '',
         cafe_phone: '',
-        cafe_operation_time: '',
-        cafe_website: '',
         cafe_address: '',
-        cafe_address_detail: '',
-        cafe_postalcode: '',
-        cafe_address_dong: '',
-        cafe_menu: []
-      }
+        cafe_region: '',
+        cafe_webpage: '',
+        cafe_description: '',
+        cafe_latitude: '',
+        cafe_longitude: '',
+        cafe_res_time: '',
+        cafe_shutdown_time: '',
+        cafe_branch_name: ''
+        // cafe_address_detail: '',
+        // cafe_postalcode: '',
+        // cafe_address_dong: '',
+        // cafe_operation_time: '',
+      },
+      images: [],
+      menus: []
     }
   },
-  // create() {
-  //   let apiUrl = `${process.env.API_LOCAL}/`
-  // },
-  // 페이지 로드 시 Default로 들어갈 메뉴카드 Brewing과 Variation
   mounted() {
-    for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
-      this.$refs.CardAddMenu[i].new_menu
-    }
+    const ida = this.menus.length + 1
+    const idb = this.menus.length + 2
+    this.menus.push({ menu_id: ida, menu_type: 'br' })
+    this.menus.push({ menu_id: idb, menu_type: 'va' })
   },
   methods: {
+    async verifyCafeName() {
+      let payload = {
+        param: {
+          cafe_name_pr: this.cafe.cafe_name_pr
+        }
+      }
+      console.log(payload)
+      await this.$axios
+        .post('http://localhost:3000/api/cafe/checkname', {
+          param: {
+            cafe_name_pr: this.cafe.cafe_name_pr
+          }
+        })
+        .then((response) => {
+          console.log(response.data)
+          if (response.data.isAvailable == 1) {
+            console.log('사용할 수 있는 카페 이름입니다')
+          } else {
+            alert('이미 등록된 카페입니다')
+          }
+        })
+        .catch((err) => console.log(err))
+    },
     submitCafeInfo() {
-      console.log('카페정보출력테스트: ', this.cafe_info)
+      const cafe = { ...this.cafe }
+      console.log(cafe)
+
+      // 메뉴 등록하기
+      const menus = []
+      for (let i = 0; i < this.menus.length; i++) {
+        menus.push(this.$refs.CardAddMenu[i].sendMenu())
+      }
+
+      // 이미지 등록하기
+      const images = [...this.$refs.ImageUpload.images]
+
+      let payload = {
+        cafe: cafe,
+        menus: menus,
+        images: images
+      }
+
+      console.log(payload)
+
+      const apiUrl = `${process.env.API}/cafe`
+      this.$axios
+        .post(apiUrl, {
+          cafe: cafe,
+          images: images,
+          menus: menus
+        })
+        .then((response) => {
+          console.log(response, '성공입니다')
+        })
+        .catch((err) => {
+          console.error(err, '실패입니다')
+        })
     },
     getPostData(payload) {
       console.log('카페주소: ', payload)
-      this.cafe_info.cafe_address = payload.address
-      this.cafe_info.cafe_address_dong = payload.extraAddress
-      this.cafe_info.cafe_postalcode = payload.postcode
+      this.cafe.cafe_address = payload.address
+      this.cafe.cafe_region = payload.extraAddress
+      this.cafe.cafe_latitude = payload.latitude
+      this.cafe.cafe_longitude = payload.longitude
+      // this.cafe.cafe_address_dong = payload.extraAddress
+      this.cafe.cafe_postalcode = payload.postcode
+      console.log(this.cafe)
     },
-    // 메뉴 추가 버튼 클릭 시 추가되는 메뉴카드
-    addBrewing() {
-      console.log('Hi')
-      /*
-      v-for와 ref를 같이 사용할 경우 아래와 같이 ref를 통해 참조한 컴포넌트에 인덱스를 붙여야 하는데,
-      동적으로 컴포넌트 생성할 때, 배열의 길이만큼 기하급수적으로 컴포넌트가 생성됨.
-      지금 상황에서는 배열에 아무것도 없기 때문에 아래 Loop가 실행되지 않으며,
-      때문에 컴포넌트를 참조할 수 없는 상황. 만약 Default로 배열을 밀어넣게 되면 양방향 바인딩이 안됨.
-      */
-      for (let i = 0; i < this.cafe_info.cafe_menu.length; i++) {
-        this.$refs.CardAddMenu[i].sendBrewing()
-      }
+    addBrewingMenu() {
+      const id = this.menus.length + 1
+      this.menus.push({ menu_id: id, menu_type: 'br' })
+      console.log(this.menus)
     },
-    printBrewing(new_menu) {
-      console.log(new_menu)
-      this.cafe_info.cafe_menu.push(new_menu)
-      console.log(this.cafe_info.cafe_menu)
+    addVariationMenu() {
+      const id = this.menus.length + 1
+      this.menus.push({ menu_id: id, menu_type: 'va' })
+      console.log(this.menus)
+    },
+    deleteCard(menu_id) {
+      console.log(menu_id)
+      this.menus = this.menus.filter((menu) => menu.menu_id !== menu_id)
+    }
+  },
+  computed: {
+    onlyBrewing() {
+      return this.menus.filter((menus) => menus.menu_type === 'br')
+    },
+    onlyVariation() {
+      return this.menus.filter((menus) => menus.menu_type === 'va')
     }
   }
 })
@@ -260,6 +391,29 @@ export default defineComponent({
   .info-block {
     display: flex;
     justify-content: space-between;
+  }
+}
+
+.cafe_description {
+  width: 80%;
+  position: relative;
+  margin: 0 auto;
+
+  .cafe_description_textarea {
+    width: 100%;
+    height: 200px;
+    box-sizing: border-box;
+    resize: none;
+    transition: border 0.5s;
+    &:focus {
+      border: 2px solid #7b3838;
+    }
+  }
+
+  .cafe_description_title {
+    position: absolute;
+    top: -35px;
+    left: 0;
   }
 }
 
