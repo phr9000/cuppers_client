@@ -1,14 +1,47 @@
 <template>
-  <q-page class="flex flex-center">
-    <div class="column items-center">
-      <div>login page</div>
-      <div>
-        <q-input label="uid" v-model="uid" dense class="q-mb-sm"></q-input>
+  <q-page>
+    <div class="login-container">
+      <div class="login-inner">
+        <div class="left">
+          <div class="user-useful">
+            <p><span class="hightlight">커핑노트</span> 작성,</p>
+            <p>카페 <span class="hightlight">마이리스트</span> 관리,</p>
+            <p>내 <span class="hightlight">취향 카페</span> 추천,</p>
+            <p>카페 <span class="hightlight bold">SNS</span> 관리</p>
+          </div>
+          <div class="cuppers-desc">
+            #커피를 커피답게 #커퍼스 #내 주변 카페 #커피SNS #감성
+          </div>
+        </div>
+        <div class="right">
+          <div class="img-area" @click="kakaoLogin">
+            <img
+              src="https://developers.kakao.com/tool/resource/static/img/button/kakaosync/complete/ko/kakao_login_large_narrow.png"
+              alt=""
+            />
+          </div>
+        </div>
       </div>
-      <div><button @click="login">입력한 uid로 로그인</button></div>
+    </div>
+
+    <!-- test -->
+    <div class="column items-left" style="border: none">
+      <div style="font-size: 10px">login page</div>
+      <div>
+        <q-input
+          style="border: none !important"
+          label="uid"
+          v-model="uid"
+          dense
+          class="q-mb-sm"
+        ></q-input>
+      </div>
+      <div>
+        <button style="background-color: #fff; width: 120px; font-size: 10px">
+          입력한 uid로 로그인
+        </button>
+      </div>
       <div v-if="user">logged user: {{ user }}</div>
-      <button @click="kakaoLogin">카카오로 로그인 하기</button>
-      <button @click="kakaoLogout">카카오로그아웃</button>
     </div>
   </q-page>
 </template>
@@ -120,4 +153,71 @@ export default defineComponent({
 })
 </script>
 
-<style></style>
+<style lang="scss" scopped>
+p {
+  padding: 0;
+  margin: 0;
+}
+.login-container {
+  max-width: 1330px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  // height: 500px;
+  margin-top: 120px;
+  .login-inner {
+    display: flex;
+    align-content: flex-start;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px 50px 20px 135px;
+  }
+  .left {
+    flex-basis: 50%;
+    > p {
+      margin: 0;
+      padding: 0;
+    }
+    .user-useful {
+      padding: 0;
+      font-size: 45px;
+      font-weight: 800;
+      margin-bottom: 0;
+      .hightlight {
+        position: relative;
+        z-index: 2;
+        &.bold {
+          font-style: bold;
+        }
+        &:after {
+          position: absolute;
+          z-index: 1;
+          bottom: 3px;
+          left: 0;
+          display: block;
+          content: '';
+          background-color: #541300;
+          opacity: 0.6;
+          width: 100%;
+          height: 20px;
+        }
+      }
+    }
+    .cuppers-desc {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #848484;
+    }
+  }
+  .right {
+    flex: 1;
+    .img-area {
+      width: 350px;
+      cursor: pointer;
+      > img {
+        width: 100%;
+      }
+    }
+  }
+}
+</style>

@@ -215,6 +215,7 @@ export default {
     }
     .input-desc-area {
       font-size: 14px;
+      font-weight: 500;
     }
     .input-box {
       border: none;
