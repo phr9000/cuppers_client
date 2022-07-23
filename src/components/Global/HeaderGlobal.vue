@@ -14,7 +14,7 @@
         ><btn-logo class="font_caveat" to="/" />
         <q-btn
           to="/test"
-          class="text-grey-3"
+          class="text-white"
           flat
           round
           icon="cruelty_free"

@@ -5,10 +5,6 @@ const routes = [
     children: [
       { path: '', component: () => import('src/pages/MainPage.vue') },
       {
-        path: 'cafe/:id',
-        component: () => import('src/pages/CafeDetailPage.vue')
-      },
-      {
         path: 'my',
         component: () => import('src/pages/MyPage.vue'),
         meta: { requiresAuth: true }
@@ -16,36 +12,34 @@ const routes = [
       {
         path: 'profile',
         component: () => import('src/pages/UserProfilePage.vue')
-      },
+      }
+    ]
+  },
+  {
+    path: '/cafe',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: ':id', component: () => import('pages/CafeDetailPage.vue') },
       {
-        path: 'review/write/:id',
-        component: () => import('src/pages/WriteReviewPage.vue'),
+        path: '/review/write/:id',
+        component: () => import('pages/WriteReviewPage.vue'),
         meta: { requiresAuth: true }
       },
-      {
-        path: 'reqnewcafe',
-        component: () => import('src/pages/ReqNewCafePage.vue')
-      },
-      {
-        path: 'newcafe',
-        component: () => import('src/pages/ReqNewCafePage.vue')
-      },
-      {
-        path: 'addnewcafe',
-        component: () => import('src/pages/AddNewCafePage.vue')
-      },
-      {
-        path: 'login',
-        component: () => import('src/pages/LoginPage.vue')
-      },
-      {
-        path: 'signup',
-        component: () => import('src/pages/SurveyPage.vue')
-      },
-      {
-        path: 'welcomeuser',
-        component: () => import('src/pages/WelcomeUser.vue')
-      }
+      { path: 'req', component: () => import('pages/ReqNewCafePage.vue') },
+      { path: 'create', component: () => import('pages/AddNewCafePage.vue') }
+    ]
+  },
+  {
+    path: '/login',
+    component: () => import('layouts/BasicLayout.vue'),
+    children: [{ path: '', component: () => import('pages/LoginPage.vue') }]
+  },
+  {
+    path: '/welcome',
+    component: () => import('layouts/BasicLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/WelcomeUser.vue') },
+      { path: 'survey', component: () => import('pages/SurveyPage.vue') }
     ]
   },
   {
@@ -84,7 +78,7 @@ const routes = [
   },
   {
     path: '/test',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/BasicLayout.vue'),
     children: [
       { path: '', component: () => import('pages/test/ButtonTest.vue') },
       {
