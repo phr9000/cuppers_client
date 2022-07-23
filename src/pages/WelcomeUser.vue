@@ -10,7 +10,8 @@
         <input
           class="input-box"
           v-model="userInfo.nickname"
-          placeholder="스페셜티 커피 10년차 전문가"
+          placeholder="스페셜티 커피 전문가2"
+          ref="nickname"
         />
         <p class="input-desc-area">
           <span class="input-desc">닉네임을 정해주세요</span>
@@ -19,12 +20,12 @@
       </div>
       <div class="user-introduce">
         <input
-          class="input-box intro"
+          class="input-box"
           v-model="userInfo.introduce"
-          placeholder="커피에 대한 열정은 누구도 따라올 수 없다"
+          placeholder="커피 질문은 메일로만 부탁드려요~🙏🙏"
         />
         <p class="input-desc-area">
-          <span class="input-desc">나를 한줄로 표현해주세요</span>
+          <span class="input-desc">나를 한줄로 소개해주세요</span>
         </p>
         <p v-if="nicknameOverlap">중복되는 이름이에요</p>
       </div>
@@ -134,11 +135,17 @@ export default {
       }
     },
     goToSurvey() {
-      this.$router.push('/signup')
+      this.$router.push('/welcome/survey')
+    },
+    nicknameFocus() {
+      this.$refs.nickname.focus()
     }
   },
   created() {
     setTimeout(this.typeText, this.newTextDelay + 200)
+  },
+  mounted() {
+    this.nicknameFocus()
   }
   // async created() {
   //   this.userId = '44'
@@ -224,12 +231,8 @@ export default {
       display: inline-block;
 
       &::placeholder {
-        color: #000;
-      }
-      &.intro {
-        &::placeholder {
-          color: #848484;
-        }
+        color: #bdbdbd;
+        font-weight: 500;
       }
     }
     .input-desc {

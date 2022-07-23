@@ -12,6 +12,21 @@ const routes = [
       {
         path: 'profile',
         component: () => import('src/pages/UserProfilePage.vue')
+      },
+      {
+        path: 'login',
+        component: () => import('src/pages/LoginPage.vue')
+      },
+      {
+        path: 'welcome',
+        component: () => import('layouts/BasicLayout.vue'),
+        children: [
+          { path: '', component: () => import('src/pages/WelcomeUser.vue') },
+          {
+            path: 'survey',
+            component: () => import('src/pages/SurveyPage.vue')
+          }
+        ]
       }
     ]
   },
@@ -29,11 +44,7 @@ const routes = [
       { path: 'create', component: () => import('pages/AddNewCafePage.vue') }
     ]
   },
-  {
-    path: '/login',
-    component: () => import('layouts/BasicLayout.vue'),
-    children: [{ path: '', component: () => import('pages/LoginPage.vue') }]
-  },
+
   {
     path: '/welcome',
     component: () => import('layouts/BasicLayout.vue'),

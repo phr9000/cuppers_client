@@ -1,6 +1,6 @@
 <template>
-  <q-page>
-    <div class="login-container">
+  <q-page class="login-container">
+    <div>
       <div class="login-inner">
         <div class="left">
           <div class="user-useful">
@@ -156,20 +156,24 @@ p {
   margin: 0;
 }
 .login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   max-width: 1330px;
   margin: 0 auto;
-  margin-bottom: 50px;
-  // height: 500px;
-  margin-top: 120px;
+  min-height: 500px;
+  height: calc(100vh - 170px);
+  margin-top: 0px;
   .login-inner {
     display: flex;
     align-content: flex-start;
     align-items: flex-end;
     justify-content: center;
-    padding: 20px 50px 20px 135px;
+    padding: 20px 0px 20px 0px;
   }
   .left {
     flex-basis: 50%;
+    margin-left: 13%;
     > p {
       margin: 0;
       padding: 0;
@@ -208,8 +212,9 @@ p {
   }
   .right {
     flex: 1;
+    margin-left: 30px;
     .img-area {
-      width: 350px;
+      width: 300px;
       cursor: pointer;
       > img {
         width: 100%;
