@@ -12,6 +12,8 @@
         ? btnMdClass
         : size === 'lg'
         ? btnLgClass
+        : size === 'xl'
+        ? btnXlClass
         : ''
     ]"
     :color="color"
@@ -32,7 +34,8 @@ export default defineComponent({
     return {
       btnSmClass: 'btn_sm',
       btnMdClass: 'btn_md',
-      btnLgClass: 'btn_lg'
+      btnLgClass: 'btn_lg',
+      btnXlClass: 'btn_xl'
     }
   }
 })
@@ -58,6 +61,15 @@ export default defineComponent({
     }
   }
   &.btn_lg {
+    padding: 5px 12px;
+    font-size: 16px !important;
+    line-height: 14px;
+    min-height: 14px;
+    i {
+      font-size: 1.5rem !important;
+    }
+  }
+  &.btn_xl {
     padding: 3px 13px 3px 13px;
     // font-size: 18px !important;
     // line-height: 18px;

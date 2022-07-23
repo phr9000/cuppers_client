@@ -142,7 +142,7 @@
         </section>
       </q-drawer>
 
-      <!-- 지도 확대, 축소 컨트롤 div -->
+      <!-- zoom_control -지도 확대, 축소 컨트롤 div -->
       <div class="zoom_control radius_border">
         <span @click="zoomIn"
           ><img
@@ -163,18 +163,37 @@
         icon="my_location"
       />
 
-      <!-- 마커 클릭시 표시되는 인포 윈도우 -->
-      <section v-if="targetCafe" class="target_cafe_wrap">
-        <card-cafe-map
-          @close="clearTarget"
-          :cafe="targetCafe"
-          :keywords="targetCafe.keywords"
-          :today="targetCafe.today"
-          :cafeFacility="targetCafe.cafeFacility"
-          :menuBrewing="targetCafe.menuBrewing"
-          :menuVariation="targetCafe.menuVariation"
-        />
-      </section>
+      <div class="map_left_top">
+        <div class="sample_keywords">
+          <btn-basic
+            v-for="keyword in sampleKeywords"
+            :key="keyword.val"
+            class="bg-grey-2 q-mr-xs"
+            @click="handleClickSearch(keyword.val)"
+            color="secondary"
+            size="lg"
+            :label="keyword.label"
+          />
+          <!-- <btn-basic
+            @click="handleClickSearch('강동')"
+            color="secondary"
+            size="md"
+            label="강동"
+          /> -->
+        </div>
+        <!-- 마커 클릭시 표시되는 인포 윈도우 -->
+        <div v-if="targetCafe" class="target_cafe_wrap">
+          <card-cafe-map
+            @close="clearTarget"
+            :cafe="targetCafe"
+            :keywords="targetCafe.keywords"
+            :today="targetCafe.today"
+            :cafeFacility="targetCafe.cafeFacility"
+            :menuBrewing="targetCafe.menuBrewing"
+            :menuVariation="targetCafe.menuVariation"
+          />
+        </div>
+      </div>
 
       <!-- 현재위치에서 재검색 -->
       <!-- <div style="">카페이름</div> -->
@@ -298,6 +317,20 @@ export default defineComponent({
         {
           label: '거리순',
           val: 'dist'
+        }
+      ],
+      sampleKeywords: [
+        {
+          label: '전체',
+          val: '*'
+        },
+        {
+          label: '송파',
+          val: '송파'
+        },
+        {
+          label: '강동',
+          val: '강동'
         }
       ],
       sort: '' // none or like or dis
@@ -867,13 +900,17 @@ export default defineComponent({
     z-index: 1;
   }
 
-  // 마커 클릭시 표시되는 인포 윈도우
-  .target_cafe_wrap {
+  .map_left_top {
     position: absolute;
     top: 15px;
     left: 15px;
-    width: 300px;
     z-index: 1;
+
+    // 마커 클릭시 표시되는 인포 윈도우
+    .target_cafe_wrap {
+      padding-top: 15px;
+      width: 300px;
+    }
   }
 }
 </style>
