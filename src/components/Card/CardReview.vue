@@ -53,6 +53,13 @@
               :img-src="img.thumbnail_url"
             />
           </q-carousel>
+
+          <!-- 모든 이미지 - 전체 화면 -->
+          <modal-swiper
+            :show="showModal"
+            :images="images"
+            @close="showModal = false"
+          />
         </div>
       </q-card-section>
       <q-card-section
@@ -83,10 +90,11 @@ import BtnAvatar from 'src/components/Button/BtnAvatar.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
+import ModalSwiper from 'src/components/Modal/ModalSwiper.vue'
 
 export default defineComponent({
   name: 'CardReview',
-  components: { BtnAvatar, BadgeCafe, BtnLike, MenuItem },
+  components: { BtnAvatar, BadgeCafe, BtnLike, MenuItem, ModalSwiper },
   props: {
     review: {
       type: Object,
@@ -107,7 +115,7 @@ export default defineComponent({
     }
   },
   data() {
-    return { slide: 0 }
+    return { slide: 0, showModal: false, sliderImages: [] }
   },
   computed: {
     createDate() {
@@ -148,6 +156,11 @@ export default defineComponent({
           if (img.thumbnail_url.startsWith('images/')) {
             img.thumbnail_url = `${process.env.STATIC}/${img.thumbnail_url}`
           }
+          if (img.images_review_url.startsWith('images/')) {
+            img.images_review_url = `${process.env.STATIC}/${img.images_review_url}`
+          }
+          img = { ...img, url: img.images_review_url, id: img.images_review_id }
+
           return img
         })
         console.log(images)
@@ -164,6 +177,7 @@ export default defineComponent({
       // this.$router.push({ path: `/cafe/${this.review.cafe_id}` })
     },
     clickThumbnail() {
+      this.showModal = true
       console.log('show all images')
     }
   }
@@ -283,18 +297,30 @@ export default defineComponent({
   }
 
   :deep(.q-carousel__navigation) {
-    transform: scale(0.6);
+    transform: scale(0.45);
     bottom: 0px;
   }
   :deep(.q-carousel__prev-arrow) {
     height: 100%;
     top: 0;
     left: 0;
+    opacity: 0;
+    transition: all 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
   :deep(.q-carousel__next-arrow) {
     height: 100%;
     top: 0;
     right: 0;
+    opacity: 0;
+    transition: all 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
   :deep(.q-carousel__arrow .q-btn-item) {
     height: 100%;

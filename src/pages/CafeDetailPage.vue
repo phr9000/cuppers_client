@@ -91,7 +91,7 @@
     <!-- 사진 모두 보기 -->
     <modal-swiper
       :show="showModal"
-      :images="silierImages"
+      :images="sliderImages"
       @close="showModal = false"
     />
 
@@ -501,7 +501,7 @@ export default defineComponent({
       ],
       showMiniMap: false,
       showModal: false,
-      silierImages: []
+      sliderImages: []
     }
   },
   watch: {
@@ -606,12 +606,12 @@ export default defineComponent({
 
             // 슬라이더 이미지
             result.data.map((img) => {
-              this.silierImages.push({
+              this.sliderImages.push({
                 id: img.images_cafe_id,
                 url: img.cafe_image_url
               })
             })
-            console.log(this.silierImages)
+            console.log(this.sliderImages)
           }
           //
           //
