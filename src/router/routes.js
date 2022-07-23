@@ -43,8 +43,7 @@ const routes = [
         component: () => import('src/pages/SurveyPage.vue')
       },
       {
-        path: 'welcomeuser/:userid',
-        name: 'welcomuser/:userid',
+        path: 'welcomeuser',
         component: () => import('src/pages/WelcomeUser.vue')
       }
     ]

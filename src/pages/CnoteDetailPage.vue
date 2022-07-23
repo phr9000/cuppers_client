@@ -25,7 +25,7 @@
           <div class="btns_wrap row no-wrap">
             <div class="btn_like_wrap">
               <btn-like
-                :user_id="cnote.user_id"
+                :user="user"
                 :id_what="cnote.cnote_id"
                 like_what="cnote"
                 :is_liked="cnote.user_liked"
@@ -81,6 +81,8 @@
 <script>
 import { ref } from 'vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 // import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
 // swiper
 export default {
@@ -88,38 +90,29 @@ export default {
     BtnLike
     // BtnBookMark
   },
+  setup() {
+    const $store = useStore()
+
+    const user = computed({
+      get: () => $store.state.auth.user
+    })
+
+    return {
+      user
+    }
+  },
   props: {
     cnote: {
       type: Object,
       default: () => {
-        return {
-          cnote_id: 1,
-          user_id: 1,
-          cnote_title: '한 잔의 커피는 나의 아낭케',
-          user_name: '동글동글동글이',
-          user_thumbnail:
-            'https://lh3.googleusercontent.com/a-/AOh14GggDZ_vzX_GCd3BjndXJiua3NszhmGTdr-CK82pLcU=s83',
-          cnote_content:
-            '오늘도 정량을 비운 커피잔엔 내일 마실 한 잔의 커피를 그리워하는 마음이 말라버린 거품으로 남았다.오늘도 정량을 비운 커피잔엔 내일 마실 한 잔의 커피를 그리워하는 마음이 말라버린 거품으로 남았다.',
-          cnote_thumbnail:
-            'https://cdn.mhns.co.kr/news/photo/202103/502451_604128_1858.jpg',
-          created_at: '2022-06-10T10:58:54.000Z',
-          user_liked: 1,
-          like_cnt: 142,
-          user_marked: 0
-        }
+        return null
       }
-    }
-  },
-  computed: {
-    swiper() {
-      return this.$refs.mySwiper
     }
   },
   data() {
     return {
+      // cnote로 묶어주기
       cnote_title: '',
-      user: '',
       user_introduce: '',
       created_at: '',
       content: '',
@@ -130,6 +123,7 @@ export default {
       cnoteId: null
     }
   },
+  computed: {},
   async created() {
     this.cnoteId = this.$route.params.id
     setTimeout(() => {
@@ -140,9 +134,9 @@ export default {
     this.getUserInfo()
   },
   mounted() {
-    this.getcnoteDetail()
-    this.getCnoteImg()
-    this.getUserInfo()
+    // this.getcnoteDetail()
+    // this.getCnoteImg()
+    // this.getUserInfo()
   },
   methods: {
     getcnoteDetail(cnoteId) {

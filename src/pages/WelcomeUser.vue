@@ -6,11 +6,32 @@
         <img :src="thumnail" alt="" />
       </div>
       <!-- user nickname -->
-      <div class="user-name">{{ nickname }} 님 안녕하세요!</div>
-      <div class="which">
+      <div class="user-name">
+        <input
+          class="input-box"
+          v-model="userInfo.nickname"
+          placeholder="스페셜티 커피 10년차 전문가"
+        />
+        <p class="input-desc-area">
+          <span class="input-desc">닉네임을 정해주세요</span>
+        </p>
+        <p v-if="nicknameOverlap">중복되는 이름이에요</p>
+      </div>
+      <div class="user-introduce">
+        <input
+          class="input-box intro"
+          v-model="userInfo.introduce"
+          placeholder="커피에 대한 열정은 누구도 따라올 수 없다"
+        />
+        <p class="input-desc-area">
+          <span class="input-desc">나를 한줄로 표현해주세요</span>
+        </p>
+        <p v-if="nicknameOverlap">중복되는 이름이에요</p>
+      </div>
+      <!-- <div class="which">
         <div class="coffee">어떤 커피를 선호하세요?</div>
         <div class="cafe">어떤 카페를 찾고 계세요?</div>
-      </div>
+      </div> -->
       <div class="answer">
         <h2>
           나는 <br />
@@ -26,13 +47,30 @@
   </div>
 </template>
 <script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 export default {
+  setup() {
+    // this.user.uid 로 호출 get 받기
+    const $store = useStore()
+
+    const user = computed({
+      get: () => $store.state.auth.user
+    })
+
+    return {
+      user
+    }
+  },
   data() {
     return {
       // userId: '3',
+      userInfo: {
+        nickname: '',
+        introduce: ''
+      },
       thumnail:
         'http://k.kakaocdn.net/dn/d1t0Y3/btrFLDKumH5/UAJNJRs8AQ9CPtJ2UiK27k/img_640x640.jpg',
-      nickname: '',
       typeValue: '',
       typeStatus: false,
       typeArray: [
@@ -49,7 +87,7 @@ export default {
     }
   },
   created() {
-    this.userId = this.$route.params.userId
+    this.userId = this.$route.store
     this.getUserInfo()
   },
   methods: {
@@ -169,8 +207,53 @@ export default {
     // user nickname
     .user-name {
       padding-top: 20px;
-      font-size: 30px;
+      padding-bottom: 5px;
       font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .input-desc-area {
+      font-size: 14px;
+    }
+    .input-box {
+      border: none;
+      text-align: center;
+      font-size: 25px;
+      display: inline-block;
+
+      &::placeholder {
+        color: #000;
+      }
+      &.intro {
+        &::placeholder {
+          color: #848484;
+        }
+      }
+    }
+    .input-desc {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      color: #000;
+      &:after {
+        display: block;
+        content: '';
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 6px;
+        background-color: #50a3a4;
+        opacity: 0.4;
+        bottom: 4px;
+        left: 0;
+      }
+    }
+    .user-introduce {
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .which {
       padding-top: 15px;
@@ -182,9 +265,12 @@ export default {
       }
     }
     .answer {
+      margin-top: 20px;
       h2 {
         font-size: 35px;
         font-weight: normal;
+        line-height: 3.4rem;
+        margin-top: 2px;
 
         span.typed-text {
           color: #d2b94b;
@@ -210,16 +296,16 @@ export default {
       color: #c3c3c3;
     }
     .survey-btn-area {
-      margin-top: 40px;
+      margin-top: 45px;
       .btn {
         border-radius: 23px;
-        padding: 10px 34px;
+        padding: 7px 20px;
         background-color: #000;
         color: #fff;
         font-weight: 600;
-        font-size: 15px;
-        animation: goToSurvey 1.5s /* 속도 */ linear 0s
-          /* 처음부터 끝까지 일정 속도로 진행 */ infinite alternate; /* 무한 반복 */
+        font-size: 14px;
+        // animation: goToSurvey 1.5s /* 속도 */ linear 0s
+        //   /* 처음부터 끝까지 일정 속도로 진행 */ infinite alternate; /* 무한 반복 */
       }
     }
   }

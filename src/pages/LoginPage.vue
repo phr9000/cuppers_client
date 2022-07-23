@@ -81,11 +81,10 @@ export default defineComponent({
         })
         .then((response) => {
           this.user_id = response.data.insertId
-
+          // store에 uid 저장하기
           alert('로그인이 되었습니다.')
           this.$router.push({
-            path: `/welcomeuser/${this.user_id}`,
-            params: { userId: `${this.user_id}` }
+            path: `/welcomeuser`
           })
         })
         .catch((ex) => {
