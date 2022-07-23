@@ -1,10 +1,10 @@
 <template>
   <q-page class="page">
     <div class="constrain_md">
-      <div class="q-mt-sm">
+      <div class="q-mt-sm q-px-md">
+        <div class="page_title">리뷰</div>
         <div class="row justify-between items-center q-py-sm">
           <div></div>
-          <div class="page_title">리뷰</div>
 
           <q-tabs
             active-color="secondary"

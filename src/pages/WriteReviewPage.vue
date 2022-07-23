@@ -104,9 +104,9 @@
                 <div class="row justify-start">
                   <img
                     v-for="img in images"
-                    :key="img.thumbnail_url"
+                    :key="img.thumb"
                     class="pic img-pic"
-                    :src="img.thumbnail_url"
+                    :src="img.thumb"
                     alt="썸네일 이미지"
                   />
                   <div v-if="images.length < 1" class="text-caption text-grey">
@@ -387,8 +387,8 @@ export default defineComponent({
                 headers: { 'Content-Type': 'multipart/form-data' }
               })
               .then((r) => {
-                console.log(r.data)
-                url = r.data.url
+                // console.log(r.data)
+                url = r.data.filename
 
                 // 2. 썸네일 이미지 업로드
                 resizeImageSquare({ file: file, maxSize: 500, square: true })
@@ -401,13 +401,14 @@ export default defineComponent({
                         headers: { 'Content-Type': 'multipart/form-data' }
                       })
                       .then((r) => {
-                        console.log(r.data)
+                        // console.log(r.data)
                         url_thumb = r.data.url
 
                         this.images.push({
                           images_review_type: 'g',
                           images_review_url: url,
-                          thumbnail_url: url_thumb
+                          thumbnail_url: r.data.filename,
+                          thumb: url_thumb
                         })
                       })
                       .catch((e) => {
