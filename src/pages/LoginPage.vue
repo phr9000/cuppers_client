@@ -28,16 +28,13 @@
     <div class="column items-left" style="border: none">
       <div style="font-size: 10px">login page</div>
       <div>
-        <q-input
-          style="border: none !important"
-          label="uid"
-          v-model="uid"
-          dense
-          class="q-mb-sm"
-        ></q-input>
+        <q-input label="uid" v-model="uid" dense class="q-mb-sm"></q-input>
       </div>
       <div>
-        <button style="background-color: #fff; width: 120px; font-size: 10px">
+        <button
+          @click="login()"
+          style="background-color: #fff; width: 120px; font-size: 10px"
+        >
           입력한 uid로 로그인
         </button>
       </div>
