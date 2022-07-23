@@ -145,7 +145,7 @@ export default {
             })
             .then((r) => {
               this.images.push(r.data.url)
-              callback(url + r.data.filename, 'alt text')
+              callback(url + r.data.url, 'alt text')
             })
             .catch((e) => {})
         }
@@ -207,7 +207,7 @@ export default {
     async uploadImg(e) {
       let file = e.target.files
       const formData = new FormData()
-      const url = 'http://localhost:3000/static/images/'
+      // const url = 'http://localhost:3000/static/images/'
       formData.append('image', file[0])
       const res = await this.$axios
         .post('http://localhost:3000/api/upload/image', formData, {
@@ -217,8 +217,8 @@ export default {
           // console.log(e)
         })
         .then((r) => {
-          this.backgroundImg = url + r.data.filename
-          this.cnote.cnote_img = url + r.data.filename
+          this.backgroundImg = r.data.url
+          this.cnote.cnote_img = r.data.filename
           // console.log(this.cnote.cnote_img)
         })
       this.backImg = true

@@ -53,6 +53,7 @@ const routes = [
       },
       {
         path: 'welcomeuser/:userid',
+        name: 'welcomuser/:userid',
         component: () => import('src/pages/WelcomeUser.vue')
       }
     ]

@@ -32,7 +32,7 @@ export default {
       // userId: '3',
       thumnail:
         'http://k.kakaocdn.net/dn/d1t0Y3/btrFLDKumH5/UAJNJRs8AQ9CPtJ2UiK27k/img_640x640.jpg',
-      nickname: '해람',
+      nickname: '',
       typeValue: '',
       typeStatus: false,
       typeArray: [
@@ -49,7 +49,7 @@ export default {
     }
   },
   created() {
-    this.userId = this.$route.params.userid
+    this.userId = this.$route.params.userId
     this.getUserInfo()
   },
   methods: {
@@ -57,9 +57,7 @@ export default {
       let apiUrl = `http://localhost:3000/api/user/detail/${userId}`
       this.$axios
         .get(apiUrl)
-        .then((result) => {
-          console.log(this.result)
-        })
+        .then((result) => {})
         .catch((err) => {
           console.log(err)
         })
