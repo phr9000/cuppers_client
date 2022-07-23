@@ -29,7 +29,12 @@ export default {
   name: 'BtnLike',
   components: {},
   props: {
-    user_id: { type: Number, required: true }, // 로그인한 사용자의 아이디
+    user: {
+      type: Object,
+      default: () => {
+        return null
+      }
+    }, // 로그인한 사용자
     like_what: { type: String, required: true }, // 'review' or 'cnote' or 'cafe'
     id_what: { type: Number, required: true }, // 'review_id' or 'cnote_id' or 'cafe_id'
     is_liked: {
@@ -65,7 +70,18 @@ export default {
     handleCLick(event) {
       event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
 
-      let apiUrl = `${process.env.API}/${this.like_what}/like/${this.user_id}/${this.id_what}` // real-server
+      // user 없을때 예외처리
+      let uid
+      if (this.user) {
+        uid = this.user.uid
+      } else {
+        console.log(
+          'user id가 없습니다. 로그인이 필요합니다. 로그인 하시겠습니까?'
+        )
+        return
+      }
+
+      let apiUrl = `${process.env.API}/${this.like_what}/like/${uid}/${this.id_what}` // real-server
 
       this.$axios
         .get(apiUrl)
@@ -81,7 +97,7 @@ export default {
               this.isLiked = true
               this.likeitCnt++
               console.log(
-                `user:id(${this.user_id}) just like this ${this.like_what}:id(${this.id_what})  `
+                `user:id(${uid}) just like this ${this.like_what}:id(${this.id_what})  `
               )
             }
           } else {

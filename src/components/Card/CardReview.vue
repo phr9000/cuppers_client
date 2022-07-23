@@ -60,7 +60,7 @@
       >
         <div class="btn_like">
           <btn-like
-            :user_id="user.uid"
+            :user="user"
             :id_what="review.review_id"
             like_what="review"
             :is_liked="review.user_liked"
@@ -142,16 +142,6 @@ export default defineComponent({
         return ''
       }
     },
-    // thumbUrl() {
-    //   if (!this.review.review_img || this.review.review_img == '') {
-    //     return null
-    //   } else {
-    //     if (this.review.review_img.startsWith('images/')) {
-    //       return `${process.env.STATIC}/${this.review.review_img}`
-    //     }
-    //     return this.review.review_img
-    //   }
-    // },
     images() {
       if (this.review.review_images.length > 0) {
         const images = this.review.review_images.map((img) => {
@@ -264,7 +254,6 @@ export default defineComponent({
   }
   // 모든이미지 보기
   .show_all {
-    // background-color: antiquewhite;
     text-align: center;
     color: antiquewhite;
     position: absolute;

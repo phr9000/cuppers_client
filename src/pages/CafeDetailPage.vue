@@ -26,7 +26,7 @@
             <!-- 좋아요 버튼 -->
             <div class="btn_likeit q-mr-xs">
               <btn-like
-                :user_id="user.uid"
+                :user="user"
                 :id_what="cafe.cafe_id"
                 like_what="cafe"
                 :is_liked="cafe.user_liked"
@@ -36,7 +36,7 @@
             <!-- 가본곳 버튼 -->
             <div class="btn_been_there q-mr-xs">
               <btn-been-there
-                :user_id="user.uid"
+                :user_id="user"
                 :cafe_id="cafe.cafe_id"
                 :been_there="cafe.user_beenthere"
               />
@@ -523,9 +523,11 @@ export default defineComponent({
     // 카페 기본정보 로드
     loadCafe(cafe_id) {
       this.loading = true
-      // cafe info load
-      // let apiUrl = `${process.env.API}/cafe/${cafe_id}` // json-server
-      let apiUrl = `${process.env.API}/cafe/${cafe_id}?user_id=${this.user.uid}` // real-server
+
+      let apiUrl = `${process.env.API}/cafe/${cafe_id}`
+      if (this.user) {
+        apiUrl = `${apiUrl}?user_id=${this.user.uid}`
+      }
       console.log(apiUrl)
       this.$axios
         .get(apiUrl)
@@ -637,7 +639,12 @@ export default defineComponent({
     loadReviews(page) {
       // let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4` // json-server
       // real-server
-      let apiUrl = `${process.env.API}/review/${this.cafeId}?user_id=${this.user.uid}&sort=${this.sort}&order=d&page=${page}&limit=4`
+      let apiUrl = `${process.env.API}/review/${this.cafeId}?sort=${this.sort}&order=d&page=${page}&limit=4`
+
+      if (this.user) {
+        apiUrl = `${apiUrl}&user_id=${this.user.uid}`
+      }
+
       this.$axios
         .get(apiUrl)
         .then((result) => {

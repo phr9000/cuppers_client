@@ -23,7 +23,12 @@ export default {
   name: 'BtnBeenThere',
   components: {},
   props: {
-    user_id: { type: Number, required: true }, // 로그인한 사용자의 아이디
+    user: {
+      type: Object,
+      default: () => {
+        return null
+      }
+    }, // 로그인한 사용자
     cafe_id: { type: Number, required: true },
     been_there: {
       type: Number,
@@ -43,7 +48,18 @@ export default {
     handleCLick(event) {
       event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
 
-      let apiUrl = `${process.env.API}/cafe/beenthere/${this.user_id}/${this.cafe_id}` // real-server
+      // user 없을때 예외처리
+      let uid
+      if (this.user) {
+        uid = this.user.uid
+      } else {
+        console.log(
+          'user id가 없습니다. 로그인이 필요합니다. 로그인 하시겠습니까?'
+        )
+        return
+      }
+
+      let apiUrl = `${process.env.API}/cafe/beenthere/${uid}/${this.cafe_id}` // real-server
 
       this.$axios
         .get(apiUrl)
@@ -52,12 +68,12 @@ export default {
             if (this.beenThere) {
               this.beenThere = false
               console.log(
-                `user:id(${this.user_id}) just unchecked beenthere this cafe:id(${this.cafe_id})`
+                `user:id(${uid}) just unchecked beenthere this cafe:id(${this.cafe_id})`
               )
             } else {
               this.beenThere = true
               console.log(
-                `user:id(${this.user_id}) just checked beenthere this cafe:id(${this.cafe_id})`
+                `user:id(${uid}) just checked beenthere this cafe:id(${this.cafe_id})`
               )
             }
           } else {
