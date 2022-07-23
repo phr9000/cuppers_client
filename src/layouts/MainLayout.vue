@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh Lpr fFf" style="padding-bottom: 110px">
+  <q-layout view="hHh Lpr fFf">
     <header-global />
 
     <q-page-container style="padding-bottom: 0px">
@@ -39,9 +39,6 @@ export default defineComponent({
     }
   },
   created() {
-    // this.user = { uid: '1234' }
-    // console.log(this.$store.state.auth.user)
-    // console.log(this.$store.getters['auth/isLoggedIn'])
     if (this.user == null) {
       this.user = this.getAuthFromLocalStorage()
     }

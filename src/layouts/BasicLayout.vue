@@ -5,13 +5,10 @@
     <q-page-container class="conainer_basic" style="padding-bottom: 0px">
       <router-view :key="$route.fullPath" />
     </q-page-container>
-
-    <!-- <footer-global /> -->
   </q-layout>
 </template>
 
 <script>
-S
 import { defineComponent } from 'vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'

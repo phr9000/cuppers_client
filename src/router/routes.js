@@ -73,12 +73,12 @@ const routes = [
     component: () => import('layouts/BasicLayout.vue'),
     children: [
       {
-        path: '/:id',
-        component: () => import('src/pages/CnoteDetailPage.vue')
+        path: ':id',
+        component: () => import('pages/CnoteDetailPage.vue')
       },
       {
-        path: '/write',
-        component: () => import('src/pages/WriteCnotePage.vue'),
+        path: 'write',
+        component: () => import('pages/WriteCnotePage.vue'),
         meta: { requiresAuth: true }
       }
     ]
