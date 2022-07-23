@@ -43,15 +43,6 @@ const routes = [
         component: () => import('src/pages/SurveyPage.vue')
       },
       {
-        path: 'cnote/:id',
-        component: () => import('src/pages/CnoteDetailPage.vue')
-      },
-      {
-        path: 'cnote/write',
-        component: () => import('src/pages/WriteCnotePage.vue'),
-        meta: { requiresAuth: true }
-      },
-      {
         path: 'welcomeuser/:userid',
         name: 'welcomuser/:userid',
         component: () => import('src/pages/WelcomeUser.vue')
@@ -74,6 +65,21 @@ const routes = [
       {
         path: 'review',
         component: () => import('pages/ReviewMainPage.vue')
+      }
+    ]
+  },
+  {
+    path: '/cnote',
+    component: () => import('layouts/BasicLayout.vue'),
+    children: [
+      {
+        path: '/:id',
+        component: () => import('src/pages/CnoteDetailPage.vue')
+      },
+      {
+        path: '/write',
+        component: () => import('src/pages/WriteCnotePage.vue'),
+        meta: { requiresAuth: true }
       }
     ]
   },
