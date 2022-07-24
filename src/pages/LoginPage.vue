@@ -124,14 +124,12 @@ export default defineComponent({
           }
         })
         .then((response) => {
-          console.log(response)
           const isNew = response.data.isNew
           const userId = response.data.user_id
           let userThumbnail = response.data.user_thumbnail_url
-          if (userThumbnail.startsWith('images/')) {
+          if (userThumbnail && userThumbnail.startsWith('images/')) {
             userThumbnail = `${process.env.STATIC}/${userThumbnail}`
           }
-          console.log(isNew)
           if (isNew == 0) {
             alert('로그인이 되었습니다 🥳')
             this.$router.push({
