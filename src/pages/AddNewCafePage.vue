@@ -55,7 +55,6 @@
             <div class="col-7">
               <q-input
                 type="text"
-                v-model="cafe.cafe_address_detail"
                 id="detailAddress"
                 label="상세주소 *"
                 :rules="[(val) => !!val || '상세 주소는 필수 항목입니다']"
@@ -253,6 +252,7 @@ export default defineComponent({
         // cafe_address_dong: '',
         // cafe_operation_time: '',
       },
+      cafe_address_detail: '',
       images: [],
       menus: []
     }

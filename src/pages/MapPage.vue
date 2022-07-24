@@ -95,7 +95,7 @@
           </div>
 
           <q-btn v-if="isMore" @click="loadMore" flat color="grey"
-            >더불러오기 {{ page }}
+            >더불러오기
           </q-btn>
         </section>
 
@@ -298,7 +298,7 @@ export default defineComponent({
 
       // 검색 옵션
       page: 0,
-      limit: 6,
+      limit: 7,
       totalCnt: 0,
       map: null, // 카카오맵 인스턴스
       search: '',
