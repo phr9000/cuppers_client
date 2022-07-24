@@ -64,7 +64,7 @@
             <div class="col-4 q-ml-xs">
               <q-input
                 type="text"
-                v-model="cafe.cafe_postalcode"
+                v-model="cafe.cafe_post"
                 label="우편번호 *"
                 :rules="[(val) => !!val || '우편 번호는 필수 항목입니다']"
               />
@@ -124,7 +124,7 @@
             <q-input
               label="바리스타 정보"
               hint="바리스타의 수상/자격증 등을 입력해주세요"
-              v-model="cafe.cafe_branch_name"
+              v-model="cafe.cafe_barista_info"
               type="url"
             />
           </div>
@@ -196,7 +196,8 @@
           name="캬페소개"
           cols="80"
           rows="10"
-          class="cafe_description_text"
+          class="cafe_description_textarea"
+          placeholder="카페를 소개해주세요"
         ></textarea>
       </div>
     </section>
@@ -243,7 +244,9 @@ export default defineComponent({
         cafe_longitude: '',
         cafe_res_time: '',
         cafe_shutdown_time: '',
-        cafe_branch_name: ''
+        cafe_branch_name: '',
+        cafe_post: '',
+        cafe_barista_info: ''
         // cafe_address_detail: '',
         // cafe_postalcode: '',
         // cafe_address_dong: '',
