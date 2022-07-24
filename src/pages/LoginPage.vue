@@ -189,12 +189,14 @@ p {
   min-height: 500px;
   height: calc(100vh - 170px);
   margin-top: 0px;
+  transition: all 0.5s;
   .login-inner {
     display: flex;
     align-content: flex-start;
     align-items: flex-end;
     justify-content: center;
     padding: 20px 0px 20px 0px;
+    transition: all 0.5s;
   }
   .left {
     flex-basis: 50%;
@@ -255,6 +257,7 @@ p {
       max-width: 330px;
       padding: 20px 25px;
       margin: 0 auto;
+      transition: all 0.5s;
     }
     .left {
       margin-left: 0px;
