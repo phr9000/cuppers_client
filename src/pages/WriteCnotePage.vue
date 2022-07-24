@@ -169,8 +169,13 @@ export default {
         this.cnote.cnote_title === null ||
         this.cnote.cnote_title === 0
       ) {
-        alert('제목을 입력해주세요')
-        this.$refs.title.focus()
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '제목을 입력해주세요',
+          color: 'primary'
+        }),
+          this.$refs.title.focus()
         return false
       } else {
         this.$axios

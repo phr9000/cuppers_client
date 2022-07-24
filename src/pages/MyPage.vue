@@ -175,7 +175,7 @@ export default defineComponent({
         color: 'primary'
       }),
         // this.$q.localStorage.remove('auth')
-        this.$router.push('/login')
+        this.$router.push('/')
     }
   }
 })
