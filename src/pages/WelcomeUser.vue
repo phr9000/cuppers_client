@@ -14,7 +14,9 @@
           ref="nickname"
         />
         <p class="input-desc-area">
-          <span class="input-desc">닉네임을 정해주세요</span>
+          <span class="input-desc"
+            ><span class="required-red">*</span> 닉네임을 정해주세요</span
+          >
         </p>
         <p v-if="nicknameOverlap">중복되는 이름이에요</p>
       </div>
@@ -135,7 +137,18 @@ export default {
       }
     },
     goToSurvey() {
-      this.$router.push('/welcome/survey')
+      if (
+        this.userInfo.nickname === '' ||
+        this.userInfo.nickname === null ||
+        this.userInfo.nickname === 0
+      ) {
+        alert('닉네임을 입력해주세요')
+        this.$refs.nickname.focus()
+        return false
+      } else {
+        alert('성공적으로 등록 되었습니다.')
+        this.$router.push('/welcome/survey')
+      }
     },
     nicknameFocus() {
       this.$refs.nickname.focus()
@@ -223,6 +236,10 @@ export default {
     .input-desc-area {
       font-size: 14px;
       font-weight: 500;
+      .required-red {
+        color: red;
+        font-weight: 600;
+      }
     }
     .input-box {
       border: none;

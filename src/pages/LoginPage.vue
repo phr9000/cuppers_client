@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="right">
-          <div class="img-area" @click="kakaoLogin">
+          <div class="img-area" @click="kakaoLogin()">
             <img
               src="https://developers.kakao.com/tool/resource/static/img/button/kakaosync/complete/ko/kakao_login_large_narrow.png"
               alt=""
@@ -25,7 +25,7 @@
     </div>
 
     <!-- test -->
-    <div class="column items-left" style="border: none">
+    <div class="column items-left" style="border: none; display: none">
       <div style="font-size: 10px">login page</div>
       <div>
         <q-input label="uid" v-model="uid" dense class="q-mb-sm"></q-input>
@@ -100,25 +100,39 @@ export default defineComponent({
     async kLogin(kakao_account) {
       console.log(kakao_account)
       await this.$axios
-        .post('http://localhost:3000/api/login', {
-          param: [
-            {
-              user_email: kakao_account.email,
-              user_thumbnail_url: kakao_account.profile.profile_image_url,
-              user_nickname: kakao_account.profile.nickname
-            }
-          ]
+        .post('http://localhost:3000/api/user/login', {
+          param: {
+            user_email: kakao_account.email,
+            user_thumbnail_url: kakao_account.profile.profile_image_url,
+            user_nickname: kakao_account.profile.nickname
+          }
         })
         .then((response) => {
-          this.user_id = response.data.insertId
-          // store에 uid 저장하기
-          alert('로그인이 되었습니다.')
-          this.$router.push({
-            path: `/welcomeuser`
-          })
+          console.log(response)
+          const isNew = response.data.isNew
+          const userId = response.data.user_id
+          const userThumbnail = response.data.user_thumbnail_url
+          console.log(isNew)
+          if (isNew == 0) {
+            alert('로그인이 되었습니다 🥳')
+            this.$router.push({
+              path: `/`
+            })
+            const uid = parseInt(this.userId)
+            this.user = {
+              uid: userId,
+              thumbUrl: userThumbnail
+            }
+          } else {
+            alert('커퍼즈 회원이 아닙니다. 회원가입먼저 진행해주세요🙏')
+            this.$router.push({
+              path: `/welcome/${userId}`,
+              params: { id: `${userId}` }
+            })
+          }
         })
         .catch((ex) => {
-          alert('로스팅하는데 문제가 생겼습니다.')
+          alert('서버에러입니다.')
           console.log(ex)
         })
     },

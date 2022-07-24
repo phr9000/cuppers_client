@@ -145,7 +145,7 @@ export default {
             })
             .then((r) => {
               this.images.push(r.data.url)
-              callback(url + r.data.url, 'alt text')
+              callback(r.data.url)
             })
             .catch((e) => {})
         }
@@ -185,14 +185,13 @@ export default {
             images: this.images
           })
           .then((response) => {
-            this.user_id = response.data.insertId
+            this.cnote_id = response.data.insertId
 
             setTimeout(() => {
               alert('글이 성공적으로 로스팅 되었습니다.')
-              // this.$router.push('/cnote/${this.cnote_id}')
               this.$router.push({
-                path: `/welcomeuser/${this.user_id}`,
-                params: { id: `${this.user_id}` }
+                path: `/cnote/${this.cnote_id}`,
+                params: { id: `${this.cnote_id}` }
               })
             }, 700)
           })

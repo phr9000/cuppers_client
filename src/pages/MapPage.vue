@@ -93,6 +93,10 @@
           <div v-else class="q-my-lg text-grey flex flex-center">
             <p>검색된 카페가 없습니다.</p>
           </div>
+
+          <q-btn v-if="isMore" @click="loadMore" flat color="grey"
+            >더불러오기 {{ page }}
+          </q-btn>
         </section>
 
         <!-- tab2: 내목록 map-my-list -->
@@ -291,6 +295,10 @@ export default defineComponent({
     return {
       cafesRaw: null, // 현재 불러온 전체 카페 리스트
       cafes: [], // 필터링된 카페 리스트
+
+      // 검색 옵션
+      page: 0,
+      limit: 6,
       totalCnt: 0,
       map: null, // 카카오맵 인스턴스
       search: '',
@@ -333,6 +341,7 @@ export default defineComponent({
           val: '강동'
         }
       ],
+      isMore: true,
       sort: '' // none or like or dis
     }
   },
@@ -442,31 +451,42 @@ export default defineComponent({
         return
       }
 
-      if (this.searching === true) {
+      if (this.searching) {
         return
       }
 
-      // console.log('handleClickSearch: ', this.search)
       if (this.cafes.length > 0) {
         // 모든 마커를 삭제
         this.clearAllMarkers()
       }
 
+      this.page = 0
+      this.isMore = true
+      this.cafes = []
+      this.doSearch()
+    },
+    loadMore() {
+      this.doSearch()
+    },
+    doSearch() {
+      this.page++
+
+      let search = this.search
+
       let bounds = null
       if (this.searchInMap) {
         // 현지도 바운더리 정보 가져오기
+
         bounds = this.getBounds()
       }
-      this.doSearch(this.search, bounds)
-    },
-    doSearch(search, bounds = null) {
+
       this.searching = true
 
       // 초기화
       const SORT = this.sort
       const ORDER = SORT === 'like' ? 'd' : 'a' // 추천순일 경우 d, 거리순일 경우 a
-      const PAGE = 1
-      const LIMIT = 5
+      const PAGE = this.page
+      const LIMIT = this.limit
 
       // this.sort = ''
       this.distance = 0
@@ -480,8 +500,6 @@ export default defineComponent({
       const MAP_CENTER_LONG = center.La
       this.lastSearchPosition = center
       console.log('center', center)
-
-      this.clearAllMarkers()
 
       if (this.search !== search) {
         this.search = search
@@ -526,7 +544,7 @@ export default defineComponent({
         .get(apiUrl)
         .then((result) => {
           this.totalCnt = result.data.totalCnt
-          this.cafes = []
+          // this.cafes = []
           for (let i = 0; i < result.data.arr.length; i++) {
             const cf = result.data.arr[i]
 
@@ -551,14 +569,14 @@ export default defineComponent({
 
             this.cafes.push(cafe)
           }
-          // console.log(this.cafes)
+
+          // 더불러오기 비활성화
+          if (result.data.arr.length < this.limit) {
+            this.isMore = false
+          }
 
           if (this.cafes.length < 1) {
-            // console.log('검색 결과가 없습니다. ', this.cafes.length)
-            // this.$q.dialog({
-            //   title: 'Error',
-            //   message: '검색 결과가 없습니다.'
-            // })
+            console.log('검색 결과가 없습니다.')
           } else {
             this.showCafesMarker()
             if (!bounds) {
@@ -593,6 +611,11 @@ export default defineComponent({
       this.currentMyListItem = item
 
       let apiUrl = `${process.env.API}/cafe/mylist/one/${item.mylist_id}?user_id=${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
+      if (this.cafes.length > 0) {
+        // 모든 마커를 삭제
+        this.clearAllMarkers()
+      }
+      this.cafes = []
       this.loadCafes(apiUrl)
     },
     // 마이리스트 좋아요한 카페 불러오기
@@ -601,10 +624,21 @@ export default defineComponent({
       // api/cafe/mypage/like/:user_id?current_lat=&current_long
 
       let apiUrl = `${process.env.API}/cafe/mypage/like/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
+      if (this.cafes.length > 0) {
+        // 모든 마커를 삭제
+        this.clearAllMarkers()
+      }
+      this.cafes = []
       this.loadCafes(apiUrl, null, 1)
     },
     // 마이리스트 가본곳 카페 불러오기
-    handleClickMyListBeenthere() {},
+    handleClickMyListBeenthere() {
+      if (this.cafes.length > 0) {
+        // 모든 마커를 삭제
+        this.clearAllMarkers()
+      }
+      this.cafes = []
+    },
     // 마이리스트 내부 목록에서 마이리스트 목록으로 돌아가기
     backToMylist() {
       // this.clearTarget()
@@ -613,10 +647,11 @@ export default defineComponent({
     // 현재위치에서 재검색
     researchInCurrentPosition() {
       // 현지도 바운더리 정보 가져오기
-      const bounds = this.getBounds()
-
+      // const bounds = this.getBounds()
+      this.searchInMap = true
+      this.cafes = []
       // 바운드로 검색
-      this.doSearch(this.search, bounds)
+      this.doSearch()
     },
     getBounds() {
       // 지도 영역정보를 얻어옵니다
