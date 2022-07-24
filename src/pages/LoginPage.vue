@@ -131,7 +131,12 @@ export default defineComponent({
             userThumbnail = `${process.env.STATIC}/${userThumbnail}`
           }
           if (isNew == 0) {
-            alert('로그인이 되었습니다 🥳')
+            this.$q.notify({
+              position: 'top',
+              timeout: 1000,
+              message: '로그인 되었습니다😸',
+              color: 'primary'
+            })
             const uid = parseInt(userId)
             this.user = {
               uid: uid,
@@ -141,34 +146,22 @@ export default defineComponent({
               path: `/`
             })
           } else {
-            setTimeout(() => {
-              alert('커퍼즈 회원이 아닙니다. 회원가입먼저 진행해주세요🙏')
+            this.$q.notify({
+              position: 'top',
+              timeout: 1000,
+              message: ' 커퍼즈 회원이 아닙니다. 회원가입먼저 진행해주세요🙏',
+              color: 'primary'
+            }),
               this.$router.push({
                 path: `/welcome`
                 // params: { id: `${this.userId}` }
               })
-            }, 700)
           }
         })
         .catch((ex) => {
           alert('서버에러입니다.')
           console.log(ex)
         })
-    },
-    // 로그아웃
-    kakaoLogout() {
-      // Kakao.init(process.env.KAKAO_API)
-      Kakao.isInitialized()
-      if (!Kakao.Auth.getAccessToken()) {
-        // 토큰이 있는지 확인 (토큰 가져와보기)
-        console.log('Not logged in.')
-        return
-      }
-
-      Kakao.Auth.logout(function () {
-        // 카카오 로그아웃
-        console.log(Kakao.Auth.getAccessToken())
-      })
     },
     login() {
       const uid = parseInt(this.uid)
@@ -250,6 +243,34 @@ p {
       cursor: pointer;
       > img {
         width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .login-container {
+    .login-inner {
+      display: block;
+      max-width: 330px;
+      padding: 20px 25px;
+      margin: 0 auto;
+    }
+    .left {
+      margin-left: 0px;
+      .user-useful {
+        font-size: 27px;
+      }
+      .cuppers-desc {
+        font-size: 10px;
+      }
+    }
+    .right {
+      margin-left: 0px;
+      margin-top: 30px;
+      .img-area {
+        width: auto;
+        margin: 0;
       }
     }
   }

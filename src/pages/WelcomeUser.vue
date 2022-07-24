@@ -140,12 +140,22 @@ export default {
         this.userInfo.nickname === null ||
         this.userInfo.nickname === 0
       ) {
-        alert('닉네임을 입력해주세요')
-        this.$refs.nickname.focus()
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '닉네임을 입력해주세요',
+          color: 'primary'
+        }),
+          this.$refs.nickname.focus()
         return false
       } else {
-        alert('성공적으로 등록 되었습니다.')
-        this.$router.push('/welcome/survey')
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '성공적으로 등록 되었습니다',
+          color: 'primary'
+        }),
+          this.$router.push('/welcome/survey')
       }
     },
     nicknameFocus() {

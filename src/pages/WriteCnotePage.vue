@@ -188,16 +188,26 @@ export default {
             this.cnote_id = response.data.insertId
 
             setTimeout(() => {
-              alert('글이 성공적으로 로스팅 되었습니다.')
-              this.$router.push({
-                path: `/cnote/${this.cnote_id}`,
-                params: { id: `${this.cnote_id}` }
-              })
+              this.$q.notify({
+                position: 'top',
+                timeout: 1000,
+                message: '글이 성공적으로 로스팅 되었습니다.',
+                color: 'primary'
+              }),
+                this.$router.push({
+                  path: `/cnote/${this.cnote_id}`,
+                  params: { id: `${this.cnote_id}` }
+                })
             }, 700)
           })
           .catch((ex) => {
-            alert('로스팅하는데 문제가 생겼습니다.')
-            console.log(ex)
+            this.$q.notify({
+              position: 'top',
+              timeout: 1000,
+              message: '로스팅하는데 문제가 발생하였습니다.',
+              color: 'primary'
+            }),
+              console.log(ex)
           })
       }
     },
