@@ -24,22 +24,34 @@
       </div>
     </div>
 
-    <!-- test -->
-    <div class="column items-left" style="border: none; display: none">
-      <div style="font-size: 10px">login page</div>
-      <div>
-        <q-input label="uid" v-model="uid" dense class="q-mb-sm"></q-input>
+    <!--시작 test -->
+    <div class="column items-left" style="border: none; max-width: 100px">
+      <div style="color: #939393">
+        <q-input
+          style="color: #949494"
+          label="test uid"
+          v-model="uid"
+          dense
+          class="q-mb-sm"
+        ></q-input>
       </div>
       <div>
         <button
           @click="login()"
-          style="background-color: #fff; width: 120px; font-size: 10px"
+          style="
+            background-color: #fff;
+            width: auto;
+            font-size: 10px;
+            border: 1px solid #949494;
+            outline: none;
+          "
         >
-          입력한 uid로 로그인
+          uid로 로그인
         </button>
       </div>
       <div v-if="user">logged user: {{ user }}</div>
     </div>
+    <!--//끝 test -->
   </q-page>
 </template>
 
@@ -124,11 +136,13 @@ export default defineComponent({
               thumbUrl: userThumbnail
             }
           } else {
-            alert('커퍼즈 회원이 아닙니다. 회원가입먼저 진행해주세요🙏')
-            this.$router.push({
-              path: `/welcome/${userId}`,
-              params: { id: `${userId}` }
-            })
+            setTimeout(() => {
+              alert('커퍼즈 회원이 아닙니다. 회원가입먼저 진행해주세요🙏')
+              this.$router.push({
+                path: `/welcome`
+                // params: { id: `${this.userId}` }
+              })
+            }, 700)
           }
         })
         .catch((ex) => {

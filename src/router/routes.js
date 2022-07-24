@@ -16,20 +16,6 @@ const routes = [
       {
         path: 'login',
         component: () => import('src/pages/LoginPage.vue')
-      },
-      {
-        path: 'welcome',
-        component: () => import('layouts/BasicLayout.vue'),
-        children: [
-          {
-            path: '/:id',
-            component: () => import('src/pages/WelcomeUser.vue')
-          },
-          {
-            path: 'survey',
-            component: () => import('src/pages/SurveyPage.vue')
-          }
-        ]
       }
     ]
   },
