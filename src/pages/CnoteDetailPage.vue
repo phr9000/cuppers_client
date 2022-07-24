@@ -18,7 +18,7 @@
             />
             <div class="writer-info flex column">
               <div class="date">{{ created_at }}</div>
-              <div clsss="user" style="margin-right: 15px">{{ user }}</div>
+              <!-- <div clsss="user" style="margin-right: 15px">{{ user }}</div> -->
             </div>
           </div>
           <!-- (상세페이지) 좋아요, 북마크 영역 -->
@@ -62,12 +62,12 @@
             <div class="profile-img">
               <q-img src="/icons/hacker.png" alt="profile 사진" />
             </div>
-            <div class="user-email-area" style="line-height: 24px">
+            <!-- <div class="user-email-area" style="line-height: 24px">
               {{ user_id }}
             </div>
             <div class="desc" style="line-height: 24px; margin-bottom: 10px">
               {{ user_introduce }}
-            </div>
+            </div> -->
             <div class="follow-btn">
               <button class="btn">+ 팔로우</button>
             </div>
@@ -273,45 +273,45 @@ export default {
       top: 15px;
       right: 21.1px;
       z-index: 101;
-      .btn_like_wrap {
-        .btn_like {
-          ::v-deep &:hover {
-            color: #bdbdbd;
-            .icon_fav,
-            .likeit_cnt {
-              color: #bdbdbd;
-            }
-          }
-          ::v-deep .icon_fav {
-            color: #bdbdbd;
-          }
-          ::v-deep .icon_fav {
-            ::v-deep &.colored {
-              color: #bdbdbd;
-            }
-          }
-          .likeit_cnt {
-            color: #bdbdbd;
-            ::v-deep &.colored {
-              color: #bdbdbd;
-            }
-          }
-        }
-      }
+      // .btn_like_wrap {
+      //   :deep(.btn_like) {
+      //     &:hover {
+      //       color: #bdbdbd;
+      //       .icon_fav,
+      //       .likeit_cnt {
+      //         color: #bdbdbd;
+      //       }
+      //     }
+      //     ::v-deep .icon_fav {
+      //       color: #bdbdbd;
+      //     }
+      //     ::v-deep .icon_fav {
+      //       ::v-deep &.colored {
+      //         color: #bdbdbd;
+      //       }
+      //     }
+      //     .likeit_cnt {
+      //       color: #bdbdbd;
+      //       ::v-deep &.colored {
+      //         color: #bdbdbd;
+      //       }
+      //     }
+      //   }
+      // }
     }
-    .likeit_wrap {
-      &:hover {
-        ::v-deep .icon_fav {
-          color: #bdbdbd;
-        }
-      }
+    // .likeit_wrap {
+    //   &:hover {
+    //     ::v-deep .icon_fav {
+    //       color: #bdbdbd;
+    //     }
+    //   }
 
-      ::v-deep .icon_fav {
-        ::v-deep &.colored {
-          color: #bdbdbd !important;
-        }
-      }
-    }
+    //   ::v-deep .icon_fav {
+    //     ::v-deep &.colored {
+    //       color: #bdbdbd !important;
+    //     }
+    //   }
+    // }
 
     // content 영역
     .content-container {
