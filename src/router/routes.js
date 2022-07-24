@@ -44,7 +44,6 @@ const routes = [
       { path: 'create', component: () => import('pages/AddNewCafePage.vue') }
     ]
   },
-
   {
     path: '/welcome',
     component: () => import('layouts/BasicLayout.vue'),
@@ -150,12 +149,6 @@ const routes = [
       }
     ]
   },
-  // {
-  //   path: '/login',
-  //   component: () => import('layouts/LoginLayout.vue'),
-  //   children: [{ path: '', component: () => import('src/pages/LoginPage.vue') }]
-  // },
-
   // Always leave this as last one,
   // but you can also remove it
   {

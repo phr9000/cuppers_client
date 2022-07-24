@@ -26,7 +26,7 @@
       <q-btn to="/map" class="q-mr-sm" flat color="primary" label="카페찾기" />
       <q-btn to="/sns" class="q-mr-md" flat color="primary" label="커피SNS" />
       <div>
-        <btn-req-new-cafe to="/newcafe" />
+        <btn-req-new-cafe to="/cafe/req" />
         <btn-my-avatar />
       </div>
     </q-toolbar>

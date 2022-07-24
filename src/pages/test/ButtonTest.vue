@@ -78,7 +78,12 @@
         to="/signup"
       />
       <btn-basic-right color="primary" label="리뷰 쓰기" icon="mail" />
-      <btn-basic-right color="secondary" label="리뷰 쓰기" icon="edit" />
+      <btn-basic-right
+        to="/cafe/create"
+        color="secondary"
+        label="카페 생성"
+        icon="edit"
+      />
       <btn-basic-right color="secondary" label="공유" icon="share" />
       <btn-basic-right size="sm" color="primary" label="리뷰" icon="mail" />
       <btn-basic-right
