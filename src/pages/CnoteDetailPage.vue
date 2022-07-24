@@ -24,13 +24,13 @@
           <!-- (상세페이지) 좋아요, 북마크 영역 -->
           <div class="btns_wrap row no-wrap">
             <div class="btn_like_wrap">
-              <btn-like
+              <!-- <btn-like
                 :user="user"
                 :id_what="cnote.cnote_id"
                 like_what="cnote"
                 :is_liked="cnote.user_liked"
                 :likeit_cnt="cnote.like_cnt"
-              />
+              /> -->
             </div>
             <!-- <div class="btn_bookmark_wrap">
               <btn-book-mark
@@ -63,7 +63,7 @@
               <q-img src="/icons/hacker.png" alt="profile 사진" />
             </div>
             <div class="user-email-area" style="line-height: 24px">
-              {{ user }}
+              {{ user_id }}
             </div>
             <div class="desc" style="line-height: 24px; margin-bottom: 10px">
               {{ user_introduce }}
@@ -80,14 +80,14 @@
 
 <script>
 import { ref } from 'vue'
-import BtnLike from 'src/components/Button/BtnLike.vue'
+// import BtnLike from 'src/components/Button/BtnLike.vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 // import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
 // swiper
 export default {
   components: {
-    BtnLike
+    // BtnLike
     // BtnBookMark
   },
   setup() {
@@ -134,9 +134,9 @@ export default {
     this.getUserInfo()
   },
   mounted() {
-    // this.getcnoteDetail()
-    // this.getCnoteImg()
-    // this.getUserInfo()
+    this.getcnoteDetail()
+    this.getCnoteImg()
+    this.getUserInfo()
   },
   methods: {
     getcnoteDetail(cnoteId) {
@@ -164,6 +164,7 @@ export default {
         .get(apiUrl)
         .then((result) => {
           this.userInfo = result.data
+
           this.user = this.userInfo[0].user_email
           this.user_introduce = this.userInfo[0].user_introduce
         })
