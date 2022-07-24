@@ -181,7 +181,8 @@ export default {
               cnote_content: this.cnote.cnote_content,
               cnote_published: this.isPublic,
               cnote_img: this.cnote.cnote_img
-            }
+            },
+            images: this.images
           })
           .then((response) => {
             this.user_id = response.data.insertId
