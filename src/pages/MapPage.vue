@@ -437,6 +437,17 @@ export default defineComponent({
         this.researchBtnFade = false
       }
     },
+    resetSearchOption() {
+      this.page = 0
+      this.isMore = true
+      this.cafes = []
+      this.bounds = null
+
+      if (this.cafes.length > 0) {
+        // 모든 마커를 삭제
+        this.clearAllMarkers()
+      }
+    },
     // 검색 버튼 클릭, 또는 enter
     handleClickSearch(search) {
       // console.log(typeof search)
@@ -455,14 +466,17 @@ export default defineComponent({
         return
       }
 
-      if (this.cafes.length > 0) {
-        // 모든 마커를 삭제
-        this.clearAllMarkers()
-      }
+      this.resetSearchOption()
 
-      this.page = 0
-      this.isMore = true
-      this.cafes = []
+      // if (this.cafes.length > 0) {
+      //   // 모든 마커를 삭제
+      //   this.clearAllMarkers()
+      // }
+
+      // this.page = 0
+      // this.isMore = true
+      // this.cafes = []
+      // this.bounds = null
       this.doSearch()
     },
     loadMore() {
@@ -473,11 +487,11 @@ export default defineComponent({
 
       let search = this.search
 
-      let bounds = null
+      // let bounds = null
       if (this.searchInMap) {
         // 현지도 바운더리 정보 가져오기
 
-        bounds = this.getBounds()
+        this.bounds = this.getBounds()
       }
 
       this.searching = true
@@ -524,13 +538,13 @@ export default defineComponent({
 
       // console.log(center) console.log(apiUrl)
 
-      if (bounds) {
-        apiUrl += `&lat_min=${bounds.lat_min}&lat_max=${bounds.lat_max}&long_min=${bounds.long_min}&long_max=${bounds.long_max}`
+      if (this.bounds) {
+        apiUrl += `&lat_min=${this.bounds.lat_min}&lat_max=${this.bounds.lat_max}&long_min=${this.bounds.long_min}&long_max=${this.bounds.long_max}`
       } else {
         apiUrl += `&lat_min=&lat_max=&long_min=&long_max=`
       }
 
-      this.loadCafes(apiUrl, bounds)
+      this.loadCafes(apiUrl, this.bounds)
     },
     changeSort(val) {
       console.log('chagne sort to: ', val)
@@ -621,23 +635,25 @@ export default defineComponent({
     // 마이리스트 좋아요한 카페 불러오기
     handleClickMyListLike() {
       this.currentMyListItem = { mylist_name: '좋아요한 카페 ' }
-      // api/cafe/mypage/like/:user_id?current_lat=&current_long
 
-      let apiUrl = `${process.env.API}/cafe/mypage/like/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
       if (this.cafes.length > 0) {
         // 모든 마커를 삭제
         this.clearAllMarkers()
       }
+      let apiUrl = `${process.env.API}/cafe/mypage/like/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
       this.cafes = []
       this.loadCafes(apiUrl, null, 1)
     },
     // 마이리스트 가본곳 카페 불러오기
     handleClickMyListBeenthere() {
+      this.currentMyListItem = { mylist_name: '가본곳 ' }
       if (this.cafes.length > 0) {
         // 모든 마커를 삭제
         this.clearAllMarkers()
       }
+      let apiUrl = `${process.env.API}/cafe/mypage/beenthere/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
       this.cafes = []
+      this.loadCafes(apiUrl, null)
     },
     // 마이리스트 내부 목록에서 마이리스트 목록으로 돌아가기
     backToMylist() {
@@ -646,12 +662,14 @@ export default defineComponent({
     },
     // 현재위치에서 재검색
     researchInCurrentPosition() {
+      this.resetSearchOption()
       // 현지도 바운더리 정보 가져오기
-      // const bounds = this.getBounds()
-      this.searchInMap = true
-      this.cafes = []
+      this.bounds = this.getBounds()
+      // this.searchInMap = true
+      // this.cafes = []
       // 바운드로 검색
       this.doSearch()
+      // this.handleClickSearch()
     },
     getBounds() {
       // 지도 영역정보를 얻어옵니다
@@ -865,6 +883,7 @@ export default defineComponent({
   }
 
   .mylist_header {
+    border-bottom: 1px solid $grey-4;
     // 마이리스트 내부에서 뒤로가는 버튼
     .btn_arrow_back {
       // position: absolute;

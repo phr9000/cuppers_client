@@ -7,19 +7,32 @@
 
     <!-- 마이 리스트 아이템 만큼 li 표시 -->
     <q-list bordered separator>
-      <q-item @click="clickLike" clickable v-ripple>
+      <!-- 좋아요한 카페 -->
+      <q-item
+        @click="clickLike"
+        clickable
+        v-ripple
+        style="background-color: #fff9f9"
+      >
         <q-item-section avatar>
-          <q-icon color="primary" name="favorite" />
+          <q-icon color="red-4" name="favorite" />
         </q-item-section>
 
-        <q-item-section>좋아요한 카페</q-item-section>
+        <q-item-section class="text-primary">좋아요한 카페</q-item-section>
       </q-item>
-      <q-item @click="clickBeenthere" clickable v-ripple>
+
+      <!-- 가본곳 -->
+      <q-item
+        @click="clickBeenthere"
+        clickable
+        v-ripple
+        style="background-color: #faffff"
+      >
         <q-item-section avatar>
-          <q-icon color="primary" name="beenhere" />
+          <q-icon color="teal-4" name="beenhere" />
         </q-item-section>
 
-        <q-item-section>가본 카페</q-item-section>
+        <q-item-section class="text-primary">가본곳</q-item-section>
       </q-item>
 
       <q-item
@@ -28,12 +41,15 @@
         :key="item.mylist_id"
         clickable
         v-ripple
+        style="background-color: #f9f9f9"
       >
         <q-item-section avatar>
           <q-icon color="primary" name="storefront" />
         </q-item-section>
 
-        <q-item-section>{{ item.mylist_name }}</q-item-section>
+        <q-item-section class="text-primary">{{
+          item.mylist_name
+        }}</q-item-section>
       </q-item>
     </q-list>
   </div>
