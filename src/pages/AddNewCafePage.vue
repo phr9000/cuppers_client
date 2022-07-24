@@ -63,6 +63,7 @@
             </div>
             <div class="col-4 q-ml-xs">
               <q-input
+                readonly
                 type="text"
                 v-model="cafe.cafe_post"
                 label="우편번호 *"
@@ -328,7 +329,7 @@ export default defineComponent({
       this.cafe.cafe_latitude = payload.latitude
       this.cafe.cafe_longitude = payload.longitude
       // this.cafe.cafe_address_dong = payload.extraAddress
-      this.cafe.cafe_postalcode = payload.postcode
+      this.cafe.cafe_post = payload.postcode
       console.log(this.cafe)
     },
     addBrewingMenu() {
