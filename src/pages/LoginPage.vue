@@ -25,7 +25,7 @@
     </div>
 
     <!-- test -->
-    <div class="column items-left" style="border: none">
+    <div class="column items-left" style="border: none; display: none">
       <div style="font-size: 10px">login page</div>
       <div>
         <q-input label="uid" v-model="uid" dense class="q-mb-sm"></q-input>
@@ -126,7 +126,8 @@ export default defineComponent({
           } else {
             alert('커퍼즈 회원이 아닙니다. 회원가입먼저 진행해주세요🙏')
             this.$router.push({
-              path: `/welcome`
+              path: `/welcome/${userId}`,
+              params: { id: `${userId}` }
             })
           }
         })

@@ -21,7 +21,10 @@ const routes = [
         path: 'welcome',
         component: () => import('layouts/BasicLayout.vue'),
         children: [
-          { path: '', component: () => import('src/pages/WelcomeUser.vue') },
+          {
+            path: '/:id',
+            component: () => import('src/pages/WelcomeUser.vue')
+          },
           {
             path: 'survey',
             component: () => import('src/pages/SurveyPage.vue')
