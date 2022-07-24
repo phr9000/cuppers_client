@@ -147,7 +147,7 @@ export default defineComponent({
   methods: {
     loadUserInfo() {
       if (this.user) {
-        let apiUrl = `${process.env.API}/user/detail/${this.user.uid}` // json-server
+        let apiUrl = `${process.env.API}/user/detail/${this.user.uid}`
         this.$axios
           .get(apiUrl)
           .then((result) => {

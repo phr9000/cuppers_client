@@ -134,14 +134,14 @@ export default defineComponent({
           console.log(isNew)
           if (isNew == 0) {
             alert('로그인이 되었습니다 🥳')
-            this.$router.push({
-              path: `/`
-            })
-            const uid = parseInt(this.userId)
+            const uid = parseInt(userId)
             this.user = {
               uid: uid,
               thumbUrl: userThumbnail
             }
+            this.$router.push({
+              path: `/`
+            })
           } else {
             setTimeout(() => {
               alert('커퍼즈 회원이 아닙니다. 회원가입먼저 진행해주세요🙏')
