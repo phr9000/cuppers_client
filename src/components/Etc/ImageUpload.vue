@@ -134,7 +134,7 @@
   </section>
 </template>
 <script>
-import useResize from 'src/composables/useResize'
+import useResize from '../../composables/useResize'
 const { resizeImage, resizeImageSquare } = useResize()
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/scss'
