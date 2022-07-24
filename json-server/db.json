@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "keywords": [
     {
       "keyword_id": 30,
@@ -53,104 +52,6 @@
       "id": 106,
       "keyword_id": 106,
       "keyword_name": "파티하기 좋은"
-=======
-  "mainKeywords": [
-    {
-      "keyword_id": 0,
-      "keyword_name": "전망이 좋은"
-    },
-    {
-      "keyword_id": 1,
-      "keyword_name": "소개팅하기 좋은"
-    },
-    {
-      "keyword_id": 2,
-      "keyword_name": "연인과 같이  가면 좋은"
-    },
-    {
-      "keyword_id": 3,
-      "keyword_name": "분위기가 좋은"
-    },
-    {
-      "keyword_id": 4,
-      "keyword_name": "바리스타 챔피언"
-    },
-    {
-      "keyword_id": 5,
-      "keyword_name": "바다가 보이는"
-    },
-    {
-      "keyword_id": 6,
-      "keyword_name": "테라스가 있는"
-    },
-    {
-      "keyword_id": 7,
-      "keyword_name": "낮에만 영업하는"
-    },
-    {
-      "keyword_id": 8,
-      "keyword_name": "연중무휴"
-    },
-    {
-      "keyword_id": 9,
-      "keyword_name": "정원이나 산책로가 있는"
-    },
-    {
-      "keyword_id": 10,
-      "keyword_name": "브런치 메뉴가 있는"
-    },
-    {
-      "keyword_id": 11,
-      "keyword_name": "루프탑이 있는"
-    },
-    {
-      "keyword_id": 12,
-      "keyword_name": "새벽까지 영업하는"
-    },
-    {
-      "keyword_id": 13,
-      "keyword_name": "미술 작품이 있는"
-    },
-    {
-      "keyword_id": 14,
-      "keyword_name": "야경이 유명한"
-    },
-    {
-      "keyword_id": 15,
-      "keyword_name": "반려동물 동반 가능"
-    },
-    {
-      "keyword_id": 16,
-      "keyword_name": "공연이 있는"
-    },
-    {
-      "keyword_id": 17,
-      "keyword_name": "한옥 인테리어"
-    },
-    {
-      "keyword_id": 18,
-      "keyword_name": "블루리본에 선정된"
-    },
-    {
-      "keyword_id": 19,
-      "keyword_name": "블루리본에 선정된"
-    },
-    {
-      "keyword_id": 20,
-      "keyword_name": "블루리본에 선정된"
-    },
-    {
-      "keyword_id": 21,
-      "keyword_name": "블루리본에 선정된"
-    },
-    {
-      "keyword_id": 22,
-      "keyword_name": "블루리본에 선정된"
-    },
-    {
-      "keyword_id": 23,
-      "keyword_name": "블루리본에 선정된"
->>>>>>> 5b2fb278fd5679ae5b23b618742c794fb3b37cdf
     }
   ],
   "mainCafes": [

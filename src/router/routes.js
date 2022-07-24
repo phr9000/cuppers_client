@@ -137,10 +137,6 @@ const routes = [
         component: () => import('pages/test/CardMenuTest.vue')
       },
       {
-<<<<<<< HEAD
-        path: 'review',
-        component: () => import('pages/test/reviewPage.vue')
-=======
         path: 'childref',
         component: () => import('pages/test/ChildRefTest.vue')
       },
@@ -151,7 +147,6 @@ const routes = [
       {
         path: 'swiper',
         component: () => import('pages/test/SwiperTest.vue')
->>>>>>> 5b2fb278fd5679ae5b23b618742c794fb3b37cdf
       }
     ]
   },
