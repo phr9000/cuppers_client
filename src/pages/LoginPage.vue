@@ -6,7 +6,7 @@
           <div class="user-useful">
             <p><span class="hightlight">커핑노트</span> 작성,</p>
             <p>카페 <span class="hightlight">마이리스트</span> 관리,</p>
-            <p>내 <span class="hightlight">취향 카페</span> 추천,</p>
+            <p>내 <span class="hightlight">주변 카페</span> 추천,</p>
             <p>카페 <span class="hightlight bold">SNS</span> 관리</p>
           </div>
           <div class="cuppers-desc">
