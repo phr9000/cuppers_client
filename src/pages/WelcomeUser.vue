@@ -18,7 +18,6 @@
             ><span class="required-red">*</span> 닉네임을 정해주세요</span
           >
         </p>
-        <p v-if="nicknameOverlap">중복되는 이름이에요</p>
       </div>
       <div class="user-introduce">
         <input
@@ -29,7 +28,6 @@
         <p class="input-desc-area">
           <span class="input-desc">나를 한줄로 소개해주세요</span>
         </p>
-        <p v-if="nicknameOverlap">중복되는 이름이에요</p>
       </div>
       <!-- <div class="which">
         <div class="coffee">어떤 커피를 선호하세요?</div>
