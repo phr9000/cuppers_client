@@ -25,7 +25,11 @@
     </div>
 
     <!--시작 test -->
-    <div class="column items-left" style="border: none; max-width: 100px">
+    <div
+      v-show="false"
+      class="column items-left"
+      style="border: none; max-width: 100px"
+    >
       <div style="color: #939393">
         <q-input
           style="color: #949494"
@@ -123,7 +127,10 @@ export default defineComponent({
           console.log(response)
           const isNew = response.data.isNew
           const userId = response.data.user_id
-          const userThumbnail = response.data.user_thumbnail_url
+          let userThumbnail = response.data.user_thumbnail_url
+          if (userThumbnail.startsWith('images/')) {
+            userThumbnail = `${process.env.STATIC}/${userThumbnail}`
+          }
           console.log(isNew)
           if (isNew == 0) {
             alert('로그인이 되었습니다 🥳')
@@ -132,7 +139,7 @@ export default defineComponent({
             })
             const uid = parseInt(this.userId)
             this.user = {
-              uid: userId,
+              uid: uid,
               thumbUrl: userThumbnail
             }
           } else {
@@ -171,7 +178,6 @@ export default defineComponent({
         uid: uid,
         thumbUrl: `${process.env.STATIC}/images/avatar/${uid}/thumb.jpg`
       }
-      // this.$q.localStorage.set('auth', this.user)
       this.$router.push('/')
     }
   }
