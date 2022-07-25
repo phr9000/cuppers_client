@@ -173,9 +173,9 @@ export default defineComponent({
         timeout: 1000,
         message: '로그아웃 되었습니다.',
         color: 'primary'
-      }),
-        // this.$q.localStorage.remove('auth')
-        this.$router.push('/')
+      })
+
+      this.$router.push('/')
     }
   }
 })
