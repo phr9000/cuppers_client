@@ -126,26 +126,26 @@ export default defineComponent({
         })
         .then((response) => {
           const isNew = response.data.isNew
-          const userId = response.data.insertId
+          const userId = response.data.user_id
           let userThumbnail = response.data.user_thumbnail_url
           if (userThumbnail && userThumbnail.startsWith('images/')) {
             userThumbnail = `${process.env.STATIC}/${userThumbnail}`
           }
           if (isNew == 0) {
+            console.log(userId)
             this.$q.notify({
               position: 'top',
               timeout: 1000,
               message: '로그인 되었습니다😸',
               color: 'primary'
             })
-            const uid = parseInt(userId)
             this.user = {
-              uid: uid,
+              uid: userId,
               thumbUrl: userThumbnail
             }
-            this.$router.push({
-              path: `/`
-            })
+            // this.$router.push({
+            //   path: `/`
+            // })
           } else {
             const userId = response.data.insertId
             this.$q.notify({
