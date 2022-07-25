@@ -84,9 +84,8 @@
             />
           </div>
         </div>
-        <TimePicker :hour="selectedHour" :minute="selectedMinute" />
 
-        <!-- <div class="q-mx-xl q-mt-xl q-my-xl row justify-between contents_block">
+        <div class="q-mx-xl q-mt-xl q-my-xl row justify-between contents_block">
           <div class="col-5">
             <q-input
               type="time"
@@ -101,7 +100,10 @@
               v-model="cafe.cafe_shutdown_time"
             />
           </div>
-        </div> -->
+        </div>
+        <div>
+          <!-- <DateTimePicker /> -->
+        </div>
         <div class="q-mx-xl q-my-xl contents_block">
           <div class="col-12">
             <q-input
@@ -221,6 +223,7 @@
 
 <script>
 import { defineComponent } from 'vue'
+// import DateTimePicker from '../components/Etc/DateTimePicker.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import PostNumber from 'src/components/Etc/PostNumber.vue'
 import CardAddMenu from 'src/components/Card/CardAddMenu.vue'
@@ -233,6 +236,7 @@ export default defineComponent({
     PostNumber,
     CardAddMenu,
     ImageUpload
+    // DateTimePicker
   },
   data() {
     return {
@@ -402,6 +406,10 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
   }
+}
+
+.timepicker_title {
+  font-size: 1rem;
 }
 
 .cafe_description {
