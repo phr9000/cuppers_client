@@ -183,7 +183,6 @@ export default {
         .concat(this.selectedCafeKeywords)
       console.log('submit: ', this.selectedAll)
       // 성공 시 uid localstorage에 저장
-      const uid = parseInt(this.userId)
       this.user = {
         uid: this.userId,
         thumbUrl: this.thumbnail
