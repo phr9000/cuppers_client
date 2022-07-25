@@ -594,7 +594,6 @@ export default defineComponent({
         })
     },
     getImages(cafe_id) {
-      // let apiUrl = `${process.env.API_LOCAL}/cafeImages?_limit=5` // json-server
       let apiUrl = `${process.env.API}/cafe/image/${cafe_id}` // real-server
       this.$axios
         .get(apiUrl)

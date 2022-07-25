@@ -91,7 +91,6 @@ export default {
     BtnMain,
     BtnBasic,
     BtnScrollTop
-    // BtnScrollTopVanilla
   },
   setup() {
     const $store = useStore()
