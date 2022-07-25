@@ -64,7 +64,6 @@
   </section>
 
   <!--------------------------------------------------------->
-
   <section class="q-px-xl q-py-lg">
     <section class="row justify-between align-center q-my-md">
       <div>
@@ -113,18 +112,14 @@
             :key="index"
           >
             <div>
-              <img
-                :src="image.thumbnail_url"
-                class="image q-my-sm q-mx-md"
-                alt=""
-              />
+              <img :src="image.thumbnail_url" class="image q-my-sm q-mx-md" />
               <q-btn
                 rounded
                 @click="deleteImage(image)"
                 color="primary"
                 label="지우기"
                 class="deleteButton"
-                padding="2px 15px"
+                padding="3px 15px"
               />
             </div>
           </swiper-slide>
@@ -134,11 +129,10 @@
   </section>
 </template>
 <script>
-import useResize from '../../composables/useResize'
+import useResize from 'src/composables/useResize'
 const { resizeImage, resizeImageSquare } = useResize()
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/scss'
-
 export default {
   name: 'imageUpload',
   components: {
@@ -164,12 +158,10 @@ export default {
         const image_id = this.images.length + 1
         // const file = files[0]
         // console.log('file', file)
-
         for (let i = 0; i < files.length; i++) {
           const file = files[i]
           let url = ''
           let url_thumb = ''
-
           const apiUrl = `${process.env.API}/upload/image`
 
           // 1. 메인 이미지 업로드
@@ -183,22 +175,21 @@ export default {
                   headers: { 'Content-Type': 'multipart/form-data' }
                 })
                 .then((response) => {
-                  console.log(response)
                   url = response.data.url
+                  console.log(url)
 
                   // 2. 썸네일 이미지 업로드
                   resizeImageSquare({ file: file, maxSize: 500, square: true })
                     .then((blob_thumb) => {
                       const formData = new FormData()
                       formData.append('image', blob_thumb)
-
                       this.$axios
                         .post(apiUrl, formData, {
                           headers: { 'Content-Type': 'multipart/form-data' }
                         })
                         .then((response) => {
-                          console.log(response)
                           url_thumb = response.data.url
+                          // console.log(url_thumb)
 
                           this.images.push({
                             image_id: image_id,
@@ -228,8 +219,7 @@ export default {
         alert('이미지는 최대 5개까지 업로드할 수 있습니다')
       }
     },
-
-    uploadMenuImage(event) {
+    async uploadMenuImage(event) {
       console.log('uploadMenuImage is executed')
       const MAX_IMAGES_LENGTH = 5
       if (this.onlyMenuImage.length < MAX_IMAGES_LENGTH) {
@@ -237,20 +227,16 @@ export default {
         const files = event.target.files
         // const file = files[0]
         // console.log('file', file)
-
         for (let i = 0; i < files.length; i++) {
           const file = files[i]
           let url = ''
           let url_thumb = ''
-
           const apiUrl = `${process.env.API}/upload/image`
-
           // 1. 메인 이미지 업로드
           resizeImage({ file: file, maxSize: 2000 })
             .then((blob) => {
               const formData = new FormData()
               formData.append('image', blob)
-
               this.$axios
                 .post(apiUrl, formData, {
                   headers: { 'Content-Type': 'multipart/form-data' }
@@ -258,13 +244,11 @@ export default {
                 .then((response) => {
                   console.log(response)
                   url = response.data.url
-
                   // 2. 썸네일 이미지 업로드
                   resizeImageSquare({ file: file, maxSize: 500, square: true })
                     .then((blob_thumb) => {
                       const formData = new FormData()
                       formData.append('image', blob_thumb)
-
                       this.$axios
                         .post(apiUrl, formData, {
                           headers: { 'Content-Type': 'multipart/form-data' }
@@ -272,7 +256,6 @@ export default {
                         .then((response) => {
                           console.log(response)
                           url_thumb = response.data.url
-
                           this.images.push({
                             image_id: image_id,
                             type: 'm',
@@ -334,7 +317,6 @@ export default {
   padding: 10px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-
   .swiper-wrapper {
     display: flex;
     text-align: center;

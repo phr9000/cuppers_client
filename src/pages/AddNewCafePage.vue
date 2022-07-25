@@ -54,6 +54,7 @@
           <div class="row info-block">
             <div class="col-7">
               <q-input
+                v-model="this.cafe_address_detail"
                 type="text"
                 id="detailAddress"
                 label="상세주소 *"
@@ -83,7 +84,9 @@
             />
           </div>
         </div>
-        <div class="q-mx-xl q-mt-xl q-my-xl row justify-between contents_block">
+        <TimePicker :hour="selectedHour" :minute="selectedMinute" />
+
+        <!-- <div class="q-mx-xl q-mt-xl q-my-xl row justify-between contents_block">
           <div class="col-5">
             <q-input
               type="time"
@@ -98,7 +101,7 @@
               v-model="cafe.cafe_shutdown_time"
             />
           </div>
-        </div>
+        </div> -->
         <div class="q-mx-xl q-my-xl contents_block">
           <div class="col-12">
             <q-input
@@ -265,12 +268,12 @@ export default defineComponent({
   },
   methods: {
     async verifyCafeName() {
-      let payload = {
-        param: {
-          cafe_name_pr: this.cafe.cafe_name_pr
-        }
-      }
-      console.log(payload)
+      // let payload = {
+      //   param: {
+      //     cafe_name_pr: this.cafe.cafe_name_pr
+      //   }
+      // }
+      // console.log(payload)
       await this.$axios
         .post('http://localhost:3000/api/cafe/checkname', {
           param: {
@@ -288,6 +291,9 @@ export default defineComponent({
         .catch((err) => console.log(err))
     },
     submitCafeInfo() {
+      // 카페 주소, 카페 상세 주소 문자열 병합
+      this.cafe.cafe_address =
+        this.cafe.cafe_address + ` ${this.cafe_address_detail}`
       const cafe = { ...this.cafe }
       console.log(cafe)
 
