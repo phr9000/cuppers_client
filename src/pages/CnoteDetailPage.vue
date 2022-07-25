@@ -120,7 +120,8 @@ export default {
       writeType: false,
       isLiked: true,
       backgroundImg: '',
-      cnoteId: null
+      cnoteId: null,
+      userId: ''
     }
   },
   computed: {},
@@ -131,7 +132,7 @@ export default {
     }, 100)
     this.getcnoteDetail()
     this.getCnoteImg()
-    this.getUserInfo()
+    this.getUserInfo(this.userId)
   },
   mounted() {
     this.getcnoteDetail()
@@ -151,20 +152,19 @@ export default {
           this.content = this.cnotedetail[0].cnote_content
           this.cnote_title = this.cnotedetail[0].cnote_title
           this.created_at = this.cnotedetail[0].created_at.substring(0, 10)
-          this.user_id = this.cnotedetail[0].user_id
+          this.userId = this.cnotedetail[0].user_id
           this.backgroundImg = this.cnotedetail[0].cnote_img
         })
         .catch((err) => {
           console.log(err)
         })
     },
-    getUserInfo() {
+    getUserInfo(userId) {
       let apiUrl = 'http://localhost:3000/api/user/detail/3'
       this.$axios
         .get(apiUrl)
         .then((result) => {
           this.userInfo = result.data
-
           this.user = this.userInfo[0].user_email
           this.user_introduce = this.userInfo[0].user_introduce
         })

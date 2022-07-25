@@ -87,7 +87,8 @@ export default defineComponent({
   },
   data() {
     return {
-      uid: 0
+      uid: 0,
+      userId: ''
     }
   },
   created() {
@@ -125,7 +126,7 @@ export default defineComponent({
         })
         .then((response) => {
           const isNew = response.data.isNew
-          const userId = response.data.user_id
+          const userId = response.data.insertId
           let userThumbnail = response.data.user_thumbnail_url
           if (userThumbnail && userThumbnail.startsWith('images/')) {
             userThumbnail = `${process.env.STATIC}/${userThumbnail}`
@@ -146,6 +147,7 @@ export default defineComponent({
               path: `/`
             })
           } else {
+            const userId = response.data.insertId
             this.$q.notify({
               position: 'top',
               timeout: 1000,
@@ -153,8 +155,8 @@ export default defineComponent({
               color: 'primary'
             }),
               this.$router.push({
-                path: `/welcome`
-                // params: { id: `${this.userId}` }
+                path: `/welcome/${userId}`,
+                params: { id: `${userId}` }
               })
           }
         })

@@ -65,13 +65,12 @@ export default {
   },
   data() {
     return {
-      // userId: '3',
+      userId: null,
       userInfo: {
         nickname: '',
         introduce: ''
       },
-      thumnail:
-        'http://k.kakaocdn.net/dn/d1t0Y3/btrFLDKumH5/UAJNJRs8AQ9CPtJ2UiK27k/img_640x640.jpg',
+      thumnail: '',
       typeValue: '',
       typeStatus: false,
       typeArray: [
@@ -87,16 +86,14 @@ export default {
       charIndex: 1
     }
   },
-  created() {
-    this.userId = this.$route.store
-    this.getUserInfo()
-  },
   methods: {
     getUserInfo(userId) {
       let apiUrl = `http://localhost:3000/api/user/detail/${userId}`
       this.$axios
         .get(apiUrl)
-        .then((result) => {})
+        .then((result) => {
+          this.thumnail = result.data[0].user_thumbnail_url
+        })
         .catch((err) => {
           console.log(err)
         })
@@ -134,7 +131,29 @@ export default {
         setTimeout(this.typeText, this.typingSpeed + 1000)
       }
     },
-    goToSurvey() {
+    checkNickName() {
+      this.$axios
+        .post('http://localhost:3000/api/user/nickname', {
+          param: {
+            user_id: this.userId,
+            user_nickname: this.userInfo.nickname,
+            user_introduce: this.userInfo.introduce
+          }
+        })
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((ex) => {
+          this.$q.notify({
+            position: 'top',
+            timeout: 1000,
+            message: '아이디를 등록하는데 문제가 생겼습니다.',
+            color: 'primary'
+          }),
+            console.log(ex)
+        })
+    },
+    goToSurvey(userId) {
       if (
         this.userInfo.nickname === '' ||
         this.userInfo.nickname === null ||
@@ -149,13 +168,17 @@ export default {
           this.$refs.nickname.focus()
         return false
       } else {
+        this.checkNickName()
         this.$q.notify({
           position: 'top',
           timeout: 1000,
           message: '성공적으로 등록 되었습니다',
           color: 'primary'
-        }),
-          this.$router.push('/welcome/survey')
+        })
+        this.$router.push({
+          path: `/welcome/survey/${this.userId}`,
+          params: { id: `${this.userId}` }
+        })
       }
     },
     nicknameFocus() {
@@ -164,41 +187,14 @@ export default {
   },
   created() {
     setTimeout(this.typeText, this.newTextDelay + 200)
+    // 파라미터로 받아온 id
+    this.userId = this.$route.params.id
+    console.log(this.userId)
+    this.getUserInfo(this.userId)
   },
   mounted() {
     this.nicknameFocus()
   }
-  // async created() {
-  //   this.userId = '44'
-  //   setTimeout(() => {
-  //     this.getUserDetail(this.userId)
-  //   }, 100)
-  //   this.getUserDetail()
-  // },
-  // mounted() {
-  //   this.getUserDetail()
-  // },
-  // methods: {
-  //   getUserDetail(userId) {
-  // let apiUrl = `http://localhost:3000/api/cnote/detail/${userId}`
-  // console.log('here')
-  // console.log(apiUrl)
-  // this.$axios
-  //   .get(apiUrl)
-  //   .then((result) => {
-  //     this.cnotedetail = result.data
-  //     // 데이터베이스에서 받아온 content v-html 에 담아서 사용
-  //     this.content = this.cnotedetail[0].cnote_content
-  //     this.cnote_title = this.cnotedetail[0].cnote_title
-  //     this.created_at = this.cnotedetail[0].created_at.substring(0, 10)
-  //     this.user_id = this.cnotedetail[0].user_id
-  //     this.backgroundImg = this.cnotedetail[0].cnote_img
-  //   })
-  //   .catch((err) => {
-  //     console.log(err)
-  //   })
-  // }
-  // }
 }
 </script>
 <style lang="scss" scoped>
