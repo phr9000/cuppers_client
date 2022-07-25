@@ -143,9 +143,9 @@ export default defineComponent({
               uid: userId,
               thumbUrl: userThumbnail
             }
-            // this.$router.push({
-            //   path: `/`
-            // })
+            this.$router.push({
+              path: `/`
+            })
           } else {
             const userId = response.data.insertId
             this.$q.notify({
