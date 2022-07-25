@@ -163,7 +163,7 @@ export default defineComponent({
 
           return img
         })
-        console.log(images)
+        // console.log(images)
         return images
       } else {
         return null

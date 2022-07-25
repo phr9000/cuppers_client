@@ -130,15 +130,15 @@ export default defineComponent({
   },
   methods: {
     loadCnotes() {
-      const uid = this.user.uid
       this.page++
 
-      // let apiUrl = `${process.env.API_LOCAL}/cnote?_page=${this.page}&_limit=${this.limit}` // json-server
-      let apiUrl = `${process.env.API}/cnote/?user_id=${uid}&page=${this.page}&limit=${this.limit}&order=${this.order}&search=${this.search}` // real-server
+      let apiUrl = `${process.env.API}/cnote?page=${this.page}&limit=${this.limit}&order=${this.order}&search=${this.search}`
+      if (this.user) {
+        apiUrl = `${apiUrl}&user_id=${this.user.uid}`
+      }
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          console.log(result)
           if (result.data.length < 1) {
             this.$refs.infScroll.stop()
             return

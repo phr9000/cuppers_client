@@ -370,13 +370,16 @@
     <!-- </a> -->
 
     <!-- 지도 미리보기 -->
-    <section v-if="showMiniMap" class="minimap q-mx-lg q-mb-xl">
-      <!-- 등록된 메뉴 없을 때  -->
-      <div class="row items-center q-mb-xs">
+    <section v-if="showMiniMap" class="q-mx-lg q-mb-xl">
+      <div class="label row items-center q-mb-xs">
         <q-icon size="xs" name="info" class="icon q-pr-xs" />
         <div class="text_subtitle1">카페 위치</div>
       </div>
-      <kakao-mini-map :lat="cafe.cafe_latitude" :lng="cafe.cafe_longitude" />
+      <kakao-mini-map
+        class="minimap"
+        :lat="cafe.cafe_latitude"
+        :lng="cafe.cafe_longitude"
+      />
     </section>
 
     <!-- 커핑 노트 -->
@@ -591,7 +594,6 @@ export default defineComponent({
         })
     },
     getImages(cafe_id) {
-      // let apiUrl = `${process.env.API_LOCAL}/cafeImages?_limit=5` // json-server
       let apiUrl = `${process.env.API}/cafe/image/${cafe_id}` // real-server
       this.$axios
         .get(apiUrl)
@@ -830,6 +832,9 @@ export default defineComponent({
   .minimap {
     border-radius: $border-radius-md;
     overflow: hidden;
+    // .label {
+    //   position: relative;
+    // }
     // border-radius: $border-radius;
     // border: 1px solid $grey-4;
   }

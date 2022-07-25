@@ -7,7 +7,7 @@
         <div class="top">
           <!-- user 사진 -->
           <div class="user-pic">
-            <q-img :src="user_info.thumbUrl" alt="profile 사진" />
+            <q-img :src="calUrl" alt="profile 사진" />
           </div>
           <!-- user 이름 -->
           <strong class="user-name">{{ user_info.user_email }}</strong>
@@ -114,6 +114,14 @@ export default {
   },
   data() {
     return {}
+  },
+  computed: {
+    calUrl() {
+      if (this.user_info.user_thumbnail_url.startsWith('images/')) {
+        return `${process.env.STATIC}/${this.user_info.user_thumbnail_url}`
+      }
+      return this.user_info.user_thumbnail_url
+    }
   },
   methods: {
     close() {

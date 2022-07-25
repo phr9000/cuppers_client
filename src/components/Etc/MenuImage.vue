@@ -3,6 +3,7 @@
   <div class="menu_image_wrap" :class="{ left: lr === 'left' }">
     <q-img class="menu_image" width="100%" height="130px" :src="calUrl">
       <div
+        @click="handleClick"
         class="rounded-borders absolute-full text-subtitle2 flex flex-center"
       >
         크게 보기
@@ -31,6 +32,11 @@ export default {
         return `${process.env.STATIC}/${this.url}`
       }
       return this.url
+    }
+  },
+  methods: {
+    handleClick() {
+      console.log('click')
     }
   }
 }

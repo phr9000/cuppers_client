@@ -96,20 +96,24 @@
 
         <q-separator class="q-my-md"></q-separator>
 
+        <!-- 음료‧카페 실내외 사진 -->
         <section class="section_image_upload q-px-sm">
           <div class="image_upload row q-pb-md">
             <div class="col-10">
               <div class="column">
-                <div class="text-subtitle1">음식‧실내외 사진</div>
+                <div class="text-subtitle1">음료‧카페 실내외 사진</div>
                 <div class="row justify-start">
                   <img
-                    v-for="img in images"
+                    v-for="img in imagesCafe"
                     :key="img.thumb"
                     class="pic img-pic"
                     :src="img.thumb"
                     alt="썸네일 이미지"
                   />
-                  <div v-if="images.length < 1" class="text-caption text-grey">
+                  <div
+                    v-if="imagesCafe.length < 1"
+                    class="q-pt-sm text-caption text-grey"
+                  >
                     ‧ 본인이 직접 촬영하지 않은 사진<br />‧ 1000 * 1000 미만
                     해상도의 사진은 통보없이 삭제될 수 있습니다.
                   </div>
@@ -117,20 +121,69 @@
               </div>
             </div>
             <div class="col-2 row justify-end items-end">
-              <label for="imgfile">
+              <label for="imgfile1">
                 <div class="pic btn-pic">
                   <img
                     class="icon"
                     src="/icons/camera-fill.svg"
                     alt="bell-icon"
                   />
-                  <span>{{ images ? images.length : 0 }}/5</span>
+                  <span>{{ imagesCafe ? imagesCafe.length : 0 }}/5</span>
                 </div></label
               >
               <input
                 type="file"
-                id="imgfile"
-                @change="handleChange"
+                id="imgfile1"
+                @change="handleChangeCafeImage"
+                accept=".png, .jpg, .jpeg"
+                multiple
+              />
+            </div>
+          </div>
+        </section>
+
+        <q-separator class="q-my-md"></q-separator>
+
+        <!-- 메뉴판 사진 -->
+        <section class="section_image_upload q-px-sm">
+          <div class="image_upload row q-pb-md">
+            <div class="col-10">
+              <div class="column">
+                <div class="text-subtitle1">메뉴판 사진</div>
+                <div class="row justify-start">
+                  <img
+                    v-for="img in imagesMenu"
+                    :key="img.thumb"
+                    class="pic img-pic"
+                    :src="img.thumb"
+                    alt="썸네일 이미지"
+                  />
+                  <div
+                    v-if="imagesMenu.length < 1"
+                    class="text-caption text-grey"
+                  >
+                    ‧ 메뉴판이나 커피 메뉴 정보가 보이는 사진을 올려주세요.<br />‧
+                    본인이 직접 촬영하지 않은 사진<br />‧ 1000 * 1000 미만
+                    해상도의 사진은 통보없이 삭제될 수 있습니다.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-2 row justify-end items-end">
+              <label for="imgfile2">
+                <div class="pic btn-pic">
+                  <img
+                    class="icon"
+                    src="/icons/camera-fill.svg"
+                    alt="bell-icon"
+                  />
+                  <span>{{ imagesMenu ? imagesMenu.length : 0 }}/5</span>
+                </div></label
+              >
+              <input
+                type="file"
+                id="imgfile2"
+                @change="handleChangeMenuImage"
                 accept=".png, .jpg, .jpeg"
                 multiple
               />
@@ -142,20 +195,22 @@
       </main>
 
       <!-- 리뷰 등록 -->
-      <btn-basic
-        class="bg-grey-2"
-        :rounded="false"
-        icon="dashboard"
-        color="grey-9"
-        label="리뷰 등록"
-        padding="4px 8px "
-        @click="postReview"
-      />
 
-      <div class="q-mt-xl q-px-sm">
+      <div class="q-mt-md q-mb-xl flex flex-center">
+        <btn-basic
+          @click="postReview"
+          size="md"
+          color="primary"
+          label="리뷰 등록"
+          icon="edit"
+          padding="6px 18px"
+        />
+      </div>
+
+      <div v-show="false" class="q-mt-xl q-px-sm">
         선택한 카페 키워드: <strong>{{ selectedCafeKeywords }}</strong>
       </div>
-      <div class="q-px-sm">
+      <div v-show="false" class="q-px-sm">
         커피의 종류: <strong>{{ review.drink_type }}</strong>
       </div>
     </section>
@@ -207,7 +262,7 @@ export default defineComponent({
           '플랫화이트 Flat White 는 에스프레소에 크림처럼 고운 스팀밀크를 올린 커피 음료예요. 라떼나 카푸치노와 비슷하지만, 밀크폼이 좀 더 부드럽고 커피맛이 진한 게 특징이에요. 저는 모르는 카페를 갔을 때 카페 라떼를 주문하는 일은 거의 없어도 플랫화이트는 종종 시켜먹어요',
         review_img: 'images/review/26/g_01_thumb.jpg'
       },
-      images: [
+      imagesCafe: [
         // {
         //   images_review_type: 'g',
         //   images_review_url: 'g_01.jpg',
@@ -221,6 +276,7 @@ export default defineComponent({
         //     'http://localhost:3000/static/images/review/26/g_01_thumb.jpg'
         // }
       ],
+      imagesMenu: [],
       selectedCafeKeywords: [
         // { keyword_id: 3 }, { keyword_id: 3 }
       ],
@@ -362,13 +418,17 @@ export default defineComponent({
     // file 선택이 변경될때마다 호출
     // e.target.files 의 모든 file들은 products 에 저장
     // file[0] 은 썸네일 이미지로 따로 저장
-    async handleChange(e) {
-      this.images = []
-      // const selected = e.target.files[0]
-      // console.log(selected.name)
+    async handleChangeCafeImage(e) {
+      this.imagesCafe = []
       const files = e.target.files
-      // const file = files[0]
-
+      this.imageUpload(files, 'g')
+    },
+    async handleChangeMenuImage(e) {
+      this.imagesMenu = []
+      const files = e.target.files
+      this.imageUpload(files, 'm')
+    },
+    async imageUpload(files, type) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
         let url = ''
@@ -404,12 +464,21 @@ export default defineComponent({
                         // console.log(r.data)
                         url_thumb = r.data.url
 
-                        this.images.push({
-                          images_review_type: 'g',
-                          images_review_url: url,
-                          thumbnail_url: r.data.filename,
-                          thumb: url_thumb
-                        })
+                        if (type === 'g') {
+                          this.imagesCafe.push({
+                            images_review_type: 'g',
+                            images_review_url: url,
+                            thumbnail_url: r.data.filename,
+                            thumb: url_thumb
+                          })
+                        } else if (type === 'm') {
+                          this.imagesMenu.push({
+                            images_review_type: 'm',
+                            images_review_url: url,
+                            thumbnail_url: r.data.filename,
+                            thumb: url_thumb
+                          })
+                        }
                       })
                       .catch((e) => {
                         console.error(e)
@@ -427,10 +496,28 @@ export default defineComponent({
             console.error(err)
           })
 
-        console.log(this.images)
+        // console.log(this.images)
       }
     },
     postReview() {
+      const images = []
+      if (this.imagesCafe.length) {
+        this.imagesCafe.forEach((img) => {
+          images.push(img)
+        })
+      }
+      if (this.imagesMenu.length) {
+        this.imagesMenu.forEach((img) => {
+          images.push(img)
+        })
+      }
+      let review_img = ''
+      if (images.length) {
+        review_img = images[0].thumbnail_url
+      }
+
+      console.log(images)
+
       this.$axios
         .post(`http://localhost:3000/api/review/1`, {
           review: {
@@ -439,9 +526,10 @@ export default defineComponent({
             review_drink: this.review.review_drink,
             drink_type: this.review.drink_type,
             review_content: this.review.review_content,
-            review_img: this.images[0].thumbnail_url
+            review_img: review_img
+            // review_img: images[0].thumbnail_url
           },
-          images: this.images,
+          images: images,
           // [
           //   {
           //     images_review_type: 'g',
