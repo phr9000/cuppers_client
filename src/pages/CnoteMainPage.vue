@@ -159,7 +159,8 @@ export default defineComponent({
       this.loadCnotes()
     },
     loadRecWriters() {
-      let apiUrl = `${process.env.API_LOCAL}/recUsers` // json-server
+      // let apiUrl = `${process.env.API_LOCAL}/recUsers` // json-server
+      let apiUrl = `${process.env.API}/cnote/writer/liked` // real-server
       this.$axios
         .get(apiUrl)
         .then((result) => {

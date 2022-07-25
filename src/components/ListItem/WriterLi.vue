@@ -38,10 +38,15 @@ export default defineComponent({
   },
   computed: {
     writeCnt() {
-      return formatNumber(this.writer.write_cnt, '#,###')
+      return formatNumber(
+        this.writer.cnote_cnt + this.writer.review_cnt,
+        '#,###'
+      )
     },
     followerCnt() {
-      return formatNumber(this.writer.follower_cnt, '#,###')
+      if (this.writer.follower_cnt) {
+        return formatNumber(this.writer.follower_cnt, '#,###')
+      } else return '0'
     }
   },
   mounted() {},
