@@ -185,7 +185,7 @@ export default {
       // 성공 시 uid localstorage에 저장
       const uid = parseInt(this.userId)
       this.user = {
-        uid: uid,
+        uid: this.userId,
         thumbUrl: this.thumbnail
       }
       this.$router.push({
