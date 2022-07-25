@@ -36,7 +36,7 @@
             <!-- 가본곳 버튼 -->
             <div class="btn_been_there q-mr-xs">
               <btn-been-there
-                :user_id="user"
+                :user="user"
                 :cafe_id="cafe.cafe_id"
                 :been_there="cafe.user_beenthere"
               />

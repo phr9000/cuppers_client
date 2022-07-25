@@ -102,7 +102,14 @@
         <!-- tab2: 내목록 map-my-list -->
         <section v-show="tab === 'mylist'">
           <div v-if="user === null" class="q-my-lg text-grey flex flex-center">
-            <p>로그인이 필요합니다.</p>
+            <div class="q-pr-sm">로그인이 필요합니다.</div>
+            <q-btn
+              dense
+              to="/login"
+              label="로그인 페이지로"
+              color="secondary"
+              padding="4px 10px"
+            />
           </div>
           <div v-else>
             <!-- 마이리스트 -->
