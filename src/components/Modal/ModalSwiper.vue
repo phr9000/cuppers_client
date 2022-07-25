@@ -11,17 +11,7 @@
       }"
       :navigation="true"
       :modules="modules"
-      class="mySwiper"
     >
-      <!-- <swiper-slide>
-        <img
-          data-src="https://swiperjs.com/demos/images/nature-1.jpg"
-          class="swiper-lazy"
-        />
-        <div
-          class="swiper-lazy-preloader swiper-lazy-preloader-white"
-        ></div> </swiper-slide
-      > -->
       <swiper-slide v-for="img in images" :key="img.id">
         <img :data-src="img.url" class="swiper-lazy" />
         <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
