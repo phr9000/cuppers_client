@@ -152,10 +152,10 @@
         @click="postReview"
       />
 
-      <div class="q-mt-xl q-px-sm">
+      <div v-show="false" class="q-mt-xl q-px-sm">
         선택한 카페 키워드: <strong>{{ selectedCafeKeywords }}</strong>
       </div>
-      <div class="q-px-sm">
+      <div v-show="false" class="q-px-sm">
         커피의 종류: <strong>{{ review.drink_type }}</strong>
       </div>
     </section>

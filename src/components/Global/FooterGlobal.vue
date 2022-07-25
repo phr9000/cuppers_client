@@ -47,7 +47,7 @@ export default defineComponent({
 <style lang="scss">
 .footer_global {
   position: relative;
-  background-color: #000;
+  background-color: $grey-10;
   height: 110px;
   // padding-bottom: 10px;
 }
