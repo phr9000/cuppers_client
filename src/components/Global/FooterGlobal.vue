@@ -1,5 +1,5 @@
 <template>
-  <q-footer bordered class="footer_global column justify-center">
+  <q-footer v-if="show" bordered class="footer_global column justify-center">
     <q-toolbar class="q-px-lg q-pt-lg">
       <div class="row items-center">
         <div class="column text-grey-5">
@@ -27,7 +27,6 @@
 <script>
 import { defineComponent } from 'vue'
 import BtnLogo from '../Button/BtnLogo.vue'
-import BtnIcon from '../Button/BtnIcon.vue'
 
 export default defineComponent({
   components: { BtnLogo },
@@ -35,7 +34,15 @@ export default defineComponent({
     hasBtnMenu: { type: Boolean, default: false }
   },
   data() {
-    return {}
+    return {
+      show: true
+    }
+  },
+  created() {
+    console.log(this.$route.path)
+    if (this.$route.path === '/cafe/create') {
+      this.show = false
+    }
   },
   methods: {
     clickMenu() {
