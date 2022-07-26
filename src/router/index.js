@@ -64,7 +64,11 @@ export default route(function ({ store } /* { store, ssrContext } */) {
             {
               label: '나중에',
               color: 'grey',
-              handler: () => {}
+              handler: () => {
+                next({
+                  path: history.back()
+                })
+              }
             }
           ]
         })

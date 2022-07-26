@@ -10,10 +10,10 @@
     >
       <swiper-slide>
         <ul class="slide-container slide-container1">
-          <li class="slide">
+          <li class="slide" @click="gotoCnoteDetail()">
             <div class="img-area">
               <img
-                :src="cnote.cnote_thumbnail"
+                src="http://localhost:3000/static/images/cnote/189/1658657143055.jpg"
                 class="img_pic"
                 alt="달콤한 커피향 가득 ‘옐로우 버번’"
               />
@@ -43,14 +43,8 @@
               />
             </div>
             <div class="txt-area">
-              <div class="title">
-                미니멀리즘으로 가는<br />
-                한달살기
-              </div>
-              <div class="desc">
-                미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는
-                것이라고...
-              </div>
+              <div class="title">광진구 로스터리 카페 로프커피</div>
+              <div class="desc">제가 마셨던 커피를 소개하고자 합니다.</div>
               <div class="writer">by 행복을 찾아서</div>
             </div>
             <div class="dim"></div>
@@ -247,19 +241,6 @@ SwiperCore.use([Pagination, Navigation])
 
 export default {
   name: 'FilterSwiper',
-  data() {
-    return {
-      swiperOption: {
-        slidesPerView: '1',
-        spaceBetween: 6, // swiper-slide 사이의 간격 지정
-        slidesOffsetBefore: 0, // slidesOffsetBefore는 첫번째 슬라이드의 시작점에 대한 변경할 때 사용
-        slidesOffsetAfter: 0, // slidesOffsetAfter는 마지막 슬라이드 시작점 + 마지막 슬라이드 너비에 해당하는 위치의 변경이 필요할 때 사용
-        freeMode: true, // freeMode를 사용시 스크롤하는 느낌으로 구현 가능
-        centerInsufficientSlides: true, // 컨텐츠의 수량에 따라 중앙정렬 여부를 결정함,
-        touchRatio: 0 //드래그 금지
-      }
-    }
-  },
   components: {
     Swiper,
     SwiperSlide
@@ -280,14 +261,32 @@ export default {
           create_at: '2022-06-14 14:30:55'
         }
       }
-    },
-    computed: {
-      createDate() {
-        return format(new Date(), 'MMM dd. yyyy')
-      },
-      swiper() {
-        return this.$refs.mySwiper
+    }
+  },
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: '1',
+        spaceBetween: 6, // swiper-slide 사이의 간격 지정
+        slidesOffsetBefore: 0, // slidesOffsetBefore는 첫번째 슬라이드의 시작점에 대한 변경할 때 사용
+        slidesOffsetAfter: 0, // slidesOffsetAfter는 마지막 슬라이드 시작점 + 마지막 슬라이드 너비에 해당하는 위치의 변경이 필요할 때 사용
+        freeMode: true, // freeMode를 사용시 스크롤하는 느낌으로 구현 가능
+        centerInsufficientSlides: true, // 컨텐츠의 수량에 따라 중앙정렬 여부를 결정함,
+        touchRatio: 0 //드래그 금지
       }
+    }
+  },
+  computed: {
+    createDate() {
+      return format(new Date(), 'MMM dd. yyyy')
+    },
+    swiper() {
+      return this.$refs.mySwiper
+    }
+  },
+  methods: {
+    gotoCnoteDetail() {
+      this.$router.push(`/cnote/189`)
     }
   }
 }
