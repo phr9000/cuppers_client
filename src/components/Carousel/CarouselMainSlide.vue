@@ -15,15 +15,22 @@
               <img
                 :src="cnote.cnote_thumbnail"
                 class="img_pic"
-                alt="한 잔의 커피는 나의 아낭케"
+                alt="달콤한 커피향 가득 ‘옐로우 버번’"
               />
             </div>
             <div class="txt-area">
-              <div class="title">{{ cnote.cnote_title }}</div>
+              <div class="title">달콤한 커피향 가득 ‘옐로우 버번’</div>
               <div class="desc">
-                <p>{{ cnote.cnote_content }}</p>
+                <p>
+                  국내 최대량의 아열대 유실수를 보유, 우리나라 아열대 농작물의
+                  대부로 불리는 황상열 대표가 앞으로 높은 수익이 예상되는
+                  ‘아열대 농작물’을 꼽았다. 국내 소비자들의 입맛을 고려한
+                  시장성과 국내 기후와 일반 하우스 시설로도 재배가 가능한 중에
+                  가장 유망한 아열대 품종을 본지가 독점 공개한다. 이번 호에는
+                  열일곱 번째 순서 아열대 유실수 ‘옐로우 버번’을 소개한다.
+                </p>
               </div>
-              <div class="writer">by {{ cnote.user_name }}</div>
+              <div class="writer">by 산미선호자</div>
             </div>
             <div class="dim"></div>
           </li>
@@ -44,7 +51,7 @@
                 미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는
                 것이라고...
               </div>
-              <div class="writer">by 위트립</div>
+              <div class="writer">by 행복을 찾아서</div>
             </div>
             <div class="dim"></div>
           </li>
@@ -108,7 +115,7 @@
                 미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는
                 것이라고...
               </div>
-              <div class="writer">by</div>
+              <div class="writer">by 커피방랑자</div>
             </div>
             <div class="dim"></div>
           </li>
@@ -151,39 +158,73 @@
           </li>
         </ul>
       </swiper-slide>
-      <swiper-slide style="width: 960px">
+      <swiper-slide>
         <ul class="slide-container slide-container">
           <li class="slide">
             <div class="img-area">
               <img
-                src="//img1.daumcdn.net/thumb/C520x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/32b33b09b41a4282912e67ca80c2a2cf"
+                src="https://cdn.pixabay.com/photo/2017/01/15/18/54/bahamas-1982413_1280.jpg"
                 class="img_pic"
                 alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
               />
             </div>
-            <div class="txt-area">test</div>
+            <div class="txt-area">
+              <div class="title">
+                편안한 카페 음향을<br />
+                위한 7가지 조언
+              </div>
+              <div class="desc">
+                카페와 관련해서 '음향'이라는 단어를 꺼내면 사람들이 가장 먼저
+                연상하는 것은 앰프와 스피커입니다. 음향을 좀 더
+                세분화해서&nbsp;전기 음향과 건축(공간) 음향으로 분류하는데요.
+                대부분의 사람들에게 더&nbsp;익숙한 것은 아무래도 전기
+                음향입니다. 1년 여 전에 페이스북을 통해서 '음향'이 괜찮은 카페
+                공간에 대한 추천을 부탁드렸던 적이 있는데요. 그 때도 역시나 전기
+                음향에 투자를 많이한&nbsp;카페에 대한 추천만 받을 수 있었습니다.
+              </div>
+              <div class="writer">by 커피야</div>
+            </div>
             <div class="dim"></div>
           </li>
           <li class="slide">
             <div class="img-area">
               <img
-                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/d9602a28c42248f1b406695658e36c52"
+                src="https://cdn.pixabay.com/photo/2017/06/25/07/56/coffee-2439897_1280.jpg"
                 class="img_pic"
                 alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
               />
             </div>
-            <div class="txt-area">test</div>
+            <div class="txt-area">
+              <div class="title">룽고에 관한 짧은 글</div>
+              <div class="desc">
+                룽고(Lungo)는 이탈리아어로 '길다'를 의미한다. 이에 에스프레소
+                룽고(Esprèsso Lungo)는 기존 에스프레소에 비해 더 긴 시간동안
+                추출한 커피를 의미하며, 줄여서 '룽고'라고 일컫는다.에스프레소는
+                대체로 25~60ml의 물로 18~30초간 커피를 추출하는데 반해, 룽고는
+                약 1분간 130~170ml의 물을 이용하여 추출한다. 단, 추출 시간과
+                양은 커피콩의 종류, 추출 기계의 압력 등 경우에 따라 달라질 수
+                있다.
+              </div>
+              <div class="writer">by 롱고커피 선호자</div>
+            </div>
             <div class="dim"></div>
           </li>
           <li class="slide">
             <div class="img-area">
               <img
-                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/ab3848ca65d3409ba7cbd2d2431ff419"
+                src="https://cdn.pixabay.com/photo/2016/11/19/17/17/beverage-1840426_1280.jpg"
                 class="img_pic"
                 alt="둘째가 태어난 뒤<br>첫째의 충격적인 말<br>"
               />
             </div>
-            <div class="txt-area">test</div>
+            <div class="txt-area">
+              <div class="title">미니멀리즘으로 사는것은 어렵지만</div>
+              <div class="desc">
+                미니멀리즘으로 사는것은 어렵지만 해볼만한 가치가 있는
+                것이라고...
+              </div>
+              <div class="writer">by 커피방랑자</div>
+            </div>
             <div class="dim"></div>
           </li>
         </ul>
@@ -314,6 +355,8 @@ export default {
       display: flex;
       .slide {
         position: relative;
+        max-height: 520px;
+        overflow: hidden;
         cursor: pointer;
         overflow: hidden;
         &:hover {
