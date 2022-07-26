@@ -1,157 +1,144 @@
 <template>
-  <q-page class="constrain_sm">
-    <section class="q-py-md section">
-      <div class="text-center text-h5">
-        <span class="title">새로운 카페를 등록해주세요</span>
-      </div>
-    </section>
-    <section class="q-mx-xl q-my-xl q-pb-xl">
-      <div class="text-right q-mr-xl q-mt-xl cafe-notice">
-        <q-icon size="11px" name="emergency" class="q-mr-xs asterisk" /><span
-          >는 필수항목 입니다</span
-        >
-      </div>
-      <div class="q-py-sm q-mt-md background">
-        <div class="flex justify-center q-mt-md">
-          <q-icon size="md" name="house" class="q-pl-sm" />
-          <span class="text-h6">카페정보</span>
-        </div>
-        <!-- 카페 이름 -->
-        <div class="q-mx-xl q-my-xl contents_block">
-          <div class="col-12">
-            <q-input
-              label="카페이름 *"
-              v-model="cafe.cafe_name_pr"
-              type="text"
-              :rules="[(val) => !!val || '카페 이름은 필수 항목입니다']"
-              class="col-12 input-area"
-              @blur="verifyCafeName"
-            />
-          </div>
-        </div>
-        <div class="col-12 q-mx-xl q-mt-xl contents_block">
-          <div class="row info-block items-center">
-            <q-input
-              v-model="cafe.cafe_address"
-              readonly
-              type="text"
-              id="address"
-              label="주소 *"
-              class="col-8 input-area"
-              :rules="[(val) => !!val || '카페 주소는 필수 항목입니다']"
-            />
-            <div class="col-3 flex row-area">
-              <post-number
-                @sendPostData="getPostData"
-                label="주소 찾기"
-                padding="7px 20px"
-                class="button"
-              />
+  <q-page class="bg-grey-1">
+    <div class="column constrain_sm q-pa-md">
+      <main class="createpost">
+        <!-- 1. 카페 기본 정보 -->
+        <section>
+          <div class="row justify-between items-end q-my-md">
+            <div class="section_title text-h5">카페 기본 정보</div>
+            <div class="text-right cafe-notice">
+              <q-icon name="emergency" class="asterisk" /><span
+                class="text-grey-6"
+                >는 필수항목 입니다</span
+              >
             </div>
           </div>
-        </div>
-        <div class="col-12 q-mx-xl q-mb-xl contents_block">
-          <div class="row info-block">
-            <div class="col-7">
-              <q-input
-                v-model="this.cafe_address_detail"
-                type="text"
-                id="detailAddress"
-                label="상세주소 *"
-                :rules="[(val) => !!val || '상세 주소는 필수 항목입니다']"
-              />
-            </div>
-            <div class="col-4 q-ml-xs">
-              <q-input
-                readonly
-                type="text"
-                v-model="cafe.cafe_post"
-                label="우편번호 *"
-                :rules="[(val) => !!val || '우편 번호는 필수 항목입니다']"
-              />
-            </div>
-          </div>
-        </div>
-        <!-- 카페 전화번호-->
-        <div class="q-mx-xl q-mt-xl q-my-xl contents_block">
-          <div class="col-12">
-            <q-input
-              label="대표전화 *"
-              v-model="cafe.cafe_phone"
-              type="tel"
-              mask="### -  #### - ####"
-              :rules="[(val) => !!val || '대표 전화는 필수 항목입니다']"
-            />
-          </div>
-        </div>
 
-        <div class="q-mx-xl q-mt-xl q-my-xl row justify-between contents_block">
-          <div class="col-5">
+          <!-- 카페 이름 -->
+          <div class="subtitle q-mb-sm">
+            카페 이름
+            <q-icon name="emergency" class="asterisk" />
+          </div>
+          <div class="q-mb-sm">
             <q-input
-              type="time"
-              hint="오픈 시간(평일)"
-              v-model="cafe.cafe_res_time"
+              :class="{ wrong: cafeNameDuplicated }"
+              v-model="cafeName"
+              placeholder="카페 이름을 입력해주세요"
+              outlined
+              :dense="dense"
+              debounce="500"
             />
           </div>
-          <div class="col-5">
-            <q-input
-              type="time"
-              hint="닫는 시간(평일)"
-              v-model="cafe.cafe_shutdown_time"
+          <div v-if="cafeNameDuplicated" class="q-pl-xs q-mb-sm text-red-5">
+            이미 존재하는 카페 이름입니다. 다른 이름을 입력해주세요.
+          </div>
+
+          <!-- 주소 찾기 -->
+          <div class="q-py-sm row justify-between items-center">
+            <div class="subtitle">
+              주소
+              <q-icon name="emergency" class="asterisk" />
+            </div>
+            <post-number
+              @sendPostData="getPostData"
+              label="주소 찾기"
+              padding="7px 20px"
+              ref="daum"
             />
           </div>
-        </div>
-        <div>
-          <!-- <DateTimePicker /> -->
-        </div>
-        <div class="q-mx-xl q-my-xl contents_block">
-          <div class="col-12">
+          <div class="q-mb-sm row">
+            <div class="col-12 col-sm-9">
+              <q-input
+                class="q-mr-xs"
+                @click="handleClickAdress"
+                v-model="cafe.cafe_address"
+                placeholder="주소 찾기"
+                stack-label
+                outlined
+                readonly
+                :dense="dense"
+              />
+            </div>
+            <div class="col-12 col-sm-3">
+              <q-input
+                placeholder="우편 번호"
+                v-model="cafe.cafe_post"
+                stack-label
+                outlined
+                readonly
+                :dense="dense"
+              />
+            </div>
+          </div>
+          <div class="q-mb-sm">
+            <q-input
+              label="상세 주소"
+              v-model="cafe_address_detail"
+              stack-label
+              outlined
+            />
+          </div>
+
+          <!-- 기타 정보 -->
+          <div class="subtitle q-py-sm">기타 정보</div>
+          <!-- 대표 전화 -->
+          <div class="q-mb-sm">
+            <q-input
+              label="대표 전화"
+              v-model="cafe.cafe_phone"
+              placeholder="000-0000-0000"
+              stack-label
+              outlined
+              v-number
+            />
+          </div>
+          <!-- 웹사이트 -->
+          <div class="q-mb-sm">
             <q-input
               label="웹사이트"
-              hint="URL을 입력해주세요"
               v-model="cafe.cafe_webpage"
-              type="url"
+              placeholder="URL을 입력해주세요"
+              stack-label
+              outlined
             />
           </div>
-        </div>
-        <div class="q-mx-xl q-my-xl contents_block">
-          <div class="col-12">
-            <q-input
-              label="분점 정보"
-              hint="쉼표로 구분해주세요"
-              v-model="cafe.cafe_branch_name"
-              type="url"
-            />
-          </div>
-        </div>
-        <div class="q-mx-xl q-my-xl contents_block">
-          <div class="col-12">
+          <!-- 바리스타 정보 -->
+          <div class="q-mb-sm">
             <q-input
               label="바리스타 정보"
-              hint="바리스타의 수상/자격증 등을 입력해주세요"
-              v-model="cafe.cafe_barista_info"
-              type="url"
+              v-model="cafe.cafe_webpage"
+              placeholder="바리스타의 수상/자격증 등을 입력해주세요"
+              stack-label
+              outlined
             />
           </div>
-        </div>
-      </div>
-    </section>
-    <section class="q-mx-xl q-my-xl q-pb-xl">
-      <div class="q-py-sm q-mt-md background">
-        <div class="flex justify-center q-mt-md">
-          <q-icon size="md" name="coffee" class="q-pl-sm" />
-          <span class="text-h6">커피정보</span>
-        </div>
-        <section class="q-my-xl">
-          <div class="flex justify-between q-mx-xl">
-            <span class="text-h6">브루잉 커피</span>
+          <!-- 카페 소개 -->
+          <div class="q-mb-sm">
+            <q-input
+              label="카페 소개"
+              v-model="cafe.cafe_description"
+              placeholder="카페를 자유롭게 소개해주세요"
+              stack-label
+              outlined
+              autogrow
+            />
+          </div>
+        </section>
+
+        <!-- 2. 커피 메뉴 -->
+        <section class="q-pt-lg">
+          <div class="section_title text-h5">커피 메뉴</div>
+
+          <!-- 브루잉 커피 -->
+          <div class="q-py-sm row justify-between items-center">
+            <div class="subtitle2">브루잉 커피 메뉴</div>
             <btn-basic
               @click="addBrewingMenu"
-              size="sm"
+              size="md"
               label="메뉴 추가"
-              color="primary"
+              color="brown-5"
               icon="add"
-              padding="7px 15px 7px 15px"
+              :rounded="false"
             />
           </div>
           <div>
@@ -164,17 +151,17 @@
               ref="CardAddMenu"
             />
           </div>
-        </section>
-        <section class="q-my-xl">
-          <div class="flex justify-between q-mx-xl">
-            <span class="text-h6">베리에이션 커피</span>
+
+          <!-- 베리에이션 커피 -->
+          <div class="q-py-sm row justify-between items-center">
+            <div class="subtitle2">베리에이션 커피 메뉴</div>
             <btn-basic
               @click="addVariationMenu"
-              size="sm"
+              size="md"
               label="메뉴 추가"
-              color="primary"
+              color="brown-5"
               icon="add"
-              padding="7px 15px 7px 15px"
+              :rounded="false"
             />
           </div>
           <div>
@@ -188,58 +175,138 @@
             />
           </div>
         </section>
-        <section>
-          <image-upload ref="ImageUpload" />
+
+        <!-- 3. 카페 이미지 등록 -->
+
+        <div class="q-pt-lg section_title text-h5 q-pb-md">카페 사진</div>
+        <section class="section_image_upload">
+          <div></div>
+          <!-- 3-1. 카페 실내외 사진 -->
+          <div class="image_upload row q-pb-md">
+            <div class="col-10 q-pl-xs">
+              <div class="column">
+                <div class="subtitle2">카페 실내외 사진</div>
+                <div class="row justify-start">
+                  <img
+                    v-for="img in imagesCafe"
+                    :key="img.thumb"
+                    class="pic img-pic"
+                    :src="img.thumb"
+                    alt="썸네일 이미지"
+                  />
+                  <div
+                    v-if="imagesCafe.length < 1"
+                    class="q-pt-sm text-caption text-grey"
+                  >
+                    ‧ 본인이 직접 촬영하지 않은 사진<br />‧ 1000 * 1000 미만
+                    해상도의 사진은 통보없이 삭제될 수 있습니다.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-2 row justify-end items-end">
+              <label for="imgfile1">
+                <div class="pic btn-pic">
+                  <q-icon name="eva-camera-outline" size="sm"></q-icon>
+                  <span>{{ imagesCafe ? imagesCafe.length : 0 }}/5</span>
+                </div></label
+              >
+              <input
+                type="file"
+                id="imgfile1"
+                @change="handleChangeCafeImage"
+                accept=".png, .jpg, .jpeg"
+                multiple
+              />
+            </div>
+          </div>
+
+          <q-separator class="q-my-md"></q-separator>
+
+          <!-- 3-2. 메뉴판 사진 -->
+          <div class="image_upload row q-pb-md">
+            <div class="col-10 q-pl-xs">
+              <div class="column">
+                <div class="text-subtitle1">메뉴판 사진</div>
+                <div class="row justify-start">
+                  <img
+                    v-for="img in imagesMenu"
+                    :key="img.thumb"
+                    class="pic img-pic"
+                    :src="img.thumb"
+                    alt="썸네일 이미지"
+                  />
+                  <div
+                    v-if="imagesMenu.length < 1"
+                    class="text-caption text-grey"
+                  >
+                    ‧ 메뉴판이나 커피 메뉴 정보가 보이는 사진을 올려주세요.<br />‧
+                    본인이 직접 촬영하지 않은 사진<br />‧ 1000 * 1000 미만
+                    해상도의 사진은 통보없이 삭제될 수 있습니다.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-2 row justify-end items-end">
+              <label for="imgfile2">
+                <div class="pic btn-pic">
+                  <q-icon name="eva-camera-outline" size="sm"></q-icon>
+                  <span>{{ imagesMenu ? imagesMenu.length : 0 }}/5</span>
+                </div></label
+              >
+              <input
+                type="file"
+                id="imgfile2"
+                @change="handleChangeMenuImage"
+                accept=".png, .jpg, .jpeg"
+                multiple
+              />
+            </div>
+          </div>
         </section>
-      </div>
-    </section>
-    <section class="q-mb-xl">
-      <div class="justify-center cafe_description">
-        <span class="text-h6 cafe_description_title">카페 소개</span>
-        <textarea
-          v-model="cafe.cafe_description"
-          name="캬페소개"
-          cols="80"
-          rows="10"
-          class="cafe_description_textarea"
-          placeholder="카페를 소개해주세요"
-        ></textarea>
-      </div>
-    </section>
-    <section>
-      <div class="text-center">
+      </main>
+
+      <!-- 카페 등록 버튼 -->
+      <div class="q-mt-md q-my-xl flex flex-center">
         <btn-basic
-          @click="submitCafeInfo"
+          @click="postCafe"
+          size="lg"
           color="primary"
-          size="md"
-          label="카페 등록하기"
-          icon="note"
-          padding="10px 30px 10px 30px"
+          label="카페 등록"
+          icon="edit"
+          padding="6px 22px 6px 18px"
         />
       </div>
-    </section>
+    </div>
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
+
+// composables
+import useResize from 'src/composables/useResize'
+const { resizeImage, resizeImageSquare } = useResize()
+
 // import DateTimePicker from '../components/Etc/DateTimePicker.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import PostNumber from 'src/components/Etc/PostNumber.vue'
 import CardAddMenu from 'src/components/Card/CardAddMenu.vue'
-import ImageUpload from 'src/components/Etc/ImageUpload.vue'
+// import ImageUpload from 'src/components/Etc/ImageUpload.vue'
 
 export default defineComponent({
   name: 'AddNewCafePage',
   components: {
     BtnBasic,
     PostNumber,
-    CardAddMenu,
-    ImageUpload
+    CardAddMenu
+    // ImageUpload
     // DateTimePicker
   },
   data() {
     return {
+      cafeName: '',
+      cafeNameDuplicated: true,
       cafe: {
         cafe_name_pr: '',
         cafe_phone: '',
@@ -249,19 +316,39 @@ export default defineComponent({
         cafe_description: '',
         cafe_latitude: '',
         cafe_longitude: '',
-        cafe_res_time: '',
-        cafe_shutdown_time: '',
-        cafe_branch_name: '',
+        // cafe_res_time: '',
+        // cafe_shutdown_time: '',
+        // cafe_branch_name: '',
         cafe_post: '',
-        cafe_barista_info: ''
+        cafe_barista_info: '',
         // cafe_address_detail: '',
         // cafe_postalcode: '',
         // cafe_address_dong: '',
         // cafe_operation_time: '',
+        cafe_img: ''
       },
       cafe_address_detail: '',
+
+      imagesCafe: [],
+      imagesMenu: [],
       images: [],
-      menus: []
+      menus: [],
+      dense: true
+    }
+  },
+  watch: {
+    cafeName(val) {
+      console.log(val)
+    }
+  },
+  directives: {
+    number: {
+      mounted(el) {
+        el.addEventListener('input', () => {
+          // console.log(event.target.value)
+          event.target.value = event.target.value.replace(/[^0-9]/g, '')
+        })
+      }
     }
   },
   mounted() {
@@ -271,14 +358,99 @@ export default defineComponent({
     this.menus.push({ menu_id: idb, menu_type: 'va' })
   },
   methods: {
-    async verifyCafeName() {
+    handleClickAdress() {
+      this.$refs.daum.execDaumPostcode()
+    },
+
+    async handleChangeCafeImage(e) {
+      this.imagesCafe = []
+      const files = e.target.files
+      this.imageUpload(files, 'g')
+    },
+    async handleChangeMenuImage(e) {
+      this.imagesMenu = []
+      const files = e.target.files
+      this.imageUpload(files, 'm')
+    },
+    async imageUpload(files, type) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i]
+        let url = ''
+        let url_thumb = ''
+
+        const apiUrl = `${process.env.API}/upload/image`
+
+        // 1. 메인 이미지 업로드
+        resizeImage({ file: file, maxSize: 2000 })
+          .then((blob) => {
+            const formData = new FormData()
+            formData.append('image', blob)
+
+            this.$axios
+              .post(apiUrl, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+              })
+              .then((r) => {
+                // console.log(r.data)
+                url = r.data.filename
+
+                // 2. 썸네일 이미지 업로드
+                resizeImageSquare({ file: file, maxSize: 500, square: true })
+                  .then((blob_thumb) => {
+                    const formData = new FormData()
+                    formData.append('image', blob_thumb)
+
+                    this.$axios
+                      .post(apiUrl, formData, {
+                        headers: { 'Content-Type': 'multipart/form-data' }
+                      })
+                      .then((r) => {
+                        // console.log(r.data)
+                        url_thumb = r.data.url
+
+                        if (type === 'g') {
+                          this.imagesCafe.push({
+                            images_review_type: 'g',
+                            images_review_url: url,
+                            thumbnail_url: r.data.filename,
+                            thumb: url_thumb
+                          })
+                        } else if (type === 'm') {
+                          this.imagesMenu.push({
+                            images_review_type: 'm',
+                            images_review_url: url,
+                            thumbnail_url: r.data.filename,
+                            thumb: url_thumb
+                          })
+                        }
+                      })
+                      .catch((e) => {
+                        console.error(e)
+                      })
+                  })
+                  .catch((err) => {
+                    console.error(err)
+                  })
+              })
+              .catch((e) => {
+                console.error(e)
+              })
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+
+        // console.log(this.images)
+      }
+    },
+    verifyCafeName() {
       // let payload = {
       //   param: {
       //     cafe_name_pr: this.cafe.cafe_name_pr
       //   }
       // }
       // console.log(payload)
-      await this.$axios
+      this.$axios
         .post('http://localhost:3000/api/cafe/checkname', {
           param: {
             cafe_name_pr: this.cafe.cafe_name_pr
@@ -294,12 +466,12 @@ export default defineComponent({
         })
         .catch((err) => console.log(err))
     },
-    submitCafeInfo() {
+    postCafe() {
       // 카페 주소, 카페 상세 주소 문자열 병합
-      this.cafe.cafe_address =
-        this.cafe.cafe_address + ` ${this.cafe_address_detail}`
-      const cafe = { ...this.cafe }
-      console.log(cafe)
+      // this.cafe.cafe_address =
+      //   this.cafe.cafe_address + ` ${this.cafe_address_detail}`
+      // const cafe = { ...this.cafe }
+      // console.log(cafe)
 
       // 메뉴 등록하기
       const menus = []
@@ -308,15 +480,44 @@ export default defineComponent({
       }
 
       // 이미지 등록하기
-      const images = [...this.$refs.ImageUpload.images]
+      // const images = [...this.$refs.ImageUpload.images]
+      const images = []
+      if (this.imagesCafe.length) {
+        this.imagesCafe.forEach((img) => {
+          images.push(img)
+        })
+      }
+      if (this.imagesMenu.length) {
+        this.imagesMenu.forEach((img) => {
+          images.push(img)
+        })
+      }
+      // let cafe_img = ''
+      if (images.length) {
+        // cafe_img = images[0].thumbnail_url
+        this.cafe.cafe_img = images[0].thumbnail_url
+      }
 
       let payload = {
-        cafe: cafe,
+        cafe: {
+          cafe_name_pr: this.cafe.cafe_name_pr,
+          cafe_phone: this.cafe.cafe_phone,
+          cafe_address: `${this.cafe.cafe_address} ${this.cafe.cafe_region} ${this.cafe_address_detail}`,
+          cafe_region: this.cafe.cafe_region,
+          cafe_webpage: this.cafe.cafe_webpage,
+          cafe_description: this.cafe.cafe_description,
+          cafe_latitude: this.cafe.cafe_latitude,
+          cafe_longitude: this.cafe.cafe_longitude,
+          cafe_post: this.cafe.cafe_post,
+          cafe_barista_info: this.cafe.cafe_barista_info,
+          cafe_img: this.cafe.cafe_img
+        },
         menus: menus,
         images: images
       }
 
       console.log(payload)
+      return
 
       const apiUrl = `${process.env.API}/cafe`
       this.$axios
@@ -333,14 +534,14 @@ export default defineComponent({
         })
     },
     getPostData(payload) {
-      console.log('카페주소: ', payload)
+      // console.log('카페주소: ', payload)
       this.cafe.cafe_address = payload.address
       this.cafe.cafe_region = payload.extraAddress
       this.cafe.cafe_latitude = payload.latitude
       this.cafe.cafe_longitude = payload.longitude
       // this.cafe.cafe_address_dong = payload.extraAddress
       this.cafe.cafe_post = payload.postcode
-      console.log(this.cafe)
+      // console.log(this.cafe)
     },
     addBrewingMenu() {
       const id = this.menus.length + 1
@@ -368,71 +569,60 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-.q-my-xl {
-  margin-bottom: 0;
+.subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: $primary;
 }
-.constrain_sm {
-  padding-bottom: 50px;
+.subtitle2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: $primary;
 }
-.q-mt-md {
-  padding-bottom: 20px;
-}
-.section {
-  position: relative;
+.wrong {
+  border: 2px solid $red-4;
 
-  // border-bottom: 2px solid #ccc;
-  &:after {
-    content: '';
-    display: block;
-    width: 55px;
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    text-align: center;
+  border-radius: 6px;
+}
+.createpost {
+  .section_image_upload {
+    border: 1px solid $grey-5;
+    padding: 16px;
+    border-radius: $border-radius;
   }
-  .title {
-    font-weight: 500;
+  .image_upload {
+    height: 102px;
   }
-}
-.asterisk {
-  color: rgb(255, 136, 0);
-}
-
-.background {
-  // outline: 1px solid #ccc;
-  box-sizing: content-box;
-  .info-block {
-    display: flex;
-    justify-content: space-between;
-  }
-}
-
-.timepicker_title {
-  font-size: 1rem;
-}
-
-.cafe_description {
-  width: 80%;
-  position: relative;
-  margin: 0 auto;
-
-  .cafe_description_textarea {
-    width: 100%;
-    height: 200px;
-    box-sizing: border-box;
-    resize: none;
-    transition: border 0.5s;
-    &:focus {
-      border: 2px solid #7b3838;
+  .pic {
+    border: 1px solid $brown-5;
+    color: $brown-5;
+    border-radius: 4px;
+    width: 70px;
+    height: 70px;
+    margin: 0 4px 4px 0;
+    &.btn-pic {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 24px;
+      }
+      span {
+        font-size: 14px;
+      }
     }
   }
-
-  .cafe_description_title {
-    position: absolute;
-    top: -35px;
-    left: 0;
+  input[type='file'] {
+    visibility: hidden;
+    width: 0px;
   }
+}
+
+.asterisk {
+  color: $red-4;
+  padding-bottom: 3px;
 }
 
 @media (max-width: 800px) {

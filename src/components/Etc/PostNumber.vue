@@ -3,7 +3,8 @@
     size="md"
     label="주소 찾기"
     @click="execDaumPostcode"
-    color="primary"
+    color="brown-5"
+    :rounded="false"
     padding="10px 14px"
   />
 </template>
@@ -116,4 +117,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped></style>
