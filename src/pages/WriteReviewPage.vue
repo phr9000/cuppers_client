@@ -1,11 +1,13 @@
 <template>
   <q-page class="bg-grey-1">
-    <section class="column constrain_sm q-pa-md">
+    <div class="column constrain_sm q-pa-md">
       <!-- cafeId: {{ cafeId }} / uid: {{ uid }} -->
 
       <main class="createpost">
         <section class="keyword">
-          <div class="section_title q-mb-sm">방문하신 카페는 어땠나요?</div>
+          <div class="section_title text-h5 q-my-md">
+            방문하신 카페는 어땠나요?
+          </div>
           <div class="text-subtitle1 q-mb-sm">
             카페 키워드 <span class="text-primary">(중복 선택 가능)</span>
           </div>
@@ -56,13 +58,31 @@
               val="br"
               label="브루잉"
               color="primary"
-            />
+            >
+              <q-tooltip
+                anchor="top left"
+                self="bottom left"
+                class="bg-brown-5 text-body2"
+                :offset="[0, 0]"
+              >
+                드립커피, 필터커피 등
+              </q-tooltip></q-checkbox
+            >
             <q-checkbox
               v-model="selectedDrinkType"
               val="va"
               label="배리에이션"
               color="primary"
-            />
+            >
+              <q-tooltip
+                anchor="top left"
+                self="bottom left"
+                class="bg-brown-5 text-body2"
+                :offset="[0, 0]"
+              >
+                아메리카노, 카페라떼 등
+              </q-tooltip></q-checkbox
+            >
             <q-checkbox
               v-model="selectedDrinkType"
               checked-icon="star"
@@ -70,7 +90,16 @@
               val="sg"
               label="시그니처 메뉴"
               color="secondary"
-            />
+            >
+              <q-tooltip
+                anchor="top left"
+                self="bottom left"
+                class="bg-secondary text-body2"
+                :offset="[0, 0]"
+              >
+                시그니처 메뉴였나요?
+              </q-tooltip></q-checkbox
+            >
           </div>
           <div class="q-mb-sm q-px-sm">
             <q-input
@@ -123,11 +152,7 @@
             <div class="col-2 row justify-end items-end">
               <label for="imgfile1">
                 <div class="pic btn-pic">
-                  <img
-                    class="icon"
-                    src="/icons/camera-fill.svg"
-                    alt="bell-icon"
-                  />
+                  <q-icon name="eva-camera-outline" size="sm"></q-icon>
                   <span>{{ imagesCafe ? imagesCafe.length : 0 }}/5</span>
                 </div></label
               >
@@ -172,11 +197,7 @@
             <div class="col-2 row justify-end items-end">
               <label for="imgfile2">
                 <div class="pic btn-pic">
-                  <img
-                    class="icon"
-                    src="/icons/camera-fill.svg"
-                    alt="bell-icon"
-                  />
+                  <q-icon name="eva-camera-outline" size="sm"></q-icon>
                   <span>{{ imagesMenu ? imagesMenu.length : 0 }}/5</span>
                 </div></label
               >
@@ -213,7 +234,7 @@
       <div v-show="false" class="q-px-sm">
         커피의 종류: <strong>{{ review.drink_type }}</strong>
       </div>
-    </section>
+    </div>
   </q-page>
 </template>
 
@@ -568,7 +589,8 @@ export default defineComponent({
     height: 102px;
   }
   .pic {
-    border: 1px solid $grey;
+    border: 1px solid $brown-5;
+    color: $brown-5;
     border-radius: 4px;
     width: 70px;
     height: 70px;
