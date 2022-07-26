@@ -30,7 +30,7 @@ const routes = [
         meta: { requiresAuth: true }
       },
       { path: 'req', component: () => import('pages/ReqNewCafePage.vue') },
-      { path: 'create', component: () => import('pages/AddNewCafePage.vue') }
+      { path: 'create', component: () => import('pages/CreateCafePage.vue') }
     ]
   },
   {
