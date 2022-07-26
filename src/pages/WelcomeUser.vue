@@ -3,7 +3,7 @@
     <div class="user-info-container">
       <!-- user thumbnail -->
       <div class="pic">
-        <img :src="thumnail" alt="" />
+        <img :src="user.thumbUrl" alt="" />
       </div>
       <!-- user nickname -->
       <div class="user-name">
@@ -52,11 +52,13 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 export default {
   setup() {
-    // this.user.uid 로 호출 get 받기
     const $store = useStore()
 
     const user = computed({
-      get: () => $store.state.auth.user
+      get: () => $store.state.auth.user,
+      set: (val) => {
+        $store.commit('auth/setUser', val)
+      }
     })
 
     return {
@@ -65,12 +67,12 @@ export default {
   },
   data() {
     return {
-      userId: null,
+      // userId: null,
       userInfo: {
         nickname: '',
         introduce: ''
       },
-      thumnail: '',
+      // thumnail: '',
       typeValue: '',
       typeStatus: false,
       typeArray: [
@@ -87,17 +89,17 @@ export default {
     }
   },
   methods: {
-    getUserInfo(userId) {
-      let apiUrl = `http://localhost:3000/api/user/detail/${userId}`
-      this.$axios
-        .get(apiUrl)
-        .then((result) => {
-          this.thumnail = result.data[0].user_thumbnail_url
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
+    // getUserInfo(userId) {
+    //   let apiUrl = `http://localhost:3000/api/user/detail/${userId}`
+    //   this.$axios
+    //     .get(apiUrl)
+    //     .then((result) => {
+    //       this.thumnail = result.data[0].user_thumbnail_url
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // },
     typeText() {
       if (this.charIndex < this.typeArray[this.typeArrayIndex].length) {
         if (!this.typeStatus) this.typeStatus = true
@@ -135,13 +137,40 @@ export default {
       this.$axios
         .post('http://localhost:3000/api/user/nickname', {
           param: {
-            user_id: this.userId,
+            user_id: this.user.uid,
             user_nickname: this.userInfo.nickname,
             user_introduce: this.userInfo.introduce
           }
         })
         .then((response) => {
-          console.log(response)
+          if (response.statusText === 'OK' && response.data.isNew == 1) {
+            console.log(response)
+            this.user = {
+              uid: this.user.uid,
+              nickname: response.data.user_nickname,
+              thumbUrl: this.user.thumbUrl
+            }
+
+            this.$q.notify({
+              position: 'top',
+              timeout: 1000,
+              message: '성공적으로 등록 되었습니다',
+              color: 'primary'
+            })
+            this.$router.push({
+              path: `/welcome/survey`
+              // path: `/welcome/survey/${this.userId}`,
+              // params: { id: `${this.userId}` }
+            })
+          } else {
+            console.log('닉네임 중복입니다.')
+            this.$q.notify({
+              position: 'top',
+              timeout: 1000,
+              message: '닉네임 중복입니다. 다른 닉네임으로 입력해주세요.',
+              color: 'primary'
+            })
+          }
         })
         .catch((ex) => {
           this.$q.notify({
@@ -149,11 +178,12 @@ export default {
             timeout: 1000,
             message: '아이디를 등록하는데 문제가 생겼습니다.',
             color: 'primary'
-          }),
-            console.log(ex)
+          })
+          console.log(ex)
         })
+      return false
     },
-    goToSurvey(userId) {
+    goToSurvey() {
       if (
         this.userInfo.nickname === '' ||
         this.userInfo.nickname === null ||
@@ -164,21 +194,11 @@ export default {
           timeout: 1000,
           message: '닉네임을 입력해주세요',
           color: 'primary'
-        }),
-          this.$refs.nickname.focus()
+        })
+        this.$refs.nickname.focus()
         return false
       } else {
         this.checkNickName()
-        this.$q.notify({
-          position: 'top',
-          timeout: 1000,
-          message: '성공적으로 등록 되었습니다',
-          color: 'primary'
-        })
-        this.$router.push({
-          path: `/welcome/survey/${this.userId}`,
-          params: { id: `${this.userId}` }
-        })
       }
     },
     nicknameFocus() {
@@ -188,9 +208,10 @@ export default {
   created() {
     setTimeout(this.typeText, this.newTextDelay + 200)
     // 파라미터로 받아온 id
-    this.userId = this.$route.params.id
-    console.log(this.userId)
-    this.getUserInfo(this.userId)
+    // this.userId = this.$route.params.id
+    // console.log(this.userId)
+    // this.getUserInfo(this.userId)
+    // console.log(this.user)
   },
   mounted() {
     this.nicknameFocus()

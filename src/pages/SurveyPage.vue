@@ -1,10 +1,17 @@
 <template>
-  <q-page class="bg-grey-1">
+  <q-page class="bg-grey-1 q-py-lg">
     <div class="form_survey_container constrain_sm q-px-md">
       <div class="title">
-        <h4 class="q-pt-xl">선호하는 커피취향</h4>
+        <h4 class="text-center q-pt-xl">취향을 등록해주세요.</h4>
+        <h5 class="text-center q-pt-xs text-grey">
+          <span class="text-brown-4">{{ user.nickname }}</span
+          >님에게 맞는 카페를 찾아드립니다~💖
+        </h5>
       </div>
-      <h6>좋아하는 커피의 특징 (중복 선택 가능)</h6>
+      <h6>
+        ☕ 좋아하는 커피의 특징
+        <span class="text-brown-4">(중복 선택 가능)</span>
+      </h6>
       <div class="row justify-start">
         <survey-select
           class="q-ma-xs"
@@ -20,7 +27,10 @@
         />
       </div>
 
-      <h6>좋아하는 추출 방식 (중복 선택 가능)</h6>
+      <h6>
+        💧 좋아하는 추출 방식
+        <span class="text-brown-4">(중복 선택 가능)</span>
+      </h6>
       <div class="row justify-start">
         <survey-select
           class="q-ma-xs"
@@ -36,7 +46,9 @@
         />
       </div>
 
-      <h6>좋아하는 카페 (중복 선택 가능)</h6>
+      <h6>
+        🪑 좋아하는 카페 <span class="text-brown-4">(중복 선택 가능)</span>
+      </h6>
       <div class="row justify-start">
         <survey-select
           class="q-ma-xs"
@@ -59,11 +71,11 @@
       <div class="flex flex-center q-py-xl">
         <btn-basic-right
           @click="submitSurvey"
-          color="primary"
-          label="sign up"
+          color="brown"
+          label="가입 완료 !"
           icon="account_circle"
           size="lg"
-          padding="2px 10px 2px 15px"
+          padding="2px 15px 2px 20px"
         />
       </div>
     </div>
@@ -71,12 +83,13 @@
 </template>
 
 <script>
-import SurveySelect from 'src/components/Etc/SurveySelect.vue'
-import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import SurveySelect from 'src/components/Etc/SurveySelect.vue'
+import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 
 export default {
+  name: 'SurveyPage',
   components: { SurveySelect, BtnBasicRight },
   setup() {
     const $store = useStore()
@@ -99,30 +112,24 @@ export default {
       cafeKeywords: [],
       selectedCoffeeKeywords: [],
       selectedBrewingKeywords: [],
-      selectedCafeKeywords: [],
-      selectedAll: [],
-      uid: 0,
-      userId: '',
-      thumbnail: ''
+      selectedCafeKeywords: []
+      // selectedAll: []
     }
   },
   created() {
-    // 파라미터로 넘어온 userId
-    this.userId = this.$route.params.id
-    this.getUserInfo(this.userId)
     // let apiUrl = `${process.env.API_LOCAL}/serveyKeywords` // json-/server
     let apiUrl = `${process.env.API}/keyword/survey` // real-server
     this.$axios
       .get(apiUrl)
       .then((result) => {
-        console.log(result.data)
+        // console.log(result.data)
         this.coffeeKeywords = result.data.filter((item) => {
           return item.keyword_type === 'coffee'
         })
         this.brewingKeywords = result.data.filter((item) => {
           return item.keyword_type === 'brewing'
         })
-        console.log(this.brewingKeywords)
+        // console.log(this.brewingKeywords)
         this.cafeKeywords = result.data.filter((item) => {
           return item.keyword_type === 'cafe'
         })
@@ -163,39 +170,41 @@ export default {
         return item !== id
       })
     },
-    getUserInfo(userId) {
-      let apiUrl = `http://localhost:3000/api/user/detail/${this.userId}`
+    submitSurvey() {
+      const selectedAll = this.selectedCoffeeKeywords
+        .concat(this.selectedBrewingKeywords)
+        .concat(this.selectedCafeKeywords)
+      console.log('submit: ', selectedAll)
+
+      // 가입 서베이 등록
+      // request 시 body 내용
+      // {
+      //     "param":[1, 2, 3], // user가 선택한 keywords 배열
+      //     "user_id": 2 // uid
+      // }
+      let apiUrl = `${process.env.API}/user/register/survey`
       this.$axios
-        .get(apiUrl)
+        .post(apiUrl, {
+          param: selectedAll,
+          user_id: this.user.uid
+        })
         .then((result) => {
-          this.thumbnail = result.data[0].user_thumbnail_url
-          if (userThumbnail && userThumbnail.startsWith('images/')) {
-            userThumbnail = `${process.env.STATIC}/${userThumbnail}`
+          if (result.statusText === 'OK') {
+            console.log(result)
+
+            if (result.data.insertId > 0) {
+              this.$q.notify({
+                position: 'top',
+                timeout: 5000,
+                message: `🎆😺 ${this.user.nickname}님의 가입을 환영합니다! 😺🎉`,
+                color: 'primary'
+              })
+              this.$router.push('/')
+            }
           }
         })
         .catch((err) => {
           console.log(err)
-        })
-    },
-    submitSurvey() {
-      this.selectedAll = this.selectedCoffeeKeywords
-        .concat(this.selectedBrewingKeywords)
-        .concat(this.selectedCafeKeywords)
-      console.log('submit: ', this.selectedAll)
-      // 성공 시 uid localstorage에 저장
-      this.user = {
-        uid: this.userId,
-        thumbUrl: this.thumbnail
-      }
-      this.$router.push({
-        path: `/`
-      })
-      this.getUserInfo(),
-        this.$q.notify({
-          position: 'top',
-          timeout: 1000,
-          message: '성공적으로 회원가입이 되었습니다',
-          color: 'primary'
         })
     }
   }
@@ -203,7 +212,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h4 {
-  margin: 0;
+.form_survey_container {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 5px 3px 7px -3px;
+  border-radius: 23px;
+  @media (max-width: 962px) {
+    box-shadow: none;
+    border-radius: none;
+  }
+
+  h4,
+  h5 {
+    margin: 0;
+  }
+  h6 {
+    margin: 15px 4px;
+  }
 }
 </style>

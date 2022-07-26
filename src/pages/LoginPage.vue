@@ -87,8 +87,7 @@ export default defineComponent({
   },
   data() {
     return {
-      uid: 0,
-      userId: ''
+      uid: 0 // 테스트 input feild용 uid
     }
   },
   created() {
@@ -116,6 +115,7 @@ export default defineComponent({
     },
     async kLogin(kakao_account) {
       console.log(kakao_account)
+
       await this.$axios
         .post('http://localhost:3000/api/user/login', {
           param: {
@@ -126,38 +126,49 @@ export default defineComponent({
         })
         .then((response) => {
           const isNew = response.data.isNew
-          const userId = response.data.user_id
-          let userThumbnail = response.data.user_thumbnail_url
-          if (userThumbnail && userThumbnail.startsWith('images/')) {
-            userThumbnail = `${process.env.STATIC}/${userThumbnail}`
-          }
+
           if (isNew == 0) {
-            console.log(userId)
+            const userId = response.data.user_id
+            const userNickname = response.data.user_nickname
+            let userThumbnail = response.data.user_thumbnail_url
+            if (userThumbnail && userThumbnail.startsWith('images/')) {
+              userThumbnail = `${process.env.STATIC}/${userThumbnail}`
+            }
+            console.log(response.data)
+
+            this.user = {
+              uid: userId,
+              nickname: userNickname,
+              thumbUrl: userThumbnail
+            }
+
             this.$q.notify({
               position: 'top',
               timeout: 1000,
               message: '로그인 되었습니다😸',
               color: 'primary'
             })
-            this.user = {
-              uid: userId,
-              thumbUrl: userThumbnail
-            }
+
             this.$router.push({
               path: `/`
             })
           } else {
-            const userId = response.data.insertId
+            this.user = {
+              uid: response.data.insertId,
+              nickname: kakao_account.profile.nickname,
+              thumbUrl: kakao_account.profile.profile_image_url
+            }
+
             this.$q.notify({
               position: 'top',
               timeout: 1000,
               message: ' 커퍼즈 회원이 아닙니다. 회원가입먼저 진행해주세요🙏',
               color: 'primary'
-            }),
-              this.$router.push({
-                path: `/welcome/${userId}`,
-                params: { id: `${userId}` }
-              })
+            })
+
+            this.$router.push({
+              path: `/welcome`
+            })
           }
         })
         .catch((ex) => {
