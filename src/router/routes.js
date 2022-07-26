@@ -37,8 +37,16 @@ const routes = [
     path: '/welcome',
     component: () => import('layouts/BasicLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/WelcomeUser.vue') },
-      { path: 'survey', component: () => import('pages/SurveyPage.vue') }
+      {
+        path: '',
+        component: () => import('pages/WelcomeUser.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'survey',
+        component: () => import('pages/SurveyPage.vue'),
+        meta: { requiresAuth: true }
+      }
     ]
   },
   {
