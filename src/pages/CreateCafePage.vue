@@ -26,7 +26,7 @@
               placeholder="카페 이름을 입력해주세요"
               outlined
               :dense="dense"
-              debounce="500"
+              @blur="checkCafeName"
             />
           </div>
           <div v-if="cafeNameDuplicated" class="q-pl-xs q-mb-sm text-red-5">
@@ -92,6 +92,16 @@
               v-number
             />
           </div>
+          <!-- 이메일 -->
+          <div class="q-mb-sm">
+            <q-input
+              label="이메일"
+              v-model="cafe.cafe_email"
+              placeholder="sample@cuppers.com"
+              stack-label
+              outlined
+            />
+          </div>
           <!-- 웹사이트 -->
           <div class="q-mb-sm">
             <q-input
@@ -125,7 +135,59 @@
           </div>
         </section>
 
-        <!-- 2. 커피 메뉴 -->
+        <!-- 2. 영업 시간 -->
+        <section class="q-pt-lg">
+          <div class="q-py-sm row justify-between items-center">
+            <div class="section_title text-h5">영업 시간</div>
+            <btn-basic
+              @click="addOpTime"
+              size="md"
+              label="항목 추가"
+              color="brown-5"
+              icon="add"
+              :rounded="false"
+            />
+          </div>
+
+          <!-- 영업 시간 리스트 -->
+          <div v-if="opTime.length">
+            <div v-for="(ot, i) in opTime" :key="i" class="q-mb-sm row">
+              <div class="row" style="width: 93%">
+                <div class="col-6 col-sm-6">
+                  <q-input
+                    class="q-mr-xs"
+                    v-model="ot.day"
+                    placeholder="월,화,수,목,금"
+                    stack-label
+                    outlined
+                    :dense="dense"
+                  />
+                </div>
+                <div class="col-6 col-sm-6">
+                  <q-input
+                    placeholder="09:00 ~ 21:00"
+                    v-model="ot.time"
+                    stack-label
+                    outlined
+                    :dense="dense"
+                  />
+                </div>
+              </div>
+              <div style="width: 7%" class="flex flex-center">
+                <btn-icon
+                  class="btn_del"
+                  @click="delOpTIme(i)"
+                  color="red-4"
+                  size="md"
+                  icon="close"
+                  :flat="true"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. 커피 메뉴 -->
         <section class="q-pt-lg">
           <div class="section_title text-h5">커피 메뉴</div>
 
@@ -283,57 +345,71 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 // composables
 import useResize from 'src/composables/useResize'
 const { resizeImage, resizeImageSquare } = useResize()
 
-// import DateTimePicker from '../components/Etc/DateTimePicker.vue'
 import BtnBasic from 'src/components/Button/BtnBasic.vue'
+import BtnIcon from 'src/components/Button/BtnIcon.vue'
 import PostNumber from 'src/components/Etc/PostNumber.vue'
 import CardAddMenu from 'src/components/Card/CardAddMenu.vue'
-// import ImageUpload from 'src/components/Etc/ImageUpload.vue'
 
 export default defineComponent({
-  name: 'AddNewCafePage',
+  name: 'CreateCafePage',
   components: {
     BtnBasic,
+    BtnIcon,
     PostNumber,
     CardAddMenu
-    // ImageUpload
-    // DateTimePicker
+  },
+  setup() {
+    const $store = useStore()
+
+    const uid = computed({
+      get: () => $store.state.auth.user.uid
+    })
+
+    return {
+      uid
+    }
   },
   data() {
     return {
+      dense: true,
       cafeName: '',
-      cafeNameDuplicated: true,
+      cafeNameDuplicated: false,
+      cafe_address_detail: '',
       cafe: {
         cafe_name_pr: '',
-        cafe_phone: '',
         cafe_address: '',
         cafe_region: '',
+        cafe_post: '',
+        cafe_phone: '',
+        cafe_email: '',
         cafe_webpage: '',
         cafe_description: '',
         cafe_latitude: '',
         cafe_longitude: '',
-        // cafe_res_time: '',
-        // cafe_shutdown_time: '',
-        // cafe_branch_name: '',
-        cafe_post: '',
         cafe_barista_info: '',
-        // cafe_address_detail: '',
-        // cafe_postalcode: '',
-        // cafe_address_dong: '',
-        // cafe_operation_time: '',
         cafe_img: ''
       },
-      cafe_address_detail: '',
-
-      imagesCafe: [],
-      imagesMenu: [],
+      opTime: [
+        {
+          day: '월,화,수,목,금',
+          time: '09:00 ~ 22:00'
+        },
+        {
+          day: '토,일,공휴일',
+          time: '10:00 ~ 21:00'
+        }
+      ],
       images: [],
       menus: [],
-      dense: true
+      imagesCafe: [],
+      imagesMenu: []
     }
   },
   watch: {
@@ -358,8 +434,50 @@ export default defineComponent({
     this.menus.push({ menu_id: idb, menu_type: 'va' })
   },
   methods: {
+    checkCafeName() {
+      // let payload = {
+      //   param: {
+      //     cafe_name_pr: this.cafe.cafe_name_pr
+      //   }
+      // }
+      // console.log(payload)
+      if (this.cafeName !== '') {
+        this.$axios
+          .post('http://localhost:3000/api/cafe/checkname', {
+            param: {
+              cafe_name_pr: this.cafeName
+            }
+          })
+          .then((response) => {
+            console.log(response.data)
+            if (response.data.isAvailable == 1) {
+              console.log('사용할 수 있는 카페 이름입니다')
+              this.cafeNameDuplicated = false
+            } else {
+              this.cafeNameDuplicated = true
+            }
+          })
+          .catch((err) => console.log(err))
+      }
+    },
     handleClickAdress() {
       this.$refs.daum.execDaumPostcode()
+    },
+    addOpTime() {
+      this.opTime.push({
+        day: '',
+        time: ''
+      })
+    },
+    delOpTIme(i) {
+      console.log(i)
+
+      this.opTime.splice(i, 1)
+      // const index = this.opTime.indexOf(i)
+      // console.log(index)
+      // if (index > -1) {
+      //   console.log(i)
+      // }
     },
 
     async handleChangeCafeImage(e) {
@@ -443,29 +561,6 @@ export default defineComponent({
         // console.log(this.images)
       }
     },
-    verifyCafeName() {
-      // let payload = {
-      //   param: {
-      //     cafe_name_pr: this.cafe.cafe_name_pr
-      //   }
-      // }
-      // console.log(payload)
-      this.$axios
-        .post('http://localhost:3000/api/cafe/checkname', {
-          param: {
-            cafe_name_pr: this.cafe.cafe_name_pr
-          }
-        })
-        .then((response) => {
-          console.log(response.data)
-          if (response.data.isAvailable == 1) {
-            console.log('사용할 수 있는 카페 이름입니다')
-          } else {
-            alert('이미 등록된 카페입니다')
-          }
-        })
-        .catch((err) => console.log(err))
-    },
     postCafe() {
       // 카페 주소, 카페 상세 주소 문자열 병합
       // this.cafe.cafe_address =
@@ -510,7 +605,9 @@ export default defineComponent({
           cafe_longitude: this.cafe.cafe_longitude,
           cafe_post: this.cafe.cafe_post,
           cafe_barista_info: this.cafe.cafe_barista_info,
-          cafe_img: this.cafe.cafe_img
+          cafe_img: this.cafe.cafe_img,
+          cafe_email: '',
+          user_id: this.uid // 등록한 사람
         },
         menus: menus,
         images: images
@@ -580,9 +677,10 @@ export default defineComponent({
   color: $primary;
 }
 .wrong {
-  border: 2px solid $red-4;
-
-  border-radius: 6px;
+  :deep(.q-field__inner) {
+    border: 2px solid $red-4;
+    border-radius: 6px;
+  }
 }
 .createpost {
   .section_image_upload {

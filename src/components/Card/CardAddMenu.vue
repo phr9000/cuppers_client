@@ -18,11 +18,6 @@
         dense
       />
       <div class="col-10 col-sm-4 signature">
-        <!-- Signature Menu 선택 -->
-        <!-- <q-checkbox v-model="new_menu.is_signature" size="20px"
-          ><span class="q-px-md">Signature</span></q-checkbox
-        > -->
-
         <q-checkbox
           class=""
           v-model="new_menu.is_signature"
@@ -37,25 +32,25 @@
     <!-- 음료 가격 -->
     <div class="row justify-between items-center q-py-xs">
       <div class="col-12 col-sm-6 row items-center">
-        <q-icon class="q-mr-sm" size="xs" name="img:/icons/hot.png" />
         <q-input
           class="drink_price"
           v-model="new_menu.menu_price_hot"
-          placeholder="음료 가격(HOT)"
+          placeholder="☕️ 음료 가격(HOT)"
           type="text"
           dense
           v-number
         />
+        <q-icon class="q-mr-sm" size="xs" name="img:/icons/hot.png" />
       </div>
       <div class="col-12 col-sm-6 row items-center">
-        <q-icon class="q-mr-sm" size="xs" name="img:/icons/ice.png" />
         <q-input
           class="drink_price"
           v-model="new_menu.menu_price_ice"
-          placeholder="음료 가격(ICE)"
+          placeholder="🧊 음료 가격(ICE)"
           dense
           v-number
         />
+        <q-icon class="q-mr-sm" size="xs" name="img:/icons/ice.png" />
       </div>
     </div>
 
@@ -116,7 +111,6 @@ export default {
     // changePrice(e) {
     //   this.new_menu.menu_price_hot += 500
     // },
-
     // 부모 컴포넌트 AddNewCafePage의 메뉴 추가 버튼과 연결된 메소드
     sendMenu() {
       this.new_menu.menu_type = this.menu_type
@@ -132,16 +126,7 @@ export default {
 .addcard {
   border: 1px solid $grey-5;
   margin-bottom: 8px;
-  // box-sizing: content-box;
-  // border-radius: 15px;
-  // .clear {
-  //   border: 1px solid $red;
-  //   box-sizing: content-box;
-  //   border-radius: 50%;
-  // }
-  // .clear:hover {
-  //   cursor: pointer;
-  // }
+
   .btn_del {
     position: absolute;
     top: 4px;
@@ -163,10 +148,6 @@ export default {
     :deep(input) {
       padding-left: 10px;
     }
-
-    // @media (max-width: $breakpoint-sm-max) {
-    // padding-right: 30px;
-    // }
   }
   .drink_price {
     width: 80%;
