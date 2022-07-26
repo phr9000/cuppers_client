@@ -42,28 +42,33 @@ export default route(function ({ store } /* { store, ssrContext } */) {
           record.meta.requiresAuth && !store.getters['auth/isLoggedIn']
       )
     ) {
-      Notify.create({
-        position: 'top',
-        timeout: 5000,
-        message: '로그인이 필요합니다. 로그인 하시겠습니까?',
-        color: 'primary',
-        actions: [
-          {
-            label: '로그인',
-            color: 'yellow',
-            handler: () => {
-              next({
-                path: '/login'
-              })
+      // 마이페이지 접근시 로그인 안되어있으면 바로 login page로 이동
+      if (to.path === '/my') {
+        next('/login')
+      } else {
+        Notify.create({
+          position: 'top',
+          timeout: 5000,
+          message: '로그인이 필요합니다. 로그인 하시겠습니까?',
+          color: 'primary',
+          actions: [
+            {
+              label: '로그인',
+              color: 'yellow',
+              handler: () => {
+                next({
+                  path: '/login'
+                })
+              }
+            },
+            {
+              label: '나중에',
+              color: 'grey',
+              handler: () => {}
             }
-          },
-          {
-            label: '나중에',
-            color: 'grey',
-            handler: () => {}
-          }
-        ]
-      })
+          ]
+        })
+      }
     } else {
       next()
     }
