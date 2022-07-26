@@ -87,7 +87,8 @@ export default defineComponent({
   },
   data() {
     return {
-      uid: 0
+      uid: 0,
+      userId: ''
     }
   },
   created() {
@@ -131,21 +132,22 @@ export default defineComponent({
             userThumbnail = `${process.env.STATIC}/${userThumbnail}`
           }
           if (isNew == 0) {
+            console.log(userId)
             this.$q.notify({
               position: 'top',
               timeout: 1000,
               message: '로그인 되었습니다😸',
               color: 'primary'
             })
-            const uid = parseInt(userId)
             this.user = {
-              uid: uid,
+              uid: userId,
               thumbUrl: userThumbnail
             }
             this.$router.push({
               path: `/`
             })
           } else {
+            const userId = response.data.insertId
             this.$q.notify({
               position: 'top',
               timeout: 1000,
@@ -153,8 +155,8 @@ export default defineComponent({
               color: 'primary'
             }),
               this.$router.push({
-                path: `/welcome`
-                // params: { id: `${this.userId}` }
+                path: `/welcome/${userId}`,
+                params: { id: `${userId}` }
               })
           }
         })

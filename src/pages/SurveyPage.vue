@@ -73,9 +73,25 @@
 <script>
 import SurveySelect from 'src/components/Etc/SurveySelect.vue'
 import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   components: { SurveySelect, BtnBasicRight },
+  setup() {
+    const $store = useStore()
+
+    const user = computed({
+      get: () => $store.state.auth.user,
+      set: (val) => {
+        $store.commit('auth/setUser', val)
+      }
+    })
+
+    return {
+      user
+    }
+  },
   data() {
     return {
       coffeeKeywords: [],
@@ -84,10 +100,16 @@ export default {
       selectedCoffeeKeywords: [],
       selectedBrewingKeywords: [],
       selectedCafeKeywords: [],
-      selectedAll: []
+      selectedAll: [],
+      uid: 0,
+      userId: '',
+      thumbnail: ''
     }
   },
   created() {
+    // 파라미터로 넘어온 userId
+    this.userId = this.$route.params.id
+    this.getUserInfo(this.userId)
     // let apiUrl = `${process.env.API_LOCAL}/serveyKeywords` // json-/server
     let apiUrl = `${process.env.API}/keyword/survey` // real-server
     this.$axios
@@ -141,11 +163,40 @@ export default {
         return item !== id
       })
     },
+    getUserInfo(userId) {
+      let apiUrl = `http://localhost:3000/api/user/detail/${this.userId}`
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          this.thumbnail = result.data[0].user_thumbnail_url
+          if (userThumbnail && userThumbnail.startsWith('images/')) {
+            userThumbnail = `${process.env.STATIC}/${userThumbnail}`
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     submitSurvey() {
       this.selectedAll = this.selectedCoffeeKeywords
         .concat(this.selectedBrewingKeywords)
         .concat(this.selectedCafeKeywords)
       console.log('submit: ', this.selectedAll)
+      // 성공 시 uid localstorage에 저장
+      this.user = {
+        uid: this.userId,
+        thumbUrl: this.thumbnail
+      }
+      this.$router.push({
+        path: `/`
+      })
+      this.getUserInfo(),
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '성공적으로 회원가입이 되었습니다',
+          color: 'primary'
+        })
     }
   }
 }
