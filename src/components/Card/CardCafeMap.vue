@@ -8,10 +8,18 @@
       class="btn_close"
       icon="close"
     />
-    <q-img class="border-rad" :ratio="16 / 9" :src="cafe.cafe_img" />
+    <q-img
+      @click="goDetail"
+      class="cafe_img border-rad"
+      :ratio="16 / 9"
+      :src="cafe.cafe_img"
+    />
 
     <q-card-section class="title_wrap">
-      <div class="row justify-between items-start no-wrap q-mb-xs">
+      <div
+        @click="goDetail"
+        class="cafe_title row justify-between items-start no-wrap q-mb-xs"
+      >
         <div class="row items-center">
           <div class="title text-left text-h6 q-mr-sm">
             {{ cafe.cafe_name_pr }}
@@ -39,7 +47,7 @@
             :review_cnt="cafe.review_cnt"
           />
         </div>
-        <div class="">
+        <!-- <div class="">
           <btn-basic-right
             @click="goDetail"
             class="btn_detail bg-grey-2"
@@ -49,7 +57,7 @@
             label="상세보기"
             padding="4px 8px"
           />
-        </div>
+        </div> -->
       </div>
       <div
         v-if="cafe.cafe_description"
@@ -156,7 +164,6 @@ import { defineComponent } from 'vue'
 import BtnIcon from 'src/components/Button/BtnIcon.vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
-import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import CafeType from 'src/components/Etc/CafeType.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
@@ -168,7 +175,6 @@ export default defineComponent({
     BtnIcon,
     BtnLike,
     BtnReview,
-    BtnBasicRight,
     BadgeCafe,
     CafeType,
     MenuItem,
@@ -225,6 +231,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 .card_cafe {
   width: 100%;
+  .cafe_img,
+  .cafe_title {
+    cursor: pointer;
+  }
   .btn_close {
     position: absolute;
     top: 0px;

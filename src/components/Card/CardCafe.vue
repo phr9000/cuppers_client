@@ -1,7 +1,7 @@
 <template>
   <!-- 카페카드 (커핑노트) -->
   <q-card v-if="cafe" class="card_cafe row overflow-hidden">
-    <div class="col-5 q-pl-md q-py-md">
+    <div @click="goDetail" class="cafe_img col-5 q-pl-md q-py-md">
       <q-img
         height="184px"
         class="thumbnail"
@@ -13,7 +13,7 @@
     <div class="col-7 column justify-between">
       <q-card-section class="title_wrap">
         <div class="row justify-between items-start q-mb-xs">
-          <div class="row items-center">
+          <div @click="goDetail" class="cafe_title row items-center">
             <div class="title text-left text-h6">
               {{ cafe.cafe_name_pr }}
             </div>
@@ -23,7 +23,7 @@
               :cafe_region="cafe.cafe_region"
             />
           </div>
-
+          <!-- 
           <div class="btn_detail">
             <btn-basic-right
               @click="goDetail"
@@ -34,7 +34,7 @@
               label="상세보기"
               padding="4px 8px "
             />
-          </div>
+          </div> -->
         </div>
         <div class="row justify-start items-center no-wrap q-mb-xs">
           <btn-like
@@ -101,7 +101,6 @@
 import { defineComponent } from 'vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
-import BtnBasicRight from 'src/components/Button/BtnBasicRight.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import CafeType from 'src/components/Etc/CafeType.vue'
 
@@ -110,7 +109,6 @@ export default defineComponent({
   components: {
     BtnLike,
     BtnReview,
-    BtnBasicRight,
     BadgeCafe,
     CafeType
   },
@@ -141,6 +139,11 @@ export default defineComponent({
   width: 100%;
   min-width: 500px;
   max-width: 900px;
+
+  .cafe_img,
+  .cafe_title {
+    cursor: pointer;
+  }
   .thumbnail {
     border-radius: $border-radius;
     max-height: 268px;
