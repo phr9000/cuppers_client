@@ -4,7 +4,7 @@
       <btn-avatar :url="review.user_thumbnail_url" />
       <div class="q-ml-sm user_name">{{ review.user_nickname }}</div>
     </div>
-    <q-card class="card_review" bordered flat>
+    <q-card class="card_review" :bordered="bordered" :flat="flat">
       <q-card-section class="cafe_info row items-center justify-between">
         <div @click="cafeNameClick" class="text-h5 cafe_name q-mb-xs q-mr-xs">
           {{ review.cafe_name_pr }}
@@ -101,6 +101,14 @@ export default defineComponent({
       default: () => {
         return null
       }
+    },
+    bordered: {
+      type: Boolean,
+      default: true
+    },
+    flat: {
+      type: Boolean,
+      default: true
     }
   },
   setup() {
@@ -173,8 +181,8 @@ export default defineComponent({
   mounted() {},
   methods: {
     clickCafeName() {
-      console.log(this.review.review_images)
-      // this.$router.push({ path: `/cafe/${this.review.cafe_id}` })
+      // console.log(this.review.review_images)
+      this.$router.push({ path: `/cafe/${this.review.cafe_id}` })
     },
     clickThumbnail() {
       this.showModal = true
@@ -215,13 +223,21 @@ export default defineComponent({
     display: grid;
     grid-template-columns: 1fr 200px;
 
-    @media (max-width: 962px) {
+    @media (max-width: $breakpoint-md-max) {
       grid-template-columns: 1fr 160px;
     }
+    // @media (max-width: $breakpoint-sm-max) {
+    //   grid-template-columns: 1fr 120px;
+    // }
 
     .caption {
-      max-height: 100px;
-      overflow-y: auto;
+      // max-height: 100px;
+      // overflow-y: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 7;
+      -webkit-box-orient: vertical;
     }
     .review_image {
       border-radius: 4px;
@@ -250,9 +266,12 @@ export default defineComponent({
   border-radius: $border-radius;
   max-height: 200px;
 
-  @media (max-width: 962px) {
+  @media (max-width: $breakpoint-md-max) {
     max-height: 160px;
   }
+  // @media (max-width: $breakpoint-sm-max) {
+  //   max-height: 120px;
+  // }
 
   .overay {
     pointer-events: none; // 마우스 클릭 안되게
@@ -292,9 +311,15 @@ export default defineComponent({
   border-radius: $border-radius;
   max-height: 200px;
 
-  @media (max-width: 962px) {
+  // @media (max-width: 962px) {
+  //   max-height: 160px;
+  // }
+  @media (max-width: $breakpoint-md-max) {
     max-height: 160px;
   }
+  // @media (max-width: $breakpoint-sm-max) {
+  //   max-height: 120px;
+  // }
 
   :deep(.q-carousel__navigation) {
     transform: scale(0.45);
