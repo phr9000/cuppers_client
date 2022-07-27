@@ -239,13 +239,12 @@
         </section>
 
         <!-- 3. 카페 이미지 등록 -->
-
         <div class="q-pt-lg section_title text-h5 q-pb-md">카페 사진</div>
         <section class="section_image_upload">
           <div></div>
           <!-- 3-1. 카페 실내외 사진 -->
           <div class="image_upload row q-pb-md">
-            <div class="col-10 q-pl-xs">
+            <div class="q-px-xs">
               <div class="column">
                 <div class="subtitle2">카페 실내외 사진</div>
                 <div class="row justify-start">
@@ -266,7 +265,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-2 row justify-end items-end">
+            <div class="row justify-end items-center">
               <label for="imgfile1">
                 <div class="pic btn-pic">
                   <q-icon name="eva-camera-outline" size="sm"></q-icon>
@@ -286,10 +285,10 @@
           <q-separator class="q-my-md"></q-separator>
 
           <!-- 3-2. 메뉴판 사진 -->
-          <div class="image_upload row q-pb-md">
-            <div class="col-10 q-pl-xs">
+          <div class="image_upload q-pb-md">
+            <div class="q-px-xs">
               <div class="column">
-                <div class="text-subtitle1">메뉴판 사진</div>
+                <div class="subtitle2">메뉴판 사진</div>
                 <div class="row justify-start">
                   <img
                     v-for="img in imagesMenu"
@@ -309,7 +308,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-2 row justify-end items-end">
+            <div class="row justify-end items-center">
               <label for="imgfile2">
                 <div class="pic btn-pic">
                   <q-icon name="eva-camera-outline" size="sm"></q-icon>
@@ -609,6 +608,7 @@ export default defineComponent({
           cafe_email: '',
           user_id: this.uid // 등록한 사람
         },
+        opTime: this.opTime,
         menus: menus,
         images: images
       }
@@ -689,7 +689,8 @@ export default defineComponent({
     border-radius: $border-radius;
   }
   .image_upload {
-    height: 102px;
+    display: grid;
+    grid-template-columns: 1fr 74px;
   }
   .pic {
     border: 1px solid $brown-5;

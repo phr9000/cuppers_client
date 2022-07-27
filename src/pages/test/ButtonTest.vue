@@ -75,7 +75,7 @@
         color="primary"
         label="가입서베이"
         icon="account_circle"
-        to="/signup"
+        to="/welcome/survey"
       />
       <btn-basic-right color="primary" label="리뷰 쓰기" icon="mail" />
       <btn-basic-right

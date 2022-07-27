@@ -40,7 +40,7 @@
           dense
           v-number
         />
-        <q-icon class="q-mr-sm" size="xs" name="img:/icons/hot.png" />
+        <q-icon class="q-mx-sm" size="xs" name="img:/icons/hot.png" />
       </div>
       <div class="col-12 col-sm-6 row items-center">
         <q-input
@@ -50,7 +50,7 @@
           dense
           v-number
         />
-        <q-icon class="q-mr-sm" size="xs" name="img:/icons/ice.png" />
+        <q-icon class="q-mx-sm" size="xs" name="img:/icons/ice.png" />
       </div>
     </div>
 

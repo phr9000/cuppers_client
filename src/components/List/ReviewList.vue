@@ -1,107 +1,39 @@
 <template>
   <div class="review_list">
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      cumque magnam odio iure quidem, quod illum numquam possimus obcaecati
-      commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.
-    </p>
+    <div class="left">
+      <!-- <card-review :review=""></card-review> -->
+      <card-review></card-review>
+    </div>
+    <div class="right"></div>
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 
+import CardReview from 'src/components/Card/CardReview.vue'
+
 export default defineComponent({
   name: 'ReviewList',
-  components: {},
-  data() {
-    return {
-      sort: null,
-      reviews: []
+  components: { CardReview },
+  props: {
+    cnotes: {
+      type: Array,
+      default: () => {
+        return null
+      }
     }
+  },
+  data() {
+    return {}
   },
   created() {},
   methods: {}
 })
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.review_list {
+  background-color: antiquewhite;
+  width: 100%;
+}
+</style>
