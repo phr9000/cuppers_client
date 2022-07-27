@@ -14,30 +14,9 @@
             class="text-grey-6"
           >
             <!-- 커핑노트 검색 -->
-            <q-input
-              v-if="searchMode"
-              @keyup.enter="handleClickSearch"
-              @blur="searchMode = false"
-              v-model="search"
-              clearable
-              dense
-              placeholder="커핑노트 검색"
-              class="text-center text-grey-5 q-px-md"
-              style="width: 300px"
-            >
-              <template v-slot:prepend>
-                <q-btn
-                  @click="handleClickSearch"
-                  round
-                  dense
-                  flat
-                  icon="search"
-                />
-              </template>
-            </q-input>
-            <q-btn v-else @click="searchMode = true" flat icon="search"></q-btn>
+            <search-toggle placeholder="커핑노트 검색" @search="handleSearch" />
 
-            <!-- 추천순 / 최신순 -->
+            <!-- 정렬 : 추천순 / 최신순 -->
             <tab-sort
               :sort_items="sortItems"
               @change="changeSort"
@@ -79,16 +58,18 @@ import { useStore } from 'vuex'
 
 import CnoteList from 'src/components/List/CnoteList.vue'
 import WriterLi from 'src/components/ListItem/WriterLi.vue'
-import InfScroll from 'src/components/Scroll/InfScroll.vue'
 import TabSort from 'src/components/Tab/TabSort.vue'
+import SearchToggle from 'src/components/Input/SearchToggle.vue'
+import InfScroll from 'src/components/Scroll/InfScroll.vue'
 
 export default defineComponent({
   name: 'CnoteMainPage',
   components: {
     CnoteList,
     WriterLi,
-    InfScroll,
-    TabSort
+    TabSort,
+    SearchToggle,
+    InfScroll
   },
   setup() {
     const $store = useStore()
@@ -103,15 +84,14 @@ export default defineComponent({
   },
   data() {
     return {
-      searchMode: false,
-      sort: null,
+      recWriters: null,
       cnotes: [],
+      sort: null,
       page: 0,
       limit: 10,
       order: 'recent', // 'recent' or 'like'
       search: '',
       end: false, // inf scroll end
-      recWriters: null,
       sortItems: [
         {
           label: '추천순',
@@ -151,11 +131,21 @@ export default defineComponent({
           console.log(err)
         })
     },
-    handleClickSearch() {
+    handleSearch(search) {
       // initList
       this.cnotes = []
       this.page = 0
+      this.search = search
 
+      this.loadCnotes()
+    },
+    changeSort(val) {
+      console.log('chagne sort to: ', val)
+      this.order = val
+
+      this.cnotes = []
+      this.page = 0
+      this.end = false
       this.loadCnotes()
     },
     loadRecWriters() {
@@ -173,15 +163,6 @@ export default defineComponent({
         .catch((err) => {
           console.log(err)
         })
-    },
-    changeSort(val) {
-      console.log('chagne sort to: ', val)
-      this.order = val
-
-      this.cnotes = []
-      this.page = 0
-      this.end = false
-      this.loadCnotes()
     }
   }
 })
