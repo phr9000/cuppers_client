@@ -45,66 +45,71 @@
           </div>
         </section>
 
-        <q-separator class="q-my-md"></q-separator>
+        <q-separator class="q-my-lg"></q-separator>
 
+        <!-- 2. 커피는 어땠나요? -->
         <section class="drink">
-          <div class="section_title q-mb-sm">커피는 어땠나요?</div>
-          <div class="text-subtitle1">
-            커피의 종류 <span class="text-primary">(중복 선택 가능)</span>
-          </div>
-          <div class="q-gutter-sm">
-            <q-checkbox
-              v-model="selectedDrinkType"
-              val="br"
-              label="브루잉"
-              color="primary"
-            >
-              <q-tooltip
-                anchor="top left"
-                self="bottom left"
-                class="bg-brown-5 text-body2"
-                :offset="[0, 0]"
+          <div class="section_title q-mb-sm">커피는 어땠나요?☕️</div>
+
+          <div :class="{ highlighted: highlighted }">
+            <div class="text-subtitle1 q-pl-sm q-pb-none">
+              커피의 종류 <span class="text-primary">(중복 선택 가능)</span>
+            </div>
+            <div class="q-gutter-sm">
+              <q-checkbox
+                v-model="selectedDrinkType"
+                val="br"
+                label="브루잉"
+                color="primary"
               >
-                드립커피, 필터커피 등
-              </q-tooltip></q-checkbox
-            >
-            <q-checkbox
-              v-model="selectedDrinkType"
-              val="va"
-              label="배리에이션"
-              color="primary"
-            >
-              <q-tooltip
-                anchor="top left"
-                self="bottom left"
-                class="bg-brown-5 text-body2"
-                :offset="[0, 0]"
+                <q-tooltip
+                  anchor="top left"
+                  self="bottom left"
+                  class="bg-brown-5 text-body2"
+                  :offset="[0, 0]"
+                >
+                  드립커피, 필터커피 등
+                </q-tooltip></q-checkbox
               >
-                아메리카노, 카페라떼 등
-              </q-tooltip></q-checkbox
-            >
-            <q-checkbox
-              v-model="selectedDrinkType"
-              checked-icon="star"
-              unchecked-icon="star_border"
-              val="sg"
-              label="시그니처 메뉴"
-              color="secondary"
-            >
-              <q-tooltip
-                anchor="top left"
-                self="bottom left"
-                class="bg-secondary text-body2"
-                :offset="[0, 0]"
+              <q-checkbox
+                v-model="selectedDrinkType"
+                val="va"
+                label="배리에이션"
+                color="primary"
               >
-                시그니처 메뉴였나요?
-              </q-tooltip></q-checkbox
-            >
+                <q-tooltip
+                  anchor="top left"
+                  self="bottom left"
+                  class="bg-brown-5 text-body2"
+                  :offset="[0, 0]"
+                >
+                  아메리카노, 카페라떼 등
+                </q-tooltip></q-checkbox
+              >
+              <q-checkbox
+                v-model="selectedDrinkType"
+                checked-icon="star"
+                unchecked-icon="star_border"
+                val="sg"
+                label="시그니처 메뉴"
+                color="secondary"
+              >
+                <q-tooltip
+                  anchor="top left"
+                  self="bottom left"
+                  class="bg-secondary text-body2"
+                  :offset="[0, 0]"
+                >
+                  시그니처 메뉴였나요?
+                </q-tooltip></q-checkbox
+              >
+            </div>
           </div>
           <div class="q-mb-sm q-px-sm">
             <q-input
               v-model="review.review_drink"
-              label="커피 이름"
+              label="커피(메뉴) 이름"
+              placeholder="어떤 메뉴를 드셨나요?"
               stack-label
               outlined
               :dense="dense"
@@ -113,24 +118,28 @@
           <div class="q-mb-sm q-px-sm">
             <q-input
               v-model="review.review_content"
-              label="드신 커피를 리뷰해주세요."
-              placeholder="드신 커피에 대해 상세히 리뷰해주세요! ex) 부드러운 질감, 베리류의 향미, 깔끔한 산미의 균형이 잘 잡힌 커피. 이 카페에서는 꼭 드립 커피를 드세요"
+              label="커피(카페)를 리뷰해주세요."
+              placeholder="커피(카페)에 대해 자유롭게 리뷰해주세요"
               stack-label
               outlined
               autogrow
               :dense="dense"
             />
+            <!-- ex) 부드러운 질감, 베리류의 향미, 깔끔한 산미의 균형이 잘 잡힌 커피. 이 카페에서는 꼭 드립 커피를 드세요 -->
           </div>
         </section>
 
-        <q-separator class="q-my-md"></q-separator>
+        <q-separator class="q-my-lg"></q-separator>
 
-        <!-- 음료‧카페 실내외 사진 -->
-        <section class="section_image_upload q-px-sm">
-          <div class="image_upload row q-pb-md">
-            <div class="col-10">
+        <!-- 3. 카페 사진 -->
+        <div class="section_title text-h5 q-pb-md">카페 사진</div>
+        <section class="section_image_upload">
+          <div></div>
+          <!-- 3-1. 카페 실내외 사진 -->
+          <div class="image_upload row">
+            <div class="q-px-xs">
               <div class="column">
-                <div class="text-subtitle1">음료‧카페 실내외 사진</div>
+                <div class="subtitle2 q-mb-xs">음료‧카페 실내외 사진</div>
                 <div class="row justify-start">
                   <img
                     v-for="img in imagesCafe"
@@ -149,7 +158,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-2 row justify-end items-end">
+            <div class="row justify-end items-center">
               <label for="imgfile1">
                 <div class="pic btn-pic">
                   <q-icon name="eva-camera-outline" size="sm"></q-icon>
@@ -165,16 +174,14 @@
               />
             </div>
           </div>
-        </section>
 
-        <q-separator class="q-my-md"></q-separator>
+          <q-separator class="q-my-md"></q-separator>
 
-        <!-- 메뉴판 사진 -->
-        <section class="section_image_upload q-px-sm">
-          <div class="image_upload row q-pb-md">
-            <div class="col-10">
+          <!-- 3-2. 메뉴판 사진 -->
+          <div class="image_upload">
+            <div class="q-px-xs">
               <div class="column">
-                <div class="text-subtitle1">메뉴판 사진</div>
+                <div class="subtitle2 q-mb-xs">메뉴판 사진</div>
                 <div class="row justify-start">
                   <img
                     v-for="img in imagesMenu"
@@ -194,7 +201,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-2 row justify-end items-end">
+            <div class="row justify-end items-center">
               <label for="imgfile2">
                 <div class="pic btn-pic">
                   <q-icon name="eva-camera-outline" size="sm"></q-icon>
@@ -211,13 +218,10 @@
             </div>
           </div>
         </section>
-
-        <q-separator class="q-my-md"></q-separator>
       </main>
 
       <!-- 리뷰 등록 -->
-
-      <div class="q-mt-md q-mb-xl flex flex-center">
+      <div class="q-mt-md q-my-xl flex flex-center">
         <btn-basic
           @click="postReview"
           size="md"
@@ -253,7 +257,6 @@ import BtnBasic from 'src/components/Button/BtnBasic.vue'
 export default defineComponent({
   name: 'WriteReviewPage',
   components: { KeywordSelect, BtnBasic },
-
   setup() {
     const $store = useStore()
 
@@ -271,16 +274,15 @@ export default defineComponent({
       dense: false,
       cafeKeywords: [], // 예시로 보여질 키워드
       addedKeywords: [], // 예시로 보여질 키워드
-      newKeyword: '테스트', // input으로 추가할 키워드
+      newKeyword: '', // input으로 추가할 키워드
       isAddingKeyword: false,
       files: [],
       review: {
         cafe_id: 1,
         user_id: 1,
-        review_drink: '아메리카노',
+        review_drink: '',
         drink_type: '',
-        review_content:
-          '플랫화이트 Flat White 는 에스프레소에 크림처럼 고운 스팀밀크를 올린 커피 음료예요. 라떼나 카푸치노와 비슷하지만, 밀크폼이 좀 더 부드럽고 커피맛이 진한 게 특징이에요. 저는 모르는 카페를 갔을 때 카페 라떼를 주문하는 일은 거의 없어도 플랫화이트는 종종 시켜먹어요',
+        review_content: '',
         review_img: 'images/review/26/g_01_thumb.jpg'
       },
       imagesCafe: [
@@ -303,11 +305,15 @@ export default defineComponent({
       ],
       selectedDrinkType: [
         // 'br', 'va', 'sg'
-      ]
+      ],
+      highlighted: false // selectedDrinkType 선택하지 않았을 경우
     }
   },
   watch: {
     selectedDrinkType(val) {
+      if (val.includes('br') || val.includes('va')) {
+        this.highlighted = false
+      }
       this.review.drink_type = val.toString()
     }
   },
@@ -440,9 +446,18 @@ export default defineComponent({
     // e.target.files 의 모든 file들은 products 에 저장
     // file[0] 은 썸네일 이미지로 따로 저장
     async handleChangeCafeImage(e) {
-      this.imagesCafe = []
-      const files = e.target.files
-      this.imageUpload(files, 'g')
+      if (e.target.files.length < 6) {
+        this.imagesCafe = []
+        const files = e.target.files
+        this.imageUpload(files, 'g')
+      } else {
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '5장 이하의 사진만 업로드 할 수 있습니다.',
+          color: 'warning'
+        })
+      }
     },
     async handleChangeMenuImage(e) {
       this.imagesMenu = []
@@ -521,6 +536,22 @@ export default defineComponent({
       }
     },
     postReview() {
+      if (
+        this.selectedDrinkType.length < 1 ||
+        (!this.selectedDrinkType.includes('br') &&
+          !this.selectedDrinkType.includes('va'))
+      ) {
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '브루잉 또는 배리에이션 중에 적어도 하나 이상 선택해주세요.',
+          color: 'primary'
+        })
+
+        this.highlighted = true
+      }
+
+      return
       const images = []
       if (this.imagesCafe.length) {
         this.imagesCafe.forEach((img) => {
@@ -576,6 +607,16 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .createpost {
+  .subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: $primary;
+  }
+  .subtitle2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: $brown-5;
+  }
   .keywords_container {
     display: grid;
     grid-template-columns: repeat(4, minmax(100px, auto));
@@ -585,8 +626,20 @@ export default defineComponent({
       grid-template-columns: repeat(2, minmax(90px, auto));
     }
   }
+
+  .highlighted {
+    border: 2px solid $red-4;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .section_image_upload {
+    border: 1px solid $grey-5;
+    padding: 16px;
+    border-radius: $border-radius;
+  }
   .image_upload {
-    height: 102px;
+    display: grid;
+    grid-template-columns: 1fr 74px;
   }
   .pic {
     border: 1px solid $brown-5;
