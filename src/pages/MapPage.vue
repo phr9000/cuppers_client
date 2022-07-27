@@ -119,6 +119,7 @@
                 @click_like="handleClickMyListLike"
                 @click_beenthere="handleClickMyListBeenthere"
                 @click_item="handleClickMyListItem"
+                @create_mylist="hancleCreateMylist"
               />
             </div>
             <div v-else>
@@ -661,6 +662,10 @@ export default defineComponent({
       let apiUrl = `${process.env.API}/cafe/mypage/beenthere/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
       this.cafes = []
       this.loadCafes(apiUrl, null)
+    },
+    // 마이리스트 새 리스트 생성 처리
+    hancleCreateMylist(title) {
+      console.log('hancleCreateMylist ', title)
     },
     // 마이리스트 내부 목록에서 마이리스트 목록으로 돌아가기
     backToMylist() {

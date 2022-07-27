@@ -1,9 +1,38 @@
 <template>
   <div>
-    <q-item-label header class="create_new_mylist row items-center">
+    <q-item-label
+      @click="openNewMylistInput = !openNewMylistInput"
+      header
+      class="create_new_mylist row items-center"
+    >
       <q-icon color="primary" size="sm" name="add_circle_outline" />
       <div class="text">새 리스트</div>
     </q-item-label>
+    <q-item v-if="openNewMylistInput" header class="row items-center">
+      <q-input
+        @keyup.enter="createMylist"
+        class="create_new_mylist_input"
+        outlined
+        bottom-slots
+        v-model="newMylistTitle"
+        counter
+        maxlength="20"
+        dense
+        color="secondary"
+        placeholder="생성할 리스트명을 입력해주세요"
+      >
+        <template v-slot:append>
+          <q-btn
+            @click="createMylist"
+            color="secondary"
+            round
+            dense
+            flat
+            icon="add_circle_outline"
+          />
+        </template>
+      </q-input>
+    </q-item>
 
     <!-- 마이 리스트 아이템 만큼 li 표시 -->
     <q-list bordered separator>
@@ -67,6 +96,12 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      openNewMylistInput: false,
+      newMylistTitle: ''
+    }
+  },
   methods: {
     clickLike() {
       this.$emit('click_like')
@@ -77,6 +112,12 @@ export default {
     clickMylistItem(item) {
       console.log(item)
       this.$emit('click_item', item)
+    },
+    createMylist() {
+      const title = this.newMylistTitle
+      this.newMylistTitle = ''
+      this.$emit('create_mylist', title)
+      this.openNewMylistInput = false
     }
   }
 }
@@ -95,5 +136,8 @@ export default {
     padding-left: 10px;
     // top: 1px;
   }
+}
+.create_new_mylist_input {
+  width: 100%;
 }
 </style>
