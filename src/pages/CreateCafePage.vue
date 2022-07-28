@@ -417,9 +417,9 @@ export default defineComponent({
     }
   },
   watch: {
-    cafeName(val) {
-      console.log(val)
-    }
+    // cafeName(val) {
+    //   console.log(val)
+    // }
   },
   directives: {
     number: {
@@ -483,16 +483,33 @@ export default defineComponent({
       //   console.log(i)
       // }
     },
-
     async handleChangeCafeImage(e) {
-      this.imagesCafe = []
-      const files = e.target.files
-      this.imageUpload(files, 'g')
+      if (e.target.files.length < 6) {
+        this.imagesCafe = []
+        const files = e.target.files
+        this.imageUpload(files, 'g')
+      } else {
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '5장 이하의 사진만 업로드 할 수 있습니다.',
+          color: 'warning'
+        })
+      }
     },
     async handleChangeMenuImage(e) {
-      this.imagesMenu = []
-      const files = e.target.files
-      this.imageUpload(files, 'm')
+      if (e.target.files.length < 6) {
+        this.imagesMenu = []
+        const files = e.target.files
+        this.imageUpload(files, 'm')
+      } else {
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '5장 이하의 사진만 업로드 할 수 있습니다.',
+          color: 'warning'
+        })
+      }
     },
     async imageUpload(files, type) {
       for (let i = 0; i < files.length; i++) {
