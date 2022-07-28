@@ -1,7 +1,7 @@
 <template>
   <q-card v-if="cnote" @click="handleCLickCnoteCard" class="card" flat bordered>
     <q-card-section
-      class="card_title_wrap row no-wrap items-start justify-between"
+      class="card_title_wrap row no-wrap items-start justify-between q-pb-sm"
     >
       <div class="text-h5 card_title q-mb-xs q-mr-xs">
         {{ cnote.cnote_title }}
@@ -16,37 +16,28 @@
             :likeit_cnt="cnote.like_cnt"
           />
         </div>
-        <div class="btn_bookmark_wrap">
-          <btn-book-mark
-            :user_id="cnote.user_id"
-            :cnote_id="cnote.cnote_id"
-            :is_marked="cnote.user_marked"
-          />
-        </div>
       </div>
     </q-card-section>
-    <q-card-section horizontal class="coffee_info_wrap row q-pt-none q-pr-md">
-      <div class="coffee_info q-py-none q-px-md">
-        <div class="caption text-caption text-grey q-my-sm">
-          {{ cnote.cnote_content }}
+    <q-card-section class="card_inner q-py-none">
+      <div class="inner_left q-py-none q-pr-md">
+        <div class="caption text-caption">
+          {{ delHtmlContent }}
         </div>
       </div>
-      <q-img
-        class="col-5 q-pr-sm card_image"
-        :initial-ratio="1"
-        :src="cnote.cnote_thumbnail"
-        ><div
-          class="rounded-borders absolute-full text-subtitle2 flex flex-center"
-        ></div>
-      </q-img>
+      <div class="inner_right">
+        <q-img class="thumbnail" :ratio="1" :src="cnote.cnote_img"> </q-img>
+      </div>
     </q-card-section>
-    <q-card-section class="card_bottom row justify-between items-center q-mb-m"
+    <q-card-section
+      class="card_bottom row justify-between items-center q-pt-none"
       ><div class="user_info row items-center">
-        <btn-avatar :url="cnote.user_thumbnail" />
-        <div class="q-ml-sm user_name">{{ cnote.user_name }}</div>
+        <btn-avatar :url="cnote.user_thumbnail_url" />
+        <div class="q-ml-sm user_name text-grey-6">
+          {{ cnote.user_nickname }}
+        </div>
       </div>
 
-      <div class="text-grey">{{ createDate }}</div>
+      <div class="text-grey">{{ dateago }}</div>
     </q-card-section>
   </q-card>
 </template>
@@ -56,11 +47,10 @@ import { format, toDate } from 'date-fns'
 import { defineComponent } from 'vue'
 import BtnAvatar from 'src/components/Button/BtnAvatar.vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
-import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
 
 export default defineComponent({
   name: 'CardReview',
-  components: { BtnAvatar, BtnLike, BtnBookMark },
+  components: { BtnAvatar, BtnLike },
   props: {
     cnote: {
       type: Object,
@@ -70,9 +60,39 @@ export default defineComponent({
     }
   },
   computed: {
-    createDate() {
-      let time = toDate(Date.parse(this.cnote.created_at))
-      return format(time, 'MMM dd. yyyy')
+    delHtmlContent() {
+      return this.cnote.cnote_content.replace(/<[^>]*>?/g, '')
+    },
+    dateago() {
+      try {
+        if (this.cnote.created_at) {
+          const created_parse = Date.parse(this.cnote.created_at)
+          // console.log(created_parse) // 1656678895000
+          const current_parse = Date.parse(new Date())
+          // console.log(current_parse) // 1656920503000
+
+          // 현재시간과차이 (분)
+          const diff = (current_parse - created_parse) / 60000
+
+          // 작성시간이 현시간 기준 1시간 미만
+          if (diff < 60) {
+            if (diff < 1) {
+              return '조금전'
+            }
+            // X 분전
+            return parseInt(diff) + '분전'
+          } else if (diff < 1440) {
+            return parseInt(diff / 60) + '시간전'
+          } else {
+            // 하루이상 지난 게시글은 날짜로 표시
+            let time = toDate(created_parse)
+            return format(time, 'MMM dd. yyyy')
+          }
+        }
+      } catch {
+        return '알수없음'
+      }
+      return '알수없음'
     }
   },
   methods: {
@@ -104,20 +124,39 @@ export default defineComponent({
     }
     .btn_like_wrap {
       position: relative;
-      left: 16px;
       top: -1px;
+      left: 4px;
     }
-    .btn_bookmark_wrap {
-      position: relative;
-      left: 7px;
-      top: 1px;
+    // .btn_bookmark_wrap {
+    //   position: relative;
+    //   left: 7px;
+    //   top: 1px;
+    // }
+  }
+
+  .card_inner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 120px;
+
+    .caption {
+      color: $grey-8;
+      height: 40px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+    }
+    .thumbnail {
+      border-radius: $border-radius;
+      min-width: 100px;
+      min-height: 100px;
     }
   }
-  .card_image {
-    border-radius: 4px;
-  }
+
   .card_bottom {
-    padding: 4px 16px 8px 16px;
+    padding: 0px 16px 8px 16px;
   }
   .absolute-full {
     background: rgba(69, 69, 69, 0.15);

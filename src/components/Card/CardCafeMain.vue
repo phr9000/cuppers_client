@@ -1,7 +1,7 @@
 <template>
   <!-- Card, 카페 추천리스트 -->
   <q-card class="card_cafe_main" @click="handleClickCard">
-    <q-img :ratio="16 / 9" :src="imgUrl" />
+    <q-img :ratio="16 / 9" :src="calUrl" />
 
     <q-card-section class="title_wrap">
       <!-- 위치 아이콘 및 거리 -->
@@ -42,14 +42,23 @@ export default defineComponent({
     },
     imgUrl: {
       type: String,
-      default: 'https://cdn.quasar.dev/img/parallax2.jpg'
+      default: 'images/cafe/0/cafe.jpg'
     },
     title: { type: String, default: '커퍼즈커피 본점' },
-    distance: { type: Number, default: 0 },
+    distance: { type: String, default: '' },
     caption: {
       type: String,
       default:
         '커피즈커피는 커피를 매개로 만나는 사람들의 미각적 행복과 기술적 진보를 위해 노력합니다. 커피리브레는 커피를 매개로 만나는 사람들의 미각적 행복과 기술적 진보를 위해 노력합니다.'
+    }
+  },
+  computed: {
+    calUrl() {
+      console.log(this.imgUrl)
+      if (this.imgUrl.startsWith('images/')) {
+        return `${process.env.STATIC}/${this.imgUrl}`
+      }
+      return this.imgUrl
     }
   },
   methods: {

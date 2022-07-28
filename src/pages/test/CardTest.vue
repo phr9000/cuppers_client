@@ -20,7 +20,7 @@
         <div class="q-mr-sm" style="width: 400px">
           <card-cnote :cnote="cnote" />
         </div>
-        <div style="width: 300px"><card-cnote :cnote="cnote" /></div>
+        <div style="width: 100%"><card-cnote :cnote="cnote" /></div>
       </div>
     </div>
 
@@ -77,7 +77,7 @@ export default defineComponent({
       //   review_img: 'https://picsum.photos/200',
       //   user_liked: 1,
       //   like_cnt: 142,
-      //   review_keyword: [
+      //   keywords: [
       //     {
       //       keyword_name: '커피에 대한 설명'
       //     },
@@ -100,7 +100,7 @@ export default defineComponent({
       //       keyword_name: '분위기가 좋은'
       //     }
       //   ],
-      //   reivew_image: [
+      //   images: [
       //     {
       //       image_review_type: 'g',
       //       image_review_url: 'url',
@@ -144,7 +144,8 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.loadReview()
+    this.loadCnote()
+    //this.loadReview()
   },
   methods: {
     loadReview() {
@@ -162,12 +163,12 @@ export default defineComponent({
         })
     },
     loadCnote() {
-      let apiUrl = `${process.env.API_LOCAL}/cnote/1` // json-server
+      let apiUrl = `${process.env.API}/cnote?page=1&limit=10&sort=recent&order=d&search=&user_id=` // json-server
 
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          this.cnote = result.data
+          this.cnote = result.data[0]
         })
         .catch((err) => {
           console.log(err)
