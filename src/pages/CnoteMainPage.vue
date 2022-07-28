@@ -86,10 +86,10 @@ export default defineComponent({
     return {
       recWriters: null,
       cnotes: [],
-      sort: null,
       page: 0,
       limit: 10,
-      order: 'recent', // 'recent' or 'like'
+      sort: 'recent', // 'recent' or 'like'
+      order: 'd',
       search: '',
       end: false, // inf scroll end
       sortItems: [
@@ -112,7 +112,7 @@ export default defineComponent({
     loadCnotes() {
       this.page++
 
-      let apiUrl = `${process.env.API}/cnote?page=${this.page}&limit=${this.limit}&order=${this.order}&search=${this.search}`
+      let apiUrl = `${process.env.API}/cnote?page=${this.page}&limit=${this.limit}&sort=${this.sort}&order=${this.order}&search=${this.search}`
       if (this.user) {
         apiUrl = `${apiUrl}&user_id=${this.user.uid}`
       }

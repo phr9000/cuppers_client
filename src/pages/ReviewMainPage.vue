@@ -59,17 +59,22 @@ export default defineComponent({
       get: () => $store.state.auth.user
     })
 
+    const locState = computed({
+      get: () => $store.state.map.loc
+    })
+
     return {
-      user
+      user,
+      locState
     }
   },
   data() {
     return {
       reviews: [],
-      sort: null,
+      sort: 'like', // 'recent' or 'like' or 'dist'
       page: 0,
       limit: 10,
-      order: 'recent', // 'recent' or 'like'
+      order: 'd',
       search: '',
       end: false, // inf scroll end
       sortItems: [
@@ -91,14 +96,20 @@ export default defineComponent({
   methods: {
     loadReviews() {
       this.page++
+      const ORDER = this.sort === 'dist' ? 'a' : 'd'
 
-      let apiUrl = `${process.env.API}/review/1?page=${this.page}&limit=${this.limit}&order=${this.order}&search=${this.search}`
+      let apiUrl = `${process.env.API}/review/?page=${this.page}&limit=${this.limit}&search=${this.search}&sort=${this.sort}&order=${ORDER}`
       if (this.user) {
         apiUrl = `${apiUrl}&user_id=${this.user.uid}`
       }
+      if (this.locState) {
+        apiUrl = `${apiUrl}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
+      }
+
       this.$axios
         .get(apiUrl)
         .then((result) => {
+          console.log(apiUrl)
           console.log(result.data)
           if (result.data.arr.length < 1) {
             this.$refs.infScroll.stop()
@@ -119,16 +130,16 @@ export default defineComponent({
       this.search = search
       this.end = false
 
-      this.loadCnotes()
+      this.loadReviews()
     },
     changeSort(val) {
       console.log('chagne sort to: ', val)
-      this.order = val
+      this.sort = val
 
       this.reviews = []
       this.page = 0
       this.end = false
-      this.loadCnotes()
+      this.loadReviews()
     }
   }
 })
