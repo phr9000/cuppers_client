@@ -19,7 +19,7 @@
               </div>
             </div>
           </div>
-          <div class="caption text-caption overflow-hidden">
+          <div class="caption text-caption">
             {{ delHtmlContent }}
           </div>
           <div class="info q-mb-xs">

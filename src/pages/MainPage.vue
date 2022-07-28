@@ -79,6 +79,8 @@ import BtnScrollTop from 'src/components/Scroll/BtnScrollTop.vue'
 // composables
 // import useDistance from 'src/composables/useDistance'
 // const { getDistanceFromLatLng } = useDistance()
+import useFormatter from 'src/composables/useFormatter'
+const { formatNumber } = useFormatter()
 
 import { computed } from 'vue'
 import { useStore } from 'vuex'
@@ -110,12 +112,10 @@ export default {
     return {
       keywords: null,
       currentLocation: null,
-      distance: '0',
       cafes: [],
       try: 0
     }
   },
-  computed: {},
   created() {
     // Load Carousel
   },
@@ -156,7 +156,13 @@ export default {
             let cafe = {
               ...result.data.arr[i]
             }
-            cafe.distance = parseInt(Math.sqrt(cafe.distance) * 111)
+
+            const dist = cafe.distance
+            if (dist > 5) {
+              cafe.distance = formatNumber(dist, '#,###')
+            } else {
+              cafe.distance = formatNumber(dist, '#,###.#')
+            }
 
             this.cafes.push(cafe)
           }

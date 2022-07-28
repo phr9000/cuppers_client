@@ -1577,7 +1577,7 @@
       "review_img": "http://localhost:3000/static/images/review/28/1_thumb.jpg",
       "like_cnt": 0,
       "user_liked": 0,
-      "review_keyword": [
+      "keywords": [
         {
           "review_id": 28,
           "keyword_id": 30,
@@ -1633,7 +1633,7 @@
       "cafe_name_pr": "커피앰비언스",
       "user_liked": 1,
       "like_cnt": 553,
-      "review_keyword": [
+      "keywords": [
         {
           "keyword_name": "커피에 대한 설명",
           "keyword_type": "cafe"
@@ -1685,7 +1685,7 @@
       "cafe_name_pr": "커피앰비언스",
       "user_liked": 1,
       "like_cnt": 142,
-      "review_keyword": [
+      "keywords": [
         {
           "keyword_name": "커피에 대한 설명",
           "keyword_type": "cafe"
@@ -1757,7 +1757,7 @@
       "cafe_name_pr": "커피앰비언스",
       "user_liked": 1,
       "like_cnt": 142,
-      "review_keyword": [
+      "keywords": [
         {
           "keyword_name": "커피에 대한 설명",
           "keyword_type": "cafe"
@@ -1813,7 +1813,7 @@
       "cafe_name_pr": "커피앰비언스",
       "user_liked": 0,
       "like_cnt": 43,
-      "review_keyword": [
+      "keywords": [
         {
           "keyword_name": "커피에 대한 설명",
           "keyword_type": "cafe"
@@ -1869,7 +1869,7 @@
       "cafe_name_pr": "커피앰비언스",
       "user_liked": 1,
       "like_cnt": 13,
-      "review_keyword": [
+      "keywords": [
         {
           "keyword_name": "커피에 대한 설명",
           "keyword_type": "cafe"

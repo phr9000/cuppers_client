@@ -39,7 +39,7 @@ export default defineComponent({
     }
   },
   created() {
-    console.log(this.$route.path)
+    // console.log(this.$route.path)
     if (this.$route.path === '/cafe/create') {
       this.show = false
     }

@@ -315,7 +315,7 @@
           <!-- 메뉴판 이미지 (오른쪽) -->
 
           <div v-if="menuRight">
-            <div class="row q-mb-xs">
+            <div class="row q-mt-sm q-mb-xs">
               <q-icon
                 size="xs"
                 name="img:/icons/menu.png"
@@ -651,6 +651,7 @@ export default defineComponent({
       this.$axios
         .get(apiUrl)
         .then((result) => {
+          console.log(result.data)
           if (!this.reviewRecent) {
             this.reviewRecent = result.data.arr[0]
           }

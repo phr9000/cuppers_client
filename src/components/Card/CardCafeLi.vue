@@ -70,11 +70,11 @@
         <!-- style="max-width: 280px; max-height: 320px" -->
         <q-img v-if="calUrl" class="thumbnail" :ratio="1" :src="calUrl" />
         <div
-          v-if="distance > -1"
+          v-if="cafe.distance > -1"
           class="row items-center justify-end q-mt-xs q-pb-md text-grey text-caption"
         >
           <q-icon name="place" />
-          <div class="distance">{{ distance }}Km</div>
+          <div class="distance">{{ calDistance }}Km</div>
         </div>
       </div></q-card-section
     >
@@ -143,13 +143,12 @@ export default defineComponent({
   },
   computed: {
     calUrl() {
-      console.log(this.cafe.cafe_img)
       if (this.cafe.cafe_img.startsWith('images/')) {
         return `${process.env.STATIC}/${this.cafe.cafe_img}`
       }
       return this.cafe.cafe_img
     },
-    distance() {
+    calDistance() {
       const dist = this.cafe.distance
       if (dist > 5) {
         return formatNumber(dist, '#,###')

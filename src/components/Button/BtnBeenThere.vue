@@ -42,7 +42,6 @@ export default {
   },
   mounted() {
     this.beenThere = this.been_there === 1 ? true : false
-    console.log(this.beenThere, this.been_there)
   },
   methods: {
     handleCLick(event) {

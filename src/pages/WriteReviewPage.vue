@@ -441,7 +441,6 @@ export default defineComponent({
         return item.keyword_id !== id
       })
     },
-
     // file 선택이 변경될때마다 호출
     // e.target.files 의 모든 file들은 products 에 저장
     // file[0] 은 썸네일 이미지로 따로 저장
@@ -460,9 +459,18 @@ export default defineComponent({
       }
     },
     async handleChangeMenuImage(e) {
-      this.imagesMenu = []
-      const files = e.target.files
-      this.imageUpload(files, 'm')
+      if (e.target.files.length < 6) {
+        this.imagesMenu = []
+        const files = e.target.files
+        this.imageUpload(files, 'm')
+      } else {
+        this.$q.notify({
+          position: 'top',
+          timeout: 1000,
+          message: '5장 이하의 사진만 업로드 할 수 있습니다.',
+          color: 'warning'
+        })
+      }
     },
     async imageUpload(files, type) {
       for (let i = 0; i < files.length; i++) {
@@ -536,6 +544,7 @@ export default defineComponent({
       }
     },
     postReview() {
+      // 유효성 검사 VALIDATION
       if (
         this.selectedDrinkType.length < 1 ||
         (!this.selectedDrinkType.includes('br') &&
@@ -551,7 +560,6 @@ export default defineComponent({
         this.highlighted = true
       }
 
-      return
       const images = []
       if (this.imagesCafe.length) {
         this.imagesCafe.forEach((img) => {

@@ -14,8 +14,8 @@ export default {
     }
   },
   mounted() {
-    console.log('KakaoMiniMap mounted')
-    console.log(this.lat, this.lng)
+    // console.log('KakaoMiniMap mounted')
+    // console.log(this.lat, this.lng)
 
     if (!window.kakao || !window.kakao.maps) {
       const script = document.createElement('script')

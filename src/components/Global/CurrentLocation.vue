@@ -68,8 +68,7 @@ export default defineComponent({
     },
     saveLocToStore(current_location) {
       this.locState = current_location
-
-      console.log(this.locState)
+      // console.log(this.locState)
     },
     locationError() {
       console.log('현재 위치를 찾을 수 없습니다.')
