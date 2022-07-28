@@ -83,15 +83,27 @@
       <section class="section_user_info">
         <card-user-info :user_info="userInfo" />
       </section>
-      <section class="section_list_wrap">
-        <!-- 커핑노트 리스트 -->
-        <div>커핑노트 리스트</div>
-        <!-- 리뷰 리스트 -->
-        <div>리뷰 리스트</div>
-        <!-- 가본곳(카페) 리스트 -->
-        <div>가본곳(카페) 리스트</div>
-        <!-- 좋아요(카페) 리스트 -->
-        <div>좋아요(카페) 리스트</div>
+      <section class="section_list_wrap bg-grey-1">
+        <div v-if="tab === 'cnote'">
+          <!-- 커핑노트 리스트 -->
+          <div class="text-center q-py-sm">내가 쓴 커핑노트 리스트</div>
+          <div class="cnotes_wrap q-px-md">
+            <cnote-list :cnotes="cnotes" />
+          </div>
+        </div>
+        <div v-else-if="tab === 'review'">
+          <!-- 리뷰 리스트 -->
+          <div class="text-center q-py-sm">내가 쓴 리뷰 리스트</div>
+          <div class="cnotes_wrap q-px-md">
+            <review-list :reviews="reviews" />
+          </div>
+        </div>
+        <div v-else>
+          <!-- 가본곳(카페) 리스트 -->
+          <div>가본곳(카페) 리스트</div>
+          <!-- 좋아요(카페) 리스트 -->
+          <div>좋아요(카페) 리스트</div>
+        </div>
       </section>
     </main>
   </q-page>
@@ -103,11 +115,15 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 import CardUserInfo from 'src/components/Card/CardUserInfo.vue'
+import CnoteList from 'src/components/List/CnoteList.vue'
+import ReviewList from 'src/components/List/ReviewList.vue'
 
 export default defineComponent({
   name: 'MyPage',
   components: {
-    CardUserInfo
+    CardUserInfo,
+    CnoteList,
+    ReviewList
   },
   setup() {
     const $store = useStore()
@@ -125,9 +141,9 @@ export default defineComponent({
   },
   data() {
     return {
-      userInfo: null,
       drawer: false,
-      tab: 'cnote' // current tab
+      tab: 'cnote', // current tab
+      userInfo: null,
       // {
       //   user_id: 1,
       //   user_email: 'hba@kakao.com',
@@ -137,14 +153,70 @@ export default defineComponent({
       //     'http://localhost:3000/static/images/avatar/1/thumb.jpg',
       //   user_nickname: 'AestasKwak'
       // }
+
+      cnotes: [],
+      cnotePage: 1,
+      cnoteLimit: 10,
+      isReviewLoaded: false,
+      reviews: []
     }
   },
   mounted() {
     setTimeout(() => {
       this.loadUserInfo()
-    }, 300)
+    }, 100)
+    this.loadCnotes()
   },
   methods: {
+    loadCnotes() {
+      const PAGE = this.cnotePage
+      const LIMIT = this.cnoteLimit
+      const uid = this.user.uid
+      const SORT = 'recent'
+
+      let apiUrl = `${process.env.API}/cnote/${uid}?user_id=${uid}&page=${PAGE}&limit=${LIMIT}&sort=${SORT}`
+
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          // console.log(apiUrl)
+          // console.log(result.data.arr)
+          if (result.data.length < 1) {
+            // this.$refs.infScroll.stop()
+            return
+          }
+          result.data.arr.forEach((item) => {
+            this.cnotes.push(item)
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    loadReviews() {
+      this.isReviewLoaded = true
+      const uid = this.user.uid
+      let apiUrl = `${process.env.API}/review/mypage/${uid}`
+
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          console.log(apiUrl)
+          console.log(result.data.arr)
+          if (result.data.arr.length < 1) {
+            // this.$refs.infScroll.stop()
+            return
+          }
+          result.data.arr.forEach((item) => {
+            const review = { ...item, user_liked: 1 }
+            this.reviews.push(review)
+          })
+          console.log(this.reviews)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     loadUserInfo() {
       if (this.user) {
         let apiUrl = `${process.env.API}/user/detail/${this.user.uid}`
@@ -165,6 +237,9 @@ export default defineComponent({
     },
     clickTab(tab) {
       this.tab = tab
+      if (!this.isReviewLoaded) {
+        this.loadReviews()
+      }
     },
     logout() {
       this.user = null
@@ -187,5 +262,8 @@ export default defineComponent({
   &.active {
     color: $secondary;
   }
+}
+.section_user_info {
+  border-bottom: 1px solid $grey-4;
 }
 </style>
