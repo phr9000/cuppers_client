@@ -156,7 +156,7 @@
                 <div class="col-6 col-sm-6">
                   <q-input
                     class="q-mr-xs"
-                    v-model="ot.day"
+                    v-model="ot.operation_day"
                     placeholder="월,화,수,목,금"
                     stack-label
                     outlined
@@ -166,7 +166,7 @@
                 <div class="col-6 col-sm-6">
                   <q-input
                     placeholder="09:00 ~ 21:00"
-                    v-model="ot.time"
+                    v-model="ot.operation_time"
                     stack-label
                     outlined
                     :dense="dense"
@@ -331,6 +331,11 @@
       <div class="q-mt-md q-my-xl flex flex-center">
         <btn-basic
           @click="postCafe"
+          :disable="
+            this.cafeName === '' ||
+            this.cafe.cafe_address === '' ||
+            this.cafeNameDuplicated
+          "
           size="lg"
           color="primary"
           label="카페 등록"
@@ -397,12 +402,12 @@ export default defineComponent({
       },
       opTime: [
         {
-          day: '월,화,수,목,금',
-          time: '09:00 ~ 22:00'
+          operation_day: '월,화,수,목,금',
+          operation_time: '09:00 ~ 22:00'
         },
         {
-          day: '토,일,공휴일',
-          time: '10:00 ~ 21:00'
+          operation_day: '토,일,공휴일',
+          operation_time: '10:00 ~ 21:00'
         }
       ],
       images: [],
@@ -464,8 +469,8 @@ export default defineComponent({
     },
     addOpTime() {
       this.opTime.push({
-        day: '',
-        time: ''
+        operation_day: '',
+        operation_time: ''
       })
     },
     delOpTIme(i) {
@@ -527,15 +532,15 @@ export default defineComponent({
 
                         if (type === 'g') {
                           this.imagesCafe.push({
-                            images_review_type: 'g',
-                            images_review_url: url,
+                            type: 'g',
+                            cafe_image_url: url,
                             thumbnail_url: r.data.filename,
                             thumb: url_thumb
                           })
                         } else if (type === 'm') {
                           this.imagesMenu.push({
-                            images_review_type: 'm',
-                            images_review_url: url,
+                            type: 'm',
+                            cafe_image_url: url,
                             thumbnail_url: r.data.filename,
                             thumb: url_thumb
                           })
@@ -556,16 +561,31 @@ export default defineComponent({
           .catch((err) => {
             console.error(err)
           })
-
-        // console.log(this.images)
       }
     },
+    notify(messsage) {
+      this.$q.notify({
+        position: 'top',
+        timeout: 1000,
+        message: messsage,
+        color: 'primary'
+      })
+    },
     postCafe() {
-      // 카페 주소, 카페 상세 주소 문자열 병합
-      // this.cafe.cafe_address =
-      //   this.cafe.cafe_address + ` ${this.cafe_address_detail}`
-      // const cafe = { ...this.cafe }
-      // console.log(cafe)
+      // 유효성 검사 VALIDATION
+      if (this.cafeName === '') {
+        this.notify('카페 이름은 필수 입력 항목입니다.')
+        return
+      } else if (this.cafeNameDuplicated) {
+        this.notify(
+          '이미 존재하는 카페 이름입니다. 이름은 필수 입력 항목입니다.'
+        )
+        return
+      }
+      if (this.cafe.address === '') {
+        this.notify('카페 주소는 필수 입력 항목입니다.')
+        return
+      }
 
       // 메뉴 등록하기
       const menus = []
@@ -594,9 +614,9 @@ export default defineComponent({
 
       let payload = {
         cafe: {
-          cafe_name_pr: this.cafe.cafe_name_pr,
+          cafe_name_pr: this.cafeName,
           cafe_phone: this.cafe.cafe_phone,
-          cafe_address: `${this.cafe.cafe_address} ${this.cafe.cafe_region} ${this.cafe_address_detail}`,
+          cafe_address: `${this.cafe.cafe_address} ${this.cafe.cafe_region} ${this.cafe_address_detail}`, // 카페 주소, 카페 상세 주소 문자열 병합
           cafe_region: this.cafe.cafe_region,
           cafe_webpage: this.cafe.cafe_webpage,
           cafe_description: this.cafe.cafe_description,
@@ -608,23 +628,24 @@ export default defineComponent({
           cafe_email: '',
           user_id: this.uid // 등록한 사람
         },
-        opTime: this.opTime,
+        op_time: this.opTime,
         menus: menus,
         images: images
       }
 
       console.log(payload)
-      return
+      // return
 
       const apiUrl = `${process.env.API}/cafe`
       this.$axios
-        .post(apiUrl, {
-          cafe: cafe,
-          images: images,
-          menus: menus
-        })
-        .then((response) => {
-          console.log(response, '성공입니다')
+        .post(apiUrl, payload)
+        .then((result) => {
+          console.log(result, '성공입니다')
+
+          if (result.data.insertId > 0) {
+            this.notify('☕ 카페가 등록되었습니다. 🪑')
+            this.$router.push(`/cafe/${result.data.insertId}`)
+          }
         })
         .catch((err) => {
           console.error(err, '실패입니다')
