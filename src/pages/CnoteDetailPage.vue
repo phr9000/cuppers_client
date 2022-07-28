@@ -26,13 +26,13 @@
           <!-- (상세페이지) 좋아요, 북마크 영역 -->
           <div class="btns_wrap row no-wrap">
             <div class="btn_like_wrap">
-              <!-- <btn-like
-                :user="user"
-                :id_what="cnote.cnote_id"
+              <btn-like
+                :user="userId"
+                :id_what="cnoteId"
                 like_what="cnote"
-                :is_liked="cnote.user_liked"
-                :likeit_cnt="cnote.like_cnt"
-              /> -->
+                :is_liked="like_it"
+                :likeit_cnt="3"
+              />
             </div>
           </div>
           <!-- dim -->
@@ -118,7 +118,8 @@ export default {
       userId: '',
       user_email: '',
       user_thumbnail: '',
-      user_nickname: ''
+      user_nickname: '',
+      like_it: ''
     }
   },
   computed: {},
@@ -147,6 +148,7 @@ export default {
           this.created_at = this.cnotedetail[0].created_at.substring(0, 10)
           this.userId = this.cnotedetail[0].user_id
           this.backgroundImg = this.cnotedetail[0].cnote_img
+          this.like_it = this.cnotedetail[0].likeit
           this.getUserInfo(this.userId)
           this.cnoteLike(this.userId, this.cnoteId)
         })
