@@ -68,12 +68,7 @@
       </div>
       <div class="col-4 q-pl-md q-pt-xs">
         <!-- style="max-width: 280px; max-height: 320px" -->
-        <q-img
-          v-if="cafe.cafe_img"
-          class="thumbnail"
-          :ratio="1"
-          :src="cafe.cafe_img"
-        />
+        <q-img v-if="calUrl" class="thumbnail" :ratio="1" :src="calUrl" />
         <div
           v-if="distance > -1"
           class="row items-center justify-end q-mt-xs q-pb-md text-grey text-caption"
@@ -147,27 +142,13 @@ export default defineComponent({
     return {}
   },
   computed: {
-    // 삭제 보류
-    // calDistance() {
-    //   try {
-    //     if (this.curLoc) {
-    //       const dist = getDistanceFromLatLng(
-    //         this.curLoc.lat,
-    //         this.curLoc.lng,
-    //         this.cafe.cafe_latitude,
-    //         this.cafe.cafe_longitude
-    //       )
-    //       if (dist > 5) {
-    //         return formatNumber(dist, '#,###')
-    //       } else {
-    //         return formatNumber(dist, '#,###.#')
-    //       }
-    //     }
-    //   } catch {
-    //     return -1
-    //   }
-    //   return -1
-    // },
+    calUrl() {
+      console.log(this.cafe.cafe_img)
+      if (this.cafe.cafe_img.startsWith('images/')) {
+        return `${process.env.STATIC}/${this.cafe.cafe_img}`
+      }
+      return this.cafe.cafe_img
+    },
     distance() {
       const dist = this.cafe.distance
       if (dist > 5) {
@@ -175,6 +156,28 @@ export default defineComponent({
       } else {
         return formatNumber(dist, '#,###.#')
       }
+
+      // 삭제 보류
+      // calDistance() {
+      //   try {
+      //     if (this.curLoc) {
+      //       const dist = getDistanceFromLatLng(
+      //         this.curLoc.lat,
+      //         this.curLoc.lng,
+      //         this.cafe.cafe_latitude,
+      //         this.cafe.cafe_longitude
+      //       )
+      //       if (dist > 5) {
+      //         return formatNumber(dist, '#,###')
+      //       } else {
+      //         return formatNumber(dist, '#,###.#')
+      //       }
+      //     }
+      //   } catch {
+      //     return -1
+      //   }
+      //   return -1
+      // },
     }
   },
   mounted() {},

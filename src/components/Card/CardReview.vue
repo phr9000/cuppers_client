@@ -11,7 +11,7 @@
         </div>
         <div class="cafe_keywords_wrap">
           <badge-cafe
-            v-for="keyword in review.review_keyword"
+            v-for="keyword in review.keywords"
             :key="keyword.name"
             :value="keyword.name"
           />
@@ -131,7 +131,7 @@ export default defineComponent({
       return format(time, 'MMM dd. yyyy')
     },
     cafeKeywords() {
-      return this.review.review_keyword.filter((key) => {
+      return this.review.keyword.filter((key) => {
         return key.keyword_type === 'cafe'
       })
     },
@@ -159,8 +159,8 @@ export default defineComponent({
       }
     },
     images() {
-      if (this.review.review_images.length > 0) {
-        const images = this.review.review_images.map((img) => {
+      if (this.review.images && this.review.images.length > 0) {
+        const images = this.review.images.map((img) => {
           if (img.thumbnail_url.startsWith('images/')) {
             img.thumbnail_url = `${process.env.STATIC}/${img.thumbnail_url}`
           }
@@ -181,7 +181,7 @@ export default defineComponent({
   mounted() {},
   methods: {
     clickCafeName() {
-      // console.log(this.review.review_images)
+      // console.log(this.review.images)
       this.$router.push({ path: `/cafe/${this.review.cafe_id}` })
     },
     clickThumbnail() {

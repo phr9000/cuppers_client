@@ -106,7 +106,7 @@
             <!-- 기본정보1 : 키워드, 카페설명 -->
             <div class="info_top">
               <!-- 키워드 -->
-              <div class="info q-mb-xs">
+              <div v-if="cafe.keywords.length" class="info q-mb-xs">
                 <q-icon size="xs" name="tag" class="icon q-mb-xs" />
 
                 <div class="cafe_keywords_wrap">
@@ -138,7 +138,7 @@
                 </div>
 
                 <!-- 분점정보 -->
-                <div v-if="cafe.branches" class="info branches q-mb-xs">
+                <div v-if="cafe.branches.length" class="info branches q-mb-xs">
                   <q-icon size="xs" name="storefront" class="icon" />
                   <div class="label_branches text_subtitle1">분점</div>
 
@@ -531,7 +531,6 @@ export default defineComponent({
       if (this.user) {
         apiUrl = `${apiUrl}?user_id=${this.user.uid}`
       }
-      console.log(apiUrl)
       this.$axios
         .get(apiUrl)
         .then((result) => {
@@ -554,9 +553,6 @@ export default defineComponent({
 
           // 해당카페 모든 리뷰 호출 (1 page)
           this.loadReviews(1) // 추후 (cafe_id, 1)로 수정
-
-          // 해당카페 모든 커핑노트 호출 (1 page)
-          // this.loadCnotes(1) // 추후 (cafe_id, 1)로 수정
 
           // 미니맵에 카페의 위치를 표시
           this.showMiniMap = true
@@ -600,9 +596,15 @@ export default defineComponent({
         .then((result) => {
           if (result.data.length > 0) {
             this.cafeImages = result.data.filter((item) => {
+              if (item.cafe_image_url.startsWith('images/')) {
+                item.cafe_image_url = `${process.env.STATIC}/${item.cafe_image_url}`
+              }
               return item.type === 'g'
             })
             this.menuImages = result.data.filter((item) => {
+              if (item.cafe_image_url.startsWith('images/')) {
+                item.cafe_image_url = `${process.env.STATIC}/${item.cafe_image_url}`
+              }
               return item.type === 'm'
             })
 
@@ -639,7 +641,6 @@ export default defineComponent({
     },
     // 리뷰 로드
     loadReviews(page) {
-      // let apiUrl = `${process.env.API_LOCAL}/review?_page=${page}&_limit=4` // json-server
       // real-server
       let apiUrl = `${process.env.API}/review/${this.cafeId}?sort=${this.sort}&order=d&page=${page}&limit=4`
 
@@ -654,19 +655,6 @@ export default defineComponent({
             this.reviewRecent = result.data.arr[0]
           }
           this.reviews = result.data.arr
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
-    // 삭제 보류
-    loadCnotes(page) {
-      let apiUrl = `${process.env.API_LOCAL}/cnote` // json-server
-      // let apiUrl = `${process.env.API}/cnote` // real-server
-      this.$axios
-        .get(apiUrl)
-        .then((result) => {
-          this.cnotes = result.data
         })
         .catch((err) => {
           console.log(err)

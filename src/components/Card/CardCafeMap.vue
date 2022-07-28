@@ -12,7 +12,7 @@
       @click="goDetail"
       class="cafe_img border-rad"
       :ratio="16 / 9"
-      :src="cafe.cafe_img"
+      :src="calUrl"
     />
 
     <q-card-section class="title_wrap">
@@ -71,7 +71,7 @@
 
     <q-card-section class="key_and_address">
       <!-- 키워드 -->
-      <div v-if="cafe.keywords" class="info info_key q-mb-xs">
+      <div v-if="cafe.keywords.length" class="info info_key q-mb-xs">
         <q-icon size="xs" name="tag" class="icon q-mb-xs" />
         <div class="cafe_keywords_wrap">
           <badge-cafe
@@ -214,6 +214,15 @@ export default defineComponent({
   },
   data() {
     return {}
+  },
+  computed: {
+    calUrl() {
+      console.log(this.cafe.cafe_img)
+      if (this.cafe.cafe_img.startsWith('images/')) {
+        return `${process.env.STATIC}/${this.cafe.cafe_img}`
+      }
+      return this.cafe.cafe_img
+    }
   },
   mounted() {},
   methods: {
