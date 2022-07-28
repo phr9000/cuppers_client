@@ -18,7 +18,9 @@
             />
             <div class="writer-info flex column">
               <div class="date">{{ created_at }}</div>
-              <!-- <div clsss="user" style="margin-right: 15px">{{ user }}</div> -->
+              <div clsss="user" style="margin-right: 15px">
+                {{ user_nickname }}
+              </div>
             </div>
           </div>
           <!-- (상세페이지) 좋아요, 북마크 영역 -->
@@ -32,13 +34,6 @@
                 :likeit_cnt="cnote.like_cnt"
               /> -->
             </div>
-            <!-- <div class="btn_bookmark_wrap">
-              <btn-book-mark
-                :user_id="cnote.user_id"
-                :cnote_id="cnote.cnote_id"
-                :is_marked="cnote.user_marked"
-              />
-            </div> -->
           </div>
           <!-- dim -->
           <div class="dim"></div>
@@ -60,14 +55,14 @@
         <div class="user-card-container">
           <div class="user-card-inner">
             <div class="profile-img">
-              <q-img src="/icons/hacker.png" alt="profile 사진" />
+              <q-img :src="user_thumbnail" alt="profile 사진" />
             </div>
-            <!-- <div class="user-email-area" style="line-height: 24px">
-              {{ user_id }}
+            <div class="user-email-area" style="line-height: 24px">
+              {{ user_email }}
             </div>
             <div class="desc" style="line-height: 24px; margin-bottom: 10px">
               {{ user_introduce }}
-            </div> -->
+            </div>
             <div class="follow-btn">
               <button class="btn">+ 팔로우</button>
             </div>
@@ -83,12 +78,11 @@ import { ref } from 'vue'
 // import BtnLike from 'src/components/Button/BtnLike.vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-// import BtnBookMark from 'src/components/Button/BtnBookMark.vue'
+import { userInfo } from '../store/auth/getters'
 // swiper
 export default {
   components: {
     // BtnLike
-    // BtnBookMark
   },
   setup() {
     const $store = useStore()
@@ -121,7 +115,10 @@ export default {
       isLiked: true,
       backgroundImg: '',
       cnoteId: null,
-      userId: ''
+      userId: '',
+      user_email: '',
+      user_thumbnail: '',
+      user_nickname: ''
     }
   },
   computed: {},
@@ -132,18 +129,14 @@ export default {
     }, 100)
     this.getcnoteDetail()
     this.getCnoteImg()
-    this.getUserInfo(this.userId)
   },
   mounted() {
     this.getcnoteDetail()
     this.getCnoteImg()
-    this.getUserInfo()
   },
   methods: {
     getcnoteDetail(cnoteId) {
       let apiUrl = `http://localhost:3000/api/cnote/detail/${cnoteId}`
-      console.log('here')
-      console.log(apiUrl)
       this.$axios
         .get(apiUrl)
         .then((result) => {
@@ -154,19 +147,36 @@ export default {
           this.created_at = this.cnotedetail[0].created_at.substring(0, 10)
           this.userId = this.cnotedetail[0].user_id
           this.backgroundImg = this.cnotedetail[0].cnote_img
+          this.getUserInfo(this.userId)
+          this.cnoteLike(this.userId, this.cnoteId)
         })
         .catch((err) => {
           console.log(err)
         })
     },
     getUserInfo(userId) {
-      let apiUrl = 'http://localhost:3000/api/user/detail/3'
+      let apiUrl = `http://localhost:3000/api/user/detail/${userId}`
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          this.userInfo = result.data
-          this.user = this.userInfo[0].user_email
-          this.user_introduce = this.userInfo[0].user_introduce
+          this.userInfo = result.data[0]
+          this.user_nickname = this.userInfo.user_nickname
+          this.user_email = this.userInfo.user_email
+          this.user_introduce = this.userInfo.user_introduce
+          this.user_thumbnail = this.userInfo.user_thumbnail_url
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    //좋아요버튼
+    cnoteLike(userid, cnoteid) {
+      let apiUrl = `http://localhost:3000/api/cnote/like/${userid}/${cnoteid}`
+      console.log(apiUrl)
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          console.log(result)
         })
         .catch((err) => {
           console.log(err)

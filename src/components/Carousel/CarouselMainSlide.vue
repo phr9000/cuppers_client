@@ -37,7 +37,7 @@
           <li class="slide">
             <div class="img-area">
               <img
-                src="//img1.daumcdn.net/thumb/C320x520.fjpg/?fname=https://t1.daumcdn.net/section/oc/2359e14af9dd4270bfd02276dbabcc21"
+                src="https://cdn.pixabay.com/photo/2022/06/30/11/29/outdoor-pool-7293487_1280.jpg"
                 class="img_pic"
                 alt="캠핑 밴에 사는<br>골드코스트의 히피들<br>"
               />
@@ -358,11 +358,22 @@ export default {
         overflow: hidden;
         cursor: pointer;
         overflow: hidden;
+        .img-area {
+          width: 100%;
+          height: 100%;
+          & > img {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
         &:hover {
           .dim {
             opacity: 0.6;
           }
           .img-area {
+            position: relative;
             transition: all 0.4s;
             transform: scale(1.1);
           }
