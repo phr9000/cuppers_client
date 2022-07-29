@@ -20,7 +20,7 @@ export default {
     if (!window.kakao || !window.kakao.maps) {
       const script = document.createElement('script')
       // 동적 로딩을 위해서 autoload=false 추가
-      script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.KAKAO_API}`
+      script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.KAKAO_API}&libraries=services`
 
       script.addEventListener('load', () => {
         // console.log('loaded', kakao)

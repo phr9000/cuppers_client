@@ -32,7 +32,7 @@ export default {
     }
   },
   mounted() {
-    if (!window.kakao || !window.kakao.maps) {
+    if (!window.Kakao || !window.Kakao.maps) {
       const script = document.createElement('script')
       // 동적 로딩을 위해서 autoload=false 추가
       script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.KAKAO_API}&libraries=services`
@@ -50,6 +50,7 @@ export default {
   methods: {
     initMap() {
       // 주소-좌표 변환 객체를 생성합니다
+      // console.log(window.kakao)
       this.geocoder = new kakao.maps.services.Geocoder()
     },
     execDaumPostcode() {

@@ -306,7 +306,7 @@ export default defineComponent({
 
       // 검색 옵션
       page: 0,
-      limit: 7,
+      limit: 12,
       totalCnt: 0,
       map: null, // 카카오맵 인스턴스
       search: '',
@@ -349,7 +349,7 @@ export default defineComponent({
           val: '강동'
         }
       ],
-      isMore: true,
+      isMore: false,
       sort: '' // none or like or dis
     }
   },
@@ -369,9 +369,10 @@ export default defineComponent({
   created() {},
   mounted() {
     if (!window.kakao || !window.kakao.maps) {
+      console.log(window.kakao)
       const script = document.createElement('script')
       // 동적 로딩을 위해서 autoload=false 추가
-      script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.KAKAO_API}`
+      script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.KAKAO_API}&libraries=services`
 
       script.addEventListener('load', () => {
         // console.log('loaded', kakao)
@@ -385,6 +386,7 @@ export default defineComponent({
   },
   methods: {
     initMap() {
+      console.log(window.kakao)
       const container = document.getElementById('map')
       const options = {
         center: new kakao.maps.LatLng(37.501523, 127.1248332, 16), // 커피 앰비언스 16?
@@ -448,13 +450,12 @@ export default defineComponent({
     resetSearchOption() {
       this.page = 0
       this.isMore = true
-      this.cafes = []
       this.bounds = null
-
       if (this.cafes.length > 0) {
         // 모든 마커를 삭제
         this.clearAllMarkers()
       }
+      this.cafes = []
     },
     // 검색 버튼 클릭, 또는 enter
     handleClickSearch(search) {
@@ -557,6 +558,7 @@ export default defineComponent({
     changeSort(val) {
       console.log('chagne sort to: ', val)
       this.sort = val
+      this.resetSearchOption()
       this.handleClickSearch()
     },
     loadCafes(apiUrl, bounds = null, liked = 0) {
@@ -583,19 +585,22 @@ export default defineComponent({
             if (!result.data.arr[i].user_liked) {
               cafe = { ...cafe, user_liked: liked }
             }
-            console.log(cafe.user_liked)
 
             if (cf.opTime) {
               cafe = { ...cafe, today: cf.opTime[0] }
             }
 
+            // console.log(cafe)
             this.cafes.push(cafe)
           }
 
           // 더불러오기 비활성화
-          if (result.data.arr.length < this.limit) {
+          if (this.cafes.length >= result.data.totalCnt) {
             this.isMore = false
           }
+          // if (result.data.arr.length < this.limit) {
+          //   this.isMore = false
+          // }
 
           if (this.cafes.length < 1) {
             console.log('검색 결과가 없습니다.')
@@ -649,7 +654,8 @@ export default defineComponent({
         this.clearAllMarkers()
       }
       let apiUrl = `${process.env.API}/cafe/mypage/like/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
-      this.cafes = []
+      // this.cafes = []
+      this.resetSearchOption()
       this.loadCafes(apiUrl, null, 1)
     },
     // 마이리스트 가본곳 카페 불러오기
@@ -660,7 +666,8 @@ export default defineComponent({
         this.clearAllMarkers()
       }
       let apiUrl = `${process.env.API}/cafe/mypage/beenthere/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
-      this.cafes = []
+      // this.cafes = []
+      this.resetSearchOption()
       this.loadCafes(apiUrl, null)
     },
     // 마이리스트 새 리스트 생성 처리
