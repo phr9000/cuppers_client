@@ -1,5 +1,5 @@
 <template>
-  <!-- Card, 카페 추천리스트 -->
+  <!-- Card, 카페 Main -->
   <q-card class="card_cafe_main" @click="handleClickCard">
     <q-img :ratio="16 / 9" :src="calUrl" />
 
@@ -36,7 +36,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'CardCafeMain',
   props: {
-    cafeId: {
+    cafe_id: {
       type: Number,
       default: -1
     },
@@ -64,11 +64,13 @@ export default defineComponent({
   methods: {
     handleClickCard() {
       // 해당 카페의 상세 페이지로 이동
-      console.log('card clicked. cafe_id: ', this.cafeId)
+      console.log('card clicked. cafe_id: ', this.cafe_id)
+      this.$router.push(`/cafe/${this.cafe_id}`)
     },
-    handleClickLocation() {
+    handleClickLocation(event) {
+      event.stopPropagation() // 버튼 클릭시 상위 클릭이벤트 호출 방지
       // 해당 카페를 지도에서 보기 (나중에 구현)
-      console.log('location icon clicked. cafe_id: ', this.cafeId)
+      console.log('location icon clicked. cafe_id: ', this.cafe_id)
     }
   }
 })

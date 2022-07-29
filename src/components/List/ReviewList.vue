@@ -1,21 +1,30 @@
 <template>
-  <div class="review_list">
-    <div class="whole">
-      <div class="cards_wrap" v-for="review in reviews" :key="review.review_id">
-        <card-review :review="review" />
-      </div>
-    </div>
-    <div class="lr">
-      <div class="left">
-        <div class="" v-for="review in leftList" :key="review.review_id">
-          <card-review :review="review" :borderd="true" :flat="true" />
-        </div>
-      </div>
-      <div class="right">
-        <div class="" v-for="review in rightList" :key="review.review_id">
+  <div>
+    <div v-if="reviews.length" class="review_list">
+      <div class="whole">
+        <div
+          class="cards_wrap"
+          v-for="review in reviews"
+          :key="review.review_id"
+        >
           <card-review :review="review" />
         </div>
       </div>
+      <div class="lr">
+        <div class="left">
+          <div class="" v-for="review in leftList" :key="review.review_id">
+            <card-review :review="review" :borderd="true" :flat="true" />
+          </div>
+        </div>
+        <div class="right">
+          <div class="" v-for="review in rightList" :key="review.review_id">
+            <card-review :review="review" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="text-grey text-center q-py-md">
+      <p class="q-pb-sm">작성한 리뷰가 없습니다.</p>
     </div>
   </div>
 </template>

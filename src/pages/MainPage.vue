@@ -46,6 +46,7 @@
             class="card_wrap q-mr-md"
           >
             <card-cafe-main
+              :cafe_id="cafe.cafe_id"
               :title="cafe.cafe_name_pr"
               :distance="cafe.distance"
               :imgUrl="cafe.cafe_img"

@@ -94,15 +94,23 @@
         <div v-else-if="tab === 'review'">
           <!-- 리뷰 리스트 -->
           <div class="text-center q-py-sm">내가 쓴 리뷰 리스트</div>
-          <div class="cnotes_wrap q-px-md">
+          <div class="review_wrap q-px-md">
             <review-list :reviews="reviews" />
           </div>
         </div>
-        <div v-else>
+        <div v-else-if="tab === 'likeit'">
+          <!-- 좋아요한(카페) 리스트 -->
+          <div class="text-center q-py-sm">좋아요한 카페 리스트</div>
+          <div class="review_wrap q-px-md">
+            <cafe-list :cafes="likeCafes" />
+          </div>
+        </div>
+        <div v-else-if="tab === 'beenthere'">
           <!-- 가본곳(카페) 리스트 -->
-          <div>가본곳(카페) 리스트</div>
-          <!-- 좋아요(카페) 리스트 -->
-          <div>좋아요(카페) 리스트</div>
+          <div class="text-center q-py-sm">가본 카페 리스트</div>
+          <div class="review_wrap q-px-md">
+            <cafe-list :cafes="beenthereCafes" />
+          </div>
         </div>
       </section>
     </main>
@@ -117,13 +125,18 @@ import { useStore } from 'vuex'
 import CardUserInfo from 'src/components/Card/CardUserInfo.vue'
 import CnoteList from 'src/components/List/CnoteList.vue'
 import ReviewList from 'src/components/List/ReviewList.vue'
+import CafeList from 'src/components/List/CafeList.vue'
+
+import useFormatter from 'src/composables/useFormatter'
+const { formatNumber } = useFormatter()
 
 export default defineComponent({
   name: 'MyPage',
   components: {
     CardUserInfo,
     CnoteList,
-    ReviewList
+    ReviewList,
+    CafeList
   },
   setup() {
     const $store = useStore()
@@ -135,8 +148,13 @@ export default defineComponent({
       }
     })
 
+    const locState = computed({
+      get: () => $store.state.map.loc
+    })
+
     return {
-      user
+      user,
+      locState
     }
   },
   data() {
@@ -153,12 +171,15 @@ export default defineComponent({
       //     'http://localhost:3000/static/images/avatar/1/thumb.jpg',
       //   user_nickname: 'AestasKwak'
       // }
-
       cnotes: [],
       cnotePage: 1,
       cnoteLimit: 10,
       isReviewLoaded: false,
-      reviews: []
+      reviews: [],
+      likeCafes: [],
+      isLikeCafeLoaded: false,
+      beenthereCafes: [],
+      isBeenthereCafeLoaded: false
     }
   },
   mounted() {
@@ -168,6 +189,7 @@ export default defineComponent({
     this.loadCnotes()
   },
   methods: {
+    // 작성한 커핑노트 불러오기
     loadCnotes() {
       const PAGE = this.cnotePage
       const LIMIT = this.cnoteLimit
@@ -193,8 +215,8 @@ export default defineComponent({
           console.log(err)
         })
     },
+    // 작성한 리뷰 불러오기
     loadReviews() {
-      this.isReviewLoaded = true
       const uid = this.user.uid
       let apiUrl = `${process.env.API}/review/mypage/${uid}`
 
@@ -212,6 +234,48 @@ export default defineComponent({
             this.reviews.push(review)
           })
           console.log(this.reviews)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 좋아요한 카페 불러오기
+    loadLikeCafes() {
+      this.likeCafes = []
+      let apiUrl = `${process.env.API}/cafe/mypage/like/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
+      this.loadCafes(apiUrl, 'like')
+    },
+    // 가본곳 누른 카페 불러오기
+    loadBeenthereCafes() {
+      this.beenthereCafes = []
+      let apiUrl = `${process.env.API}/cafe/mypage/beenthere/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
+      this.loadCafes(apiUrl, 'beenthere')
+    },
+    loadCafes(apiUrl, cafeListType) {
+      console.log(apiUrl)
+
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          // this.cafes = []
+          for (let i = 0; i < result.data.arr.length; i++) {
+            let cafe = {
+              ...result.data.arr[i]
+            }
+
+            const dist = cafe.distance
+            if (dist > 5) {
+              cafe.distance = formatNumber(dist, '#,###')
+            } else {
+              cafe.distance = formatNumber(dist, '#,###.#')
+            }
+
+            if (cafeListType === 'like') {
+              this.likeCafes.push(cafe)
+            } else if (cafeListType === 'beenthere') {
+              this.beenthereCafes.push(cafe)
+            }
+          }
         })
         .catch((err) => {
           console.log(err)
@@ -239,8 +303,15 @@ export default defineComponent({
     },
     clickTab(tab) {
       this.tab = tab
-      if (!this.isReviewLoaded) {
+      if (tab === 'review' && !this.isReviewLoaded) {
+        this.isReviewLoaded = true
         this.loadReviews()
+      } else if (tab === 'likeit' && !this.isLikeCafeLoaded) {
+        this.isLikeCafeLoaded = true
+        this.loadLikeCafes()
+      } else if (tab === 'beenthere' && !this.isBeenthereCafeLoaded) {
+        this.isBeenthereCafeLoaded = true
+        this.loadBeenthereCafes()
       }
     },
     logout() {
@@ -264,6 +335,9 @@ export default defineComponent({
   &.active {
     color: $secondary;
   }
+}
+.section_list_wrap {
+  min-height: calc(100vh - 261px);
 }
 .section_user_info {
   border-bottom: 1px solid $grey-4;
