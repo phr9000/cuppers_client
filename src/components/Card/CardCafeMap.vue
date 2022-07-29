@@ -46,17 +46,15 @@
             :review_cnt="cafe.review_cnt"
           />
         </div>
-        <!-- <div class="">
-          <btn-basic-right
-            @click="goDetail"
-            class="btn_detail bg-grey-2"
+        <div class="">
+          <btn-add-to-list
+            :cafe_id="cafe.cafe_id"
+            class="btn_detail"
             :rounded="false"
-            icon="open_in_new"
             color="grey-7"
-            label="상세보기"
             padding="4px 8px"
           />
-        </div> -->
+        </div>
       </div>
       <div
         v-if="cafe.cafe_description"
@@ -167,6 +165,7 @@ import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import CafeType from 'src/components/Etc/CafeType.vue'
 import MenuItem from 'src/components/Etc/MenuItem.vue'
 import FacilityItem from 'src/components/Etc/FacilityItem.vue'
+import BtnAddToList from 'src/components/Button/BtnAddToList.vue'
 
 export default defineComponent({
   name: 'CardCafeMap',
@@ -177,7 +176,8 @@ export default defineComponent({
     BadgeCafe,
     CafeType,
     MenuItem,
-    FacilityItem
+    FacilityItem,
+    BtnAddToList
   },
   props: {
     cafe: {
@@ -255,8 +255,8 @@ export default defineComponent({
     padding-right: 4px;
   }
   .btn_detail {
-    width: 100px;
-    margin-top: 3px;
+    // width: 100px;
+    // margin-top: 3px;
   }
   .btn_like {
     position: relative;

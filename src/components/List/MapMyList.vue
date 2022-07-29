@@ -8,7 +8,7 @@
       <q-icon color="primary" size="sm" name="add_circle_outline" />
       <div class="text">새 리스트</div>
     </q-item-label>
-    <q-item v-if="openNewMylistInput" header class="row items-center">
+    <q-item v-if="openNewMylistInput" header class="row items-center q-pt-md">
       <q-input
         @keyup.enter="createMylist"
         class="create_new_mylist_input"

@@ -84,7 +84,7 @@ export default defineComponent({
   data() {
     return {
       cafe: {
-        cafe_id: 4,
+        cafe_id: 1,
         cafe_name_pr: '커피 앰비언스',
         cafe_address: '서울 송파구 송이로17길 51',
         cafe_region: '송파',

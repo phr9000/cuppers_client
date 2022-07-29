@@ -618,8 +618,7 @@ export default defineComponent({
     },
     // 마이리스트 목록 가져오기
     loadMyList() {
-      this.clearAllMarkers()
-      this.cafes = []
+      this.resetSearchOption()
 
       let apiUrl = `${process.env.API}/cafe/mylist/all/${this.user.uid}` // real-server
       console.log(apiUrl)
@@ -672,7 +671,30 @@ export default defineComponent({
     },
     // 마이리스트 새 리스트 생성 처리
     hancleCreateMylist(title) {
-      console.log('hancleCreateMylist ', title)
+      // -> db에 title 전달하여 마이리스트에 새 리스트 만드는 라우트
+      let apiUrl = `${process.env.API}/cafe/mylist`
+      this.$axios
+        .post(apiUrl, {
+          param: {
+            user_id: this.user.uid,
+            mylist_name: title
+          }
+        })
+        .then((result) => {
+          if (result.data.insertId > 0) {
+            this.$q.notify({
+              position: 'top',
+              timeout: 1000,
+              message: '마이리스트가 생성되었습니다.',
+              color: 'info'
+            })
+            this.loadMyList()
+          }
+        })
+        .catch((err) => {
+          console.log('마이리스트 생성 실패')
+          console.log(err)
+        })
     },
     // 마이리스트 내부 목록에서 마이리스트 목록으로 돌아가기
     backToMylist() {
