@@ -16,7 +16,6 @@
           v-for="item in mylist"
           :key="item.mylist_id"
           clickable
-          dense
           v-close-popup
           @click="addCafeToList(item.mylist_id)"
         >
@@ -84,11 +83,20 @@ export default {
           }
         })
         .then((result) => {
+          console.log(result.data)
           if (result.data.insertId > 0) {
             this.$q.notify({
               position: 'top',
               timeout: 1000,
               message: '마이리스트에 저장했습니다',
+              color: 'info'
+            })
+          }
+          if (result.data.startsWith('already exists')) {
+            this.$q.notify({
+              position: 'top',
+              timeout: 1000,
+              message: '이미 저장된 카페입니다',
               color: 'info'
             })
           }

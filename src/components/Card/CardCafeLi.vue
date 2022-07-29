@@ -1,10 +1,6 @@
 <template>
   <!-- 카페카드 (지도화면) -->
-  <q-card
-    @click="handleCardClick"
-    flat
-    class="card_cafe q-pa-md column overflow-hidden"
-  >
+  <q-card v-if="!deleted" flat class="card_cafe q-pa-md column overflow-hidden">
     <q-card-section class="row q-pa-none">
       <div class="col-8">
         <div class="">
@@ -73,13 +69,13 @@
           class="row items-center justify-end q-mt-xs q-pb-md text-grey text-caption"
         >
           <q-icon name="place" />
-          <div class="distance">{{ calDistance }}Km</div>
+          <div class="distance q-pr-xs">{{ calDistance }}Km</div>
         </div>
       </div></q-card-section
     >
     <q-card-section
       v-if="cafe.cafe_description && cafe.keywords"
-      class="q-pa-none"
+      class="q-pa-none row justify-between"
     >
       <!-- 키워드 -->
       <div class="info q-mb-xs">
@@ -92,12 +88,37 @@
           />
         </div>
       </div>
+      <div v-if="cafe.mylist_cafe_id">
+        <btn-basic
+          flat
+          class="btn_remove"
+          @click="delFromList"
+          size="md"
+          icon="playlist_remove"
+          label="제거"
+        />
+      </div>
+    </q-card-section>
+
+    <q-card-section v-else class="q-pa-none row justify-between">
+      <div></div>
+      <div>
+        <btn-basic
+          flat
+          class="btn_remove"
+          @click="delFromList"
+          size="md"
+          icon="playlist_remove"
+          label="제거"
+        />
+      </div>
     </q-card-section>
   </q-card>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
+import BtnBasic from 'src/components/Button/BtnBasic.vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
@@ -112,6 +133,7 @@ const { formatNumber } = useFormatter()
 export default defineComponent({
   name: 'CardCafeLi',
   components: {
+    BtnBasic,
     BtnLike,
     BtnReview,
     BadgeCafe,
@@ -138,7 +160,7 @@ export default defineComponent({
     // }
   },
   data() {
-    return {}
+    return { deleted: false }
   },
   computed: {
     calUrl() {
@@ -180,10 +202,32 @@ export default defineComponent({
   },
   mounted() {},
   methods: {
-    handleCardClick() {
-      // 해당 카페 클릭 처리
-      // console.log('card clicked. cafe_id: ', this.cafe.cafe_id)
-      // this.$router.push(`/cafe/${this.cafe.cafe_id}`)
+    // 리스트에서 제거
+    delFromList(event) {
+      event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
+      console.log(this.cafe.mylist_cafe_id)
+      let apiUrl = `${process.env.API}/cafe/mylist/remove`
+      this.$axios
+        .post(apiUrl, {
+          param: {
+            mylist_cafe_id: this.cafe.mylist_cafe_id
+          }
+        })
+        .then((result) => {
+          if (result.data.affectedRows > 0) {
+            this.$q.notify({
+              position: 'top',
+              timeout: 1000,
+              message: '마이리스트에서 제거되었습니다.',
+              color: 'info'
+            })
+            this.deleted = true
+          }
+        })
+        .catch((err) => {
+          console.log('마이리스트 생성 실패')
+          console.log(err)
+        })
     }
   }
 })
@@ -213,6 +257,15 @@ export default defineComponent({
       transform: scale(0.9);
       left: -24px;
     }
+  }
+  .btn_remove {
+    position: relative;
+    top: -2px;
+    left: 6px;
+    line-height: 16px;
+    padding: 1px 10px;
+    color: $grey-5 !important;
+    transform: scale(0.9);
   }
   .thumbnail {
     border-radius: $border-radius-md;
