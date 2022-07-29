@@ -10,7 +10,7 @@
             <q-img :src="calUrl" alt="profile 사진" />
           </div>
           <!-- user 이름 -->
-          <strong class="user-name">{{ user_info.user_email }}</strong>
+          <strong class="user-name">{{ user_info.user_nickname }}</strong>
           <!-- user 소개 -->
           <div class="user-intro">{{ user_info.user_introduce }}</div>
         </div>
@@ -19,19 +19,19 @@
           <!-- user info -->
           <div class="user-info">
             <div class="box">
-              <p class="num">11,947</p>
+              <p class="num">0</p>
               <p class="txt">팔로워</p>
             </div>
             <div class="box">
-              <p class="num">4</p>
+              <p class="num">0</p>
               <p class="txt">팔로잉</p>
             </div>
             <div class="box">
-              <p class="num">15</p>
+              <p class="num">{{ user_info.review_cnt }}</p>
               <p class="txt">리뷰</p>
             </div>
             <div class="box">
-              <p class="num">9</p>
+              <p class="num">{{ user_info.cnote_cnt }}</p>
               <p class="txt">커핑노트</p>
             </div>
           </div>
@@ -155,7 +155,7 @@ export default {
       display: block;
       padding: 7px 0 0;
       font-size: 16px;
-      font-weight: 800;
+      font-weight: 600;
     }
     &:after {
       position: absolute;
