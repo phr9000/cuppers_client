@@ -143,12 +143,12 @@ export default {
         .then((result) => {
           this.cnotedetail = result.data
           // 데이터베이스에서 받아온 content v-html 에 담아서 사용
-          this.content = this.cnotedetail[0].cnote_content
-          this.cnote_title = this.cnotedetail[0].cnote_title
-          this.created_at = this.cnotedetail[0].created_at.substring(0, 10)
-          this.userId = this.cnotedetail[0].user_id
-          this.backgroundImg = this.cnotedetail[0].cnote_img
-          this.like_it = this.cnotedetail[0].likeit
+          this.content = this.cnotedetail.cnote_content
+          this.cnote_title = this.cnotedetail.cnote_title
+          this.created_at = this.cnotedetail.created_at.substring(0, 10)
+          this.userId = this.cnotedetail.user_id
+          this.backgroundImg = this.cnotedetail.cnote_img
+          this.like_it = this.cnotedetail.likeit
           this.getUserInfo(this.userId)
           this.cnoteLike(this.userId, this.cnoteId)
         })
