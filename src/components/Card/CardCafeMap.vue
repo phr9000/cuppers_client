@@ -35,7 +35,6 @@
         <div class="row no-wrap">
           <btn-like
             class="btn_like"
-            :user_id="1"
             :id_what="cafe.cafe_id"
             like_what="cafe"
             :is_liked="cafe.user_liked"

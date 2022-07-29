@@ -26,7 +26,6 @@
             <!-- 좋아요 버튼 -->
             <div class="btn_likeit q-mr-xs">
               <btn-like
-                :user="user"
                 :id_what="cafe.cafe_id"
                 like_what="cafe"
                 :is_liked="cafe.user_liked"

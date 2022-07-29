@@ -23,7 +23,6 @@
           <div class="btns row justify-start items-center no-wrap q-mb-xs">
             <btn-like
               class="btn_like"
-              :user_id="1"
               :id_what="cafe.cafe_id"
               like_what="cafe"
               :is_liked="cafe.user_liked"

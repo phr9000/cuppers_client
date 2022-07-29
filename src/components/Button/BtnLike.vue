@@ -23,18 +23,31 @@
   </q-btn>
 </template>
 <script>
-import useFormatter from 'src/composables/useFormatter'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 const { formatNumber } = useFormatter()
+import useFormatter from 'src/composables/useFormatter'
 export default {
   name: 'BtnLike',
   components: {},
+  setup() {
+    const $store = useStore()
+
+    const user = computed({
+      get: () => $store.state.auth.user
+    })
+
+    return {
+      user
+    }
+  },
   props: {
-    user: {
-      type: Object,
-      default: () => {
-        return null
-      }
-    }, // 로그인한 사용자
+    // user: {
+    //   type: Object,
+    //   default: () => {
+    //     return null
+    //   }
+    // }, // 로그인한 사용자
     like_what: { type: String, required: true }, // 'review' or 'cnote' or 'cafe'
     id_what: { type: Number, required: true }, // 'review_id' or 'cnote_id' or 'cafe_id'
     is_liked: {

@@ -6,7 +6,7 @@
     </div>
     <q-card class="card_review" :bordered="bordered" :flat="flat">
       <q-card-section class="cafe_info row items-center justify-between">
-        <div @click="cafeNameClick" class="text-h5 cafe_name q-mb-xs q-mr-xs">
+        <div @click="clickCafeName" class="text-h5 cafe_name q-mb-xs q-mr-xs">
           {{ review.cafe_name_pr }}
         </div>
         <div class="cafe_keywords_wrap">
@@ -67,7 +67,6 @@
       >
         <div class="btn_like">
           <btn-like
-            :user="user"
             :id_what="review.review_id"
             like_what="review"
             :is_liked="review.user_liked"

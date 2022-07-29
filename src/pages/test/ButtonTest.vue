@@ -130,7 +130,6 @@
       <p>btn-like, btn-been-there, btn-mark</p>
       <div class="row items-center">
         <btn-like
-          :user_id="0"
           like_what="cafe"
           :id_what="0"
           :is_liked="0"

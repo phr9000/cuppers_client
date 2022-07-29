@@ -9,7 +9,6 @@
       <div class="btns_wrap row no-wrap">
         <div class="btn_like_wrap">
           <btn-like
-            :user_id="cnote.user_id"
             :id_what="cnote.cnote_id"
             like_what="cnote"
             :is_liked="cnote.user_liked"
