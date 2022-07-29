@@ -71,7 +71,7 @@ export default defineComponent({
   data() {
     return {
       reviews: [],
-      sort: 'like', // 'recent' or 'like' or 'dist'
+      sort: 'recent', // 'recent' or 'like' or 'dist'
       page: 0,
       limit: 10,
       order: 'd',
@@ -86,7 +86,7 @@ export default defineComponent({
           label: '최신순',
           val: 'recent'
         },
-        { label: '거리순', val: 'distance' }
+        { label: '거리순', val: 'dist' }
       ]
     }
   },

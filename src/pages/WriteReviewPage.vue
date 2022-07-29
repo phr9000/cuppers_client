@@ -340,7 +340,7 @@ export default defineComponent({
           console.log(err)
         })
     },
-    async checkAndAddKeyword() {
+    checkAndAddKeyword() {
       const newKeyword = this.newKeyword
 
       // input value 유효성 검사

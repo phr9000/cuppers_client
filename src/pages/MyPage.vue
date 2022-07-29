@@ -242,13 +242,13 @@ export default defineComponent({
     // 좋아요한 카페 불러오기
     loadLikeCafes() {
       this.likeCafes = []
-      let apiUrl = `${process.env.API}/cafe/mypage/like/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
+      let apiUrl = `${process.env.API}/cafe/mypage/like/${this.user.uid}?current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
       this.loadCafes(apiUrl, 'like')
     },
     // 가본곳 누른 카페 불러오기
     loadBeenthereCafes() {
       this.beenthereCafes = []
-      let apiUrl = `${process.env.API}/cafe/mypage/beenthere/${this.user.uid}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
+      let apiUrl = `${process.env.API}/cafe/mypage/beenthere/${this.user.uid}?current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
       this.loadCafes(apiUrl, 'beenthere')
     },
     loadCafes(apiUrl, cafeListType) {
