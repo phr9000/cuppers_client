@@ -9,13 +9,6 @@
         >
           <!-- title 영역 -->
           <div class="title-area-inner">
-            <!-- <input
-              type="text"
-              placeholder="제목을 입력하세요"
-              class="input-box title"
-              :readonly="!writeType"
-              v-model="cnote.cnote_title"
-            /> -->
             <input
               type="text"
               class="input-box title"
@@ -44,8 +37,6 @@
           <!-- dim -->
           <div class="dim"></div>
         </div>
-        <!-- (등록페이지) 공개여부  -->
-        <!-- <q-toggle class="public-btn" label="커핑노트 공개여부" v-if="true" /> -->
 
         <!-- content 영역 -->
         <div class="content-container">
@@ -76,13 +67,10 @@
 </template>
 
 <script>
-// import { ref } from 'vue'
 import BtnLike from 'src/components/Button/BtnLike.vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { format, toDate } from 'date-fns'
-// import { userInfo } from '../store/auth/getters'
-// swiper
 export default {
   components: {
     BtnLike
@@ -103,19 +91,6 @@ export default {
       cnoteId: null,
       cnote: null, // (커핑노트)
       userInfo: null // (작성자)
-      // cnote_title: '',
-      // user_introduce: '',
-      // created_at: '',
-      // content: '',
-      // cnoteImgs: '',
-      // writeType: false,
-      // isLiked: true,
-      // backgroundImg: '',
-      // userId: '',
-      // user_email: '',
-      // user_thumbnail: '',
-      // user_nickname: '',
-      // like_it: ''
     }
   },
   computed: {
@@ -138,15 +113,7 @@ export default {
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          const cnote = result.data
-          // 데이터베이스에서 받아온 content v-html 에 담아서 사용
-          // this.content = this.cnotedetail[0].cnote_content
-          // this.cnote_title = this.cnotedetail[0].cnote_title
-          // this.created_at = this.cnotedetail[0].created_at.substring(0, 10)
-          // this.userId = this.cnotedetail[0].user_id
-          // this.backgroundImg = this.cnotedetail[0].cnote_img
-          // this.like_it = this.cnotedetail[0].likeit
-          this.cnote = cnote
+          this.cnote = result.data
           this.getUserInfo(this.cnote.user_id)
           // this.cnoteLike(this.userId, this.cnoteId)
         })
@@ -160,41 +127,11 @@ export default {
         .get(apiUrl)
         .then((result) => {
           this.userInfo = result.data
-          // this.user_nickname = this.userInfo.user_nickname
-          // this.user_email = this.userInfo.user_email
-          // this.user_introduce = this.userInfo.user_introduce
-          // this.user_thumbnail = this.userInfo.user_thumbnail_url
         })
         .catch((err) => {
           console.log(err)
         })
     }
-    // 좋아요 버튼 클릭시 백엔드 보내는건 좋아요버튼 내부에서 처리하도록 되어있음
-    // //좋아요버튼
-    // cnoteLike(userid, cnoteid) {
-    //   let apiUrl = `http://localhost:3000/api/cnote/like/${userid}/${cnoteid}`
-    //   console.log(apiUrl)
-    //   this.$axios
-    //     .get(apiUrl)
-    //     .then((result) => {
-    //       console.log(result)
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-    // }
-    // getCnoteImg() {
-    //   let apiUrl = 'http://localhost:3000/api/cnote/img/7'
-    //   this.$axios
-    //     .get(apiUrl)
-    //     .then((result) => {
-    //       this.cnoteImgs = result.data
-    //       // console.log(this.cnoteImgs)
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-    // }
   }
 }
 </script>
