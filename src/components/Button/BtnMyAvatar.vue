@@ -1,6 +1,6 @@
 <template>
   <q-btn @click="clickMyAvatar" round size="sm" class="q-my-sm">
-    <q-avatar size="md"> <img :src="url" /> </q-avatar
+    <q-avatar size="md"> <img :src="calUrl" /> </q-avatar
   ></q-btn>
 </template>
 <script>
@@ -17,19 +17,22 @@ export default defineComponent({
       get: () => $store.state.auth.user
     })
 
-    const url = computed({
+    const calUrl = computed({
       get: () => {
         if (user.value == null) {
           return '/icons/avatar_default.jpg'
         } else {
-          return user.value.thumbUrl
+          console.log(user.value.thumbUrl)
+          return user.value.thumbUrl.startsWith('images/')
+            ? `${process.env.STATIC}/${user.value.thumbUrl}`
+            : user.value.thumbUrl
         }
       }
     })
 
     return {
       user,
-      url
+      calUrl
     }
   },
   methods: {

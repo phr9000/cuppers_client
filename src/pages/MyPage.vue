@@ -225,8 +225,10 @@ export default defineComponent({
           .then((result) => {
             if (result.statusText === 'OK') {
               this.userInfo = {
-                ...result.data[0],
-                thumbUrl: `${process.env.STATIC}/${result.data[0].user_thumbnail_url}`
+                ...result.data,
+                thumbUrl: result.data.user_thumbnail_url.startsWith('images/')
+                  ? `${process.env.STATIC}/${result.data.user_thumbnail_url}`
+                  : result.data.user_thumbnail_url
               }
             }
           })

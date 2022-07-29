@@ -20,10 +20,13 @@ export default defineComponent({
   },
   computed: {
     calUrl() {
-      if (this.url !== '') {
-        return `${process.env.STATIC}/${this.url}`
-      } else {
+      if (this.url === '') {
         return `${process.env.STATIC}/images/avatar/0/thumb.jpg`
+      } else {
+        if (this.url.startsWith('images/')) {
+          return `${process.env.STATIC}/${this.url}`
+        }
+        return this.url
       }
     }
   },
