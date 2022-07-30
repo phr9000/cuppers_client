@@ -32,7 +32,7 @@
       class="cnote_main constrain_md row justify-between align-start q-pa-md"
     >
       <div class="main_list" style="margin: 0">
-        <cnote-list :cnotes="cnotes" />
+        <cnote-list :cnotes="cnotes" :single="true" />
         <inf-scroll @entry="loadCnotes" ref="infScroll" />
       </div>
       <div class="main_aside">
@@ -173,7 +173,7 @@ export default defineComponent({
   .page_title {
     color: $grey-9;
     font-size: 1.5rem;
-    @media (max-width: $breakpoint-sm-max) {
+    @media (max-width: $breakpoint-xs-max) {
       position: absolute;
       font-size: 1.2rem;
       left: 16px;
@@ -185,7 +185,7 @@ export default defineComponent({
     grid-template-columns: 1fr 216px;
     align-content: start;
     // padding: 0 12px;
-    @media (max-width: $breakpoint-sm-max) {
+    @media (max-width: $breakpoint-xs-max) {
       display: block;
       margin: 0;
       padding-right: 16px;
@@ -199,7 +199,7 @@ export default defineComponent({
     justify-self: end;
     width: 204px;
     padding-right: 16px;
-    @media (max-width: $breakpoint-sm-max) {
+    @media (max-width: $breakpoint-xs-max) {
       margin: 0 auto;
       // text-align: center;
       // width: 500px;
@@ -209,7 +209,7 @@ export default defineComponent({
       box-shadow: 0 1px 5px rgb(0 0 0 / 8%), 0 2px 2px rgb(0 0 0 / 14%),
         0 3px 1px -2px rgb(0 0 0 / 12%) !important;
 
-      @media (max-width: $breakpoint-sm-max) {
+      @media (max-width: $breakpoint-xs-max) {
         margin-bottom: 50px;
         // text-align: center;
         // width: 500px;

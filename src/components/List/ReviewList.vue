@@ -12,12 +12,20 @@
       </div>
       <div class="lr">
         <div class="left">
-          <div class="" v-for="review in leftList" :key="review.review_id">
+          <div
+            class="q-mb-sm"
+            v-for="review in leftList"
+            :key="review.review_id"
+          >
             <card-review :review="review" :borderd="true" :flat="true" />
           </div>
         </div>
         <div class="right">
-          <div class="" v-for="review in rightList" :key="review.review_id">
+          <div
+            class="q-mb-sm"
+            v-for="review in rightList"
+            :key="review.review_id"
+          >
             <card-review :review="review" />
           </div>
         </div>
@@ -50,6 +58,7 @@ export default defineComponent({
   },
   computed: {
     leftList() {
+      console.log(this.reviews)
       return this.reviews.filter((item, i) => {
         return i % 2 === 0
       })
@@ -70,17 +79,22 @@ export default defineComponent({
   .whole {
     display: none;
     width: 100%;
-    background-color: $s-teal;
+    @media (max-width: $breakpoint-sm-max) {
+      display: block;
+    }
   }
   .lr {
+    @media (max-width: $breakpoint-sm-max) {
+      display: none;
+    }
     display: grid;
     grid-template-columns: 1fr 1fr;
 
     .left {
-      padding-right: 4px;
+      padding-right: 5px;
     }
     .right {
-      padding-left: 4px;
+      padding-left: 5px;
     }
   }
 }
