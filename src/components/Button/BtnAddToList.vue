@@ -84,7 +84,7 @@ export default {
         })
         .then((result) => {
           console.log(result.data)
-          if (result.data.insertId > 0) {
+          if (result.data.insertId > 0 || result.data.affectedRows > 0) {
             this.$q.notify({
               position: 'top',
               timeout: 1000,
@@ -92,7 +92,7 @@ export default {
               color: 'info'
             })
           }
-          if (result.data.startsWith('already exists')) {
+          if (result.data.isNew === 0) {
             this.$q.notify({
               position: 'top',
               timeout: 1000,
