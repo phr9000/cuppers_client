@@ -54,6 +54,10 @@ const routes = [
     component: () => import('layouts/MapLayout.vue')
   },
   {
+    path: '/map/:id',
+    component: () => import('layouts/MapLayout.vue')
+  },
+  {
     path: '/sns',
     component: () => import('layouts/SNSLayout.vue'),
     children: [

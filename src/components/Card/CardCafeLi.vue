@@ -33,7 +33,7 @@
 
           <div class="caption text-caption overflow-hidden">
             <div v-if="cafe.cafe_description">{{ cafe.cafe_description }}</div>
-            <div v-else>
+            <div v-else-if="cafe.keywords.length">
               <!-- 키워드 -->
               <div class="info q-mb-xs">
                 <q-icon size="xs" name="tag" class="icon icon_key" />
@@ -74,7 +74,7 @@
       </div></q-card-section
     >
     <q-card-section
-      v-if="cafe.cafe_description && cafe.keywords"
+      v-if="cafe.cafe_description && cafe.keywords.length"
       class="q-pa-none row justify-between"
     >
       <!-- 키워드 -->

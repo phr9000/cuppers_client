@@ -66,6 +66,16 @@
                 color="secondary"
                 label="강동"
               />
+              <btn-basic
+                @click="handleClickSearch('조용한')"
+                color="secondary"
+                label="조용한"
+              />
+              <btn-basic
+                @click="handleClickSearch('공장형')"
+                color="secondary"
+                label="공장형"
+              />
             </div>
 
             <!-- 정렬 -->
@@ -267,7 +277,7 @@ import CardCafeLi from 'src/components/Card/CardCafeLi.vue'
 import BtnSort from 'src/components/Tab/BtnSort.vue'
 import MapMyList from 'src/components/List/MapMyList.vue'
 
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
@@ -282,6 +292,7 @@ export default defineComponent({
   },
   setup() {
     const $store = useStore()
+    // const $route = useRoute()
 
     const user = computed({
       get: () => $store.state.auth.user
@@ -347,6 +358,14 @@ export default defineComponent({
         {
           label: '강동',
           val: '강동'
+        },
+        {
+          label: '조용한',
+          val: '조용한'
+        },
+        {
+          label: '공장형',
+          val: '공장형'
         }
       ],
       isMore: false,
@@ -366,7 +385,9 @@ export default defineComponent({
       }
     }
   },
-  created() {},
+  created() {
+    // console.log(this.$route.params.id)
+  },
   mounted() {
     if (!window.kakao || !window.kakao.maps) {
       console.log(window.kakao)
@@ -386,7 +407,7 @@ export default defineComponent({
   },
   methods: {
     initMap() {
-      console.log(window.kakao)
+      // console.log(window.kakao)
       const container = document.getElementById('map')
       const options = {
         center: new kakao.maps.LatLng(37.501523, 127.1248332, 16), // 커피 앰비언스 16?
@@ -415,6 +436,10 @@ export default defineComponent({
         imageSize,
         imageOption
       )
+
+      console.log(this.$route.params.id)
+      this.search = this.$route.params.id
+      this.handleClickSearch()
     },
     // 지도 위치 변경될때마다 호출되는 콜백
     handeBoundsChanged() {

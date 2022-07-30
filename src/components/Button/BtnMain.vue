@@ -26,7 +26,9 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log(`keword id ${this.id} clicked`)
+      // console.log(`keword id ${this.id} clicked`)
+      console.log(this.keyword)
+      this.$router.push(`/map/${this.keyword}`)
     }
   }
 }

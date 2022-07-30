@@ -120,12 +120,18 @@ export default {
   created() {
     // Load Carousel
   },
-  mounted() {
+  async mounted() {
     // Load Keywords
     this.loadKeywords()
 
     // Load Cafes Recommended 추천 카페
-    this.loadCafes()
+    if (this.locState) {
+      this.loadCafes()
+    } else {
+      setTimeout(() => {
+        this.loadCafes()
+      }, 1000)
+    }
   },
   methods: {
     loadKeywords() {
@@ -144,10 +150,13 @@ export default {
       // json-server let apiUrl = `${process.env.API_LOCAL}/mainCafes?_limit=3`
       // real-server
       // 추천카페 backend api 가 생길때 까지 가까운 카페 3개 보여주도록
-      let apiUrl = `${process.env.API}/cafe?search=&current_lat=37.5415013&current_long=127.1285397&page=1&limit=3&sort=dist&order=a`
+      let apiUrl = `${process.env.API}/cafe?search=&page=1&limit=3&sort=dist&order=a`
       if (this.locState) {
-        apiUrl = `${process.env.API}/cafe?search=&current_lat=${this.locState.lat}&current_long=${this.locState.lng}&page=1&limit=3&sort=dist&order=a`
+        apiUrl = `${apiUrl}&current_lat=${this.locState.lat}&current_long=${this.locState.lng}`
+      } else {
+        apiUrl = `${apiUrl}&current_lat=37.5415013&current_long=127.1285397`
       }
+      console.log(apiUrl)
 
       this.$axios
         .get(apiUrl)

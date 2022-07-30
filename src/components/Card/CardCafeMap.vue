@@ -254,10 +254,6 @@ export default defineComponent({
   .icon {
     padding-right: 4px;
   }
-  .btn_detail {
-    // width: 100px;
-    // margin-top: 3px;
-  }
   .btn_like {
     position: relative;
     left: -8px;
