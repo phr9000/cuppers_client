@@ -1,7 +1,7 @@
 <template>
   <!-- edit 할 곳  -->
   <q-page class="editor-container">
-    <div class="btn-box">
+    <div class="btn-box q-pt-md">
       <!-- 글 올리기 -->
 
       <span v-if="isWriting" class="send-btn" @click="sendCnote()"
@@ -249,8 +249,6 @@ export default {
 // toast ui 모듈에서 가져오는거라 scoped 하면 안되요~
 // 유니크 클래스 : editor-container //
 .editor-container {
-  padding-top: 15px;
-
   .title-container {
     position: relative;
     width: 100%;

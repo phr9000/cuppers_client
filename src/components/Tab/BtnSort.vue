@@ -20,6 +20,12 @@ export default {
     BtnBasic
   },
   props: {
+    start: {
+      type: String,
+      default: () => {
+        return null
+      }
+    },
     sort_items: {
       type: Array,
       default: () => {
@@ -30,6 +36,11 @@ export default {
   data() {
     return {
       current: ''
+    }
+  },
+  mounted() {
+    if (this.start) {
+      this.current = this.start
     }
   },
   methods: {

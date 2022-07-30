@@ -923,7 +923,7 @@ export default defineComponent({
 .map_wrap {
   position: relative;
   overflow: hidden;
-  height: calc(100vh - 51px);
+  height: calc(100vh - 61px);
 
   .section_search {
     .search_module {

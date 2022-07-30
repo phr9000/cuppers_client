@@ -31,8 +31,8 @@
         </div>
       </div>
     </div>
-    <div v-else class="text-grey text-center q-py-md">
-      <p class="q-pb-sm">작성한 리뷰가 없습니다.</p>
+    <div v-else class="text-grey-5 text-center q-py-md">
+      <p class="q-pb-sm">불러온 리뷰가 없습니다</p>
     </div>
   </div>
 </template>
