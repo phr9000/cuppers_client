@@ -93,6 +93,12 @@
       :images="sliderImages"
       @close="showModal = false"
     />
+    <!-- 사진 모두 보기 -->
+    <modal-swiper
+      :show="showMenuModal"
+      :images="sliderMenuImages"
+      @close="showMenuModal = false"
+    />
 
     <!-- 기본정보, 커피메뉴 & 최근리뷰 컨테이너 -->
     <section class="cafe_information_section column">
@@ -289,6 +295,7 @@
                   <div class="text_subtitle1">메뉴판 이미지</div>
                 </div>
                 <menu-image
+                  @showImagesMenu="showImagesMenu"
                   v-if="menuImages && menuImages.length > 0"
                   :url="menuImages[0].cafe_image_url"
                   lr="left"
@@ -323,6 +330,7 @@
               <div class="text_subtitle1">메뉴판 이미지</div>
             </div>
             <menu-image
+              @showImagesMenu="showImagesMenu"
               v-if="menuImages && menuImages.length > 0"
               :url="menuImages[0].cafe_image_url"
               lr="right"
@@ -503,7 +511,9 @@ export default defineComponent({
       ],
       showMiniMap: false,
       showModal: false,
-      sliderImages: []
+      showMenuModal: false,
+      sliderImages: [],
+      sliderMenuImages: []
     }
   },
   watch: {
@@ -615,6 +625,12 @@ export default defineComponent({
                 id: img.images_cafe_id,
                 url: img.cafe_image_url
               })
+              if (img.type === 'm') {
+                this.sliderMenuImages.push({
+                  id: img.images_cafe_id,
+                  url: img.cafe_image_url
+                })
+              }
             })
             console.log(this.sliderImages)
           }
@@ -669,8 +685,10 @@ export default defineComponent({
       this.$router.push({ path: `/review/write/${this.cafeId}` })
     },
     showImagesAll() {
-      console.log(this.cafeId)
       this.showModal = true
+    },
+    showImagesMenu() {
+      this.showMenuModal = true
     }
   }
 })

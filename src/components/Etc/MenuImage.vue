@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log('click')
+      this.$emit('showImagesMenu')
     }
   }
 }
