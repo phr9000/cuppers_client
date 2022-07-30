@@ -547,7 +547,7 @@ export default defineComponent({
       const MAP_CENTER_LAT = center.Ma
       const MAP_CENTER_LONG = center.La
       this.lastSearchPosition = center
-      console.log('center', center)
+      // console.log('center', center)
 
       if (this.search !== search) {
         this.search = search
@@ -581,7 +581,7 @@ export default defineComponent({
       this.loadCafes(apiUrl, this.bounds)
     },
     changeSort(val) {
-      console.log('chagne sort to: ', val)
+      // console.log('chagne sort to: ', val)
       this.sort = val
       this.resetSearchOption()
       this.handleClickSearch()
