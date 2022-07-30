@@ -322,7 +322,17 @@ export default defineComponent({
         color: 'primary'
       })
 
-      this.$router.push('/')
+      // -> logout 라우트 (세션 삭제)
+      let apiUrl = `${process.env.API}/logout`
+      this.$axios
+        .post(apiUrl)
+        .then((result) => {
+          console.log(result.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      this.$router.push('/login')
     }
   }
 })
