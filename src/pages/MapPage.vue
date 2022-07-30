@@ -314,10 +314,9 @@ export default defineComponent({
     return {
       cafesRaw: null, // 현재 불러온 전체 카페 리스트
       cafes: [], // 필터링된 카페 리스트
-
       // 검색 옵션
       page: 0,
-      limit: 12,
+      limit: 5,
       totalCnt: 0,
       map: null, // 카카오맵 인스턴스
       search: '',

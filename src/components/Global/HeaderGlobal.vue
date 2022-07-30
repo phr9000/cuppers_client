@@ -12,14 +12,14 @@
       />
       <q-toolbar-title class="row items-center"
         ><btn-logo class="font_caveat" to="/" />
-        <q-btn
+        <!-- <q-btn
           to="/test"
           class="text-white"
           flat
           round
           icon="cruelty_free"
           aria-label="Menu"
-        />
+        /> -->
         <current-location class="text-grey-3" />
       </q-toolbar-title>
 
