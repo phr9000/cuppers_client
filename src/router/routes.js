@@ -29,8 +29,16 @@ const routes = [
         component: () => import('pages/WriteReviewPage.vue'),
         meta: { requiresAuth: true }
       },
-      { path: 'req', component: () => import('pages/ReqNewCafePage.vue') },
-      { path: 'create', component: () => import('pages/CreateCafePage.vue') }
+      {
+        path: 'req',
+        component: () => import('pages/ReqNewCafePage.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'create',
+        component: () => import('pages/CreateCafePage.vue'),
+        meta: { requiresAuth: true }
+      }
     ]
   },
   {

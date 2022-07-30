@@ -269,6 +269,7 @@
                     :type="menu.menu_type"
                     :hot="menu.menu_price_hot"
                     :ice="menu.menu_price_ice"
+                    :is_signature="menu.is_signature"
                   />
                 </div>
               </div>
@@ -594,6 +595,7 @@ export default defineComponent({
             this.menuVariation = this.cafeMenu.filter(
               (menu) => menu.menu_type !== 'br'
             )
+            console.log(this.menuVariation)
           }
         })
         .catch((err) => {

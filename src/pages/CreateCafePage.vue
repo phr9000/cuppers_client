@@ -116,7 +116,7 @@
           <div class="q-mb-sm">
             <q-input
               label="바리스타 정보"
-              v-model="cafe.cafe_webpage"
+              v-model="cafe.cafe_barista_info"
               placeholder="바리스타의 수상/자격증 등을 입력해주세요"
               stack-label
               outlined
