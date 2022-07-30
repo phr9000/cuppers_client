@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-if="cnotes.length" class="cnote_list section_top">
+  <div class="cnote_list">
+    <div v-if="cnotes.length">
       <div v-if="single">
         <div
           class="cards_wrap q-mb-sm"

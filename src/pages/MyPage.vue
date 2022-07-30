@@ -79,11 +79,11 @@
   </q-drawer>
 
   <q-page class="page">
-    <main>
+    <main class="bg-grey-1">
       <section class="section_user_info">
-        <card-user-info :user_info="userInfo" />
+        <card-user-info class="constrain_md" :user_info="userInfo" />
       </section>
-      <section class="section_list_wrap bg-grey-1">
+      <section class="section_list_wrap constrain_md">
         <div v-if="tab === 'cnote'">
           <!-- 커핑노트 리스트 -->
           <div class="row justify-end q-py-md q-pr-sm">

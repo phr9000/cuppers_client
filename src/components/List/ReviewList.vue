@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-if="reviews.length" class="review_list">
+  <div class="review_list">
+    <div v-if="reviews.length">
       <div class="whole">
         <div
           class="cards_wrap"
