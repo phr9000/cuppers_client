@@ -117,7 +117,7 @@ export default defineComponent({
       console.log(kakao_account)
 
       await this.$axios
-        .post('http://localhost:3000/api/user/login', {
+        .post('http://localhost:3000/api/login', {
           param: {
             user_email: kakao_account.email,
             user_thumbnail_url: kakao_account.profile.profile_image_url,
@@ -125,12 +125,12 @@ export default defineComponent({
           }
         })
         .then((response) => {
-          const isNew = response.data.isNew
+          const isNew = response.data.user.isNew
 
           if (isNew == 0) {
-            const userId = response.data.user_id
-            const userNickname = response.data.user_nickname
-            let userThumbnail = response.data.user_thumbnail_url
+            const userId = response.data.user.user_id
+            const userNickname = response.data.user.user_nickname
+            let userThumbnail = response.data.user.user_thumbnail_url
             if (userThumbnail && userThumbnail.startsWith('images/')) {
               userThumbnail = `${process.env.STATIC}/${userThumbnail}`
             }
