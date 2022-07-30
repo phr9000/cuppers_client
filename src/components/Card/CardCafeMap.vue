@@ -33,13 +33,25 @@
       </div>
       <div class="row justify-between items-center no-wrap q-mb-xs">
         <div class="row no-wrap">
-          <btn-like
+          <q-btn
+            padding="2px 8px"
+            flat
+            dense
+            rounded
+            color="grey-5"
+            class="btn_like btn row no-wrap items-center"
+          >
+            <q-icon size="xs" class="icon_fav" name="favorite_border" />
+            <span class="review_cnt q-ml-xs text-h6"> {{ cafe.like_cnt }}</span>
+          </q-btn>
+
+          <!-- <btn-like
             class="btn_like"
             :id_what="cafe.cafe_id"
             like_what="cafe"
             :is_liked="cafe.user_liked"
             :likeit_cnt="cafe.like_cnt"
-          />
+          /> targetCafe 바뀔때 언마운트가 안되어서 갱신이 안되는 문제가 있음 -->
           <btn-review
             class="btn_review"
             :cafe_id="cafe.cafe_id"
@@ -68,7 +80,10 @@
 
     <q-card-section class="key_and_address">
       <!-- 키워드 -->
-      <div v-if="cafe.keywords.length" class="info info_key q-mb-xs">
+      <div
+        v-if="cafe.keywords && cafe.keywords.length"
+        class="info info_key q-mb-xs"
+      >
         <q-icon size="xs" name="tag" class="icon q-mb-xs" />
         <div class="cafe_keywords_wrap">
           <badge-cafe
@@ -159,7 +174,6 @@
 <script>
 import { defineComponent } from 'vue'
 import BtnIcon from 'src/components/Button/BtnIcon.vue'
-import BtnLike from 'src/components/Button/BtnLike.vue'
 import BtnReview from 'src/components/Button/BtnReview.vue'
 import BadgeCafe from 'src/components/Badge/BadgeCafe.vue'
 import CafeType from 'src/components/Etc/CafeType.vue'
@@ -171,7 +185,6 @@ export default defineComponent({
   name: 'CardCafeMap',
   components: {
     BtnIcon,
-    BtnLike,
     BtnReview,
     BadgeCafe,
     CafeType,
@@ -216,12 +229,16 @@ export default defineComponent({
   },
   computed: {
     calUrl() {
-      console.log(this.cafe.cafe_img)
+      console.log(this.cafe.like_cnt)
       if (this.cafe.cafe_img.startsWith('images/')) {
         return `${process.env.STATIC}/${this.cafe.cafe_img}`
       }
       return this.cafe.cafe_img
     }
+    // likeCnt() {
+    //   console.log(this.cafe.cafe_id)
+    //   return this.cafe.cafe_id + '/ ' + this.cafe.like_cnt
+    // }
   },
   mounted() {},
   methods: {
@@ -254,13 +271,26 @@ export default defineComponent({
   .icon {
     padding-right: 4px;
   }
+  .btn_like,
+  .btn_review {
+    pointer-events: none;
+  }
   .btn_like {
     position: relative;
-    left: -8px;
+    left: -10px;
+    // transform: scale(0.95);
   }
   .btn_review {
     position: relative;
-    left: -12px;
+    left: -20px;
+  }
+  .review_cnt {
+    line-height: 18px;
+    color: $grey-5;
+    font-size: 18px;
+    &.colored {
+      color: $primary;
+    }
   }
 
   .caption {

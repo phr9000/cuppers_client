@@ -204,7 +204,7 @@
           /> -->
         </div>
         <!-- 마커 클릭시 표시되는 인포 윈도우 -->
-        <div v-if="targetCafe" class="target_cafe_wrap">
+        <div v-if="showCard && targetCafe" class="target_cafe_wrap">
           <card-cafe-map
             @close="clearTarget"
             :cafe="targetCafe"
@@ -279,6 +279,7 @@ import MapMyList from 'src/components/List/MapMyList.vue'
 
 import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { api } from '../boot/axios'
 
 export default defineComponent({
   name: 'MapPage',
@@ -312,6 +313,7 @@ export default defineComponent({
   },
   data() {
     return {
+      showCard: false, // targetCafe 표시 ()
       cafesRaw: null, // 현재 불러온 전체 카페 리스트
       cafes: [], // 필터링된 카페 리스트
       // 검색 옵션
@@ -368,7 +370,7 @@ export default defineComponent({
         }
       ],
       isMore: false,
-      sort: '' // none or like or dis
+      sort: '' // none or like or dist
     }
   },
   computed: {},
@@ -557,7 +559,7 @@ export default defineComponent({
 
       let CENTER_LAT = ''
       let CENTER_LONG = ''
-      if (this.searchInMap) {
+      if (!this.locState || this.searchInMap) {
         // 지도의 중심
         CENTER_LAT = MAP_CENTER_LAT
         CENTER_LONG = MAP_CENTER_LONG
@@ -567,15 +569,16 @@ export default defineComponent({
         CENTER_LONG = this.locState.lng
       }
 
-      let apiUrl = `${process.env.API}/cafe?search=${search}&user=&page=${PAGE}&limit=${LIMIT}&sort=${SORT}&order=${ORDER}&current_lat=${CENTER_LAT}&current_long=${CENTER_LONG}`
-
-      // console.log(center) console.log(apiUrl)
-
+      let apiUrl = `${process.env.API}/cafe?search=${search}&page=${PAGE}&limit=${LIMIT}&sort=${SORT}&order=${ORDER}&current_lat=${CENTER_LAT}&current_long=${CENTER_LONG}`
+      if (this.user) {
+        apiUrl += `&user=${this.user.uid}`
+      }
       if (this.bounds) {
         apiUrl += `&lat_min=${this.bounds.lat_min}&lat_max=${this.bounds.lat_max}&long_min=${this.bounds.long_min}&long_max=${this.bounds.long_max}`
       } else {
         apiUrl += `&lat_min=&lat_max=&long_min=&long_max=`
       }
+      // console.log(apiUrl);
 
       this.loadCafes(apiUrl, this.bounds)
     },
@@ -617,6 +620,7 @@ export default defineComponent({
             // console.log(cafe)
             this.cafes.push(cafe)
           }
+          console.log(this.cafes)
 
           // 더불러오기 비활성화
           if (this.cafes.length >= result.data.totalCnt) {
@@ -805,17 +809,28 @@ export default defineComponent({
       const find = this.cafes.filter((cafe) => {
         return cafe['cafe_id'] === cafe_id
       })[0]
+      console.log(find)
+      this.showCard = false
+
+      // 시설 정보와 메뉴 정보를 로드
+      // this.loadCafeBasicInfo(cafe_id)
 
       // 시설 정보와 메뉴 정보 필드도 생성
       this.targetCafe = {
         ...find,
+        // latlng: find.latlng,
+        // marker: find.marker,
         cafeFacility: null,
         menuBrewing: null,
         menuVariation: null
       }
+      // this.targetCafe.cafe_id = cafe_id
+      // this.targetCafe.like_cnt = find.like_cnt
+      // console.log(this.targetCafe.like_cnt)
 
       // 시설 정보와 메뉴 정보를 로드
-      this.loadCafeInfo(cafe_id)
+      this.loadCafeOtherInfo(cafe_id)
+      console.log(this.targetCafe)
 
       // target cafe 마커 활성황, 이외의 마커는 비활성화
       this.cafes.forEach((cafe) => {
@@ -827,9 +842,25 @@ export default defineComponent({
       })
 
       this.map.panTo(this.targetCafe.latlng)
+      this.showCard = true
     },
+    // 카페 기본 정보 로드
+    // loadCafeBasicInfo(cafe_id) {
+    //   let apiUrl = `${process.env.API}/cafe/${cafe_id}`
+    //   if (this.user) {
+    //     apiUrl += `?user_id=${this.user.uid}`
+    //   }
+    //   this.$axios
+    //     .get(apiUrl)
+    //     .then((result) => {
+    //       this.targetCafe = result.data
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // },
     // 카페 메뉴와 시설정보 로드
-    loadCafeInfo(cafe_id) {
+    loadCafeOtherInfo(cafe_id) {
       let apiUrl = `${process.env.API}/cafe/info/${cafe_id}` // real-server
       this.$axios
         .get(apiUrl)

@@ -39,9 +39,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.block {
-  font-size: 4rem !important;
-}
 .btn {
   cursor: pointer;
 
