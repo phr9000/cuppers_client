@@ -86,14 +86,26 @@
       <section class="section_list_wrap bg-grey-1">
         <div v-if="tab === 'cnote'">
           <!-- 커핑노트 리스트 -->
-          <div class="text-center q-py-sm">내가 쓴 커핑노트 리스트</div>
+          <div class="row justify-end q-py-md q-pr-sm">
+            <btn-sort
+              :sort_items="sortItems1"
+              start="my"
+              @change="changeInnerTab"
+            />
+          </div>
           <div class="cnotes_wrap q-px-md">
             <cnote-list :cnotes="cnotes" />
           </div>
         </div>
         <div v-else-if="tab === 'review'">
           <!-- 리뷰 리스트 -->
-          <div class="text-center q-py-sm">내가 쓴 리뷰 리스트</div>
+          <div class="row justify-end q-py-md q-pr-sm">
+            <btn-sort
+              :sort_items="sortItems1"
+              start="my"
+              @change="changeInnerTab"
+            />
+          </div>
           <div class="review_wrap q-px-md">
             <review-list :reviews="reviews" />
           </div>
@@ -126,6 +138,7 @@ import CardUserInfo from 'src/components/Card/CardUserInfo.vue'
 import CnoteList from 'src/components/List/CnoteList.vue'
 import ReviewList from 'src/components/List/ReviewList.vue'
 import CafeList from 'src/components/List/CafeList.vue'
+import BtnSort from 'src/components/Tab/BtnSort.vue'
 
 import useFormatter from 'src/composables/useFormatter'
 const { formatNumber } = useFormatter()
@@ -136,7 +149,8 @@ export default defineComponent({
     CardUserInfo,
     CnoteList,
     ReviewList,
-    CafeList
+    CafeList,
+    BtnSort
   },
   setup() {
     const $store = useStore()
@@ -171,10 +185,25 @@ export default defineComponent({
       //     'http://localhost:3000/static/images/avatar/1/thumb.jpg',
       //   user_nickname: 'AestasKwak'
       // }
+      innerTab: 'my',
+      sortItems1: [
+        {
+          label: '내가 작성한',
+          val: 'my'
+        },
+        {
+          label: '좋아요',
+          val: 'fav'
+        }
+      ],
       cnotes: [],
       cnotePage: 1,
-      cnoteLimit: 10,
-      isReviewLoaded: false,
+      cnoteLimit: 100,
+      // isReviewLoaded: false,
+      // likeCnotes: [],
+      // islikeCnotesLoaded: false,
+      // likeReviews: [],
+      // islikeReviewsLoaded: false,
       reviews: [],
       likeCafes: [],
       isLikeCafeLoaded: false,
@@ -185,28 +214,62 @@ export default defineComponent({
   mounted() {
     setTimeout(() => {
       this.loadUserInfo()
-    }, 100)
+    }, 300)
     this.loadCnotes()
   },
   methods: {
+    clickTab(tab) {
+      this.tab = tab
+      this.innerTab = 'my'
+      if (tab === 'cnote') {
+        this.cnotes = []
+        this.loadCnotes()
+      }
+      if (tab === 'review') {
+        this.reviews = []
+        this.loadReviews()
+      } else if (tab === 'likeit' && !this.isLikeCafeLoaded) {
+        this.isLikeCafeLoaded = true
+        this.loadLikeCafes()
+      } else if (tab === 'beenthere' && !this.isBeenthereCafeLoaded) {
+        this.isBeenthereCafeLoaded = true
+        this.loadBeenthereCafes()
+      }
+    },
+    changeInnerTab(val) {
+      this.innerTab = val
+      if (this.tab === 'cnote') {
+        this.cnotes = []
+        this.loadCnotes()
+      } else if (this.tab === 'review') {
+        this.reviews = []
+        this.loadReviews()
+      }
+    },
     // 작성한 커핑노트 불러오기
     loadCnotes() {
+      const uid = this.user.uid
       const PAGE = this.cnotePage
       const LIMIT = this.cnoteLimit
-      const uid = this.user.uid
       const SORT = 'recent'
 
-      let apiUrl = `${process.env.API}/cnote/${uid}?user_id=${uid}&page=${PAGE}&limit=${LIMIT}&sort=${SORT}`
-
+      let apiUrl
+      if (this.innerTab === 'my') {
+        // 1. 특정유저의 cnotes
+        apiUrl = `${process.env.API}/cnote/${uid}?user_id=${uid}&page=${PAGE}&limit=${LIMIT}&sort=${SORT}`
+      } else if (this.innerTab === 'fav') {
+        // 2. 좋아요 누른 cnotes
+        apiUrl = `${process.env.API}/cnote/mypage/like/${uid}`
+      }
+      console.log(apiUrl)
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          // console.log(apiUrl)
-          // console.log(result.data.arr)
-          if (result.data.length < 1) {
-            // this.$refs.infScroll.stop()
-            return
-          }
+          console.log(result.data.arr)
+          // if (result.data.length < 1) {
+          //this.$refs.infScroll.stop()
+          // return
+          // }
           result.data.arr.forEach((item) => {
             this.cnotes.push(item)
           })
@@ -218,17 +281,27 @@ export default defineComponent({
     // 작성한 리뷰 불러오기
     loadReviews() {
       const uid = this.user.uid
-      let apiUrl = `${process.env.API}/review/mypage/${uid}`
+
+      let apiUrl
+      if (this.innerTab === 'my') {
+        // 1. 내가 작성한 reviews
+        apiUrl = `${process.env.API}/review/mypage/${uid}`
+      } else if (this.innerTab === 'fav') {
+        // 2. 좋아요 누른 cnotes
+        apiUrl = `${process.env.API}/review/mypage/like/${uid}` // ? 안됨
+      }
+      console.log(apiUrl)
 
       this.$axios
         .get(apiUrl)
         .then((result) => {
+          console.log(result.data.arr)
           // console.log(apiUrl)
           // console.log(result.data.arr)
-          if (result.data.arr.length < 1) {
-            // this.$refs.infScroll.stop()
-            return
-          }
+          // if (result.data.arr.length < 1) {
+          // this.$refs.infScroll.stop()
+          // return
+          // }
           result.data.arr.forEach((item) => {
             this.reviews.push(item)
           })
@@ -298,19 +371,6 @@ export default defineComponent({
           .catch((err) => {
             console.log(err)
           })
-      }
-    },
-    clickTab(tab) {
-      this.tab = tab
-      if (tab === 'review' && !this.isReviewLoaded) {
-        this.isReviewLoaded = true
-        this.loadReviews()
-      } else if (tab === 'likeit' && !this.isLikeCafeLoaded) {
-        this.isLikeCafeLoaded = true
-        this.loadLikeCafes()
-      } else if (tab === 'beenthere' && !this.isBeenthereCafeLoaded) {
-        this.isBeenthereCafeLoaded = true
-        this.loadBeenthereCafes()
       }
     },
     logout() {
