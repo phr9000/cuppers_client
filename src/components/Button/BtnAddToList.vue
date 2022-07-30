@@ -51,13 +51,8 @@ export default {
       mylist: []
     }
   },
-  mounted() {},
-  methods: {
-    // 해당 카페를 내 마이리스트에 추가
-    handleCLick(event) {
-      event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
-
-      console.log('click', this.cafe_id)
+  mounted() {
+    if (this.user) {
       let apiUrl = `${process.env.API}/cafe/mylist/all/${this.user.uid}` // real-server
       console.log(apiUrl)
       this.$axios
@@ -68,6 +63,47 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    }
+  },
+  methods: {
+    // 해당 카페를 내 마이리스트에 추가
+    handleCLick(event) {
+      event.stopPropagation() // 버튼 클릭시 상위 컴포넌트 클릭이벤트 호출 방지
+
+      // user 없을때 예외처리
+      if (!this.user) {
+        this.$q.notify({
+          position: 'top',
+          timeout: 5000,
+          message: '로그인이 필요합니다. 로그인 하시겠습니까?',
+          color: 'primary',
+          actions: [
+            {
+              label: '로그인',
+              color: 'yellow',
+              handler: () => {
+                this.$router.push('/login')
+              }
+            },
+            {
+              label: '나중에',
+              color: 'grey',
+              handler: () => {}
+            }
+          ]
+        })
+      } else {
+        if (this.mylist.length < 1) {
+          this.$q.notify({
+            position: 'top',
+            timeout: 1000,
+            message: '생성된 목록이 없습니다',
+            color: 'info'
+          })
+        } else {
+        }
+      }
+      // console.log('click', this.cafe_id)
     },
     // 마이리스트에 카페 추가
     addCafeToList(mylist_id) {
