@@ -223,15 +223,14 @@ export default defineComponent({
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          console.log(apiUrl)
-          console.log(result.data.arr)
+          // console.log(apiUrl)
+          // console.log(result.data.arr)
           if (result.data.arr.length < 1) {
             // this.$refs.infScroll.stop()
             return
           }
           result.data.arr.forEach((item) => {
-            const review = { ...item, user_liked: 1 }
-            this.reviews.push(review)
+            this.reviews.push(item)
           })
           console.log(this.reviews)
         })

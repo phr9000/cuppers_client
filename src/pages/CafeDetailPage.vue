@@ -1,5 +1,5 @@
 <template>
-  <q-page v-if="cafe" class="cafe_detail_page constrain">
+  <q-page v-if="!loading && cafe" class="cafe_detail_page constrain">
     <!-- 카페이름 및 기본버튼들 -->
     <section
       class="cafe_title_section section_top column q-pl-lg q-pr-md q-pt-lg"
@@ -513,6 +513,7 @@ export default defineComponent({
   },
   async created() {
     this.cafeId = parseInt(this.$route.params.id)
+    this.loading = true
     // load delay test
     setTimeout(() => {
       this.loadCafe(this.cafeId)
@@ -523,9 +524,7 @@ export default defineComponent({
   },
   methods: {
     // 카페 기본정보 로드
-    loadCafe(cafe_id) {
-      this.loading = true
-
+    async loadCafe(cafe_id) {
       let apiUrl = `${process.env.API}/cafe/${cafe_id}`
       if (this.user) {
         apiUrl = `${apiUrl}?user_id=${this.user.uid}`
@@ -535,7 +534,6 @@ export default defineComponent({
         .then((result) => {
           console.log(result.data.user_liked)
           this.cafe = result.data
-          this.loading = false
 
           this.cafe.cafe_description = this.cafe.cafe_description
             ? this.cafe.cafe_description.replace('#', '<br>')
@@ -555,6 +553,10 @@ export default defineComponent({
 
           // 미니맵에 카페의 위치를 표시
           this.showMiniMap = true
+
+          setTimeout(() => {
+            this.loading = false
+          }, 100)
         })
         .catch((err) => {
           console.log(err)
