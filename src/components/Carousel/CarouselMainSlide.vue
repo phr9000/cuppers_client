@@ -30,7 +30,7 @@
                   열일곱 번째 순서 아열대 유실수 ‘옐로우 버번’을 소개한다.
                 </p>
               </div>
-              <div class="writer">by 산미선호자</div>
+              <div class="writer">by 쿠키맛커피</div>
             </div>
             <div class="dim"></div>
           </li>
