@@ -54,7 +54,6 @@ export default defineComponent({
   },
   computed: {
     calUrl() {
-      console.log(this.imgUrl)
       if (this.imgUrl.startsWith('images/')) {
         return `${process.env.STATIC}/${this.imgUrl}`
       }

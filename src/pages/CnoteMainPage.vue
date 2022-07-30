@@ -132,20 +132,21 @@ export default defineComponent({
         })
     },
     handleSearch(search) {
-      // initList
       this.cnotes = []
       this.page = 0
+      this.end = false
+
       this.search = search
 
       this.loadCnotes()
     },
     changeSort(val) {
-      console.log('chagne sort to: ', val)
-      this.order = val
-
       this.cnotes = []
       this.page = 0
       this.end = false
+
+      this.sort = val
+
       this.loadCnotes()
     },
     loadRecWriters() {
@@ -154,11 +155,9 @@ export default defineComponent({
       this.$axios
         .get(apiUrl)
         .then((result) => {
-          console.log(result)
           if (result.statusText === 'OK') {
             this.recWriters = result.data
           }
-          console.log(this.recWriters)
         })
         .catch((err) => {
           console.log(err)

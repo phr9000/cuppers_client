@@ -45,7 +45,7 @@
       <btn-scroll-top />
     </div>
     <div v-else class="text-grey text-center q-py-md">
-      <p class="q-pb-sm">작성한 커핑노트가 없습니다.</p>
+      <p class="q-pb-sm">작성된 커핑노트가 없습니다.</p>
       <div>
         <btn-basic
           to="/cnote/write"

@@ -99,8 +99,10 @@
         />
       </div>
     </q-card-section>
-
-    <q-card-section v-else class="q-pa-none row justify-between">
+    <q-card-section
+      v-else-if="cafe.mylist_cafe_id"
+      class="q-pa-none row justify-between"
+    >
       <div></div>
       <div>
         <btn-basic

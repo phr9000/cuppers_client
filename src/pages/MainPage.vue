@@ -156,7 +156,6 @@ export default {
       } else {
         apiUrl = `${apiUrl}&current_lat=37.5415013&current_long=127.1285397`
       }
-      console.log(apiUrl)
 
       this.$axios
         .get(apiUrl)
